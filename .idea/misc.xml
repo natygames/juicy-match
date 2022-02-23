@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_map.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_win_dialog.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_game.xml" value="0.1" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_loading.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_map.xml" value="0.18432971014492755" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_win_dialog.xml" value="0.18432971014492755" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

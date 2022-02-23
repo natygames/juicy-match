@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_score_target">32sp</dimen>
+    <dimen name="text_size_move">23sp</dimen>
+    <dimen name="text_size_fruit">20sp</dimen>
+    <dimen name="text_size_level">30sp</dimen>
+    <dimen name="text_size_btn">25sp</dimen>
+    <dimen name="text_size_dialog">70sp</dimen>
+</resources>

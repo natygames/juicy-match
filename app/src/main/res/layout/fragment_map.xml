@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/background"
+    tools:context=".fragment.MapFragment">
+
+    <Button
+        android:id="@+id/btn_type1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Type1"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/baloo"/>
+
+    <Button
+        android:id="@+id/btn_type2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Type2"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/baloo"/>
+
+    <Button
+        android:id="@+id/btn_type3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Type3"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/baloo"/>
+
+    <Button
+        android:id="@+id/btn_type4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Type4"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/baloo"/>
+
+</LinearLayout>

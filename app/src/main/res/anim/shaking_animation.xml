@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/overshoot_interpolator"
+    android:fillAfter="true">
+
+    <translate
+        android:startOffset="100"
+        android:fromXDelta="0%p"
+        android:toXDelta="3%p"
+        android:duration="50" />
+
+    <translate
+        android:startOffset="150"
+        android:fromXDelta="0%p"
+        android:toXDelta="-8%p"
+        android:duration="110" />
+
+    <translate
+        android:startOffset="260"
+        android:fromXDelta="0%p"
+        android:toXDelta="8%p"
+        android:duration="120" />
+
+    <translate
+        android:startOffset="380"
+        android:fromXDelta="0%p"
+        android:toXDelta="-7%p"
+        android:duration="130" />
+
+    <translate
+        android:startOffset="510"
+        android:fromXDelta="0%p"
+        android:toXDelta="5%p"
+        android:duration="140" />
+
+    <translate
+        android:startOffset="650"
+        android:fromXDelta="0%p"
+        android:toXDelta="-3%p"
+        android:duration="140" />
+
+    <translate
+        android:startOffset="790"
+        android:fromXDelta="0%p"
+        android:toXDelta="3%p"
+        android:duration="140" />
+
+    <translate
+        android:startOffset="930"
+        android:fromXDelta="0%p"
+        android:toXDelta="-2%p"
+        android:duration="140" />
+
+    <translate
+        android:startOffset="1070"
+        android:fromXDelta="0%p"
+        android:toXDelta="1%p"
+        android:duration="140" />
+
+</set>
