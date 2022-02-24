@@ -12,24 +12,27 @@ import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.game.Tile;
+import com.example.matchgamesample.level.Level;
 
 /* This class let you design fruit board
  * Assign fruit board's block with char[]
  * Use createGameBoard() to get char[] value
  */
 
-public class GameManager {
+public class Game {
     private final Context context;
+    private final Level mLevel;
     private final int column, row, tileSize;
 
-    public GameManager(Context context, int column, int row, int tileSize){
+    public Game(Context context, Level level, int tileSize){
         this.context = context;
-        this.column = column;
-        this.row = row;
+        mLevel = level;
+        this.column = level.column;
+        this.row = level.row;
         this.tileSize = tileSize;
     }
 
-    public void createGridBoard(GridLayout grid_board, char[] board_char){
+    public void createGridBoard(GridLayout grid_board){
         /* Explanation:
          *
          * n for normal(default)
@@ -56,6 +59,9 @@ public class GameManager {
          * o for one
          *
          */
+
+        char[] board_char = mLevel.board.toCharArray();
+
         grid_board.setColumnCount(column);
         grid_board.setRowCount(row);
         grid_board.getLayoutParams().width = tileSize * column;
@@ -131,7 +137,7 @@ public class GameManager {
         }
     }
 
-    public void createFruitBoard(GridLayout fruit_board, char[][] fruit_char, Tile[][] tileArray){
+    public void createFruitBoard(GridLayout fruit_board, Tile[][] tileArray){
         /* Explanation:
          *
          * n for normal
@@ -153,6 +159,15 @@ public class GameManager {
          * b B for pie4
          *
          */
+
+        //Set fruit board
+        char[][] fruit_char = new char[row][column];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                char type = mLevel.fruit.charAt(j + i * column);
+                fruit_char[i][j] = type;
+            }
+        }
 
         //Create fruit board
         fruit_board.setColumnCount(column);

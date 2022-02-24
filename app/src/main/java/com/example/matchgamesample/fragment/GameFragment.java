@@ -15,7 +15,7 @@ import android.widget.RelativeLayout;
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
-import com.example.matchgamesample.game.GameManager;
+import com.example.matchgamesample.game.Game;
 import com.example.matchgamesample.game.Tile;
 import com.example.matchgamesample.game.TileMatrix;
 import com.example.matchgamesample.input.BasicInputController;
@@ -36,7 +36,6 @@ public class GameFragment extends BaseFragment {
     //Level parameter
     private Level mLevel;
     private int[] mFruit;
-    private LevelManager mLevelManager;
 
     private GameEngine mGameEngine;
 
@@ -81,8 +80,8 @@ public class GameFragment extends BaseFragment {
         tileSize = (int) ((mScreen_width - 20) / 9);
 
         //Level parameter
-        mLevelManager = new LevelManager(mActivity, level);
-        mLevel = mLevelManager.getLevel();
+        mLevel = mActivity.getLevelManager().getLevel(level);
+        mActivity.getLevelManager().init();
         int row = mLevel.row;
         int column = mLevel.column;
 
@@ -107,9 +106,9 @@ public class GameFragment extends BaseFragment {
             }
         }
 
-        GameManager mGameManager = new GameManager(mActivity, column, row, tileSize);
-        mGameManager.createGridBoard(grid_board, mLevelManager.getBoardChar());
-        mGameManager.createFruitBoard(fruit_board, mLevelManager.getFruitChar(), tileArray);
+        Game mGame = new Game(mActivity, mLevel, tileSize);
+        mGame.createGridBoard(grid_board);
+        mGame.createFruitBoard(fruit_board, tileArray);
 
 
         mGameEngine.setInputController(new BasicInputController());
@@ -118,10 +117,6 @@ public class GameFragment extends BaseFragment {
 
         mGameEngine.startGame();
 
-    }
-
-    public LevelManager getLevelManager() {
-        return mLevelManager;
     }
 
     @Override

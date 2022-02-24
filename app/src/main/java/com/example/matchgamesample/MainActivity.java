@@ -9,9 +9,12 @@ import android.view.View;
 import com.example.matchgamesample.fragment.BaseFragment;
 import com.example.matchgamesample.fragment.GameFragment;
 import com.example.matchgamesample.fragment.LoadingFragment;
+import com.example.matchgamesample.level.LevelManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG_FRAGMENT = "container";
+
+    private LevelManager mLevelManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
                     .commit();
         }
 
+        mLevelManager = new LevelManager(this);
+
+    }
+
+    public LevelManager getLevelManager(){
+        return mLevelManager;
     }
 
     public void startGame(int level) {

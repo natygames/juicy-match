@@ -1,5 +1,7 @@
 package com.example.matchgamesample.level;
 
+import com.example.matchgamesample.R;
+
 import java.util.ArrayList;
 
 /** This class stores variables of each level
@@ -17,6 +19,40 @@ public class Level {
     public ArrayList<Integer> collect = new ArrayList<>();
     // Game board in char
     public String board = "", fruit = "", ice = "", advance = "";
+
+    public void addCollect(String s){
+            switch (s) {
+                case ("strawberry"):
+                    collect.add(R.drawable.strawberry);
+                    break;
+                case ("cherry"):
+                    collect.add(R.drawable.cherry);
+                    break;
+                case ("lemon"):
+                    collect.add(R.drawable.lemon);
+                    break;
+                case ("striped"):
+                    collect.add(R.drawable.striped_ball);
+                    break;
+                case ("cracker"):
+                    collect.add(R.drawable.cracker);
+                    break;
+                case ("cookie"):
+                    collect.add(R.drawable.cookie);
+                    break;
+                case ("starfish"):
+                    collect.add(R.drawable.starfish);
+                    break;
+                case ("pie"):
+                    collect.add(R.drawable.pie1_1);
+                    break;
+                case ("ice"):
+                    // We don't check ice this way
+                    collect.add(0);
+                    break;
+            }
+
+    }
 
     /* Explanation:
      * <targetType> is the target type of level:
