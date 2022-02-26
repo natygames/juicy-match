@@ -2,10 +2,14 @@ package com.example.matchgamesample.game;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.Sprite;
 
 public class Tile extends Sprite {
+    private GameEngine mGameEngine;
+    private int mTileSize;
+
     public int row = 0, col = 0;                // Tile position
     public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute
     public int bounce = 0, wait = 0, diagonal = 0;            // Tile moving
@@ -17,10 +21,12 @@ public class Tile extends Sprite {
 
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
+        mGameEngine = gameEngine;
+        mTileSize = gameEngine.mImageSize;
     }
 
     public void startGame() {
-        if(!breakable
+        if (!breakable
                 && !lock
                 && !honey
                 && kind != TileID.STAR_FISH) {
@@ -39,12 +45,30 @@ public class Tile extends Sprite {
 
     @Override
     public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-
+        int diff_x = x - col * mTileSize;
+        int diff_y = y - row * mTileSize;
+        if (diff_x > 0) {
+            //Go left
+            x -= elapsedMillis;
+        }
+        if (diff_x < 0) {
+            //Go right
+            x += elapsedMillis;
+        }
+        if (diff_y > 0) {
+            //Go up
+            y -= elapsedMillis;
+        }
+        if (diff_y < 0) {
+            //Go down
+            y += elapsedMillis;
+        }
 
     }
 
     @Override
     public void onDraw() {
+
         mImage.setX(x);
         mImage.setY(y);
 

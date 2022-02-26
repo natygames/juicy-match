@@ -1,6 +1,7 @@
 package com.example.matchgamesample.engine;
 
 import android.app.Activity;
+
 import java.util.ArrayList;
 
 public class GameEngine {
@@ -12,7 +13,7 @@ public class GameEngine {
     public Activity mActivity;
     public int mImageSize;
 
-    public GameEngine (Activity activity, int imageSize) {
+    public GameEngine(Activity activity, int imageSize) {
         mActivity = activity;
         mImageSize = imageSize;
     }
@@ -27,9 +28,14 @@ public class GameEngine {
         stopGame();
         // Setup the game objects
         int numGameObjects = mGameObjects.size();
-        for (int i=0; i<numGameObjects; i++) {
+        for (int i = 0; i < numGameObjects; i++) {
             mGameObjects.get(i).startGame();
         }
+
+        if (mInputController != null) {
+            mInputController.onStart();
+        }
+
         // Start the update thread
         mUpdateThread = new UpdateThread(this);
         mUpdateThread.start();
@@ -45,20 +51,30 @@ public class GameEngine {
         if (mDrawThread != null) {
             mDrawThread.stopGame();
         }
-    }
-
-    public void resumeGame() {
-        mUpdateThread.resumeGame();
-        mDrawThread.resumeGame();
+        if (mInputController != null) {
+            mInputController.onStop();
+        }
     }
 
     public void pauseGame() {
         mUpdateThread.pauseGame();
         mDrawThread.pauseGame();
+        if (mInputController != null) {
+            mInputController.onPause();
+        }
+    }
+
+
+    public void resumeGame() {
+        mUpdateThread.resumeGame();
+        mDrawThread.resumeGame();
+        if (mInputController != null) {
+            mInputController.onResume();
+        }
     }
 
     public boolean isPaused() {
-        return mUpdateThread != null &&  mUpdateThread.mIsGamePause;
+        return mUpdateThread != null && mUpdateThread.mIsGamePause;
     }
 
     public boolean isRunning() {
@@ -69,14 +85,14 @@ public class GameEngine {
 
     public void onUpdate(long elapsedMillis) {
         int numGameObjects = mGameObjects.size();
-        for (int i=0; i<numGameObjects; i++) {
+        for (int i = 0; i < numGameObjects; i++) {
             mGameObjects.get(i).onUpdate(elapsedMillis, this);
         }
     }
 
     public void onDraw() {
         int numGameObjects = mGameObjects.size();
-        for (int i=0; i<numGameObjects; i++) {
+        for (int i = 0; i < numGameObjects; i++) {
             mGameObjects.get(i).onDraw();
         }
     }
@@ -95,12 +111,12 @@ public class GameEngine {
         mInputController = inputController;
     }
 
-    public void onGameEvent (GameEvent gameEvent) {
+    public void onGameEvent(GameEvent gameEvent) {
         // We notify all the GameObjects
         int numObjects = mGameObjects.size();
         for (int i = 0; i < numObjects; i++) {
-            //if(mGameObjects.get(i) instanceof GameEventListner)
-              //  ((GameEventListner)mGameObjects.get(i)).onGameEvent(gameEvent);
+            if (mGameObjects.get(i) instanceof GameEventListener)
+                ((GameEventListener) mGameObjects.get(i)).onGameEvent(gameEvent);
         }
 
         // Play Sound

@@ -12,4 +12,19 @@ public class InputController {
     public boolean isUsingHammer = false;
 
     public boolean isUsingBomb = false;
+
+    public void onStart() {
+    }
+
+    public void onStop() {
+    }
+
+    public void onPause() {
+    }
+
+    public void onResume() {
+    }
+
+    public void onPreUpdate() {
+    }
 }

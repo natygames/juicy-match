@@ -1,8 +1,17 @@
 package com.example.matchgamesample.game;
 
+import com.example.matchgamesample.engine.GameEngine;
+import com.example.matchgamesample.engine.InputController;
+import com.example.matchgamesample.level.Level;
+
 public class MyAlgorithm {
+    private GameEngine mGameEngine;
+    private InputController mInputController;
+
+    private final Level mLevel;
     private final int row, column;
     private final int tileSize;
+    private Tile[][] mTileMatrix;
 
     //Fruit's moving SPEED
     private int SPEED = 15;
@@ -18,13 +27,49 @@ public class MyAlgorithm {
     private int combo = 0;
     private int winningStage = 0;
 
-    public MyAlgorithm(int row, int column, int tileSize){
-        this.row = row;
-        this.column = column;
-        this.tileSize = tileSize;
+    public MyAlgorithm(GameEngine gameEngine, Level level, Tile[][] tileMatrix) {
+        this.mGameEngine = gameEngine;
+        this.mInputController = gameEngine.mInputController;
+        this.mLevel = level;
+        this.row = level.row;
+        this.column = level.column;
+        this.tileSize = gameEngine.mImageSize;
+        this.mTileMatrix = tileMatrix;
     }
 
-    public void run(Tile[][] tileMatrix){
+    public void run(Tile[][] tileMatrix) {
+
+    }
+
+    public void swap(Tile tile1, Tile tile2) {
+        if(tile1.invalid || tile2.invalid)
+            return;
+
+        //Exchange row
+        int temp_row = tile1.row;
+        tile1.row = tile2.row;
+        tile2.row = temp_row;
+
+        //Exchange column
+        int temp_col = tile1.col;
+        tile1.col = tile2.col;
+        tile2.col = temp_col;
+
+        //Exchange tile
+        mTileMatrix[tile1.row][tile1.col] = tile1;
+        mTileMatrix[tile2.row][tile2.col] = tile2;
+
+    }
+
+    public void useHand() {
+
+    }
+
+    public void useHammer() {
+
+    }
+
+    public void useBomb() {
 
     }
 

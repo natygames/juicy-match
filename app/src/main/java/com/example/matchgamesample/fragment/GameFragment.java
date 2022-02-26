@@ -17,10 +17,9 @@ import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.Game;
 import com.example.matchgamesample.game.Tile;
-import com.example.matchgamesample.game.TileMatrix;
+import com.example.matchgamesample.game.GameController;
 import com.example.matchgamesample.input.BasicInputController;
 import com.example.matchgamesample.level.Level;
-import com.example.matchgamesample.level.LevelManager;
 
 public class GameFragment extends BaseFragment {
     private static final String LEVEL = "level";
@@ -31,11 +30,6 @@ public class GameFragment extends BaseFragment {
     //Device size
     private int mScreen_width;
     private int mScreen_height;
-    private int tileSize = 0;
-
-    //Level parameter
-    private Level mLevel;
-    private int[] mFruit;
 
     private GameEngine mGameEngine;
 
@@ -77,15 +71,15 @@ public class GameFragment extends BaseFragment {
         mActivity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         mScreen_width = displayMetrics.widthPixels;
         mScreen_height = displayMetrics.heightPixels;
-        tileSize = (int) ((mScreen_width - 20) / 9);
+        int tileSize = (int) ((mScreen_width - 20) / 9);
 
         //Level parameter
-        mLevel = mActivity.getLevelManager().getLevel(level);
+        Level mLevel = mActivity.getLevelManager().getLevel(level);
         mActivity.getLevelManager().init();
         int row = mLevel.row;
         int column = mLevel.column;
 
-        //Initializing fruit layer
+        //Initializing game board layer
         GridLayout grid_board = (GridLayout) getView().findViewById(R.id.grid_board);
         GridLayout fruit_board = (GridLayout) getView().findViewById(R.id.fruit_board);
         //Initializing effect layer
@@ -110,10 +104,9 @@ public class GameFragment extends BaseFragment {
         mGame.createGridBoard(grid_board);
         mGame.createFruitBoard(fruit_board, tileArray);
 
-
-        mGameEngine.setInputController(new BasicInputController());
+        mGameEngine.setInputController(new BasicInputController(view, mGameEngine));
         // Add all the game object here
-        mGameEngine.addGameObject(new TileMatrix(tileArray, row, column, tileSize));
+        mGameEngine.addGameObject(new GameController(mGameEngine, tileArray, mLevel));
 
         mGameEngine.startGame();
 

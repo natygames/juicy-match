@@ -11,7 +11,7 @@ import com.example.matchgamesample.game.TileID;
 public class LevelManager {
     //Current mLevel
     private Level mLevel;
-    private XMLPuller mXMLPuller;
+    private final XMLPuller mXMLPuller;
 
 
     public LevelManager(Context context) {
