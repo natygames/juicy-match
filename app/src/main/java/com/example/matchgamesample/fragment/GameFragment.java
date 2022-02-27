@@ -100,6 +100,7 @@ public class GameFragment extends BaseFragment {
             }
         }
 
+        // Render game
         Game mGame = new Game(mActivity, mLevel, tileSize);
         mGame.createGridBoard(grid_board);
         mGame.createFruitBoard(fruit_board, tileArray);

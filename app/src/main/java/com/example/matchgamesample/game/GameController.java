@@ -36,13 +36,13 @@ public class GameController extends GameObject implements GameEventListener {
     }
 
     @Override
-    public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
+    public void onUpdate() {
         // Run my algorithm
         myAlgorithm.run(mTileMatrix);
 
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
-                mTileMatrix[i][j].onUpdate(elapsedMillis, gameEngine);
+                mTileMatrix[i][j].onUpdate();
             }
         }
     }
@@ -63,13 +63,13 @@ public class GameController extends GameObject implements GameEventListener {
                 playerSwap();
                 break;
             case PropsHand:
-                myAlgorithm.useHand();
+                // myAlgorithm.useHand();
                 break;
             case PropsHammer:
-                myAlgorithm.useHammer();
+                // myAlgorithm.useHammer();
                 break;
             case PropsBomb:
-                myAlgorithm.useBomb();
+                // myAlgorithm.useBomb();
                 break;
         }
     }
@@ -79,27 +79,36 @@ public class GameController extends GameObject implements GameEventListener {
         int tileColumn = mInputController.mX_Down / mTileSize;
         int tileRow = mInputController.mY_Down / mTileSize;
 
+        myAlgorithm.swapCol = tileColumn;
+        myAlgorithm.swapRow = tileRow;
+
         if(mInputController.mX_Down - mInputController.mX_Up < -50){
             // Swap right
             if(tileColumn == mColumn - 1)
                 return;
             myAlgorithm.swap(mTileMatrix[tileRow][tileColumn], mTileMatrix[tileRow][tileColumn + 1]);
+            myAlgorithm.direction = 'r';
         } else if (mInputController.mX_Down - mInputController.mX_Up > 50){
             // Swap left
             if(tileColumn == 0)
                 return;
             myAlgorithm.swap(mTileMatrix[tileRow][tileColumn], mTileMatrix[tileRow][tileColumn - 1]);
+            myAlgorithm.direction = 'l';
         } else if (mInputController.mY_Down - mInputController.mY_Up > 50){
             // Swap up
             if(tileRow == 0)
                 return;
             myAlgorithm.swap(mTileMatrix[tileRow][tileColumn], mTileMatrix[tileRow - 1][tileColumn]);
+            myAlgorithm.direction = 'u';
         } else if (mInputController.mY_Down - mInputController.mY_Up < -50){
             // Swap down
             if(tileRow == mRow - 1)
                 return;
             myAlgorithm.swap(mTileMatrix[tileRow][tileColumn], mTileMatrix[tileRow + 1][tileColumn]);
+            myAlgorithm.direction = 'd';
         }
+
+        myAlgorithm.isSwap = true;
 
     }
 

@@ -33,6 +33,4 @@ public class LevelManager {
         TileID.FRUITS_TO_USE = new int[size];
         System.arraycopy(TileID.FRUITS, 0, TileID.FRUITS_TO_USE, 0, size);
     }
-
-
 }

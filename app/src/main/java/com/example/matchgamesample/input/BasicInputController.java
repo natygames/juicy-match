@@ -12,8 +12,8 @@ public class BasicInputController extends InputController {
     private final GameEngine mGameEngine;
 
     public BasicInputController(View view, GameEngine gameEngine) {
-        view.findViewById(R.id.fruit_board).setOnTouchListener(new BasicOnTouchListener());
         mGameEngine = gameEngine;
+        view.findViewById(R.id.fruit_board).setOnTouchListener(new BasicOnTouchListener());
     }
 
     private class BasicOnTouchListener implements View.OnTouchListener {

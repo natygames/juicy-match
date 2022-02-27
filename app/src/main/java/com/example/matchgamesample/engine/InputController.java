@@ -7,12 +7,6 @@ public class InputController {
     // User finger up position
     public int mX_Up = 0, mY_Up = 0;
 
-    public boolean isUsingHand = false;
-
-    public boolean isUsingHammer = false;
-
-    public boolean isUsingBomb = false;
-
     public void onStart() {
     }
 

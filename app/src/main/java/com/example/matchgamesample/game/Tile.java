@@ -9,6 +9,7 @@ import com.example.matchgamesample.engine.Sprite;
 public class Tile extends Sprite {
     private GameEngine mGameEngine;
     private int mTileSize;
+    private static final int SPEED = 8;
 
     public int row = 0, col = 0;                // Tile position
     public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute
@@ -44,24 +45,31 @@ public class Tile extends Sprite {
     }
 
     @Override
-    public void onUpdate(long elapsedMillis, GameEngine gameEngine) {
-        int diff_x = x - col * mTileSize;
-        int diff_y = y - row * mTileSize;
-        if (diff_x > 0) {
-            //Go left
-            x -= elapsedMillis;
-        }
-        if (diff_x < 0) {
-            //Go right
-            x += elapsedMillis;
-        }
-        if (diff_y > 0) {
-            //Go up
-            y -= elapsedMillis;
-        }
-        if (diff_y < 0) {
-            //Go down
-            y += elapsedMillis;
+    public void onUpdate() {
+        for (int i = 0; i < SPEED; i++) {
+            int diff_x = x - col * mTileSize;
+            int diff_y = y - row * mTileSize;
+            if (diff_x > 0) {
+                //Go left
+                if (y > diagonal * mTileSize)
+                    x -= 1;
+            }
+            if (diff_x < 0) {
+                //Go right
+                if (y > diagonal * mTileSize)
+                    x += 1;
+            }
+            if (diff_y > 0) {
+                //Go up
+                y -= 1;
+            }
+            if (diff_y < 0) {
+                //Go down
+                y += 1;
+            }
+
+            if (diff_x == 0)
+                diagonal = 0;
         }
 
     }
@@ -88,6 +96,10 @@ public class Tile extends Sprite {
             }
         }
 
+    }
+
+    public boolean isMoving(){
+        return (x - col * mTileSize != 0) || (y - row * mTileSize != 0);
     }
 
     public boolean isMovable() {

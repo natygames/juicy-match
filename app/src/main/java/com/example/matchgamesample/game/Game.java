@@ -1,17 +1,11 @@
 package com.example.matchgamesample.game;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.R;
-import com.example.matchgamesample.game.Tile;
 import com.example.matchgamesample.level.Level;
 
 /* This class let you design fruit board
@@ -24,7 +18,7 @@ public class Game {
     private final Level mLevel;
     private final int column, row, tileSize;
 
-    public Game(Context context, Level level, int tileSize){
+    public Game(Context context, Level level, int tileSize) {
         this.context = context;
         mLevel = level;
         this.column = level.column;
@@ -32,7 +26,7 @@ public class Game {
         this.tileSize = tileSize;
     }
 
-    public void createGridBoard(GridLayout grid_board){
+    public void createGridBoard(GridLayout grid_board) {
         /* Explanation:
          *
          * n for normal(default)
@@ -71,7 +65,7 @@ public class Game {
         for (int x = 0; x < board_char.length; x++) {
             ImageView block = new ImageView(context);
             block.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
-            switch (board_char[x]){
+            switch (board_char[x]) {
                 case ('n'):
                     block.setBackgroundResource(R.drawable.block);
                     break;
@@ -137,7 +131,7 @@ public class Game {
         }
     }
 
-    public void createFruitBoard(GridLayout fruit_board, Tile[][] tileArray){
+    public void createFruitBoard(GridLayout fruit_board, Tile[][] tileArray) {
         /* Explanation:
          *
          * n for normal
@@ -175,9 +169,10 @@ public class Game {
         fruit_board.getLayoutParams().width = tileSize * column;
         fruit_board.getLayoutParams().height = tileSize * row;
 
+        int size = TileID.FRUITS_TO_USE.length;
         //Set tile's parameter
-        for(int j = 0; j <= column - 1; j++) {
-            for(int i = row - 1; i >= 0; i--) {
+        for (int j = 0; j < column; j++) {
+            for (int i = row - 1; i >= 0; i--) {
 
                 tileArray[i][j].row = i;
                 tileArray[i][j].col = j;
@@ -305,15 +300,13 @@ public class Game {
 
                 }
 
-                int size = TileID.FRUITS_TO_USE.length;
                 // Set random fruit
                 do {
                     tileArray[i][j].kind = TileID.FRUITS_TO_USE[(int) (Math.random() * size)];
                 } while ((i < row - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind && tileArray[i + 2][j].kind == tileArray[i][j].kind)
-                        || (j >= 3 && tileArray[i][j - 1].kind == tileArray[i][j].kind && tileArray[i][j - 2].kind == tileArray[i][j].kind));
+                        || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind && tileArray[i][j - 2].kind == tileArray[i][j].kind));
             }
         }
 
     }
 }
-

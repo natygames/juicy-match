@@ -1,17 +1,35 @@
 package com.example.matchgamesample.engine;
 
-public abstract class GameThread extends Thread{
+import android.os.Handler;
+
+public class GameThread extends Thread{
     protected final GameEngine mGameEngine;
     private final Object mLock = new Object();
     public volatile boolean mIsGameRunning;
     public volatile boolean mIsGamePause;
+    private final Handler mHandle = new Handler();
 
     public GameThread(GameEngine gameEngine) {
         mGameEngine = gameEngine;
         mIsGameRunning = false;
     }
 
-    protected abstract void doIt(long elapsedMillis);
+    protected void doIt(){
+
+        mHandle.post(new Runnable() {
+            @Override
+            public void run() {
+                mGameEngine.onUpdate();
+                mGameEngine.onDraw();
+            }
+        });
+
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException e) {
+            // We stay on the loop
+        }
+    }
 
     @Override
     public void start() {
@@ -27,13 +45,7 @@ public abstract class GameThread extends Thread{
 
     @Override
     public void run() {
-        long elapsedMillis;
-        long previousTimeMillis;
-        long currentTimeMillis;
-        previousTimeMillis = System.currentTimeMillis();
         while(mIsGameRunning){
-            currentTimeMillis = System.currentTimeMillis();
-            elapsedMillis = currentTimeMillis - previousTimeMillis;
 
             if (mIsGamePause) {
                 while (mIsGamePause) {
@@ -45,14 +57,15 @@ public abstract class GameThread extends Thread{
                         // We stay on the loop
                     }
                 }
-                currentTimeMillis = System.currentTimeMillis();
             }
 
-            doIt(elapsedMillis);
-
-            previousTimeMillis = currentTimeMillis;
+            doIt();
         }
 
+    }
+
+    public void pauseGame() {
+        mIsGamePause = true;
     }
 
     public void resumeGame() {
@@ -64,7 +77,4 @@ public abstract class GameThread extends Thread{
         }
     }
 
-    public void pauseGame() {
-        mIsGamePause = true;
-    }
 }

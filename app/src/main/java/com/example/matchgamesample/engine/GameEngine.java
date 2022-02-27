@@ -5,8 +5,7 @@ import android.app.Activity;
 import java.util.ArrayList;
 
 public class GameEngine {
-    private UpdateThread mUpdateThread;
-    private DrawThread mDrawThread;
+    private GameThread mGameThread;
     private final ArrayList<GameObject> mGameObjects = new ArrayList<>();
 
     public InputController mInputController;
@@ -37,19 +36,13 @@ public class GameEngine {
         }
 
         // Start the update thread
-        mUpdateThread = new UpdateThread(this);
-        mUpdateThread.start();
-        // Start the drawing thread
-        mDrawThread = new DrawThread(this);
-        mDrawThread.start();
+        mGameThread = new GameThread(this);
+        mGameThread.start();
     }
 
     public void stopGame() {
-        if (mUpdateThread != null) {
-            mUpdateThread.stopGame();
-        }
-        if (mDrawThread != null) {
-            mDrawThread.stopGame();
+        if (mGameThread != null) {
+            mGameThread.stopGame();
         }
         if (mInputController != null) {
             mInputController.onStop();
@@ -57,36 +50,33 @@ public class GameEngine {
     }
 
     public void pauseGame() {
-        mUpdateThread.pauseGame();
-        mDrawThread.pauseGame();
+        mGameThread.pauseGame();
         if (mInputController != null) {
             mInputController.onPause();
         }
     }
 
-
     public void resumeGame() {
-        mUpdateThread.resumeGame();
-        mDrawThread.resumeGame();
+        mGameThread.resumeGame();
         if (mInputController != null) {
             mInputController.onResume();
         }
     }
 
     public boolean isPaused() {
-        return mUpdateThread != null && mUpdateThread.mIsGamePause;
+        return mGameThread != null && mGameThread.mIsGamePause;
     }
 
     public boolean isRunning() {
-        return mUpdateThread != null && mUpdateThread.mIsGameRunning;
+        return mGameThread != null && mGameThread.mIsGameRunning;
     }
 
     //=================================================================================
 
-    public void onUpdate(long elapsedMillis) {
+    public void onUpdate() {
         int numGameObjects = mGameObjects.size();
         for (int i = 0; i < numGameObjects; i++) {
-            mGameObjects.get(i).onUpdate(elapsedMillis, this);
+            mGameObjects.get(i).onUpdate();
         }
     }
 
