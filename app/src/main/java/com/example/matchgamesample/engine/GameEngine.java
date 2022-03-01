@@ -2,6 +2,8 @@ package com.example.matchgamesample.engine;
 
 import android.app.Activity;
 
+import com.example.matchgamesample.level.Level;
+
 import java.util.ArrayList;
 
 public class GameEngine {
@@ -10,10 +12,12 @@ public class GameEngine {
 
     public InputController mInputController;
     public Activity mActivity;
+    public Level mLevel;
     public int mImageSize;
 
-    public GameEngine(Activity activity, int imageSize) {
+    public GameEngine(Activity activity, Level level, int imageSize) {
         mActivity = activity;
+        mLevel = level;
         mImageSize = imageSize;
     }
 

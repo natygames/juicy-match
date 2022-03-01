@@ -1,105 +1,32 @@
 package com.example.matchgamesample.game;
 
-import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.engine.GameEngine;
-import com.example.matchgamesample.engine.InputController;
-import com.example.matchgamesample.level.Level;
 
 public class MyAlgorithm {
-    private GameEngine mGameEngine;
-    private InputController mInputController;
-
-    private final Level mLevel;
     private final int row, column;
     private final int tileSize;
-    private Tile[][] tileArray;
 
-    //Fruit's moving SPEED
-    private int SPEED = 15;
-    private int WAIT_TIME = 300;   //300
-
-    //Flag
-    public boolean isSwap = false, isSwapBack = false, isMoving = false, isWin = false, isBonusTime = false, isRunning = true;
-    private boolean showHint = true, isTransf = false, isShowGuide = true;
-    private boolean matchFinding = false, waitFinding = false, fallingFinding = false;
-    public char direction = 'N';
-    public int swapCol, swapRow;
-    private int isWait = 1;
-    private int combo = 0;
-    private int winningStage = 0;
-
-    private boolean wait = false;
-
-    private final AnimationManager mAnimationManager;
-
-    public MyAlgorithm(GameEngine gameEngine, Level level, Tile[][] tileMatrix) {
-        mGameEngine = gameEngine;
-        mInputController = gameEngine.mInputController;
-        mLevel = level;
-        row = level.row;
-        column = level.column;
-        tileSize = gameEngine.mImageSize;
-        tileArray = tileMatrix;
-
-        mAnimationManager = new AnimationManager(mGameEngine);
+    public MyAlgorithm(GameEngine gameEngine) {
+        this.row = gameEngine.mLevel.row;
+        this.column = gameEngine.mLevel.column;
+        this.tileSize = gameEngine.mImageSize;
     }
 
-    public void run(Tile[][] tileArray) {
-        findMatch(tileArray);
-
-        isMoving = false;
-        outer:
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-
-                if (tileArray[i][j].isMoving()) {
-                    isMoving = true;
-                    break outer;
-                } else {
-                    if (isSwap) {
-                        isSwapBack = false;
-                    }
-                }
-
-            }
-        }
-
-        matchFinding = false;
-        outer:
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if(tileArray[i][j].match != 0){
-                    matchFinding = true;
-                    break outer;
-                }
-            }
-        }
-
-        swapBack(tileArray);
-
-        if (!isMoving) {
-            wait = false;
-            addAnimation(tileArray);
-            tile2Top(tileArray);
-            tileReset(tileArray);
-        }
-    }
-
-    private void findMatch(Tile[][] tileMatrix) {
+    public void findMatch(Tile[][] tileArray) {
         for (int j = 0; j < column; j++) {
             for (int i = 0; i < row - 2; i++) {
                 //Check state
-                if (!tileMatrix[i][j].empty
-                        && tileMatrix[i][j].wait == 0
-                        && !tileMatrix[i][j].breakable
-                        && tileMatrix[i][j].kind != 0
-                        && tileMatrix[i][j].kind != TileID.STAR_FISH) {
+                if (!tileArray[i][j].empty
+                        && tileArray[i][j].wait == 0
+                        && !tileArray[i][j].breakable
+                        && tileArray[i][j].kind != 0
+                        && tileArray[i][j].kind != TileID.STAR_FISH) {
                     //Check match 3 in column
-                    if ((tileMatrix[i][j].kind == tileMatrix[i + 1][j].kind) &&
-                            (tileMatrix[i][j].kind == tileMatrix[i + 2][j].kind)) {
+                    if ((tileArray[i][j].kind == tileArray[i + 1][j].kind) &&
+                            (tileArray[i][j].kind == tileArray[i + 2][j].kind)) {
                         //Add match and explode around
                         for (int n = 0; n <= 2; n++) {
-                            tileMatrix[i + n][j].match++;
+                            tileArray[i + n][j].match++;
                             // explodeAround(tileMatrix[i + n][j]);
                         }
 
@@ -110,18 +37,18 @@ public class MyAlgorithm {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column - 2; j++) {
                 //Check state
-                if (!tileMatrix[i][j].empty
-                        && tileMatrix[i][j].wait == 0
-                        && !tileMatrix[i][j].breakable
-                        && tileMatrix[i][j].kind != 0
-                        && tileMatrix[i][j].kind != TileID.STAR_FISH) {
+                if (!tileArray[i][j].empty
+                        && tileArray[i][j].wait == 0
+                        && !tileArray[i][j].breakable
+                        && tileArray[i][j].kind != 0
+                        && tileArray[i][j].kind != TileID.STAR_FISH) {
 
                     //Check match 3 in row
-                    if ((tileMatrix[i][j].kind == tileMatrix[i][j + 1].kind) &&
-                            (tileMatrix[i][j].kind == tileMatrix[i][j + 2].kind)) {
+                    if ((tileArray[i][j].kind == tileArray[i][j + 1].kind) &&
+                            (tileArray[i][j].kind == tileArray[i][j + 2].kind)) {
                         //Add match and explode around
                         for (int n = 0; n <= 2; n++) {
-                            tileMatrix[i][j + n].match++;
+                            tileArray[i][j + n].match++;
                             // explodeAround(tileMatrix[i][j + n]);
                         }
 
@@ -131,61 +58,7 @@ public class MyAlgorithm {
         }
     }
 
-    private void swapBack(Tile[][] tileArray){
-        //Swap back if no match
-        if(isSwap && !isMoving) {
-            if(!matchFinding) {
-                switch (direction) {
-                    case 'u':
-                        swap(tileArray[swapRow][swapCol], tileArray[swapRow - 1][swapCol]);
-                        break;
-                    case 'd':
-                        swap(tileArray[swapRow][swapCol], tileArray[swapRow + 1][swapCol]);
-                        break;
-                    case 'l':
-                        swap(tileArray[swapRow][swapCol], tileArray[swapRow][swapCol - 1]);
-                        break;
-                    case 'r':
-                        swap(tileArray[swapRow][swapCol], tileArray[swapRow][swapCol + 1]);
-                        break;
-                }
-                direction = 'N';
-                isSwapBack = true;
-            }else{
-                //Player move
-                //reduceMove();
-                //Restart hint
-                //hint.stopHint();
-                //showHint = true;
-            }
-            isSwap = false;
-        }
-    }
-
-    private void addAnimation(Tile[][] tileMatrix) {
-        //(5.7.3) Add animation
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                //Check is match
-                if (!tileMatrix[i][j].empty
-                        && tileMatrix[i][j].match != 0
-                        && tileMatrix[i][j].kind != 0
-                        && !tileMatrix[i][j].isAnimate) {
-
-                    // Set isAnimate
-                    tileMatrix[i][j].isAnimate = true;
-
-                    //Explode fruit
-                    if (!tileMatrix[i][j].isUpgrade)
-                        mAnimationManager.explodeFruit(tileMatrix[i][j]);
-                    //Show score
-                    mAnimationManager.createScore(tileMatrix[i][j]);
-                }
-            }
-        }
-    }
-
-    private void tile2Top(Tile[][] tileArray) {
+    public void tile2Top(Tile[][] tileArray) {
         for (int j = 0; j < column; j++) {
             for (int i = row - 1; i >= 0; i--) {
                 //Check match
@@ -202,7 +75,7 @@ public class MyAlgorithm {
                                 break;
                             }
 
-                            swap(tileArray[n][j], tileArray[i][j]);
+                            swap(tileArray, tileArray[n][j], tileArray[i][j]);
                             break;
                         }
                     }
@@ -211,7 +84,7 @@ public class MyAlgorithm {
         }
     }
 
-    private void tileReset(Tile[][] tileArray) {
+    public void tileReset(Tile[][] tileArray) {
         for (int j = 0; j < column; j++) {
             for (int i = row - 1, n = 1; i >= 0; i--) {
 
@@ -302,7 +175,7 @@ public class MyAlgorithm {
         }
     }
 
-    public void swap(Tile tile1, Tile tile2) {
+    public void swap(Tile[][] tileArray, Tile tile1, Tile tile2) {
         if (tile1.invalid || tile2.invalid)
             return;
 

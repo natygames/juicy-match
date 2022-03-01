@@ -1,5 +1,8 @@
 package com.example.matchgamesample.fragment;
 
+import android.content.Context;
+import android.hardware.input.InputManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.Game;
 import com.example.matchgamesample.game.Tile;
@@ -88,7 +92,7 @@ public class GameFragment extends BaseFragment {
         effect_board.getLayoutParams().height = tileSize * row;
         RelativeLayout guide_board = (RelativeLayout) getView().findViewById(R.id.guide_board);
 
-        mGameEngine = new GameEngine(mActivity, tileSize);
+        mGameEngine = new GameEngine(mActivity, mLevel, tileSize);
 
         //Initializing array
         Tile[][] tileArray = new Tile[row][column];
@@ -107,7 +111,10 @@ public class GameFragment extends BaseFragment {
 
         mGameEngine.setInputController(new BasicInputController(view, mGameEngine));
         // Add all the game object here
-        mGameEngine.addGameObject(new GameController(mGameEngine, tileArray, mLevel));
+        GameController gameController = new GameController(mGameEngine, tileArray);
+        gameController.setAnimationManager(new AnimationManager(mGameEngine));
+
+        mGameEngine.addGameObject(gameController);
 
         mGameEngine.startGame();
 
@@ -115,11 +122,33 @@ public class GameFragment extends BaseFragment {
 
     @Override
     public boolean onBackPressed() {
-        if (mGameEngine.isRunning()) {
-            mGameEngine.stopGame();
+        if (mGameEngine.isRunning() && !mGameEngine.isPaused()){
+            mGameEngine.pauseGame();
             return true;
         }
-        return false;
+        return super.onBackPressed();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mGameEngine.isRunning() && !mGameEngine.isPaused()){
+            mGameEngine.pauseGame();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mGameEngine.isRunning() && mGameEngine.isPaused()){
+            mGameEngine.resumeGame();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mGameEngine.stopGame();
     }
 
 }

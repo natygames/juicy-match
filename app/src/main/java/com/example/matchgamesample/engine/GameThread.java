@@ -2,7 +2,7 @@ package com.example.matchgamesample.engine;
 
 import android.os.Handler;
 
-public class GameThread extends Thread{
+public class GameThread extends Thread {
     protected final GameEngine mGameEngine;
     private final Object mLock = new Object();
     public volatile boolean mIsGameRunning;
@@ -14,7 +14,7 @@ public class GameThread extends Thread{
         mIsGameRunning = false;
     }
 
-    protected void doIt(){
+    protected void doIt() {
 
         mHandle.post(new Runnable() {
             @Override
@@ -45,7 +45,7 @@ public class GameThread extends Thread{
 
     @Override
     public void run() {
-        while(mIsGameRunning){
+        while (mIsGameRunning) {
 
             if (mIsGamePause) {
                 while (mIsGamePause) {

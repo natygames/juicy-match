@@ -46,32 +46,7 @@ public class Tile extends Sprite {
 
     @Override
     public void onUpdate() {
-        for (int i = 0; i < SPEED; i++) {
-            int diff_x = x - col * mTileSize;
-            int diff_y = y - row * mTileSize;
-            if (diff_x > 0) {
-                //Go left
-                if (y > diagonal * mTileSize)
-                    x -= 1;
-            }
-            if (diff_x < 0) {
-                //Go right
-                if (y > diagonal * mTileSize)
-                    x += 1;
-            }
-            if (diff_y > 0) {
-                //Go up
-                y -= 1;
-            }
-            if (diff_y < 0) {
-                //Go down
-                y += 1;
-            }
-
-            if (diff_x == 0)
-                diagonal = 0;
-        }
-
+        // We do this in GameController
     }
 
     @Override
