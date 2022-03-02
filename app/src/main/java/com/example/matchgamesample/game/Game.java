@@ -169,7 +169,6 @@ public class Game {
         fruit_board.getLayoutParams().width = tileSize * column;
         fruit_board.getLayoutParams().height = tileSize * row;
 
-        int size = TileID.FRUITS_TO_USE.length;
         //Set tile's parameter
         for (int j = 0; j < column; j++) {
             for (int i = row - 1; i >= 0; i--) {
@@ -302,7 +301,7 @@ public class Game {
 
                 // Set random fruit
                 do {
-                    tileArray[i][j].kind = TileID.FRUITS_TO_USE[(int) (Math.random() * size)];
+                    tileArray[i][j].setRandomFruit();
                 } while ((i < row - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind && tileArray[i + 2][j].kind == tileArray[i][j].kind)
                         || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind && tileArray[i][j - 2].kind == tileArray[i][j].kind));
             }

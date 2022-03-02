@@ -79,7 +79,6 @@ public class GameFragment extends BaseFragment {
 
         //Level parameter
         Level mLevel = mActivity.getLevelManager().getLevel(level);
-        mActivity.getLevelManager().init();
         int row = mLevel.row;
         int column = mLevel.column;
 
@@ -112,8 +111,6 @@ public class GameFragment extends BaseFragment {
         mGameEngine.setInputController(new BasicInputController(view, mGameEngine));
         // Add all the game object here
         GameController gameController = new GameController(mGameEngine, tileArray);
-        gameController.setAnimationManager(new AnimationManager(mGameEngine));
-
         mGameEngine.addGameObject(gameController);
 
         mGameEngine.startGame();

@@ -14,7 +14,7 @@ public class Level {
     public int targetType = 0;
     public int move = 0;
     public int column = 0, row = 0;
-    public int fruitNum = 0;
+    public int fruitNum = 4;
     public ArrayList<Integer> target = new ArrayList<>();
     public ArrayList<Integer> collect = new ArrayList<>();
     // Game board in char
@@ -61,7 +61,7 @@ public class Level {
      *     3 for clear ice
      *     4 for starfish
      * <move> is the maxim swaps
-     * <fruitNum> is the number of fruit, maxim 5
+     * <fruitNum> is the number of fruit, default 4, maxim 5
      * <target> is the list stores each target amount
      * <collect> is the list stores items need to be collect
      */

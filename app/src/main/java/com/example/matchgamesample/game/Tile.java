@@ -7,23 +7,21 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.Sprite;
 
 public class Tile extends Sprite {
-    private GameEngine mGameEngine;
-    private int mTileSize;
-    private static final int SPEED = 8;
-
     public int row = 0, col = 0;                // Tile position
     public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute
     public int bounce = 0, wait = 0, diagonal = 0;            // Tile moving
-    public boolean invalid = false, empty = false, tube = false, special = false, lock = false, honey = false, breakable = false;  // Tile design
-    public boolean isExplode = false, isUpgrade = false, isAnimate = false, isChosen = false;                        //Tile state
+    public boolean invalid = false, empty = false, tube = false;  // Tile movement
+    public boolean special = false, lock = false, honey = false, breakable = false;     // Tile attribute
+    public boolean isExplode = false, isUpgrade = false, isAnimate = false, isChosen = false;       //Tile state
     public char direct = 'N', machine = 'N', specialCombine = 'N';
     public int iceCreamTarget = 0;
     public boolean entryPoint = false;
 
+    private final int mFruitNum;
+
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
-        mGameEngine = gameEngine;
-        mTileSize = gameEngine.mImageSize;
+        mFruitNum = gameEngine.mLevel.fruitNum;
     }
 
     public void startGame() {
@@ -74,7 +72,7 @@ public class Tile extends Sprite {
     }
 
     public boolean isMoving(){
-        return (x - col * mTileSize != 0) || (y - row * mTileSize != 0);
+        return (x - col * mWidth != 0) || (y - row * mHeight != 0);
     }
 
     public boolean isMovable() {
@@ -82,5 +80,39 @@ public class Tile extends Sprite {
             return false;
 
         return true;
+    }
+
+    public boolean isFruit() {
+        for (int i = 0; i < 5; i++) {
+            if (kind == TileID.FRUITS[i])
+                return true;
+        }
+
+        return false;
+    }
+
+    public void reset(){
+        match = 0;
+        if (special) {
+            special = false;
+            direct = 'N';
+            specialCombine = 'N';
+            iceCreamTarget = 0;
+        }
+        if (isUpgrade) {
+            isUpgrade = false;
+        }
+        if (breakable) {
+            breakable = false;
+        }
+
+        isExplode = false;   //Do not put this in "if (fruitArray[i][j].special)", or it won't detect
+
+        setRandomFruit();
+    }
+
+    public void setRandomFruit(){
+        //Assign fruit kind
+        kind = TileID.FRUITS[(int) (Math.random() * mFruitNum)];
     }
 }
