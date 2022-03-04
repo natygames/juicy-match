@@ -18,8 +18,6 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.RequiresApi;
-
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.Tile;
@@ -44,7 +42,7 @@ public class AnimationManager {
     public AnimationManager(GameEngine gameEngine) {
         mEffect_board = gameEngine.mActivity.findViewById(R.id.effect_board);
         mActivity = gameEngine.mActivity;
-        this.mTileSize = gameEngine.mImageSize;
+        mTileSize = gameEngine.mImageSize;
         explosion = Explosion.attach2Window(gameEngine.mActivity);
         shaking_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_animation);
         shaking_small_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_small_animation);
@@ -56,18 +54,21 @@ public class AnimationManager {
         //Add explode
         createExplodeBackground(tile, 3);
 
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add flash1
         ImageView flash1 = new ImageView(mActivity);
         flash1.setBackgroundResource(R.drawable.flash_h_right_clip);
-        flash1.setX(tile.x - mTileSize * 3);
-        flash1.setY(tile.y - mTileSize);
+        flash1.setX(positX - mTileSize * 2);
+        flash1.setY(positY);
         flash1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 3, mTileSize));
         mEffect_board.addView(flash1);
         //Add flash2
         ImageView flash2 = new ImageView(mActivity);
         flash2.setBackgroundResource(R.drawable.flash_h_left_clip);
-        flash2.setX(tile.x - mTileSize);
-        flash2.setY(tile.y - mTileSize);
+        flash2.setX(positX);
+        flash2.setY(positY);
         flash2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 3, mTileSize));
         mEffect_board.addView(flash2);
 
@@ -88,13 +89,13 @@ public class AnimationManager {
                 if (level[0] < 10000) {
                     mHandler.postDelayed(this, 10);
                 } else {
-                    flash1.animate().setDuration(600).x(tile.col * mTileSize - mTileSize * 9).scaleX(1.5f).scaleY(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
+                    flash1.animate().setDuration(600).x(tile.col * mTileSize - mTileSize * 8).scaleX(1.5f).scaleY(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             mEffect_board.removeView(flash1);
                         }
                     });
-                    flash2.animate().setDuration(600).x(tile.col * mTileSize + mTileSize * 5).scaleX(1.5f).scaleY(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
+                    flash2.animate().setDuration(600).x(tile.col * mTileSize + mTileSize * 6).scaleX(1.5f).scaleY(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             mEffect_board.removeView(flash2);
@@ -111,18 +112,21 @@ public class AnimationManager {
         //Add explode
         createExplodeBackground(tile, 3);
 
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add flash1
         ImageView flash1 = new ImageView(mActivity);
         flash1.setBackgroundResource(R.drawable.flash_v_bottom_clip);
-        flash1.setX(tile.x - mTileSize);
-        flash1.setY(tile.y - mTileSize * 3);
+        flash1.setX(positX);
+        flash1.setY(positY - mTileSize * 2);
         flash1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize * 3));
         mEffect_board.addView(flash1);
         //Add flash2
         ImageView flash2 = new ImageView(mActivity);
         flash2.setBackgroundResource(R.drawable.flash_v_top_clip);
-        flash2.setX(tile.x - mTileSize);
-        flash2.setY(tile.y - mTileSize);
+        flash2.setX(positX);
+        flash2.setY(positY);
         flash2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize * 3));
         mEffect_board.addView(flash2);
 
@@ -143,13 +147,13 @@ public class AnimationManager {
                 if (level[0] < 10000) {
                     mHandler.postDelayed(this, 10);
                 } else {
-                    flash1.animate().setDuration(600).y(tile.row * mTileSize - mTileSize * 9).scaleY(1.5f).scaleX(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
+                    flash1.animate().setDuration(600).y(tile.row * mTileSize - mTileSize * 8).scaleY(1.5f).scaleX(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             mEffect_board.removeView(flash1);
                         }
                     });
-                    flash2.animate().setDuration(600).y(tile.row * mTileSize + mTileSize * 5).scaleY(1.5f).scaleX(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
+                    flash2.animate().setDuration(600).y(tile.row * mTileSize + mTileSize * 6).scaleY(1.5f).scaleX(0.6f).alpha(0).setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
                             mEffect_board.removeView(flash2);
@@ -496,43 +500,47 @@ public class AnimationManager {
     public void upgrade2H_left(Tile tile) {
         //Add explode
         createExplodeBackground(tile, 3);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add first tile
         ImageView fruit1 = new ImageView(mActivity);
         fruit1.setImageResource(tile.kind);
-        fruit1.setX(tile.x - mTileSize * 2 - (int) (mTileSize / 3));
-        fruit1.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit1.setX(positX - mTileSize - (int) (mTileSize / 3));
+        fruit1.setY(positY - (int) (mTileSize / 3));
         fruit1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit1);
         //Add second tile
         ImageView fruit2 = new ImageView(mActivity);
         fruit2.setImageResource(tile.kind);
-        fruit2.setX(tile.x - (int) (mTileSize / 3));               //tile.x - mTileSize + mTileSize
-        fruit2.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit2.setX(positX + mTileSize - (int) (mTileSize / 3));               //tile.x - mTileSize + mTileSize
+        fruit2.setY(positY - (int) (mTileSize / 3));
         fruit2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit2);
         //Add third tile
         ImageView fruit3 = new ImageView(mActivity);
         fruit3.setImageResource(tile.kind);
-        fruit3.setX(tile.x + mTileSize - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize * 2
-        fruit3.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit3.setX(positX + mTileSize * 2 - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize * 2
+        fruit3.setY(positY - (int) (mTileSize / 3));
         fruit3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit3);
         //Add moving animation
-        fruit1.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit1.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit1);
                     }
                 });
-        fruit2.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit2.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit2);
                     }
                 });
-        fruit3.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit3.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -547,43 +555,47 @@ public class AnimationManager {
     public void upgrade2H_right(Tile tile) {
         //Add explode
         createExplodeBackground(tile, 3);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add first tile
         ImageView fruit1 = new ImageView(mActivity);
         fruit1.setImageResource(tile.kind);
-        fruit1.setX(tile.x - mTileSize * 3 - (int) (mTileSize / 3));
-        fruit1.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit1.setX(positX - mTileSize * 2 - (int) (mTileSize / 3));
+        fruit1.setY(positY - (int) (mTileSize / 3));
         fruit1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit1);
         //Add second tile
         ImageView fruit2 = new ImageView(mActivity);
         fruit2.setImageResource(tile.kind);
-        fruit2.setX(tile.x - mTileSize * 2 - (int) (mTileSize / 3));               //tile.x - mTileSize + mTileSize
-        fruit2.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit2.setX(positX - mTileSize - (int) (mTileSize / 3));               //tile.x - mTileSize + mTileSize
+        fruit2.setY(positY - (int) (mTileSize / 3));
         fruit2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit2);
         //Add thrid tile
         ImageView fruit3 = new ImageView(mActivity);
         fruit3.setImageResource(tile.kind);
-        fruit3.setX(tile.x - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize * 2
-        fruit3.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit3.setX(positX + mTileSize - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize * 2
+        fruit3.setY(positY - (int) (mTileSize / 3));
         fruit3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit3);
         //Add moving animation
-        fruit1.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit1.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit1);
                     }
                 });
-        fruit2.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit2.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit2);
                     }
                 });
-        fruit3.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit3.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -598,43 +610,47 @@ public class AnimationManager {
     public void upgrade2V_bottom(Tile tile) {
         //Add explode
         createExplodeBackground(tile, 3);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add first tile
         ImageView fruit1 = new ImageView(mActivity);
         fruit1.setImageResource(tile.kind);
-        fruit1.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit1.setY(tile.y - (int) (mTileSize / 3));
+        fruit1.setX(positX - (int) (mTileSize / 3));
+        fruit1.setY(positY + mTileSize - (int) (mTileSize / 3));
         fruit1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit1);
         //Add second tile
         ImageView fruit2 = new ImageView(mActivity);
         fruit2.setImageResource(tile.kind);
-        fruit2.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit2.setY(tile.y - mTileSize * 2 - (int) (mTileSize / 3));
+        fruit2.setX(positX - (int) (mTileSize / 3));
+        fruit2.setY(positY - mTileSize - (int) (mTileSize / 3));
         fruit2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit2);
         //Add thrid tile
         ImageView fruit3 = new ImageView(mActivity);
         fruit3.setImageResource(tile.kind);
-        fruit3.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit3.setY(tile.y - mTileSize * 3 - (int) (mTileSize / 3));
+        fruit3.setX(positX - (int) (mTileSize / 3));
+        fruit3.setY(positY - mTileSize * 2 - (int) (mTileSize / 3));
         fruit3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit3);
         //Add moving animation
-        fruit1.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit1.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit1);
                     }
                 });
-        fruit2.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit2.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit2);
                     }
                 });
-        fruit3.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit3.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -649,43 +665,47 @@ public class AnimationManager {
     public void upgrade2V_top(Tile tile) {
         //Add explode
         createExplodeBackground(tile, 3);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add first tile
         ImageView fruit1 = new ImageView(mActivity);
         fruit1.setImageResource(tile.kind);
-        fruit1.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit1.setY(tile.y + mTileSize - (int) (mTileSize / 3));
+        fruit1.setX(positX - (int) (mTileSize / 3));
+        fruit1.setY(positY + mTileSize * 2 - (int) (mTileSize / 3));
         fruit1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit1);
         //Add second tile
         ImageView fruit2 = new ImageView(mActivity);
         fruit2.setImageResource(tile.kind);
-        fruit2.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit2.setY(tile.y - (int) (mTileSize / 3));
+        fruit2.setX(positX - (int) (mTileSize / 3));
+        fruit2.setY(positY + mTileSize - (int) (mTileSize / 3));
         fruit2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit2);
         //Add thrid tile
         ImageView fruit3 = new ImageView(mActivity);
         fruit3.setImageResource(tile.kind);
-        fruit3.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit3.setY(tile.y - mTileSize * 2 - (int) (mTileSize / 3));
+        fruit3.setX(positX - (int) (mTileSize / 3));
+        fruit3.setY(positY - mTileSize - (int) (mTileSize / 3));
         fruit3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit3);
         //Add moving animation
-        fruit1.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit1.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit1);
                     }
                 });
-        fruit2.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit2.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit2);
                     }
                 });
-        fruit3.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit3.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -701,57 +721,60 @@ public class AnimationManager {
         //Add explode
         createExplodeBackground(tile, 3);
 
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add first tile
         ImageView fruit1 = new ImageView(mActivity);
         fruit1.setImageResource(tile.kind);
-        fruit1.setX(tile.x - mTileSize * 3 - (int) (mTileSize / 3));
-        fruit1.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit1.setX(positX - mTileSize * 2 - (int) (mTileSize / 3));
+        fruit1.setY(positY - (int) (mTileSize / 3));
         fruit1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit1);
         //Add second tile
         ImageView fruit2 = new ImageView(mActivity);
         fruit2.setImageResource(tile.kind);
-        fruit2.setX(tile.x - mTileSize * 2 - (int) (mTileSize / 3));
-        fruit2.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit2.setX(positX - mTileSize - (int) (mTileSize / 3));
+        fruit2.setY(positY - (int) (mTileSize / 3));
         fruit2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit2);
         //Add thrid tile
         ImageView fruit3 = new ImageView(mActivity);
         fruit3.setImageResource(tile.kind);
-        fruit3.setX(tile.x - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize
-        fruit3.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit3.setX(positX + mTileSize - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize
+        fruit3.setY(positY - (int) (mTileSize / 3));
         fruit3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit3);
         //Add forth tile
         ImageView fruit4 = new ImageView(mActivity);
         fruit4.setImageResource(tile.kind);
-        fruit4.setX(tile.x + mTileSize - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize * 2
-        fruit4.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        fruit4.setX(positX + mTileSize * 2 - (int) (mTileSize / 3));       //tile.x - mTileSize + mTileSize * 2
+        fruit4.setY(positY - (int) (mTileSize / 3));
         fruit4.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit4);
         //Add moving animation
-        fruit1.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit1.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit1);
                     }
                 });
-        fruit2.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit2.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit2);
                     }
                 });
-        fruit3.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit3.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit3);
                     }
                 });
-        fruit4.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit4.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -771,57 +794,60 @@ public class AnimationManager {
         //Add explode
         createExplodeBackground(tile, 3);
 
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add first tile
         ImageView fruit1 = new ImageView(mActivity);
         fruit1.setImageResource(tile.kind);
-        fruit1.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit1.setY(tile.y + mTileSize - (int) (mTileSize / 3));              //tile.y - mTileSize + mTileSize
+        fruit1.setX(positX - (int) (mTileSize / 3));
+        fruit1.setY(positY + mTileSize * 2 - (int) (mTileSize / 3));              //tile.y - mTileSize + mTileSize
         fruit1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit1);
         //Add second tile
         ImageView fruit2 = new ImageView(mActivity);
         fruit2.setImageResource(tile.kind);
-        fruit2.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit2.setY(tile.y - (int) (mTileSize / 3));
+        fruit2.setX(positX - (int) (mTileSize / 3));
+        fruit2.setY(positY + mTileSize - (int) (mTileSize / 3));
         fruit2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit2);
         //Add thrid tile
         ImageView fruit3 = new ImageView(mActivity);
         fruit3.setImageResource(tile.kind);
-        fruit3.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit3.setY(tile.y - mTileSize * 2 - (int) (mTileSize / 3));
+        fruit3.setX(positX - (int) (mTileSize / 3));
+        fruit3.setY(positY - mTileSize - (int) (mTileSize / 3));
         fruit3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit3);
         //Add forth tile
         ImageView fruit4 = new ImageView(mActivity);
         fruit4.setImageResource(tile.kind);
-        fruit4.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        fruit4.setY(tile.y - mTileSize * 3 - (int) (mTileSize / 3));
+        fruit4.setX(positX - (int) (mTileSize / 3));
+        fruit4.setY(positY - mTileSize * 2 - (int) (mTileSize / 3));
         fruit4.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit4);
         //Add moving animation
-        fruit1.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)         //tile.y - mTileSize + mTileSize * 2
+        fruit1.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)         //tile.y - mTileSize + mTileSize * 2
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit1);
                     }
                 });
-        fruit2.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit2.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit2);
                     }
                 });
-        fruit3.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit3.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit3);
                     }
                 });
-        fruit4.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit4.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -1133,11 +1159,15 @@ public class AnimationManager {
     private void explodeNotSpecialFruit(Tile tile) {
         //Add sparkler
         createSparkler(tile, 4, 0.7f, 0.2f, 750);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add flash
         ImageView flash = new ImageView(mActivity);
         flash.setImageResource(R.drawable.flash_s_small);
-        flash.setX(tile.x - mTileSize);
-        flash.setY(tile.y - mTileSize);
+        flash.setX(positX);
+        flash.setY(positY);
         flash.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
         flash.animate().setDuration(500).rotation(Math.random() > 0.5 ? 30 : -30).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
@@ -1171,10 +1201,10 @@ public class AnimationManager {
         }
 
         //Set location
-        fruit_frag1.setX(tile.x - mTileSize);
-        fruit_frag1.setY(tile.y - mTileSize);
-        fruit_frag2.setX(tile.x - mTileSize);
-        fruit_frag2.setY(tile.y - mTileSize);
+        fruit_frag1.setX(positX);
+        fruit_frag1.setY(positY);
+        fruit_frag2.setX(positX);
+        fruit_frag2.setY(positY);
 
         //Set size
         fruit_frag1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
@@ -1185,7 +1215,7 @@ public class AnimationManager {
         mEffect_board.addView(fruit_frag2);
 
         //Add animation
-        fruit_frag1.animate().setDuration(500).x((float) (tile.x - mTileSize - mTileSize / 4)).y((float) (tile.y - mTileSize + mTileSize / 4))
+        fruit_frag1.animate().setDuration(500).x((float) (positX - mTileSize / 4)).y((float) (positY + mTileSize / 4))
                 .rotation(-45).alpha(0).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -1193,7 +1223,7 @@ public class AnimationManager {
 
             }
         });
-        fruit_frag2.animate().setDuration(500).x((float) (tile.x - mTileSize + mTileSize / 4)).y((float) (tile.y - mTileSize + mTileSize / 4))
+        fruit_frag2.animate().setDuration(500).x((float) (positX + mTileSize / 4)).y((float) (positY + mTileSize / 4))
                 .rotation(-45).alpha(0).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -1682,7 +1712,6 @@ public class AnimationManager {
     }
 
     //This create lightning
-    @RequiresApi(api = Build.VERSION_CODES.M)
     public void createLightning(Tile ice_cream, Tile target) {
         //Add image
         ImageView lightning = new ImageView(mActivity);
@@ -1731,8 +1760,12 @@ public class AnimationManager {
         mEffect_board.addView(lightning);
 
         ClipDrawable clip = (ClipDrawable) lightning.getBackground();
-        AnimationDrawable anim = (AnimationDrawable) clip.getDrawable();
-        anim.start();
+
+        AnimationDrawable anim = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            anim = (AnimationDrawable) clip.getDrawable();
+            anim.start();
+        }
 
         clip.setLevel(0);
         final int[] level = {0};
@@ -1971,8 +2004,8 @@ public class AnimationManager {
         //Add flash
         ImageView flash = new ImageView(mActivity);
         flash.setImageResource(R.drawable.flash_s_small_lightning_clip);
-        flash.setX(tile.col * mTileSize - mTileSize - mTileSize);
-        flash.setY(tile.row * mTileSize - mTileSize - mTileSize);
+        flash.setX(tile.col * mTileSize - mTileSize);
+        flash.setY(tile.row * mTileSize - mTileSize);
         flash.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 3, mTileSize * 3));
         flash.animate().setDuration(500).rotation(Math.random() > 0.5 ? 60 : -60);
         mEffect_board.addView(flash);

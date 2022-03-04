@@ -2,8 +2,11 @@ package com.example.matchgamesample.game;
 
 import android.content.Context;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.level.Level;
@@ -308,4 +311,429 @@ public class Game {
         }
 
     }
+
+    public void createIceBoard(GridLayout ice_board, ImageView[][] iceArray, GridLayout ice_board2, ImageView[][] iceArray2, Tile[][] tileArray) {
+        /* Explanation:
+         *
+         * n for no ice (default)
+         * i for one layer ice
+         * I for double layer ice
+         *
+         */
+
+        char[] board_char = mLevel.board.toCharArray();
+        char[][] ice_char = new char[row][column];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                char type = mLevel.ice.charAt(j + i * column);
+                ice_char[i][j] = type;
+            }
+        }
+
+        ice_board.setColumnCount(column);
+        ice_board.setRowCount(row);
+        ice_board.getLayoutParams().width = tileSize * column;
+        ice_board.getLayoutParams().height = tileSize * row;
+        ice_board2.setColumnCount(column);
+        ice_board2.setRowCount(row);
+        ice_board2.getLayoutParams().width = tileSize * column;
+        ice_board2.getLayoutParams().height = tileSize * row;
+
+
+        //Set ice image
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+
+                //First layer
+                ImageView ice = new ImageView(context);
+                ice.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+
+                //Second layer
+                ImageView ice2 = new ImageView(context);
+                ice2.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+
+                if (ice_char[i][j] == 'n') {
+                    iceArray[i][j] = ice;
+                    ice_board.addView(ice);
+                    iceArray2[i][j] = ice2;
+                    ice_board2.addView(ice2);
+                    continue;
+                }
+
+                // Set ice
+                tileArray[i][j].ice++;
+                // Set image according to board
+                switch (board_char[i * column + j]) {
+                    case ('n'):
+                        ice.setBackgroundResource(R.drawable.ice);
+                        break;
+                    case ('q'):
+                        ice.setBackgroundResource(R.drawable.ice_corner);
+                        break;
+                    case ('w'):
+                        ice.setBackgroundResource(R.drawable.ice_corner);
+                        ice.setRotation(90);
+                        break;
+                    case ('a'):
+                        ice.setBackgroundResource(R.drawable.ice_corner);
+                        ice.setRotation(270);
+                        break;
+                    case ('s'):
+                        ice.setBackgroundResource(R.drawable.ice_corner);
+                        ice.setRotation(180);
+                        break;
+                    case ('u'):
+                        ice.setBackgroundResource(R.drawable.ice_margin);
+                        break;
+                    case ('l'):
+                        ice.setBackgroundResource(R.drawable.ice_margin);
+                        ice.setRotation(270);
+                        break;
+                    case ('r'):
+                        ice.setBackgroundResource(R.drawable.ice_margin);
+                        ice.setRotation(90);
+                        break;
+                    case ('d'):
+                        ice.setBackgroundResource(R.drawable.ice_margin);
+                        ice.setRotation(180);
+                        break;
+                    case ('U'):
+                        ice.setBackgroundResource(R.drawable.ice_sole);
+                        break;
+                    case ('L'):
+                        ice.setBackgroundResource(R.drawable.ice_sole);
+                        ice.setRotation(270);
+                        break;
+                    case ('R'):
+                        ice.setBackgroundResource(R.drawable.ice_sole);
+                        ice.setRotation(90);
+                        break;
+                    case ('D'):
+                        ice.setBackgroundResource(R.drawable.ice_sole);
+                        ice.setRotation(180);
+                        break;
+                    case ('h'):
+                        ice.setBackgroundResource(R.drawable.ice_bar);
+                        break;
+                    case ('v'):
+                        ice.setBackgroundResource(R.drawable.ice_bar);
+                        ice.setRotation(90);
+                        break;
+                    case ('o'):
+                        ice.setBackgroundResource(R.drawable.ice_one);
+                        break;
+                    default:
+
+                }
+
+                if (ice_char[i][j] == 'I') {
+                    // Set ice
+                    tileArray[i][j].ice++;
+                    // Set image according to board
+                    switch (board_char[i * column + j]) {
+                        case ('n'):
+                            ice2.setBackgroundResource(R.drawable.ice2);
+                            break;
+                        case ('q'):
+                            ice2.setBackgroundResource(R.drawable.ice2_corner);
+                            break;
+                        case ('w'):
+                            ice2.setBackgroundResource(R.drawable.ice2_corner);
+                            ice2.setRotation(90);
+                            break;
+                        case ('a'):
+                            ice2.setBackgroundResource(R.drawable.ice2_corner);
+                            ice2.setRotation(270);
+                            break;
+                        case ('s'):
+                            ice2.setBackgroundResource(R.drawable.ice2_corner);
+                            ice2.setRotation(180);
+                            break;
+                        case ('u'):
+                            ice2.setBackgroundResource(R.drawable.ice2_margin);
+                            break;
+                        case ('l'):
+                            ice2.setBackgroundResource(R.drawable.ice2_margin);
+                            ice2.setRotation(270);
+                            break;
+                        case ('r'):
+                            ice2.setBackgroundResource(R.drawable.ice2_margin);
+                            ice2.setRotation(90);
+                            break;
+                        case ('d'):
+                            ice2.setBackgroundResource(R.drawable.ice2_margin);
+                            ice2.setRotation(180);
+                            break;
+                        case ('U'):
+                            ice2.setBackgroundResource(R.drawable.ice2_sole);
+                            break;
+                        case ('L'):
+                            ice2.setBackgroundResource(R.drawable.ice2_sole);
+                            ice2.setRotation(270);
+                            break;
+                        case ('R'):
+                            ice2.setBackgroundResource(R.drawable.ice2_sole);
+                            ice2.setRotation(90);
+                            break;
+                        case ('D'):
+                            ice2.setBackgroundResource(R.drawable.ice2_sole);
+                            ice2.setRotation(180);
+                            break;
+                        case ('h'):
+                            ice2.setBackgroundResource(R.drawable.ice2_bar);
+                            break;
+                        case ('v'):
+                            ice2.setBackgroundResource(R.drawable.ice2_bar);
+                            ice2.setRotation(90);
+                            break;
+                        case ('o'):
+                            ice2.setBackgroundResource(R.drawable.ice2_one);
+                            break;
+                        default:
+
+                    }
+
+                }
+
+                iceArray[i][j] = ice;
+                ice_board.addView(ice);
+                iceArray2[i][j] = ice2;
+                ice_board2.addView(ice2);
+
+            }
+        }
+
+    }
+
+    public void createAdvanceBoard(GridLayout advance_board, ImageView[][] advanceArray, Tile[][] tileArray) {
+        /* Explanation:
+         *
+         * n for normal (default)
+         * x for lock
+         * A for arrow
+         * I for tube
+         * H for horizontal cherry machine
+         * V for vertical cherry machine
+         * S for strawberry machine
+         * O for ice cream machine
+         * X for starfish machine
+         * h for honey
+         *
+         */
+
+        char[] board_char = mLevel.board.toCharArray();
+        char[][] advance_char = new char[row + 2][column];
+        for (int i = 0; i < row + 2; i++) {
+            for (int j = 0; j < column; j++) {
+                char type = mLevel.advance.charAt(j + i * column);
+                advance_char[i][j] = type;
+            }
+        }
+
+        //Arrow animation
+        final Animation arrow_anim = AnimationUtils.loadAnimation(context, R.anim.arrow_animation);
+
+        //Create advance board
+        advance_board.setColumnCount(column);
+        advance_board.setRowCount(row + 2);
+        advance_board.getLayoutParams().width = tileSize * column;
+        advance_board.getLayoutParams().height = tileSize * (row + 2);
+
+        //Set advance image
+        for (int i = 0; i < row + 2; i++) {
+            for (int j = 0; j < column; j++) {
+                //First layer
+                ImageView advance = new ImageView(context);
+                advance.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+
+                // Set honey
+                if (advance_char[i][j] == 'h') {
+                    // Set ice
+                    tileArray[i - 1][j].honey = true;
+
+                    switch (board_char[(i - 1) * column + j]) {
+                        case ('n'):
+                            advance.setBackgroundResource(R.drawable.honey);
+                            break;
+                        case ('q'):
+                            advance.setBackgroundResource(R.drawable.honey_corner);
+                            break;
+                        case ('w'):
+                            advance.setBackgroundResource(R.drawable.honey_corner);
+                            advance.setRotation(90);
+                            break;
+                        case ('a'):
+                            advance.setBackgroundResource(R.drawable.honey_corner);
+                            advance.setRotation(270);
+                            break;
+                        case ('s'):
+                            advance.setBackgroundResource(R.drawable.honey_corner);
+                            advance.setRotation(180);
+                            break;
+                        case ('u'):
+                            advance.setBackgroundResource(R.drawable.honey_margin);
+                            break;
+                        case ('l'):
+                            advance.setBackgroundResource(R.drawable.honey_margin);
+                            advance.setRotation(270);
+                            break;
+                        case ('r'):
+                            advance.setBackgroundResource(R.drawable.honey_margin);
+                            advance.setRotation(90);
+                            break;
+                        case ('d'):
+                            advance.setBackgroundResource(R.drawable.honey_margin);
+                            advance.setRotation(180);
+                            break;
+                        case ('U'):
+                            advance.setBackgroundResource(R.drawable.honey_sole);
+                            break;
+                        case ('L'):
+                            advance.setBackgroundResource(R.drawable.honey_sole);
+                            advance.setRotation(270);
+                            break;
+                        case ('R'):
+                            advance.setBackgroundResource(R.drawable.honey_sole);
+                            advance.setRotation(90);
+                            break;
+                        case ('D'):
+                            advance.setBackgroundResource(R.drawable.honey_sole);
+                            advance.setRotation(180);
+                            break;
+                        case ('h'):
+                            advance.setBackgroundResource(R.drawable.honey_bar);
+                            break;
+                        case ('v'):
+                            advance.setBackgroundResource(R.drawable.honey_bar);
+                            advance.setRotation(90);
+                            break;
+                        case ('o'):
+                            advance.setBackgroundResource(R.drawable.honey_one);
+                            break;
+                        default:
+
+                    }
+                    advanceArray[i][j] = advance;
+                    advance_board.addView(advance);
+                    continue;
+                }
+
+                // Set Advance
+                switch (advance_char[i][j]) {
+                    case ('n'):
+                        advanceArray[i][j] = advance;
+                        advance_board.addView(advance);
+                        break;
+                    case ('x'):
+                        // Add lock
+                        tileArray[i - 1][j].lock = true;
+                        tileArray[i - 1][j].invalid = true;
+                        advance.setBackgroundResource(R.drawable.lock);
+                        advanceArray[i][j] = advance;
+                        advance_board.addView(advance);
+                        break;
+                    case ('A'):
+                        // Add entry point
+                        if (i <= row)
+                            tileArray[i - 1][j].entryPoint = true;
+                        advance.setBackgroundResource(R.drawable.arrow);
+                        advance.setAlpha(0.5f);
+                        advance.startAnimation(arrow_anim);
+                        advance.animate().translationY((float) -tileSize / 2);
+                        advance_board.addView(advance);
+                        break;
+                    case ('I'):
+                        advance.setBackgroundResource(R.drawable.tube);
+                        advance.setAlpha(0.7f);
+                        advance_board.addView(advance);
+                        break;
+                    case ('H'):
+                        advance.setBackgroundResource(R.drawable.handler);
+                        advanceArray[i][j] = advance;
+                        RelativeLayout machine_h = new RelativeLayout(context);
+                        machine_h.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        machine_h.setBackgroundResource(R.drawable.machine_cherry_h);
+                        machine_h.addView(advance);
+                        advance_board.addView(machine_h);
+                        machine_h.animate().translationY((float) tileSize / 4);
+
+                        // Add machine to whole column
+                        for (int x = 1; x <= row; x++) {
+                            if (!tileArray[i - 1][j].empty)
+                                tileArray[i - 1][j].machine = 'H';
+                        }
+                        break;
+                    case ('V'):
+                        advance.setBackgroundResource(R.drawable.handler);
+                        advanceArray[i][j] = advance;
+                        RelativeLayout machine_v = new RelativeLayout(context);
+                        machine_v.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        machine_v.setBackgroundResource(R.drawable.machine_cherry_v);
+                        machine_v.addView(advance);
+                        advance_board.addView(machine_v);
+                        machine_v.animate().translationY((float) tileSize / 4);
+
+                        // Add machine to whole column
+                        for (int x = 1; x <= row; x++) {
+                            if (!tileArray[i - 1][j].empty)
+                                tileArray[i - 1][j].machine = 'V';
+                        }
+                        break;
+                    case ('S'):
+                        advance.setBackgroundResource(R.drawable.handler);
+                        advanceArray[i][j] = advance;
+                        RelativeLayout machine_s = new RelativeLayout(context);
+                        machine_s.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        machine_s.setBackgroundResource(R.drawable.machine_strawberry);
+                        machine_s.addView(advance);
+                        advance_board.addView(machine_s);
+                        machine_s.animate().translationY((float) tileSize / 4);
+
+                        // Add machine to whole column
+                        for (int x = 1; x <= row; x++) {
+                            if (!tileArray[i - 1][j].empty)
+                                tileArray[i - 1][j].machine = 'S';
+                        }
+                        break;
+                    case ('O'):
+                        advance.setBackgroundResource(R.drawable.handler);
+                        advanceArray[i][j] = advance;
+                        RelativeLayout machine_o = new RelativeLayout(context);
+                        machine_o.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        machine_o.setBackgroundResource(R.drawable.machine_icecream);
+                        machine_o.addView(advance);
+                        advance_board.addView(machine_o);
+                        machine_o.animate().translationY((float) tileSize / 4);
+
+                        // Add machine to whole column
+                        for (int x = 1; x <= row; x++) {
+                            if (!tileArray[i - 1][j].empty)
+                                tileArray[i - 1][j].machine = 'O';
+                        }
+                        break;
+                    case ('X'):
+                        advance.setBackgroundResource(R.drawable.handler);
+                        advanceArray[i][j] = advance;
+                        RelativeLayout machine_x = new RelativeLayout(context);
+                        machine_x.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        machine_x.setBackgroundResource(R.drawable.machine_star);
+                        machine_x.addView(advance);
+                        advance_board.addView(machine_x);
+                        machine_x.animate().translationY((float) tileSize / 4);
+
+                        // Add machine to whole column
+                        for (int x = 1; x <= row; x++) {
+                            if (!tileArray[i - 1][j].empty)
+                                tileArray[i - 1][j].machine = 'X';
+                        }
+                        break;
+                    default:
+
+                }
+
+            }
+        }
+    }
+
 }

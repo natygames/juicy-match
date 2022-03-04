@@ -18,7 +18,7 @@ public class Level {
     public ArrayList<Integer> target = new ArrayList<>();
     public ArrayList<Integer> collect = new ArrayList<>();
     // Game board in char
-    public String board = "", fruit = "", ice = "", advance = "";
+    public String board, fruit, ice, advance;
 
     public void addCollect(String s){
             switch (s) {

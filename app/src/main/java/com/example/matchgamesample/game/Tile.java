@@ -93,21 +93,15 @@ public class Tile extends Sprite {
 
     public void reset(){
         match = 0;
+        isUpgrade = false;
+        breakable = false;
+        isExplode = false;
         if (special) {
             special = false;
             direct = 'N';
             specialCombine = 'N';
             iceCreamTarget = 0;
         }
-        if (isUpgrade) {
-            isUpgrade = false;
-        }
-        if (breakable) {
-            breakable = false;
-        }
-
-        isExplode = false;   //Do not put this in "if (fruitArray[i][j].special)", or it won't detect
-
         setRandomFruit();
     }
 

@@ -1,8 +1,5 @@
 package com.example.matchgamesample.fragment;
 
-import android.content.Context;
-import android.hardware.input.InputManager;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,13 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
-import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.Game;
+import com.example.matchgamesample.game.MyAlgorithm;
 import com.example.matchgamesample.game.Tile;
 import com.example.matchgamesample.game.GameController;
 import com.example.matchgamesample.input.BasicInputController;
@@ -28,13 +26,6 @@ import com.example.matchgamesample.level.Level;
 public class GameFragment extends BaseFragment {
     private static final String LEVEL = "level";
     private int level;
-
-    private MainActivity mActivity;
-
-    //Device size
-    private int mScreen_width;
-    private int mScreen_height;
-
     private GameEngine mGameEngine;
 
     public GameFragment() {
@@ -68,17 +59,19 @@ public class GameFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mActivity = getMainActivity();
+        startGame();
+    }
 
+    private void startGame(){
         //Initializing device parameters
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        mActivity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        mScreen_width = displayMetrics.widthPixels;
-        mScreen_height = displayMetrics.heightPixels;
-        int tileSize = (int) ((mScreen_width - 20) / 9);
+        getMainActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screen_width = displayMetrics.widthPixels;
+        int screen_height = displayMetrics.heightPixels;
+        int tileSize = (int) ((screen_width - 20) / 9);
 
         //Level parameter
-        Level mLevel = mActivity.getLevelManager().getLevel(level);
+        Level mLevel = getMainActivity().getLevelManager().getLevel(level);
         int row = mLevel.row;
         int column = mLevel.column;
 
@@ -91,9 +84,9 @@ public class GameFragment extends BaseFragment {
         effect_board.getLayoutParams().height = tileSize * row;
         RelativeLayout guide_board = (RelativeLayout) getView().findViewById(R.id.guide_board);
 
-        mGameEngine = new GameEngine(mActivity, mLevel, tileSize);
+        mGameEngine = new GameEngine(getMainActivity(), mLevel, tileSize);
 
-        //Initializing array
+        //Initializing tile
         Tile[][] tileArray = new Tile[row][column];
         // Implement tiles
         for (int i = 0; i < row; i++) {
@@ -104,17 +97,30 @@ public class GameFragment extends BaseFragment {
         }
 
         // Render game
-        Game mGame = new Game(mActivity, mLevel, tileSize);
+        Game mGame = new Game(getMainActivity(), mLevel, tileSize);
+        MyAlgorithm myAlgorithm = new MyAlgorithm(mGameEngine);
         mGame.createGridBoard(grid_board);
         mGame.createFruitBoard(fruit_board, tileArray);
+        if(mLevel.targetType == 3){
+            ImageView[][] iceArray = new ImageView[row][column];
+            ImageView[][] iceArray2 = new ImageView[row][column];
+            mGame.createIceBoard(getView().findViewById(R.id.ice_board), iceArray,
+                    getView().findViewById(R.id.ice_board2), iceArray2, tileArray);
+            myAlgorithm.setIceArray(iceArray, iceArray2);
+        }
+        if (mLevel.advance != null) {
+            ImageView[][] advanceArray = new ImageView[row + 2][column];
+            mGame.createAdvanceBoard(getView().findViewById(R.id.advance_board), advanceArray, tileArray);
+            myAlgorithm.setAdvanceArray(advanceArray);
+        }
 
-        mGameEngine.setInputController(new BasicInputController(view, mGameEngine));
+        mGameEngine.setInputController(new BasicInputController(getView(), mGameEngine));
         // Add all the game object here
         GameController gameController = new GameController(mGameEngine, tileArray);
+        gameController.setMyAlgorithm(myAlgorithm);
         mGameEngine.addGameObject(gameController);
 
         mGameEngine.startGame();
-
     }
 
     @Override
