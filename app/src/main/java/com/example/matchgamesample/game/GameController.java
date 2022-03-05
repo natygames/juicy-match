@@ -72,32 +72,36 @@ public class GameController extends GameObject implements GameEventListener {
                 return;
             mAlgorithm.swapCol2 = swapCol + 1;
             mAlgorithm.swapRow2 = swapRow;
-            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow][swapCol + 1]);
             mAlgorithm.direction = 'R';
+            mAlgorithm.checkSpecialCombine(tileArray[swapRow][swapCol], tileArray[swapRow][swapCol + 1]);
+            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow][swapCol + 1]);
         } else if (mInputController.mX_Down - mInputController.mX_Up > 50) {
             // Swap left
             if (swapCol == 0)
                 return;
             mAlgorithm.swapCol2 = swapCol - 1;
             mAlgorithm.swapRow2 = swapRow;
-            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow][swapCol - 1]);
             mAlgorithm.direction = 'L';
+            mAlgorithm.checkSpecialCombine(tileArray[swapRow][swapCol], tileArray[swapRow][swapCol - 1]);
+            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow][swapCol - 1]);
         } else if (mInputController.mY_Down - mInputController.mY_Up > 50) {
             // Swap up
             if (swapRow == 0)
                 return;
             mAlgorithm.swapCol2 = swapCol;
             mAlgorithm.swapRow2 = swapRow - 1;
-            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow - 1][swapCol]);
             mAlgorithm.direction = 'U';
+            mAlgorithm.checkSpecialCombine(tileArray[swapRow][swapCol], tileArray[swapRow - 1][swapCol]);
+            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow - 1][swapCol]);
         } else if (mInputController.mY_Down - mInputController.mY_Up < -50) {
             // Swap down
             if (swapRow == mRow - 1)
                 return;
             mAlgorithm.swapCol2 = swapCol;
             mAlgorithm.swapRow2 = swapRow + 1;
-            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow + 1][swapCol]);
             mAlgorithm.direction = 'D';
+            mAlgorithm.checkSpecialCombine(tileArray[swapRow][swapCol], tileArray[swapRow + 1][swapCol]);
+            mAlgorithm.swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow + 1][swapCol]);
         }
 
     }

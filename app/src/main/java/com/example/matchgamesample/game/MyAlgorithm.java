@@ -8,6 +8,7 @@ import com.example.matchgamesample.engine.GameEngine;
 
 public class MyAlgorithm {
     private final int row, column;
+    private int fruitMun;
     private final int tileSize;
 
     private ImageView[][] iceArray, iceArray2;
@@ -30,6 +31,7 @@ public class MyAlgorithm {
     public MyAlgorithm(GameEngine gameEngine) {
         row = gameEngine.mLevel.row;
         column = gameEngine.mLevel.column;
+        fruitMun = gameEngine.mLevel.fruitNum;
         tileSize = gameEngine.mImageSize;
         animationManager = new AnimationManager(gameEngine);
     }
@@ -160,6 +162,189 @@ public class MyAlgorithm {
         }
 
         if (!isMoving) {
+
+            //(5.2) Add square special fruit
+            for (int i = 0; i < row; i++) {
+                for (int j = 1; j < column - 1; j++) {
+                    //Check state
+                    if (tileArray[i][j].isFruit() && tileArray[i][j].wait == 0) {
+                        //Check row for 3
+                        if (tileArray[i][j].kind == tileArray[i][j - 1].kind &&
+                                tileArray[i][j].kind == tileArray[i][j + 1].kind) {
+                            //Check potential match
+                            if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j - 1].kind
+                                    && tileArray[i - 1][j - 1].match > 0) {            //Top left
+                                //If tile is coco, do not add
+                                if (!tileArray[i][j - 1].special) {
+                                    if (i > 1 && tileArray[i - 2][j - 1].kind == tileArray[i][j].kind) {
+                                        /* O
+                                         * O
+                                         * X O O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j - 1], 'L', 1);
+                                        tileArray[i][j].isUpgrade = true;
+                                        tileArray[i][j + 1].isUpgrade = true;
+                                        tileArray[i - 1][j - 1].isUpgrade = true;
+                                        tileArray[i - 2][j - 1].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j - 1].match = 0;
+                                        tileArray[i][j - 1].special = true;
+                                        tileArray[i][j - 1].direct = 'S';
+                                    } else if (i < row - 1 && tileArray[i + 1][j - 1].kind == tileArray[i][j].kind) {
+                                        /* O
+                                         * X O O
+                                         * O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j - 1], 'L', 2);
+                                        tileArray[i][j].isUpgrade = true;
+                                        tileArray[i][j + 1].isUpgrade = true;
+                                        tileArray[i - 1][j - 1].isUpgrade = true;
+                                        tileArray[i + 1][j - 1].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j - 1].match = 0;
+                                        tileArray[i][j - 1].special = true;
+                                        tileArray[i][j - 1].direct = 'S';
+                                    }
+                                }
+                            } else if (i < row - 1 && tileArray[i][j].kind == tileArray[i + 1][j - 1].kind
+                                    && tileArray[i + 1][j - 1].match > 0) {         //Bottom Left
+                                //If tile is coco, do not add
+                                if (!tileArray[i][j - 1].special) {
+                                    if (i < row - 2 && tileArray[i + 2][j - 1].kind == tileArray[i][j].kind) {
+                                        /* X O O
+                                         * O
+                                         * O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j - 1], 'L', 3);
+                                        tileArray[i][j].isUpgrade = true;
+                                        tileArray[i][j + 1].isUpgrade = true;
+                                        tileArray[i + 1][j - 1].isUpgrade = true;
+                                        tileArray[i + 2][j - 1].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j - 1].match = 0;
+                                        tileArray[i][j - 1].special = true;
+                                        tileArray[i][j - 1].direct = 'S';
+                                    }
+                                }
+                            } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j].kind && tileArray[i - 1][j].match > 0) {            //Top Center
+                                //If tile is coco, do not add
+                                if (!tileArray[i][j].special) {
+                                    if (i > 1 && tileArray[i - 2][j].kind == tileArray[i][j].kind) {
+                                        /*   O
+                                         *   O
+                                         * O X O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j], 'C', 1);
+                                        tileArray[i][j - 1].isUpgrade = true;
+                                        tileArray[i][j + 1].isUpgrade = true;
+                                        tileArray[i - 1][j].isUpgrade = true;
+                                        tileArray[i - 2][j].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j].match = 0;
+                                        tileArray[i][j].special = true;
+                                        tileArray[i][j].direct = 'S';
+                                    } else if (i < row - 1 && tileArray[i + 1][j].kind == tileArray[i][j].kind) {
+                                        /*   O
+                                         * O X O
+                                         *   O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j], 'C', 2);
+                                        tileArray[i][j - 1].isUpgrade = true;
+                                        tileArray[i][j + 1].isUpgrade = true;
+                                        tileArray[i - 1][j].isUpgrade = true;
+                                        tileArray[i + 1][j].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j].match = 0;
+                                        tileArray[i][j].special = true;
+                                        tileArray[i][j].direct = 'S';
+                                    }
+                                }
+                            } else if (i < row - 1 && tileArray[i][j].kind == tileArray[i + 1][j].kind
+                                    && tileArray[i + 1][j].match > 0) {              //Bottom Center
+                                //If tile is coco, do not add
+                                if (!tileArray[i][j].special) {
+                                    if (i < row - 2 && tileArray[i + 2][j].kind == tileArray[i][j].kind) {
+                                        /* O X O
+                                         *   O
+                                         *   O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j], 'C', 3);
+                                        tileArray[i][j - 1].isUpgrade = true;
+                                        tileArray[i][j + 1].isUpgrade = true;
+                                        tileArray[i + 1][j].isUpgrade = true;
+                                        tileArray[i + 2][j].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j].match = 0;
+                                        tileArray[i][j].special = true;
+                                        tileArray[i][j].direct = 'S';
+                                    }
+                                }
+                            } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j + 1].kind && tileArray[i - 1][j + 1].match > 0) {           //Top Right
+                                //If tile is coco, do not add
+                                if (!tileArray[i][j + 1].special) {
+                                    if (i > 1 && tileArray[i - 2][j + 1].kind == tileArray[i][j].kind) {
+                                        /*     O
+                                         *     O
+                                         * O O X
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j + 1], 'R', 1);
+                                        tileArray[i][j - 1].isUpgrade = true;
+                                        tileArray[i][j].isUpgrade = true;
+                                        tileArray[i - 1][j + 1].isUpgrade = true;
+                                        tileArray[i - 2][j + 1].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j + 1].match = 0;
+                                        tileArray[i][j + 1].special = true;
+                                        tileArray[i][j + 1].direct = 'S';
+                                    } else if (i < row - 1 && tileArray[i + 1][j + 1].kind == tileArray[i][j].kind) {
+                                        /*     O
+                                         * O O X
+                                         *     O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j + 1], 'R', 2);
+                                        tileArray[i][j - 1].isUpgrade = true;
+                                        tileArray[i][j].isUpgrade = true;
+                                        tileArray[i - 1][j + 1].isUpgrade = true;
+                                        tileArray[i + 1][j + 1].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j + 1].match = 0;
+                                        tileArray[i][j + 1].special = true;
+                                        tileArray[i][j + 1].direct = 'S';
+                                    }
+                                }
+                            } else if (i < row - 1 && tileArray[i][j].kind == tileArray[i + 1][j + 1].kind && tileArray[i + 1][j + 1].match > 0) {                 //Bottom Right
+                                //If tile is coco, do not add
+                                if (!tileArray[i][j + 1].special) {
+                                    if (i < row - 2 && tileArray[i + 2][j + 1].kind == tileArray[i][j].kind) {
+                                        /* O O X
+                                         *     O
+                                         *     O
+                                         */
+                                        //Add upgrade animation
+                                        animationManager.upgrade2S(tileArray[i][j + 1], 'R', 3);
+                                        tileArray[i][j - 1].isUpgrade = true;
+                                        tileArray[i][j].isUpgrade = true;
+                                        tileArray[i + 1][j + 1].isUpgrade = true;
+                                        tileArray[i + 2][j + 1].isUpgrade = true;
+                                        //Make it special
+                                        tileArray[i][j + 1].match = 0;
+                                        tileArray[i][j + 1].special = true;
+                                        tileArray[i][j + 1].direct = 'S';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
 
             //(5.3) Add vertical special fruit
             for (int i = 0; i < row; i++) {
@@ -311,7 +496,7 @@ public class MyAlgorithm {
                             if (tileArray[i][j].specialCombine == 'B') {
                                 //explodeBigS(tileArray[i][j]);
                             } else {
-                                //explodeS(tileArray[i][j]);
+                                explodeS(tileArray, tileArray[i][j]);
                             }
                         } else if (tileArray[i][j].direct == 'I' && !tileArray[i][j].isExplode) {
                             //Check special combine
@@ -322,7 +507,7 @@ public class MyAlgorithm {
                             } else if (tileArray[i][j].specialCombine == 'M') {
                                 //  massI(tileArray[i][j]);
                             } else {
-                                //  explodeI(tileArray[i][j]);
+                                explodeI(tileArray, tileArray[i][j]);
                             }
                         }
                     }
@@ -576,6 +761,104 @@ public class MyAlgorithm {
 
     }
 
+    public void checkSpecialCombine(Tile tile1, Tile tile2) {
+        if (tile1.special && tile2.special) {
+            if (tile1.direct == 'H') {
+                if (tile2.direct == 'H') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile1.specialCombine = 'R';
+                } else if (tile2.direct == 'V') {
+                    tile1.match++;
+                    tile2.match++;
+                } else if (tile2.direct == 'S') {
+                    tile1.match++;
+                    tile2.isExplode = true;
+                    tile1.specialCombine = 'G';
+                } else if (tile2.direct == 'I') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile1.isExplode = true;    // So tile1 became regular fruit
+                    tile2.specialCombine = 'T';
+                    tile2.iceCreamTarget = tile1.kind;
+                }
+            } else if (tile1.direct == 'V') {
+                if (tile2.direct == 'H') {
+                    tile1.match++;
+                    tile2.match++;
+                } else if (tile2.direct == 'V') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile2.specialCombine = 'R';
+                } else if (tile2.direct == 'S') {
+                    tile1.match++;
+                    tile2.isExplode = true;
+                    tile1.specialCombine = 'G';
+                } else if (tile2.direct == 'I') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile1.isExplode = true;
+                    tile2.specialCombine = 'T';
+                    tile2.iceCreamTarget = tile1.kind;
+                }
+            } else if (tile1.direct == 'S') {
+                if (tile2.direct == 'H') {
+                    tile2.match++;
+                    tile1.isExplode = true;
+                    tile2.specialCombine = 'G';
+                } else if (tile2.direct == 'V') {
+                    tile2.match++;
+                    tile1.isExplode = true;
+                    tile2.specialCombine = 'G';
+                } else if (tile2.direct == 'S') {
+                    tile1.match++;
+                    tile2.isExplode = true;
+                    tile1.specialCombine = 'B';
+                } else if (tile2.direct == 'I') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile1.isExplode = true;
+                    tile2.specialCombine = 'S';
+                    tile2.iceCreamTarget = tile1.kind;
+                }
+            } else if (tile1.direct == 'I') {
+                if (tile2.direct == 'H') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile2.isExplode = true;
+                    tile1.specialCombine = 'T';
+                    tile1.iceCreamTarget = tile2.kind;
+                } else if (tile2.direct == 'V') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile2.isExplode = true;
+                    tile1.specialCombine = 'T';
+                    tile1.iceCreamTarget = tile2.kind;
+                } else if (tile2.direct == 'S') {
+                    tile1.match++;
+                    tile2.match++;
+                    tile2.isExplode = true;
+                    tile1.specialCombine = 'S';
+                    tile1.iceCreamTarget = tile2.kind;
+                } else if (tile2.direct == 'I') {
+                    //here
+                    tile1.match++;
+                    tile2.match++;
+                    tile1.specialCombine = 'M';
+                    tile2.isExplode = true;
+                }
+            }
+        } else if (tile1.direct == 'I' && tile2.isFruit()) {
+            tile1.match++;
+            tile2.match++;
+            tile1.iceCreamTarget = tile2.kind;
+        } else if (tile2.direct == 'I' && tile1.isFruit()) {
+            tile1.match++;
+            tile2.match++;
+            tile2.iceCreamTarget = tile1.kind;
+        }
+    }
+
     private void tileWait() {
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -650,7 +933,7 @@ public class MyAlgorithm {
                         } else if (tileArray[tile.row][j].direct == 'H') {
                             explodeH(tileArray, tileArray[tile.row][j]);
                         } else if (tileArray[tile.row][j].direct == 'S') {
-                            //explodeS(tileArray[tile.row][n]);
+                            explodeS(tileArray, tileArray[tile.row][j]);
                         } else if (tileArray[tile.row][j].direct == 'I') {
                             //explodeI(tileArray[tile.row][n]);
                         }
@@ -686,9 +969,95 @@ public class MyAlgorithm {
                         } else if (tileArray[i][tile.col].direct == 'V') {
                             explodeV(tileArray, tileArray[i][tile.col]);
                         } else if (tileArray[i][tile.col].direct == 'S') {
-                            //explodeS(tileArray[n][tile.col]);
+                            explodeS(tileArray, tileArray[i][tile.col]);
                         } else if (tileArray[i][tile.col].direct == 'I') {
                             //explodeI(tileArray[n][tile.col]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void explodeS(Tile[][] tileArray, Tile tile) {
+        //Mark isExplode
+        tile.isExplode = true;
+        //Add square flash
+        animationManager.createSquareFlash(tile);
+        //Add match in square
+        for (int r = tile.row - 1; r <= tile.row + 1; r++) {
+            for (int c = tile.col - 1; c <= tile.col + 1; c++) {
+
+                if (r < 0 || r >= row || c < 0 || c >= column)
+                    continue;
+
+                //Check is empty fruit
+                if (!tileArray[r][c].empty) {
+
+                    // Add match
+                    tileArray[r][c].match++;
+
+                    //Check fruit is special in square
+                    if (tileArray[r][c].special) {
+                        //Check is explode
+                        if (!tileArray[r][c].isExplode && !tileArray[r][c].lock) {
+                            //Check direct
+                            if (tileArray[r][c].direct == 'H') {
+                                explodeH(tileArray, tileArray[r][c]);
+                            } else if (tileArray[r][c].direct == 'V') {
+                                explodeV(tileArray, tileArray[r][c]);
+                            } else if (tileArray[r][c].direct == 'S') {
+                                explodeS(tileArray, tileArray[r][c]);
+                            } else if (tileArray[r][c].direct == 'I') {
+                                //explodeI(tileArray[r][c]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void explodeI(Tile[][] tileArray, Tile tile) {
+        // Mark isExplode
+        tile.isExplode = true;
+
+        // Get target fruit
+        int target = 0;
+        if (tile.iceCreamTarget == 0) {
+            // Get a random fruit
+            target = TileID.FRUITS[(int) (Math.random() * fruitMun)];
+        } else {
+            target = tile.iceCreamTarget;
+        }
+
+        // Check same fruit kind
+        for (int j = 0; j < column; j++) {
+            for (int i = 0; i < row; i++) {
+
+                // Check state
+                if (!tileArray[i][j].empty && !tileArray[i][j].isExplode && tileArray[i][j].kind != 0) {
+
+                    //Check is target fruit
+                    if (target == tileArray[i][j].kind) {
+
+                        // Add lightning animation
+                        animationManager.createLightning(tile, tileArray[i][j]);
+                        animationManager.createLightning_fruit(tileArray[i][j], false);
+
+                        // Add match to target and explode around
+                        tileArray[i][j].match++;
+                        //explodeAround(tileArray[i][j]);
+
+                        // Check fruit is special
+                        if (tileArray[i][j].special && !tileArray[i][j].isExplode && !tileArray[i][j].lock) {
+                            if (tileArray[i][j].direct == 'H') {
+                                explodeH(tileArray, tileArray[i][j]);
+                            } else if (tileArray[i][j].direct == 'V') {
+                                explodeV(tileArray, tileArray[i][j]);
+                            } else if (tileArray[i][j].direct == 'S') {
+                                explodeS(tileArray, tileArray[i][j]);
+                            }
                         }
                     }
                 }

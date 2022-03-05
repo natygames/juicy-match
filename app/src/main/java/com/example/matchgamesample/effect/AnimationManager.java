@@ -169,11 +169,15 @@ public class AnimationManager {
     public void createSquareFlash(Tile tile) {
         //Add explode
         createExplodeBackground(tile, 5);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add flash
         ImageView flash = new ImageView(mActivity);
         flash.setImageResource(R.drawable.flash_s_clip);
-        flash.setX(tile.x - (int) (mTileSize * 5 / 2));
-        flash.setY(tile.y - (int) (mTileSize * 5 / 2));
+        flash.setX(positX - mTileSize * 1.5f);
+        flash.setY(positY - mTileSize * 1.5f);
         flash.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 4, mTileSize * 4));
         mEffect_board.addView(flash);
 
@@ -210,11 +214,11 @@ public class AnimationManager {
         //Top right
         ImageView flash_bar1 = new ImageView(mActivity);
         flash_bar1.setImageResource(R.drawable.flash_bar);
-        flash_bar1.setX(tile.x - mTileSize + mTileSize / 2);
-        flash_bar1.setY(tile.y - mTileSize);
+        flash_bar1.setX(positX + mTileSize * 0.5f);
+        flash_bar1.setY(positY);
         flash_bar1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar1.setRotation(45);
-        flash_bar1.animate().setDuration(500).x(tile.x - mTileSize + mTileSize / 2 + mTileSize * 2).y(tile.y - mTileSize - mTileSize * 2)
+        flash_bar1.animate().setDuration(500).x(positX + mTileSize * 0.5f + mTileSize * 2).y(positY - mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -225,11 +229,12 @@ public class AnimationManager {
         //Bottom right
         ImageView flash_bar2 = new ImageView(mActivity);
         flash_bar2.setImageResource(R.drawable.flash_bar);
-        flash_bar2.setX(tile.x - mTileSize + mTileSize / 2);
-        flash_bar2.setY(tile.y - mTileSize + mTileSize / 2);
+        flash_bar2.setX(positX + mTileSize * 0.5f);
+        flash_bar2.setY(positY + mTileSize * 0.5f);
         flash_bar2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar2.setRotation(135);
-        flash_bar2.animate().setDuration(500).x(tile.x - mTileSize + mTileSize / 2 + mTileSize * 2).y(tile.y - mTileSize + mTileSize / 2 + mTileSize * 2)
+        flash_bar2.animate().setDuration(500).x(positX + mTileSize * 0.5f + mTileSize * 2)
+                .y(positY + mTileSize * 0.5f + mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -240,11 +245,12 @@ public class AnimationManager {
         //Bottom left
         ImageView flash_bar3 = new ImageView(mActivity);
         flash_bar3.setImageResource(R.drawable.flash_bar);
-        flash_bar3.setX(tile.x - mTileSize);
-        flash_bar3.setY(tile.y - mTileSize + mTileSize / 2);
+        flash_bar3.setX(positX);
+        flash_bar3.setY(positY + mTileSize * 0.5f);
         flash_bar3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar3.setRotation(225);
-        flash_bar3.animate().setDuration(500).x(tile.x - mTileSize - mTileSize * 2).y(tile.y - mTileSize + mTileSize / 2 + mTileSize * 2)
+        flash_bar3.animate().setDuration(500).x(positX - mTileSize * 2)
+                .y(positY + mTileSize * 0.5f + mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -255,11 +261,11 @@ public class AnimationManager {
         //Top left
         ImageView flash_bar4 = new ImageView(mActivity);
         flash_bar4.setImageResource(R.drawable.flash_bar);
-        flash_bar4.setX(tile.x - mTileSize);
-        flash_bar4.setY(tile.y - mTileSize);
+        flash_bar4.setX(positX);
+        flash_bar4.setY(positY);
         flash_bar4.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar4.setRotation(315);
-        flash_bar4.animate().setDuration(500).x(tile.x - mTileSize - mTileSize * 2).y(tile.y - mTileSize - mTileSize * 2)
+        flash_bar4.animate().setDuration(500).x(positX - mTileSize * 2).y(positY - mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -270,11 +276,11 @@ public class AnimationManager {
         //Top
         ImageView flash_bar5 = new ImageView(mActivity);
         flash_bar5.setImageResource(R.drawable.flash_bar);
-        flash_bar5.setX(tile.x - mTileSize + mTileSize / 4);
-        flash_bar5.setY(tile.y - mTileSize);
+        flash_bar5.setX(positX + mTileSize * 0.25f);
+        flash_bar5.setY(positY);
         flash_bar5.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar5.setRotation(0);
-        flash_bar5.animate().setDuration(500).y(tile.y - mTileSize - mTileSize * 2)
+        flash_bar5.animate().setDuration(500).y(positY - mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -285,11 +291,11 @@ public class AnimationManager {
         //Right
         ImageView flash_bar6 = new ImageView(mActivity);
         flash_bar6.setImageResource(R.drawable.flash_bar);
-        flash_bar6.setX(tile.x - mTileSize + mTileSize / 2);
-        flash_bar6.setY(tile.y - mTileSize + mTileSize / 4);
+        flash_bar6.setX(positX + mTileSize * 0.5f);
+        flash_bar6.setY(positY + mTileSize * 0.25f);
         flash_bar6.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar6.setRotation(90);
-        flash_bar6.animate().setDuration(500).x(tile.x - mTileSize + mTileSize / 2 + mTileSize * 2)
+        flash_bar6.animate().setDuration(500).x(positX + mTileSize * 0.5f + mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -300,11 +306,11 @@ public class AnimationManager {
         //Bottom
         ImageView flash_bar7 = new ImageView(mActivity);
         flash_bar7.setImageResource(R.drawable.flash_bar);
-        flash_bar7.setX(tile.x - mTileSize + mTileSize / 4);
-        flash_bar7.setY(tile.y - mTileSize + mTileSize / 2);
+        flash_bar7.setX(positX + mTileSize * 0.25f);
+        flash_bar7.setY(positY + mTileSize * 0.5f);
         flash_bar7.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar7.setRotation(180);
-        flash_bar7.animate().setDuration(500).y(tile.y - mTileSize + mTileSize / 2 + mTileSize * 2)
+        flash_bar7.animate().setDuration(500).y(positY + mTileSize * 0.5f + mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -315,11 +321,11 @@ public class AnimationManager {
         //Left
         ImageView flash_bar8 = new ImageView(mActivity);
         flash_bar8.setImageResource(R.drawable.flash_bar);
-        flash_bar8.setX(tile.x - mTileSize);
-        flash_bar8.setY(tile.y - mTileSize + mTileSize / 4);
+        flash_bar8.setX(positX);
+        flash_bar8.setY(positY + mTileSize * 0.25f);
         flash_bar8.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 2, mTileSize / 2));
         flash_bar8.setRotation(270);
-        flash_bar8.animate().setDuration(500).x(tile.x - mTileSize - mTileSize * 2)
+        flash_bar8.animate().setDuration(500).x(positX - mTileSize * 2)
                 .scaleX(4).scaleY(4).alpha(0.1f).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -866,18 +872,22 @@ public class AnimationManager {
     public void upgrade2S(Tile tile, char direction, int type) {
         //Add explode
         createExplodeBackground(tile, 3);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add first tile
         ImageView fruit1 = new ImageView(mActivity);
         fruit1.setImageResource(tile.kind);
         if (direction == 'L') {
-            fruit1.setX(tile.x - (int) (mTileSize / 3));
-            fruit1.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+            fruit1.setX(positX + mTileSize - (int) (mTileSize / 3));
+            fruit1.setY(positY - (int) (mTileSize / 3));
         } else if (direction == 'C') {
-            fruit1.setX(tile.x - (int) (mTileSize / 3));
-            fruit1.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+            fruit1.setX(positX + mTileSize - (int) (mTileSize / 3));
+            fruit1.setY(positY - (int) (mTileSize / 3));
         } else {
-            fruit1.setX(tile.x - mTileSize * 2 - (int) (mTileSize / 3));
-            fruit1.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+            fruit1.setX(positX - mTileSize - (int) (mTileSize / 3));
+            fruit1.setY(positY - (int) (mTileSize / 3));
         }
         fruit1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit1);
@@ -885,14 +895,14 @@ public class AnimationManager {
         ImageView fruit2 = new ImageView(mActivity);
         fruit2.setImageResource(tile.kind);
         if (direction == 'L') {
-            fruit2.setX(tile.x + mTileSize - (int) (mTileSize / 3));
-            fruit2.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+            fruit2.setX(positX + mTileSize * 2 - (int) (mTileSize / 3));
+            fruit2.setY(positY - (int) (mTileSize / 3));
         } else if (direction == 'C') {
-            fruit2.setX(tile.x - mTileSize * 2 - (int) (mTileSize / 3));
-            fruit2.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+            fruit2.setX(positX - mTileSize - (int) (mTileSize / 3));
+            fruit2.setY(positY - (int) (mTileSize / 3));
         } else {
-            fruit2.setX(tile.x - mTileSize * 3 - (int) (mTileSize / 3));
-            fruit2.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+            fruit2.setX(positX - mTileSize * 2 - (int) (mTileSize / 3));
+            fruit2.setY(positY - (int) (mTileSize / 3));
         }
         fruit2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit2);
@@ -900,14 +910,14 @@ public class AnimationManager {
         ImageView fruit3 = new ImageView(mActivity);
         fruit3.setImageResource(tile.kind);
         if (type == 1) {
-            fruit3.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-            fruit3.setY(tile.y - mTileSize * 2 - (int) (mTileSize / 3));
+            fruit3.setX(positX - (int) (mTileSize / 3));
+            fruit3.setY(positY - mTileSize - (int) (mTileSize / 3));
         } else if (type == 2) {
-            fruit3.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-            fruit3.setY(tile.y - mTileSize * 2 - (int) (mTileSize / 3));
+            fruit3.setX(positX - (int) (mTileSize / 3));
+            fruit3.setY(positY - mTileSize - (int) (mTileSize / 3));
         } else {
-            fruit3.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-            fruit3.setY(tile.y - (int) (mTileSize / 3));
+            fruit3.setX(positX - (int) (mTileSize / 3));
+            fruit3.setY(positY + mTileSize - (int) (mTileSize / 3));
         }
         fruit3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit3);
@@ -915,40 +925,40 @@ public class AnimationManager {
         ImageView fruit4 = new ImageView(mActivity);
         fruit4.setImageResource(tile.kind);
         if (type == 1) {
-            fruit4.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-            fruit4.setY(tile.y - mTileSize * 3 - (int) (mTileSize / 3));
+            fruit4.setX(positX - (int) (mTileSize / 3));
+            fruit4.setY(positY - mTileSize * 2 - (int) (mTileSize / 3));
         } else if (type == 2) {
-            fruit4.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-            fruit4.setY(tile.y - (int) (mTileSize / 3));
+            fruit4.setX(positX - (int) (mTileSize / 3));
+            fruit4.setY(positY + mTileSize - (int) (mTileSize / 3));
         } else {
-            fruit4.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-            fruit4.setY(tile.y + mTileSize - (int) (mTileSize / 3));
+            fruit4.setX(positX - (int) (mTileSize / 3));
+            fruit4.setY(positY + mTileSize * 2 - (int) (mTileSize / 3));
         }
         fruit4.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(fruit4);
         //Add moving animation
-        fruit1.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit1.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit1);
                     }
                 });
-        fruit2.animate().setDuration(UPGRADE_TIME).x(tile.x - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit2.animate().setDuration(UPGRADE_TIME).x(positX - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit2);
                     }
                 });
-        fruit3.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit3.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mEffect_board.removeView(fruit3);
                     }
                 });
-        fruit4.animate().setDuration(UPGRADE_TIME).y(tile.y - mTileSize - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
+        fruit4.animate().setDuration(UPGRADE_TIME).y(positY - (int) (mTileSize / 3)).scaleX(0.5f).scaleY(0.5f)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -1751,8 +1761,8 @@ public class AnimationManager {
         }
 
         //Set location
-        lightning.setX(ice_cream.x - mTileSize);
-        lightning.setY((float) (ice_cream.y - mTileSize + mTileSize / 2 - edge));
+        lightning.setX(ice_cream.x);
+        lightning.setY((float) (ice_cream.y + mTileSize * 0.5 - edge));
         //Set size
         lightning.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, (int) edge));
 
@@ -1792,11 +1802,15 @@ public class AnimationManager {
 
     //This create explosion when tile hit by lightning
     public void createLightning_fruit(Tile tile, boolean isExplode) {
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add image
         ImageView flash = new ImageView(mActivity);
         flash.setBackgroundResource(R.drawable.flash_s_small_blue_clip);
-        flash.setX(tile.x - mTileSize - (int) (mTileSize / 3));
-        flash.setY(tile.y - mTileSize - (int) (mTileSize / 3));
+        flash.setX(positX - (int) (mTileSize / 3));
+        flash.setY(positY - (int) (mTileSize / 3));
         flash.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 5 / 3, mTileSize * 5 / 3));
         mEffect_board.addView(flash);
 
