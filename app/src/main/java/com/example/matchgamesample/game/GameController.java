@@ -52,7 +52,7 @@ public class GameController extends GameObject implements GameEventListener {
     @Override
     public void onGameEvent(GameEvent gameEvents) {
         switch (gameEvents) {
-            case Swap:
+            case SWAP:
                 playerSwap();
                 break;
         }

@@ -1,5 +1,8 @@
 package com.example.matchgamesample.engine;
 
 public enum GameEvent {
-    Swap
+    SWAP,
+    VALID_SWAP,
+    SCORE,
+    COLLECT
 }

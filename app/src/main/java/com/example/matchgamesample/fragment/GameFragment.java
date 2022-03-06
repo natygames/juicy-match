@@ -13,11 +13,13 @@ import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.counter.MoveCounter;
+import com.example.matchgamesample.counter.TargetCounter;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.Game;
 import com.example.matchgamesample.game.MyAlgorithm;
+import com.example.matchgamesample.counter.ScoreCounter;
 import com.example.matchgamesample.game.Tile;
 import com.example.matchgamesample.game.GameController;
 import com.example.matchgamesample.input.BasicInputController;
@@ -119,6 +121,9 @@ public class GameFragment extends BaseFragment {
         GameController gameController = new GameController(mGameEngine, tileArray);
         gameController.setMyAlgorithm(myAlgorithm);
         mGameEngine.addGameObject(gameController);
+        mGameEngine.addGameObject(new ScoreCounter(getView(), R.id.score));
+        mGameEngine.addGameObject(new MoveCounter(getView(), R.id.move, mLevel.move));
+        mGameEngine.addGameObject(new TargetCounter(getView(), mLevel));
 
         mGameEngine.startGame();
     }

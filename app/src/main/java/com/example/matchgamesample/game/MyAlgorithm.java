@@ -5,8 +5,10 @@ import android.widget.ImageView;
 
 import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.engine.GameEngine;
+import com.example.matchgamesample.engine.GameEvent;
 
 public class MyAlgorithm {
+    private final GameEngine mGameEngine;
     private final int row, column;
     private int fruitMun;
     private final int tileSize;
@@ -24,11 +26,13 @@ public class MyAlgorithm {
     // Tile's moving SPEED
     private int SPEED = 15;
     private int WAIT_TIME = 300;
+    private boolean isTransf = false;
     //==================================================================================
     private final AnimationManager animationManager;
     private final Handler mHandler = new Handler();
 
     public MyAlgorithm(GameEngine gameEngine) {
+        mGameEngine = gameEngine;
         row = gameEngine.mLevel.row;
         column = gameEngine.mLevel.column;
         fruitMun = gameEngine.mLevel.fruitNum;
@@ -46,6 +50,11 @@ public class MyAlgorithm {
     }
 
     public void update(Tile[][] tileArray) {
+
+        // Do nothing when waiting event
+        if (isTransf)
+            return;
+
         updateWait(tileArray);
         if (!waitFinding) {
             findMatch(tileArray);
@@ -127,6 +136,7 @@ public class MyAlgorithm {
         //Swap back if no match
         if (isSwap && !isMoving) {
             if (!matchFinding) {
+                // Player make an invalid swap
                 switch (direction) {
                     case 'U':
                         swapRow2 = swapRow - 1;
@@ -152,8 +162,8 @@ public class MyAlgorithm {
                 direction = 'N';
                 isSwapBack = true;
             } else {
-                //Player move
-                //reduceMove();
+                // Player make avalid swap
+                mGameEngine.onGameEvent(GameEvent.VALID_SWAP);
                 //Restart hint
                 //hint.stopHint();
                 //showHint = true;
@@ -476,7 +486,7 @@ public class MyAlgorithm {
                             if (tileArray[i][j].specialCombine == 'R') {
                                 explodeV(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].specialCombine == 'G') {
-                                //explodeBigH(tileArray[i][j]);
+                                explodeBigH(tileArray, tileArray[i][j]);
                             } else {
                                 if (!tileArray[i][j].isExplode)
                                     explodeH(tileArray, tileArray[i][j]);
@@ -486,7 +496,7 @@ public class MyAlgorithm {
                             if (tileArray[i][j].specialCombine == 'R') {
                                 explodeH(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].specialCombine == 'G') {
-                                //explodeBigV(tileArray[i][j]);
+                                explodeBigV(tileArray, tileArray[i][j]);
                             } else {
                                 if (!tileArray[i][j].isExplode)
                                     explodeV(tileArray, tileArray[i][j]);
@@ -494,20 +504,76 @@ public class MyAlgorithm {
                         } else if (tileArray[i][j].direct == 'S' && !tileArray[i][j].isExplode) {
                             //Check special combine
                             if (tileArray[i][j].specialCombine == 'B') {
-                                //explodeBigS(tileArray[i][j]);
+                                explodeBigS(tileArray, tileArray[i][j]);
                             } else {
                                 explodeS(tileArray, tileArray[i][j]);
                             }
                         } else if (tileArray[i][j].direct == 'I' && !tileArray[i][j].isExplode) {
                             //Check special combine
                             if (tileArray[i][j].specialCombine == 'T') {
-                                //transI(tileArray[i][j]);
+                                transI(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].specialCombine == 'S') {
-                                // transI(tileArray[i][j]);
+                                transI(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].specialCombine == 'M') {
-                                //  massI(tileArray[i][j]);
+                                explodeBigI(tileArray, tileArray[i][j]);
                             } else {
                                 explodeI(tileArray, tileArray[i][j]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //(5.6) Check invalid tile
+            for (int i = row - 1; i >= 0; i--) {
+                for (int j = 0; j < column; j++) {
+
+                    // Check invalid tile match
+                    if(tileArray[i][j].invalid && tileArray[i][j].match != 0){
+
+                        if(i == 0){
+                            // Add match to whole column if not waiting
+                            for (int m = i + 1; m < row; m++) {
+                                // Check invalid obstacle (if match != 0 means can go down)
+                                if(tileArray[m][j].tube){
+                                    continue;
+                                }else if(tileArray[m][j].invalid && tileArray[m][j].match == 0){
+                                    break;
+                                }else if(tileArray[m][j].wait != 0) {
+                                    tileArray[m][j].wait = 0;
+                                    tileArray[m][j].match++;
+                                }
+                            }
+                        }else{
+                            // Check up 3 in row, if any column tile is available, then can falling down
+                            for (int n = j - 1; n <= j + 1; n++) {
+
+                                if(n < 0 || n >= column)
+                                    continue;
+
+                                // If find tile can fill
+                                if(!tileArray[i - 1][n].invalid || (tileArray[i - 1][n].tube && n == j)){
+
+                                    /* The tile can only go though tube vertically from bottom
+                                     *      | |   <-- tube
+                                     *      | |
+                                     *     x o x  <-- tile (No diagonal swapping)
+                                     */
+
+                                    // Add match to whole column if not waiting
+                                    for (int m = i + 1; m < row; m++) {
+                                        // Check invalid obstacle (if match != 0 means can go down)
+                                        if(tileArray[m][j].tube){
+                                            continue;
+                                        }else if(tileArray[m][j].invalid && tileArray[m][j].match == 0){
+                                            break;
+                                        }else if(tileArray[m][j].wait != 0) {
+                                            tileArray[m][j].wait = 0;
+                                            tileArray[m][j].match++;
+                                        }
+                                    }
+                                    break;
+                                }
                             }
                         }
                     }
@@ -534,6 +600,19 @@ public class MyAlgorithm {
                     }
                 }
             }
+
+            //(5.8) Add score
+            for (int j = 0; j < column; j++) {
+                for (int i = 0; i < row; i++) {
+                    if (tileArray[i][j].match != 0 && tileArray[i][j].isFruit() ) {
+                        mGameEngine.onGameEvent(GameEvent.SCORE);
+                    }
+                }
+            }
+
+            // Do nothing when transform
+            if (isTransf)
+                return;
 
             tile2Top(tileArray);
             tileReset(tileArray);
@@ -764,88 +843,97 @@ public class MyAlgorithm {
     public void checkSpecialCombine(Tile tile1, Tile tile2) {
         if (tile1.special && tile2.special) {
             if (tile1.direct == 'H') {
-                if (tile2.direct == 'H') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile1.specialCombine = 'R';
-                } else if (tile2.direct == 'V') {
-                    tile1.match++;
-                    tile2.match++;
-                } else if (tile2.direct == 'S') {
-                    tile1.match++;
-                    tile2.isExplode = true;
-                    tile1.specialCombine = 'G';
-                } else if (tile2.direct == 'I') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile1.isExplode = true;    // So tile1 became regular fruit
-                    tile2.specialCombine = 'T';
-                    tile2.iceCreamTarget = tile1.kind;
+                switch (tile2.direct) {
+                    case 'H':
+                        tile1.match++;
+                        tile2.match++;
+                        tile1.specialCombine = 'R';
+                        break;
+                    case 'V':
+                        tile1.match++;
+                        tile2.match++;
+                        break;
+                    case 'S':
+                        tile1.match++;
+                        tile2.isExplode = true;
+                        tile1.specialCombine = 'G';
+                        break;
+                    case 'I':
+                        tile1.match++;
+                        tile2.match++;
+                        tile1.isExplode = true;    // So tile1 became regular fruit
+                        tile2.specialCombine = 'T';
+                        tile2.iceCreamTarget = tile1.kind;
+                        break;
                 }
             } else if (tile1.direct == 'V') {
-                if (tile2.direct == 'H') {
-                    tile1.match++;
-                    tile2.match++;
-                } else if (tile2.direct == 'V') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile2.specialCombine = 'R';
-                } else if (tile2.direct == 'S') {
-                    tile1.match++;
-                    tile2.isExplode = true;
-                    tile1.specialCombine = 'G';
-                } else if (tile2.direct == 'I') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile1.isExplode = true;
-                    tile2.specialCombine = 'T';
-                    tile2.iceCreamTarget = tile1.kind;
+                switch (tile2.direct) {
+                    case 'H':
+                        tile1.match++;
+                        tile2.match++;
+                        break;
+                    case 'V':
+                        tile1.match++;
+                        tile2.match++;
+                        tile2.specialCombine = 'R';
+                        break;
+                    case 'S':
+                        tile1.match++;
+                        tile2.isExplode = true;
+                        tile1.specialCombine = 'G';
+                        break;
+                    case 'I':
+                        tile1.match++;
+                        tile2.match++;
+                        tile1.isExplode = true;
+                        tile2.specialCombine = 'T';
+                        tile2.iceCreamTarget = tile1.kind;
+                        break;
                 }
             } else if (tile1.direct == 'S') {
-                if (tile2.direct == 'H') {
-                    tile2.match++;
-                    tile1.isExplode = true;
-                    tile2.specialCombine = 'G';
-                } else if (tile2.direct == 'V') {
-                    tile2.match++;
-                    tile1.isExplode = true;
-                    tile2.specialCombine = 'G';
-                } else if (tile2.direct == 'S') {
-                    tile1.match++;
-                    tile2.isExplode = true;
-                    tile1.specialCombine = 'B';
-                } else if (tile2.direct == 'I') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile1.isExplode = true;
-                    tile2.specialCombine = 'S';
-                    tile2.iceCreamTarget = tile1.kind;
+                switch (tile2.direct) {
+                    case 'H':
+                    case 'V':
+                        tile2.match++;
+                        tile1.isExplode = true;
+                        tile2.specialCombine = 'G';
+                        break;
+                    case 'S':
+                        tile1.match++;
+                        tile2.isExplode = true;
+                        tile1.specialCombine = 'B';
+                        break;
+                    case 'I':
+                        tile1.match++;
+                        tile2.match++;
+                        tile1.isExplode = true;
+                        tile2.specialCombine = 'S';
+                        tile2.iceCreamTarget = tile1.kind;
+                        break;
                 }
             } else if (tile1.direct == 'I') {
-                if (tile2.direct == 'H') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile2.isExplode = true;
-                    tile1.specialCombine = 'T';
-                    tile1.iceCreamTarget = tile2.kind;
-                } else if (tile2.direct == 'V') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile2.isExplode = true;
-                    tile1.specialCombine = 'T';
-                    tile1.iceCreamTarget = tile2.kind;
-                } else if (tile2.direct == 'S') {
-                    tile1.match++;
-                    tile2.match++;
-                    tile2.isExplode = true;
-                    tile1.specialCombine = 'S';
-                    tile1.iceCreamTarget = tile2.kind;
-                } else if (tile2.direct == 'I') {
-                    //here
-                    tile1.match++;
-                    tile2.match++;
-                    tile1.specialCombine = 'M';
-                    tile2.isExplode = true;
+                switch (tile2.direct) {
+                    case 'H':
+                    case 'V':
+                        tile1.match++;
+                        tile2.match++;
+                        tile2.isExplode = true;
+                        tile1.specialCombine = 'T';
+                        tile1.iceCreamTarget = tile2.kind;
+                        break;
+                    case 'S':
+                        tile1.match++;
+                        tile2.match++;
+                        tile2.isExplode = true;
+                        tile1.specialCombine = 'S';
+                        tile1.iceCreamTarget = tile2.kind;
+                        break;
+                    case 'I':
+                        tile1.match++;
+                        tile2.match++;
+                        tile1.specialCombine = 'M';
+                        tile2.isExplode = true;
+                        break;
                 }
             }
         } else if (tile1.direct == 'I' && tile2.isFruit()) {
@@ -935,7 +1023,7 @@ public class MyAlgorithm {
                         } else if (tileArray[tile.row][j].direct == 'S') {
                             explodeS(tileArray, tileArray[tile.row][j]);
                         } else if (tileArray[tile.row][j].direct == 'I') {
-                            //explodeI(tileArray[tile.row][n]);
+                            explodeI(tileArray, tileArray[tile.row][j]);
                         }
                     }
                 }
@@ -971,7 +1059,7 @@ public class MyAlgorithm {
                         } else if (tileArray[i][tile.col].direct == 'S') {
                             explodeS(tileArray, tileArray[i][tile.col]);
                         } else if (tileArray[i][tile.col].direct == 'I') {
-                            //explodeI(tileArray[n][tile.col]);
+                            explodeI(tileArray, tileArray[i][tile.col]);
                         }
                     }
                 }
@@ -1009,7 +1097,92 @@ public class MyAlgorithm {
                             } else if (tileArray[r][c].direct == 'S') {
                                 explodeS(tileArray, tileArray[r][c]);
                             } else if (tileArray[r][c].direct == 'I') {
-                                //explodeI(tileArray[r][c]);
+                                explodeI(tileArray, tileArray[r][c]);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void explodeBigH(Tile[][] tileArray, Tile tile) {
+        int row = tile.row;
+        int col = tile.col;
+
+        if (row == 0) {
+            explodeH(tileArray, tileArray[row][col]);
+            explodeH(tileArray, tileArray[row + 1][col]);
+        } else if (row == this.row - 1) {
+            explodeH(tileArray, tileArray[row - 1][col]);
+            explodeH(tileArray, tileArray[row][col]);
+        } else {
+            explodeH(tileArray, tileArray[row - 1][col]);
+            explodeH(tileArray, tileArray[row][col]);
+            explodeH(tileArray, tileArray[row + 1][col]);
+        }
+        animationManager.createShakingAnim_small();
+        animationManager.createExplodeWave_small(tileArray[row][col]);
+        animationManager.createSquareFlash(tileArray[row][col]);
+    }
+
+    private void explodeBigV(Tile[][] tileArray, Tile tile) {
+        int row = tile.row;
+        int col = tile.col;
+
+        if (col == 0) {
+            explodeV(tileArray, tileArray[row][col]);
+            explodeV(tileArray, tileArray[row][col + 1]);
+        } else if (col == this.column - 1) {
+            explodeV(tileArray, tileArray[row][col - 1]);
+            explodeV(tileArray, tileArray[row][col]);
+        } else {
+            explodeV(tileArray, tileArray[row][col - 1]);
+            explodeV(tileArray, tileArray[row][col]);
+            explodeV(tileArray, tileArray[row][col + 1]);
+        }
+        animationManager.createShakingAnim_small();
+        animationManager.createExplodeWave_small(tileArray[row][col]);
+        animationManager.createSquareFlash(tileArray[row][col]);
+    }
+
+    private void explodeBigS(Tile[][] tileArray, Tile tile) {
+        int row = tile.row;
+        int col = tile.col;
+        //Mark isExplode
+        tile.isExplode = true;
+        //Add square flash
+        animationManager.createShakingAnim_small();
+        animationManager.createSquareFlash_big(tile);
+        //Add match in 5x5 square
+        for (int i = row - 2; i <= row + 2; i++) {
+            for (int j = col - 2; j <= col + 2; j++) {
+                //Check index not out of boarder
+                if (i < 0 || i >= row || j < 0 || j >= row)
+                    continue;
+
+                //Check is empty fruit
+                if (!tileArray[i][j].empty) {
+
+                    // Add match
+                    tileArray[i][j].match++;
+
+                    // Explode cake
+                    //explodePie(tileArray[r][c]);
+
+                    //Check fruit is special in square
+                    if (tileArray[i][j].special) {
+                        //Check is explode
+                        if (!tileArray[i][j].isExplode && !tileArray[i][j].lock) {
+                            //Check direct
+                            if (tileArray[i][j].direct == 'H') {
+                                explodeH(tileArray, tileArray[i][j]);
+                            } else if (tileArray[i][j].direct == 'V') {
+                                explodeV(tileArray, tileArray[i][j]);
+                            } else if (tileArray[i][j].direct == 'S') {
+                                explodeS(tileArray, tileArray[i][j]);
+                            } else if (tileArray[i][j].direct == 'I') {
+                                explodeI(tileArray, tileArray[i][j]);
                             }
                         }
                     }
@@ -1063,6 +1236,94 @@ public class MyAlgorithm {
                 }
             }
         }
+    }
+
+    private void explodeBigI(Tile[][] tileArray, Tile tile) {
+        //Mark isExplode
+        tile.isExplode = true;
+        //Add animation
+        animationManager.createShakingAnim();
+        animationManager.createExplodeWave(tile);
+        //Check same fruit kind
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (!tileArray[i][j].empty
+                        && !tileArray[i][j].isExplode) {
+
+                    //Add lightning animation
+                    animationManager.createLightning(tile, tileArray[i][j]);
+                    animationManager.createLightning_fruit(tileArray[i][j], false);
+
+                    // Add match
+                    tileArray[i][j].match++;
+
+                    // Explode cake
+                    //explodePie(tileArray[i][j]);
+
+                    //Check fruit is special
+                    if (tileArray[i][j].special && !tileArray[i][j].lock) {
+                        if (tileArray[i][j].direct == 'H') {
+                            explodeH(tileArray, tileArray[i][j]);
+                        } else if (tileArray[i][j].direct == 'V') {
+                            explodeV(tileArray, tileArray[i][j]);
+                        } else if (tileArray[i][j].direct == 'S') {
+                            explodeS(tileArray, tileArray[i][j]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void transI(Tile[][] tileArray, Tile tile) {
+
+        // Transform flag
+        transfWait();
+
+        // Let hint delay
+        //hintWait();
+
+        // Mark isExplode
+        tile.isExplode = true;
+
+        // Check same fruit kind
+        int target = tile.iceCreamTarget;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+
+                // Check state
+                if (!tileArray[i][j].empty && !tileArray[i][j].isExplode && tileArray[i][j].kind != 0) {
+
+                    // Check ice cream target
+                    if ((target == tileArray[i][j].kind) && !tileArray[i][j].special) {
+
+                        // Add lightning animation
+                        animationManager.createLightning(tile, tileArray[i][j]);
+                        animationManager.createLightning_fruit(tileArray[i][j], true);
+
+                        // Set direct
+                        if (tile.specialCombine == 'T') {
+                            tileArray[i][j].special = true;
+                            tileArray[i][j].direct = (Math.random() > 0.5 ? 'H' : 'V');
+                        } else {
+                            tileArray[i][j].special = true;
+                            tileArray[i][j].direct = 'S';
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void transfWait() {
+        //Bug is ice cream's wait may cause error
+        isTransf = true;
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                isTransf = false;
+            }
+        }, 1200);
     }
 
 }
