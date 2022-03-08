@@ -3,19 +3,22 @@ package com.example.matchgamesample.counter;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEvent;
-import com.example.matchgamesample.engine.GameEventListener;
 import com.example.matchgamesample.engine.GameObject;
+import com.example.matchgamesample.level.Level;
 
-public class MoveCounter extends GameObject implements GameEventListener {
+public class MoveCounter extends GameObject {
 
+    private final Level mLevel;
     private final TextView mText;
     private int mMoves;
     private boolean mMovesHaveChanged;
 
-    public MoveCounter(View view, int viewResId, int move) {
-        mText = (TextView) view.findViewById(viewResId);
-        mMoves = move;
+    public MoveCounter(View view, Level level) {
+        mText = (TextView) view.findViewById(R.id.move);
+        mLevel = level;
+        mMoves = level.move;
     }
 
     @Override
@@ -39,8 +42,10 @@ public class MoveCounter extends GameObject implements GameEventListener {
     @Override
     public void onGameEvent(GameEvent gameEvents) {
         if (gameEvents == GameEvent.VALID_SWAP) {
-            if (mMoves > 0)
+            if (mMoves > 0) {
                 mMoves--;
+                mLevel.move--;
+            }
             mMovesHaveChanged = true;
         }
     }

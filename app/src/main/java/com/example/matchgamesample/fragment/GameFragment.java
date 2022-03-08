@@ -121,9 +121,9 @@ public class GameFragment extends BaseFragment {
         GameController gameController = new GameController(mGameEngine, tileArray);
         gameController.setMyAlgorithm(myAlgorithm);
         mGameEngine.addGameObject(gameController);
-        mGameEngine.addGameObject(new ScoreCounter(getView(), R.id.score));
-        mGameEngine.addGameObject(new MoveCounter(getView(), R.id.move, mLevel.move));
-        mGameEngine.addGameObject(new TargetCounter(getView(), mLevel));
+        mGameEngine.addGameObject(new ScoreCounter(getView()));
+        mGameEngine.addGameObject(new MoveCounter(getView(), mLevel));
+        mGameEngine.addGameObject(new TargetCounter(getView(), mGameEngine));
 
         mGameEngine.startGame();
     }

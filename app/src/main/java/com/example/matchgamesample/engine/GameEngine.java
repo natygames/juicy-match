@@ -109,8 +109,7 @@ public class GameEngine {
         // We notify all the GameObjects
         int numObjects = mGameObjects.size();
         for (int i = 0; i < numObjects; i++) {
-            if (mGameObjects.get(i) instanceof GameEventListener)
-                ((GameEventListener) mGameObjects.get(i)).onGameEvent(gameEvent);
+             mGameObjects.get(i).onGameEvent(gameEvent);
         }
 
         // Play Sound

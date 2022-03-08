@@ -250,54 +250,6 @@ public class Game {
                         tileArray[i][j].layer = 3;
                         tileArray[i][j].breakable = true;
                         continue;
-                    case ('p'):
-                        tileArray[i][j].kind = TileID.PIE_1;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 2;
-                        tileArray[i][j].breakable = true;
-                        continue;
-                    case ('k'):
-                        tileArray[i][j].kind = TileID.PIE_2;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 2;
-                        tileArray[i][j].breakable = true;
-                        continue;
-                    case ('a'):
-                        tileArray[i][j].kind = TileID.PIE_3;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 2;
-                        tileArray[i][j].breakable = true;
-                        continue;
-                    case ('b'):
-                        tileArray[i][j].kind = TileID.PIE_4;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 2;
-                        tileArray[i][j].breakable = true;
-                        continue;
-                    case ('P'):
-                        tileArray[i][j].kind = TileID.PIE_1;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 4;
-                        tileArray[i][j].breakable = true;
-                        continue;
-                    case ('K'):
-                        tileArray[i][j].kind = TileID.PIE_2;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 4;
-                        tileArray[i][j].breakable = true;
-                        continue;
-                    case ('A'):
-                        tileArray[i][j].kind = TileID.PIE_3;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 4;
-                        tileArray[i][j].breakable = true;
-                        continue;
-                    case ('B'):
-                        tileArray[i][j].kind = TileID.PIE_4;
-                        tileArray[i][j].invalid = true;
-                        tileArray[i][j].layer = 4;
-                        tileArray[i][j].breakable = true;
-                        continue;
                     default:
 
                 }
@@ -312,7 +264,8 @@ public class Game {
 
     }
 
-    public void createIceBoard(GridLayout ice_board, ImageView[][] iceArray, GridLayout ice_board2, ImageView[][] iceArray2, Tile[][] tileArray) {
+    public void createIceBoard(GridLayout ice_board, ImageView[][] iceArray,
+                               GridLayout ice_board2, ImageView[][] iceArray2, Tile[][] tileArray) {
         /* Explanation:
          *
          * n for no ice (default)
@@ -547,78 +500,6 @@ public class Game {
                 ImageView advance = new ImageView(context);
                 advance.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
 
-                // Set honey
-                if (advance_char[i][j] == 'h') {
-                    // Set ice
-                    tileArray[i - 1][j].honey = true;
-
-                    switch (board_char[(i - 1) * column + j]) {
-                        case ('n'):
-                            advance.setBackgroundResource(R.drawable.honey);
-                            break;
-                        case ('q'):
-                            advance.setBackgroundResource(R.drawable.honey_corner);
-                            break;
-                        case ('w'):
-                            advance.setBackgroundResource(R.drawable.honey_corner);
-                            advance.setRotation(90);
-                            break;
-                        case ('a'):
-                            advance.setBackgroundResource(R.drawable.honey_corner);
-                            advance.setRotation(270);
-                            break;
-                        case ('s'):
-                            advance.setBackgroundResource(R.drawable.honey_corner);
-                            advance.setRotation(180);
-                            break;
-                        case ('u'):
-                            advance.setBackgroundResource(R.drawable.honey_margin);
-                            break;
-                        case ('l'):
-                            advance.setBackgroundResource(R.drawable.honey_margin);
-                            advance.setRotation(270);
-                            break;
-                        case ('r'):
-                            advance.setBackgroundResource(R.drawable.honey_margin);
-                            advance.setRotation(90);
-                            break;
-                        case ('d'):
-                            advance.setBackgroundResource(R.drawable.honey_margin);
-                            advance.setRotation(180);
-                            break;
-                        case ('U'):
-                            advance.setBackgroundResource(R.drawable.honey_sole);
-                            break;
-                        case ('L'):
-                            advance.setBackgroundResource(R.drawable.honey_sole);
-                            advance.setRotation(270);
-                            break;
-                        case ('R'):
-                            advance.setBackgroundResource(R.drawable.honey_sole);
-                            advance.setRotation(90);
-                            break;
-                        case ('D'):
-                            advance.setBackgroundResource(R.drawable.honey_sole);
-                            advance.setRotation(180);
-                            break;
-                        case ('h'):
-                            advance.setBackgroundResource(R.drawable.honey_bar);
-                            break;
-                        case ('v'):
-                            advance.setBackgroundResource(R.drawable.honey_bar);
-                            advance.setRotation(90);
-                            break;
-                        case ('o'):
-                            advance.setBackgroundResource(R.drawable.honey_one);
-                            break;
-                        default:
-
-                    }
-                    advanceArray[i][j] = advance;
-                    advance_board.addView(advance);
-                    continue;
-                }
-
                 // Set Advance
                 switch (advance_char[i][j]) {
                     case ('n'):
@@ -635,8 +516,7 @@ public class Game {
                         break;
                     case ('A'):
                         // Add entry point
-                        if (i <= row)
-                            tileArray[i - 1][j].entryPoint = true;
+                        tileArray[i - 2][j].entryPoint = true;
                         advance.setBackgroundResource(R.drawable.arrow);
                         advance.setAlpha(0.5f);
                         advance.startAnimation(arrow_anim);

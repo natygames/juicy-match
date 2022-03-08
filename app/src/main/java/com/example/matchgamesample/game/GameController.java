@@ -2,11 +2,10 @@ package com.example.matchgamesample.game;
 
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
-import com.example.matchgamesample.engine.GameEventListener;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.engine.InputController;
 
-public class GameController extends GameObject implements GameEventListener {
+public class GameController extends GameObject{
     private final Tile[][] tileArray;
     private final int mRow, mColumn;
     private final int mTileSize;

@@ -3,19 +3,19 @@ package com.example.matchgamesample.counter;
 import android.view.View;
 import android.widget.TextView;
 
+import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEvent;
-import com.example.matchgamesample.engine.GameEventListener;
 import com.example.matchgamesample.engine.GameObject;
 
-public class ScoreCounter extends GameObject implements GameEventListener {
+public class ScoreCounter extends GameObject{
     private static final int POINTS_GAINED_PER_FRUIT = 10;
 
     private final TextView mText;
     private int mPoints;
     private boolean mPointsHaveChanged;
 
-    public ScoreCounter(View view, int viewResId){
-        mText = (TextView) view.findViewById(viewResId);
+    public ScoreCounter(View view){
+        mText = (TextView) view.findViewById(R.id.score);
     }
 
     @Override

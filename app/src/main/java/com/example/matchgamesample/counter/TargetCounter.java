@@ -7,27 +7,27 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
-import com.example.matchgamesample.engine.GameEventListener;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.game.TileID;
 import com.example.matchgamesample.level.Level;
+import com.example.matchgamesample.state.GameState;
 
 import java.util.ArrayList;
 
-public class TargetCounter extends GameObject implements GameEventListener {
+public class TargetCounter extends GameObject{
 
-    private final Level mLevel;
+    private final GameEngine mGameEngine;
     private final ArrayList<TextView> mText = new ArrayList<>();
     private boolean mTargetsHaveChanged;
 
-    public TargetCounter(View view, Level level) {
-        mLevel = level;
-
-        if(mLevel.targetType == 1){
+    public TargetCounter(View view, GameEngine gameEngine) {
+        mGameEngine = gameEngine;
+        if(gameEngine.mLevel.targetType == 1){
             mText.add(view.findViewById(R.id.target_score));
         }else{
-            setTargetImages(mLevel.target.size(), view);
+            setTargetImages(gameEngine.mLevel.target.size(), view);
         }
 
     }
@@ -65,21 +65,18 @@ public class TargetCounter extends GameObject implements GameEventListener {
         int imgSize = mTargetsImage.size();
         for(int i = 0; i < imgSize; i++) {
 
-            int id = mLevel.collect.get(i);
+            int id = mGameEngine.mLevel.collect.get(i);
 
             // Adjust image
-            if(id == TileID.PIE_1) {
-                mTargetsImage.get(i).setBackgroundResource(R.drawable.pie_target);
-            }else if(id == 0){
+            if(id == 0){
                 mTargetsImage.get(i).setBackgroundResource(R.drawable.ice);
             }else {
-                mTargetsImage.get(i).setBackgroundResource(mLevel.collect.get(i));
+                mTargetsImage.get(i).setBackgroundResource(mGameEngine.mLevel.collect.get(i));
             }
 
             // Set scale
             if(id == R.drawable.striped_ball
                     || id == TileID.COOKIE
-                    || id == TileID.PIE_1
                     || id == 0) {
                 mTargetsImage.get(i).setScaleX(0.8f);
                 mTargetsImage.get(i).setScaleY(0.8f);
@@ -95,7 +92,7 @@ public class TargetCounter extends GameObject implements GameEventListener {
         // Init target text
         int txtSize = mText.size();
         for (int i = 0; i < txtSize; i++) {
-            mText.get(i).setText(String.valueOf(mLevel.target.get(i)));
+            mText.get(i).setText(String.valueOf(mGameEngine.mLevel.target.get(i)));
             mText.get(i).setVisibility(View.VISIBLE);
         }
     }
@@ -111,7 +108,7 @@ public class TargetCounter extends GameObject implements GameEventListener {
             // Update target text
             int txtSize = mText.size();
             for (int i = 0; i < txtSize; i++) {
-                mText.get(i).setText(String.valueOf(mLevel.target.get(i)));
+                mText.get(i).setText(String.valueOf(mGameEngine.mLevel.target.get(i)));
             }
             mTargetsHaveChanged = false;
         }

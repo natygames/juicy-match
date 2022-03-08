@@ -93,40 +93,6 @@ public class TileID {
             R.drawable.cookie4
     };
 
-    // Pie ID
-    public static final int PIE_1 = R.drawable.pie1_1;
-    public static final int[] PIES_1 = {
-            R.drawable.pie1_1,
-            R.drawable.pie2_1,
-            R.drawable.pie3_1,
-            R.drawable.pie4_1,
-            R.drawable.pie5_1
-    };
-    public static final int PIE_2 = R.drawable.pie1_2;
-    public static final int[] PIES_2 = {
-            R.drawable.pie1_2,
-            R.drawable.pie2_2,
-            R.drawable.pie3_2,
-            R.drawable.pie4_2,
-            R.drawable.pie5_2
-    };
-    public static final int PIE_3 = R.drawable.pie1_3;
-    public static final int[] PIES_3 = {
-            R.drawable.pie1_3,
-            R.drawable.pie2_3,
-            R.drawable.pie3_3,
-            R.drawable.pie4_3,
-            R.drawable.pie5_3
-    };
-    public static final int PIE_4 = R.drawable.pie1_4;
-    public static final int[] PIES_4 = {
-            R.drawable.pie1_4,
-            R.drawable.pie2_4,
-            R.drawable.pie3_4,
-            R.drawable.pie4_4,
-            R.drawable.pie5_4
-    };
-
     // Star fish ID
     public static final int STAR_FISH = R.drawable.starfish;
     public static final int STAR_FISH_CHOSEN = R.drawable.starfish_chosen;
@@ -140,20 +106,10 @@ public class TileID {
     }
 
     public static int getFruit(Tile tile) {
-        switch (tile.kind){
-            case COOKIE:
-                return COOKIES[tile.layer];
-            case PIE_1:
-                return PIES_1[tile.layer];
-            case PIE_2:
-                return PIES_2[tile.layer];
-            case PIE_3:
-                return PIES_3[tile.layer];
-            case PIE_4:
-                return PIES_4[tile.layer];
-            default:
-                return tile.kind;
+        if (tile.kind == COOKIE) {
+            return COOKIES[tile.layer];
         }
+        return tile.kind;
 
     }
 

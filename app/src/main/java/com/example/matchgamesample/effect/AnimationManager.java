@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ClipDrawable;
-import android.os.Build;
 import android.os.Handler;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1468,27 +1467,6 @@ public class AnimationManager {
         createSmoke(tile);
     }
 
-    public void explodePie(Tile tile) {
-        // Pie cup effect
-        int positX = tile.x - mTileSize;
-        int positY = tile.y - mTileSize;
-        ImageView cup = new ImageView(mActivity);
-        cup.setBackgroundResource(R.drawable.pie_cup);
-        //Set location
-        cup.setX(positX);
-        cup.setY(positY);
-        //Set size
-        cup.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 2, mTileSize * 2));
-        //Add view
-        mEffect_board.addView(cup);
-        cup.animate().setDuration(400).scaleX(0).scaleY(0).alpha(0.5f).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(cup);
-            }
-        });
-    }
-
     public void explodePieLayer(Tile tile) {
         //Smoke effect
         int positX = tile.x - mTileSize;
@@ -1622,106 +1600,16 @@ public class AnimationManager {
 
     }
 
-    public void explodeHoney(ImageView honey, Tile tile) {
-        honey.animate().setDuration(300).scaleX(0).scaleY(0).setInterpolator(anticipateInterpolator);
-
-        float positX = tile.x - mTileSize;
-        float positY = tile.y - mTileSize;
-
-        //Add honey frag
-        //Top right
-        ImageView honey_frag1 = new ImageView(mActivity);
-        honey_frag1.setImageResource(R.drawable.honey_frag);
-        honey_frag1.setX(positX + mTileSize / 2);
-        honey_frag1.setY(positY + mTileSize / 4);
-        honey_frag1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 4, mTileSize / 4));
-        honey_frag1.setRotation(45);
-        mEffect_board.addView(honey_frag1);
-        honey_frag1.animate().setDuration(300).x(positX + (float) mTileSize).y(positY - (float) mTileSize * 0.3f)
-                .scaleX(3).scaleY(3).alpha(0.2f).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(honey_frag1);
-            }
-        });
-
-
-        //Bottom right
-        ImageView honey_frag2 = new ImageView(mActivity);
-        honey_frag2.setImageResource(R.drawable.honey_frag);
-        honey_frag2.setX(positX + mTileSize / 2);
-        honey_frag2.setY(positY + mTileSize / 2);
-        honey_frag2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 4, mTileSize / 4));
-        honey_frag2.setRotation(120);
-        mEffect_board.addView(honey_frag2);
-        honey_frag2.animate().setDuration(200).x(positX + (float) mTileSize).y(positY + (float) mTileSize * 0.6f)
-                .scaleX(2.5f).scaleY(2.5f).alpha(0.2f).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(honey_frag2);
-            }
-        });
-
-        //Bottom left
-        ImageView honey_frag3 = new ImageView(mActivity);
-        honey_frag3.setImageResource(R.drawable.honey_frag);
-        honey_frag3.setX(positX + mTileSize / 4);
-        honey_frag3.setY(positY + mTileSize / 2);
-        honey_frag3.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 4, mTileSize / 4));
-        honey_frag3.setRotation(200);
-        mEffect_board.addView(honey_frag3);
-        honey_frag3.animate().setDuration(250).x(positX - (float) mTileSize * 0.2f).y(positY + (float) mTileSize)
-                .scaleX(1.5f).scaleY(1.5f).alpha(0.2f).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(honey_frag3);
-            }
-        });
-
-        //Top left
-        ImageView honey_frag4 = new ImageView(mActivity);
-        honey_frag4.setImageResource(R.drawable.honey_frag);
-        honey_frag4.setX(positX + mTileSize / 4);
-        honey_frag4.setY(positY + mTileSize / 4);
-        honey_frag4.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 4, mTileSize / 4));
-        honey_frag4.setRotation(340);
-        mEffect_board.addView(honey_frag4);
-        honey_frag4.animate().setDuration(300).x(positX + (float) mTileSize * 0.2f).y(positY - (float) mTileSize * 0.5f)
-                .scaleX(2).scaleY(2).alpha(0.2f).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(honey_frag4);
-            }
-        });
-
-        //Bottom left big
-        ImageView honey_frag5 = new ImageView(mActivity);
-        honey_frag5.setImageResource(R.drawable.honey_frag);
-        honey_frag5.setX(positX + mTileSize / 4);
-        honey_frag5.setY(positY + mTileSize / 2);
-        honey_frag5.setLayoutParams(new ViewGroup.LayoutParams(mTileSize / 4, mTileSize / 4));
-        honey_frag5.setRotation(250);
-        mEffect_board.addView(honey_frag5);
-        honey_frag5.animate().setDuration(400).x(positX - mTileSize * 0.3f).y(positY + mTileSize * 0.6f)
-                .scaleX(3.5f).scaleY(3.5f).alpha(0.3f).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(honey_frag5);
-            }
-        });
-
-    }
-
     public void explodeStarFish(Tile tile) {
         //Add sparkler
         createSparkler(tile, 4, 0.7f, 0.2f, 750);
         //Add ice cream
         ImageView starfish = new ImageView(mActivity);
         starfish.setImageResource(R.drawable.starfish);
-        starfish.setX(tile.x - mTileSize);
-        starfish.setY(tile.y - mTileSize);
+        starfish.setX(tile.x);
+        starfish.setY(tile.y);
         starfish.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
-        starfish.animate().setDuration(500).scaleX(0).scaleY(0).y(tile.y);
+        starfish.animate().setDuration(500).scaleX(0).scaleY(0).y(tile.y + mTileSize);
         mEffect_board.addView(starfish);
     }
 
@@ -1883,11 +1771,11 @@ public class AnimationManager {
         mEffect_board.addView(wave);
         wave.animate().setDuration(500).scaleY(10).scaleX(10).alpha(0.1f)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(wave);
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mEffect_board.removeView(wave);
+                    }
+                });
     }
 
     //This create explode sparkler

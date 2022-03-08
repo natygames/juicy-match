@@ -6,6 +6,11 @@ import android.widget.ImageView;
 import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
+import com.example.matchgamesample.state.CollectGameState;
+import com.example.matchgamesample.state.GameState;
+import com.example.matchgamesample.state.IceGameState;
+import com.example.matchgamesample.state.ScoreGameState;
+import com.example.matchgamesample.state.StarGameState;
 
 public class MyAlgorithm {
     private final GameEngine mGameEngine;
@@ -28,6 +33,7 @@ public class MyAlgorithm {
     private int WAIT_TIME = 300;
     private boolean isTransf = false;
     //==================================================================================
+    private GameState mGameState;
     private final AnimationManager animationManager;
     private final Handler mHandler = new Handler();
 
@@ -38,6 +44,25 @@ public class MyAlgorithm {
         fruitMun = gameEngine.mLevel.fruitNum;
         tileSize = gameEngine.mImageSize;
         animationManager = new AnimationManager(gameEngine);
+        initGameState();
+    }
+
+    private void initGameState() {
+        switch (mGameEngine.mLevel.targetType) {
+            case 1:
+                mGameState = new ScoreGameState(mGameEngine);
+                break;
+            case 2:
+                mGameState = new CollectGameState(mGameEngine);
+                break;
+            case 3:
+                mGameState = new IceGameState(mGameEngine);
+                break;
+            case 4:
+                mGameState = new StarGameState(mGameEngine);
+                break;
+        }
+
     }
 
     public void setIceArray(ImageView[][] iceArray, ImageView[][] iceArray2) {
@@ -529,30 +554,30 @@ public class MyAlgorithm {
                 for (int j = 0; j < column; j++) {
 
                     // Check invalid tile match
-                    if(tileArray[i][j].invalid && tileArray[i][j].match != 0){
+                    if (tileArray[i][j].invalid && tileArray[i][j].match != 0) {
 
-                        if(i == 0){
+                        if (i == 0) {
                             // Add match to whole column if not waiting
                             for (int m = i + 1; m < row; m++) {
                                 // Check invalid obstacle (if match != 0 means can go down)
-                                if(tileArray[m][j].tube){
+                                if (tileArray[m][j].tube) {
                                     continue;
-                                }else if(tileArray[m][j].invalid && tileArray[m][j].match == 0){
+                                } else if (tileArray[m][j].invalid && tileArray[m][j].match == 0) {
                                     break;
-                                }else if(tileArray[m][j].wait != 0) {
+                                } else if (tileArray[m][j].wait != 0) {
                                     tileArray[m][j].wait = 0;
                                     tileArray[m][j].match++;
                                 }
                             }
-                        }else{
+                        } else {
                             // Check up 3 in row, if any column tile is available, then can falling down
                             for (int n = j - 1; n <= j + 1; n++) {
 
-                                if(n < 0 || n >= column)
+                                if (n < 0 || n >= column)
                                     continue;
 
                                 // If find tile can fill
-                                if(!tileArray[i - 1][n].invalid || (tileArray[i - 1][n].tube && n == j)){
+                                if (!tileArray[i - 1][n].invalid || (tileArray[i - 1][n].tube && n == j)) {
 
                                     /* The tile can only go though tube vertically from bottom
                                      *      | |   <-- tube
@@ -563,11 +588,11 @@ public class MyAlgorithm {
                                     // Add match to whole column if not waiting
                                     for (int m = i + 1; m < row; m++) {
                                         // Check invalid obstacle (if match != 0 means can go down)
-                                        if(tileArray[m][j].tube){
+                                        if (tileArray[m][j].tube) {
                                             continue;
-                                        }else if(tileArray[m][j].invalid && tileArray[m][j].match == 0){
+                                        } else if (tileArray[m][j].invalid && tileArray[m][j].match == 0) {
                                             break;
-                                        }else if(tileArray[m][j].wait != 0) {
+                                        } else if (tileArray[m][j].wait != 0) {
                                             tileArray[m][j].wait = 0;
                                             tileArray[m][j].match++;
                                         }
@@ -580,7 +605,14 @@ public class MyAlgorithm {
                 }
             }
 
-            //(5.7.3) Add animation
+            //(5.7) Update game state
+            for (int j = 0; j < column; j++) {
+                for (int i = 0; i < row; i++) {
+                    mGameState.onUpdate(tileArray[i][j]);
+                }
+            }
+
+            //(5.8) Add animation
             for (int j = 0; j < column; j++) {
                 for (int i = 0; i < row; i++) {
                     //Check is match
@@ -592,19 +624,29 @@ public class MyAlgorithm {
                         // Set isAnimate
                         tileArray[i][j].isAnimate = true;
 
-                        //Explode fruit
+                        //Check is starfish
+                        if (tileArray[i][j].kind == TileID.STAR_FISH) {
+                            animationManager.explodeStarFish(tileArray[i][j]);
+                            continue;
+                        }
+
+                        // Explode ice
+                        if (tileArray[i][j].ice > 0)
+                            explodeIce(iceArray[i][j], iceArray2[i][j], tileArray[i][j]);
+
+                        // Explode fruit
                         if (!tileArray[i][j].isUpgrade)
                             animationManager.explodeFruit(tileArray[i][j]);
-                        //Show score
+                        // Show score
                         animationManager.createScore(tileArray[i][j]);
                     }
                 }
             }
 
-            //(5.8) Add score
+            //(5.9) Add score
             for (int j = 0; j < column; j++) {
                 for (int i = 0; i < row; i++) {
-                    if (tileArray[i][j].match != 0 && tileArray[i][j].isFruit() ) {
+                    if (tileArray[i][j].match != 0 && tileArray[i][j].isFruit()) {
                         mGameEngine.onGameEvent(GameEvent.SCORE);
                     }
                 }
@@ -834,6 +876,20 @@ public class MyAlgorithm {
         tile1.col = tile2.col;
         tile2.col = temp_col;
 
+        //If ice do not swap
+        if(tile1.ice  != 0 || tile2.ice != 0){
+            int temp = tile1.ice;
+            tile1.ice = tile2.ice;
+            tile2.ice = temp;
+        }
+
+        //If entryPoint do not swap
+        if(tile1.entryPoint || tile2.entryPoint){
+            boolean temp = tile1.entryPoint;
+            tile1.entryPoint = tile2.entryPoint;
+            tile2.entryPoint = temp;
+        }
+
         //Exchange tile
         tileArray[tile1.row][tile1.col] = tile1;
         tileArray[tile2.row][tile2.col] = tile2;
@@ -1008,9 +1064,6 @@ public class MyAlgorithm {
                 // Add match
                 tileArray[tile.row][j].match++;
 
-                // Explode cake
-                //explodePie(tileArray[tile.row][n]);
-
                 //Check fruit is special in row
                 if (tileArray[tile.row][j].special) {
                     //Check is explode
@@ -1043,9 +1096,6 @@ public class MyAlgorithm {
 
                 // Add match
                 tileArray[i][tile.col].match++;
-
-                // Explode cake
-                //explodePie(tileArray[n][tile.col]);
 
                 //Check fruit is special in column
                 if (tileArray[i][tile.col].special) {
@@ -1167,9 +1217,6 @@ public class MyAlgorithm {
                     // Add match
                     tileArray[i][j].match++;
 
-                    // Explode cake
-                    //explodePie(tileArray[r][c]);
-
                     //Check fruit is special in square
                     if (tileArray[i][j].special) {
                         //Check is explode
@@ -1257,9 +1304,6 @@ public class MyAlgorithm {
                     // Add match
                     tileArray[i][j].match++;
 
-                    // Explode cake
-                    //explodePie(tileArray[i][j]);
-
                     //Check fruit is special
                     if (tileArray[i][j].special && !tileArray[i][j].lock) {
                         if (tileArray[i][j].direct == 'H') {
@@ -1324,6 +1368,20 @@ public class MyAlgorithm {
                 isTransf = false;
             }
         }, 1200);
+    }
+
+    private void explodeIce(ImageView ice, ImageView ice2, Tile tile) {
+        if (tile.ice == 1) {
+            if (ice != null) {
+                animationManager.explodeIce(ice, 10);
+            }
+        } else if (tile.ice == 2) {
+            if (ice2 != null) {
+                animationManager.explodeIce(ice2, 5);
+            }
+        }
+        tile.ice--;
+
     }
 
 }

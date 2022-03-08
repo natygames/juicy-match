@@ -19,6 +19,10 @@ public abstract class GameObject {
         }
     };
 
-    public  void onRemovedFromGameUiThread(){}
+    public void onRemovedFromGameUiThread(){}
     public void onAddedToGameUiThread() {}
+
+    public void onGameEvent(GameEvent gameEvent) {
+
+    }
 }
