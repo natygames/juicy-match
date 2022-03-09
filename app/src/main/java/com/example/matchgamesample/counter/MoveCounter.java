@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.level.Level;
@@ -15,10 +16,10 @@ public class MoveCounter extends GameObject {
     private int mMoves;
     private boolean mMovesHaveChanged;
 
-    public MoveCounter(View view, Level level) {
+    public MoveCounter(View view, GameEngine gameEngine) {
         mText = (TextView) view.findViewById(R.id.move);
-        mLevel = level;
-        mMoves = level.move;
+        mLevel = gameEngine.mLevel;
+        mMoves = gameEngine.mLevel.move;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class MoveCounter extends GameObject {
 
     @Override
     public void onGameEvent(GameEvent gameEvents) {
-        if (gameEvents == GameEvent.VALID_SWAP) {
+        if (gameEvents == GameEvent.SWAP) {
             if (mMoves > 0) {
                 mMoves--;
                 mLevel.move--;

@@ -12,21 +12,20 @@ import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.game.TileID;
 import com.example.matchgamesample.level.Level;
-import com.example.matchgamesample.state.GameState;
 
 import java.util.ArrayList;
 
-public class TargetCounter extends GameObject{
+public class TargetCounter extends GameObject {
 
-    private final GameEngine mGameEngine;
+    private final Level mLevel;
     private final ArrayList<TextView> mText = new ArrayList<>();
     private boolean mTargetsHaveChanged;
 
     public TargetCounter(View view, GameEngine gameEngine) {
-        mGameEngine = gameEngine;
-        if(gameEngine.mLevel.targetType == 1){
+        mLevel = gameEngine.mLevel;
+        if (gameEngine.mLevel.targetType == 1) {
             mText.add(view.findViewById(R.id.target_score));
-        }else{
+        } else {
             setTargetImages(gameEngine.mLevel.target.size(), view);
         }
 
@@ -63,26 +62,20 @@ public class TargetCounter extends GameObject{
 
         // Set target image
         int imgSize = mTargetsImage.size();
-        for(int i = 0; i < imgSize; i++) {
+        for (int i = 0; i < imgSize; i++) {
 
-            int id = mGameEngine.mLevel.collect.get(i);
-
-            // Adjust image
-            if(id == 0){
-                mTargetsImage.get(i).setBackgroundResource(R.drawable.ice);
-            }else {
-                mTargetsImage.get(i).setBackgroundResource(mGameEngine.mLevel.collect.get(i));
-            }
+            int id = mLevel.collect.get(i);
+            mTargetsImage.get(i).setBackgroundResource(id);
+            mTargetsImage.get(i).setVisibility(View.VISIBLE);
 
             // Set scale
-            if(id == R.drawable.striped_ball
-                    || id == TileID.COOKIE
-                    || id == 0) {
+            if (id == R.drawable.striped_ball
+                    || id == R.drawable.ice
+                    || id == TileID.COOKIE) {
                 mTargetsImage.get(i).setScaleX(0.8f);
                 mTargetsImage.get(i).setScaleY(0.8f);
             }
 
-            mTargetsImage.get(i).setVisibility(View.VISIBLE);
         }
 
     }
@@ -92,7 +85,7 @@ public class TargetCounter extends GameObject{
         // Init target text
         int txtSize = mText.size();
         for (int i = 0; i < txtSize; i++) {
-            mText.get(i).setText(String.valueOf(mGameEngine.mLevel.target.get(i)));
+            mText.get(i).setText(String.valueOf(mLevel.target.get(i)));
             mText.get(i).setVisibility(View.VISIBLE);
         }
     }
@@ -108,7 +101,7 @@ public class TargetCounter extends GameObject{
             // Update target text
             int txtSize = mText.size();
             for (int i = 0; i < txtSize; i++) {
-                mText.get(i).setText(String.valueOf(mGameEngine.mLevel.target.get(i)));
+                mText.get(i).setText(String.valueOf(mLevel.target.get(i)));
             }
             mTargetsHaveChanged = false;
         }

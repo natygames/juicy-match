@@ -80,11 +80,6 @@ public class GameFragment extends BaseFragment {
         //Initializing game board layer
         GridLayout grid_board = (GridLayout) getView().findViewById(R.id.grid_board);
         GridLayout fruit_board = (GridLayout) getView().findViewById(R.id.fruit_board);
-        //Initializing effect layer
-        RelativeLayout effect_board = (RelativeLayout) getView().findViewById(R.id.effect_board);
-        effect_board.getLayoutParams().width = tileSize * column;
-        effect_board.getLayoutParams().height = tileSize * row;
-        RelativeLayout guide_board = (RelativeLayout) getView().findViewById(R.id.guide_board);
 
         mGameEngine = new GameEngine(getMainActivity(), mLevel, tileSize);
 
@@ -122,7 +117,7 @@ public class GameFragment extends BaseFragment {
         gameController.setMyAlgorithm(myAlgorithm);
         mGameEngine.addGameObject(gameController);
         mGameEngine.addGameObject(new ScoreCounter(getView()));
-        mGameEngine.addGameObject(new MoveCounter(getView(), mLevel));
+        mGameEngine.addGameObject(new MoveCounter(getView(), mGameEngine));
         mGameEngine.addGameObject(new TargetCounter(getView(), mGameEngine));
 
         mGameEngine.startGame();

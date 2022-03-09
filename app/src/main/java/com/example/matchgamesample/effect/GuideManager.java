@@ -2,7 +2,7 @@ package com.example.matchgamesample.effect;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
+import android.app.Activity;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.animation.AnticipateInterpolator;
@@ -13,11 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.engine.GameEngine;
 
 public class GuideManager {
-    private final Context context;
-    private final RelativeLayout layout_guide;
-    private final int tileSize;
+    private final Activity mActivity;
+    private final RelativeLayout mRoot;
+    private final int mTileSize;
     //Duration
     private static final int FALL_TIME_SHORT = 300;
     private static final int FALL_TIME_LONG = 600;
@@ -29,40 +30,40 @@ public class GuideManager {
     private final OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
     private final DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator();
 
-    public GuideManager(Context context, RelativeLayout layout_guide, int tileSize){
-        this.context = context;
-        this.layout_guide = layout_guide;
-        this.tileSize = tileSize;
+    public GuideManager(GameEngine gameEngine){
+        mActivity = gameEngine.mActivity;
+        mTileSize = gameEngine.mImageSize;
+        mRoot = gameEngine.mActivity.findViewById(R.id.guide_board);
     }
 
     private void createBlackScreen(){
         //Add black screen
-        ImageView black_screen = new ImageView(context);
+        ImageView black_screen = new ImageView(mActivity);
         black_screen.setImageResource(R.color.black);
         black_screen.setImageAlpha(150);
         black_screen.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        layout_guide.addView(black_screen);
+        mRoot.addView(black_screen);
     }
 
     public void createRefreshGuide(){
         //Add guide
-        ImageView refresh = new ImageView(context);
+        ImageView refresh = new ImageView(mActivity);
         refresh.setImageResource(R.drawable.guide_refresh);
-        refresh.setX((int)(layout_guide.getWidth() / 2 - tileSize * 4));
-        refresh.setY(- tileSize * 3);
-        refresh.setLayoutParams(new ViewGroup.LayoutParams(tileSize * 8, tileSize * 3));
-        layout_guide.addView(refresh);
+        refresh.setX((int)(mRoot.getWidth() / 2 - mTileSize * 4));
+        refresh.setY(-mTileSize * 3);
+        refresh.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 3));
+        mRoot.addView(refresh);
 
         //Set animation
         //Set dropping
-        refresh.animate().setDuration(FALL_TIME_LONG).y((float) (layout_guide.getHeight() / 2 - tileSize * 1.5)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+        refresh.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                refresh.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(- tileSize * 3).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                refresh.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(-mTileSize * 3).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        layout_guide.removeView(refresh);
+                        mRoot.removeView(refresh);
                     }
                 });
             }
@@ -76,7 +77,7 @@ public class GuideManager {
          * wonderful for 6 combo
          */
         //Add guide
-        ImageView guide = new ImageView(context);
+        ImageView guide = new ImageView(mActivity);
         if(combo == 4){
             guide.setImageResource(R.drawable.guide_nice);
         }else if(combo == 5){
@@ -84,21 +85,21 @@ public class GuideManager {
         }else{
             guide.setImageResource(R.drawable.guide_wonderful);
         }
-        guide.setX((int)(layout_guide.getWidth() / 2 - tileSize * 4));
-        guide.setY(- tileSize * 3);
-        guide.setLayoutParams(new ViewGroup.LayoutParams(tileSize * 8, tileSize * 3));
-        layout_guide.addView(guide);
+        guide.setX((int)(mRoot.getWidth() / 2 - mTileSize * 4));
+        guide.setY(-mTileSize * 3);
+        guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 3));
+        mRoot.addView(guide);
 
         //Set animation
         //Set dropping
-        guide.animate().setDuration(FALL_TIME_SHORT).y((float) (layout_guide.getHeight() / 2 - tileSize * 1.5)).setInterpolator(decelerateInterpolator).setListener(new AnimatorListenerAdapter() {
+        guide.animate().setDuration(FALL_TIME_SHORT).y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5)).setInterpolator(decelerateInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                guide.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(- tileSize * 3).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                guide.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(-mTileSize * 3).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        layout_guide.removeView(guide);
+                        mRoot.removeView(guide);
                     }
                 });
             }
@@ -107,23 +108,23 @@ public class GuideManager {
 
     public void createBonusTime(){
         //Add guide
-        ImageView bonusTime = new ImageView(context);
+        ImageView bonusTime = new ImageView(mActivity);
         bonusTime.setImageResource(R.drawable.guide_bonus);
-        bonusTime.setX((int)(layout_guide.getWidth() / 2 - tileSize * 4));
-        bonusTime.setY(- tileSize * 6);
-        bonusTime.setLayoutParams(new ViewGroup.LayoutParams(tileSize * 8, tileSize * 6));
-        layout_guide.addView(bonusTime);
+        bonusTime.setX((int)(mRoot.getWidth() / 2 - mTileSize * 4));
+        bonusTime.setY(-mTileSize * 6);
+        bonusTime.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 6));
+        mRoot.addView(bonusTime);
 
         //Set animation
         //Set dropping
-        bonusTime.animate().setDuration(FALL_TIME_LONG).y((float) (layout_guide.getHeight() / 2 - tileSize * 3)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+        bonusTime.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 3)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                bonusTime.animate().setStartDelay(PAUSE_TIME_SHORT).setDuration(RETRY_TIME).y(- tileSize * 6).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                bonusTime.animate().setStartDelay(PAUSE_TIME_SHORT).setDuration(RETRY_TIME).y(-mTileSize * 6).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        layout_guide.removeView(bonusTime);
+                        mRoot.removeView(bonusTime);
                     }
                 });
             }
@@ -140,33 +141,37 @@ public class GuideManager {
         //Add black screen
         createBlackScreen();
         //Add board
-        LinearLayout board = new LinearLayout(context);
+        LinearLayout board = new LinearLayout(mActivity);
         board.setOrientation(LinearLayout.HORIZONTAL);
         board.setGravity(Gravity.CENTER);
         board.setBackgroundResource(R.drawable.guide_board);
         board.setX(0);
-        board.setY(- tileSize * 4);
-        board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, tileSize * 4));
-        layout_guide.addView(board);
+        board.setY(-mTileSize * 4);
+        board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mTileSize * 4));
+        mRoot.addView(board);
         //Add guide
-        ImageView guide = new ImageView(context);
+        ImageView guide = new ImageView(mActivity);
         if(type == 1) {
             guide.setImageResource(R.drawable.guide_taeget_score);
         }else if(type == 3){
             guide.setImageResource(R.drawable.guide_target_ice);
-            ImageView ice = new ImageView(context);
+            ImageView ice = new ImageView(mActivity);
             ice.setBackgroundResource(R.drawable.ice);
-            ice.setLayoutParams(new ViewGroup.LayoutParams((int)(tileSize * 1.5), (int)(tileSize * 1.5)));
-            ice.animate().setStartDelay(200).setDuration(200).rotation(-30).setListener(new AnimatorListenerAdapter() {
+            ice.setLayoutParams(new ViewGroup.LayoutParams((int)(mTileSize * 1.5), (int)(mTileSize * 1.5)));
+            ice.animate().setStartDelay(200).setDuration(200).rotation(-30)
+                    .setListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    ice.animate().setStartDelay(0).setDuration(400).rotation(30).setListener(new AnimatorListenerAdapter() {
+                    ice.animate().setStartDelay(0).setDuration(400).rotation(30)
+                            .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
-                            ice.animate().setDuration(400).rotation(-30).setListener(new AnimatorListenerAdapter() {
+                            ice.animate().setDuration(400).rotation(-30)
+                                    .setListener(new AnimatorListenerAdapter() {
                                 @Override
                                 public void onAnimationEnd(Animator animation) {
-                                    ice.animate().setDuration(400).rotation(30).setListener(new AnimatorListenerAdapter() {
+                                    ice.animate().setDuration(400).rotation(30)
+                                            .setListener(new AnimatorListenerAdapter() {
                                         @Override
                                         public void onAnimationEnd(Animator animation) {
                                             animation.cancel();
@@ -182,19 +187,20 @@ public class GuideManager {
         }else{
             guide.setImageResource(R.drawable.guide_target_collect);
         }
-        guide.setLayoutParams(new ViewGroup.LayoutParams(tileSize * 7, tileSize * 2));
+        guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 7, mTileSize * 2));
         board.addView(guide);
 
         //Set animation
         //Set dropping
-        board.animate().setDuration(FALL_TIME_LONG).y((float) (layout_guide.getHeight() / 2 - tileSize * 2)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+        board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
+                .setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME).y(layout_guide.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME).y(mRoot.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        layout_guide.removeAllViews();
+                        mRoot.removeAllViews();
                     }
                 });
             }
@@ -210,33 +216,33 @@ public class GuideManager {
         //Add black screen
         createBlackScreen();
         //Add board
-        RelativeLayout board = new RelativeLayout(context);
+        RelativeLayout board = new RelativeLayout(mActivity);
         board.setGravity(Gravity.CENTER);
         board.setBackgroundResource(R.drawable.guide_board);
         board.setX(0);
-        board.setY(- tileSize * 4);
-        board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, tileSize * 4));
-        layout_guide.addView(board);
+        board.setY(-mTileSize * 4);
+        board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mTileSize * 4));
+        mRoot.addView(board);
         //Add guide
-        ImageView guide = new ImageView(context);
+        ImageView guide = new ImageView(mActivity);
         if(type == 1){
             guide.setImageResource(R.drawable.guide_win);
         }else{
             guide.setImageResource(R.drawable.guide_loss);
         }
-        guide.setLayoutParams(new ViewGroup.LayoutParams(tileSize * 7, tileSize * 2));
+        guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 7, mTileSize * 2));
         board.addView(guide);
 
         //Set animation
         //Set dropping
-        board.animate().setDuration(FALL_TIME_LONG).y((float) (layout_guide.getHeight() / 2 - tileSize * 2)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+        board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                board.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(layout_guide.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                board.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(mRoot.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        layout_guide.removeAllViews();
+                        mRoot.removeAllViews();
                     }
                 });
             }

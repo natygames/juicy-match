@@ -3,7 +3,6 @@ package com.example.matchgamesample.game;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 
-import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.Sprite;
 
@@ -12,7 +11,7 @@ public class Tile extends Sprite {
     public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute
     public int bounce = 0, wait = 0, diagonal = 0;            // Tile moving
     public boolean invalid = false, empty = false, tube = false;  // Tile movement
-    public boolean special = false, lock = false, honey = false, breakable = false;     // Tile attribute
+    public boolean special = false, lock = false, breakable = false, honey = false;     // Tile attribute
     public boolean isExplode = false, isUpgrade = false, isAnimate = false, isChosen = false;       //Tile state
     public char direct = 'N', machine = 'N', specialCombine = 'N';
     public int iceCreamTarget = 0;
@@ -26,9 +25,7 @@ public class Tile extends Sprite {
     }
 
     public void startGame() {
-        if (!breakable
-                && !lock
-                && !honey
+        if (!invalid
                 && kind != TileID.STAR_FISH) {
             mImage.setAlpha(0f);
             mImage.setScaleY(0);
@@ -72,12 +69,12 @@ public class Tile extends Sprite {
 
     }
 
-    public boolean isMoving(){
+    public boolean isMoving() {
         return (x - col * mWidth != 0) || (y - row * mHeight != 0);
     }
 
     public boolean isMovable() {
-        if (empty || lock || honey || kind == 0 || (breakable && kind != TileID.CRACKER))
+        if (empty || lock || kind == 0 || (breakable && kind != TileID.CRACKER))
             return false;
 
         return true;
@@ -92,7 +89,7 @@ public class Tile extends Sprite {
         return false;
     }
 
-    public void reset(){
+    public void reset() {
         match = 0;
         isUpgrade = false;
         breakable = false;
@@ -106,7 +103,7 @@ public class Tile extends Sprite {
         setRandomFruit();
     }
 
-    public void setRandomFruit(){
+    public void setRandomFruit() {
         //Assign fruit kind
         kind = TileID.FRUITS[(int) (Math.random() * mFruitNum)];
     }

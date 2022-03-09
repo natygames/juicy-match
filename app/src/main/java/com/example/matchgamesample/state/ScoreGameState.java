@@ -30,9 +30,13 @@ public class ScoreGameState extends GameState {
     }
 
     @Override
-    public void onUpdate(Tile tile) {
-        if (tile.match > 0) {
-            mPoint += 10;
+    public void onUpdate(Tile[][] tileArray) {
+        for (int j = 0; j < mColumn; j++) {
+            for (int i = 0; i < mRow; i++) {
+                if (tileArray[i][j].match > 0) {
+                    mPoint += 10;
+                }
+            }
         }
     }
 

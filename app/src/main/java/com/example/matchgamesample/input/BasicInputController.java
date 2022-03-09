@@ -25,15 +25,17 @@ public class BasicInputController extends InputController {
                 mX_Down = (int) event.getX();
                 mY_Down = (int) event.getY();
                 // Log.d("input", "(" + mX_Down + ", " + mY_Down + ")");
+                mGameEngine.onGameEvent(GameEvent.PLAYER_TOUCH);
 
             } else if (action == MotionEvent.ACTION_UP) {
 
                 mX_Up = (int) event.getX();
                 mY_Up = (int) event.getY();
                 // Log.d("input", "(" + mX_Up + ", " + mY_Up + ")");
+                mGameEngine.onGameEvent(GameEvent.PLAYER_RELEASE);
 
                 if (Math.abs(mX_Down - mX_Up) > 50 || Math.abs(mY_Down - mY_Up) > 50) {
-                    mGameEngine.onGameEvent(GameEvent.SWAP);
+                    mGameEngine.onGameEvent(GameEvent.PLAYER_MOVE);
                 }
             }
 

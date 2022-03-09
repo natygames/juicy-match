@@ -5,9 +5,12 @@ import com.example.matchgamesample.game.Tile;
 
 public class GameState {
     protected GameEngine mGameEngine;
+    protected int mRow, mColumn;
 
     public GameState(GameEngine gameEngine){
         mGameEngine = gameEngine;
+        mRow = gameEngine.mLevel.row;
+        mColumn = gameEngine.mLevel.column;
     }
 
     public boolean isPlayerWin() {
@@ -18,7 +21,7 @@ public class GameState {
         return false;
     }
 
-    public void onUpdate(Tile tile) {
+    public void onUpdate(Tile[][] tileArray) {
     }
 
 }

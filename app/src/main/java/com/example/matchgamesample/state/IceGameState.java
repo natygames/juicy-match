@@ -6,7 +6,7 @@ import com.example.matchgamesample.game.Tile;
 
 import java.util.ArrayList;
 
-public class IceGameState extends GameState{
+public class IceGameState extends GameState {
     private final ArrayList<Integer> mTarget;
 
     public IceGameState(GameEngine gameEngine) {
@@ -25,30 +25,36 @@ public class IceGameState extends GameState{
     }
 
     @Override
-    public void onUpdate(Tile tile) {
-        if(tile.match == 0 || tile.layer != 0){
-            return;
-        }
+    public void onUpdate(Tile[][] tileArray) {
+        for (int j = 0; j < mColumn; j++) {
+            for (int i = 0; i < mRow; i++) {
 
-        // Update ice
-        if(tile.ice == 1){
-            int target = mGameEngine.mLevel.target.get(0);
-            if(target > 0) {
-                target--;
-                mGameEngine.mLevel.target.set(0, target);
-                mGameEngine.onGameEvent(GameEvent.COLLECT);
-            }
-        }
+                Tile tile = tileArray[i][j];
+                if (tile.match == 0 || tile.layer != 0) {
+                    continue;
+                }
 
-        // Update collect item
-        int size = mTarget.size();
-        for(int i = 1; i < size; i++){
-            if(tile.kind == mTarget.get(i)){
-                int target = mGameEngine.mLevel.target.get(i);
-                if(target > 0) {
-                    target--;
-                    mGameEngine.mLevel.target.set(i, target);
-                    mGameEngine.onGameEvent(GameEvent.COLLECT);
+                // Update ice
+                if (tile.ice == 1) {
+                    int target = mGameEngine.mLevel.target.get(0);
+                    if (target > 0) {
+                        target--;
+                        mGameEngine.mLevel.target.set(0, target);
+                        mGameEngine.onGameEvent(GameEvent.COLLECT);
+                    }
+                }
+
+                // Update collect item
+                int size = mTarget.size();
+                for (int n = 1; n < size; n++) {
+                    if (tile.kind == mTarget.get(n)) {
+                        int target = mGameEngine.mLevel.target.get(n);
+                        if (target > 0) {
+                            target--;
+                            mGameEngine.mLevel.target.set(n, target);
+                            mGameEngine.onGameEvent(GameEvent.COLLECT);
+                        }
+                    }
                 }
             }
         }

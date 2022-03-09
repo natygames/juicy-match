@@ -9,10 +9,10 @@ import com.example.matchgamesample.game.TileID;
 
 import java.util.ArrayList;
 
-public class StarGameState extends GameState{
+public class StarGameState extends GameState {
     private final ArrayList<Integer> mTarget;
 
-    public StarGameState(GameEngine gameEngine){
+    public StarGameState(GameEngine gameEngine) {
         super(gameEngine);
         mTarget = gameEngine.mLevel.collect;
     }
@@ -28,32 +28,38 @@ public class StarGameState extends GameState{
     }
 
     @Override
-    public void onUpdate(Tile tile) {
-        // Update starfish
-        if(tile.kind == TileID.STAR_FISH && tile.entryPoint){
-            tile.match++;
-            int target = mGameEngine.mLevel.target.get(0);
-            if(target > 0) {
-                target--;
-                mGameEngine.mLevel.target.set(0, target);
-                mGameEngine.onGameEvent(GameEvent.COLLECT);
-            }
-            return;
-        }
+    public void onUpdate(Tile[][] tileArray) {
+        for (int j = 0; j < mColumn; j++) {
+            for (int i = 0; i < mRow; i++) {
 
-        if(tile.match == 0 || tile.layer != 0){
-            return;
-        }
+                Tile tile = tileArray[i][j];
+                // Update starfish
+                if (tile.kind == TileID.STAR_FISH && tile.entryPoint) {
+                    tile.match++;
+                    int target = mGameEngine.mLevel.target.get(0);
+                    if (target > 0) {
+                        target--;
+                        mGameEngine.mLevel.target.set(0, target);
+                        mGameEngine.onGameEvent(GameEvent.COLLECT);
+                    }
+                    continue;
+                }
 
-        // Update collect item
-        int size = mTarget.size();
-        for(int i = 1; i < size; i++){
-            if(tile.kind == mTarget.get(i)){
-                int target = mGameEngine.mLevel.target.get(i);
-                if(target > 0) {
-                    target--;
-                    mGameEngine.mLevel.target.set(i, target);
-                    mGameEngine.onGameEvent(GameEvent.COLLECT);
+                if (tile.match == 0 || tile.layer != 0) {
+                    continue;
+                }
+
+                // Update collect item
+                int size = mTarget.size();
+                for (int n = 1; n < size; n++) {
+                    if (tile.kind == mTarget.get(n)) {
+                        int target = mGameEngine.mLevel.target.get(n);
+                        if (target > 0) {
+                            target--;
+                            mGameEngine.mLevel.target.set(n, target);
+                            mGameEngine.onGameEvent(GameEvent.COLLECT);
+                        }
+                    }
                 }
             }
         }

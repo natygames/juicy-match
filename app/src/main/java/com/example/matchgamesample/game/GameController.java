@@ -5,7 +5,7 @@ import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.engine.InputController;
 
-public class GameController extends GameObject{
+public class GameController extends GameObject {
     private final Tile[][] tileArray;
     private final int mRow, mColumn;
     private final int mTileSize;
@@ -20,7 +20,7 @@ public class GameController extends GameObject{
         mInputController = gameEngine.mInputController;
     }
 
-    public void setMyAlgorithm(MyAlgorithm myAlgorithm){
+    public void setMyAlgorithm(MyAlgorithm myAlgorithm) {
         mAlgorithm = myAlgorithm;
     }
 
@@ -50,8 +50,21 @@ public class GameController extends GameObject{
 
     @Override
     public void onGameEvent(GameEvent gameEvents) {
+        if(!mAlgorithm.canPlayerSwap()){
+            return;
+        }
         switch (gameEvents) {
-            case SWAP:
+            case PLAYER_TOUCH:
+                int touchCol = mInputController.mX_Down / mTileSize;
+                int touchRow = mInputController.mY_Down / mTileSize;
+                tileArray[touchRow][touchCol].isChosen = true;
+                break;
+            case PLAYER_RELEASE:
+                int releaseCol = mInputController.mX_Down / mTileSize;
+                int releaseRow = mInputController.mY_Down / mTileSize;
+                tileArray[releaseRow][releaseCol].isChosen = false;
+                break;
+            case PLAYER_MOVE:
                 playerSwap();
                 break;
         }

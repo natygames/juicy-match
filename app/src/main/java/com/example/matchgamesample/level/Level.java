@@ -44,8 +44,7 @@ public class Level {
                     collect.add(R.drawable.starfish);
                     break;
                 case ("ice"):
-                    // We don't check ice this way
-                    collect.add(0);
+                    collect.add(R.drawable.ice);
                     break;
             }
 

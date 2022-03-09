@@ -25,23 +25,27 @@ import com.example.matchgamesample.explosion.Explosion;
 
 public class AnimationManager {
     private final Activity mActivity;
-    private final RelativeLayout mEffect_board;
     private final int mTileSize;
+    private final RelativeLayout mEffect_board;
     //Score text
     private static final int UPGRADE_TIME = 300;
     private final AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();
     private final DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator();
     private final AnticipateInterpolator anticipateInterpolator = new AnticipateInterpolator();
     private final OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
-    //Explode lock animation
+    // Animation
     private final Explosion explosion;
     private final Animation shaking_anim, shaking_small_anim, machine_anim;
     private final Handler mHandler = new Handler();
 
     public AnimationManager(GameEngine gameEngine) {
-        mEffect_board = gameEngine.mActivity.findViewById(R.id.effect_board);
         mActivity = gameEngine.mActivity;
         mTileSize = gameEngine.mImageSize;
+
+        mEffect_board = gameEngine.mActivity.findViewById(R.id.effect_board);
+        mEffect_board.getLayoutParams().width = mTileSize * gameEngine.mLevel.column;
+        mEffect_board.getLayoutParams().height = mTileSize * gameEngine.mLevel.row;
+
         explosion = Explosion.attach2Window(gameEngine.mActivity);
         shaking_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_animation);
         shaking_small_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_small_animation);
@@ -1465,30 +1469,6 @@ public class AnimationManager {
     public void explodeCookieLayer(Tile tile) {
         //Smoke effect
         createSmoke(tile);
-    }
-
-    public void explodePieLayer(Tile tile) {
-        //Smoke effect
-        int positX = tile.x - mTileSize;
-        int positY = tile.y - mTileSize;
-        //Smoke effect
-        ImageView smoke = new ImageView(mActivity);
-        smoke.setBackgroundResource(R.drawable.smoke_animation);
-        AnimationDrawable anim = (AnimationDrawable) smoke.getBackground();
-        //Set location
-        smoke.setX(positX - mTileSize);
-        smoke.setY(positY - mTileSize);
-        //Set size
-        smoke.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 4, mTileSize * 4));
-        //Add view
-        mEffect_board.addView(smoke);
-        smoke.animate().setDuration(400).alpha(0.5f).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(smoke);
-            }
-        });
-        anim.start();
     }
 
     public void explodeLock(ImageView lock, Tile tile) {
