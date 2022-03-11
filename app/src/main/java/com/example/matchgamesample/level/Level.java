@@ -11,54 +11,75 @@ import java.util.ArrayList;
 **/
 
 public class Level {
-    public int targetType = 0;
-    public int move = 0;
-    public int column = 0, row = 0;
-    public int fruitNum = 4;
-    public ArrayList<Integer> target = new ArrayList<>();
-    public ArrayList<Integer> collect = new ArrayList<>();
+    public LevelType mLevelType;
+    public int mMove = 0;
+    public int mColumn = 0, mRow = 0;
+    public int mFruitNum = 4;
+    public ArrayList<Integer> mTarget = new ArrayList<>();
+    public ArrayList<Integer> mCollect = new ArrayList<>();
     // Game board in char
     public String board, fruit, ice, advance;
+
+    public void setLevelType(int type){
+        switch (type){
+            case 1:
+                mLevelType = LevelType.LEVEL_TYPE_SCORE;
+                break;
+            case 2:
+                mLevelType = LevelType.LEVEL_TYPE_COLLECT;
+                break;
+            case 3:
+                mLevelType = LevelType.LEVEL_TYPE_ICE;
+                break;
+            case 4:
+                mLevelType = LevelType.LEVEL_TYPE_STARFISH;
+                break;
+        }
+    }
+
+    public void addTarget(int target){
+        mTarget.add(target);
+    }
 
     public void addCollect(String s){
             switch (s) {
                 case ("strawberry"):
-                    collect.add(R.drawable.strawberry);
+                    mCollect.add(R.drawable.strawberry);
                     break;
                 case ("cherry"):
-                    collect.add(R.drawable.cherry);
+                    mCollect.add(R.drawable.cherry);
                     break;
                 case ("lemon"):
-                    collect.add(R.drawable.lemon);
+                    mCollect.add(R.drawable.lemon);
                     break;
                 case ("striped"):
-                    collect.add(R.drawable.striped_ball);
+                    mCollect.add(R.drawable.striped_ball);
                     break;
                 case ("cracker"):
-                    collect.add(R.drawable.cracker);
+                    mCollect.add(R.drawable.cracker);
                     break;
                 case ("cookie"):
-                    collect.add(R.drawable.cookie);
+                    mCollect.add(R.drawable.cookie);
                     break;
                 case ("starfish"):
-                    collect.add(R.drawable.starfish);
+                    mCollect.add(R.drawable.starfish);
                     break;
                 case ("ice"):
-                    collect.add(R.drawable.ice);
+                    mCollect.add(R.drawable.ice);
                     break;
             }
 
     }
 
     /* Explanation:
-     * <targetType> is the target type of level:
-     *     1 for reach target score
-     *     2 for collect items
+     * <mLevelType> is the mTarget type of level:
+     *     1 for reach mTarget score
+     *     2 for mCollect items
      *     3 for clear ice
      *     4 for starfish
-     * <move> is the maxim swaps
-     * <fruitNum> is the number of fruit, default 4, maxim 5
-     * <target> is the list stores each target amount
-     * <collect> is the list stores items need to be collect
+     * <mMove> is the maxim swaps
+     * <mFruitNum> is the number of fruit, default 4, maxim 5
+     * <mTarget> is the list stores each mTarget amount
+     * <mCollect> is the list stores items need to be mCollect
      */
 }

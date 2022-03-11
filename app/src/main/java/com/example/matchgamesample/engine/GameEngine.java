@@ -93,12 +93,10 @@ public class GameEngine {
 
     public void addGameObject(final GameObject gameObject) {
         mGameObjects.add(gameObject);
-        mActivity.runOnUiThread(gameObject.mOnAddedRunnable);
     }
 
     public void removeGameObject(final GameObject gameObject) {
         mGameObjects.remove(gameObject);
-        mActivity.runOnUiThread(gameObject.mOnRemovedRunnable);
     }
 
     public void setInputController(InputController inputController) {

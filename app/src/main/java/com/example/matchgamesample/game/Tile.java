@@ -21,12 +21,12 @@ public class Tile extends Sprite {
 
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
-        mFruitNum = gameEngine.mLevel.fruitNum;
+        mFruitNum = gameEngine.mLevel.mFruitNum;
     }
 
     public void startGame() {
         if (!invalid
-                && kind != TileID.STAR_FISH) {
+                && kind != TileUtils.STAR_FISH) {
             mImage.setAlpha(0f);
             mImage.setScaleY(0);
             mImage.setScaleX(0);
@@ -58,11 +58,11 @@ public class Tile extends Sprite {
                 mImage.setImageResource(0);
             } else {
                 if (isChosen && isMovable()) {
-                    mImage.setImageResource(TileID.getChosenFruit(this));
+                    mImage.setImageResource(TileUtils.getChosenFruit(this));
                 } else if (special) {
-                    mImage.setImageResource(TileID.getSpecialFruit(this));
+                    mImage.setImageResource(TileUtils.getSpecialFruit(this));
                 } else {
-                    mImage.setImageResource(TileID.getFruit(this));
+                    mImage.setImageResource(TileUtils.getFruit(this));
                 }
             }
         }
@@ -74,7 +74,7 @@ public class Tile extends Sprite {
     }
 
     public boolean isMovable() {
-        if (empty || lock || kind == 0 || (breakable && kind != TileID.CRACKER))
+        if (empty || lock || kind == 0 || (breakable && kind != TileUtils.CRACKER))
             return false;
 
         return true;
@@ -82,7 +82,7 @@ public class Tile extends Sprite {
 
     public boolean isFruit() {
         for (int i = 0; i < 5; i++) {
-            if (kind == TileID.FRUITS[i])
+            if (kind == TileUtils.FRUITS[i])
                 return true;
         }
 
@@ -105,6 +105,6 @@ public class Tile extends Sprite {
 
     public void setRandomFruit() {
         //Assign fruit kind
-        kind = TileID.FRUITS[(int) (Math.random() * mFruitNum)];
+        kind = TileUtils.FRUITS[(int) (Math.random() * mFruitNum)];
     }
 }

@@ -70,22 +70,22 @@ public class XMLPuller {
                     // Assign mLevel data when found
                     switch (tagName) {
                         case ("target_type"):
-                            mLevel.targetType = Integer.parseInt(parser.nextText());
+                            mLevel.setLevelType(Integer.parseInt(parser.nextText()));
                             break;
                         case ("move"):
-                            mLevel.move = Integer.parseInt(parser.nextText());
+                            mLevel.mMove = Integer.parseInt(parser.nextText());
                             break;
                         case ("fruit_num"):
-                            mLevel.fruitNum = Integer.parseInt(parser.nextText());
+                            mLevel.mFruitNum = Integer.parseInt(parser.nextText());
                             break;
                         case ("column"):
-                            mLevel.column = Integer.parseInt(parser.nextText());
+                            mLevel.mColumn = Integer.parseInt(parser.nextText());
                             break;
                         case ("row"):
-                            mLevel.row = Integer.parseInt(parser.nextText());
+                            mLevel.mRow = Integer.parseInt(parser.nextText());
                             break;
                         case ("target"):
-                            mLevel.target.add(Integer.parseInt(parser.nextText()));
+                            mLevel.addTarget(Integer.parseInt(parser.nextText()));
                             break;
                         case ("collect"):
                             mLevel.addCollect(parser.nextText());

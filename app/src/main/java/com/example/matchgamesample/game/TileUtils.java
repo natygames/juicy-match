@@ -2,7 +2,7 @@ package com.example.matchgamesample.game;
 
 import com.example.matchgamesample.R;
 
-public class TileID {
+public class TileUtils {
 
     // Fruit ID
     public static final int[] FRUITS = {

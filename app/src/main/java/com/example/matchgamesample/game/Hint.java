@@ -65,7 +65,7 @@ public class Hint{
                 //Check swappable
                 if(!tileArray[i][j].invalid) {
 
-                    //Find two special fruit in row and column
+                    //Find two special fruit in mRow and mColumn
                     if (!tileArray[i][j + 1].invalid
                             && tileArray[i][j].special && tileArray[i][j + 1].special){
 
@@ -89,7 +89,7 @@ public class Hint{
             }
         }
 
-        //Check match 5 in column
+        //Check match 5 in mColumn
         for (int i = 1; i <= row - 4; i++) {
             for (int j = 1; j <= column; j++) {
                 //Check tile state
@@ -141,7 +141,7 @@ public class Hint{
             }
         }
 
-        //Check match 5 in row
+        //Check match 5 in mRow
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= column - 4; j++) {
                 if(!tileArray[i][j].empty
@@ -186,7 +186,7 @@ public class Hint{
             }
         }
 
-        //Check match 4 T L in column
+        //Check match 4 T L in mColumn
         for (int i = 1; i <= row - 1; i++) {
             for (int j = 1; j <= column; j++) {
                 //Check tile state
@@ -194,7 +194,7 @@ public class Hint{
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
-                    //Check next 1 row
+                    //Check next 1 mRow
                     if (tileArray[i][j].kind == tileArray[i + 1][j].kind) {
 
                         //Check potential match
@@ -320,14 +320,14 @@ public class Hint{
             }
         }
 
-        //Check match 4 T L in row
+        //Check match 4 T L in mRow
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= column - 1; j++) {
                 if(!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
-                    //Check next 1 column
+                    //Check next 1 mColumn
                     if (tileArray[i][j].kind == tileArray[i][j + 1].kind) {
 
                         //Check potential match
@@ -439,7 +439,7 @@ public class Hint{
             }
         }
 
-        //Check match 3 in column 1
+        //Check match 3 in mColumn 1
         for (int i = 1; i <= row - 1; i++) {
             for (int j = 1; j <= column; j++) {
                 //Check tile state
@@ -447,7 +447,7 @@ public class Hint{
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
-                    //Check next 1 row
+                    //Check next 1 mRow
                     if (tileArray[i][j].kind == tileArray[i + 1][j].kind) {
                         //Check potential match
                         if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
@@ -504,7 +504,7 @@ public class Hint{
             }
         }
 
-        //Check match 3 in column 2
+        //Check match 3 in mColumn 2
         for (int i = 1; i <= row - 2; i++) {
             for (int j = 1; j <= column; j++) {
                 //Check tile state
@@ -512,7 +512,7 @@ public class Hint{
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
-                    //Check next 2 row
+                    //Check next 2 mRow
                     if (tileArray[i][j].kind == tileArray[i + 2][j].kind) {
                         //Check potential match
                         if (tileArray[i][j].kind == tileArray[i + 1][j - 1].kind) {
@@ -571,14 +571,14 @@ public class Hint{
             }
         }
 
-        //Check match 3 in row 1
+        //Check match 3 in mRow 1
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= column - 1; j++) {
                 if(!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
-                    //Check next 1 column
+                    //Check next 1 mColumn
                     if (tileArray[i][j].kind == tileArray[i][j + 1].kind) {
                         //Check potential match
                         if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
@@ -631,14 +631,14 @@ public class Hint{
             }
         }
 
-        //Check match 3 in row 2
+        //Check match 3 in mRow 2
         for (int i = 1; i <= row; i++) {
             for (int j = 1; j <= column - 2; j++) {
                 if(!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
-                    //Check next 2 column
+                    //Check next 2 mColumn
                     if (tileArray[i][j].kind == tileArray[i][j + 2].kind) {
                         //Check potential match
                         if (tileArray[i][j].kind == tileArray[i - 1][j + 1].kind) {

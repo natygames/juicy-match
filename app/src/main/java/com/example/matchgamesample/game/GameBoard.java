@@ -1,6 +1,6 @@
 package com.example.matchgamesample.game;
 
-import android.content.Context;
+import android.app.Activity;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.level.Level;
 
 /* This class let you design fruit board
@@ -16,17 +17,19 @@ import com.example.matchgamesample.level.Level;
  * Use createGameBoard() to get char[] value
  */
 
-public class Game {
-    private final Context context;
+public class GameBoard {
+    private final GameEngine mGameEngine;
+    private final Activity mActivity;
     private final Level mLevel;
-    private final int column, row, tileSize;
+    private final int mColumn, mRow, mTileSize;
 
-    public Game(Context context, Level level, int tileSize) {
-        this.context = context;
-        mLevel = level;
-        this.column = level.column;
-        this.row = level.row;
-        this.tileSize = tileSize;
+    public GameBoard(GameEngine gameEngine) {
+        mGameEngine = gameEngine;
+        mActivity = gameEngine.mActivity;
+        mLevel = gameEngine.mLevel;
+        mColumn = gameEngine.mLevel.mColumn;
+        mRow = gameEngine.mLevel.mRow;
+        mTileSize = gameEngine.mImageSize;
     }
 
     public void createGridBoard(GridLayout grid_board) {
@@ -59,16 +62,17 @@ public class Game {
 
         char[] board_char = mLevel.board.toCharArray();
 
-        grid_board.setColumnCount(column);
-        grid_board.setRowCount(row);
-        grid_board.getLayoutParams().width = tileSize * column;
-        grid_board.getLayoutParams().height = tileSize * row;
+        grid_board.setColumnCount(mColumn);
+        grid_board.setRowCount(mRow);
+        grid_board.getLayoutParams().width = mTileSize * mColumn;
+        grid_board.getLayoutParams().height = mTileSize * mRow;
 
         //Implement blocks
-        for (int x = 0; x < board_char.length; x++) {
-            ImageView block = new ImageView(context);
-            block.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
-            switch (board_char[x]) {
+        int size = board_char.length;
+        for (int i = 0; i < size; i++) {
+            ImageView block = new ImageView(mActivity);
+            block.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
+            switch (board_char[i]) {
                 case ('n'):
                     block.setBackgroundResource(R.drawable.block);
                     break;
@@ -157,29 +161,37 @@ public class Game {
          *
          */
 
+        // Implement tiles
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn; j++) {
+                tileArray[i][j] = new Tile(mGameEngine);
+                fruit_board.addView(tileArray[i][j].mImage);
+            }
+        }
+
         //Set fruit board
-        char[][] fruit_char = new char[row][column];
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                char type = mLevel.fruit.charAt(j + i * column);
+        char[][] fruit_char = new char[mRow][mColumn];
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn; j++) {
+                char type = mLevel.fruit.charAt(j + i * mColumn);
                 fruit_char[i][j] = type;
             }
         }
 
         //Create fruit board
-        fruit_board.setColumnCount(column);
-        fruit_board.setRowCount(row);
-        fruit_board.getLayoutParams().width = tileSize * column;
-        fruit_board.getLayoutParams().height = tileSize * row;
+        fruit_board.setColumnCount(mColumn);
+        fruit_board.setRowCount(mRow);
+        fruit_board.getLayoutParams().width = mTileSize * mColumn;
+        fruit_board.getLayoutParams().height = mTileSize * mRow;
 
         //Set tile's parameter
-        for (int j = 0; j < column; j++) {
-            for (int i = row - 1; i >= 0; i--) {
+        for (int j = 0; j < mColumn; j++) {
+            for (int i = mRow - 1; i >= 0; i--) {
 
                 tileArray[i][j].row = i;
                 tileArray[i][j].col = j;
-                tileArray[i][j].x = j * tileSize;
-                tileArray[i][j].y = i * tileSize;
+                tileArray[i][j].x = j * mTileSize;
+                tileArray[i][j].y = i * mTileSize;
 
                 //Set fruit kind
                 switch (fruit_char[i][j]) {
@@ -200,7 +212,7 @@ public class Game {
                     case ('i'):
                         tileArray[i][j].special = true;
                         tileArray[i][j].direct = 'I';
-                        tileArray[i][j].kind = TileID.ICE_CREAM;
+                        tileArray[i][j].kind = TileUtils.ICE_CREAM;
                         continue;
                     case ('e'):
                         tileArray[i][j].empty = true;
@@ -218,34 +230,34 @@ public class Game {
                         tileArray[i][j].kind = R.drawable.lemon;
                         continue;
                     case ('x'):
-                        tileArray[i][j].kind = TileID.STAR_FISH;
+                        tileArray[i][j].kind = TileUtils.STAR_FISH;
                         continue;
                     case ('w'):
                         tileArray[i][j].wait = 2;
                         continue;
                     case ('c'):
-                        tileArray[i][j].kind = TileID.CRACKER;
+                        tileArray[i][j].kind = TileUtils.CRACKER;
                         tileArray[i][j].breakable = true;
                         continue;
                     case ('o'):
-                        tileArray[i][j].kind = TileID.COOKIE;
+                        tileArray[i][j].kind = TileUtils.COOKIE;
                         tileArray[i][j].invalid = true;
                         tileArray[i][j].breakable = true;
                         continue;
                     case ('O'):
-                        tileArray[i][j].kind = TileID.COOKIE;
+                        tileArray[i][j].kind = TileUtils.COOKIE;
                         tileArray[i][j].invalid = true;
                         tileArray[i][j].layer = 1;
                         tileArray[i][j].breakable = true;
                         continue;
                     case ('q'):
-                        tileArray[i][j].kind = TileID.COOKIE;
+                        tileArray[i][j].kind = TileUtils.COOKIE;
                         tileArray[i][j].invalid = true;
                         tileArray[i][j].layer = 2;
                         tileArray[i][j].breakable = true;
                         continue;
                     case ('Q'):
-                        tileArray[i][j].kind = TileID.COOKIE;
+                        tileArray[i][j].kind = TileUtils.COOKIE;
                         tileArray[i][j].invalid = true;
                         tileArray[i][j].layer = 3;
                         tileArray[i][j].breakable = true;
@@ -257,15 +269,18 @@ public class Game {
                 // Set random fruit
                 do {
                     tileArray[i][j].setRandomFruit();
-                } while ((i < row - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind && tileArray[i + 2][j].kind == tileArray[i][j].kind)
+                } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind && tileArray[i + 2][j].kind == tileArray[i][j].kind)
                         || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind && tileArray[i][j - 2].kind == tileArray[i][j].kind));
             }
         }
 
     }
 
-    public void createIceBoard(GridLayout ice_board, ImageView[][] iceArray,
-                               GridLayout ice_board2, ImageView[][] iceArray2, Tile[][] tileArray) {
+    public void createIceBoard(GridLayout ice_board,
+                               ImageView[][] iceArray,
+                               GridLayout ice_board2,
+                               ImageView[][] iceArray2,
+                               Tile[][] tileArray) {
         /* Explanation:
          *
          * n for no ice (default)
@@ -275,36 +290,36 @@ public class Game {
          */
 
         char[] board_char = mLevel.board.toCharArray();
-        char[][] ice_char = new char[row][column];
+        char[][] ice_char = new char[mRow][mColumn];
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                char type = mLevel.ice.charAt(j + i * column);
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn; j++) {
+                char type = mLevel.ice.charAt(j + i * mColumn);
                 ice_char[i][j] = type;
             }
         }
 
-        ice_board.setColumnCount(column);
-        ice_board.setRowCount(row);
-        ice_board.getLayoutParams().width = tileSize * column;
-        ice_board.getLayoutParams().height = tileSize * row;
-        ice_board2.setColumnCount(column);
-        ice_board2.setRowCount(row);
-        ice_board2.getLayoutParams().width = tileSize * column;
-        ice_board2.getLayoutParams().height = tileSize * row;
+        ice_board.setColumnCount(mColumn);
+        ice_board.setRowCount(mRow);
+        ice_board.getLayoutParams().width = mTileSize * mColumn;
+        ice_board.getLayoutParams().height = mTileSize * mRow;
+        ice_board2.setColumnCount(mColumn);
+        ice_board2.setRowCount(mRow);
+        ice_board2.getLayoutParams().width = mTileSize * mColumn;
+        ice_board2.getLayoutParams().height = mTileSize * mRow;
 
 
         //Set ice image
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn; j++) {
 
                 //First layer
-                ImageView ice = new ImageView(context);
-                ice.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                ImageView ice = new ImageView(mActivity);
+                ice.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
 
                 //Second layer
-                ImageView ice2 = new ImageView(context);
-                ice2.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                ImageView ice2 = new ImageView(mActivity);
+                ice2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
 
                 if (ice_char[i][j] == 'n') {
                     iceArray[i][j] = ice;
@@ -317,7 +332,7 @@ public class Game {
                 // Set ice
                 tileArray[i][j].ice++;
                 // Set image according to board
-                switch (board_char[i * column + j]) {
+                switch (board_char[i * mColumn + j]) {
                     case ('n'):
                         ice.setBackgroundResource(R.drawable.ice);
                         break;
@@ -384,7 +399,7 @@ public class Game {
                     // Set ice
                     tileArray[i][j].ice++;
                     // Set image according to board
-                    switch (board_char[i * column + j]) {
+                    switch (board_char[i * mColumn + j]) {
                         case ('n'):
                             ice2.setBackgroundResource(R.drawable.ice2);
                             break;
@@ -459,7 +474,9 @@ public class Game {
 
     }
 
-    public void createAdvanceBoard(GridLayout advance_board, ImageView[][] advanceArray, Tile[][] tileArray) {
+    public void createAdvanceBoard(GridLayout advance_board,
+                                   ImageView[][] advanceArray,
+                                   Tile[][] tileArray) {
         /* Explanation:
          *
          * n for normal (default)
@@ -476,29 +493,29 @@ public class Game {
          */
 
         char[] board_char = mLevel.board.toCharArray();
-        char[][] advance_char = new char[row + 2][column];
-        for (int i = 0; i < row + 2; i++) {
-            for (int j = 0; j < column; j++) {
-                char type = mLevel.advance.charAt(j + i * column);
+        char[][] advance_char = new char[mRow + 2][mColumn];
+        for (int i = 0; i < mRow + 2; i++) {
+            for (int j = 0; j < mColumn; j++) {
+                char type = mLevel.advance.charAt(j + i * mColumn);
                 advance_char[i][j] = type;
             }
         }
 
         //Arrow animation
-        final Animation arrow_anim = AnimationUtils.loadAnimation(context, R.anim.arrow_animation);
+        final Animation arrow_anim = AnimationUtils.loadAnimation(mActivity, R.anim.arrow_animation);
 
         //Create advance board
-        advance_board.setColumnCount(column);
-        advance_board.setRowCount(row + 2);
-        advance_board.getLayoutParams().width = tileSize * column;
-        advance_board.getLayoutParams().height = tileSize * (row + 2);
+        advance_board.setColumnCount(mColumn);
+        advance_board.setRowCount(mRow + 2);
+        advance_board.getLayoutParams().width = mTileSize * mColumn;
+        advance_board.getLayoutParams().height = mTileSize * (mRow + 2);
 
         //Set advance image
-        for (int i = 0; i < row + 2; i++) {
-            for (int j = 0; j < column; j++) {
+        for (int i = 0; i < mRow + 2; i++) {
+            for (int j = 0; j < mColumn; j++) {
                 //First layer
-                ImageView advance = new ImageView(context);
-                advance.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                ImageView advance = new ImageView(mActivity);
+                advance.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
 
                 // Set Advance
                 switch (advance_char[i][j]) {
@@ -520,7 +537,7 @@ public class Game {
                         advance.setBackgroundResource(R.drawable.arrow);
                         advance.setAlpha(0.5f);
                         advance.startAnimation(arrow_anim);
-                        advance.animate().translationY((float) -tileSize / 2);
+                        advance.animate().translationY((float) -mTileSize / 2);
                         advance_board.addView(advance);
                         break;
                     case ('I'):
@@ -531,15 +548,15 @@ public class Game {
                     case ('H'):
                         advance.setBackgroundResource(R.drawable.handler);
                         advanceArray[i][j] = advance;
-                        RelativeLayout machine_h = new RelativeLayout(context);
-                        machine_h.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        RelativeLayout machine_h = new RelativeLayout(mActivity);
+                        machine_h.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
                         machine_h.setBackgroundResource(R.drawable.machine_cherry_h);
                         machine_h.addView(advance);
                         advance_board.addView(machine_h);
-                        machine_h.animate().translationY((float) tileSize / 4);
+                        machine_h.animate().translationY((float) mTileSize / 4);
 
-                        // Add machine to whole column
-                        for (int x = 1; x <= row; x++) {
+                        // Add machine to whole mColumn
+                        for (int x = 1; x <= mRow; x++) {
                             if (!tileArray[i - 1][j].empty)
                                 tileArray[i - 1][j].machine = 'H';
                         }
@@ -547,15 +564,15 @@ public class Game {
                     case ('V'):
                         advance.setBackgroundResource(R.drawable.handler);
                         advanceArray[i][j] = advance;
-                        RelativeLayout machine_v = new RelativeLayout(context);
-                        machine_v.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        RelativeLayout machine_v = new RelativeLayout(mActivity);
+                        machine_v.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
                         machine_v.setBackgroundResource(R.drawable.machine_cherry_v);
                         machine_v.addView(advance);
                         advance_board.addView(machine_v);
-                        machine_v.animate().translationY((float) tileSize / 4);
+                        machine_v.animate().translationY((float) mTileSize / 4);
 
-                        // Add machine to whole column
-                        for (int x = 1; x <= row; x++) {
+                        // Add machine to whole mColumn
+                        for (int x = 1; x <= mRow; x++) {
                             if (!tileArray[i - 1][j].empty)
                                 tileArray[i - 1][j].machine = 'V';
                         }
@@ -563,15 +580,15 @@ public class Game {
                     case ('S'):
                         advance.setBackgroundResource(R.drawable.handler);
                         advanceArray[i][j] = advance;
-                        RelativeLayout machine_s = new RelativeLayout(context);
-                        machine_s.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        RelativeLayout machine_s = new RelativeLayout(mActivity);
+                        machine_s.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
                         machine_s.setBackgroundResource(R.drawable.machine_strawberry);
                         machine_s.addView(advance);
                         advance_board.addView(machine_s);
-                        machine_s.animate().translationY((float) tileSize / 4);
+                        machine_s.animate().translationY((float) mTileSize / 4);
 
-                        // Add machine to whole column
-                        for (int x = 1; x <= row; x++) {
+                        // Add machine to whole mColumn
+                        for (int x = 1; x <= mRow; x++) {
                             if (!tileArray[i - 1][j].empty)
                                 tileArray[i - 1][j].machine = 'S';
                         }
@@ -579,15 +596,15 @@ public class Game {
                     case ('O'):
                         advance.setBackgroundResource(R.drawable.handler);
                         advanceArray[i][j] = advance;
-                        RelativeLayout machine_o = new RelativeLayout(context);
-                        machine_o.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        RelativeLayout machine_o = new RelativeLayout(mActivity);
+                        machine_o.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
                         machine_o.setBackgroundResource(R.drawable.machine_icecream);
                         machine_o.addView(advance);
                         advance_board.addView(machine_o);
-                        machine_o.animate().translationY((float) tileSize / 4);
+                        machine_o.animate().translationY((float) mTileSize / 4);
 
-                        // Add machine to whole column
-                        for (int x = 1; x <= row; x++) {
+                        // Add machine to whole mColumn
+                        for (int x = 1; x <= mRow; x++) {
                             if (!tileArray[i - 1][j].empty)
                                 tileArray[i - 1][j].machine = 'O';
                         }
@@ -595,15 +612,15 @@ public class Game {
                     case ('X'):
                         advance.setBackgroundResource(R.drawable.handler);
                         advanceArray[i][j] = advance;
-                        RelativeLayout machine_x = new RelativeLayout(context);
-                        machine_x.setLayoutParams(new ViewGroup.LayoutParams(tileSize, tileSize));
+                        RelativeLayout machine_x = new RelativeLayout(mActivity);
+                        machine_x.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
                         machine_x.setBackgroundResource(R.drawable.machine_star);
                         machine_x.addView(advance);
                         advance_board.addView(machine_x);
-                        machine_x.animate().translationY((float) tileSize / 4);
+                        machine_x.animate().translationY((float) mTileSize / 4);
 
-                        // Add machine to whole column
-                        for (int x = 1; x <= row; x++) {
+                        // Add machine to whole mColumn
+                        for (int x = 1; x <= mRow; x++) {
                             if (!tileArray[i - 1][j].empty)
                                 tileArray[i - 1][j].machine = 'X';
                         }

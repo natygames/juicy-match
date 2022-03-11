@@ -1,4 +1,4 @@
-package com.example.matchgamesample.state;
+package com.example.matchgamesample.game.state;
 
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.Tile;
@@ -10,23 +10,15 @@ public class ScoreGameState extends GameState {
     public ScoreGameState(GameEngine gameEngine) {
         super(gameEngine);
         mPoint = 0;
-        mTarget = gameEngine.mLevel.target.get(0);
+        mTarget = gameEngine.mLevel.mTarget.get(0);
     }
 
     @Override
     public boolean isPlayerWin() {
         if (mPoint >= mTarget) {
-            return true;
+            mPlayerWin = true;
         }
-        return false;
-    }
-
-    @Override
-    public boolean isPlayerLoss() {
-        if (mGameEngine.mLevel.move == 0 && mPoint < mTarget) {
-            return true;
-        }
-        return false;
+        return mPlayerWin;
     }
 
     @Override

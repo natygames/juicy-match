@@ -12,37 +12,39 @@
     <level2>
         <target_type>2</target_type>
         <move>20</move>
-        <column>7</column>
-        <row>9</row>
+        <column>8</column>
+        <row>8</row>
+        <target>24</target>
         <target>20</target>
-        <target>20</target>
-        <target>20</target>
-        <collect>strawberry</collect>
+        <target>10</target>
+        <collect>cracker</collect>
         <collect>cherry</collect>
-        <collect>lemon</collect>
-        <board>eqweqweqnnunnwlnnnnnrannnnnselnnnreqnnnnnwlnnnnnranndnnseasease</board>
-        <fruit>ennennennnnnnnnnnnnnnnnnnnnnennnnnennnnnnnnnnnnnnnnnnnnnennenne</fruit>
+        <collect>strawberry</collect>
+        <board>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</board>
+        <fruit>eecnnceeeccnnccecccnncccnnnnnnnnnnnnnnnncccnnccceccnncceeecnncee</fruit>
     </level2>
     <level3>
         <target_type>3</target_type>
-        <move>12</move>
-        <column>6</column>
-        <row>8</row>
-        <target>20</target>
+        <move>30</move>
+        <column>7</column>
+        <row>9</row>
+        <target>49</target>
+        <target>22</target>
         <collect>ice</collect>
-        <board>quuuuwlnnnnrlnnnnrlnnnnrlnnnnrlnnnnrlnnnnradddds</board>
-        <fruit>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</fruit>
-          <ice>nnnnnnniiiinniiiinniiiinniiiinniiiinnnnnnnnnnnnn</ice>
+        <collect>cookie</collect>
+        <board>eequweeeelnreeeqnnnweelnnnreelnnnreqnnnnnwlnnnnnrlnnnnnraddddds</board>
+        <fruit>eezZzeeeeZzZeeeooZooeewoZoweewoooweowwwwwoowwwwwoowwwwwoooooooo</fruit>
+        <ice>nniiinnnniiinnniiiiinniiiiinniiiiiniiiiiiiiiiiiiiiiiiiiiiiiiiii</ice>
     </level3>
     <level4>
         <target_type>4</target_type>
-        <move>20</move>
-        <column>7</column>
+        <move>30</move>
+        <column>8</column>
         <row>9</row>
-        <target>3</target>
+        <target>4</target>
         <collect>starfish</collect>
-        <board>UequweUvelnrevvelnrevlunnnurlnnnnnrlnnnnnrlnnnnnrannnnnseadddse</board>
-        <fruit>xenxnexnennnennennnennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnennnnne</fruit>
-        <ad>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnAnnnnnAnAAAAAn</ad>
+        <board>eqweeqweqnnuunnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeannseeeeeaseee</board>
+        <fruit>exxeexxennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnwnnnnnnwewnnnnweeewwwweeeeewweee</fruit>
+        <ad>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnxxnnnnxxnxxnnxxnAnxxxxnAnAnnnnAnnnAnnAnnnnnAAnnn</ad>
     </level4>
 </levels>

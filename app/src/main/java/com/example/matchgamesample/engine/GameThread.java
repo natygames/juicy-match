@@ -1,13 +1,14 @@
 package com.example.matchgamesample.engine;
 
 import android.os.Handler;
+import android.os.Looper;
 
 public class GameThread extends Thread {
     protected final GameEngine mGameEngine;
     private final Object mLock = new Object();
     public volatile boolean mIsGameRunning;
     public volatile boolean mIsGamePause;
-    private final Handler mHandle = new Handler();
+    private final Handler mHandle = new Handler(Looper.getMainLooper());
 
     public GameThread(GameEngine gameEngine) {
         mGameEngine = gameEngine;
@@ -25,7 +26,7 @@ public class GameThread extends Thread {
         });
 
         try {
-            Thread.sleep(10);
+            Thread.sleep(20);
         } catch (InterruptedException e) {
             // We stay on the loop
         }

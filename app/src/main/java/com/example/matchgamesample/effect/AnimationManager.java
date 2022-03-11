@@ -43,8 +43,8 @@ public class AnimationManager {
         mTileSize = gameEngine.mImageSize;
 
         mEffect_board = gameEngine.mActivity.findViewById(R.id.effect_board);
-        mEffect_board.getLayoutParams().width = mTileSize * gameEngine.mLevel.column;
-        mEffect_board.getLayoutParams().height = mTileSize * gameEngine.mLevel.row;
+        mEffect_board.getLayoutParams().width = mTileSize * gameEngine.mLevel.mColumn;
+        mEffect_board.getLayoutParams().height = mTileSize * gameEngine.mLevel.mRow;
 
         explosion = Explosion.attach2Window(gameEngine.mActivity);
         shaking_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_animation);
@@ -978,7 +978,7 @@ public class AnimationManager {
 
     //This create score effect when tile match
     public void createScore(Tile tile) {
-        //Get position (in case it move)
+        //Get position (in case it mMove)
         int positX = tile.x;
         int positY = tile.y;
 
@@ -1253,6 +1253,10 @@ public class AnimationManager {
     public void explodeCracker(Tile tile) {
         //Add explode
         createExplodeBackground(tile, 1);
+
+        int positX = tile.x;
+        int positY = tile.y;
+
         //Add sparkler
         createSparkler(tile, 4, 0.7f, 0.2f, 750);
         //Add frag
@@ -1269,18 +1273,18 @@ public class AnimationManager {
         ImageView frag6 = new ImageView(mActivity);
         frag6.setImageResource(R.drawable.cracker_frag6);
         //Set location
-        frag1.setX(tile.x - mTileSize);
-        frag1.setY(tile.y - mTileSize);
-        frag2.setX(tile.x - mTileSize);
-        frag2.setY(tile.y - mTileSize);
-        frag3.setX(tile.x - mTileSize);
-        frag3.setY(tile.y - mTileSize);
-        frag4.setX(tile.x - mTileSize);
-        frag4.setY(tile.y - mTileSize);
-        frag5.setX(tile.x - mTileSize);
-        frag5.setY(tile.y - mTileSize);
-        frag6.setX(tile.x - mTileSize);
-        frag6.setY(tile.y - mTileSize);
+        frag1.setX(positX);
+        frag1.setY(positY);
+        frag2.setX(positX);
+        frag2.setY(positY);
+        frag3.setX(positX);
+        frag3.setY(positY);
+        frag4.setX(positX);
+        frag4.setY(positY);
+        frag5.setX(positX);
+        frag5.setY(positY);
+        frag6.setX(positX);
+        frag6.setY(positY);
         //Set size
         frag1.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
         frag2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
@@ -1296,43 +1300,59 @@ public class AnimationManager {
         mEffect_board.addView(frag5);
         mEffect_board.addView(frag6);
         //Add animation
-        frag1.animate().setDuration(200 + (int) (Math.random() * 4) * 100).x((float) (tile.x - mTileSize - mTileSize / 3)).y((float) (tile.y - mTileSize - mTileSize / 3))
-                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f).setListener(new AnimatorListenerAdapter() {
+        frag1.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
+                .x((float) (positX - mTileSize / 3))
+                .y((float) (positY - mTileSize / 3))
+                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mEffect_board.removeView(frag1);
             }
         });
-        frag2.animate().setDuration(200 + (int) (Math.random() * 4) * 100).y((float) (tile.y - mTileSize - mTileSize / 3))
-                .rotation(Math.random() > 0.5 ? -30 : 30).scaleX(0.7f).scaleY(0.7f).alpha(0.3f).setListener(new AnimatorListenerAdapter() {
+        frag2.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
+                .y((float) (positY - mTileSize / 3))
+                .rotation(Math.random() > 0.5 ? -30 : 30).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mEffect_board.removeView(frag2);
             }
         });
-        frag3.animate().setDuration(200 + (int) (Math.random() * 4) * 100).x((float) (tile.x - mTileSize + mTileSize / 3)).y((float) (tile.y - mTileSize - mTileSize / 3))
-                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f).setListener(new AnimatorListenerAdapter() {
+        frag3.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
+                .x((float) (positX + mTileSize / 3))
+                .y((float) (positY - mTileSize / 3))
+                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mEffect_board.removeView(frag3);
             }
         });
-        frag4.animate().setDuration(200 + (int) (Math.random() * 4) * 100).x((float) (tile.x - mTileSize - mTileSize / 3)).y((float) (tile.y - mTileSize + mTileSize / 3))
-                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f).setListener(new AnimatorListenerAdapter() {
+        frag4.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
+                .x((float) (positX - mTileSize / 3))
+                .y((float) (positY + mTileSize / 3))
+                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mEffect_board.removeView(frag4);
             }
         });
-        frag5.animate().setDuration(200 + (int) (Math.random() * 4) * 100).y((float) (tile.y - mTileSize + mTileSize / 3))
-                .rotation(Math.random() > 0.5 ? -30 : 30).scaleX(0.7f).scaleY(0.7f).alpha(0.3f).setListener(new AnimatorListenerAdapter() {
+        frag5.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
+                .y((float) (positY + mTileSize / 3))
+                .rotation(Math.random() > 0.5 ? -30 : 30).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mEffect_board.removeView(frag5);
             }
         });
-        frag6.animate().setDuration(200 + (int) (Math.random() * 4) * 100).x((float) (tile.x - mTileSize + mTileSize / 3)).y((float) (tile.y - mTileSize + mTileSize / 3))
-                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f).setListener(new AnimatorListenerAdapter() {
+        frag6.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
+                .x((float) (positX + mTileSize / 3))
+                .y((float) (positY + mTileSize / 3))
+                .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 mEffect_board.removeView(frag6);
@@ -1341,8 +1361,8 @@ public class AnimationManager {
     }
 
     public void explodeCookie(Tile tile) {
-        int positX = tile.x - mTileSize;
-        int positY = tile.y - mTileSize;
+        int positX = tile.x;
+        int positY = tile.y;
 
         //Add frag
         ImageView frag1 = new ImageView(mActivity);
@@ -1474,8 +1494,8 @@ public class AnimationManager {
     public void explodeLock(ImageView lock, Tile tile) {
         lock.animate().setDuration(100).scaleX(0).scaleY(0);
 
-        int positX = tile.x - mTileSize;
-        int positY = tile.y - mTileSize;
+        int positX = tile.x;
+        int positY = tile.y;
 
         //Add frag
         ImageView frag1 = new ImageView(mActivity);
@@ -1512,17 +1532,20 @@ public class AnimationManager {
         mEffect_board.addView(frag4);
         mEffect_board.addView(frag5);
         //Add animation
-        frag1.animate().setDuration(200).rotation(-90).x((float) (positX - mTileSize / 4)).y((float) (positY - mTileSize * (0.8 + Math.random() * 0.6)))
+        frag1.animate().setDuration(200).rotation(-90).x((float) (positX - mTileSize / 4))
+                .y((float) (positY - mTileSize * (0.8 + Math.random() * 0.6)))
                 .setInterpolator(decelerateInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                frag1.animate().setDuration(350 + (int) (Math.random() * 3) * 100).x((float) (positX - mTileSize / 2)).y((float) (positY + mTileSize * 3))
-                        .scaleX(0.7f).scaleY(0.7f).alpha(0).setInterpolator(accelerateInterpolator).setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mEffect_board.removeView(frag1);
-                    }
-                });
+                frag1.animate().setDuration(350 + (int) (Math.random() * 3) * 100)
+                        .x((float) (positX - mTileSize / 2)).y((float) (positY + mTileSize * 3))
+                        .scaleX(0.7f).scaleY(0.7f).alpha(0).setInterpolator(accelerateInterpolator)
+                        .setListener(new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                mEffect_board.removeView(frag1);
+                            }
+                        });
             }
         });
         frag2.animate().setDuration(200).rotation(-45).y((float) (positY - mTileSize * (0.8 + Math.random() * 0.6)))

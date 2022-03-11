@@ -1,4 +1,4 @@
-package com.example.matchgamesample.counter;
+package com.example.matchgamesample.game.counter;
 
 import android.view.View;
 import android.widget.TextView;

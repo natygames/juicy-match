@@ -1,4 +1,4 @@
-package com.example.matchgamesample.counter;
+package com.example.matchgamesample.game.counter;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -10,8 +10,9 @@ import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
-import com.example.matchgamesample.game.TileID;
+import com.example.matchgamesample.game.TileUtils;
 import com.example.matchgamesample.level.Level;
+import com.example.matchgamesample.level.LevelType;
 
 import java.util.ArrayList;
 
@@ -23,20 +24,20 @@ public class TargetCounter extends GameObject {
 
     public TargetCounter(View view, GameEngine gameEngine) {
         mLevel = gameEngine.mLevel;
-        if (gameEngine.mLevel.targetType == 1) {
+        if (gameEngine.mLevel.mLevelType == LevelType.LEVEL_TYPE_SCORE) {
             mText.add(view.findViewById(R.id.target_score));
         } else {
-            setTargetImages(gameEngine.mLevel.target.size(), view);
+            setTargetImages(gameEngine.mLevel.mTarget.size(), view);
         }
 
     }
 
-    private void setTargetImages(int target, View view) {
+    private void setTargetImages(int targetNum, View view) {
         final ArrayList<ImageView> mTargetsImage = new ArrayList<>();
 
         ConstraintLayout board_target = (ConstraintLayout) view.findViewById(R.id.board_target);
 
-        switch (target) {
+        switch (targetNum) {
             case 1:
                 mText.add(view.findViewById(R.id.target_txt_center));
                 mTargetsImage.add(view.findViewById(R.id.target_image_center));
@@ -60,18 +61,18 @@ public class TargetCounter extends GameObject {
                 break;
         }
 
-        // Set target image
+        // Set mTarget image
         int imgSize = mTargetsImage.size();
         for (int i = 0; i < imgSize; i++) {
 
-            int id = mLevel.collect.get(i);
+            int id = mLevel.mCollect.get(i);
             mTargetsImage.get(i).setBackgroundResource(id);
             mTargetsImage.get(i).setVisibility(View.VISIBLE);
 
             // Set scale
             if (id == R.drawable.striped_ball
                     || id == R.drawable.ice
-                    || id == TileID.COOKIE) {
+                    || id == TileUtils.COOKIE) {
                 mTargetsImage.get(i).setScaleX(0.8f);
                 mTargetsImage.get(i).setScaleY(0.8f);
             }
@@ -82,10 +83,10 @@ public class TargetCounter extends GameObject {
 
     @Override
     public void startGame() {
-        // Init target text
+        // Init mTarget text
         int txtSize = mText.size();
         for (int i = 0; i < txtSize; i++) {
-            mText.get(i).setText(String.valueOf(mLevel.target.get(i)));
+            mText.get(i).setText(String.valueOf(mLevel.mTarget.get(i)));
             mText.get(i).setVisibility(View.VISIBLE);
         }
     }
@@ -98,10 +99,10 @@ public class TargetCounter extends GameObject {
     @Override
     public void onDraw() {
         if (mTargetsHaveChanged) {
-            // Update target text
+            // Update mTarget text
             int txtSize = mText.size();
             for (int i = 0; i < txtSize; i++) {
-                mText.get(i).setText(String.valueOf(mLevel.target.get(i)));
+                mText.get(i).setText(String.valueOf(mLevel.mTarget.get(i)));
             }
             mTargetsHaveChanged = false;
         }
