@@ -23,17 +23,17 @@ public class MyAlgorithm {
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
-    public boolean isSwap = false, isSwapBack = false, isMoving = false;
-    public char direction = 'N';
     public int swapCol, swapRow, swapCol2, swapRow2;
-    private int isWait = 1;
+    public boolean isSwap = false, isMoving = false;
     private boolean matchFinding = false, waitFinding = false;
-    // Tile's moving SPEED
-    private int SPEED = 30;
-    private int WAIT_TIME = 300;
+    // Tile's moving control
+    private static final int WAITING_TIME = 300;
+    private int mWaitingTime = 0;
+    public boolean mMoveTile = false;
+
+    // Tile's other state
     private boolean isTransf = false;
     private int combo = 0;
-    private boolean isWin = false, isTransitState = false;
     //==================================================================================
     private GameState mGameState;
     private final AnimationManager animationManager;
@@ -76,7 +76,7 @@ public class MyAlgorithm {
         this.advanceArray = advanceArray;
     }
 
-    public void update(Tile[][] tileArray) {
+    public void update(Tile[][] tileArray, long elapsedMillis) {
 
         // Do nothing when waiting event
         if (isTransf)
@@ -89,52 +89,15 @@ public class MyAlgorithm {
         }
 
         // 2. Moving
-        isMoving = false;
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                int diff_x = 0, diff_y = 0;
-                for (int n = 0; n < SPEED; n++) {
-                    diff_x = tileArray[i][j].x - tileArray[i][j].col * tileSize;
-                    diff_y = tileArray[i][j].y - tileArray[i][j].row * tileSize;
-                    if (diff_x != 0) {
-                        if (isWait == 3) {
-                            // Check diagonal swapping position
-                            if (tileArray[i][j].y >= tileArray[i][j].diagonal * tileSize)
-                                //Go left or right
-                                tileArray[i][j].x -= diff_x / Math.abs(diff_x);
-                        }
-                    } else {
-                        tileArray[i][j].diagonal = 0;
-                    }
-                    if (diff_y != 0) {
-                        if (diff_y < 0) {
-                            if (isWait == 3) {
-                                //Measure dropping distance
-                                if (tileArray[i][j].bounce == 0) {
-                                    if (diff_y <= -tileSize * 4) {
-                                        tileArray[i][j].bounce = 2;
-                                    } else {
-                                        tileArray[i][j].bounce = 1;
-                                    }
-                                }
-                                //Go down
-                                tileArray[i][j].y -= diff_y / Math.abs(diff_y);
-                                //Set bounce when stop falling
-                                if (tileArray[i][j].y == tileArray[i][j].row * tileSize) {
-                                    if (!isSwap && !isSwapBack) {
-                                        if (tileArray[i][j].bounce == 1) {
-                                            animationManager.createLightBounceAnim(tileArray[i][j].mImage);
-                                        } else {
-                                            animationManager.createHeavyBounceAnim(tileArray[i][j].mImage);
-                                        }
-                                        tileArray[i][j].bounce = 0;
-                                    }
-                                }
-                            }
-                        } else {
-                            //Go up
-                            tileArray[i][j].y -= diff_y / Math.abs(diff_y);
-                        }
+        if (mMoveTile) {
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < column; j++) {
+                    tileArray[i][j].onUpdate(elapsedMillis);
+                    // Start bouncing animation
+                    if(tileArray[i][j].bounce == 1){
+                        animationManager.createLightBounceAnim(tileArray[i][j].mImage);
+                    } else if(tileArray[i][j].bounce == 2){
+                        animationManager.createHeavyBounceAnim(tileArray[i][j].mImage);
                     }
                 }
             }
@@ -142,29 +105,24 @@ public class MyAlgorithm {
 
         updateMove(tileArray);
 
-        if (!isMoving)
-            isSwapBack = false;
-
         // 3. Fruit wait
         if (!isMoving && !waitFinding) {
-            isWait = 1;
+            mMoveTile = false;
         } else {
             //Check is player swapping
-            if (!isSwap && !isSwapBack) {
-                if (isWait == 1) {
-                    tileWait();
-                    isWait = 2;
+            if (!mMoveTile) {
+                mWaitingTime += elapsedMillis;
+                if (mWaitingTime > WAITING_TIME) {
+                    mMoveTile = true;
+                    mWaitingTime = 0;
                 }
-            } else {
-                //Player is swapping
-                isWait = 3;
             }
         }
 
         updateMatch(tileArray);
 
         //Check combo
-        if (!isMoving && !isWin) {
+        if (!isMoving) {
             if (matchFinding) {
                 combo++;
             } else {
@@ -178,7 +136,8 @@ public class MyAlgorithm {
                             mGameEngine.onGameEvent(GameEvent.COMBO_6);
                         }
 
-                        guideWait();
+                        combo = 0;
+                        return;
                     }
                     combo = 0;
                 }
@@ -189,30 +148,8 @@ public class MyAlgorithm {
         if (isSwap && !isMoving) {
             if (!matchFinding) {
                 // Player make an invalid swap
-                switch (direction) {
-                    case 'U':
-                        swapRow2 = swapRow - 1;
-                        swapCol2 = swapCol;
-                        swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow2][swapCol2]);
-                        break;
-                    case 'D':
-                        swapRow2 = swapRow + 1;
-                        swapCol2 = swapCol;
-                        swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow2][swapCol2]);
-                        break;
-                    case 'L':
-                        swapRow2 = swapRow;
-                        swapCol2 = swapCol - 1;
-                        swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow2][swapCol2]);
-                        break;
-                    case 'R':
-                        swapRow2 = swapRow;
-                        swapCol2 = swapCol + 1;
-                        swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow2][swapCol2]);
-                        break;
-                }
-                direction = 'N';
-                isSwapBack = true;
+                swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow2][swapCol2]);
+                mMoveTile = true;
             } else {
                 // Player make valid swap
                 mGameEngine.onGameEvent(GameEvent.PLAYER_SWAP);
@@ -467,7 +404,7 @@ public class MyAlgorithm {
                                 //Check is right or left be chosen
                                 if ((i == swapRow && j + 1 == swapCol) || (i == swapRow2 && j + 1 == swapCol2)) {
                                     //If tile is already special, do not add
-                                    if (!tileArray[i][j + 1].special && !tileArray[i][j + 1].isUpgrade) {
+                                    if (tileArray[i][j + 1].direct == 'N' && !tileArray[i][j + 1].isUpgrade) {
                                         //Add upgrade animation
                                         animationManager.upgrade2H_left(tileArray[i][j + 1]);
                                         tileArray[i][j].isUpgrade = true;
@@ -478,7 +415,7 @@ public class MyAlgorithm {
                                     }
                                 } else {
                                     //If tile is already special, do not add
-                                    if (!tileArray[i][j + 2].special && !tileArray[i][j + 2].isUpgrade) {
+                                    if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
                                         //Add upgrade animation
                                         animationManager.upgrade2H_right(tileArray[i][j + 2]);
                                         tileArray[i][j].isUpgrade = true;
@@ -517,9 +454,10 @@ public class MyAlgorithm {
                                 tileArray[i + 2][j].kind = TileUtils.ICE_CREAM;
                             } else {
                                 //Check is top or bottom be chosen
-                                if ((i + 1 == swapRow && j == swapCol) || (i + 1 == swapRow2 && j == swapCol2)) {
+                                if ((i + 1 == swapRow && j == swapCol)
+                                        || (i + 1 == swapRow2 && j == swapCol2)) {
                                     //If tile is already special, do not add
-                                    if (!tileArray[i + 1][j].special && !tileArray[i + 1][j].isUpgrade) {
+                                    if (tileArray[i + 1][j].direct == 'N' && !tileArray[i + 1][j].isUpgrade) {
                                         //Add upgrade animation
                                         animationManager.upgrade2V_top(tileArray[i + 1][j]);
                                         tileArray[i][j].isUpgrade = true;
@@ -530,7 +468,7 @@ public class MyAlgorithm {
                                     }
                                 } else {
                                     //If tile is already special, do not add
-                                    if (!tileArray[i + 2][j].special && !tileArray[i + 2][j].isUpgrade) {
+                                    if (tileArray[i + 2][j].direct == 'N' && !tileArray[i + 2][j].isUpgrade) {
                                         //Add upgrade animation
                                         animationManager.upgrade2V_bottom(tileArray[i + 2][j]);
                                         tileArray[i][j].isUpgrade = true;
@@ -604,15 +542,17 @@ public class MyAlgorithm {
             }
 
             // (5.6) Update game state
-            if (mGameState.isPlayerWin()) {
-                if (!matchFinding && !waitFinding && !isTransitState && !isWin) {
+            if (mGameState.isPlayerReachTarget()) {
+                if (!matchFinding && !waitFinding) {
                     playerWin();
+                    return;
                 }
             }
 
-            if (mGameState.isPlayerLoss()) {
-                if (!matchFinding && !waitFinding && !isTransf && !isTransitState && !isWin) {
+            if (mGameState.isPlayerOutOfMove()) {
+                if (!matchFinding && !waitFinding && !isTransf) {
                     playerLoss();
+                    return;
                 }
             }
 
@@ -622,7 +562,7 @@ public class MyAlgorithm {
             for (int j = 0; j < column; j++) {
                 for (int i = 0; i < row; i++) {
                     if (tileArray[i][j].match != 0 && tileArray[i][j].isFruit()) {
-                        mGameEngine.onGameEvent(GameEvent.SCORE);
+                        mGameEngine.onGameEvent(GameEvent.PLAYER_SCORE);
                     }
                 }
             }
@@ -718,12 +658,11 @@ public class MyAlgorithm {
     }
 
     private void playerWin() {
-        isWin = true;
-        mGameEngine.onGameEvent(GameEvent.PLAYER_WIN);
+        mGameEngine.onGameEvent(GameEvent.PLAYER_REACH_TARGET);
     }
 
     private void playerLoss() {
-        mGameEngine.onGameEvent(GameEvent.PLAYER_LOSS);
+        mGameEngine.onGameEvent(GameEvent.PLAYER_OUT_OF_MOVE);
     }
 
     //----------------------------------------------------------------------------------
@@ -917,8 +856,50 @@ public class MyAlgorithm {
             }
         }
     }
+
+    private void updateMove(Tile[][] tileArray) {
+        isMoving = false;
+        outer:
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (tileArray[i][j].isMoving()) {
+                    isMoving = true;
+                    break outer;
+                }
+            }
+        }
+    }
+
+    private void updateWait(Tile[][] tileArray) {
+        waitFinding = false;
+        outer:
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (tileArray[i][j].wait == 1) {
+                    waitFinding = true;
+                    break outer;
+                }
+            }
+        }
+    }
+
+    private void updateMatch(Tile[][] tileArray) {
+        matchFinding = false;
+        outer:
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                if (tileArray[i][j].match != 0) {
+                    matchFinding = true;
+                    break outer;
+                }
+            }
+        }
+    }
     //==================================================================================
 
+    //----------------------------------------------------------------------------------
+    // Method control swap
+    //----------------------------------------------------------------------------------
     public void swap(Tile[][] tileArray, Tile tile1, Tile tile2) {
         if (tile1.invalid || tile2.invalid)
             return;
@@ -954,7 +935,7 @@ public class MyAlgorithm {
     }
 
     public boolean canPlayerSwap() {
-        if (isMoving || isTransitState || isWin) {
+        if (isMoving || matchFinding || waitFinding) {
             return false;
         }
         return true;
@@ -1066,65 +1047,11 @@ public class MyAlgorithm {
             tile2.iceCreamTarget = tile1.kind;
         }
     }
+    //==================================================================================
 
-    private void tileWait() {
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isWait = 3;
-            }
-        }, WAIT_TIME);
-    }
-
-    private void guideWait() {
-        isTransitState = true;
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isTransitState = false;
-            }
-        }, 1800);
-    }
-
-    private void updateMove(Tile[][] tileArray) {
-        isMoving = false;
-        outer:
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (tileArray[i][j].isMoving()) {
-                    isMoving = true;
-                    break outer;
-                }
-            }
-        }
-    }
-
-    private void updateWait(Tile[][] tileArray) {
-        waitFinding = false;
-        outer:
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (tileArray[i][j].wait == 1) {
-                    waitFinding = true;
-                    break outer;
-                }
-            }
-        }
-    }
-
-    private void updateMatch(Tile[][] tileArray) {
-        matchFinding = false;
-        outer:
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
-                if (tileArray[i][j].match != 0) {
-                    matchFinding = true;
-                    break outer;
-                }
-            }
-        }
-    }
-
+    //----------------------------------------------------------------------------------
+    // Method of special fruit
+    //----------------------------------------------------------------------------------
     private void explodeH(Tile[][] tileArray, Tile tile) {
         //Mark isExplode
         tile.isExplode = true;
@@ -1282,7 +1209,7 @@ public class MyAlgorithm {
         for (int i = row - 2; i <= row + 2; i++) {
             for (int j = col - 2; j <= col + 2; j++) {
                 //Check index not out of boarder
-                if (i < 0 || i >= row || j < 0 || j >= row)
+                if (i < 0 || i >= row || j < 0 || j >= col)
                     continue;
 
                 //Check is empty fruit
@@ -1432,6 +1359,7 @@ public class MyAlgorithm {
             }
         }
     }
+    //==================================================================================
 
     private void transfWait() {
         //Bug is ice cream's wait may cause error
