@@ -16,7 +16,7 @@ public class StarGameState extends GameState {
     }
 
     @Override
-    public boolean isPlayerWin() {
+    public boolean isPlayerReachTarget() {
         int size = mGameEngine.mLevel.mTarget.size();
         for(int i = 0; i < size; i++){
             if(mGameEngine.mLevel.mTarget.get(i) != 0){
@@ -40,7 +40,7 @@ public class StarGameState extends GameState {
                     if (target > 0) {
                         target--;
                         mGameEngine.mLevel.mTarget.set(0, target);
-                        mGameEngine.onGameEvent(GameEvent.COLLECT);
+                        mGameEngine.onGameEvent(GameEvent.PLAYER_COLLECT);
                     }
                     continue;
                 }
@@ -57,7 +57,7 @@ public class StarGameState extends GameState {
                         if (target > 0) {
                             target--;
                             mGameEngine.mLevel.mTarget.set(n, target);
-                            mGameEngine.onGameEvent(GameEvent.COLLECT);
+                            mGameEngine.onGameEvent(GameEvent.PLAYER_COLLECT);
                         }
                     }
                 }

@@ -14,7 +14,7 @@ public class ScoreGameState extends GameState {
     }
 
     @Override
-    public boolean isPlayerWin() {
+    public boolean isPlayerReachTarget() {
         if (mPoint >= mTarget) {
             mPlayerWin = true;
         }
@@ -25,7 +25,7 @@ public class ScoreGameState extends GameState {
     public void onUpdate(Tile[][] tileArray) {
         for (int j = 0; j < mColumn; j++) {
             for (int i = 0; i < mRow; i++) {
-                if (tileArray[i][j].match > 0) {
+                if (tileArray[i][j].match > 0 && tileArray[i][j].isValidFruit()) {
                     mPoint += 10;
                 }
             }

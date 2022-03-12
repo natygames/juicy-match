@@ -30,6 +30,7 @@ public class TargetCounter extends GameObject {
             setTargetImages(gameEngine.mLevel.mTarget.size(), view);
         }
 
+        mTargetsHaveChanged = false;
     }
 
     private void setTargetImages(int targetNum, View view) {
@@ -86,13 +87,13 @@ public class TargetCounter extends GameObject {
         // Init mTarget text
         int txtSize = mText.size();
         for (int i = 0; i < txtSize; i++) {
-            mText.get(i).setText(String.valueOf(mLevel.mTarget.get(i)));
             mText.get(i).setVisibility(View.VISIBLE);
         }
+        mTargetsHaveChanged = true;
     }
 
     @Override
-    public void onUpdate() {
+    public void onUpdate(long elapsedMillis) {
 
     }
 
@@ -110,7 +111,7 @@ public class TargetCounter extends GameObject {
 
     @Override
     public void onGameEvent(GameEvent gameEvents) {
-        if (gameEvents == GameEvent.COLLECT) {
+        if (gameEvents == GameEvent.PLAYER_COLLECT) {
             mTargetsHaveChanged = true;
         }
     }

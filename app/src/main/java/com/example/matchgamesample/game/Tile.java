@@ -7,17 +7,19 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.Sprite;
 
 public class Tile extends Sprite {
+    private final int mFruitNum;
     public int row = 0, col = 0;                // Tile position
     public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute
     public int bounce = 0, wait = 0, diagonal = 0;            // Tile moving
     public boolean invalid = false, empty = false, tube = false;  // Tile movement
-    public boolean special = false, lock = false, breakable = false, honey = false;     // Tile attribute
+    public boolean special = false, lock = false, breakable = false;     // Tile attribute
     public boolean isExplode = false, isUpgrade = false, isAnimate = false, isChosen = false;       //Tile state
     public char direct = 'N', machine = 'N', specialCombine = 'N';
     public int iceCreamTarget = 0;
     public boolean entryPoint = false;
 
-    private final int mFruitNum;
+    // Tile speed
+    private int mSpeed = 15;
 
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
@@ -41,8 +43,36 @@ public class Tile extends Sprite {
     }
 
     @Override
-    public void onUpdate() {
+    public void onUpdate(long elapsedMillis) {
         // We do this in GameController
+        int diff_x = 0, diff_y = 0;
+        for (int i = 0; i < mSpeed; i++) {
+            diff_x = x - col * mWidth;
+            diff_y = y - row * mWidth;
+
+            if (diff_x != 0) {
+                // Check diagonal swapping position
+                if (y >= diagonal * mWidth)
+                    //Go left or right
+                    x -= diff_x / Math.abs(diff_x);
+            } else {
+                diagonal = 0;
+            }
+
+            if (diff_y != 0) {
+                if (bounce == 0) {
+                    if (diff_y <= -mWidth * 4) {
+                        bounce = 2;
+                    } else if (diff_y <= -mWidth * 2) {
+                        bounce = 1;
+                    }
+                }
+                y -= diff_y / Math.abs(diff_y);
+            } else {
+                bounce = 0;
+            }
+        }
+
     }
 
     @Override
@@ -86,6 +116,13 @@ public class Tile extends Sprite {
                 return true;
         }
 
+        return false;
+    }
+
+    public boolean isValidFruit() {
+        if (!invalid && (isFruit() || kind == TileUtils.ICE_CREAM)) {
+            return true;
+        }
         return false;
     }
 

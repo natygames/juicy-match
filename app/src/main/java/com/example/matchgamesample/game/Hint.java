@@ -1,55 +1,55 @@
 package com.example.matchgamesample.game;
 
-import android.content.Context;
-import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
 import java.util.ArrayList;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.engine.GameEngine;
+import com.example.matchgamesample.engine.GameEvent;
+import com.example.matchgamesample.engine.GameObject;
 
 /* Hint class check possible match on board
  * if founded, start hint animation
  * otherwise, refresh
  */
-public class Hint{
-    private final int column, row;
+public class Hint extends GameObject {
+    private final GameEngine mGameEngine;
+    private final int mColumn, mRow;
+    private Tile[][] tileArray;
     private final Animation animation;
-    private Runnable runnable;
-    private final Handler handler = new Handler();
-    private final ArrayList<ImageView> hintArray;        //Put the match fruit in this
-    //ID
-    private static final int STAR_FISH = R.drawable.starfish;
+    private final ArrayList<ImageView> hintArray = new ArrayList<>();
 
-    public Hint(Context context, int column, int row){
-        this.column = column;
-        this.row = row;
-        animation = AnimationUtils.loadAnimation(context, R.anim.hint_animation);
-        hintArray = new ArrayList<>();
+    private boolean mShowHint;
+    private int mDelayTime;
+    private static final int DELAY_TIME = 5000;
+
+    public Hint(GameEngine gameEngine, Tile[][] tileArray) {
+        mGameEngine = gameEngine;
+        mColumn = gameEngine.mLevel.mColumn;
+        mRow = gameEngine.mLevel.mRow;
+        this.tileArray = tileArray;
+        animation = AnimationUtils.loadAnimation(gameEngine.mActivity, R.anim.hint_animation);
+        mShowHint = false;
     }
 
-    public void startHint(){
-        runnable = new Runnable() {
-            @Override
-            public void run() {
-                //Start animation
-                for(ImageView i:hintArray){
-                    i.startAnimation(animation);
-                }
-            }
-        };
-        handler.postDelayed(runnable, 5000);
+    private void startHint() {
+        // Start hint animation
+        int size = hintArray.size();
+        for (int i = 0; i < size; i++) {
+            hintArray.get(i).startAnimation(animation);
+        }
     }
 
-    public void stopHint(){
+    private void stopHint() {
         hintArray.clear();
-        handler.removeCallbacks(runnable);
         animation.cancel();
         animation.reset();
     }
 
-    public boolean checkPossibleMatch(Tile[][] tileArray, ImageView[][] fruitsArray){
+    private boolean checkPossibleMatch() {
         /* Hint priority
          * 1. Special combine
          * 2. match in 5
@@ -59,41 +59,41 @@ public class Hint{
          */
 
         //Check special combine
-        for (int i = 1; i <= row; i++) {
-            for (int j = 1; j <= column; j++) {
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn - 1; j++) {
 
-                //Check swappable
-                if(!tileArray[i][j].invalid) {
+                // Find two special fruit in row and column
+                if (!tileArray[i][j].invalid && !tileArray[i][j + 1].invalid
+                        && tileArray[i][j].special && tileArray[i][j + 1].special) {
 
-                    //Find two special fruit in mRow and mColumn
-                    if (!tileArray[i][j + 1].invalid
-                            && tileArray[i][j].special && tileArray[i][j + 1].special){
-
-                        //Check honey
-                        if(!tileArray[i][j].honey || !tileArray[i][j + 1].honey) {
-                            hintArray.add(fruitsArray[i - 1][j - 1]);
-                            hintArray.add(fruitsArray[i - 1][j]);
-                            return true;
-                        }
-                    } else if (!tileArray[i + 1][j].invalid
-                            && tileArray[i][j].special && tileArray[i + 1][j].special){
-
-                        //Check honey
-                        if(!tileArray[i][j].honey || !tileArray[i + 1][j].honey) {
-                            hintArray.add(fruitsArray[i - 1][j - 1]);
-                            hintArray.add(fruitsArray[i][j - 1]);
-                            return true;
-                        }
-                    }
+                    hintArray.add(tileArray[i][j].mImage);
+                    hintArray.add(tileArray[i][j + 1].mImage);
+                    return true;
                 }
             }
         }
 
+        for (int j = 0; j < mColumn; j++) {
+            for (int i = 0; i < mRow - 1; i++) {
+
+                // Find two special fruit in row and column
+                if (!tileArray[i][j].invalid && !tileArray[i + 1][j].invalid
+                        && tileArray[i][j].special && tileArray[i + 1][j].special) {
+
+                    //Check honey
+                    hintArray.add(tileArray[i][j].mImage);
+                    hintArray.add(tileArray[i + 1][j].mImage);
+                    return true;
+                }
+            }
+        }
+
+        /*
         //Check match 5 in mColumn
-        for (int i = 1; i <= row - 4; i++) {
-            for (int j = 1; j <= column; j++) {
+        for (int i = 1; i <= mRow - 4; i++) {
+            for (int j = 1; j <= mColumn; j++) {
                 //Check tile state
-                if(!tileArray[i][j].empty
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -142,9 +142,9 @@ public class Hint{
         }
 
         //Check match 5 in mRow
-        for (int i = 1; i <= row; i++) {
-            for (int j = 1; j <= column - 4; j++) {
-                if(!tileArray[i][j].empty
+        for (int i = 1; i <= mRow; i++) {
+            for (int j = 1; j <= mColumn - 4; j++) {
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -187,10 +187,10 @@ public class Hint{
         }
 
         //Check match 4 T L in mColumn
-        for (int i = 1; i <= row - 1; i++) {
-            for (int j = 1; j <= column; j++) {
+        for (int i = 1; i <= mRow - 1; i++) {
+            for (int j = 1; j <= mColumn; j++) {
                 //Check tile state
-                if(!tileArray[i][j].empty
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -211,20 +211,20 @@ public class Hint{
                                 hintArray.add(fruitsArray[i][j - 1]);
                                 hintArray.add(fruitsArray[i + 1][j - 2]);
                                 hintArray.add(fruitsArray[i + 2][j - 1]);
-                                if(tileArray[i][j].kind == tileArray[i + 2][j - 2].kind) {
+                                if (tileArray[i][j].kind == tileArray[i + 2][j - 2].kind) {
                                     //  O
                                     //  O
                                     //OO
                                     //  O
                                     hintArray.add(fruitsArray[i + 1][j - 3]);
                                 }
-                                if(tileArray[i][j].kind == tileArray[i + 2][j + 1].kind) {
+                                if (tileArray[i][j].kind == tileArray[i + 2][j + 1].kind) {
                                     // O
                                     // O
                                     //O O
                                     // O
                                     hintArray.add(fruitsArray[i + 1][j]);
-                                    if(tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                    if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
                                         // O
                                         // O
                                         //O OO
@@ -235,7 +235,7 @@ public class Hint{
                                 return true;
                             }
                         } else if (tileArray[i][j].kind == tileArray[i + 2][j + 1].kind
-                                && tileArray[i][j].kind == tileArray[i + 3][j].kind ) {
+                                && tileArray[i][j].kind == tileArray[i + 3][j].kind) {
                             //Check is swappable
                             if (!tileArray[i + 2][j + 1].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
                                     && (!tileArray[i + 2][j + 1].honey || !tileArray[i + 2][j].honey)) {
@@ -247,7 +247,7 @@ public class Hint{
                                 hintArray.add(fruitsArray[i][j - 1]);
                                 hintArray.add(fruitsArray[i + 1][j]);
                                 hintArray.add(fruitsArray[i + 2][j - 1]);
-                                if(tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
                                     //O
                                     //O
                                     // OO
@@ -269,20 +269,20 @@ public class Hint{
                                 hintArray.add(fruitsArray[i][j - 1]);
                                 hintArray.add(fruitsArray[i - 2][j - 2]);
                                 hintArray.add(fruitsArray[i - 3][j - 1]);
-                                if(tileArray[i][j].kind == tileArray[i - 1][j - 2].kind) {
+                                if (tileArray[i][j].kind == tileArray[i - 1][j - 2].kind) {
                                     //  O
                                     //OO
                                     //  O
                                     //  O
                                     hintArray.add(fruitsArray[i - 2][j - 3]);
                                 }
-                                if(tileArray[i][j].kind == tileArray[i - 1][j + 1].kind) {
+                                if (tileArray[i][j].kind == tileArray[i - 1][j + 1].kind) {
                                     // O
                                     //O O
                                     // O
                                     // O
                                     hintArray.add(fruitsArray[i - 2][j]);
-                                    if(tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
+                                    if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
                                         // O
                                         //O OO
                                         // O
@@ -305,7 +305,7 @@ public class Hint{
                                 hintArray.add(fruitsArray[i][j - 1]);
                                 hintArray.add(fruitsArray[i - 2][j]);
                                 hintArray.add(fruitsArray[i - 3][j - 1]);
-                                if(tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
+                                if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
                                     //O
                                     // OO
                                     //O
@@ -321,9 +321,9 @@ public class Hint{
         }
 
         //Check match 4 T L in mRow
-        for (int i = 1; i <= row; i++) {
-            for (int j = 1; j <= column - 1; j++) {
-                if(!tileArray[i][j].empty
+        for (int i = 1; i <= mRow; i++) {
+            for (int j = 1; j <= mColumn - 1; j++) {
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -342,18 +342,18 @@ public class Hint{
                                 hintArray.add(fruitsArray[i - 1][j]);
                                 hintArray.add(fruitsArray[i - 2][j + 1]);
                                 hintArray.add(fruitsArray[i - 1][j + 2]);
-                                if(tileArray[i][j].kind == tileArray[i - 2][j + 2].kind) {
+                                if (tileArray[i][j].kind == tileArray[i - 2][j + 2].kind) {
                                     //  O
                                     //  O
                                     //OO O
                                     hintArray.add(fruitsArray[i - 3][j + 1]);
                                 }
-                                if(tileArray[i][j].kind == tileArray[i + 1][j + 2].kind) {
+                                if (tileArray[i][j].kind == tileArray[i + 1][j + 2].kind) {
                                     //  O
                                     //OO O
                                     //  O
                                     hintArray.add(fruitsArray[i][j + 1]);
-                                    if(tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                    if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
                                         //  O
                                         //OO O
                                         //  O
@@ -374,7 +374,7 @@ public class Hint{
                                 hintArray.add(fruitsArray[i - 1][j]);
                                 hintArray.add(fruitsArray[i][j + 1]);
                                 hintArray.add(fruitsArray[i - 1][j + 2]);
-                                if(tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
                                     //OO O
                                     //  O
                                     //  O
@@ -386,25 +386,25 @@ public class Hint{
                                 && tileArray[i][j].kind == tileArray[i][j - 2].kind) {
                             //Check is swappable
                             if (!tileArray[i - 1][j - 1].invalid && !tileArray[i][j - 1].invalid && tileArray[i][j - 1].kind != 0
-                                    && (!tileArray[i - 1][j - 1].honey || !tileArray[i][j - 1].honey )) {
+                                    && (!tileArray[i - 1][j - 1].honey || !tileArray[i][j - 1].honey)) {
                                 // O
                                 //O OO
                                 hintArray.add(fruitsArray[i - 1][j - 1]);
                                 hintArray.add(fruitsArray[i - 1][j]);
                                 hintArray.add(fruitsArray[i - 2][j - 2]);
                                 hintArray.add(fruitsArray[i - 1][j - 3]);
-                                if(tileArray[i][j].kind == tileArray[i - 2][j - 1].kind) {
+                                if (tileArray[i][j].kind == tileArray[i - 2][j - 1].kind) {
                                     // O
                                     // O
                                     //O OO
                                     hintArray.add(fruitsArray[i - 3][j - 2]);
                                 }
-                                if(tileArray[i][j].kind == tileArray[i + 1][j - 1].kind) {
+                                if (tileArray[i][j].kind == tileArray[i + 1][j - 1].kind) {
                                     // O
                                     //O OO
                                     // O
                                     hintArray.add(fruitsArray[i][j - 2]);
-                                    if(tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
+                                    if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
                                         // O
                                         //O OO
                                         // O
@@ -425,7 +425,7 @@ public class Hint{
                                 hintArray.add(fruitsArray[i - 1][j]);
                                 hintArray.add(fruitsArray[i][j - 2]);
                                 hintArray.add(fruitsArray[i - 1][j - 3]);
-                                if(tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
+                                if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
                                     //O OO
                                     // O
                                     // O
@@ -440,10 +440,10 @@ public class Hint{
         }
 
         //Check match 3 in mColumn 1
-        for (int i = 1; i <= row - 1; i++) {
-            for (int j = 1; j <= column; j++) {
+        for (int i = 1; i <= mRow - 1; i++) {
+            for (int j = 1; j <= mColumn; j++) {
                 //Check tile state
-                if(!tileArray[i][j].empty
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -505,10 +505,10 @@ public class Hint{
         }
 
         //Check match 3 in mColumn 2
-        for (int i = 1; i <= row - 2; i++) {
-            for (int j = 1; j <= column; j++) {
+        for (int i = 1; i <= mRow - 2; i++) {
+            for (int j = 1; j <= mColumn; j++) {
                 //Check tile state
-                if(!tileArray[i][j].empty
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -572,9 +572,9 @@ public class Hint{
         }
 
         //Check match 3 in mRow 1
-        for (int i = 1; i <= row; i++) {
-            for (int j = 1; j <= column - 1; j++) {
-                if(!tileArray[i][j].empty
+        for (int i = 1; i <= mRow; i++) {
+            for (int j = 1; j <= mColumn - 1; j++) {
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -632,9 +632,9 @@ public class Hint{
         }
 
         //Check match 3 in mRow 2
-        for (int i = 1; i <= row; i++) {
-            for (int j = 1; j <= column - 2; j++) {
-                if(!tileArray[i][j].empty
+        for (int i = 1; i <= mRow; i++) {
+            for (int j = 1; j <= mColumn - 2; j++) {
+                if (!tileArray[i][j].empty
                         && !tileArray[i][j].breakable
                         && tileArray[i][j].kind != 0
                         && tileArray[i][j].kind != STAR_FISH) {
@@ -690,39 +690,39 @@ public class Hint{
         }
 
         //Check ice cream
-        for (int i = 1; i <= row; i++) {
-            for (int j = 1; j <= column; j++) {
+        for (int i = 1; i <= mRow; i++) {
+            for (int j = 1; j <= mColumn; j++) {
                 if (tileArray[i][j].direct == 'I') {
                     //Check nearby fruit is swappable
-                    if ( (!tileArray[i - 1][j].invalid && !tileArray[i][j].invalid)
+                    if ((!tileArray[i - 1][j].invalid && !tileArray[i][j].invalid)
                             && (!tileArray[i - 1][j].honey || !tileArray[i][j].honey)
                             && !tileArray[i - 1][j].breakable
                             && tileArray[i - 1][j].kind != 0
-                            && tileArray[i - 1][j].kind != STAR_FISH){
+                            && tileArray[i - 1][j].kind != STAR_FISH) {
                         hintArray.add(fruitsArray[i - 1][j - 1]);
                         hintArray.add(fruitsArray[i - 2][j - 1]);
                         return true;
-                    }else if( (!tileArray[i + 1][j].invalid && !tileArray[i][j].invalid)
+                    } else if ((!tileArray[i + 1][j].invalid && !tileArray[i][j].invalid)
                             && (!tileArray[i + 1][j].honey || !tileArray[i][j].honey)
                             && !tileArray[i + 1][j].breakable
                             && tileArray[i + 1][j].kind != 0
-                            && tileArray[i + 1][j].kind != STAR_FISH){
+                            && tileArray[i + 1][j].kind != STAR_FISH) {
                         hintArray.add(fruitsArray[i - 1][j - 1]);
                         hintArray.add(fruitsArray[i][j - 1]);
                         return true;
-                    }else if( (!tileArray[i][j - 1].invalid && !tileArray[i][j].invalid)
+                    } else if ((!tileArray[i][j - 1].invalid && !tileArray[i][j].invalid)
                             && (!tileArray[i][j - 1].honey || !tileArray[i][j].honey)
                             && !tileArray[i][j - 1].breakable
                             && tileArray[i][j - 1].kind != 0
-                            && tileArray[i][j - 1].kind != STAR_FISH){
+                            && tileArray[i][j - 1].kind != STAR_FISH) {
                         hintArray.add(fruitsArray[i - 1][j - 1]);
                         hintArray.add(fruitsArray[i - 1][j - 2]);
                         return true;
-                    }else if( (!tileArray[i][j + 1].invalid && !tileArray[i][j].invalid)
+                    } else if ((!tileArray[i][j + 1].invalid && !tileArray[i][j].invalid)
                             && (!tileArray[i][j + 1].honey || !tileArray[i][j].honey)
                             && !tileArray[i][j + 1].breakable
                             && tileArray[i][j + 1].kind != 0
-                            && tileArray[i][j + 1].kind != STAR_FISH){
+                            && tileArray[i][j + 1].kind != STAR_FISH) {
                         hintArray.add(fruitsArray[i - 1][j - 1]);
                         hintArray.add(fruitsArray[i - 1][j]);
                         return true;
@@ -731,8 +731,54 @@ public class Hint{
             }
         }
 
+
+         */
         return false;
     }
 
+    @Override
+    public void startGame() {
+        mDelayTime = 0;
+        mShowHint = true;
+    }
+
+    @Override
+    public void onUpdate(long elapsedMillis) {
+
+        if (mShowHint) {
+            mDelayTime += elapsedMillis;
+            if (mDelayTime > DELAY_TIME) {
+                startHint();
+                mDelayTime = 0;
+                mShowHint = false;
+            }
+        }
+    }
+
+    @Override
+    public void onGameEvent(GameEvent gameEvent) {
+        switch (gameEvent) {
+            case START_HINT:
+                stopHint();
+
+                boolean isFindMatch = checkPossibleMatch();
+                if (!isFindMatch) {
+                    mGameEngine.onGameEvent(GameEvent.REFRESH);
+                } else {
+                    mShowHint = true;
+                }
+                break;
+            case PLAYER_SWAP:
+                stopHint();
+                mShowHint = false;
+                mDelayTime = 0;
+                break;
+        }
+    }
+
+    @Override
+    public void onDraw() {
+        // This game object does not draw anything
+    }
 }
 

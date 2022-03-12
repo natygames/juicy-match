@@ -16,16 +16,17 @@ public class ScoreCounter extends GameObject{
 
     public ScoreCounter(View view){
         mText = (TextView) view.findViewById(R.id.score);
+        mPointsHaveChanged = false;
     }
 
     @Override
     public void startGame() {
         mPoints = 0;
-        mText.setText(String.valueOf(mPoints));
+        mPointsHaveChanged = true;
     }
 
     @Override
-    public void onUpdate() {
+    public void onUpdate(long elapsedMillis) {
 
     }
 
@@ -39,7 +40,7 @@ public class ScoreCounter extends GameObject{
 
     @Override
     public void onGameEvent(GameEvent gameEvents) {
-        if (gameEvents == GameEvent.SCORE) {
+        if (gameEvents == GameEvent.PLAYER_SCORE) {
             mPoints += POINTS_GAINED_PER_FRUIT;
             mPointsHaveChanged = true;
         }

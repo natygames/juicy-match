@@ -15,21 +15,24 @@ public class GameThread extends Thread {
         mIsGameRunning = false;
     }
 
-    protected void doIt() {
+    protected void doIt(long elapsedMillis) {
+
+        if (elapsedMillis < 20) { // This is 50 fps
+            try {
+                Thread.sleep(20 - elapsedMillis);
+            } catch (InterruptedException e) {
+                // We just continue
+            }
+        }
 
         mHandle.post(new Runnable() {
             @Override
             public void run() {
-                mGameEngine.onUpdate();
+                mGameEngine.onUpdate(elapsedMillis);
                 mGameEngine.onDraw();
             }
         });
 
-        try {
-            Thread.sleep(20);
-        } catch (InterruptedException e) {
-            // We stay on the loop
-        }
     }
 
     @Override
@@ -46,7 +49,14 @@ public class GameThread extends Thread {
 
     @Override
     public void run() {
+        long previousTimeMillis;
+        long currentTimeMillis;
+        long elapsedMillis;
+        previousTimeMillis = System.currentTimeMillis();
+
         while (mIsGameRunning) {
+            currentTimeMillis = System.currentTimeMillis();
+            elapsedMillis = currentTimeMillis - previousTimeMillis;
 
             if (mIsGamePause) {
                 while (mIsGamePause) {
@@ -58,9 +68,11 @@ public class GameThread extends Thread {
                         // We stay on the loop
                     }
                 }
+                currentTimeMillis = System.currentTimeMillis();
             }
 
-            doIt();
+            doIt(elapsedMillis);
+            previousTimeMillis = currentTimeMillis;
         }
 
     }

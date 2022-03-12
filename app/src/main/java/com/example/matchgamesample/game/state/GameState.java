@@ -17,11 +17,11 @@ public class GameState {
         mPlayerLoss = false;
     }
 
-    public boolean isPlayerWin() {
+    public boolean isPlayerReachTarget() {
         return mPlayerWin;
     }
 
-    public boolean isPlayerLoss() {
+    public boolean isPlayerOutOfMove() {
         if (mGameEngine.mLevel.mMove == 0 && !mPlayerWin) {
             mPlayerLoss = true;
         }

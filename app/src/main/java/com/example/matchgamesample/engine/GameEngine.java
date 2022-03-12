@@ -77,10 +77,10 @@ public class GameEngine {
 
     //=================================================================================
 
-    public void onUpdate() {
+    public void onUpdate(long elapsedMillis) {
         int numGameObjects = mGameObjects.size();
         for (int i = 0; i < numGameObjects; i++) {
-            mGameObjects.get(i).onUpdate();
+            mGameObjects.get(i).onUpdate(elapsedMillis);
         }
     }
 

@@ -20,15 +20,16 @@ public class MoveCounter extends GameObject {
         mText = (TextView) view.findViewById(R.id.move);
         mLevel = gameEngine.mLevel;
         mMoves = gameEngine.mLevel.mMove;
+        mMovesHaveChanged = false;
     }
 
     @Override
     public void startGame() {
-        mText.setText(String.valueOf(mMoves));
+        mMovesHaveChanged = true;
     }
 
     @Override
-    public void onUpdate() {
+    public void onUpdate(long elapsedMillis) {
 
     }
 

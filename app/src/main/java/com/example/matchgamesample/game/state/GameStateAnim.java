@@ -3,8 +3,6 @@ package com.example.matchgamesample.game.state;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
-import android.os.Handler;
-import android.os.Looper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +39,12 @@ public class GameStateAnim {
         mRoot = gameEngine.mActivity.findViewById(R.id.guide_board);
     }
 
+    public void startGameBoard() {
+        View view = mActivity.findViewById(R.id.board_frame);
+        view.setX(-mTileSize * 10);
+        view.animate().setDuration(600).x(0).setInterpolator(overshootInterpolator);
+    }
+
     public void startGame(LevelType type) {
         /* This method create guide when fruit begin
          *  type is the mTarget type:
@@ -48,82 +52,75 @@ public class GameStateAnim {
          *  2 for mCollect items
          *  3 for eliminate item
          */
-        View view = mActivity.findViewById(R.id.board_frame);
-        view.setX(-mTileSize * 10);
-        view.animate().setDuration(600).x(0).setInterpolator(overshootInterpolator);
 
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+        //Add black screen
+        createBlackScreen();
+
+        //Add board
+        LinearLayout board = new LinearLayout(mActivity);
+        board.setOrientation(LinearLayout.HORIZONTAL);
+        board.setGravity(Gravity.CENTER);
+        board.setBackgroundResource(R.drawable.guide_board);
+        board.setX(0);
+        board.setY(-mTileSize * 4);
+        board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mTileSize * 4));
+        mRoot.addView(board);
+        //Add guide
+        ImageView guide = new ImageView(mActivity);
+        if (type == LevelType.LEVEL_TYPE_SCORE) {
+            guide.setImageResource(R.drawable.guide_taeget_score);
+        } else if (type == LevelType.LEVEL_TYPE_ICE) {
+            guide.setImageResource(R.drawable.guide_target_ice);
+            ImageView ice = new ImageView(mActivity);
+            ice.setBackgroundResource(R.drawable.ice);
+            ice.setLayoutParams(new ViewGroup.LayoutParams((int) (mTileSize * 1.5), (int) (mTileSize * 1.5)));
+            ice.animate().setStartDelay(200).setDuration(200).rotation(-30)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            ice.animate().setStartDelay(0).setDuration(400).rotation(30)
+                                    .setListener(new AnimatorListenerAdapter() {
+                                        @Override
+                                        public void onAnimationEnd(Animator animation) {
+                                            ice.animate().setDuration(400).rotation(-30)
+                                                    .setListener(new AnimatorListenerAdapter() {
+                                                        @Override
+                                                        public void onAnimationEnd(Animator animation) {
+                                                            ice.animate().setDuration(400).rotation(30)
+                                                                    .setListener(new AnimatorListenerAdapter() {
+                                                                        @Override
+                                                                        public void onAnimationEnd(Animator animation) {
+                                                                            animation.cancel();
+                                                                        }
+                                                                    });
+                                                        }
+                                                    });
+                                        }
+                                    });
+                        }
+                    });
+            board.addView(ice);
+        } else {
+            guide.setImageResource(R.drawable.guide_target_collect);
+        }
+        guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 7, mTileSize * 2));
+        board.addView(guide);
+
+        //Set animation
+        //Set dropping
+        board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
+                .setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
-            public void run() {
-                //Add black screen
-                createBlackScreen();
-                //Add board
-                LinearLayout board = new LinearLayout(mActivity);
-                board.setOrientation(LinearLayout.HORIZONTAL);
-                board.setGravity(Gravity.CENTER);
-                board.setBackgroundResource(R.drawable.guide_board);
-                board.setX(0);
-                board.setY(-mTileSize * 4);
-                board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mTileSize * 4));
-                mRoot.addView(board);
-                //Add guide
-                ImageView guide = new ImageView(mActivity);
-                if (type == LevelType.LEVEL_TYPE_SCORE) {
-                    guide.setImageResource(R.drawable.guide_taeget_score);
-                } else if (type == LevelType.LEVEL_TYPE_ICE) {
-                    guide.setImageResource(R.drawable.guide_target_ice);
-                    ImageView ice = new ImageView(mActivity);
-                    ice.setBackgroundResource(R.drawable.ice);
-                    ice.setLayoutParams(new ViewGroup.LayoutParams((int) (mTileSize * 1.5), (int) (mTileSize * 1.5)));
-                    ice.animate().setStartDelay(200).setDuration(200).rotation(-30)
-                            .setListener(new AnimatorListenerAdapter() {
-                                @Override
-                                public void onAnimationEnd(Animator animation) {
-                                    ice.animate().setStartDelay(0).setDuration(400).rotation(30)
-                                            .setListener(new AnimatorListenerAdapter() {
-                                                @Override
-                                                public void onAnimationEnd(Animator animation) {
-                                                    ice.animate().setDuration(400).rotation(-30)
-                                                            .setListener(new AnimatorListenerAdapter() {
-                                                                @Override
-                                                                public void onAnimationEnd(Animator animation) {
-                                                                    ice.animate().setDuration(400).rotation(30)
-                                                                            .setListener(new AnimatorListenerAdapter() {
-                                                                                @Override
-                                                                                public void onAnimationEnd(Animator animation) {
-                                                                                    animation.cancel();
-                                                                                }
-                                                                            });
-                                                                }
-                                                            });
-                                                }
-                                            });
-                                }
-                            });
-                    board.addView(ice);
-                } else {
-                    guide.setImageResource(R.drawable.guide_target_collect);
-                }
-                guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 7, mTileSize * 2));
-                board.addView(guide);
-
-                //Set animation
-                //Set dropping
-                board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
-                        .setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+            public void onAnimationEnd(Animator animation) {
+                //Set retry
+                board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME).y(mRoot.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        //Set retry
-                        board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME).y(mRoot.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                mRoot.removeAllViews();
-                            }
-                        });
+                        mRoot.removeAllViews();
                     }
                 });
             }
-        }, 2000);
+        });
 
     }
 
@@ -246,10 +243,10 @@ public class GameStateAnim {
         ImageView guide = new ImageView(mActivity);
 
         switch (gameEvent) {
-            case PLAYER_WIN:
+            case PLAYER_REACH_TARGET:
                 guide.setImageResource(R.drawable.guide_win);
                 break;
-            case PLAYER_LOSS:
+            case PLAYER_OUT_OF_MOVE:
                 guide.setImageResource(R.drawable.guide_loss);
                 break;
         }
