@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.game.Hint;
 import com.example.matchgamesample.game.counter.MoveCounter;
 import com.example.matchgamesample.game.counter.TargetCounter;
 import com.example.matchgamesample.engine.GameEngine;
@@ -109,6 +110,7 @@ public class GameFragment extends BaseFragment {
         mGameEngine.addGameObject(new ScoreCounter(getView()));
         mGameEngine.addGameObject(new MoveCounter(getView(), mGameEngine));
         mGameEngine.addGameObject(new TargetCounter(getView(), mGameEngine));
+        mGameEngine.addGameObject(new Hint(mGameEngine, tileArray));
 
         mGameEngine.startGame();
     }

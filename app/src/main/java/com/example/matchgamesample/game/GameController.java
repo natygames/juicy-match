@@ -17,7 +17,7 @@ public class GameController extends GameObject {
 
     private GameControllerState mState;
     private int mWaitingTime;
-    private static final int WAITING_TIME = 2000;
+    private static final int WAITING_TIME = 1600;
 
     public GameController(GameEngine gameEngine, Tile[][] TileArray) {
         mGameEngine = gameEngine;
@@ -55,8 +55,13 @@ public class GameController extends GameObject {
                 if (mWaitingTime > WAITING_TIME) {
                     // Start animation
                     mGameStateAnim.startGame(mGameEngine.mLevel.mLevelType);
+
+                    // We disable player move when waiting
                     mState = GameControllerState.WAITING;
                     mWaitingTime = 0;
+
+                    // Start hint
+                    mGameEngine.onGameEvent(GameEvent.START_HINT);
                 }
                 break;
             case PLAY_GAME:
@@ -66,6 +71,7 @@ public class GameController extends GameObject {
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > WAITING_TIME) {
                     mState = GameControllerState.PLAY_GAME;
+                    mWaitingTime = 0;
                 }
                 break;
             case PLAYER_WIN:
@@ -120,7 +126,7 @@ public class GameController extends GameObject {
                 if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
                     return;
                 }
-                playerSwap();
+                SwapTile();
                 break;
             case PLAYER_REACH_TARGET:
                 mState = GameControllerState.PLAYER_WIN;
@@ -130,28 +136,25 @@ public class GameController extends GameObject {
                 break;
             case REFRESH:
                 mState = GameControllerState.WAITING;
-                mWaitingTime = 0;
                 mGameStateAnim.refreshGame();
+                refreshTile();
                 break;
             case COMBO_4:
                 mState = GameControllerState.WAITING;
-                mWaitingTime = 0;
                 mGameStateAnim.startCombo(GameEvent.COMBO_4);
                 break;
             case COMBO_5:
                 mState = GameControllerState.WAITING;
-                mWaitingTime = 0;
                 mGameStateAnim.startCombo(GameEvent.COMBO_5);
                 break;
             case COMBO_6:
                 mState = GameControllerState.WAITING;
-                mWaitingTime = 0;
                 mGameStateAnim.startCombo(GameEvent.COMBO_6);
                 break;
         }
     }
 
-    private void playerSwap() {
+    private void SwapTile() {
         // Get the tile player press from inputController
         int swapCol = mInputController.mX_Down / mTileSize;
         int swapRow = mInputController.mY_Down / mTileSize;
@@ -195,7 +198,12 @@ public class GameController extends GameObject {
         mAlgorithm.swapRow2 = swapRow2;
         mAlgorithm.isSwap = true;
         mAlgorithm.mMoveTile = true;
+        mAlgorithm.mShowHint = true;
 
+    }
+
+    private void refreshTile() {
+        mAlgorithm.refresh(mTileArray);
     }
 
 }

@@ -32,7 +32,7 @@ public class Tile extends Sprite {
             mImage.setAlpha(0f);
             mImage.setScaleY(0);
             mImage.setScaleX(0);
-            mImage.animate().scaleX(1).scaleY(1).alpha(1).setStartDelay(800).setDuration((long) (500 * Math.random() + 200))
+            mImage.animate().scaleX(1).scaleY(1).alpha(1).setStartDelay(700).setDuration((long) (500 * Math.random() + 200))
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -60,6 +60,7 @@ public class Tile extends Sprite {
             }
 
             if (diff_y != 0) {
+
                 if (bounce == 0) {
                     if (diff_y <= -mWidth * 4) {
                         bounce = 2;
@@ -67,6 +68,7 @@ public class Tile extends Sprite {
                         bounce = 1;
                     }
                 }
+
                 y -= diff_y / Math.abs(diff_y);
             } else {
                 bounce = 0;
@@ -104,10 +106,7 @@ public class Tile extends Sprite {
     }
 
     public boolean isMovable() {
-        if (empty || lock || kind == 0 || (breakable && kind != TileUtils.CRACKER))
-            return false;
-
-        return true;
+        return !invalid && kind != 0;
     }
 
     public boolean isFruit() {

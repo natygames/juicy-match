@@ -255,12 +255,14 @@ public class GameStateAnim {
         board.addView(guide);
 
         //Set animation
-        //Set dropping
-        board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+        board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
+                .setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                board.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(mRoot.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                board.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
+                        .y(mRoot.getHeight()).setInterpolator(anticipateInterpolator)
+                        .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mRoot.removeAllViews();

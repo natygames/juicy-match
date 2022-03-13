@@ -24,7 +24,7 @@ public class Hint extends GameObject {
 
     private boolean mShowHint;
     private int mDelayTime;
-    private static final int DELAY_TIME = 5000;
+    private static final int DELAY_TIME = 4000;
 
     public Hint(GameEngine gameEngine, Tile[][] tileArray) {
         mGameEngine = gameEngine;
@@ -44,6 +44,9 @@ public class Hint extends GameObject {
     }
 
     private void stopHint() {
+        mShowHint = false;
+        mDelayTime = 0;
+
         hintArray.clear();
         animation.cancel();
         animation.reset();
@@ -88,51 +91,48 @@ public class Hint extends GameObject {
             }
         }
 
-        /*
-        //Check match 5 in mColumn
-        for (int i = 1; i <= mRow - 4; i++) {
-            for (int j = 1; j <= mColumn; j++) {
+        //Check match 5 in column
+        for (int i = 0; i < mRow - 4; i++) {
+            for (int j = 0; j < mColumn; j++) {
                 //Check tile state
-                if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+                if (!tileArray[i][j].empty && tileArray[i][j].isFruit()) {
 
-                    if (tileArray[i][j].kind == tileArray[i + 1][j].kind
-                            && tileArray[i][j].kind == tileArray[i + 3][j].kind
-                            && tileArray[i][j].kind == tileArray[i + 4][j].kind) {
+                    int kind = tileArray[i][j].kind;
+                    if (kind == tileArray[i + 1][j].kind
+                            && kind == tileArray[i + 3][j].kind
+                            && kind == tileArray[i + 4][j].kind) {
 
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
+                        if (j > 0 && kind == tileArray[i + 2][j - 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 2][j - 1].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
-                                    && (!tileArray[i + 2][j - 1].honey || !tileArray[i + 2][j].honey)) {
+                            if (tileArray[i + 2][j - 1].isMovable()
+                                    && tileArray[i + 2][j].isMovable()) {
                                 // O
                                 // O
                                 //O
                                 // O
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j - 2]);
-                                hintArray.add(fruitsArray[i + 2][j - 1]);
-                                hintArray.add(fruitsArray[i + 3][j - 1]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i + 2][j - 1].mImage);
+                                hintArray.add(tileArray[i + 3][j].mImage);
+                                hintArray.add(tileArray[i + 4][j].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 2][j + 1].kind) {
+                        } else if (j < mColumn - 1 && kind == tileArray[i + 2][j + 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 2][j + 1].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
-                                    && (!tileArray[i + 2][j + 1].honey || !tileArray[i + 2][j].honey)) {
+                            if (tileArray[i + 2][j + 1].isMovable()
+                                    && tileArray[i + 2][j].isMovable()) {
                                 //O
                                 //O
                                 // O
                                 //O
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j]);
-                                hintArray.add(fruitsArray[i + 2][j - 1]);
-                                hintArray.add(fruitsArray[i + 3][j - 1]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i + 2][j + 1].mImage);
+                                hintArray.add(tileArray[i + 3][j].mImage);
+                                hintArray.add(tileArray[i + 4][j].mImage);
                                 return true;
                             }
                         }
@@ -141,43 +141,42 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 5 in mRow
-        for (int i = 1; i <= mRow; i++) {
-            for (int j = 1; j <= mColumn - 4; j++) {
-                if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+        //Check match 5 in row
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn - 4; j++) {
+                //Check tile state
+                if (!tileArray[i][j].empty && tileArray[i][j].isFruit()) {
 
-                    if (tileArray[i][j].kind == tileArray[i][j + 1].kind
-                            && tileArray[i][j].kind == tileArray[i][j + 3].kind
-                            && tileArray[i][j].kind == tileArray[i][j + 4].kind) {
+                    int kind = tileArray[i][j].kind;
+                    if (kind == tileArray[i][j + 1].kind
+                            && kind == tileArray[i][j + 3].kind
+                            && kind == tileArray[i][j + 4].kind) {
 
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
+                        if (i > 0 && kind == tileArray[i - 1][j + 2].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j + 2].invalid && !tileArray[i][j + 2].invalid && tileArray[i][j + 2].kind != 0
-                                    && (!tileArray[i - 1][j + 2].honey || !tileArray[i][j + 2].honey)) {
+                            if (tileArray[i - 1][j + 2].isMovable()
+                                    && tileArray[i][j + 2].isMovable()) {
                                 //  O
                                 //OO OO
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i - 2][j + 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 2]);
-                                hintArray.add(fruitsArray[i - 1][j + 3]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i - 1][j + 2].mImage);
+                                hintArray.add(tileArray[i][j + 3].mImage);
+                                hintArray.add(tileArray[i][j + 4].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 1][j + 2].kind) {
+                        } else if (i < mRow - 1 && kind == tileArray[i + 1][j + 2].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j + 2].invalid && !tileArray[i][j + 2].invalid && tileArray[i][j + 2].kind != 0
-                                    && (!tileArray[i + 1][j + 2].honey || !tileArray[i][j + 2].honey)) {
+                            if (tileArray[i + 1][j + 2].isMovable()
+                                    && tileArray[i][j + 2].isMovable()) {
                                 //OO OO
                                 //  O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i][j + 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 2]);
-                                hintArray.add(fruitsArray[i - 1][j + 3]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i + 1][j + 2].mImage);
+                                hintArray.add(tileArray[i][j + 3].mImage);
+                                hintArray.add(tileArray[i][j + 4].mImage);
                                 return true;
                             }
                         }
@@ -186,131 +185,133 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 4 T L in mColumn
-        for (int i = 1; i <= mRow - 1; i++) {
-            for (int j = 1; j <= mColumn; j++) {
+        //Check match 4 T L in column
+        for (int i = 0; i < mRow - 1; i++) {
+            for (int j = 0; j < mColumn; j++) {
+
                 //Check tile state
-                if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+                if (!tileArray[i][j].empty && tileArray[i][j].isFruit()) {
+
+                    int kind = tileArray[i][j].kind;
                     //Check next 1 mRow
-                    if (tileArray[i][j].kind == tileArray[i + 1][j].kind) {
+                    if (kind == tileArray[i + 1][j].kind) {
 
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind
-                                && tileArray[i][j].kind == tileArray[i + 3][j].kind) {
+                        if (i < mRow - 3 && j > 0
+                                && kind == tileArray[i + 2][j - 1].kind
+                                && kind == tileArray[i + 3][j].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 2][j - 1].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
-                                    && (!tileArray[i + 2][j - 1].honey || !tileArray[i + 2][j].honey)) {
+                            if (tileArray[i + 2][j - 1].isMovable()
+                                    && tileArray[i + 2][j].isMovable()) {
                                 // O
                                 // O
                                 //O
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j - 2]);
-                                hintArray.add(fruitsArray[i + 2][j - 1]);
-                                if (tileArray[i][j].kind == tileArray[i + 2][j - 2].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i + 2][j - 1].mImage);
+                                hintArray.add(tileArray[i + 3][j].mImage);
+                                if (j > 1 && kind == tileArray[i + 2][j - 2].kind) {
                                     //  O
                                     //  O
                                     //OO
                                     //  O
-                                    hintArray.add(fruitsArray[i + 1][j - 3]);
+                                    hintArray.add(tileArray[i + 2][j - 2].mImage);
                                 }
-                                if (tileArray[i][j].kind == tileArray[i + 2][j + 1].kind) {
+                                if (j < mColumn - 1 && kind == tileArray[i + 2][j + 1].kind) {
                                     // O
                                     // O
                                     //O O
                                     // O
-                                    hintArray.add(fruitsArray[i + 1][j]);
-                                    if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                    hintArray.add(tileArray[i + 2][j + 1].mImage);
+                                    if (j < mColumn - 2 && kind == tileArray[i + 2][j + 2].kind) {
                                         // O
                                         // O
                                         //O OO
                                         // O
-                                        hintArray.add(fruitsArray[i + 1][j + 1]);
+                                        hintArray.add(tileArray[i + 2][j + 2].mImage);
                                     }
                                 }
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 2][j + 1].kind
-                                && tileArray[i][j].kind == tileArray[i + 3][j].kind) {
+                        } else if (i < mRow - 3 && j < mColumn - 1
+                                && kind == tileArray[i + 2][j + 1].kind
+                                && kind == tileArray[i + 3][j].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 2][j + 1].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
-                                    && (!tileArray[i + 2][j + 1].honey || !tileArray[i + 2][j].honey)) {
+                            if (tileArray[i + 2][j + 1].isMovable()
+                                    && tileArray[i + 2][j].isMovable()) {
                                 //O
                                 //O
                                 // O
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j]);
-                                hintArray.add(fruitsArray[i + 2][j - 1]);
-                                if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i + 2][j + 1].mImage);
+                                hintArray.add(tileArray[i + 3][j].mImage);
+                                if (j < mColumn - 2 && kind == tileArray[i + 2][j + 2].kind) {
                                     //O
                                     //O
                                     // OO
                                     //O
-                                    hintArray.add(fruitsArray[i + 1][j + 1]);
+                                    hintArray.add(tileArray[i + 2][j + 2].mImage);
                                 }
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i - 1][j - 1].kind
-                                && tileArray[i][j].kind == tileArray[i - 2][j].kind) {
+                        } else if (i > 1 && j > 0
+                                && kind == tileArray[i - 1][j - 1].kind
+                                && kind == tileArray[i - 2][j].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j - 1].invalid && !tileArray[i - 1][j].invalid && tileArray[i - 1][j].kind != 0
-                                    && (!tileArray[i - 1][j - 1].honey || !tileArray[i - 1][j].honey)) {
+                            if (tileArray[i - 1][j - 1].isMovable() && tileArray[i - 1][j].isMovable()) {
                                 // O
                                 //O
                                 // O
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i - 2][j - 2]);
-                                hintArray.add(fruitsArray[i - 3][j - 1]);
-                                if (tileArray[i][j].kind == tileArray[i - 1][j - 2].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i - 1][j - 1].mImage);
+                                hintArray.add(tileArray[i - 2][j].mImage);
+                                if (j > 1 && kind == tileArray[i - 1][j - 2].kind) {
                                     //  O
                                     //OO
                                     //  O
                                     //  O
-                                    hintArray.add(fruitsArray[i - 2][j - 3]);
+                                    hintArray.add(tileArray[i - 1][j - 2].mImage);
                                 }
-                                if (tileArray[i][j].kind == tileArray[i - 1][j + 1].kind) {
+                                if (j < mColumn - 1 && kind == tileArray[i - 1][j + 1].kind) {
                                     // O
                                     //O O
                                     // O
                                     // O
-                                    hintArray.add(fruitsArray[i - 2][j]);
-                                    if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
+                                    hintArray.add(tileArray[i - 1][j + 1].mImage);
+                                    if (j < mColumn - 2 && kind == tileArray[i - 1][j + 2].kind) {
                                         // O
                                         //O OO
                                         // O
                                         // O
-                                        hintArray.add(fruitsArray[i - 2][j + 1]);
+                                        hintArray.add(tileArray[i - 1][j + 2].mImage);
                                     }
                                 }
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i - 1][j + 1].kind
-                                && tileArray[i][j].kind == tileArray[i - 2][j].kind) {
+                        } else if (i > 1 && j < mColumn - 1
+                                && kind == tileArray[i - 1][j + 1].kind
+                                && kind == tileArray[i - 2][j].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j + 1].invalid && !tileArray[i - 1][j].invalid && tileArray[i - 1][j].kind != 0
-                                    && (!tileArray[i - 1][j + 1].honey || !tileArray[i - 1][j].honey)) {
+                            if (tileArray[i - 1][j + 1].isMovable() && tileArray[i - 1][j].isMovable()) {
                                 //O
                                 // O
                                 //O
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i - 2][j]);
-                                hintArray.add(fruitsArray[i - 3][j - 1]);
-                                if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i - 1][j + 1].mImage);
+                                hintArray.add(tileArray[i - 2][j].mImage);
+                                if (j < mColumn - 2 && kind == tileArray[i - 1][j + 2].kind) {
                                     //O
                                     // OO
                                     //O
                                     //O
-                                    hintArray.add(fruitsArray[i - 2][j + 1]);
+                                    hintArray.add(tileArray[i - 1][j + 2].mImage);
                                 }
                                 return true;
                             }
@@ -320,116 +321,120 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 4 T L in mRow
-        for (int i = 1; i <= mRow; i++) {
-            for (int j = 1; j <= mColumn - 1; j++) {
+        //Check match 4 T L in row
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn - 1; j++) {
                 if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+                        && tileArray[i][j].isFruit()) {
+
                     //Check next 1 mColumn
                     if (tileArray[i][j].kind == tileArray[i][j + 1].kind) {
 
+                        int kind = tileArray[i][j].kind;
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind
-                                && tileArray[i][j].kind == tileArray[i][j + 3].kind) {
+                        if (i > 0 && j < mColumn - 3
+                                && kind == tileArray[i - 1][j + 2].kind
+                                && kind == tileArray[i][j + 3].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j + 2].invalid && !tileArray[i][j + 2].invalid && tileArray[i][j + 2].kind != 0
-                                    && (!tileArray[i - 1][j + 2].honey || !tileArray[i][j + 2].honey)) {
+                            if (tileArray[i - 1][j + 2].isMovable()
+                                    && tileArray[i][j + 2].isMovable()) {
                                 //  O
                                 //OO O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i - 2][j + 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 2]);
-                                if (tileArray[i][j].kind == tileArray[i - 2][j + 2].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i - 1][j + 2].mImage);
+                                hintArray.add(tileArray[i][j + 3].mImage);
+                                if (i > 1 && kind == tileArray[i - 2][j + 2].kind) {
                                     //  O
                                     //  O
                                     //OO O
-                                    hintArray.add(fruitsArray[i - 3][j + 1]);
+                                    hintArray.add(tileArray[i - 2][j + 2].mImage);
                                 }
-                                if (tileArray[i][j].kind == tileArray[i + 1][j + 2].kind) {
+                                if (i < mRow - 1 && kind == tileArray[i + 1][j + 2].kind) {
                                     //  O
                                     //OO O
                                     //  O
-                                    hintArray.add(fruitsArray[i][j + 1]);
-                                    if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                    hintArray.add(tileArray[i + 1][j + 2].mImage);
+                                    if (i < mRow - 2 && kind == tileArray[i + 2][j + 2].kind) {
                                         //  O
                                         //OO O
                                         //  O
                                         //  O
-                                        hintArray.add(fruitsArray[i + 1][j + 1]);
+                                        hintArray.add(tileArray[i + 2][j + 2].mImage);
                                     }
                                 }
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 1][j + 2].kind
-                                && tileArray[i][j].kind == tileArray[i][j + 3].kind) {
+                        } else if (i < mRow - 1 && j < mColumn - 3
+                                && kind == tileArray[i + 1][j + 2].kind
+                                && kind == tileArray[i][j + 3].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j + 2].invalid && !tileArray[i][j + 2].invalid && tileArray[i][j + 2].kind != 0
-                                    && (!tileArray[i + 1][j + 2].honey || !tileArray[i][j + 2].honey)) {
+                            if (tileArray[i + 1][j + 2].isMovable()
+                                    && tileArray[i][j + 2].isMovable()) {
                                 //OO O
                                 //  O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i][j + 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 2]);
-                                if (tileArray[i][j].kind == tileArray[i + 2][j + 2].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i + 1][j + 2].mImage);
+                                hintArray.add(tileArray[i][j + 3].mImage);
+                                if (i < mRow - 2 && kind == tileArray[i + 2][j + 2].kind) {
                                     //OO O
                                     //  O
                                     //  O
-                                    hintArray.add(fruitsArray[i + 1][j + 1]);
+                                    hintArray.add(tileArray[i + 2][j + 2].mImage);
                                 }
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i - 1][j - 1].kind
-                                && tileArray[i][j].kind == tileArray[i][j - 2].kind) {
+                        } else if (i > 0 && j > 1
+                                && kind == tileArray[i - 1][j - 1].kind
+                                && kind == tileArray[i][j - 2].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j - 1].invalid && !tileArray[i][j - 1].invalid && tileArray[i][j - 1].kind != 0
-                                    && (!tileArray[i - 1][j - 1].honey || !tileArray[i][j - 1].honey)) {
+                            if (tileArray[i - 1][j - 1].isMovable()
+                                    && tileArray[i][j - 1].isMovable()) {
                                 // O
                                 //O OO
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i - 2][j - 2]);
-                                hintArray.add(fruitsArray[i - 1][j - 3]);
-                                if (tileArray[i][j].kind == tileArray[i - 2][j - 1].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i - 1][j - 1].mImage);
+                                hintArray.add(tileArray[i][j - 2].mImage);
+                                if (i > 1 && kind == tileArray[i - 2][j - 1].kind) {
                                     // O
                                     // O
                                     //O OO
-                                    hintArray.add(fruitsArray[i - 3][j - 2]);
+                                    hintArray.add(tileArray[i - 2][j - 1].mImage);
                                 }
-                                if (tileArray[i][j].kind == tileArray[i + 1][j - 1].kind) {
+                                if (i < mRow - 1 && kind == tileArray[i + 1][j - 1].kind) {
                                     // O
                                     //O OO
                                     // O
-                                    hintArray.add(fruitsArray[i][j - 2]);
-                                    if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
+                                    hintArray.add(tileArray[i + 1][j - 1].mImage);
+                                    if (i < mRow - 2 && kind == tileArray[i + 2][j - 1].kind) {
                                         // O
                                         //O OO
                                         // O
                                         // O
-                                        hintArray.add(fruitsArray[i + 1][j - 2]);
+                                        hintArray.add(tileArray[i + 2][j - 1].mImage);
                                     }
                                 }
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 1][j - 1].kind
-                                && tileArray[i][j].kind == tileArray[i][j - 2].kind) {
+                        } else if (i < mRow - 1 && j > 1
+                                && kind == tileArray[i + 1][j - 1].kind
+                                && kind == tileArray[i][j - 2].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j - 1].invalid && !tileArray[i][j - 1].invalid && tileArray[i][j - 1].kind != 0
-                                    && (!tileArray[i + 1][j - 1].honey || !tileArray[i][j - 1].honey)) {
+                            if (tileArray[i + 1][j - 1].isMovable()
+                                    && tileArray[i][j - 1].isMovable()) {
                                 //O OO
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i][j - 2]);
-                                hintArray.add(fruitsArray[i - 1][j - 3]);
-                                if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i + 1][j - 1].mImage);
+                                hintArray.add(tileArray[i][j - 2].mImage);
+                                if (i < mRow - 2 && kind == tileArray[i + 2][j - 1].kind) {
                                     //O OO
                                     // O
                                     // O
-                                    hintArray.add(fruitsArray[i + 1][j - 2]);
+                                    hintArray.add(tileArray[i + 2][j - 1].mImage);
                                 }
                                 return true;
                             }
@@ -439,63 +444,67 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in mColumn 1
-        for (int i = 1; i <= mRow - 1; i++) {
-            for (int j = 1; j <= mColumn; j++) {
+        //Check match 3 in column 1
+        for (int i = 0; i < mRow - 1; i++) {
+            for (int j = 0; j < mColumn; j++) {
                 //Check tile state
                 if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+                        && tileArray[i][j].isFruit()) {
+
+                    int kind = tileArray[i][j].kind;
                     //Check next 1 mRow
-                    if (tileArray[i][j].kind == tileArray[i + 1][j].kind) {
+                    if (kind == tileArray[i + 1][j].kind) {
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i + 2][j - 1].kind) {
+                        if (i < mRow - 2 && j > 0
+                                && kind == tileArray[i + 2][j - 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 2][j - 1].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
-                                    && (!tileArray[i + 2][j - 1].honey || !tileArray[i + 2][j].honey)) {
+                            if (tileArray[i + 2][j - 1].isMovable()
+                                    && tileArray[i + 2][j].isMovable()) {
                                 // O
                                 // O
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j - 2]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i + 2][j - 1].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 2][j + 1].kind) {
+                        } else if (i < mRow - 2 && j < mColumn - 1
+                                && kind == tileArray[i + 2][j + 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 2][j + 1].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
-                                    && (!tileArray[i + 2][j + 1].honey || !tileArray[i + 2][j].honey)) {
+                            if (tileArray[i + 2][j + 1].isMovable()
+                                    && tileArray[i + 2][j].isMovable()) {
                                 //O
                                 //O
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i + 2][j + 1].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i - 1][j - 1].kind) {
+                        } else if (i > 0 && j > 0
+                                && kind == tileArray[i - 1][j - 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j - 1].invalid && !tileArray[i - 1][j].invalid && tileArray[i - 1][j].kind != 0
-                                    && (!tileArray[i - 1][j - 1].honey || !tileArray[i - 1][j].honey)) {
+                            if (tileArray[i - 1][j - 1].isMovable()
+                                    && tileArray[i - 1][j].isMovable()) {
                                 //O
                                 // O
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i - 2][j - 2]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i - 1][j - 1].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i - 1][j + 1].kind) {
+                        } else if (i > 0 && j < mColumn - 1
+                                && kind == tileArray[i - 1][j + 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j + 1].invalid && !tileArray[i - 1][j].invalid && tileArray[i - 1][j].kind != 0
-                                    && (!tileArray[i - 1][j + 1].honey || !tileArray[i - 1][j].honey)) {
+                            if (tileArray[i - 1][j + 1].isMovable()
+                                    && tileArray[i - 1][j].isMovable()) {
                                 // O
                                 //O
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 1]);
-                                hintArray.add(fruitsArray[i - 2][j]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j].mImage);
+                                hintArray.add(tileArray[i - 1][j + 1].mImage);
                                 return true;
                             }
                         }
@@ -504,65 +513,66 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in mColumn 2
-        for (int i = 1; i <= mRow - 2; i++) {
-            for (int j = 1; j <= mColumn; j++) {
+        //Check match 3 in column 2
+        for (int i = 0; i < mRow - 2; i++) {
+            for (int j = 0; j < mColumn; j++) {
                 //Check tile state
                 if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+                        && tileArray[i][j].isFruit()) {
+
+                    int kind = tileArray[i][j].kind;
                     //Check next 2 mRow
-                    if (tileArray[i][j].kind == tileArray[i + 2][j].kind) {
+                    if (kind == tileArray[i + 2][j].kind) {
+
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i + 1][j - 1].kind) {
+                        if (j > 0 && kind == tileArray[i + 1][j - 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j - 1].invalid && !tileArray[i + 1][j].invalid && tileArray[i + 1][j].kind != 0
-                                    && (!tileArray[i + 1][j - 1].honey || !tileArray[i + 1][j].honey)) {
+                            if (tileArray[i + 1][j - 1].isMovable()
+                                    && tileArray[i + 1][j].isMovable()) {
                                 // O
                                 //O
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j - 2]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j - 1].mImage);
+                                hintArray.add(tileArray[i + 2][j].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 1][j + 1].kind) {
+                        } else if (j < mColumn - 1 && kind == tileArray[i + 1][j + 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j + 1].invalid && !tileArray[i + 1][j].invalid && tileArray[i + 1][j].kind != 0
-                                    && (!tileArray[i + 1][j + 1].honey || !tileArray[i + 1][j].honey)) {
+                            if (tileArray[i + 1][j + 1].isMovable()
+                                    && tileArray[i + 1][j].isMovable()) {
                                 //O
                                 // O
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j - 1]);
-                                hintArray.add(fruitsArray[i][j]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j + 1].mImage);
+                                hintArray.add(tileArray[i + 2][j].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 3][j].kind) {
+                        } else if (i < mRow - 3 && kind == tileArray[i + 3][j].kind) {
                             //Check is swappable
-                            if (!tileArray[i][j].invalid && !tileArray[i + 1][j].invalid && tileArray[i + 1][j].kind != 0
-                                    && (!tileArray[i][j].honey || !tileArray[i + 1][j].honey)) {
+                            if (tileArray[i][j].isMovable()
+                                    && tileArray[i + 1][j].isMovable()) {
                                 //O
                                 //
                                 //O
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j - 1]);
-                                hintArray.add(fruitsArray[i + 2][j - 1]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 2][j].mImage);
+                                hintArray.add(tileArray[i + 3][j].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i - 1][j].kind) {
+                        } else if (i > 0 && kind == tileArray[i - 1][j].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j].invalid && !tileArray[i + 2][j].invalid && tileArray[i + 2][j].kind != 0
-                                    && (!tileArray[i + 1][j].honey || !tileArray[i + 2][j].honey)) {
+                            if (tileArray[i + 1][j].isMovable()
+                                    && tileArray[i + 2][j].isMovable()) {
                                 //O
                                 //O
                                 //
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i + 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 2][j - 1]);
+                                hintArray.add(tileArray[i - 1][j].mImage);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 2][j].mImage);
                                 return true;
                             }
                         }
@@ -571,58 +581,61 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in mRow 1
-        for (int i = 1; i <= mRow; i++) {
-            for (int j = 1; j <= mColumn - 1; j++) {
-                if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+        //Check match 3 in row 1
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn - 1; j++) {
+                if (!tileArray[i][j].empty && tileArray[i][j].isFruit()) {
+
+                    int kind = tileArray[i][j].kind;
                     //Check next 1 mColumn
-                    if (tileArray[i][j].kind == tileArray[i][j + 1].kind) {
+                    if (kind == tileArray[i][j + 1].kind) {
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i - 1][j + 2].kind) {
+                        if (i > 0 && j < mColumn - 2
+                                && kind == tileArray[i - 1][j + 2].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j + 2].invalid && !tileArray[i][j + 2].invalid && tileArray[i][j + 2].kind != 0
-                                    && (!tileArray[i - 1][j + 2].honey || !tileArray[i][j + 2].honey)) {
+                            if (tileArray[i - 1][j + 2].isMovable()
+                                    && tileArray[i][j + 2].isMovable()) {
                                 //  O
                                 //OO
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i - 2][j + 1]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i - 1][j + 2].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 1][j + 2].kind) {
+                        } else if (i < mRow - 1 && j < mColumn - 2
+                                && kind == tileArray[i + 1][j + 2].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j + 2].invalid && !tileArray[i][j + 2].invalid && tileArray[i][j + 2].kind != 0
-                                    && (!tileArray[i + 1][j + 2].honey || !tileArray[i][j + 2].honey)) {
+                            if (tileArray[i + 1][j + 2].isMovable()
+                                    && tileArray[i][j + 2].isMovable()) {
                                 //OO
                                 //  O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i][j + 1]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i + 1][j + 2].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i - 1][j - 1].kind) {
+                        } else if (i > 0 && j > 0
+                                && kind == tileArray[i - 1][j - 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j - 1].invalid && !tileArray[i][j - 1].invalid && tileArray[i][j - 1].kind != 0
-                                    && (!tileArray[i - 1][j - 1].honey || !tileArray[i][j - 1].honey)) {
+                            if (tileArray[i - 1][j - 1].isMovable()
+                                    && tileArray[i][j - 1].isMovable()) {
                                 //O
                                 // OO
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i - 2][j - 2]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i - 1][j - 1].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 1][j - 1].kind) {
+                        } else if (i < mRow - 1 && j > 0
+                                && kind == tileArray[i + 1][j - 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j - 1].invalid && !tileArray[i][j - 1].invalid && tileArray[i][j - 1].kind != 0
-                                    && (!tileArray[i + 1][j - 1].honey || !tileArray[i][j - 1].honey)) {
+                            if (tileArray[i + 1][j - 1].isMovable()
+                                    && tileArray[i][j - 1].isMovable()) {
                                 // OO
                                 //O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j]);
-                                hintArray.add(fruitsArray[i][j - 2]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 1].mImage);
+                                hintArray.add(tileArray[i + 1][j - 1].mImage);
                                 return true;
                             }
                         }
@@ -631,56 +644,57 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in mRow 2
-        for (int i = 1; i <= mRow; i++) {
-            for (int j = 1; j <= mColumn - 2; j++) {
+        //Check match 3 in row 2
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn - 2; j++) {
                 if (!tileArray[i][j].empty
-                        && !tileArray[i][j].breakable
-                        && tileArray[i][j].kind != 0
-                        && tileArray[i][j].kind != STAR_FISH) {
+                        && tileArray[i][j].isFruit()) {
+
+                    int kind = tileArray[i][j].kind;
                     //Check next 2 mColumn
-                    if (tileArray[i][j].kind == tileArray[i][j + 2].kind) {
+                    if (kind == tileArray[i][j + 2].kind) {
+
                         //Check potential match
-                        if (tileArray[i][j].kind == tileArray[i - 1][j + 1].kind) {
+                        if (i > 0 && kind == tileArray[i - 1][j + 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i - 1][j + 1].invalid && !tileArray[i][j + 1].invalid && tileArray[i][j + 1].kind != 0
-                                    && (!tileArray[i - 1][j + 1].honey || !tileArray[i][j + 1].honey)) {
+                            if (tileArray[i - 1][j + 1].isMovable()
+                                    && tileArray[i][j + 1].isMovable()) {
                                 // O
                                 //O O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 1]);
-                                hintArray.add(fruitsArray[i - 2][j]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i - 1][j + 1].mImage);
+                                hintArray.add(tileArray[i][j + 2].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i + 1][j + 1].kind) {
+                        } else if (i < mRow - 1 && kind == tileArray[i + 1][j + 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i + 1][j + 1].invalid && !tileArray[i][j + 1].invalid && tileArray[i][j + 1].kind != 0
-                                    && (!tileArray[i + 1][j + 1].honey || !tileArray[i][j + 1].honey)) {
+                            if (tileArray[i + 1][j + 1].isMovable()
+                                    && tileArray[i][j + 1].isMovable()) {
                                 //O O
                                 // O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 1]);
-                                hintArray.add(fruitsArray[i][j]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i + 1][j + 1].mImage);
+                                hintArray.add(tileArray[i][j + 2].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i][j + 3].kind) {
+                        } else if (j < mColumn - 3 && kind == tileArray[i][j + 3].kind) {
                             //Check is swappable
-                            if (!tileArray[i][j].invalid && !tileArray[i][j + 1].invalid && tileArray[i][j + 1].kind != 0
-                                    && (!tileArray[i][j].honey || !tileArray[i][j + 1].honey)) {
+                            if (tileArray[i][j].isMovable()
+                                    && tileArray[i][j + 1].isMovable()) {
                                 //O OO
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 2]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 2].mImage);
+                                hintArray.add(tileArray[i][j + 3].mImage);
                                 return true;
                             }
-                        } else if (tileArray[i][j].kind == tileArray[i][j - 1].kind) {
+                        } else if (j > 0 && kind == tileArray[i][j - 1].kind) {
                             //Check is swappable
-                            if (!tileArray[i][j + 2].invalid && !tileArray[i][j + 1].invalid && tileArray[i][j + 1].kind != 0
-                                    && (!tileArray[i][j + 2].honey || !tileArray[i][j + 1].honey)) {
+                            if (tileArray[i][j + 2].isMovable()
+                                    && tileArray[i][j + 1].isMovable()) {
                                 //OO O
-                                hintArray.add(fruitsArray[i - 1][j - 1]);
-                                hintArray.add(fruitsArray[i - 1][j + 1]);
-                                hintArray.add(fruitsArray[i - 1][j - 2]);
+                                hintArray.add(tileArray[i][j].mImage);
+                                hintArray.add(tileArray[i][j + 2].mImage);
+                                hintArray.add(tileArray[i][j - 1].mImage);
                                 return true;
                             }
                         }
@@ -690,49 +704,38 @@ public class Hint extends GameObject {
         }
 
         //Check ice cream
-        for (int i = 1; i <= mRow; i++) {
-            for (int j = 1; j <= mColumn; j++) {
-                if (tileArray[i][j].direct == 'I') {
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn; j++) {
+
+                if (tileArray[i][j].direct == 'I' && tileArray[i][j].isMovable()) {
+
                     //Check nearby fruit is swappable
-                    if ((!tileArray[i - 1][j].invalid && !tileArray[i][j].invalid)
-                            && (!tileArray[i - 1][j].honey || !tileArray[i][j].honey)
-                            && !tileArray[i - 1][j].breakable
-                            && tileArray[i - 1][j].kind != 0
-                            && tileArray[i - 1][j].kind != STAR_FISH) {
-                        hintArray.add(fruitsArray[i - 1][j - 1]);
-                        hintArray.add(fruitsArray[i - 2][j - 1]);
+                    if (i > 0 && tileArray[i - 1][j].isMovable()
+                            && tileArray[i - 1][j].isFruit()) {
+                        hintArray.add(tileArray[i][j].mImage);
+                        hintArray.add(tileArray[i - 1][j].mImage);
                         return true;
-                    } else if ((!tileArray[i + 1][j].invalid && !tileArray[i][j].invalid)
-                            && (!tileArray[i + 1][j].honey || !tileArray[i][j].honey)
-                            && !tileArray[i + 1][j].breakable
-                            && tileArray[i + 1][j].kind != 0
-                            && tileArray[i + 1][j].kind != STAR_FISH) {
-                        hintArray.add(fruitsArray[i - 1][j - 1]);
-                        hintArray.add(fruitsArray[i][j - 1]);
+                    } else if (i < mRow - 1 && tileArray[i + 1][j].isMovable()
+                            && tileArray[i + 1][j].isFruit()) {
+                        hintArray.add(tileArray[i][j].mImage);
+                        hintArray.add(tileArray[i + 1][j].mImage);
                         return true;
-                    } else if ((!tileArray[i][j - 1].invalid && !tileArray[i][j].invalid)
-                            && (!tileArray[i][j - 1].honey || !tileArray[i][j].honey)
-                            && !tileArray[i][j - 1].breakable
-                            && tileArray[i][j - 1].kind != 0
-                            && tileArray[i][j - 1].kind != STAR_FISH) {
-                        hintArray.add(fruitsArray[i - 1][j - 1]);
-                        hintArray.add(fruitsArray[i - 1][j - 2]);
+                    } else if (j > 0 && tileArray[i][j - 1].isMovable()
+                            && tileArray[i][j - 1].isFruit()) {
+                        hintArray.add(tileArray[i][j].mImage);
+                        hintArray.add(tileArray[i][j - 1].mImage);
                         return true;
-                    } else if ((!tileArray[i][j + 1].invalid && !tileArray[i][j].invalid)
-                            && (!tileArray[i][j + 1].honey || !tileArray[i][j].honey)
-                            && !tileArray[i][j + 1].breakable
-                            && tileArray[i][j + 1].kind != 0
-                            && tileArray[i][j + 1].kind != STAR_FISH) {
-                        hintArray.add(fruitsArray[i - 1][j - 1]);
-                        hintArray.add(fruitsArray[i - 1][j]);
+                    } else if (j < mColumn - 1 && tileArray[i][j + 1].isMovable()
+                            && tileArray[i][j + 1].isFruit()) {
+                        hintArray.add(tileArray[i][j].mImage);
+                        hintArray.add(tileArray[i][j + 1].mImage);
                         return true;
                     }
+
                 }
             }
         }
 
-
-         */
         return false;
     }
 
@@ -759,6 +762,7 @@ public class Hint extends GameObject {
     public void onGameEvent(GameEvent gameEvent) {
         switch (gameEvent) {
             case START_HINT:
+                // When the player make a invalid swap, we stop the hint
                 stopHint();
 
                 boolean isFindMatch = checkPossibleMatch();
@@ -767,11 +771,10 @@ public class Hint extends GameObject {
                 } else {
                     mShowHint = true;
                 }
+
                 break;
             case PLAYER_SWAP:
                 stopHint();
-                mShowHint = false;
-                mDelayTime = 0;
                 break;
         }
     }
