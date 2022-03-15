@@ -19,7 +19,7 @@ public class Tile extends Sprite {
     public boolean entryPoint = false;
 
     // Tile speed
-    private int mSpeed = 15;
+    public static int mSpeed = 15;
 
     public Tile(GameEngine gameEngine) {
         super(gameEngine);

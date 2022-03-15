@@ -5,7 +5,7 @@
         <move>15</move>
         <column>6</column>
         <row>6</row>
-        <target>800</target>
+        <target>300</target>
         <board>quuuuwlnnnnrlnnnnrlnnnnrannnnseaddse</board>
         <fruit>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnennnne</fruit>
     </level1>

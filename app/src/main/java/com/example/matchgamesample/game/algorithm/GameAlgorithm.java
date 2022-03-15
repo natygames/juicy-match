@@ -1,52 +1,37 @@
-package com.example.matchgamesample.game;
+package com.example.matchgamesample.game.algorithm;
 
-import android.os.Handler;
 import android.widget.ImageView;
 
-import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
+import com.example.matchgamesample.game.GameController;
+import com.example.matchgamesample.game.GameControllerState;
+import com.example.matchgamesample.game.Tile;
+import com.example.matchgamesample.game.TileUtils;
 import com.example.matchgamesample.game.state.CollectGameState;
 import com.example.matchgamesample.game.state.GameState;
 import com.example.matchgamesample.game.state.IceGameState;
 import com.example.matchgamesample.game.state.ScoreGameState;
 import com.example.matchgamesample.game.state.StarGameState;
 
-public class MyAlgorithm {
-    private final GameEngine mGameEngine;
-    private final int mRow, mColumn;
-    private int fruitMun;
-    private final int tileSize;
-
+public class GameAlgorithm extends BaseAlgorithm {
     private ImageView[][] iceArray, iceArray2;
     private ImageView[][] advanceArray;
+    private GameState mGameState;
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
     public int swapCol, swapRow, swapCol2, swapRow2;
     public boolean isSwap = false, mShowHint = false;
-    private boolean isMoving = false, matchFinding = false, waitFinding = false;
-
-    // Tile's moving control
+    private int combo = 0;
+    // Tile moving control
     private static final int WAITING_TIME = 300;
     private int mWaitingTime = 0;
     public boolean mMoveTile = false;
-
-    // Tile's other state
-    private boolean isTransf = false;
-    private int combo = 0;
     //==================================================================================
-    private GameState mGameState;
-    private final AnimationManager animationManager;
-    private final Handler mHandler = new Handler();
 
-    public MyAlgorithm(GameEngine gameEngine) {
-        mGameEngine = gameEngine;
-        mRow = gameEngine.mLevel.mRow;
-        mColumn = gameEngine.mLevel.mColumn;
-        fruitMun = gameEngine.mLevel.mFruitNum;
-        tileSize = gameEngine.mImageSize;
-        animationManager = new AnimationManager(gameEngine);
+    public GameAlgorithm(GameEngine gameEngine) {
+        super(gameEngine);
         initGameState();
     }
 
@@ -77,6 +62,7 @@ public class MyAlgorithm {
         this.advanceArray = advanceArray;
     }
 
+    @Override
     public void update(Tile[][] tileArray, long elapsedMillis) {
 
         // Do nothing when waiting event
@@ -96,9 +82,9 @@ public class MyAlgorithm {
                     tileArray[i][j].onUpdate(elapsedMillis);
                     // Start bouncing animation
                     if (tileArray[i][j].bounce == 1) {
-                        animationManager.createLightBounceAnim(tileArray[i][j].mImage);
+                        mAnimationManager.createLightBounceAnim(tileArray[i][j].mImage);
                     } else if (tileArray[i][j].bounce == 2) {
-                        animationManager.createHeavyBounceAnim(tileArray[i][j].mImage);
+                        mAnimationManager.createHeavyBounceAnim(tileArray[i][j].mImage);
                     }
                 }
             }
@@ -122,7 +108,7 @@ public class MyAlgorithm {
 
         updateMatch(tileArray);
 
-        //Check combo
+        // Check combo
         if (!isMoving) {
             if (matchFinding) {
                 combo++;
@@ -145,7 +131,7 @@ public class MyAlgorithm {
             }
         }
 
-        //Check hint
+        // Check hint
         if (!isSwap && !isMoving) {
             //Check is potential moving
             if (!matchFinding && !waitFinding && mShowHint) {
@@ -241,7 +227,7 @@ public class MyAlgorithm {
                                          * X O O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j - 1], 'L', 1);
+                                        mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 1);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j - 1].isUpgrade = true;
@@ -254,7 +240,7 @@ public class MyAlgorithm {
                                          * O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j - 1], 'L', 2);
+                                        mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 2);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j - 1].isUpgrade = true;
@@ -273,7 +259,7 @@ public class MyAlgorithm {
                                          * O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j - 1], 'L', 3);
+                                        mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 3);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i + 1][j - 1].isUpgrade = true;
@@ -291,7 +277,7 @@ public class MyAlgorithm {
                                          * O X O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j], 'C', 1);
+                                        mAnimationManager.upgrade2S(tileArray[i][j], 'C', 1);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j].isUpgrade = true;
@@ -304,7 +290,7 @@ public class MyAlgorithm {
                                          *   O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j], 'C', 2);
+                                        mAnimationManager.upgrade2S(tileArray[i][j], 'C', 2);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j].isUpgrade = true;
@@ -323,7 +309,7 @@ public class MyAlgorithm {
                                          *   O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j], 'C', 3);
+                                        mAnimationManager.upgrade2S(tileArray[i][j], 'C', 3);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i + 1][j].isUpgrade = true;
@@ -341,7 +327,7 @@ public class MyAlgorithm {
                                          * O O X
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j + 1], 'R', 1);
+                                        mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 1);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i - 1][j + 1].isUpgrade = true;
@@ -354,7 +340,7 @@ public class MyAlgorithm {
                                          *     O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j + 1], 'R', 2);
+                                        mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 2);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i - 1][j + 1].isUpgrade = true;
@@ -372,7 +358,7 @@ public class MyAlgorithm {
                                          *     O
                                          */
                                         //Add upgrade animation
-                                        animationManager.upgrade2S(tileArray[i][j + 1], 'R', 3);
+                                        mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 3);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 1][j + 1].isUpgrade = true;
@@ -402,7 +388,7 @@ public class MyAlgorithm {
                                 //If tile is already special, do not add
                                 if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
                                     //Add upgrade animation
-                                    animationManager.upgrade2I_h(tileArray[i][j + 2]);
+                                    mAnimationManager.upgrade2I_h(tileArray[i][j + 2]);
                                     tileArray[i][j].isUpgrade = true;
                                     tileArray[i][j + 1].isUpgrade = true;
                                     tileArray[i][j + 3].isUpgrade = true;
@@ -417,7 +403,7 @@ public class MyAlgorithm {
                                     //If tile is already special, do not add
                                     if (tileArray[i][j + 1].direct == 'N' && !tileArray[i][j + 1].isUpgrade) {
                                         //Add upgrade animation
-                                        animationManager.upgrade2H_left(tileArray[i][j + 1]);
+                                        mAnimationManager.upgrade2H_left(tileArray[i][j + 1]);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 2].isUpgrade = true;
                                         tileArray[i][j + 3].isUpgrade = true;
@@ -428,7 +414,7 @@ public class MyAlgorithm {
                                     //If tile is already special, do not add
                                     if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
                                         //Add upgrade animation
-                                        animationManager.upgrade2H_right(tileArray[i][j + 2]);
+                                        mAnimationManager.upgrade2H_right(tileArray[i][j + 2]);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i][j + 3].isUpgrade = true;
@@ -457,7 +443,7 @@ public class MyAlgorithm {
                                 //If tile is already special, do not add
                                 if (tileArray[i + 2][j].direct == 'N' && !tileArray[i + 2][j].isUpgrade) {
                                     //Add upgrade animation
-                                    animationManager.upgrade2I_v(tileArray[i + 2][j]);
+                                    mAnimationManager.upgrade2I_v(tileArray[i + 2][j]);
                                     tileArray[i][j].isUpgrade = true;
                                     tileArray[i + 1][j].isUpgrade = true;
                                     tileArray[i + 3][j].isUpgrade = true;
@@ -473,7 +459,7 @@ public class MyAlgorithm {
                                     //If tile is already special, do not add
                                     if (tileArray[i + 1][j].direct == 'N' && !tileArray[i + 1][j].isUpgrade) {
                                         //Add upgrade animation
-                                        animationManager.upgrade2V_top(tileArray[i + 1][j]);
+                                        mAnimationManager.upgrade2V_top(tileArray[i + 1][j]);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 2][j].isUpgrade = true;
                                         tileArray[i + 3][j].isUpgrade = true;
@@ -484,7 +470,7 @@ public class MyAlgorithm {
                                     //If tile is already special, do not add
                                     if (tileArray[i + 2][j].direct == 'N' && !tileArray[i + 2][j].isUpgrade) {
                                         //Add upgrade animation
-                                        animationManager.upgrade2V_bottom(tileArray[i + 2][j]);
+                                        mAnimationManager.upgrade2V_bottom(tileArray[i + 2][j]);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 1][j].isUpgrade = true;
                                         tileArray[i + 3][j].isUpgrade = true;
@@ -558,7 +544,7 @@ public class MyAlgorithm {
             // (5.6) Update game state
             if (mGameState.isPlayerReachTarget()) {
                 if (!matchFinding && !waitFinding) {
-                    playerWin();
+                    playerWin(tileArray);
                     return;
                 }
             }
@@ -602,7 +588,7 @@ public class MyAlgorithm {
                         // Check is starfish
                         if (tileArray[i][j].kind == TileUtils.STAR_FISH) {
                             if (tileArray[i][j].entryPoint) {
-                                animationManager.explodeStarFish(tileArray[i][j]);
+                                mAnimationManager.explodeStarFish(tileArray[i][j]);
                             } else {
                                 tileArray[i][j].match = 0;
                             }
@@ -612,21 +598,21 @@ public class MyAlgorithm {
                         // Check breakable
                         if (tileArray[i][j].kind == TileUtils.CRACKER) {
                             // Explode cracker
-                            animationManager.explodeCracker(tileArray[i][j]);
+                            mAnimationManager.explodeCracker(tileArray[i][j]);
                         } else if (tileArray[i][j].kind == TileUtils.COOKIE) {
                             // Check how many layer
                             switch (tileArray[i][j].layer) {
                                 case 0:
                                     //Explode cookie
                                     tileArray[i][j].invalid = false;
-                                    animationManager.explodeCookie(tileArray[i][j]);
+                                    mAnimationManager.explodeCookie(tileArray[i][j]);
                                     break;
                                 case 1:
                                 case 2:
                                 case 3:
                                     tileArray[i][j].match = 0;
                                     tileArray[i][j].layer--;
-                                    animationManager.explodeCookieLayer(tileArray[i][j]);
+                                    mAnimationManager.explodeCookieLayer(tileArray[i][j]);
                                     break;
                             }
                         } else {
@@ -643,9 +629,9 @@ public class MyAlgorithm {
 
                             // Explode fruit
                             if (!tileArray[i][j].isUpgrade)
-                                animationManager.explodeFruit(tileArray[i][j]);
+                                mAnimationManager.explodeFruit(tileArray[i][j]);
                             // Show score
-                            animationManager.createScore(tileArray[i][j]);
+                            mAnimationManager.createScore(tileArray[i][j]);
                         }
                     }
                 }
@@ -671,283 +657,50 @@ public class MyAlgorithm {
 
     }
 
-    private void playerWin() {
-        mGameEngine.onGameEvent(GameEvent.PLAYER_REACH_TARGET);
-    }
+    public void refresh(Tile[][] tileArray) {
 
-    private void playerLoss() {
-        mGameEngine.onGameEvent(GameEvent.PLAYER_OUT_OF_MOVE);
-    }
-
-    //----------------------------------------------------------------------------------
-    // Method of Algorithm
-    //----------------------------------------------------------------------------------
-    private void findMatch(Tile[][] tileArray) {
-
-        // Check match 3 in mColumn
-        for (int j = 0; j < mColumn; j++) {
-            for (int i = 0; i < mRow - 2; i++) {
-                //Check state
-                if (tileArray[i][j].isFruit() && tileArray[i][j].wait == 0) {
-                    // Check is there a sequence
-                    if ((tileArray[i][j].kind == tileArray[i + 1][j].kind) &&
-                            (tileArray[i][j].kind == tileArray[i + 2][j].kind)) {
-                        //Add match and explode around
-                        for (int n = 0; n <= 2; n++) {
-                            tileArray[i + n][j].match = 1;
-                            explodeAround(tileArray, tileArray[i + n][j]);
-                        }
-
-                    }
-                }
-            }
-        }
-
-        // Check match 3 in mRow
-        for (int i = 0; i < mRow; i++) {
-            for (int j = 0; j < mColumn - 2; j++) {
-                //Check state
-                if (tileArray[i][j].isFruit() && tileArray[i][j].wait == 0) {
-
-                    // Check is there a sequence
-                    if ((tileArray[i][j].kind == tileArray[i][j + 1].kind) &&
-                            (tileArray[i][j].kind == tileArray[i][j + 2].kind)) {
-                        //Add match and explode around
-                        for (int n = 0; n <= 2; n++) {
-                            tileArray[i][j + n].match = 1;
-                            explodeAround(tileArray, tileArray[i][j + n]);
-                        }
-
-                    }
-                }
-            }
-        }
-    }
-
-    private void tile2Top(Tile[][] tileArray) {
-        for (int j = 0; j < mColumn; j++) {
-            for (int i = mRow - 1; i >= 0; i--) {
-                //Check match
-                if (tileArray[i][j].match != 0) {
-                    //Swap tile
-                    for (int n = i - 1; n >= 0; n--) {
-                        //If empty tube do not swap
-                        if (tileArray[n][j].match == 0 && !tileArray[n][j].tube) {
-
-                            if (tileArray[n][j].invalid) {
-                                tileArray[i][j].kind = 0;
-                                tileArray[i][j].match = 0;
-                                tileArray[i][j].wait = 1;
-                                break;
-                            }
-
-                            swap(tileArray, tileArray[n][j], tileArray[i][j]);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void tileReset(Tile[][] tileArray) {
-        for (int j = 0; j < mColumn; j++) {
-            for (int i = mRow - 1, n = 1; i >= 0; i--) {
-
-                // Breakable may cause 0 match
-                if (tileArray[i][j].isAnimate) {
-                    tileArray[i][j].isAnimate = false;
-                }
-
-                if (tileArray[i][j].match != 0) {
-
-                    // Go to top
-                    tileArray[i][j].y = -tileSize * n++;
-                    tileArray[i][j].x = tileArray[i][j].col * tileSize;
-                    // Reset fruit
-                    tileArray[i][j].reset();
-
-                }
-            }
-        }
-    }
-
-    private void diagonalSwap(Tile[][] tileArray) {
-
-        // First, check wait = 2 top down
-        for (int j = 0; j < mColumn; j++) {
-            for (int i = 0; i < mRow; i++) {
-
-                //Find waiting tile
-                if (tileArray[i][j].wait != 0) {
-
-                    //Look up
-                    for (int n = i - 1; n >= 0; n--) {
-
-                        //Find obstacle
-                        if ((tileArray[n][j].invalid && !tileArray[n][j].tube) || tileArray[n][j].wait == 2) {
-
-                            //Check is blocked
-                            if ((j == 0 || tileArray[n][j - 1].invalid || tileArray[n][j - 1].wait == 2)
-                                    && (j == mColumn - 1 || tileArray[n][j + 1].invalid || tileArray[n][j + 1].wait == 2)) {
-                                tileArray[i][j].wait = 2;
-                                break;
-                            } else if (tileArray[n + 1][j].tube) {
-                                tileArray[i][j].wait = 2;
-                                break;
-                            } else {
-                                tileArray[i][j].wait = 1;
-                            }
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-
-        // Then, diagonal swap bottom up
-        for (int j = 0; j < mColumn; j++) {
-            for (int i = mRow - 1; i >= 0; i--) {
-
-                //Find waiting tile
-                if (tileArray[i][j].wait != 0) {
-
-                    //Look up
-                    outer:
-                    for (int n = i - 1; n >= 0; n--) {
-
-                        //Find obstacle
-                        if ((tileArray[n][j].invalid && !tileArray[n][j].tube) || tileArray[n][j].wait == 2) {
-
-                            if (tileArray[n + 1][j].tube) {
-                                /* The tile can only go though tube vertically from top
-                                 *     x o x  <-- tile (No diagonal swapping)
-                                 *      | |
-                                 *      | |   <-- tube
-                                 */
-                                break;
-                            }
-
-                            //Look right
-                            for (int m = n; m >= 0; m--) {
-                                if (j == mColumn - 1 || tileArray[m][j + 1].invalid || (tileArray[m][j + 1].y - tileArray[m][j + 1].row * tileSize != 0)) {
-                                    break;
-                                } else if (tileArray[m][j + 1].wait == 0) {
-                                    /*    O X
-                                     *
-                                     *    O
-                                     */
-                                    tileArray[i][j].match++;
-                                    tileArray[i][j].wait = 0;
-                                    tileArray[m][j + 1].diagonal = n;
-                                    swap(tileArray, tileArray[m][j + 1], tileArray[i][j]);
-                                    break outer;
-                                }
-                            }
-
-                            //Look left
-                            for (int m = n; m >= 0; m--) {
-                                if (j == 0 || tileArray[m][j - 1].invalid || (tileArray[m][j - 1].y - tileArray[m][j - 1].row * tileSize != 0)) {
-                                    break;
-                                } else if (tileArray[m][j - 1].wait == 0) {
-                                    /*  X O
-                                     *
-                                     *    O
-                                     */
-                                    tileArray[i][j].match++;
-                                    tileArray[i][j].wait = 0;
-                                    tileArray[m][j - 1].diagonal = n;
-                                    swap(tileArray, tileArray[m][j - 1], tileArray[i][j]);
-                                    break outer;
-                                }
-                            }
-
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void updateMove(Tile[][] tileArray) {
-        isMoving = false;
-        outer:
+        //Refresh fruit
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
-                if (tileArray[i][j].isMoving()) {
-                    isMoving = true;
-                    break outer;
+                //Check tile state
+                if (!tileArray[i][j].invalid
+                        && tileArray[i][j].isFruit()
+                        && !tileArray[i][j].special) {
+                    //Do not refresh special fruit
+                    mAnimationManager.createRefreshAnim(tileArray[i][j].mImage);
                 }
             }
         }
-    }
 
-    private void updateWait(Tile[][] tileArray) {
-        waitFinding = false;
-        outer:
-        for (int i = 0; i < mRow; i++) {
-            for (int j = 0; j < mColumn; j++) {
-                if (tileArray[i][j].wait == 1) {
-                    waitFinding = true;
-                    break outer;
+        mHandler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                for (int j = 0; j < mColumn; j++) {
+                    for (int i = mRow - 1; i >= 0; i--) {
+                        //Check tile state
+                        if (!tileArray[i][j].invalid
+                                && tileArray[i][j].isFruit()
+                                && !tileArray[i][j].special) {
+                            //Assign new tile
+                            do {
+                                tileArray[i][j].setRandomFruit();
+                            } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
+                                    && tileArray[i + 2][j].kind == tileArray[i][j].kind)
+                                    || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind
+                                    && tileArray[i][j - 2].kind == tileArray[i][j].kind));
+                        }
+                    }
                 }
-            }
-        }
-    }
 
-    private void updateMatch(Tile[][] tileArray) {
-        matchFinding = false;
-        outer:
-        for (int i = 0; i < mRow; i++) {
-            for (int j = 0; j < mColumn; j++) {
-                if (tileArray[i][j].match != 0) {
-                    matchFinding = true;
-                    break outer;
-                }
+                mGameEngine.onGameEvent(GameEvent.START_HINT);
             }
-        }
+        }, 800);
+
     }
-    //==================================================================================
 
     //----------------------------------------------------------------------------------
     // Method control swap
     //----------------------------------------------------------------------------------
-    public void swap(Tile[][] tileArray, Tile tile1, Tile tile2) {
-        if (tile1.invalid || tile2.invalid)
-            return;
-
-        //Exchange mRow
-        int temp_row = tile1.row;
-        tile1.row = tile2.row;
-        tile2.row = temp_row;
-
-        //Exchange mColumn
-        int temp_col = tile1.col;
-        tile1.col = tile2.col;
-        tile2.col = temp_col;
-
-        //If ice do not swap
-        if (tile1.ice != 0 || tile2.ice != 0) {
-            int temp = tile1.ice;
-            tile1.ice = tile2.ice;
-            tile2.ice = temp;
-        }
-
-        //If entryPoint do not swap
-        if (tile1.entryPoint || tile2.entryPoint) {
-            boolean temp = tile1.entryPoint;
-            tile1.entryPoint = tile2.entryPoint;
-            tile2.entryPoint = temp;
-        }
-
-        //Exchange tile
-        tileArray[tile1.row][tile1.col] = tile1;
-        tileArray[tile2.row][tile2.col] = tile2;
-
-    }
-
     public boolean canPlayerSwap() {
         if (isMoving || matchFinding || waitFinding) {
             return false;
@@ -1061,418 +814,37 @@ public class MyAlgorithm {
             tile2.iceCreamTarget = tile1.kind;
         }
     }
-
-    public void refresh(Tile[][] tileArray) {
-
-        //Refresh fruit
-        for (int i = 0; i < mRow; i++) {
-            for (int j = 0; j < mColumn; j++) {
-                //Check tile state
-                if (!tileArray[i][j].invalid
-                        && tileArray[i][j].isFruit()
-                        && !tileArray[i][j].special) {
-                    //Do not refresh special fruit
-                    animationManager.createRefreshAnim(tileArray[i][j].mImage);
-                }
-            }
-        }
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (int j = 0; j < mColumn; j++) {
-                    for (int i = mRow - 1; i >= 0; i--) {
-                        //Check tile state
-                        if (!tileArray[i][j].invalid
-                                && tileArray[i][j].isFruit()
-                                && !tileArray[i][j].special) {
-                            //Assign new tile
-                            do {
-                                tileArray[i][j].setRandomFruit();
-                            } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
-                                    && tileArray[i + 2][j].kind == tileArray[i][j].kind)
-                                    || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind
-                                    && tileArray[i][j - 2].kind == tileArray[i][j].kind));
-                        }
-                    }
-                }
-
-                mGameEngine.onGameEvent(GameEvent.START_HINT);
-            }
-        }, 800);
-
-    }
     //==================================================================================
 
-    //----------------------------------------------------------------------------------
-    // Method of special fruit
-    //----------------------------------------------------------------------------------
-    private void explodeH(Tile[][] tileArray, Tile tile) {
-        //Mark isExplode
-        tile.isExplode = true;
-        //Add horizontal flash
-        animationManager.createHorizontalFlash(tile);
-        //Add match in mRow
-        for (int j = 0; j < mColumn; j++) {
-            //Check is empty fruit
-            if (!tileArray[tile.row][j].empty) {
+    private void playerWin(Tile[][] tileArray) {
+        mGameEngine.onGameEvent(GameEvent.PLAYER_REACH_TARGET);
 
-                // Add match
-                tileArray[tile.row][j].match++;
-
-                //Check fruit is special in mRow
-                if (tileArray[tile.row][j].special) {
-                    //Check is explode
-                    if (!tileArray[tile.row][j].isExplode && !tileArray[tile.row][j].lock) {
-                        //Check direct
-                        if (tileArray[tile.row][j].direct == 'V') {
-                            explodeV(tileArray, tileArray[tile.row][j]);
-                        } else if (tileArray[tile.row][j].direct == 'H') {
-                            explodeH(tileArray, tileArray[tile.row][j]);
-                        } else if (tileArray[tile.row][j].direct == 'S') {
-                            explodeS(tileArray, tileArray[tile.row][j]);
-                        } else if (tileArray[tile.row][j].direct == 'I') {
-                            explodeI(tileArray, tileArray[tile.row][j]);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void explodeV(Tile[][] tileArray, Tile tile) {
-        //Mark isExplode
-        tile.isExplode = true;
-        //Add vertical flash
-        animationManager.createVerticalFlash(tile);
-        //Add match in mColumn
-        for (int i = 0; i < mRow; i++) {
-            //Check is empty fruit
-            if (!tileArray[i][tile.col].empty) {
-
-                // Add match
-                tileArray[i][tile.col].match++;
-
-                //Check fruit is special in mColumn
-                if (tileArray[i][tile.col].special) {
-                    //Check is explode
-                    if (!tileArray[i][tile.col].isExplode && !tileArray[i][tile.col].lock) {
-                        //Check direct
-                        if (tileArray[i][tile.col].direct == 'H') {
-                            explodeH(tileArray, tileArray[i][tile.col]);
-                        } else if (tileArray[i][tile.col].direct == 'V') {
-                            explodeV(tileArray, tileArray[i][tile.col]);
-                        } else if (tileArray[i][tile.col].direct == 'S') {
-                            explodeS(tileArray, tileArray[i][tile.col]);
-                        } else if (tileArray[i][tile.col].direct == 'I') {
-                            explodeI(tileArray, tileArray[i][tile.col]);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void explodeS(Tile[][] tileArray, Tile tile) {
-        int row = tile.row;
-        int col = tile.col;
-
-        //Mark isExplode
-        tile.isExplode = true;
-        //Add square flash
-        animationManager.createSquareFlash(tile);
-        //Add match in square
-        for (int i = row - 1; i <= row + 1; i++) {
-            for (int j = col - 1; j <= col + 1; j++) {
-
-                if (i < 0 || i >= mRow || j < 0 || j >= mColumn)
-                    continue;
-
-                //Check is empty fruit
-                if (!tileArray[i][j].empty) {
-
-                    // Add match
-                    tileArray[i][j].match++;
-
-                    //Check fruit is special in square
-                    if (tileArray[i][j].special) {
-                        //Check is explode
-                        if (!tileArray[i][j].isExplode && !tileArray[i][j].lock) {
-                            //Check direct
-                            if (tileArray[i][j].direct == 'H') {
-                                explodeH(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'V') {
-                                explodeV(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'S') {
-                                explodeS(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'I') {
-                                explodeI(tileArray, tileArray[i][j]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void explodeBigH(Tile[][] tileArray, Tile tile) {
-        int row = tile.row;
-        int col = tile.col;
-
-        if (row == 0) {
-            explodeH(tileArray, tileArray[row][col]);
-            explodeH(tileArray, tileArray[row + 1][col]);
-        } else if (row == this.mRow - 1) {
-            explodeH(tileArray, tileArray[row - 1][col]);
-            explodeH(tileArray, tileArray[row][col]);
-        } else {
-            explodeH(tileArray, tileArray[row - 1][col]);
-            explodeH(tileArray, tileArray[row][col]);
-            explodeH(tileArray, tileArray[row + 1][col]);
-        }
-        animationManager.createShakingAnim_small();
-        animationManager.createExplodeWave_small(tileArray[row][col]);
-        animationManager.createSquareFlash(tileArray[row][col]);
-    }
-
-    private void explodeBigV(Tile[][] tileArray, Tile tile) {
-        int row = tile.row;
-        int col = tile.col;
-
-        if (col == 0) {
-            explodeV(tileArray, tileArray[row][col]);
-            explodeV(tileArray, tileArray[row][col + 1]);
-        } else if (col == this.mColumn - 1) {
-            explodeV(tileArray, tileArray[row][col - 1]);
-            explodeV(tileArray, tileArray[row][col]);
-        } else {
-            explodeV(tileArray, tileArray[row][col - 1]);
-            explodeV(tileArray, tileArray[row][col]);
-            explodeV(tileArray, tileArray[row][col + 1]);
-        }
-        animationManager.createShakingAnim_small();
-        animationManager.createExplodeWave_small(tileArray[row][col]);
-        animationManager.createSquareFlash(tileArray[row][col]);
-    }
-
-    private void explodeBigS(Tile[][] tileArray, Tile tile) {
-        int row = tile.row;
-        int col = tile.col;
-        //Mark isExplode
-        tile.isExplode = true;
-        //Add square flash
-        animationManager.createShakingAnim_small();
-        animationManager.createSquareFlash_big(tile);
-
-        //Add match in 5x5 square
-        for (int i = row - 2; i <= row + 2; i++) {
-            for (int j = col - 2; j <= col + 2; j++) {
-
-                //Check index not out of bound
-                if (i < 0 || i >= mRow || j < 0 || j >= mColumn)
-                    continue;
-
-                //Check is empty fruit
-                if (!tileArray[i][j].empty) {
-
-                    // Add match
-                    tileArray[i][j].match++;
-
-                    //Check fruit is special in square
-                    if (tileArray[i][j].special) {
-                        //Check is explode
-                        if (!tileArray[i][j].isExplode && !tileArray[i][j].lock) {
-                            //Check direct
-                            if (tileArray[i][j].direct == 'H') {
-                                explodeH(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'V') {
-                                explodeV(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'S') {
-                                explodeS(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'I') {
-                                explodeI(tileArray, tileArray[i][j]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void explodeI(Tile[][] tileArray, Tile tile) {
-        // Mark isExplode
-        tile.isExplode = true;
-
-        // Get mTarget fruit
-        int target = 0;
-        if (tile.iceCreamTarget == 0) {
-            // Get a random fruit
-            target = TileUtils.FRUITS[(int) (Math.random() * fruitMun)];
-        } else {
-            target = tile.iceCreamTarget;
-        }
-
-        // Check same fruit kind
+        // Unlock all the tile
         for (int j = 0; j < mColumn; j++) {
             for (int i = 0; i < mRow; i++) {
 
-                // Check state
-                if (!tileArray[i][j].empty && !tileArray[i][j].isExplode && tileArray[i][j].kind != 0) {
-
-                    //Check is mTarget fruit
-                    if (target == tileArray[i][j].kind) {
-
-                        // Add lightning animation
-                        animationManager.createLightning(tile, tileArray[i][j]);
-                        animationManager.createLightning_fruit(tileArray[i][j], false);
-
-                        // Add match to mTarget and explode around
-                        tileArray[i][j].match = 1;
-                        explodeAround(tileArray, tileArray[i][j]);
-
-                        // Check fruit is special
-                        if (tileArray[i][j].special && !tileArray[i][j].isExplode && !tileArray[i][j].lock) {
-                            if (tileArray[i][j].direct == 'H') {
-                                explodeH(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'V') {
-                                explodeV(tileArray, tileArray[i][j]);
-                            } else if (tileArray[i][j].direct == 'S') {
-                                explodeS(tileArray, tileArray[i][j]);
-                            }
-                        }
-                    }
+                //Check lock
+                if (tileArray[i][j].lock) {
+                    explodeLock(advanceArray[i + 1][j], tileArray[i][j]);
                 }
+
             }
         }
+
     }
 
-    private void explodeBigI(Tile[][] tileArray, Tile tile) {
-        //Mark isExplode
-        tile.isExplode = true;
-        //Add animation
-        animationManager.createShakingAnim();
-        animationManager.createExplodeWave(tile);
-        //Check same fruit kind
-        for (int i = 0; i < mRow; i++) {
-            for (int j = 0; j < mColumn; j++) {
-                if (!tileArray[i][j].empty
-                        && !tileArray[i][j].isExplode) {
-
-                    //Add lightning animation
-                    animationManager.createLightning(tile, tileArray[i][j]);
-                    animationManager.createLightning_fruit(tileArray[i][j], false);
-
-                    // Add match
-                    tileArray[i][j].match++;
-
-                    //Check fruit is special
-                    if (tileArray[i][j].special && !tileArray[i][j].lock) {
-                        if (tileArray[i][j].direct == 'H') {
-                            explodeH(tileArray, tileArray[i][j]);
-                        } else if (tileArray[i][j].direct == 'V') {
-                            explodeV(tileArray, tileArray[i][j]);
-                        } else if (tileArray[i][j].direct == 'S') {
-                            explodeS(tileArray, tileArray[i][j]);
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private void transI(Tile[][] tileArray, Tile tile) {
-
-        // Transform flag
-        transfWait();
-
-        // Mark isExplode
-        tile.isExplode = true;
-
-        // Check same fruit kind
-        int target = tile.iceCreamTarget;
-        for (int i = 0; i < mRow; i++) {
-            for (int j = 0; j < mColumn; j++) {
-
-                // Check state
-                if (!tileArray[i][j].empty
-                        && !tileArray[i][j].isExplode
-                        && tileArray[i][j].isFruit()) {
-
-                    // Check ice cream mTarget
-                    if ((target == tileArray[i][j].kind) && !tileArray[i][j].special) {
-
-                        // Add lightning animation
-                        animationManager.createLightning(tile, tileArray[i][j]);
-                        animationManager.createLightning_fruit(tileArray[i][j], true);
-
-                        // Set direct
-                        if (tile.specialCombine == 'T') {
-                            tileArray[i][j].special = true;
-                            tileArray[i][j].direct = (Math.random() > 0.5 ? 'H' : 'V');
-                        } else {
-                            tileArray[i][j].special = true;
-                            tileArray[i][j].direct = 'S';
-                        }
-                    }
-                }
-            }
-        }
-    }
-    //==================================================================================
-
-    private void transfWait() {
-        //Bug is ice cream's wait may cause error
-        isTransf = true;
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isTransf = false;
-            }
-        }, 1200);
-    }
-
-    private void explodeAround(Tile[][] tileArray, Tile tile) {
-        // Do nothing if locked
-        if (tile.lock)
-            return;
-
-        int col_temp = tile.col;
-        int row_temp = tile.row;
-
-        // Check up
-        if (row_temp > 0 && tileArray[row_temp - 1][col_temp].breakable
-                && !tileArray[row_temp - 1][col_temp].lock) {
-            tileArray[row_temp - 1][col_temp].match++;
-        }
-
-        // Check down
-        if (row_temp < mRow - 1 && tileArray[row_temp + 1][col_temp].breakable
-                && !tileArray[row_temp + 1][col_temp].lock) {
-            tileArray[row_temp + 1][col_temp].match++;
-        }
-
-        // Check left
-        if (col_temp > 0 && tileArray[row_temp][col_temp - 1].breakable
-                && !tileArray[row_temp][col_temp - 1].lock) {
-            tileArray[row_temp][col_temp - 1].match++;
-        }
-
-        // Check right
-        if (col_temp < mColumn - 1 && tileArray[row_temp][col_temp + 1].breakable
-                && !tileArray[row_temp][col_temp + 1].lock) {
-            tileArray[row_temp][col_temp + 1].match++;
-        }
-
+    private void playerLoss() {
+        mGameEngine.onGameEvent(GameEvent.PLAYER_OUT_OF_MOVE);
     }
 
     private void explodeIce(ImageView ice, ImageView ice2, Tile tile) {
         if (tile.ice == 1) {
             if (ice != null) {
-                animationManager.explodeIce(ice, 10);
+                mAnimationManager.explodeIce(ice, 10);
             }
         } else if (tile.ice == 2) {
             if (ice2 != null) {
-                animationManager.explodeIce(ice2, 5);
+                mAnimationManager.explodeIce(ice2, 5);
             }
         }
         tile.ice--;
@@ -1484,7 +856,7 @@ public class MyAlgorithm {
         tile.lock = false;
         if (tile.kind != TileUtils.COOKIE)
             tile.invalid = false;
-        animationManager.explodeLock(lock, tile);
+        mAnimationManager.explodeLock(lock, tile);
     }
 
 }

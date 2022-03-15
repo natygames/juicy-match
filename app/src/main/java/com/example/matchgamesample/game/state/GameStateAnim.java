@@ -106,14 +106,17 @@ public class GameStateAnim {
         guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 7, mTileSize * 2));
         board.addView(guide);
 
-        //Set animation
-        //Set dropping
-        board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
-                .setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+        //Set animation (total 2000 ms)
+        board.animate().setDuration(FALL_TIME_LONG)
+                .y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
+                .setInterpolator(overshootInterpolator)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME).y(mRoot.getHeight()).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME)
+                        .y(mRoot.getHeight()).setInterpolator(anticipateInterpolator)
+                        .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mRoot.removeAllViews();
@@ -133,13 +136,17 @@ public class GameStateAnim {
         refresh.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 3));
         mRoot.addView(refresh);
 
-        //Set animation
-        //Set dropping
-        refresh.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5)).setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+        //Set animation (total 1600 ms)
+        refresh.animate().setDuration(FALL_TIME_LONG)
+                .y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5))
+                .setInterpolator(overshootInterpolator)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                refresh.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(-mTileSize * 3).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                refresh.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
+                        .y(-mTileSize * 3).setInterpolator(anticipateInterpolator)
+                        .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mRoot.removeView(refresh);
@@ -176,13 +183,17 @@ public class GameStateAnim {
         guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 3));
         mRoot.addView(guide);
 
-        //Set animation
-        //Set dropping
-        guide.animate().setDuration(FALL_TIME_SHORT).y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5)).setInterpolator(decelerateInterpolator).setListener(new AnimatorListenerAdapter() {
+        //Set animation (total 1300 ms)
+        guide.animate().setDuration(FALL_TIME_SHORT)
+                .y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5))
+                .setInterpolator(decelerateInterpolator)
+                .setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
-                guide.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME).y(-mTileSize * 3).setInterpolator(anticipateInterpolator).setListener(new AnimatorListenerAdapter() {
+                guide.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
+                        .y(-mTileSize * 3).setInterpolator(anticipateInterpolator)
+                        .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         mRoot.removeView(guide);

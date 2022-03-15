@@ -17,7 +17,7 @@ import com.example.matchgamesample.game.counter.MoveCounter;
 import com.example.matchgamesample.game.counter.TargetCounter;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.GameBoard;
-import com.example.matchgamesample.game.MyAlgorithm;
+import com.example.matchgamesample.game.algorithm.GameAlgorithm;
 import com.example.matchgamesample.game.counter.ScoreCounter;
 import com.example.matchgamesample.game.Tile;
 import com.example.matchgamesample.game.GameController;
@@ -79,7 +79,7 @@ public class GameFragment extends BaseFragment {
 
         // Init engine
         mGameEngine = new GameEngine(getMainActivity(), mLevel, tileSize);
-        MyAlgorithm myAlgorithm = new MyAlgorithm(mGameEngine);
+        GameAlgorithm gameAlgorithm = new GameAlgorithm(mGameEngine);
 
         // Init tile
         Tile[][] tileArray = new Tile[row][column];
@@ -93,19 +93,19 @@ public class GameFragment extends BaseFragment {
             ImageView[][] iceArray2 = new ImageView[row][column];
             mGameBoard.createIceBoard(getView().findViewById(R.id.ice_board), iceArray,
                     getView().findViewById(R.id.ice_board2), iceArray2, tileArray);
-            myAlgorithm.setIceArray(iceArray, iceArray2);
+            gameAlgorithm.setIceArray(iceArray, iceArray2);
         }
         if (mLevel.advance != null) {
             ImageView[][] advanceArray = new ImageView[row + 2][column];
             mGameBoard.createAdvanceBoard(getView().findViewById(R.id.advance_board),
                     advanceArray, tileArray);
-            myAlgorithm.setAdvanceArray(advanceArray);
+            gameAlgorithm.setAdvanceArray(advanceArray);
         }
 
         // Add all the object to engine
         mGameEngine.setInputController(new BasicInputController(getView(), mGameEngine));
         GameController gameController = new GameController(mGameEngine, tileArray);
-        gameController.setMyAlgorithm(myAlgorithm);
+        gameController.setMyAlgorithm(gameAlgorithm);
         mGameEngine.addGameObject(gameController);
         mGameEngine.addGameObject(new ScoreCounter(getView()));
         mGameEngine.addGameObject(new MoveCounter(getView(), mGameEngine));

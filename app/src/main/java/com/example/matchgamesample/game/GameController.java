@@ -1,9 +1,18 @@
 package com.example.matchgamesample.game;
 
+import android.view.View;
+import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
+
+import com.example.matchgamesample.MainActivity;
+import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.engine.InputController;
+import com.example.matchgamesample.fragment.MapFragment;
+import com.example.matchgamesample.game.algorithm.BonusTimeAlgorithm;
+import com.example.matchgamesample.game.algorithm.GameAlgorithm;
 import com.example.matchgamesample.game.state.GameStateAnim;
 
 public class GameController extends GameObject {
@@ -13,11 +22,13 @@ public class GameController extends GameObject {
     private final int mTileSize;
     private final InputController mInputController;
     private final GameStateAnim mGameStateAnim;
-    private MyAlgorithm mAlgorithm;
+    private GameAlgorithm mAlgorithm;
+    private final BonusTimeAlgorithm mBonusTimeAlgorithm;
 
     private GameControllerState mState;
     private int mWaitingTime;
-    private static final int WAITING_TIME = 1600;
+    private static final int WAITING_TIME_SHORT = 1500;
+    private static final int WAITING_TIME_LONG = 1800;
 
     public GameController(GameEngine gameEngine, Tile[][] TileArray) {
         mGameEngine = gameEngine;
@@ -27,10 +38,11 @@ public class GameController extends GameObject {
         mTileSize = gameEngine.mImageSize;
         mInputController = gameEngine.mInputController;
         mGameStateAnim = new GameStateAnim(gameEngine);
+        mBonusTimeAlgorithm = new BonusTimeAlgorithm(gameEngine);
     }
 
-    public void setMyAlgorithm(MyAlgorithm myAlgorithm) {
-        mAlgorithm = myAlgorithm;
+    public void setMyAlgorithm(GameAlgorithm gameAlgorithm) {
+        mAlgorithm = gameAlgorithm;
     }
 
     @Override
@@ -52,7 +64,7 @@ public class GameController extends GameObject {
         switch (mState) {
             case START_GAME:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME) {
+                if (mWaitingTime > WAITING_TIME_SHORT) {
                     // Start animation
                     mGameStateAnim.startGame(mGameEngine.mLevel.mLevelType);
 
@@ -69,27 +81,34 @@ public class GameController extends GameObject {
                 break;
             case WAITING:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME) {
+                if (mWaitingTime > WAITING_TIME_SHORT) {
                     mState = GameControllerState.PLAY_GAME;
                     mWaitingTime = 0;
                 }
                 break;
-            case PLAYER_WIN:
-                mGameStateAnim.gameOver(GameEvent.PLAYER_REACH_TARGET);
-                mState = GameControllerState.BONUS_TIME;
-                break;
-            case PLAYER_LOSS:
-                mGameStateAnim.gameOver(GameEvent.PLAYER_OUT_OF_MOVE);
-                mState = GameControllerState.GAME_OVER;
-                break;
             case BONUS_TIME:
-
+                mBonusTimeAlgorithm.update(mTileArray, elapsedMillis);
                 break;
-            case GAME_PASS:
-
+            case BONUS_TIME_WAITING:
+                mWaitingTime += elapsedMillis;
+                if (mWaitingTime > WAITING_TIME_LONG) {
+                    mState = GameControllerState.BONUS_TIME;
+                    mWaitingTime = 0;
+                }
                 break;
             case GAME_OVER:
-
+                mWaitingTime += elapsedMillis;
+                if (mWaitingTime > WAITING_TIME_LONG) {
+                    showGameOverDialog();
+                    mWaitingTime = 0;
+                }
+                break;
+            case GAME_COMPLETE:
+                mWaitingTime += elapsedMillis;
+                if (mWaitingTime > WAITING_TIME_LONG) {
+                    showGameCompleteDialog();
+                    mWaitingTime = 0;
+                }
                 break;
         }
     }
@@ -129,27 +148,37 @@ public class GameController extends GameObject {
                 SwapTile();
                 break;
             case PLAYER_REACH_TARGET:
-                mState = GameControllerState.PLAYER_WIN;
+                mGameStateAnim.gameOver(GameEvent.PLAYER_REACH_TARGET);
+                mState = GameControllerState.BONUS_TIME_WAITING;
                 break;
             case PLAYER_OUT_OF_MOVE:
-                mState = GameControllerState.PLAYER_LOSS;
+                mGameStateAnim.gameOver(GameEvent.PLAYER_OUT_OF_MOVE);
+                mState = GameControllerState.GAME_OVER;
+                break;
+            case BONUS_TIME:
+                mGameStateAnim.startBonusTime();
+                addSkipButton();
+                mState = GameControllerState.BONUS_TIME_WAITING;
+                break;
+            case BONUS_TIME_COMPLETE:
+                mState = GameControllerState.GAME_COMPLETE;
                 break;
             case REFRESH:
-                mState = GameControllerState.WAITING;
                 mGameStateAnim.refreshGame();
                 refreshTile();
+                mState = GameControllerState.WAITING;
                 break;
             case COMBO_4:
-                mState = GameControllerState.WAITING;
                 mGameStateAnim.startCombo(GameEvent.COMBO_4);
+                mState = GameControllerState.WAITING;
                 break;
             case COMBO_5:
-                mState = GameControllerState.WAITING;
                 mGameStateAnim.startCombo(GameEvent.COMBO_5);
+                mState = GameControllerState.WAITING;
                 break;
             case COMBO_6:
-                mState = GameControllerState.WAITING;
                 mGameStateAnim.startCombo(GameEvent.COMBO_6);
+                mState = GameControllerState.WAITING;
                 break;
         }
     }
@@ -204,6 +233,32 @@ public class GameController extends GameObject {
 
     private void refreshTile() {
         mAlgorithm.refresh(mTileArray);
+    }
+
+    private void addSkipButton() {
+        Button button = mGameEngine.mActivity.findViewById(R.id.btn_skip);
+        button.animate().setStartDelay(300).setDuration(400)
+                .scaleX(2).scaleY(2).alpha(1).setInterpolator(new OvershootInterpolator());
+        button.setVisibility(View.VISIBLE);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Tile.mSpeed = 100;
+                mBonusTimeAlgorithm.mCurrentBonusTimeInterval = 50;
+                mBonusTimeAlgorithm.mCurrentWaitingTime = 0;
+                button.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
+    private void showGameOverDialog() {
+        MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
+        mainActivity.navigateToFragment(new MapFragment());
+    }
+
+    private void showGameCompleteDialog() {
+        MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
+        mainActivity.navigateToFragment(new MapFragment());
     }
 
 }

@@ -4,9 +4,11 @@ public enum GameControllerState {
     START_GAME,
     PLAY_GAME,
     WAITING,
-    PLAYER_WIN,
-    PLAYER_LOSS,
+
     BONUS_TIME,
-    GAME_PASS,
-    GAME_OVER
+    BONUS_TIME_WAITING,
+
+    GAME_OVER,
+    GAME_COMPLETE
+
 }
