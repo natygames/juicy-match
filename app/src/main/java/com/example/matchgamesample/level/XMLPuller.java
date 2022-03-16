@@ -11,20 +11,20 @@ import java.io.InputStream;
 
 public class XMLPuller {
     private static final String FILE_NAME = "data.xml";
-    private final Context context;
+    private final Context mContext;
     private Level mLevel;
-    private String currentLevel, nextLevel;
+    private String mCurrentLevel, mNextLevel;
 
     public XMLPuller(Context context) {
-        this.context = context;
-
+        mContext = context;
     }
 
     public Level getLevel(int level) {
-        this.currentLevel = "level" + level;
-        this.nextLevel = "level" + (level + 1);
+        mCurrentLevel = "level" + level;
+        mNextLevel = "level" + (level + 1);
         parseXML();
-        return this.mLevel;
+        mLevel.mLevel = level;
+        return mLevel;
     }
 
     private void parseXML() {
@@ -33,7 +33,7 @@ public class XMLPuller {
         try {
             parserFactory = XmlPullParserFactory.newInstance();
             XmlPullParser parser = parserFactory.newPullParser();
-            file = context.getAssets().open(FILE_NAME);
+            file = mContext.getAssets().open(FILE_NAME);
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(file, null);
             processParsing(parser);
@@ -60,10 +60,10 @@ public class XMLPuller {
             if (eventType == XmlPullParser.START_TAG) {
                 tagName = parser.getName();
 
-                if (currentLevel.equals(tagName)) {
-                    // Initialize mLevel when finding currentLevel
-                    this.mLevel = new Level();
-                } else if (nextLevel.equals(tagName)) {
+                if (mCurrentLevel.equals(tagName)) {
+                    // Initialize mLevel when finding mCurrentLevel
+                    mLevel = new Level();
+                } else if (mNextLevel.equals(tagName)) {
                     // Break loop when finish assign mLevel data
                     break;
                 } else if (this.mLevel != null) {

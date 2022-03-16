@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
@@ -29,9 +31,9 @@ public class GameStateAnim {
     private static final int PAUSE_TIME_LONG = 400;
     private static final int RETRY_TIME = 600;
     //Interpolator
-    private final AnticipateInterpolator anticipateInterpolator = new AnticipateInterpolator();
-    private final OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
-    private final DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator();
+    private final AnticipateInterpolator mAnticipateInterpolator = new AnticipateInterpolator();
+    private final OvershootInterpolator mOvershootInterpolator = new OvershootInterpolator();
+    private final DecelerateInterpolator mDecelerateInterpolator = new DecelerateInterpolator();
 
     public GameStateAnim(GameEngine gameEngine) {
         mActivity = gameEngine.mActivity;
@@ -42,7 +44,18 @@ public class GameStateAnim {
     public void startGameBoard() {
         View view = mActivity.findViewById(R.id.board_frame);
         view.setX(-mTileSize * 10);
-        view.animate().setDuration(600).x(0).setInterpolator(overshootInterpolator);
+        view.animate().setDuration(600).x(0).setInterpolator(mOvershootInterpolator);
+    }
+
+    public void clearGameBoard(int delay) {
+        View view = mActivity.findViewById(R.id.board_frame);
+        view.animate().setStartDelay(delay).setDuration(600).x(view.getWidth())
+                .setInterpolator(mAnticipateInterpolator);
+
+        ConstraintLayout board_info = (ConstraintLayout) mActivity.findViewById(R.id.board_info);
+        board_info.animate().setStartDelay(delay).setDuration(0).alpha(0);
+        ConstraintLayout board_button = (ConstraintLayout) mActivity.findViewById(R.id.board_button);
+        board_button.animate().setStartDelay(delay).setDuration(0).alpha(0);
     }
 
     public void startGame(LevelType type) {
@@ -109,21 +122,21 @@ public class GameStateAnim {
         //Set animation (total 2000 ms)
         board.animate().setDuration(FALL_TIME_LONG)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
-                .setInterpolator(overshootInterpolator)
+                .setInterpolator(mOvershootInterpolator)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                //Set retry
-                board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME)
-                        .y(mRoot.getHeight()).setInterpolator(anticipateInterpolator)
-                        .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mRoot.removeAllViews();
+                        //Set retry
+                        board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME)
+                                .y(mRoot.getHeight()).setInterpolator(mAnticipateInterpolator)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        mRoot.removeAllViews();
+                                    }
+                                });
                     }
                 });
-            }
-        });
 
     }
 
@@ -139,21 +152,21 @@ public class GameStateAnim {
         //Set animation (total 1600 ms)
         refresh.animate().setDuration(FALL_TIME_LONG)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5))
-                .setInterpolator(overshootInterpolator)
+                .setInterpolator(mOvershootInterpolator)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                //Set retry
-                refresh.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
-                        .y(-mTileSize * 3).setInterpolator(anticipateInterpolator)
-                        .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mRoot.removeView(refresh);
+                        //Set retry
+                        refresh.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
+                                .y(-mTileSize * 3).setInterpolator(mAnticipateInterpolator)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        mRoot.removeView(refresh);
+                                    }
+                                });
                     }
                 });
-            }
-        });
     }
 
     public void startCombo(GameEvent gameEvent) {
@@ -186,21 +199,21 @@ public class GameStateAnim {
         //Set animation (total 1300 ms)
         guide.animate().setDuration(FALL_TIME_SHORT)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5))
-                .setInterpolator(decelerateInterpolator)
+                .setInterpolator(mDecelerateInterpolator)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                //Set retry
-                guide.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
-                        .y(-mTileSize * 3).setInterpolator(anticipateInterpolator)
-                        .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mRoot.removeView(guide);
+                        //Set retry
+                        guide.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
+                                .y(-mTileSize * 3).setInterpolator(mAnticipateInterpolator)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        mRoot.removeView(guide);
+                                    }
+                                });
                     }
                 });
-            }
-        });
     }
 
     public void startBonusTime() {
@@ -216,14 +229,14 @@ public class GameStateAnim {
         //Set dropping
         bonusTime.animate().setDuration(FALL_TIME_LONG)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 3))
-                .setInterpolator(overshootInterpolator)
+                .setInterpolator(mOvershootInterpolator)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         //Set retry
                         bonusTime.animate().setStartDelay(PAUSE_TIME_SHORT)
                                 .setDuration(RETRY_TIME).y(-mTileSize * 6)
-                                .setInterpolator(anticipateInterpolator)
+                                .setInterpolator(mAnticipateInterpolator)
                                 .setListener(new AnimatorListenerAdapter() {
                                     @Override
                                     public void onAnimationEnd(Animator animation) {
@@ -267,18 +280,18 @@ public class GameStateAnim {
 
         //Set animation
         board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
-                .setInterpolator(overshootInterpolator).setListener(new AnimatorListenerAdapter() {
+                .setInterpolator(mOvershootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 //Set retry
                 board.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
-                        .y(mRoot.getHeight()).setInterpolator(anticipateInterpolator)
+                        .y(mRoot.getHeight()).setInterpolator(mAnticipateInterpolator)
                         .setListener(new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationEnd(Animator animation) {
-                        mRoot.removeAllViews();
-                    }
-                });
+                            @Override
+                            public void onAnimationEnd(Animator animation) {
+                                mRoot.removeAllViews();
+                            }
+                        });
             }
         });
     }

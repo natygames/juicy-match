@@ -11,9 +11,11 @@ import java.util.ArrayList;
 **/
 
 public class Level {
+    public int mLevel;
     public LevelType mLevelType;
-    public int mMove = 0;
-    public int mColumn = 0, mRow = 0;
+    public int mMove;
+    public int mScore;
+    public int mColumn, mRow;
     public int mFruitNum = 4;
     public ArrayList<Integer> mTarget = new ArrayList<>();
     public ArrayList<Integer> mCollect = new ArrayList<>();

@@ -266,9 +266,6 @@ public class BaseAlgorithm {
     }
 
     public void swap(Tile[][] tileArray, Tile tile1, Tile tile2) {
-        if (tile1.invalid || tile2.invalid)
-            return;
-
         //Exchange mRow
         int temp_row = tile1.row;
         tile1.row = tile2.row;

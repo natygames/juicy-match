@@ -286,7 +286,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_dialog_end"
         android:layout_width="wrap_content"

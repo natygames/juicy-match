@@ -1,5 +1,6 @@
 package com.example.matchgamesample.game.counter;
 
+import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,42 +23,43 @@ public class TargetCounter extends GameObject {
     private final ArrayList<TextView> mText = new ArrayList<>();
     private boolean mTargetsHaveChanged;
 
-    public TargetCounter(View view, GameEngine gameEngine) {
+    public TargetCounter(GameEngine gameEngine) {
         mLevel = gameEngine.mLevel;
         if (gameEngine.mLevel.mLevelType == LevelType.LEVEL_TYPE_SCORE) {
-            mText.add(view.findViewById(R.id.target_score));
+            mText.add(gameEngine.mActivity.findViewById(R.id.target_score));
         } else {
-            setTargetImages(gameEngine.mLevel.mTarget.size(), view);
+            setTargetImages(gameEngine);
         }
 
         mTargetsHaveChanged = false;
     }
 
-    private void setTargetImages(int targetNum, View view) {
+    private void setTargetImages(GameEngine gameEngine) {
+        Activity activity = gameEngine.mActivity;
         final ArrayList<ImageView> mTargetsImage = new ArrayList<>();
 
-        ConstraintLayout board_target = (ConstraintLayout) view.findViewById(R.id.board_target);
+        ConstraintLayout board_target = (ConstraintLayout) activity.findViewById(R.id.board_target);
 
-        switch (targetNum) {
+        switch (gameEngine.mLevel.mTarget.size()) {
             case 1:
-                mText.add(view.findViewById(R.id.target_txt_center));
-                mTargetsImage.add(view.findViewById(R.id.target_image_center));
+                mText.add(activity.findViewById(R.id.target_txt_center));
+                mTargetsImage.add(activity.findViewById(R.id.target_image_center));
                 board_target.setBackgroundResource(R.drawable.board_target_1);
                 break;
             case 2:
-                mText.add(view.findViewById(R.id.target_txt_leftCenter));
-                mText.add(view.findViewById(R.id.target_txt_rightCenter));
-                mTargetsImage.add(view.findViewById(R.id.target_image_leftCenter));
-                mTargetsImage.add(view.findViewById(R.id.target_image_rightCenter));
+                mText.add(activity.findViewById(R.id.target_txt_leftCenter));
+                mText.add(activity.findViewById(R.id.target_txt_rightCenter));
+                mTargetsImage.add(activity.findViewById(R.id.target_image_leftCenter));
+                mTargetsImage.add(activity.findViewById(R.id.target_image_rightCenter));
                 board_target.setBackgroundResource(R.drawable.board_target_2);
                 break;
             case 3:
-                mText.add(view.findViewById(R.id.target_txt_left));
-                mText.add(view.findViewById(R.id.target_txt_center));
-                mText.add(view.findViewById(R.id.target_txt_right));
-                mTargetsImage.add(view.findViewById(R.id.target_image_left));
-                mTargetsImage.add(view.findViewById(R.id.target_image_center));
-                mTargetsImage.add(view.findViewById(R.id.target_image_right));
+                mText.add(activity.findViewById(R.id.target_txt_left));
+                mText.add(activity.findViewById(R.id.target_txt_center));
+                mText.add(activity.findViewById(R.id.target_txt_right));
+                mTargetsImage.add(activity.findViewById(R.id.target_image_left));
+                mTargetsImage.add(activity.findViewById(R.id.target_image_center));
+                mTargetsImage.add(activity.findViewById(R.id.target_image_right));
                 board_target.setBackgroundResource(R.drawable.board_target_3);
                 break;
         }

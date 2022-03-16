@@ -11,6 +11,7 @@ import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.engine.InputController;
 import com.example.matchgamesample.fragment.MapFragment;
+import com.example.matchgamesample.fragment.WinDialogFragment;
 import com.example.matchgamesample.game.algorithm.BonusTimeAlgorithm;
 import com.example.matchgamesample.game.algorithm.GameAlgorithm;
 import com.example.matchgamesample.game.state.GameStateAnim;
@@ -26,9 +27,10 @@ public class GameController extends GameObject {
     private final BonusTimeAlgorithm mBonusTimeAlgorithm;
 
     private GameControllerState mState;
+    private Button mSkipButton;
     private int mWaitingTime;
-    private static final int WAITING_TIME_SHORT = 1500;
-    private static final int WAITING_TIME_LONG = 1800;
+    private static final int WAITING_TIME = 1500;
+    private static final int SWAP_THRESHOLD = 50;
 
     public GameController(GameEngine gameEngine, Tile[][] TileArray) {
         mGameEngine = gameEngine;
@@ -39,6 +41,7 @@ public class GameController extends GameObject {
         mInputController = gameEngine.mInputController;
         mGameStateAnim = new GameStateAnim(gameEngine);
         mBonusTimeAlgorithm = new BonusTimeAlgorithm(gameEngine);
+        mSkipButton = (Button) mGameEngine.mActivity.findViewById(R.id.btn_skip);
     }
 
     public void setMyAlgorithm(GameAlgorithm gameAlgorithm) {
@@ -64,7 +67,7 @@ public class GameController extends GameObject {
         switch (mState) {
             case START_GAME:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME_SHORT) {
+                if (mWaitingTime > WAITING_TIME) {
                     // Start animation
                     mGameStateAnim.startGame(mGameEngine.mLevel.mLevelType);
 
@@ -81,7 +84,7 @@ public class GameController extends GameObject {
                 break;
             case WAITING:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME_SHORT) {
+                if (mWaitingTime > WAITING_TIME) {
                     mState = GameControllerState.PLAY_GAME;
                     mWaitingTime = 0;
                 }
@@ -91,21 +94,21 @@ public class GameController extends GameObject {
                 break;
             case BONUS_TIME_WAITING:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME_LONG) {
+                if (mWaitingTime > 1800) {
                     mState = GameControllerState.BONUS_TIME;
                     mWaitingTime = 0;
                 }
                 break;
             case GAME_OVER:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME_LONG) {
+                if (mWaitingTime > 2300) {
                     showGameOverDialog();
                     mWaitingTime = 0;
                 }
                 break;
             case GAME_COMPLETE:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME_LONG) {
+                if (mWaitingTime > 700) {
                     showGameCompleteDialog();
                     mWaitingTime = 0;
                 }
@@ -145,7 +148,7 @@ public class GameController extends GameObject {
                 if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
                     return;
                 }
-                SwapTile();
+                swapTile();
                 break;
             case PLAYER_REACH_TARGET:
                 mGameStateAnim.gameOver(GameEvent.PLAYER_REACH_TARGET);
@@ -153,6 +156,7 @@ public class GameController extends GameObject {
                 break;
             case PLAYER_OUT_OF_MOVE:
                 mGameStateAnim.gameOver(GameEvent.PLAYER_OUT_OF_MOVE);
+                clearView(1600);
                 mState = GameControllerState.GAME_OVER;
                 break;
             case BONUS_TIME:
@@ -161,6 +165,7 @@ public class GameController extends GameObject {
                 mState = GameControllerState.BONUS_TIME_WAITING;
                 break;
             case BONUS_TIME_COMPLETE:
+                clearView(0);
                 mState = GameControllerState.GAME_COMPLETE;
                 break;
             case REFRESH:
@@ -183,38 +188,43 @@ public class GameController extends GameObject {
         }
     }
 
-    private void SwapTile() {
+    private void swapTile() {
         // Get the tile player press from inputController
         int swapCol = mInputController.mX_Down / mTileSize;
         int swapRow = mInputController.mY_Down / mTileSize;
         int swapCol2 = 0;
         int swapRow2 = 0;
 
-        if (mInputController.mX_Down - mInputController.mX_Up < -50) {
+        if (mInputController.mX_Down - mInputController.mX_Up < -SWAP_THRESHOLD) {
             // Swap right
             if (swapCol >= mColumn - 1)
                 return;
             swapCol2 = swapCol + 1;
             swapRow2 = swapRow;
-        } else if (mInputController.mX_Down - mInputController.mX_Up > 50) {
+        } else if (mInputController.mX_Down - mInputController.mX_Up > SWAP_THRESHOLD) {
             // Swap left
             if (swapCol <= 0)
                 return;
             swapCol2 = swapCol - 1;
             swapRow2 = swapRow;
-        } else if (mInputController.mY_Down - mInputController.mY_Up > 50) {
+        } else if (mInputController.mY_Down - mInputController.mY_Up > SWAP_THRESHOLD) {
             // Swap up
             if (swapRow <= 0)
                 return;
             swapCol2 = swapCol;
             swapRow2 = swapRow - 1;
-        } else if (mInputController.mY_Down - mInputController.mY_Up < -50) {
+        } else if (mInputController.mY_Down - mInputController.mY_Up < -SWAP_THRESHOLD) {
             // Swap down
             if (swapRow >= mRow - 1)
                 return;
             swapCol2 = swapCol;
             swapRow2 = swapRow + 1;
         } else {
+            return;
+        }
+
+        if (!mTileArray[swapRow][swapCol].isMovable()
+                || !mTileArray[swapRow2][swapCol2].isMovable()) {
             return;
         }
 
@@ -236,19 +246,24 @@ public class GameController extends GameObject {
     }
 
     private void addSkipButton() {
-        Button button = mGameEngine.mActivity.findViewById(R.id.btn_skip);
-        button.animate().setStartDelay(300).setDuration(400)
+        mSkipButton.animate().setStartDelay(300).setDuration(400)
                 .scaleX(2).scaleY(2).alpha(1).setInterpolator(new OvershootInterpolator());
-        button.setVisibility(View.VISIBLE);
-        button.setOnClickListener(new View.OnClickListener() {
+        mSkipButton.setVisibility(View.VISIBLE);
+        mSkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Tile.mSpeed = 100;
                 mBonusTimeAlgorithm.mCurrentBonusTimeInterval = 50;
                 mBonusTimeAlgorithm.mCurrentWaitingTime = 0;
-                button.setVisibility(View.INVISIBLE);
+                mSkipButton.setVisibility(View.INVISIBLE);
             }
         });
+    }
+
+    private void clearView(int delay) {
+        // Broad disappear
+        mGameStateAnim.clearGameBoard(delay);
+        mSkipButton.setVisibility(View.GONE);
     }
 
     private void showGameOverDialog() {
@@ -258,7 +273,8 @@ public class GameController extends GameObject {
 
     private void showGameCompleteDialog() {
         MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
-        mainActivity.navigateToFragment(new MapFragment());
+        mainActivity.navigateToFragment(WinDialogFragment
+                .newInstance(mGameEngine.mLevel.mLevel, mGameEngine.mLevel.mScore));
     }
 
 }

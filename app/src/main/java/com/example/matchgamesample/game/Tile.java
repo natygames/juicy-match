@@ -19,11 +19,12 @@ public class Tile extends Sprite {
     public boolean entryPoint = false;
 
     // Tile speed
-    public static int mSpeed = 15;
+    public static int mSpeed;
 
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
         mFruitNum = gameEngine.mLevel.mFruitNum;
+        mSpeed = 15;
     }
 
     public void startGame() {

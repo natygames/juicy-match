@@ -1,6 +1,5 @@
 package com.example.matchgamesample.game.counter;
 
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.matchgamesample.R;
@@ -11,13 +10,13 @@ import com.example.matchgamesample.level.Level;
 
 public class MoveCounter extends GameObject {
 
-    private final Level mLevel;
     private final TextView mText;
+    private final Level mLevel;
     private int mMoves;
     private boolean mMovesHaveChanged;
 
-    public MoveCounter(View view, GameEngine gameEngine) {
-        mText = (TextView) view.findViewById(R.id.move);
+    public MoveCounter(GameEngine gameEngine) {
+        mText = (TextView) gameEngine.mActivity.findViewById(R.id.move);
         mLevel = gameEngine.mLevel;
         mMoves = gameEngine.mLevel.mMove;
         mMovesHaveChanged = false;
