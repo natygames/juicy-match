@@ -1,5 +1,7 @@
 package com.example.matchgamesample.fragment;
 
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.ClipDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,7 +15,9 @@ import android.widget.ImageView;
 
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.game.Hint;
+import com.example.matchgamesample.game.counter.FPSCounter;
 import com.example.matchgamesample.game.counter.MoveCounter;
+import com.example.matchgamesample.game.counter.ScoreBarCounter;
 import com.example.matchgamesample.game.counter.TargetCounter;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.GameBoard;
@@ -29,6 +33,7 @@ public class GameFragment extends BaseFragment {
     private static final String LEVEL = "level";
     private int level;
     private GameEngine mGameEngine;
+    private AnimationDrawable mScoreBarAnimation;
 
     public GameFragment() {
         // Required empty public constructor
@@ -107,18 +112,34 @@ public class GameFragment extends BaseFragment {
         GameController gameController = new GameController(mGameEngine, tileArray);
         gameController.setMyAlgorithm(gameAlgorithm);
         mGameEngine.addGameObject(gameController);
+        mGameEngine.addGameObject(new FPSCounter(mGameEngine));
         mGameEngine.addGameObject(new ScoreCounter(mGameEngine));
         mGameEngine.addGameObject(new MoveCounter(mGameEngine));
         mGameEngine.addGameObject(new TargetCounter(mGameEngine));
+        mGameEngine.addGameObject(new ScoreBarCounter(mGameEngine));
         mGameEngine.addGameObject(new Hint(mGameEngine, tileArray));
 
         mGameEngine.startGame();
+
+        // We start score bar animation here
+        ClipDrawable clipDrawable = (ClipDrawable) getView().findViewById(R.id.score_bar).getBackground();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            mScoreBarAnimation = (AnimationDrawable) clipDrawable.getDrawable();
+        }
+        getMainActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (mScoreBarAnimation != null)
+                    mScoreBarAnimation.start();
+            }
+        });
     }
 
     @Override
     public boolean onBackPressed() {
         if (mGameEngine.isRunning() && !mGameEngine.isPaused()) {
             mGameEngine.pauseGame();
+            mScoreBarAnimation.stop();
             return true;
         }
         return super.onBackPressed();
@@ -129,6 +150,7 @@ public class GameFragment extends BaseFragment {
         super.onPause();
         if (mGameEngine.isRunning() && !mGameEngine.isPaused()) {
             mGameEngine.pauseGame();
+            mScoreBarAnimation.stop();
         }
     }
 
@@ -137,6 +159,7 @@ public class GameFragment extends BaseFragment {
         super.onResume();
         if (mGameEngine.isRunning() && mGameEngine.isPaused()) {
             mGameEngine.resumeGame();
+            mScoreBarAnimation.start();
         }
     }
 

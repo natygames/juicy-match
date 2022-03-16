@@ -2,7 +2,7 @@
 <levels>
     <level1>
         <target_type>1</target_type>
-        <move>15</move>
+        <move>10</move>
         <column>6</column>
         <row>6</row>
         <target>300</target>

@@ -108,6 +108,7 @@ public class AnimationManager {
                 }
             }
         }.run();
+
     }
 
     //This create vertical flash
@@ -1965,45 +1966,6 @@ public class AnimationManager {
                 view.animate().scaleX(1).scaleY(1).setDuration(100);
             }
         });
-    }
-
-    public void createInAnim(View board) {
-        board.animate().setDuration(600).x(0).setInterpolator(overshootInterpolator);
-    }
-
-    public void createOutAnim(View board) {
-        board.animate().setDuration(600).x(board.getWidth()).setInterpolator(anticipateInterpolator);
-    }
-
-    public void createStarAnim(RelativeLayout star) {
-        int view_width = star.getWidth();
-
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                ImageView sparkler = new ImageView(mActivity);
-                sparkler.setImageResource(R.drawable.flash_s_small);
-                sparkler.setX((int) (view_width * 4 / 9));
-                sparkler.setY((int) (view_width * 4 / 9));
-                sparkler.setLayoutParams(new ViewGroup.LayoutParams((int) (view_width / 9), (int) (view_width / 9)));
-                star.addView(sparkler);
-                //Set animation
-                sparkler.animate().setDuration((long) (250 * Math.random() + 250)).alpha(0).rotation(Math.random() > 0.5 ? 180 : -180).scaleX(10).scaleY(10)
-                        .x(j < 2 ? (float) ((int) (view_width * 4 / 9) - view_width * 3 * Math.random())
-                                : (float) ((int) (view_width * 4 / 9) + view_width * 3 * Math.random()))
-                        .y(i < 2 ? (float) ((int) (view_width * 4 / 9) - view_width * 3 * Math.random())
-                                : (float) ((int) (view_width * 4 / 9) + view_width * 3 * Math.random()))
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                star.removeView(sparkler);
-                            }
-                        });
-            }
-        }
-    }
-
-    public void createBtnSkipAnim(View view) {
-        view.animate().setStartDelay(300).setDuration(400).scaleX(2).scaleY(2).alpha(1).setInterpolator(overshootInterpolator);
     }
 
     public void createMachineAnim(ImageView view) {

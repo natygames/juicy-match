@@ -27,7 +27,7 @@ public class GameController extends GameObject {
     private final BonusTimeAlgorithm mBonusTimeAlgorithm;
 
     private GameControllerState mState;
-    private Button mSkipButton;
+    private final Button mSkipButton;
     private int mWaitingTime;
     private static final int WAITING_TIME = 1500;
     private static final int SWAP_THRESHOLD = 50;
