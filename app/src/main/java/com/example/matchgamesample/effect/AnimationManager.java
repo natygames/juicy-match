@@ -1958,16 +1958,6 @@ public class AnimationManager {
         mActivity.findViewById(R.id.effect_board).startAnimation(shaking_small_anim);
     }
 
-    public void createTextAnim(View view) {
-        view.animate().cancel();
-        view.animate().scaleX(1.5f).scaleY(1.5f).setDuration(100).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.animate().scaleX(1).scaleY(1).setDuration(100);
-            }
-        });
-    }
-
     public void createMachineAnim(ImageView view) {
         view.startAnimation(machine_anim);
     }

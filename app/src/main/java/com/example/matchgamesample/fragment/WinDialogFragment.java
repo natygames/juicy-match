@@ -87,7 +87,7 @@ public class WinDialogFragment extends BaseFragment {
         btn_next.setOnClickListener(btnOnClick);
 
         //Dialog animation
-        Animation inAnim = AnimationUtils.loadAnimation(getMainActivity(), R.anim.dialog_in_animation);
+        Animation inAnim = AnimationUtils.loadAnimation(getMainActivity(), R.anim.enter_from_left);
         mDialog.startAnimation(inAnim);
 
         //Star pop up

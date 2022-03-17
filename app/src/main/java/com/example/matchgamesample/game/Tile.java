@@ -24,7 +24,7 @@ public class Tile extends Sprite {
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
         mFruitNum = gameEngine.mLevel.mFruitNum;
-        mSpeed = 15;
+        mSpeed = 30;
     }
 
     public void startGame() {

@@ -1,5 +1,8 @@
 package com.example.matchgamesample.game.counter;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.matchgamesample.R;
@@ -36,6 +39,7 @@ public class MoveCounter extends GameObject {
     public void onDraw() {
         if (mMovesHaveChanged) {
             mText.setText(String.valueOf(mMoves));
+            createTextAnim(mText);
             mMovesHaveChanged = false;
         }
     }
@@ -50,4 +54,15 @@ public class MoveCounter extends GameObject {
             mMovesHaveChanged = true;
         }
     }
+
+    private void createTextAnim(View view) {
+        view.animate().cancel();
+        view.animate().scaleX(1.5f).scaleY(1.5f).setDuration(100).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                view.animate().scaleX(1).scaleY(1).setDuration(100);
+            }
+        });
+    }
+
 }

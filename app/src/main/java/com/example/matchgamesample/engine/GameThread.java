@@ -17,12 +17,10 @@ public class GameThread extends Thread {
 
     protected void doIt(long elapsedMillis) {
 
-        if (elapsedMillis < 20) { // This is 50 fps
-            try {
-                Thread.sleep(20 - elapsedMillis);
-            } catch (InterruptedException e) {
-                // We just continue
-            }
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            // We just continue
         }
 
         mHandle.post(new Runnable() {

@@ -4,6 +4,8 @@ import android.view.View;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
@@ -258,6 +260,9 @@ public class GameController extends GameObject {
                 mSkipButton.setVisibility(View.INVISIBLE);
             }
         });
+
+        ConstraintLayout board_button = (ConstraintLayout) mGameEngine.mActivity.findViewById(R.id.board_button);
+        board_button.setVisibility(View.INVISIBLE);
     }
 
     private void clearView(int delay) {

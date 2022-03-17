@@ -4,15 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.matchgamesample.dialog.BaseDialog;
 import com.example.matchgamesample.fragment.BaseFragment;
 import com.example.matchgamesample.fragment.GameFragment;
 import com.example.matchgamesample.fragment.LoadingFragment;
 import com.example.matchgamesample.level.LevelManager;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG_FRAGMENT = "container";
+    private static final String TAG_FRAGMENT = "content";
+    private BaseDialog mCurrentDialog;
+    private boolean mShowingDialog;
 
     private LevelManager mLevelManager;
 
@@ -36,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public LevelManager getLevelManager(){
+    public LevelManager getLevelManager() {
         return mLevelManager;
     }
 
@@ -48,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
     public void navigateToFragment(BaseFragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+                .setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out,
+                        android.R.anim.fade_in,
+                        android.R.anim.fade_out)
                 .replace(R.id.container, fragment, TAG_FRAGMENT)
                 .addToBackStack(null)
                 .commit();
@@ -56,11 +64,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void navigateBack() {
         // Do a push on the navigation history
-        getFragmentManager().popBackStack();
+        getSupportFragmentManager().popBackStack();
     }
+
+    public void setShowingDialog(boolean b) {
+        mShowingDialog = b;
+    }
+
+    public void showDialog(BaseDialog newDialog, boolean dismissOtherDialog) {
+        if (mCurrentDialog != null && mCurrentDialog.isShowing()) {
+            if (dismissOtherDialog) {
+                mCurrentDialog.dismiss();
+            } else {
+                return;
+            }
+        }
+        mCurrentDialog = newDialog;
+        mCurrentDialog.show();
+    }
+
 
     @Override
     public void onBackPressed() {
+        if (mCurrentDialog != null && mCurrentDialog.isShowing()) {
+            mCurrentDialog.dismiss();
+            return;
+        }
         final BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
         if (fragment == null || !fragment.onBackPressed()) {
             super.onBackPressed();

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/board_button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_game_item_bound">
+
+        <ImageButton
+            android:id="@+id/btnHand"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_hand"
+            app:layout_constraintBottom_toTopOf="@id/guideline_btn_end"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@id/btnSpoon"
+            app:layout_constraintStart_toEndOf="@id/guideline_vertical_20"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnSpoon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_spoon"
+            app:layout_constraintBottom_toTopOf="@id/guideline_btn_end"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/btnHammer"
+            app:layout_constraintStart_toEndOf="@+id/btnHand"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/btnHammer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/btn_hammer"
+            app:layout_constraintBottom_toTopOf="@id/guideline_btn_end"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnSpoon"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtHand"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_btn"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guideline_btn_end"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/btnHand"
+            app:layout_constraintTop_toBottomOf="@id/guideline_txt" />
+
+        <TextView
+            android:id="@+id/txtSpoon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_btn"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guideline_btn_end"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/btnSpoon"
+            app:layout_constraintTop_toBottomOf="@id/guideline_txt" />
+
+        <TextView
+            android:id="@+id/txtHammer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/baloo"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_btn"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/guideline_btn_end"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="@id/btnHammer"
+            app:layout_constraintTop_toBottomOf="@id/guideline_txt" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.425" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_btn_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.7" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/view_game_item_bound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.88" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,8 +11,9 @@ import androidx.annotation.Nullable;
 
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.dialog.QuitDialog;
 
-public class MapFragment extends BaseFragment {
+public class MapFragment extends BaseFragment implements QuitDialog.QuitDialogListener {
     private static final int TOTAL_LEVEL = 4;
     private MainActivity mActivity;
 
@@ -47,6 +48,22 @@ public class MapFragment extends BaseFragment {
             });
         }
 
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if (!super.onBackPressed()) {
+            QuitDialog quitDialog = new QuitDialog(getMainActivity());
+            quitDialog.setListener(this);
+            showDialog(quitDialog);
+            return true;
+        }
+        return true;
+    }
+
+    @Override
+    public void exit() {
+        getMainActivity().finish();
     }
 
 }

@@ -156,7 +156,7 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_50"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_50"
-            app:layout_constraintTop_toBottomOf="@id/guideline_board_button" />
+            app:layout_constraintTop_toBottomOf="@id/game_lower_bound" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_vertical_20"
@@ -264,7 +264,7 @@
             app:layout_constraintGuide_percent="0.62" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_board_button"
+            android:id="@+id/game_lower_bound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
