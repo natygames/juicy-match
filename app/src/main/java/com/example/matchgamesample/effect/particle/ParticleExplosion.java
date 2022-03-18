@@ -1,4 +1,4 @@
-package com.example.matchgamesample.explosion;
+package com.example.matchgamesample.effect.particle;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -10,16 +10,18 @@ import android.graphics.Rect;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+
 import com.example.matchgamesample.Utils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Explosion extends View {
-    private List<ParticleSystem> mExplosions = new ArrayList<>();        //array storing animation on Piece
-    private int[] mExpandInset = new int[2];                                //Expanding the explosion area
+public class ParticleExplosion extends View {
+    private final List<ParticleSystem> mExplosions = new ArrayList<>();        //array storing animation on Piece
+    private final int[] mExpandInset = new int[2];                                //Expanding the explosion area
 
-    public Explosion(Context context) {
+    public ParticleExplosion(Context context) {
         super(context);
         Arrays.fill(mExpandInset, Utils.dp2Px(32));
     }
@@ -67,11 +69,11 @@ public class Explosion extends View {
         invalidate();
     }
 
-    public static Explosion attach2Window(Activity activity) {
+    public static ParticleExplosion attach2Window(Activity activity) {
         ViewGroup rootView = (ViewGroup) activity.findViewById(Window.ID_ANDROID_CONTENT);
-        Explosion explosion = new Explosion(activity);
-        rootView.addView(explosion, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        return explosion;
+        ParticleExplosion particleExplosion = new ParticleExplosion(activity);
+        rootView.addView(particleExplosion, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        return particleExplosion;
     }
 
 }

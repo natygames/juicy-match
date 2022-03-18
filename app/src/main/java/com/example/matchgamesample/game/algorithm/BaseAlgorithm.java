@@ -1,11 +1,9 @@
 package com.example.matchgamesample.game.algorithm;
 
-import android.os.Handler;
-
 import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.engine.GameEngine;
-import com.example.matchgamesample.game.Tile;
-import com.example.matchgamesample.game.TileUtils;
+import com.example.matchgamesample.game.tile.Tile;
+import com.example.matchgamesample.game.tile.TileUtils;
 
 public class BaseAlgorithm {
     protected final GameEngine mGameEngine;
@@ -13,12 +11,12 @@ public class BaseAlgorithm {
     protected int mFruitNum;
     protected final int mTileSize;
     protected final AnimationManager mAnimationManager;
-    protected final Handler mHandler = new Handler();
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
     protected boolean isMoving = false, matchFinding = false, waitFinding = false;
     protected boolean isTransf = false;   // To control ice cream transform animation
+    protected int mWaitingTime = 0;
     //==================================================================================
 
     protected BaseAlgorithm(GameEngine gameEngine) {
@@ -576,7 +574,8 @@ public class BaseAlgorithm {
     protected void transI(Tile[][] tileArray, Tile tile) {
 
         // Transform flag
-        transfWait();
+        isTransf = true;
+        mWaitingTime = 0;
 
         // Mark isExplode
         tile.isExplode = true;
@@ -612,17 +611,6 @@ public class BaseAlgorithm {
         }
     }
     //==================================================================================
-
-    private void transfWait() {
-        //Bug is ice cream's wait may cause error
-        isTransf = true;
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                isTransf = false;
-            }
-        }, 1200);
-    }
 
     private void explodeAround(Tile[][] tileArray, Tile tile) {
         // Do nothing if locked

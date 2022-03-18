@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.matchgamesample.R;
-import com.example.matchgamesample.game.Hint;
+import com.example.matchgamesample.dialog.PauseDialog;
+import com.example.matchgamesample.game.tile.Hint;
 import com.example.matchgamesample.game.counter.FPSCounter;
 import com.example.matchgamesample.game.counter.MoveCounter;
 import com.example.matchgamesample.game.counter.ScoreBarCounter;
@@ -23,13 +24,13 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.GameBoard;
 import com.example.matchgamesample.game.algorithm.GameAlgorithm;
 import com.example.matchgamesample.game.counter.ScoreCounter;
-import com.example.matchgamesample.game.Tile;
+import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.GameController;
 import com.example.matchgamesample.input.BasicInputController;
 import com.example.matchgamesample.level.Level;
 import com.example.matchgamesample.level.LevelType;
 
-public class GameFragment extends BaseFragment {
+public class GameFragment extends BaseFragment implements PauseDialog.PauseDialogListener {
     private static final String LEVEL = "level";
     private int level;
     private GameEngine mGameEngine;
@@ -66,6 +67,12 @@ public class GameFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getView().findViewById(R.id.btn_pause).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pauseGameAndShowPauseDialog();
+            }
+        });
         startGame();
     }
 
@@ -138,8 +145,7 @@ public class GameFragment extends BaseFragment {
     @Override
     public boolean onBackPressed() {
         if (mGameEngine.isRunning() && !mGameEngine.isPaused()) {
-            mGameEngine.pauseGame();
-            mScoreBarAnimation.stop();
+            pauseGameAndShowPauseDialog();
             return true;
         }
         return super.onBackPressed();
@@ -148,9 +154,8 @@ public class GameFragment extends BaseFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mGameEngine.isRunning() && !mGameEngine.isPaused()) {
-            mGameEngine.pauseGame();
-            mScoreBarAnimation.stop();
+        if (mGameEngine.isRunning()) {
+            pauseGameAndShowPauseDialog();
         }
     }
 
@@ -158,8 +163,7 @@ public class GameFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         if (mGameEngine.isRunning() && mGameEngine.isPaused()) {
-            mGameEngine.resumeGame();
-            mScoreBarAnimation.start();
+            resumeGame();
         }
     }
 
@@ -167,6 +171,29 @@ public class GameFragment extends BaseFragment {
     public void onDestroy() {
         super.onDestroy();
         mGameEngine.stopGame();
+    }
+
+    private void pauseGameAndShowPauseDialog() {
+        if (mGameEngine.isPaused()) {
+            return;
+        }
+        mGameEngine.pauseGame();
+        PauseDialog dialog = new PauseDialog(getMainActivity());
+        dialog.setListener(this);
+        showDialog(dialog);
+
+        mScoreBarAnimation.stop();
+    }
+
+    public void resumeGame() {
+        mGameEngine.resumeGame();
+        mScoreBarAnimation.start();
+    }
+
+    @Override
+    public void quitGame() {
+        mGameEngine.stopGame();
+        getMainActivity().navigateBack();
     }
 
 }

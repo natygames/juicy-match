@@ -2,7 +2,7 @@ package com.example.matchgamesample.game.state;
 
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
-import com.example.matchgamesample.game.Tile;
+import com.example.matchgamesample.game.tile.Tile;
 
 import java.util.ArrayList;
 

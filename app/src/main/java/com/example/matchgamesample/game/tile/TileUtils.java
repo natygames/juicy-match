@@ -1,4 +1,4 @@
-package com.example.matchgamesample.game;
+package com.example.matchgamesample.game.tile;
 
 import com.example.matchgamesample.R;
 
@@ -141,7 +141,7 @@ public class TileUtils {
                     return SPECIAL_FRUITS_S_CHOSEN[getIndex(tile.kind)];
             }
         } else {
-            switch (tile.kind){
+            switch (tile.kind) {
                 case CRACKER:
                     return CRACKER_CHOSEN;
                 case STAR_FISH:
@@ -151,7 +151,7 @@ public class TileUtils {
             }
         }
 
-        return - 1;
+        return -1;
     }
 
 }

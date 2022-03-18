@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ClipDrawable;
 import android.os.Handler;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
@@ -19,9 +18,9 @@ import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
-import com.example.matchgamesample.game.Tile;
+import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.Utils;
-import com.example.matchgamesample.explosion.Explosion;
+import com.example.matchgamesample.effect.particle.ParticleExplosion;
 
 public class AnimationManager {
     private final Activity mActivity;
@@ -34,7 +33,7 @@ public class AnimationManager {
     private final AnticipateInterpolator anticipateInterpolator = new AnticipateInterpolator();
     private final OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
     // Animation
-    private final Explosion explosion;
+    private final ParticleExplosion particleExplosion;
     private final Animation shaking_anim, shaking_small_anim, machine_anim;
     private final Handler mHandler = new Handler();
 
@@ -46,7 +45,7 @@ public class AnimationManager {
         mEffect_board.getLayoutParams().width = mTileSize * gameEngine.mLevel.mColumn;
         mEffect_board.getLayoutParams().height = mTileSize * gameEngine.mLevel.mRow;
 
-        explosion = Explosion.attach2Window(gameEngine.mActivity);
+        particleExplosion = ParticleExplosion.attach2Window(gameEngine.mActivity);
         shaking_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_animation);
         shaking_small_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_small_animation);
         machine_anim = AnimationUtils.loadAnimation(mActivity, R.anim.machine_animation);
@@ -1861,7 +1860,7 @@ public class AnimationManager {
     }
 
     public void explodeIce(ImageView view, int partLen) {
-        explosion.explode(view, partLen);
+        particleExplosion.explode(view, partLen);
     }
 
     public void createLightBounceAnim(ImageView tile) {
@@ -1963,7 +1962,7 @@ public class AnimationManager {
     }
 
     public void clear() {
-        explosion.clear();
+        particleExplosion.clear();
     }
 
 }

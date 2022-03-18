@@ -11,10 +11,7 @@ public abstract class Sprite extends GameObject{
     public int mHeight;
 
     protected Sprite(GameEngine gameEngine) {
-        mImage = new ImageView(gameEngine.mActivity);
-        mWidth = gameEngine.mImageSize;
-        mHeight = gameEngine.mImageSize;
-        mImage.setLayoutParams(new ViewGroup.LayoutParams(mWidth, mHeight));
+        this(gameEngine, gameEngine.mImageSize, gameEngine.mImageSize);
     }
 
     protected Sprite(GameEngine gameEngine, int width, int height) {

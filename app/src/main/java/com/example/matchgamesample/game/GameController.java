@@ -17,6 +17,7 @@ import com.example.matchgamesample.fragment.WinDialogFragment;
 import com.example.matchgamesample.game.algorithm.BonusTimeAlgorithm;
 import com.example.matchgamesample.game.algorithm.GameAlgorithm;
 import com.example.matchgamesample.game.state.GameStateAnim;
+import com.example.matchgamesample.game.tile.Tile;
 
 public class GameController extends GameObject {
     private final GameEngine mGameEngine;
@@ -254,7 +255,7 @@ public class GameController extends GameObject {
         mSkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tile.mSpeed = 100;
+                Tile.mSpeed = mTileSize * 2;
                 mBonusTimeAlgorithm.mCurrentBonusTimeInterval = 50;
                 mBonusTimeAlgorithm.mCurrentWaitingTime = 0;
                 mSkipButton.setVisibility(View.INVISIBLE);
@@ -272,11 +273,15 @@ public class GameController extends GameObject {
     }
 
     private void showGameOverDialog() {
+        // We stop the game here, or the pause dialog will pop up
+        mGameEngine.stopGame();
         MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
         mainActivity.navigateToFragment(new MapFragment());
     }
 
     private void showGameCompleteDialog() {
+        // We stop the game here, or the pause dialog will pop up
+        mGameEngine.stopGame();
         MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
         mainActivity.navigateToFragment(WinDialogFragment
                 .newInstance(mGameEngine.mLevel.mLevel, mGameEngine.mLevel.mScore));

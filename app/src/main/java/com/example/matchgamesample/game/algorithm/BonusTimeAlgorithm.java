@@ -2,8 +2,8 @@ package com.example.matchgamesample.game.algorithm;
 
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
-import com.example.matchgamesample.game.Tile;
-import com.example.matchgamesample.game.TileUtils;
+import com.example.matchgamesample.game.tile.Tile;
+import com.example.matchgamesample.game.tile.TileUtils;
 
 public class BonusTimeAlgorithm extends BaseAlgorithm {
     // Tile moving control

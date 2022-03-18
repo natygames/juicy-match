@@ -1,4 +1,4 @@
-package com.example.matchgamesample.game;
+package com.example.matchgamesample.game.tile;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -24,7 +24,7 @@ public class Tile extends Sprite {
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
         mFruitNum = gameEngine.mLevel.mFruitNum;
-        mSpeed = 30;
+        mSpeed = mWidth / 4;
     }
 
     public void startGame() {

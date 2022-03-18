@@ -1,4 +1,4 @@
-package com.example.matchgamesample.game;
+package com.example.matchgamesample.game.tile;
 
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -15,6 +15,7 @@ import com.example.matchgamesample.engine.GameObject;
  * if founded, start hint animation
  * otherwise, refresh
  */
+
 public class Hint extends GameObject {
     private final GameEngine mGameEngine;
     private final int mColumn, mRow;
@@ -75,9 +76,12 @@ public class Hint extends GameObject {
 
                 break;
             case PLAYER_SWAP:
+                stopHint();
+                break;
             case PLAYER_REACH_TARGET:
             case PLAYER_OUT_OF_MOVE:
                 stopHint();
+                mGameEngine.removeGameObject(this);
                 break;
         }
     }

@@ -1,4 +1,4 @@
-package com.example.matchgamesample.explosion;
+package com.example.matchgamesample.effect.particle;
 
 import android.animation.ValueAnimator;
 import android.graphics.Bitmap;
@@ -9,7 +9,9 @@ import android.graphics.Rect;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
+
 import com.example.matchgamesample.Utils;
+
 import java.util.Random;
 
 public class ParticleSystem extends ValueAnimator {
@@ -21,17 +23,17 @@ public class ParticleSystem extends ValueAnimator {
     private static final float Y = Utils.dp2Px(20);
     private static final float V = Utils.dp2Px(2);
     private static final float W = Utils.dp2Px(1);
-    private Paint paint;
-    private Particle[] particlesArray;
-    private Rect bound;
-    private View view;
+    private final Paint mPaint;
+    private final Particle[] mParticlesArray;
+    private final Rect mBound;
+    private final View mView;
 
     public ParticleSystem(View view, Bitmap bitmap, Rect bound, int partLen) {
-        this.view = view;
-        this.bound = new Rect(bound);
-        this.paint = new Paint();
+        this.mView = view;
+        this.mBound = new Rect(bound);
+        this.mPaint = new Paint();
         //partLen is pieces amount
-        this.particlesArray = new Particle[partLen * partLen];
+        this.mParticlesArray = new Particle[partLen * partLen];
         Random random = new Random(System.currentTimeMillis());
         //Pieces width and height
         int w = bitmap.getWidth() / (partLen + 2);
@@ -39,7 +41,7 @@ public class ParticleSystem extends ValueAnimator {
         //Generate Pieces
         for (int i = 0; i < partLen; i++) {
             for (int j = 0; j < partLen; j++) {
-                particlesArray[(i * partLen) + j] = generateParticle(bitmap.getPixel((j + 1) * w, (i + 1) * h), random);
+                mParticlesArray[(i * partLen) + j] = generateParticle(bitmap.getPixel((j + 1) * w, (i + 1) * h), random);
             }
         }
         setFloatValues(0f, END_VALUE);
@@ -57,17 +59,17 @@ public class ParticleSystem extends ValueAnimator {
             particle.baseRadius = W + ((V - W) * random.nextFloat());
         }
         float nextFloat = random.nextFloat();
-        particle.top = bound.height() * ((0.18f * random.nextFloat()) + 0.2f);
+        particle.top = mBound.height() * ((0.18f * random.nextFloat()) + 0.2f);
         particle.top = nextFloat < 0.2f ? particle.top : particle.top + ((particle.top * 0.2f) * random.nextFloat());
-        particle.bottom = (bound.height() * (random.nextFloat() - 0.5f)) * 1.8f;
+        particle.bottom = (mBound.height() * (random.nextFloat() - 0.5f)) * 1.8f;
         float f = nextFloat < 0.2f ? particle.bottom : nextFloat < 0.8f ? particle.bottom * 0.6f : particle.bottom * 0.3f;
         particle.bottom = f;
         particle.mag = 4.0f * particle.top / particle.bottom;
         particle.neg = (-particle.mag) / particle.bottom;
-        f = bound.centerX() + (Y * (random.nextFloat() - 0.5f));
+        f = mBound.centerX() + (Y * (random.nextFloat() - 0.5f));
         particle.baseCx = f;
         particle.cx = f;
-        f = bound.centerY() + (Y * (random.nextFloat() - 0.5f));
+        f = mBound.centerY() + (Y * (random.nextFloat() - 0.5f));
         particle.baseCy = f;
         particle.cy = f;
         particle.life = END_VALUE / 10 * random.nextFloat();
@@ -76,29 +78,28 @@ public class ParticleSystem extends ValueAnimator {
         return particle;
     }
 
-    public boolean draw(Canvas canvas) {
+    public void draw(Canvas canvas) {
         if (!isStarted()) {
-            return false;
+            return;
         }
-        for (Particle particle : particlesArray) {
+        for (Particle particle : mParticlesArray) {
             particle.advance((float) getAnimatedValue());
             if (particle.alpha > 0f) {
-                paint.setColor(particle.color);
-                paint.setAlpha((int) (Color.alpha(particle.color) * particle.alpha));
-                canvas.drawCircle(particle.cx, particle.cy, particle.radius, paint);
+                mPaint.setColor(particle.color);
+                mPaint.setAlpha((int) (Color.alpha(particle.color) * particle.alpha));
+                canvas.drawCircle(particle.cx, particle.cy, particle.radius, mPaint);
             }
         }
-        view.invalidate();
-        return true;
+        mView.invalidate();
     }
 
     @Override
     public void start() {
         super.start();
-        view.invalidate(bound);
+        mView.invalidate(mBound);
     }
 
-    private class Particle {
+    private static class Particle {
         float alpha;
         int color;
         float cx;

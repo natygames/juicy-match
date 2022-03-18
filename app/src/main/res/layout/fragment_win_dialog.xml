@@ -12,8 +12,7 @@
     <ImageView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:alpha="0.6"
-        android:background="@color/black"
+        android:background="#aa000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,10 +152,10 @@
             android:layout_height="0dp"
             android:background="@drawable/btn_next"
             app:layout_constraintBottom_toTopOf="@id/guideline_btn_end"
-            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_50"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_50"
-            app:layout_constraintTop_toBottomOf="@id/game_lower_bound" />
+            app:layout_constraintTop_toBottomOf="@id/guideline_btn_start" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_vertical_20"
@@ -264,7 +263,7 @@
             app:layout_constraintGuide_percent="0.62" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/game_lower_bound"
+            android:id="@+id/guideline_btn_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -275,7 +274,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.85" />
+            app:layout_constraintGuide_percent="0.8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

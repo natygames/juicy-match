@@ -4,10 +4,8 @@ import android.widget.ImageView;
 
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
-import com.example.matchgamesample.game.GameController;
-import com.example.matchgamesample.game.GameControllerState;
-import com.example.matchgamesample.game.Tile;
-import com.example.matchgamesample.game.TileUtils;
+import com.example.matchgamesample.game.tile.Tile;
+import com.example.matchgamesample.game.tile.TileUtils;
 import com.example.matchgamesample.game.state.CollectGameState;
 import com.example.matchgamesample.game.state.GameState;
 import com.example.matchgamesample.game.state.IceGameState;
@@ -22,11 +20,12 @@ public class GameAlgorithm extends BaseAlgorithm {
     // Var to change state of game
     //----------------------------------------------------------------------------------
     public int swapCol, swapRow, swapCol2, swapRow2;
-    public boolean isSwap = false, mShowHint = false;
+    public boolean isSwap = false, mShowHint = false, mRefresh = false;
     private int combo = 0;
     // Tile moving control
     private static final int WAITING_TIME = 300;
-    private int mWaitingTime = 0;
+    private static final int EFFECT_WAITING_TIME = 1200;
+    private static final int REFRESH_WAITING_TIME = 800;
     public boolean mMoveTile = false;
     //==================================================================================
 
@@ -66,8 +65,43 @@ public class GameAlgorithm extends BaseAlgorithm {
     public void update(Tile[][] tileArray, long elapsedMillis) {
 
         // Do nothing when waiting event
-        if (isTransf)
+        if (isTransf) {
+            mWaitingTime += elapsedMillis;
+            if (mWaitingTime > EFFECT_WAITING_TIME) {
+                isTransf = false;
+                mWaitingTime = 0;
+            }
             return;
+        }
+
+        if (mRefresh) {
+            mWaitingTime += elapsedMillis;
+            if (mWaitingTime > REFRESH_WAITING_TIME) {
+
+                for (int j = 0; j < mColumn; j++) {
+                    for (int i = mRow - 1; i >= 0; i--) {
+                        //Check tile state
+                        if (tileArray[i][j].isMovable()
+                                && tileArray[i][j].isFruit()
+                                && !tileArray[i][j].special) {
+
+                            //Assign new tile
+                            do {
+                                tileArray[i][j].setRandomFruit();
+                            } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
+                                    && tileArray[i + 2][j].kind == tileArray[i][j].kind)
+                                    || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind
+                                    && tileArray[i][j - 2].kind == tileArray[i][j].kind));
+                        }
+                    }
+                }
+
+                mGameEngine.onGameEvent(GameEvent.START_HINT);
+                mRefresh = false;
+                mWaitingTime = 0;
+            }
+            return;
+        }
 
         // 1. Find match
         updateWait(tileArray);
@@ -561,7 +595,7 @@ public class GameAlgorithm extends BaseAlgorithm {
             // (5.7) Add score
             for (int j = 0; j < mColumn; j++) {
                 for (int i = 0; i < mRow; i++) {
-                    if (tileArray[i][j].match != 0 && tileArray[i][j].isFruit()) {
+                    if (tileArray[i][j].match != 0 && tileArray[i][j].isValidFruit()) {
                         mGameEngine.onGameEvent(GameEvent.PLAYER_SCORE);
                     }
                 }
@@ -659,6 +693,9 @@ public class GameAlgorithm extends BaseAlgorithm {
 
     public void refresh(Tile[][] tileArray) {
 
+        mRefresh = true;
+        mWaitingTime = 0;
+
         //Refresh fruit
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
@@ -671,30 +708,6 @@ public class GameAlgorithm extends BaseAlgorithm {
                 }
             }
         }
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                for (int j = 0; j < mColumn; j++) {
-                    for (int i = mRow - 1; i >= 0; i--) {
-                        //Check tile state
-                        if (!tileArray[i][j].invalid
-                                && tileArray[i][j].isFruit()
-                                && !tileArray[i][j].special) {
-                            //Assign new tile
-                            do {
-                                tileArray[i][j].setRandomFruit();
-                            } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
-                                    && tileArray[i + 2][j].kind == tileArray[i][j].kind)
-                                    || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind
-                                    && tileArray[i][j - 2].kind == tileArray[i][j].kind));
-                        }
-                    }
-                }
-
-                mGameEngine.onGameEvent(GameEvent.START_HINT);
-            }
-        }, 800);
 
     }
 

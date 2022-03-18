@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class GameEngine {
     private GameThread mGameThread;
     private final ArrayList<GameObject> mGameObjects = new ArrayList<>();
+    private final ArrayList<GameObject> mObjectsToAdd = new ArrayList<>();
+    private final ArrayList<GameObject> mObjectsToRemove = new ArrayList<>();
 
     public InputController mInputController;
     public Activity mActivity;
@@ -82,21 +84,36 @@ public class GameEngine {
         for (int i = 0; i < numGameObjects; i++) {
             mGameObjects.get(i).onUpdate(elapsedMillis);
         }
+
+        synchronized (mGameObjects){
+            while (!mObjectsToRemove.isEmpty()){
+                mGameObjects.remove(mObjectsToRemove.remove(0));
+            }
+            while (!mObjectsToAdd.isEmpty()){
+                mGameObjects.add(mObjectsToAdd.remove(0));
+            }
+        }
     }
 
     public void onDraw() {
-        int numGameObjects = mGameObjects.size();
-        for (int i = 0; i < numGameObjects; i++) {
-            mGameObjects.get(i).onDraw();
+        synchronized (mGameObjects) {
+            int numGameObjects = mGameObjects.size();
+            for (int i = 0; i < numGameObjects; i++) {
+                mGameObjects.get(i).onDraw();
+            }
         }
     }
 
     public void addGameObject(final GameObject gameObject) {
-        mGameObjects.add(gameObject);
+        if(isRunning()){
+            mObjectsToAdd.add(gameObject);
+        } else {
+            mGameObjects.add(gameObject);
+        }
     }
 
     public void removeGameObject(final GameObject gameObject) {
-        mGameObjects.remove(gameObject);
+        mObjectsToRemove.add(gameObject);
     }
 
     public void setInputController(InputController inputController) {

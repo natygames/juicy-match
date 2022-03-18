@@ -10,6 +10,8 @@ import android.widget.RelativeLayout;
 
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
+import com.example.matchgamesample.game.tile.Tile;
+import com.example.matchgamesample.game.tile.TileUtils;
 import com.example.matchgamesample.level.Level;
 
 /* This class let you design fruit board

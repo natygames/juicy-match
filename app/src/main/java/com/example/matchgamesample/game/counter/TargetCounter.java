@@ -11,7 +11,7 @@ import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
-import com.example.matchgamesample.game.TileUtils;
+import com.example.matchgamesample.game.tile.TileUtils;
 import com.example.matchgamesample.level.Level;
 import com.example.matchgamesample.level.LevelType;
 
@@ -19,11 +19,13 @@ import java.util.ArrayList;
 
 public class TargetCounter extends GameObject {
 
+    private GameEngine mGameEngine;
     private final Level mLevel;
     private final ArrayList<TextView> mText = new ArrayList<>();
     private boolean mTargetsHaveChanged;
 
     public TargetCounter(GameEngine gameEngine) {
+        mGameEngine = gameEngine;
         mLevel = gameEngine.mLevel;
         if (gameEngine.mLevel.mLevelType == LevelType.LEVEL_TYPE_SCORE) {
             mText.add(gameEngine.mActivity.findViewById(R.id.target_score));
@@ -113,8 +115,15 @@ public class TargetCounter extends GameObject {
 
     @Override
     public void onGameEvent(GameEvent gameEvents) {
-        if (gameEvents == GameEvent.PLAYER_COLLECT) {
-            mTargetsHaveChanged = true;
+        switch (gameEvents){
+            case PLAYER_COLLECT:
+                mTargetsHaveChanged = true;
+                break;
+            case PLAYER_REACH_TARGET:
+            case PLAYER_OUT_OF_MOVE:
+                mGameEngine.removeGameObject(this);
+                break;
+
         }
     }
 }
