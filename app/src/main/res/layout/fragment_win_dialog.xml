@@ -9,14 +9,7 @@
     android:clipChildren="false"
     tools:context=".fragment.WinDialogFragment">
 
-    <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#aa000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/dialog_container"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dialog_win"

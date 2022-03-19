@@ -2,17 +2,18 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
-    android:layout_height="200dp"
+    android:layout_height="350dp"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_exit"
+    android:background="@drawable/dialog_setting"
     android:orientation="vertical">
 
     <ImageButton
-        android:id="@+id/btn_resume"
+        android:id="@+id/btn_cancel"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="right"
-        android:layout_margin="5dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/btn_cancel" />
 
     <LinearLayout
@@ -37,12 +38,5 @@
             android:background="@drawable/btn_sound" />
 
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/btn_quit"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_quit" />
 
 </LinearLayout>

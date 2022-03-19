@@ -60,18 +60,23 @@ public class ScoreBarCounter extends GameObject {
             mScoreBarLevel += mFactor * POINTS_GAINED_PER_FRUIT;
             mScoreBar.setLevel(mScoreBarLevel);
 
-            if (mCurrentStar < 1 && STAR1_THRESHOLD <= mScoreBarLevel) {
+            if (mCurrentStar < 1 && mScoreBarLevel >= STAR1_THRESHOLD) {
                 mStar1.setBackgroundResource(R.drawable.star);
                 createStarAnim(mStar1);
+                mGameEngine.mLevel.mStar = 1;
                 mCurrentStar = 1;
-            } else if (mCurrentStar < 2 && STAR2_THRESHOLD <= mScoreBarLevel) {
+            } else if (mCurrentStar < 2 && mScoreBarLevel >= STAR2_THRESHOLD) {
                 mStar2.setBackgroundResource(R.drawable.star);
                 createStarAnim(mStar2);
+                mGameEngine.mLevel.mStar = 2;
                 mCurrentStar = 2;
-            } else if (mCurrentStar < 3 && STAR3_THRESHOLD <= mScoreBarLevel) {
+            } else if (mCurrentStar < 3 && mScoreBarLevel >= STAR3_THRESHOLD) {
                 mStar3.setBackgroundResource(R.drawable.star);
                 createStarAnim(mStar3);
+                mGameEngine.mLevel.mStar = 3;
                 mCurrentStar = 3;
+
+                mGameEngine.removeGameObject(this);
             }
 
         }

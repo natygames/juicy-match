@@ -4,4 +4,4 @@
     android:toXDelta="0%p"
     android:interpolator="@android:anim/overshoot_interpolator"
     android:repeatCount="0"
-    android:duration="700" />
+    android:duration="500" />

@@ -2,6 +2,7 @@ package com.example.matchgamesample.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,17 +21,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.Utils;
+import com.example.matchgamesample.dialog.ExitDialog;
 
-public class WinDialogFragment extends BaseFragment {
+public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDialogListener{
     private static final String LEVEL = "LEVEL";
     private static final String SCORE = "SCORE";
+    private static final String STAR = "STAR";
     private int mLevel;
-    private int mStar;
     private int mScore;
+    private int mStar;
 
-    private int mCurrentScore = 0;
     private ConstraintLayout mDialog;
-    private TextView mLevelText, mScoreText;
     private ImageView mStar1, mStar2, mStar3;
     private static final int EXPLODE_TIME = 250;
     private final OvershootInterpolator mInterpolator = new OvershootInterpolator();
@@ -40,11 +42,12 @@ public class WinDialogFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-    public static WinDialogFragment newInstance(int level, int score) {
+    public static WinDialogFragment newInstance(int level, int score, int star) {
         WinDialogFragment fragment = new WinDialogFragment();
         Bundle args = new Bundle();
         args.putInt(LEVEL, level);
         args.putInt(SCORE, score);
+        args.putInt(STAR, star);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,6 +58,7 @@ public class WinDialogFragment extends BaseFragment {
         if (getArguments() != null) {
             mLevel = getArguments().getInt(LEVEL);
             mScore = getArguments().getInt(SCORE);
+            mStar = getArguments().getInt(STAR);
         }
     }
 
@@ -69,32 +73,59 @@ public class WinDialogFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mStar = 3;
-        mCurrentScore = mScore - 150;
-
-        //Initialize iew
+        // Init view
+        TextView textView = (TextView) getView().findViewById(R.id.txt_level_win);
+        textView.setText("Level " + String.valueOf(mLevel));
         mDialog = (ConstraintLayout) getView().findViewById(R.id.dialog_win);
-        mLevelText = (TextView) getView().findViewById(R.id.txt_level_win);
-        mScoreText = (TextView) getView().findViewById(R.id.txt_score_win);
-        mLevelText.setText("Level " + String.valueOf(mLevel));
         mStar1 = (ImageView) getView().findViewById(R.id.star1);
         mStar2 = (ImageView) getView().findViewById(R.id.star2);
         mStar3 = (ImageView) getView().findViewById(R.id.star3);
-        ImageButton btn_next = (ImageButton) getView().findViewById(R.id.btn_next_win);
-        btn_next.setScaleX(0);
-        btn_next.setScaleY(0);
-        btn_next.animate().setStartDelay(700).setDuration(500).scaleX(1).scaleY(1).setInterpolator(mInterpolator);
-        btn_next.setOnClickListener(btnOnClick);
 
-        //Dialog animation
+        // Init button
+        ImageButton btnNext = (ImageButton) getView().findViewById(R.id.btn_next_win);
+        Utils.createButtonEffect(btnNext);
+        btnNext.setScaleX(0);
+        btnNext.setScaleY(0);
+        btnNext.animate().setDuration(700).scaleX(1).scaleY(1).setInterpolator(mInterpolator);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getMainActivity().navigateToFragment(new MapFragment());
+            }
+        });
+
+        // Dialog animation
         Animation inAnim = AnimationUtils.loadAnimation(getMainActivity(), R.anim.enter_from_left);
         mDialog.startAnimation(inAnim);
 
-        //Star pop up
-        createStarAnim();
+        // Run score
+        TextView mScoreText = (TextView) getView().findViewById(R.id.txt_score_win);
+        ValueAnimator animator = ValueAnimator.ofFloat(mScore - 150, mScore);
+        animator.setDuration(2000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                mScoreText.setText(String.valueOf((int) value));
+            }
+        });
+        animator.start();
 
-        //Explode animation
-        if (mStar >= 1) {
+        // Star animation
+        createStarAnim(mStar);
+
+    }
+
+    private void createStarAnim(int star) {
+        if (star >= 1) {
+            mStar1.animate().setStartDelay(700).setDuration(300).scaleX(4).scaleY(4).alpha(1)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mStar1.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
+                                    .setInterpolator(mInterpolator);
+                        }
+                    });
+
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -102,8 +133,16 @@ public class WinDialogFragment extends BaseFragment {
                 }
             }, 700);
         }
+        if (star >= 2) {
+            mStar2.animate().setStartDelay(1000).setDuration(300).scaleX(4).scaleY(4).alpha(1)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mStar2.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
+                                    .setInterpolator(mInterpolator);
+                        }
+                    });
 
-        if (mStar >= 2) {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -111,69 +150,22 @@ public class WinDialogFragment extends BaseFragment {
                 }
             }, 1000);
         }
+        if (star >= 3) {
+            mStar3.animate().setStartDelay(1300).setDuration(300).scaleX(4).scaleY(4).alpha(1)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            mStar3.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
+                                    .setInterpolator(mInterpolator);
+                        }
+                    });
 
-        if (mStar >= 3) {
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     createExplode(mStar3);
                 }
             }, 1300);
-        }
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Calculate score
-                while (mCurrentScore < mScore) {
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            mCurrentScore++;
-                            if (mCurrentScore <= mScore)
-                                mScoreText.setText(String.valueOf(mCurrentScore));
-                        }
-                    });
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ignored) {
-
-                    }
-                }
-            }
-        }).start();
-    }
-
-    private void createStarAnim() {
-        if (mStar >= 1) {
-            mStar1.animate().setStartDelay(700).setDuration(300).scaleX(4).scaleY(4).alpha(1)
-                    .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mStar1.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
-                            .setInterpolator(mInterpolator);
-                }
-            });
-        }
-        if (mStar >= 2) {
-            mStar2.animate().setStartDelay(1000).setDuration(300).scaleX(4).scaleY(4).alpha(1)
-                    .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mStar2.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
-                            .setInterpolator(mInterpolator);
-                }
-            });
-        }
-        if (mStar >= 3) {
-            mStar3.animate().setStartDelay(1300).setDuration(300).scaleX(4).scaleY(4).alpha(1)
-                    .setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mStar3.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
-                            .setInterpolator(mInterpolator);
-                }
-            });
         }
     }
 
@@ -356,11 +348,20 @@ public class WinDialogFragment extends BaseFragment {
         }
     }
 
-    private final View.OnClickListener btnOnClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            getMainActivity().navigateToFragment(new MapFragment());
+    @Override
+    public void exit() {
+        getMainActivity().finish();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if (!super.onBackPressed()) {
+            ExitDialog quitDialog = new ExitDialog(getMainActivity());
+            quitDialog.setListener(this);
+            showDialog(quitDialog);
+            return true;
         }
-    };
+        return true;
+    }
 
 }

@@ -18,42 +18,63 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/image_level1_star"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/star_set_background" />
+
         <Button
-            android:id="@+id/btn_type1"
+            android:id="@+id/btn_level1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/baloo"
-            android:text="Type1"
+            android:text="Level1"
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/image_level2_star"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/star_set_background" />
+
         <Button
-            android:id="@+id/btn_type2"
+            android:id="@+id/btn_level2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/baloo"
-            android:text="Type2"
+            android:text="Level2"
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/image_level3_star"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/star_set_background" />
+
         <Button
-            android:id="@+id/btn_type3"
+            android:id="@+id/btn_level3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
             android:fontFamily="@font/baloo"
-            android:text="Type3"
+            android:text="Level3"
             android:textSize="30sp"
             android:textStyle="bold" />
 
+        <ImageView
+            android:id="@+id/image_level4_star"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:src="@drawable/star_set_background" />
+
         <Button
-            android:id="@+id/btn_type4"
+            android:id="@+id/btn_level4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"
-            android:text="Type4"
+            android:text="Level4"
             android:textSize="30sp"
             android:textStyle="bold" />
 

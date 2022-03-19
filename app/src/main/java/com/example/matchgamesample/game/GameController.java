@@ -284,7 +284,9 @@ public class GameController extends GameObject {
         mGameEngine.stopGame();
         MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
         mainActivity.navigateToFragment(WinDialogFragment
-                .newInstance(mGameEngine.mLevel.mLevel, mGameEngine.mLevel.mScore));
+                .newInstance(mGameEngine.mLevel.mLevel,
+                        mGameEngine.mLevel.mScore,
+                        mGameEngine.mLevel.mStar));
     }
 
 }

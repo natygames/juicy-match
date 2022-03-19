@@ -11,9 +11,11 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.dialog.PauseDialog;
 import com.example.matchgamesample.game.tile.Hint;
 import com.example.matchgamesample.game.counter.FPSCounter;
@@ -67,12 +69,15 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getView().findViewById(R.id.btn_pause).setOnClickListener(new View.OnClickListener() {
+        ImageButton imageButton = (ImageButton) getView().findViewById(R.id.btn_pause);
+        Utils.createButtonEffect(imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 pauseGameAndShowPauseDialog();
             }
         });
+
         startGame();
     }
 
@@ -182,12 +187,14 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         dialog.setListener(this);
         showDialog(dialog);
 
-        mScoreBarAnimation.stop();
+        if (mScoreBarAnimation != null)
+            mScoreBarAnimation.stop();
     }
 
     public void resumeGame() {
         mGameEngine.resumeGame();
-        mScoreBarAnimation.start();
+        if (mScoreBarAnimation != null)
+            mScoreBarAnimation.start();
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.example.matchgamesample.dialog;
 
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,8 +19,15 @@ public class BaseDialog implements View.OnTouchListener, Animation.AnimationList
     private View mRootView;
     private boolean mIsHiding;
 
+    private int mShowAnimation;
+    private int mHideAnimation;
+
     public BaseDialog(MainActivity activity) {
         mParent = activity;
+
+        // This is the default animation
+        mShowAnimation = R.anim.enter_from_top;
+        mHideAnimation = R.anim.exit_to_top;
     }
 
     protected void onViewClicked() {
@@ -49,8 +55,12 @@ public class BaseDialog implements View.OnTouchListener, Animation.AnimationList
     }
 
     private void startShowAnimation() {
-        Animation dialogIn = AnimationUtils.loadAnimation(mParent, R.anim.enter_from_top);
+        Animation dialogIn = AnimationUtils.loadAnimation(mParent, mShowAnimation);
         mRootView.startAnimation(dialogIn);
+    }
+
+    public void setShowAnimation(int id) {
+        mShowAnimation = id;
     }
 
     public void dismiss() {
@@ -68,9 +78,13 @@ public class BaseDialog implements View.OnTouchListener, Animation.AnimationList
     }
 
     private void startHideAnimation() {
-        Animation dialogOut = AnimationUtils.loadAnimation(mParent, R.anim.exit_to_top);
+        Animation dialogOut = AnimationUtils.loadAnimation(mParent, mHideAnimation);
         dialogOut.setAnimationListener(this);
         mRootView.startAnimation(dialogOut);
+    }
+
+    public void setHideAnimation(int id) {
+        mHideAnimation = id;
     }
 
     private void hideViews() {

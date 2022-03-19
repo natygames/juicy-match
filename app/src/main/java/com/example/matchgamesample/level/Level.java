@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 public class Level {
     public int mLevel;
+    public int mStar;
     public LevelType mLevelType;
     public int mMove;
     public int mScore;

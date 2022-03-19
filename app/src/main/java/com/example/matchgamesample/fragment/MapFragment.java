@@ -4,18 +4,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
-import com.example.matchgamesample.dialog.QuitDialog;
+import com.example.matchgamesample.Utils;
+import com.example.matchgamesample.dialog.LevelDialog;
+import com.example.matchgamesample.dialog.SettingDialog;
 
-public class MapFragment extends BaseFragment implements QuitDialog.QuitDialogListener {
-    private static final int TOTAL_LEVEL = 4;
-    private MainActivity mActivity;
+public class MapFragment extends BaseFragment implements LevelDialog.LevelDialogListener {
+
+    private int mLevel;
 
     public MapFragment() {
         // Required empty public constructor
@@ -32,38 +33,52 @@ public class MapFragment extends BaseFragment implements QuitDialog.QuitDialogLi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mActivity = (MainActivity) getMainActivity();
+        getView().findViewById(R.id.btn_level1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLevelDialog(1);
+            }
+        });
+        getView().findViewById(R.id.btn_level2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLevelDialog(2);
+            }
+        });
+        getView().findViewById(R.id.btn_level3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLevelDialog(3);
+            }
+        });
+        getView().findViewById(R.id.btn_level4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLevelDialog(4);
+            }
+        });
 
-        //Create button listener
-        for (int i = 1; i <= TOTAL_LEVEL; i++) {
-            String name = "btn_type" + i;
-            int id = getResources().getIdentifier(name, "id", mActivity.getPackageName());
-            Button btn = (Button) getView().findViewById(id);
-            int level = i;
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mActivity.startGame(level);
-                }
-            });
-        }
+        ImageButton imageButton = (ImageButton) getView().findViewById(R.id.btn_setting);
+        Utils.createButtonEffect(imageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SettingDialog dialog = new SettingDialog(getMainActivity());
+                showDialog(dialog);
+            }
+        });
+    }
 
+    private void showLevelDialog(int level) {
+        mLevel = level;
+        LevelDialog dialog = new LevelDialog(getMainActivity(), level);
+        dialog.setListener(this);
+        showDialog(dialog);
     }
 
     @Override
-    public boolean onBackPressed() {
-        if (!super.onBackPressed()) {
-            QuitDialog quitDialog = new QuitDialog(getMainActivity());
-            quitDialog.setListener(this);
-            showDialog(quitDialog);
-            return true;
-        }
-        return true;
-    }
-
-    @Override
-    public void exit() {
-        getMainActivity().finish();
+    public void startLevel() {
+        getMainActivity().startGame(mLevel);
     }
 
 }

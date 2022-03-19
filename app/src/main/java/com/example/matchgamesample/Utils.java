@@ -3,9 +3,12 @@ package com.example.matchgamesample;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 
 public class Utils {
@@ -20,12 +23,35 @@ public class Utils {
     }
 
     public static double angle(double sideA, double sideB, double sideC) {
-        double A=(Math.pow(sideC,2)+Math.pow(sideB,2)-Math.pow(sideA,2))/(2*sideB*sideC);
-        double angleA=Math.acos(A);
-        angleA=Math.toDegrees(angleA);
-        angleA=Math.round(angleA);
+        double A = (Math.pow(sideC, 2) + Math.pow(sideB, 2) - Math.pow(sideA, 2)) / (2 * sideB * sideC);
+        double angleA = Math.acos(A);
+        angleA = Math.toDegrees(angleA);
+        angleA = Math.round(angleA);
         return angleA;
         //cosA = (B^2 + C^2 - A^2) / 2BC
+    }
+
+    public static void createButtonEffect(View button) {
+        button.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View view, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        button.animate().setDuration(300).scaleX(0.8f).scaleY(0.8f)
+                                .setInterpolator(new BounceInterpolator());
+                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                        view.invalidate();
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        button.animate().setDuration(300).scaleX(1).scaleY(1)
+                                .setInterpolator(new BounceInterpolator());
+                        view.getBackground().clearColorFilter();
+                        view.invalidate();
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     public static Bitmap createBitmapFromView(View view) {

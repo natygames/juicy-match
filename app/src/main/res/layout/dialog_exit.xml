@@ -12,7 +12,7 @@
         android:layout_height="50dp"
         android:layout_gravity="right"
         android:layout_margin="5dp"
-        android:background="@drawable/btn_close" />
+        android:background="@drawable/btn_cancel" />
 
     <TextView
         android:layout_width="wrap_content"

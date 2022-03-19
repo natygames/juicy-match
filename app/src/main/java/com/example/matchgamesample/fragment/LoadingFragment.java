@@ -33,7 +33,7 @@ public class LoadingFragment extends BaseFragment {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                getMainActivity().navigateToFragment(new MapFragment());
+                getMainActivity().navigateToFragment(new MenuFragment());
             }
         }, 500);
 
