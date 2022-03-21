@@ -14,6 +14,7 @@ import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.dialog.ExitDialog;
 import com.example.matchgamesample.dialog.SettingDialog;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 
 public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogListener {
 
@@ -37,6 +38,7 @@ public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogL
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
                 getMainActivity().navigateToFragment(new MapFragment());
             }
         });
@@ -46,6 +48,7 @@ public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogL
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
                 SettingDialog dialog = new SettingDialog(getMainActivity());
                 showDialog(dialog);
             }

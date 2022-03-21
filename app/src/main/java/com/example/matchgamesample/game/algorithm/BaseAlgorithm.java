@@ -1,6 +1,8 @@
 package com.example.matchgamesample.game.algorithm;
 
+import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.effect.AnimationManager;
+import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
@@ -11,6 +13,7 @@ public class BaseAlgorithm {
     protected int mFruitNum;
     protected final int mTileSize;
     protected final AnimationManager mAnimationManager;
+    protected final SoundManager mSoundManager;
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
@@ -26,6 +29,8 @@ public class BaseAlgorithm {
         mFruitNum = gameEngine.mLevel.mFruitNum;
         mTileSize = gameEngine.mImageSize;
         mAnimationManager = new AnimationManager(gameEngine);
+        MainActivity activity = (MainActivity) gameEngine.mActivity;
+        mSoundManager = activity.getSoundManager();
     }
 
     public void update(Tile[][] tileArray, long elapsedMillis) {

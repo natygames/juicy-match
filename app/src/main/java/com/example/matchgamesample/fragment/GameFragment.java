@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.dialog.PauseDialog;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.game.tile.Hint;
 import com.example.matchgamesample.game.counter.FPSCounter;
 import com.example.matchgamesample.game.counter.MoveCounter;
@@ -74,6 +75,7 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
                 pauseGameAndShowPauseDialog();
             }
         });
@@ -148,15 +150,6 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
     }
 
     @Override
-    public boolean onBackPressed() {
-        if (mGameEngine.isRunning() && !mGameEngine.isPaused()) {
-            pauseGameAndShowPauseDialog();
-            return true;
-        }
-        return super.onBackPressed();
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         if (mGameEngine.isRunning()) {
@@ -165,17 +158,18 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (mGameEngine.isRunning() && mGameEngine.isPaused()) {
-            resumeGame();
-        }
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
         mGameEngine.stopGame();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        if (mGameEngine.isRunning() && !mGameEngine.isPaused()) {
+            pauseGameAndShowPauseDialog();
+            return true;
+        }
+        return super.onBackPressed();
     }
 
     private void pauseGameAndShowPauseDialog() {
@@ -191,6 +185,7 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
             mScoreBarAnimation.stop();
     }
 
+    @Override
     public void resumeGame() {
         mGameEngine.resumeGame();
         if (mScoreBarAnimation != null)
@@ -200,6 +195,8 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
     @Override
     public void quitGame() {
         mGameEngine.stopGame();
+        if (mScoreBarAnimation != null)
+            mScoreBarAnimation.stop();
         getMainActivity().navigateBack();
     }
 

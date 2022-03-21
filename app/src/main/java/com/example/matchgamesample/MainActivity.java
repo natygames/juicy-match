@@ -2,13 +2,13 @@ package com.example.matchgamesample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.AudioManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.matchgamesample.dialog.BaseDialog;
+import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.fragment.BaseFragment;
 import com.example.matchgamesample.fragment.GameFragment;
 import com.example.matchgamesample.fragment.LoadingFragment;
@@ -16,10 +16,12 @@ import com.example.matchgamesample.level.LevelManager;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG_FRAGMENT = "content";
+
     private BaseDialog mCurrentDialog;
     private boolean mShowingDialog;
 
     private LevelManager mLevelManager;
+    private SoundManager mSoundManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +40,17 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mLevelManager = new LevelManager(this);
+        mSoundManager = new SoundManager(this);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
     }
 
     public LevelManager getLevelManager() {
         return mLevelManager;
+    }
+
+    public SoundManager getSoundManager() {
+        return mSoundManager;
     }
 
     public void startGame(int level) {

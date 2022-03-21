@@ -13,6 +13,7 @@ import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.dialog.LevelDialog;
 import com.example.matchgamesample.dialog.SettingDialog;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 
 public class MapFragment extends BaseFragment implements LevelDialog.LevelDialogListener {
 
@@ -63,6 +64,7 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
                 SettingDialog dialog = new SettingDialog(getMainActivity());
                 showDialog(dialog);
             }

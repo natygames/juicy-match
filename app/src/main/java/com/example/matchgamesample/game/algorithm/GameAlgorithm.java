@@ -2,6 +2,7 @@ package com.example.matchgamesample.game.algorithm;
 
 import android.widget.ImageView;
 
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
@@ -113,12 +114,18 @@ public class GameAlgorithm extends BaseAlgorithm {
         if (mMoveTile) {
             for (int i = 0; i < mRow; i++) {
                 for (int j = 0; j < mColumn; j++) {
+
                     tileArray[i][j].onUpdate(elapsedMillis);
-                    // Start bouncing animation
-                    if (tileArray[i][j].bounce == 1) {
-                        mAnimationManager.createLightBounceAnim(tileArray[i][j].mImage);
-                    } else if (tileArray[i][j].bounce == 2) {
-                        mAnimationManager.createHeavyBounceAnim(tileArray[i][j].mImage);
+
+                    if(!tileArray[i][j].isMoving()) {
+                        // Start bouncing animation
+                        if (tileArray[i][j].bounce == 1) {
+                            mAnimationManager.createLightBounceAnim(tileArray[i][j].mImage);
+                        } else if (tileArray[i][j].bounce == 2) {
+                            mAnimationManager.createHeavyBounceAnim(tileArray[i][j].mImage);
+                        }
+
+                        tileArray[i][j].bounce = 0;
                     }
                 }
             }
@@ -128,6 +135,9 @@ public class GameAlgorithm extends BaseAlgorithm {
 
         // 3. Fruit wait
         if (!isMoving && !waitFinding) {
+            // Play fruit bouncing sound when tile stop
+            if(mMoveTile && !isSwap)
+                mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_BOUNCING);
             mMoveTile = false;
         } else {
             //Check is player swapping
@@ -262,6 +272,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 1);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j - 1].isUpgrade = true;
@@ -275,6 +286,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 2);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j - 1].isUpgrade = true;
@@ -294,6 +306,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 3);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i + 1][j - 1].isUpgrade = true;
@@ -312,6 +325,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j], 'C', 1);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j].isUpgrade = true;
@@ -325,6 +339,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j], 'C', 2);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j].isUpgrade = true;
@@ -344,6 +359,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j], 'C', 3);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i + 1][j].isUpgrade = true;
@@ -362,6 +378,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 1);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i - 1][j + 1].isUpgrade = true;
@@ -375,6 +392,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 2);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i - 1][j + 1].isUpgrade = true;
@@ -393,6 +411,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                          */
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 3);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 1][j + 1].isUpgrade = true;
@@ -423,6 +442,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
                                     //Add upgrade animation
                                     mAnimationManager.upgrade2I_h(tileArray[i][j + 2]);
+                                    mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
                                     tileArray[i][j].isUpgrade = true;
                                     tileArray[i][j + 1].isUpgrade = true;
                                     tileArray[i][j + 3].isUpgrade = true;
@@ -438,6 +458,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     if (tileArray[i][j + 1].direct == 'N' && !tileArray[i][j + 1].isUpgrade) {
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2H_left(tileArray[i][j + 1]);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 2].isUpgrade = true;
                                         tileArray[i][j + 3].isUpgrade = true;
@@ -449,6 +470,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2H_right(tileArray[i][j + 2]);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i][j + 3].isUpgrade = true;
@@ -478,6 +500,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 if (tileArray[i + 2][j].direct == 'N' && !tileArray[i + 2][j].isUpgrade) {
                                     //Add upgrade animation
                                     mAnimationManager.upgrade2I_v(tileArray[i + 2][j]);
+                                    mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
                                     tileArray[i][j].isUpgrade = true;
                                     tileArray[i + 1][j].isUpgrade = true;
                                     tileArray[i + 3][j].isUpgrade = true;
@@ -494,6 +517,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     if (tileArray[i + 1][j].direct == 'N' && !tileArray[i + 1][j].isUpgrade) {
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2V_top(tileArray[i + 1][j]);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 2][j].isUpgrade = true;
                                         tileArray[i + 3][j].isUpgrade = true;
@@ -505,6 +529,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     if (tileArray[i + 2][j].direct == 'N' && !tileArray[i + 2][j].isUpgrade) {
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2V_bottom(tileArray[i + 2][j]);
+                                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 1][j].isUpgrade = true;
                                         tileArray[i + 3][j].isUpgrade = true;
@@ -601,7 +626,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                 }
             }
 
-            // (5.8) Add animation
+            // (5.8) Add animation and sound
             for (int j = 0; j < mColumn; j++) {
                 for (int i = 0; i < mRow; i++) {
                     //Check is match
@@ -662,8 +687,10 @@ public class GameAlgorithm extends BaseAlgorithm {
                             }
 
                             // Explode fruit
-                            if (!tileArray[i][j].isUpgrade)
+                            if (!tileArray[i][j].isUpgrade) {
                                 mAnimationManager.explodeFruit(tileArray[i][j]);
+
+                            }
                             // Show score
                             mAnimationManager.createScore(tileArray[i][j]);
                         }

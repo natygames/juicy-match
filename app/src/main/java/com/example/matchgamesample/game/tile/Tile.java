@@ -71,8 +71,6 @@ public class Tile extends Sprite {
                 }
 
                 y -= diff_y / Math.abs(diff_y);
-            } else {
-                bounce = 0;
             }
         }
 

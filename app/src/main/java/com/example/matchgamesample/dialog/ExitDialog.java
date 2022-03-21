@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 
 public class ExitDialog extends BaseDialog implements View.OnClickListener {
 
@@ -31,9 +32,11 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_exit){
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             super.dismiss();
             mListener.exit();
         } else if(view.getId() == R.id.btn_cancel){
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             super.dismiss();
         }
     }

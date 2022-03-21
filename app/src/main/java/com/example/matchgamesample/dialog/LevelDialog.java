@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.level.Level;
 import com.example.matchgamesample.level.LevelType;
 
@@ -100,9 +101,11 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_play) {
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             mSelectedId = view.getId();
             super.dismiss();
         } else if (view.getId() == R.id.btn_cancel) {
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             super.dismiss();
         }
     }

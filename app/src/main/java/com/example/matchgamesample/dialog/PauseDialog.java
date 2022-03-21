@@ -2,10 +2,13 @@ package com.example.matchgamesample.dialog;
 
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
+import com.example.matchgamesample.effect.sound.SoundEvent;
+import com.example.matchgamesample.effect.sound.SoundManager;
 
 public class PauseDialog extends BaseDialog implements View.OnClickListener {
 
@@ -34,26 +37,26 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
     }
 
     private void updateSoundAndMusicButtons() {
-        /*
         SoundManager soundManager = mParent.getSoundManager();
+
+        // Update music state
         boolean music = soundManager.getMusicStatus();
         ImageView btnMusic = (ImageView) findViewById(R.id.btn_music);
         if (music) {
-            btnMusic.setImageResource(R.drawable.music_on_no_bg);
-        }
-        else {
-            btnMusic.setImageResource(R.drawable.music_off_no_bg);
-        }
-        boolean sound = soundManager.getSoundStatus();
-        ImageView btnSounds= (ImageView) findViewById(R.id.btn_sound);
-        if (sound) {
-            btnSounds.setImageResource(R.drawable.sounds_on_no_bg);
-        }
-        else {
-            btnSounds.setImageResource(R.drawable.sounds_off_no_bg);
+            btnMusic.setBackgroundResource(R.drawable.btn_music_on);
+        } else {
+            btnMusic.setBackgroundResource(R.drawable.btn_music_off);
         }
 
-         */
+        // Update sound state
+        boolean sound = soundManager.getSoundStatus();
+        ImageView btnSounds = (ImageView) findViewById(R.id.btn_sound);
+        if (sound) {
+            btnSounds.setBackgroundResource(R.drawable.btn_sound_on);
+        } else {
+            btnSounds.setBackgroundResource(R.drawable.btn_sound_off);
+        }
+
     }
 
     public void setListener(PauseDialogListener listener) {
@@ -63,15 +66,19 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_sound) {
-            //mParent.getSoundManager().toggleSoundStatus();
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+            mParent.getSoundManager().toggleSoundStatus();
             updateSoundAndMusicButtons();
         } else if (view.getId() == R.id.btn_music) {
-            //mParent.getSoundManager().toggleMusicStatus();
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+            mParent.getSoundManager().toggleMusicStatus();
             updateSoundAndMusicButtons();
         } else if (view.getId() == R.id.btn_quit) {
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             mSelectedId = view.getId();
             super.dismiss();
         } else if (view.getId() == R.id.btn_resume) {
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             mSelectedId = view.getId();
             super.dismiss();
         }
@@ -99,4 +106,3 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
         void resumeGame();
     }
 }
-
