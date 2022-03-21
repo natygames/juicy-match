@@ -7,12 +7,12 @@ import com.example.matchgamesample.game.tile.TileUtils;
 
 public class BonusTimeAlgorithm extends BaseAlgorithm {
     // Tile moving control
-    public int mCurrentWaitingTime = 300;
+    private int mCurrentWaitingTime = 300;
     private int mWaitingTime = 0;
     private boolean mMoveTile = false;
 
     // Bonus time time control
-    public int mCurrentBonusTimeInterval = 200;
+    private int mCurrentBonusTimeInterval = 200;
     private int mBonusTime = 0;
     private boolean mLevelComplete = false;
 
@@ -27,6 +27,12 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
     public BonusTimeAlgorithm(GameEngine gameEngine) {
         super(gameEngine);
         mState = BonusTimeState.CLEAR_SPECIAL_FRUIT;
+    }
+
+    public void skip() {
+        mCurrentWaitingTime = 0;
+        mCurrentBonusTimeInterval = 50;
+        Tile.mSpeed = mTileSize * 2;
     }
 
     @Override
@@ -95,7 +101,6 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                         mState = BonusTimeState.GAME_OVER;
                     } else {
                         mState = BonusTimeState.BONUS_TIME;
-                        mGameEngine.onGameEvent(GameEvent.BONUS_TIME);
                         mFruitNum = TileUtils.FRUITS.length;
                     }
                 }

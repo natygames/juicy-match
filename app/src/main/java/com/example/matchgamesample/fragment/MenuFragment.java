@@ -68,7 +68,7 @@ public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogL
             showDialog(quitDialog);
             return true;
         }
-        return true;
+        return super.onBackPressed();
     }
 
 }

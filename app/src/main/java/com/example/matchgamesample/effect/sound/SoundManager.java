@@ -51,6 +51,8 @@ public class SoundManager {
     private void loadSounds() {
         createSoundPool();
         mSoundsMap = new HashMap<>();
+        loadEventSound(mContext, SoundEvent.SQUARE_EXPLODE, R.raw.square_explode_sound);
+        loadEventSound(mContext, SoundEvent.VERTICAL_EXPLODE, R.raw.vertical_explode_sound);
         loadEventSound(mContext, SoundEvent.FRUIT_BOUNCING, R.raw.fruit_bouncing_sound);
         loadEventSound(mContext, SoundEvent.FRUIT_UPGRADE, R.raw.fruit_upgrade_sound);
         loadEventSound(mContext, SoundEvent.ICE_CREAM_UPGRADE, R.raw.ice_cream_upgrade_sound);

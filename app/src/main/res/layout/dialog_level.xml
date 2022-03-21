@@ -112,8 +112,8 @@
 
     <ImageButton
         android:id="@+id/btn_play"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/btn_play"
         app:layout_constraintEnd_toEndOf="parent"

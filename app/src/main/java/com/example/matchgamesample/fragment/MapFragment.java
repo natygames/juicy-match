@@ -83,4 +83,13 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         getMainActivity().startGame(mLevel);
     }
 
+    @Override
+    public boolean onBackPressed() {
+        if (!super.onBackPressed()) {
+            getMainActivity().navigateToFragment(new MenuFragment());
+            return true;
+        }
+        return super.onBackPressed();
+    }
+
 }

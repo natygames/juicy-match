@@ -365,7 +365,7 @@
     </FrameLayout>
 
     <RelativeLayout
-        android:id="@+id/star1"
+        android:id="@+id/layout_star1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/star_background"
@@ -376,7 +376,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_progress1" />
 
     <RelativeLayout
-        android:id="@+id/star2"
+        android:id="@+id/layout_star2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/star_background"
@@ -387,7 +387,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline_progress1" />
 
     <RelativeLayout
-        android:id="@+id/star3"
+        android:id="@+id/layout_star3"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/star_background"

@@ -1,4 +1,4 @@
-package com.example.matchgamesample.game.state;
+package com.example.matchgamesample.game;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -20,7 +20,7 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.level.LevelType;
 
-public class GameStateAnim {
+public class StateAnimation {
     private final Activity mActivity;
     private final RelativeLayout mRoot;
     private final int mTileSize;
@@ -35,7 +35,7 @@ public class GameStateAnim {
     private final OvershootInterpolator mOvershootInterpolator = new OvershootInterpolator();
     private final DecelerateInterpolator mDecelerateInterpolator = new DecelerateInterpolator();
 
-    public GameStateAnim(GameEngine gameEngine) {
+    public StateAnimation(GameEngine gameEngine) {
         mActivity = gameEngine.mActivity;
         mTileSize = gameEngine.mImageSize;
         mRoot = gameEngine.mActivity.findViewById(R.id.guide_board);
@@ -253,6 +253,7 @@ public class GameStateAnim {
          *  0 for player loss
          *  1 for player win
          */
+
         //Add black screen
         createBlackScreen();
         //Add board

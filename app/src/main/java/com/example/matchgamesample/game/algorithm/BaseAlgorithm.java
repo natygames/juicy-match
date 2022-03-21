@@ -2,6 +2,7 @@ package com.example.matchgamesample.game.algorithm;
 
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.effect.AnimationManager;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.tile.Tile;
@@ -308,6 +309,7 @@ public class BaseAlgorithm {
         tile.isExplode = true;
         //Add horizontal flash
         mAnimationManager.createHorizontalFlash(tile);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.VERTICAL_EXPLODE);
         //Add match in mRow
         for (int j = 0; j < mColumn; j++) {
             //Check is empty fruit
@@ -341,6 +343,7 @@ public class BaseAlgorithm {
         tile.isExplode = true;
         //Add vertical flash
         mAnimationManager.createVerticalFlash(tile);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.VERTICAL_EXPLODE);
         //Add match in mColumn
         for (int i = 0; i < mRow; i++) {
             //Check is empty fruit
@@ -377,6 +380,7 @@ public class BaseAlgorithm {
         tile.isExplode = true;
         //Add square flash
         mAnimationManager.createSquareFlash(tile);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.SQUARE_EXPLODE);
         //Add match in square
         for (int i = row - 1; i <= row + 1; i++) {
             for (int j = col - 1; j <= col + 1; j++) {

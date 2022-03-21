@@ -16,7 +16,6 @@ import com.example.matchgamesample.fragment.MapFragment;
 import com.example.matchgamesample.fragment.WinDialogFragment;
 import com.example.matchgamesample.game.algorithm.BonusTimeAlgorithm;
 import com.example.matchgamesample.game.algorithm.GameAlgorithm;
-import com.example.matchgamesample.game.state.GameStateAnim;
 import com.example.matchgamesample.game.tile.Tile;
 
 public class GameController extends GameObject {
@@ -25,7 +24,7 @@ public class GameController extends GameObject {
     private final int mRow, mColumn;
     private final int mTileSize;
     private final InputController mInputController;
-    private final GameStateAnim mGameStateAnim;
+    private final StateAnimation mStateAnimation;
     private GameAlgorithm mAlgorithm;
     private final BonusTimeAlgorithm mBonusTimeAlgorithm;
 
@@ -42,7 +41,7 @@ public class GameController extends GameObject {
         mColumn = gameEngine.mLevel.mColumn;
         mTileSize = gameEngine.mImageSize;
         mInputController = gameEngine.mInputController;
-        mGameStateAnim = new GameStateAnim(gameEngine);
+        mStateAnimation = new StateAnimation(gameEngine);
         mBonusTimeAlgorithm = new BonusTimeAlgorithm(gameEngine);
         mSkipButton = (Button) mGameEngine.mActivity.findViewById(R.id.btn_skip);
     }
@@ -62,7 +61,7 @@ public class GameController extends GameObject {
 
         mWaitingTime = 0;
         mState = GameControllerState.START_GAME;
-        mGameStateAnim.startGameBoard();
+        mStateAnimation.startGameBoard();
     }
 
     @Override
@@ -72,7 +71,7 @@ public class GameController extends GameObject {
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > WAITING_TIME) {
                     // Start animation
-                    mGameStateAnim.startGame(mGameEngine.mLevel.mLevelType);
+                    mStateAnimation.startGame(mGameEngine.mLevel.mLevelType);
 
                     // We disable player move when waiting
                     mState = GameControllerState.WAITING;
@@ -98,6 +97,8 @@ public class GameController extends GameObject {
             case BONUS_TIME_WAITING:
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > 1800) {
+                    mStateAnimation.startBonusTime();
+                    addSkipButton();
                     mState = GameControllerState.BONUS_TIME;
                     mWaitingTime = 0;
                 }
@@ -154,38 +155,33 @@ public class GameController extends GameObject {
                 swapTile();
                 break;
             case PLAYER_REACH_TARGET:
-                mGameStateAnim.gameOver(GameEvent.PLAYER_REACH_TARGET);
+                mStateAnimation.gameOver(GameEvent.PLAYER_REACH_TARGET);
                 mState = GameControllerState.BONUS_TIME_WAITING;
                 break;
             case PLAYER_OUT_OF_MOVE:
-                mGameStateAnim.gameOver(GameEvent.PLAYER_OUT_OF_MOVE);
+                mStateAnimation.gameOver(GameEvent.PLAYER_OUT_OF_MOVE);
                 clearView(1600);
                 mState = GameControllerState.GAME_OVER;
-                break;
-            case BONUS_TIME:
-                mGameStateAnim.startBonusTime();
-                addSkipButton();
-                mState = GameControllerState.BONUS_TIME_WAITING;
                 break;
             case BONUS_TIME_COMPLETE:
                 clearView(0);
                 mState = GameControllerState.GAME_COMPLETE;
                 break;
             case REFRESH:
-                mGameStateAnim.refreshGame();
+                mStateAnimation.refreshGame();
                 refreshTile();
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_4:
-                mGameStateAnim.startCombo(GameEvent.COMBO_4);
+                mStateAnimation.startCombo(GameEvent.COMBO_4);
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_5:
-                mGameStateAnim.startCombo(GameEvent.COMBO_5);
+                mStateAnimation.startCombo(GameEvent.COMBO_5);
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_6:
-                mGameStateAnim.startCombo(GameEvent.COMBO_6);
+                mStateAnimation.startCombo(GameEvent.COMBO_6);
                 mState = GameControllerState.WAITING;
                 break;
         }
@@ -255,9 +251,7 @@ public class GameController extends GameObject {
         mSkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Tile.mSpeed = mTileSize * 2;
-                mBonusTimeAlgorithm.mCurrentBonusTimeInterval = 50;
-                mBonusTimeAlgorithm.mCurrentWaitingTime = 0;
+                mBonusTimeAlgorithm.skip();
                 mSkipButton.setVisibility(View.INVISIBLE);
             }
         });
@@ -268,7 +262,7 @@ public class GameController extends GameObject {
 
     private void clearView(int delay) {
         // Broad disappear
-        mGameStateAnim.clearGameBoard(delay);
+        mStateAnimation.clearGameBoard(delay);
         mSkipButton.setVisibility(View.GONE);
     }
 

@@ -35,9 +35,9 @@ public class ScoreBarCounter extends GameObject {
         mScoreBar = (ClipDrawable) gameEngine.mActivity.findViewById(R.id.score_bar).getBackground();
 
         // Star
-        mStar1 = (RelativeLayout) gameEngine.mActivity.findViewById(R.id.star1);
-        mStar2 = (RelativeLayout) gameEngine.mActivity.findViewById(R.id.star2);
-        mStar3 = (RelativeLayout) gameEngine.mActivity.findViewById(R.id.star3);
+        mStar1 = (RelativeLayout) gameEngine.mActivity.findViewById(R.id.layout_star1);
+        mStar2 = (RelativeLayout) gameEngine.mActivity.findViewById(R.id.layout_star2);
+        mStar3 = (RelativeLayout) gameEngine.mActivity.findViewById(R.id.layout_star3);
 
     }
 

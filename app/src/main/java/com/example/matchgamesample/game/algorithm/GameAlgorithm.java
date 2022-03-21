@@ -201,6 +201,16 @@ public class GameAlgorithm extends BaseAlgorithm {
         // 5. Update tile
         if (!isMoving) {
 
+            outer:
+            for (int j = 0; j < mColumn; j++) {
+                for (int i = 0; i < mRow; i++) {
+                    if(tileArray[i][j].match != 0) {
+                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_EXPLODE);
+                        break outer;
+                    }
+                }
+            }
+
             // (5.1) Check special fruit
             for (int j = 0; j < mColumn; j++) {
                 for (int i = 0; i < mRow; i++) {

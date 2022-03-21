@@ -77,16 +77,16 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
         TextView textView = (TextView) getView().findViewById(R.id.txt_level_win);
         textView.setText("Level " + String.valueOf(mLevel));
         mDialog = (ConstraintLayout) getView().findViewById(R.id.dialog_win);
-        mStar1 = (ImageView) getView().findViewById(R.id.star1);
-        mStar2 = (ImageView) getView().findViewById(R.id.star2);
-        mStar3 = (ImageView) getView().findViewById(R.id.star3);
+        mStar1 = (ImageView) getView().findViewById(R.id.image_star1);
+        mStar2 = (ImageView) getView().findViewById(R.id.image_star2);
+        mStar3 = (ImageView) getView().findViewById(R.id.image_star3);
 
         // Init button
         ImageButton btnNext = (ImageButton) getView().findViewById(R.id.btn_next_win);
         Utils.createButtonEffect(btnNext);
         btnNext.setScaleX(0);
         btnNext.setScaleY(0);
-        btnNext.animate().setDuration(700).scaleX(1).scaleY(1).setInterpolator(mInterpolator);
+        btnNext.animate().setDuration(1000).scaleX(1).scaleY(1).setInterpolator(mInterpolator);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -361,7 +361,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
             showDialog(quitDialog);
             return true;
         }
-        return true;
+        return super.onBackPressed();
     }
 
 }

@@ -57,7 +57,7 @@
             app:layout_constraintTop_toTopOf="@id/guideline_star_2" />
 
         <ImageView
-            android:id="@+id/star1"
+            android:id="@+id/image_star1"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:alpha="0"
@@ -79,7 +79,7 @@
             app:layout_constraintTop_toTopOf="@id/guideline_star_1" />
 
         <ImageView
-            android:id="@+id/star2"
+            android:id="@+id/image_star2"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:alpha="0"
@@ -101,7 +101,7 @@
             app:layout_constraintTop_toTopOf="@id/guideline_star_2" />
 
         <ImageView
-            android:id="@+id/star3"
+            android:id="@+id/image_star3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:alpha="0"
