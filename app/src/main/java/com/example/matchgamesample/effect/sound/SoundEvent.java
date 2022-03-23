@@ -1,11 +1,33 @@
 package com.example.matchgamesample.effect.sound;
 
 public enum SoundEvent {
-    FRUIT_EXPLODE,
+    COMB01,
+    COMB02,
+    COMB03,
+    COMBO4,
+    FRUIT_APPEAR,
     FRUIT_BOUNCING,
     FRUIT_UPGRADE,
     ICE_CREAM_UPGRADE,
+
+    CRACKER_EXPLODE,
+    COOKIE_EXPLODE,
+
     SQUARE_EXPLODE,
     VERTICAL_EXPLODE,
+    ICE_CREAM_EXPLODE,
+
+    ICE_EXPLODE,
+    LOCK_EXPLODE,
+    COLLECT_STAR_FISH,
+    SCORE_GET_STAR,
+    ADD_BONUS,
+
+    SWEEP1,
+    SWEEP2,
+    GAME_INTRO,
+    GAME_WIN,
+    GAME_OVER,
+    SCORE_COUNT,
     BUTTON_CLICK
 }

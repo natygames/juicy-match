@@ -2,7 +2,6 @@ package com.example.matchgamesample.game;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +14,15 @@ import android.widget.RelativeLayout;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.level.LevelType;
 
 public class StateAnimation {
-    private final Activity mActivity;
+    private final MainActivity mActivity;
     private final RelativeLayout mRoot;
     private final int mTileSize;
     //Duration
@@ -36,7 +37,7 @@ public class StateAnimation {
     private final DecelerateInterpolator mDecelerateInterpolator = new DecelerateInterpolator();
 
     public StateAnimation(GameEngine gameEngine) {
-        mActivity = gameEngine.mActivity;
+        mActivity = (MainActivity) gameEngine.mActivity;
         mTileSize = gameEngine.mImageSize;
         mRoot = gameEngine.mActivity.findViewById(R.id.guide_board);
     }
@@ -44,7 +45,15 @@ public class StateAnimation {
     public void startGameBoard() {
         View view = mActivity.findViewById(R.id.board_frame);
         view.setX(-mTileSize * 10);
-        view.animate().setDuration(600).x(0).setInterpolator(mOvershootInterpolator);
+        view.animate().setDuration(600).x(0)
+                .setInterpolator(mOvershootInterpolator)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.FRUIT_APPEAR);
+                    }
+                });
+
     }
 
     public void clearGameBoard(int delay) {
@@ -126,13 +135,20 @@ public class StateAnimation {
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        //Set retry
-                        board.animate().setStartDelay(PAUSE_TIME_LONG * 2).setDuration(RETRY_TIME)
-                                .y(mRoot.getHeight()).setInterpolator(mAnticipateInterpolator)
+                        board.animate().setDuration(PAUSE_TIME_LONG * 2).alpha(1)
                                 .setListener(new AnimatorListenerAdapter() {
                                     @Override
                                     public void onAnimationEnd(Animator animation) {
-                                        mRoot.removeAllViews();
+                                        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
+                                        //Set retry
+                                        board.animate().setDuration(RETRY_TIME).y(mRoot.getHeight())
+                                                .setInterpolator(mAnticipateInterpolator)
+                                                .setListener(new AnimatorListenerAdapter() {
+                                                    @Override
+                                                    public void onAnimationEnd(Animator animation) {
+                                                        mRoot.removeAllViews();
+                                                    }
+                                                });
                                     }
                                 });
                     }
@@ -156,13 +172,20 @@ public class StateAnimation {
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        //Set retry
-                        refresh.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
-                                .y(-mTileSize * 3).setInterpolator(mAnticipateInterpolator)
+                        refresh.animate().setDuration(PAUSE_TIME_LONG).alpha(1)
                                 .setListener(new AnimatorListenerAdapter() {
                                     @Override
                                     public void onAnimationEnd(Animator animation) {
-                                        mRoot.removeView(refresh);
+                                        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
+                                        //Set retry
+                                        refresh.animate().setDuration(RETRY_TIME).y(-mTileSize * 3)
+                                                .setInterpolator(mAnticipateInterpolator)
+                                                .setListener(new AnimatorListenerAdapter() {
+                                                    @Override
+                                                    public void onAnimationEnd(Animator animation) {
+                                                        mRoot.removeView(refresh);
+                                                    }
+                                                });
                                     }
                                 });
                     }
@@ -204,12 +227,20 @@ public class StateAnimation {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         //Set retry
-                        guide.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
-                                .y(-mTileSize * 3).setInterpolator(mAnticipateInterpolator)
+                        guide.animate().setDuration(PAUSE_TIME_LONG).alpha(1)
                                 .setListener(new AnimatorListenerAdapter() {
                                     @Override
                                     public void onAnimationEnd(Animator animation) {
-                                        mRoot.removeView(guide);
+                                        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
+                                        //Set retry
+                                        guide.animate().setDuration(RETRY_TIME).y(-mTileSize * 3)
+                                                .setInterpolator(mAnticipateInterpolator)
+                                                .setListener(new AnimatorListenerAdapter() {
+                                                    @Override
+                                                    public void onAnimationEnd(Animator animation) {
+                                                        mRoot.removeView(guide);
+                                                    }
+                                                });
                                     }
                                 });
                     }
@@ -233,14 +264,20 @@ public class StateAnimation {
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        //Set retry
-                        bonusTime.animate().setStartDelay(PAUSE_TIME_SHORT)
-                                .setDuration(RETRY_TIME).y(-mTileSize * 6)
-                                .setInterpolator(mAnticipateInterpolator)
+                        bonusTime.animate().setDuration(PAUSE_TIME_SHORT).alpha(1)
                                 .setListener(new AnimatorListenerAdapter() {
                                     @Override
                                     public void onAnimationEnd(Animator animation) {
-                                        mRoot.removeView(bonusTime);
+                                        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
+                                        //Set retry
+                                        bonusTime.animate().setDuration(RETRY_TIME).y(-mTileSize * 6)
+                                                .setInterpolator(mAnticipateInterpolator)
+                                                .setListener(new AnimatorListenerAdapter() {
+                                                    @Override
+                                                    public void onAnimationEnd(Animator animation) {
+                                                        mRoot.removeView(bonusTime);
+                                                    }
+                                                });
                                     }
                                 });
                     }
@@ -284,13 +321,20 @@ public class StateAnimation {
                 .setInterpolator(mOvershootInterpolator).setListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
-                //Set retry
-                board.animate().setStartDelay(PAUSE_TIME_LONG).setDuration(RETRY_TIME)
-                        .y(mRoot.getHeight()).setInterpolator(mAnticipateInterpolator)
+                board.animate().setDuration(PAUSE_TIME_LONG).alpha(1)
                         .setListener(new AnimatorListenerAdapter() {
                             @Override
                             public void onAnimationEnd(Animator animation) {
-                                mRoot.removeAllViews();
+                                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
+                                //Set retry
+                                board.animate().setDuration(RETRY_TIME).y(mRoot.getHeight())
+                                        .setInterpolator(mAnticipateInterpolator)
+                                        .setListener(new AnimatorListenerAdapter() {
+                                            @Override
+                                            public void onAnimationEnd(Animator animation) {
+                                                mRoot.removeAllViews();
+                                            }
+                                        });
                             }
                         });
             }

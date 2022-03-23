@@ -66,19 +66,19 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_sound) {
-            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             mParent.getSoundManager().toggleSoundStatus();
             updateSoundAndMusicButtons();
         } else if (view.getId() == R.id.btn_music) {
-            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             mParent.getSoundManager().toggleMusicStatus();
             updateSoundAndMusicButtons();
         } else if (view.getId() == R.id.btn_quit) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             mSelectedId = view.getId();
             super.dismiss();
         } else if (view.getId() == R.id.btn_resume) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             mSelectedId = view.getId();
             super.dismiss();
         }

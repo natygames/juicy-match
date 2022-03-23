@@ -6,10 +6,10 @@ import com.example.matchgamesample.game.tile.Tile;
 
 import java.util.ArrayList;
 
-public class CollectGameState extends GameState {
+public class CollectBaseGameState extends BaseGameState {
     private final ArrayList<Integer> mTarget;
 
-    public CollectGameState(GameEngine gameEngine) {
+    public CollectBaseGameState(GameEngine gameEngine) {
         super(gameEngine);
         mTarget = gameEngine.mLevel.mCollect;
         mPlayerWin = false;

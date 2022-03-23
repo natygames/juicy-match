@@ -7,16 +7,16 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
-import com.example.matchgamesample.game.state.CollectGameState;
-import com.example.matchgamesample.game.state.GameState;
-import com.example.matchgamesample.game.state.IceGameState;
-import com.example.matchgamesample.game.state.ScoreGameState;
-import com.example.matchgamesample.game.state.StarGameState;
+import com.example.matchgamesample.game.state.CollectBaseGameState;
+import com.example.matchgamesample.game.state.BaseGameState;
+import com.example.matchgamesample.game.state.IceBaseGameState;
+import com.example.matchgamesample.game.state.ScoreBaseGameState;
+import com.example.matchgamesample.game.state.StarBaseGameState;
 
 public class GameAlgorithm extends BaseAlgorithm {
     private ImageView[][] iceArray, iceArray2;
     private ImageView[][] advanceArray;
-    private GameState mGameState;
+    private BaseGameState mGameState;
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
@@ -38,16 +38,16 @@ public class GameAlgorithm extends BaseAlgorithm {
     private void initGameState() {
         switch (mGameEngine.mLevel.mLevelType) {
             case LEVEL_TYPE_SCORE:
-                mGameState = new ScoreGameState(mGameEngine);
+                mGameState = new ScoreBaseGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_COLLECT:
-                mGameState = new CollectGameState(mGameEngine);
+                mGameState = new CollectBaseGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_ICE:
-                mGameState = new IceGameState(mGameEngine);
+                mGameState = new IceBaseGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_STARFISH:
-                mGameState = new StarGameState(mGameEngine);
+                mGameState = new StarBaseGameState(mGameEngine);
                 break;
         }
 
@@ -117,7 +117,7 @@ public class GameAlgorithm extends BaseAlgorithm {
 
                     tileArray[i][j].onUpdate(elapsedMillis);
 
-                    if(!tileArray[i][j].isMoving()) {
+                    if (!tileArray[i][j].isMoving()) {
                         // Start bouncing animation
                         if (tileArray[i][j].bounce == 1) {
                             mAnimationManager.createLightBounceAnim(tileArray[i][j].mImage);
@@ -136,7 +136,7 @@ public class GameAlgorithm extends BaseAlgorithm {
         // 3. Fruit wait
         if (!isMoving && !waitFinding) {
             // Play fruit bouncing sound when tile stop
-            if(mMoveTile && !isSwap)
+            if (mMoveTile && !isSwap)
                 mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_BOUNCING);
             mMoveTile = false;
         } else {
@@ -156,6 +156,15 @@ public class GameAlgorithm extends BaseAlgorithm {
         if (!isMoving) {
             if (matchFinding) {
                 combo++;
+                if (combo == 1) {
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.COMB01);
+                } else if (combo == 2) {
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.COMB02);
+                } else if (combo == 3) {
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.COMB03);
+                } else {
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.COMBO4);
+                }
             } else {
                 if (!waitFinding) {
                     if (combo >= 4) {
@@ -200,16 +209,6 @@ public class GameAlgorithm extends BaseAlgorithm {
 
         // 5. Update tile
         if (!isMoving) {
-
-            outer:
-            for (int j = 0; j < mColumn; j++) {
-                for (int i = 0; i < mRow; i++) {
-                    if(tileArray[i][j].match != 0) {
-                        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_EXPLODE);
-                        break outer;
-                    }
-                }
-            }
 
             // (5.1) Check special fruit
             for (int j = 0; j < mColumn; j++) {
@@ -658,6 +657,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                         if (tileArray[i][j].kind == TileUtils.STAR_FISH) {
                             if (tileArray[i][j].entryPoint) {
                                 mAnimationManager.explodeStarFish(tileArray[i][j]);
+                                mSoundManager.playSoundForSoundEvent(SoundEvent.COLLECT_STAR_FISH);
                             } else {
                                 tileArray[i][j].match = 0;
                             }
@@ -668,6 +668,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                         if (tileArray[i][j].kind == TileUtils.CRACKER) {
                             // Explode cracker
                             mAnimationManager.explodeCracker(tileArray[i][j]);
+                            mSoundManager.playSoundForSoundEvent(SoundEvent.CRACKER_EXPLODE);
                         } else if (tileArray[i][j].kind == TileUtils.COOKIE) {
                             // Check how many layer
                             switch (tileArray[i][j].layer) {
@@ -675,6 +676,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     //Explode cookie
                                     tileArray[i][j].invalid = false;
                                     mAnimationManager.explodeCookie(tileArray[i][j]);
+                                    mSoundManager.playSoundForSoundEvent(SoundEvent.COOKIE_EXPLODE);
                                     break;
                                 case 1:
                                 case 2:
@@ -891,10 +893,12 @@ public class GameAlgorithm extends BaseAlgorithm {
         if (tile.ice == 1) {
             if (ice != null) {
                 mAnimationManager.explodeIce(ice, 10);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_EXPLODE);
             }
         } else if (tile.ice == 2) {
             if (ice2 != null) {
                 mAnimationManager.explodeIce(ice2, 5);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_EXPLODE);
             }
         }
         tile.ice--;
@@ -907,6 +911,7 @@ public class GameAlgorithm extends BaseAlgorithm {
         if (tile.kind != TileUtils.COOKIE)
             tile.invalid = false;
         mAnimationManager.explodeLock(lock, tile);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.LOCK_EXPLODE);
     }
 
 }

@@ -3,13 +3,13 @@ package com.example.matchgamesample.game.state;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.tile.Tile;
 
-public class GameState {
+public class BaseGameState {
     protected GameEngine mGameEngine;
     protected int mRow, mColumn;
     protected boolean mPlayerWin;
     protected boolean mPlayerLoss;
 
-    public GameState(GameEngine gameEngine) {
+    public BaseGameState(GameEngine gameEngine) {
         mGameEngine = gameEngine;
         mRow = gameEngine.mLevel.mRow;
         mColumn = gameEngine.mLevel.mColumn;

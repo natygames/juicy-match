@@ -7,13 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 
 public class ScoreBarCounter extends GameObject {
     private final GameEngine mGameEngine;
+    private final MainActivity mActivity;
 
     private int mPoints;
     private int mScoreBarLevel;
@@ -29,6 +32,7 @@ public class ScoreBarCounter extends GameObject {
 
     public ScoreBarCounter(GameEngine gameEngine) {
         mGameEngine = gameEngine;
+        mActivity = (MainActivity) gameEngine.mActivity;
         mFactor = (10000 / (gameEngine.mLevel.mMove * 100));   // Progress bar max is 10000
 
         // Score bar
@@ -63,16 +67,19 @@ public class ScoreBarCounter extends GameObject {
             if (mCurrentStar < 1 && mScoreBarLevel >= STAR1_THRESHOLD) {
                 mStar1.setBackgroundResource(R.drawable.star);
                 createStarAnim(mStar1);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 mGameEngine.mLevel.mStar = 1;
                 mCurrentStar = 1;
             } else if (mCurrentStar < 2 && mScoreBarLevel >= STAR2_THRESHOLD) {
                 mStar2.setBackgroundResource(R.drawable.star);
                 createStarAnim(mStar2);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 mGameEngine.mLevel.mStar = 2;
                 mCurrentStar = 2;
             } else if (mCurrentStar < 3 && mScoreBarLevel >= STAR3_THRESHOLD) {
                 mStar3.setBackgroundResource(R.drawable.star);
                 createStarAnim(mStar3);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 mGameEngine.mLevel.mStar = 3;
                 mCurrentStar = 3;
 

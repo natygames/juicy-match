@@ -51,11 +51,34 @@ public class SoundManager {
     private void loadSounds() {
         createSoundPool();
         mSoundsMap = new HashMap<>();
+        loadEventSound(mContext, SoundEvent.COMB01, R.raw.combo1_sound);
+        loadEventSound(mContext, SoundEvent.COMB02, R.raw.combo2_sound);
+        loadEventSound(mContext, SoundEvent.COMB03, R.raw.combo3_sound);
+        loadEventSound(mContext, SoundEvent.COMBO4, R.raw.combo4_sound);
+
+        loadEventSound(mContext, SoundEvent.CRACKER_EXPLODE, R.raw.cracker_explode_sound);
+        loadEventSound(mContext, SoundEvent.COOKIE_EXPLODE, R.raw.cookie_explode_sound);
+        loadEventSound(mContext, SoundEvent.ICE_CREAM_EXPLODE, R.raw.ice_cream_explode_sound);
+
+        loadEventSound(mContext, SoundEvent.ICE_EXPLODE, R.raw.ice_explode_sound);
+        loadEventSound(mContext, SoundEvent.LOCK_EXPLODE, R.raw.lock_explode_sound);
+        loadEventSound(mContext, SoundEvent.COLLECT_STAR_FISH, R.raw.collect_starfish_sound);
+
         loadEventSound(mContext, SoundEvent.SQUARE_EXPLODE, R.raw.square_explode_sound);
         loadEventSound(mContext, SoundEvent.VERTICAL_EXPLODE, R.raw.vertical_explode_sound);
+        loadEventSound(mContext, SoundEvent.FRUIT_APPEAR, R.raw.fruit_appear_sound);
         loadEventSound(mContext, SoundEvent.FRUIT_BOUNCING, R.raw.fruit_bouncing_sound);
         loadEventSound(mContext, SoundEvent.FRUIT_UPGRADE, R.raw.fruit_upgrade_sound);
         loadEventSound(mContext, SoundEvent.ICE_CREAM_UPGRADE, R.raw.ice_cream_upgrade_sound);
+
+        loadEventSound(mContext, SoundEvent.GAME_INTRO, R.raw.intro_sound);
+        loadEventSound(mContext, SoundEvent.GAME_WIN, R.raw.win_sound);
+        loadEventSound(mContext, SoundEvent.GAME_OVER, R.raw.game_over_sound);
+        loadEventSound(mContext, SoundEvent.SCORE_COUNT, R.raw.score_count_sound);
+        loadEventSound(mContext, SoundEvent.SCORE_GET_STAR, R.raw.score_get_star_sound);
+        loadEventSound(mContext, SoundEvent.ADD_BONUS, R.raw.add_bonus_sound);
+        loadEventSound(mContext, SoundEvent.SWEEP1, R.raw.sweep1_sound);
+        loadEventSound(mContext, SoundEvent.SWEEP2, R.raw.sweep2_sound);
         loadEventSound(mContext, SoundEvent.BUTTON_CLICK, R.raw.btn_sound);
     }
 

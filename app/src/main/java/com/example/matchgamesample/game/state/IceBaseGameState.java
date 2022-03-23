@@ -6,10 +6,10 @@ import com.example.matchgamesample.game.tile.Tile;
 
 import java.util.ArrayList;
 
-public class IceGameState extends GameState {
+public class IceBaseGameState extends BaseGameState {
     private final ArrayList<Integer> mTarget;
 
-    public IceGameState(GameEngine gameEngine) {
+    public IceBaseGameState(GameEngine gameEngine) {
         super(gameEngine);
         mTarget = gameEngine.mLevel.mCollect;
     }

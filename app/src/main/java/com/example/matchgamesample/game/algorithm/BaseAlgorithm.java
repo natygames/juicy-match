@@ -5,6 +5,7 @@ import com.example.matchgamesample.effect.AnimationManager;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.engine.GameEngine;
+import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 
@@ -379,6 +380,7 @@ public class BaseAlgorithm {
         //Mark isExplode
         tile.isExplode = true;
         //Add square flash
+        mAnimationManager.createScaleAnim();
         mAnimationManager.createSquareFlash(tile);
         mSoundManager.playSoundForSoundEvent(SoundEvent.SQUARE_EXPLODE);
         //Add match in square
@@ -461,8 +463,9 @@ public class BaseAlgorithm {
         //Mark isExplode
         tile.isExplode = true;
         //Add square flash
-        mAnimationManager.createShakingAnim_small();
+        mAnimationManager.createScaleAnim();
         mAnimationManager.createSquareFlash_big(tile);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.SQUARE_EXPLODE);
 
         //Add match in 5x5 square
         for (int i = row - 2; i <= row + 2; i++) {
@@ -512,6 +515,8 @@ public class BaseAlgorithm {
             target = tile.iceCreamTarget;
         }
 
+        mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_EXPLODE);
+
         // Check same fruit kind
         for (int j = 0; j < mColumn; j++) {
             for (int i = 0; i < mRow; i++) {
@@ -552,6 +557,7 @@ public class BaseAlgorithm {
         //Add animation
         mAnimationManager.createShakingAnim();
         mAnimationManager.createExplodeWave(tile);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_EXPLODE);
         //Check same fruit kind
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
@@ -588,6 +594,8 @@ public class BaseAlgorithm {
 
         // Mark isExplode
         tile.isExplode = true;
+
+        mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_EXPLODE);
 
         // Check same fruit kind
         int target = tile.iceCreamTarget;

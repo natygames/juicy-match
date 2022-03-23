@@ -106,6 +106,7 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
             super.dismiss();
         } else if (view.getId() == R.id.btn_cancel) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             super.dismiss();
         }
     }

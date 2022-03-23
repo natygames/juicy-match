@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.matchgamesample.dialog.BaseDialog;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.fragment.BaseFragment;
 import com.example.matchgamesample.fragment.GameFragment;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         }
         mCurrentDialog = newDialog;
         mCurrentDialog.show();
+        getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
     }
 
 

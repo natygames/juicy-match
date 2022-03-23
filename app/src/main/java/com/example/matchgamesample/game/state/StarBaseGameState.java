@@ -7,10 +7,10 @@ import com.example.matchgamesample.game.tile.TileUtils;
 
 import java.util.ArrayList;
 
-public class StarGameState extends GameState {
+public class StarBaseGameState extends BaseGameState {
     private final ArrayList<Integer> mTarget;
 
-    public StarGameState(GameEngine gameEngine) {
+    public StarBaseGameState(GameEngine gameEngine) {
         super(gameEngine);
         mTarget = gameEngine.mLevel.mCollect;
     }

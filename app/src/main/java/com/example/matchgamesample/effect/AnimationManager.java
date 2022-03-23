@@ -34,7 +34,7 @@ public class AnimationManager {
     private final OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
     // Animation
     private final ParticleExplosion particleExplosion;
-    private final Animation shaking_anim, shaking_small_anim, machine_anim;
+    private final Animation scaleAnim, shakingAnim, shakingSmallAnim, machineAnim;
     private final Handler mHandler = new Handler();
 
     public AnimationManager(GameEngine gameEngine) {
@@ -46,9 +46,10 @@ public class AnimationManager {
         mEffect_board.getLayoutParams().height = mTileSize * gameEngine.mLevel.mRow;
 
         particleExplosion = ParticleExplosion.attach2Window(gameEngine.mActivity);
-        shaking_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_animation);
-        shaking_small_anim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_small_animation);
-        machine_anim = AnimationUtils.loadAnimation(mActivity, R.anim.machine_animation);
+        scaleAnim = AnimationUtils.loadAnimation(mActivity, R.anim.scale_animation);
+        shakingAnim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_animation);
+        shakingSmallAnim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_small_animation);
+        machineAnim = AnimationUtils.loadAnimation(mActivity, R.anim.machine_animation);
     }
 
     //This create horizontal flash
@@ -1947,18 +1948,23 @@ public class AnimationManager {
         }.run();
     }
 
+    public void createScaleAnim() {
+        mActivity.findViewById(R.id.board_frame).startAnimation(scaleAnim);
+        mActivity.findViewById(R.id.effect_board).startAnimation(scaleAnim);
+    }
+
     public void createShakingAnim() {
-        mActivity.findViewById(R.id.board_frame).startAnimation(shaking_anim);
-        mActivity.findViewById(R.id.effect_board).startAnimation(shaking_anim);
+        mActivity.findViewById(R.id.board_frame).startAnimation(shakingAnim);
+        mActivity.findViewById(R.id.effect_board).startAnimation(shakingAnim);
     }
 
     public void createShakingAnim_small() {
-        mActivity.findViewById(R.id.board_frame).startAnimation(shaking_small_anim);
-        mActivity.findViewById(R.id.effect_board).startAnimation(shaking_small_anim);
+        mActivity.findViewById(R.id.board_frame).startAnimation(shakingSmallAnim);
+        mActivity.findViewById(R.id.effect_board).startAnimation(shakingSmallAnim);
     }
 
     public void createMachineAnim(ImageView view) {
-        view.startAnimation(machine_anim);
+        view.startAnimation(machineAnim);
     }
 
     public void clear() {

@@ -23,8 +23,9 @@ import android.widget.TextView;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.dialog.ExitDialog;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 
-public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDialogListener{
+public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDialogListener {
     private static final String LEVEL = "LEVEL";
     private static final String SCORE = "SCORE";
     private static final String STAR = "STAR";
@@ -90,6 +91,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
                 getMainActivity().navigateToFragment(new MapFragment());
             }
         });
@@ -109,6 +111,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
             }
         });
         animator.start();
+        getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_COUNT);
 
         // Star animation
         createStarAnim(mStar);
@@ -130,6 +133,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                 @Override
                 public void run() {
                     createExplode(mStar1);
+                    getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 }
             }, 700);
         }
@@ -147,6 +151,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                 @Override
                 public void run() {
                     createExplode(mStar2);
+                    getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 }
             }, 1000);
         }
@@ -164,6 +169,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                 @Override
                 public void run() {
                     createExplode(mStar3);
+                    getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 }
             }, 1300);
         }
@@ -356,9 +362,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
     @Override
     public boolean onBackPressed() {
         if (!super.onBackPressed()) {
-            ExitDialog quitDialog = new ExitDialog(getMainActivity());
-            quitDialog.setListener(this);
-            showDialog(quitDialog);
+            getMainActivity().navigateToFragment(new MapFragment());
             return true;
         }
         return super.onBackPressed();

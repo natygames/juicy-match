@@ -107,7 +107,12 @@ public class TargetCounter extends GameObject {
             // Update mTarget text
             int txtSize = mText.size();
             for (int i = 0; i < txtSize; i++) {
-                mText.get(i).setText(String.valueOf(mLevel.mTarget.get(i)));
+                if(mLevel.mTarget.get(i) == 0) {
+                    mText.get(i).setBackgroundResource(R.drawable.check);
+                    mText.get(i).setText("");
+                } else {
+                    mText.get(i).setText(String.valueOf(mLevel.mTarget.get(i)));
+                }
             }
             mTargetsHaveChanged = false;
         }

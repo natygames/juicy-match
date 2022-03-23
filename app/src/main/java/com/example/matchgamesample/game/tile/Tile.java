@@ -33,7 +33,7 @@ public class Tile extends Sprite {
             mImage.setAlpha(0f);
             mImage.setScaleY(0);
             mImage.setScaleX(0);
-            mImage.animate().scaleX(1).scaleY(1).alpha(1).setStartDelay(700).setDuration((long) (500 * Math.random() + 200))
+            mImage.animate().scaleX(1).scaleY(1).alpha(1).setStartDelay(650).setDuration((long) (500 * Math.random() + 200))
                     .setListener(new AnimatorListenerAdapter() {
                         @Override
                         public void onAnimationEnd(Animator animation) {
@@ -65,7 +65,7 @@ public class Tile extends Sprite {
                 if (bounce == 0) {
                     if (diff_y <= -mWidth * 4) {
                         bounce = 2;
-                    } else if (diff_y <= -mWidth * 2) {
+                    } else if (diff_y <= -mWidth) {
                         bounce = 1;
                     }
                 }

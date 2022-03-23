@@ -37,6 +37,7 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
             mListener.exit();
         } else if(view.getId() == R.id.btn_cancel){
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             super.dismiss();
         }
     }

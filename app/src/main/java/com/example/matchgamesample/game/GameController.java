@@ -8,6 +8,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
+import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
@@ -20,6 +21,7 @@ import com.example.matchgamesample.game.tile.Tile;
 
 public class GameController extends GameObject {
     private final GameEngine mGameEngine;
+    private final MainActivity mActivity;
     private final Tile[][] mTileArray;
     private final int mRow, mColumn;
     private final int mTileSize;
@@ -36,6 +38,7 @@ public class GameController extends GameObject {
 
     public GameController(GameEngine gameEngine, Tile[][] TileArray) {
         mGameEngine = gameEngine;
+        mActivity = (MainActivity) gameEngine.mActivity;
         mTileArray = TileArray;
         mRow = gameEngine.mLevel.mRow;
         mColumn = gameEngine.mLevel.mColumn;
@@ -60,8 +63,9 @@ public class GameController extends GameObject {
         }
 
         mWaitingTime = 0;
-        mState = GameControllerState.START_GAME;
         mStateAnimation.startGameBoard();
+        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+        mState = GameControllerState.START_GAME;
     }
 
     @Override
@@ -72,6 +76,8 @@ public class GameController extends GameObject {
                 if (mWaitingTime > WAITING_TIME) {
                     // Start animation
                     mStateAnimation.startGame(mGameEngine.mLevel.mLevelType);
+                    mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+                    mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.GAME_INTRO);
 
                     // We disable player move when waiting
                     mState = GameControllerState.WAITING;
@@ -98,6 +104,7 @@ public class GameController extends GameObject {
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > 1800) {
                     mStateAnimation.startBonusTime();
+                    mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
                     addSkipButton();
                     mState = GameControllerState.BONUS_TIME;
                     mWaitingTime = 0;
@@ -156,10 +163,14 @@ public class GameController extends GameObject {
                 break;
             case PLAYER_REACH_TARGET:
                 mStateAnimation.gameOver(GameEvent.PLAYER_REACH_TARGET);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.GAME_WIN);
                 mState = GameControllerState.BONUS_TIME_WAITING;
                 break;
             case PLAYER_OUT_OF_MOVE:
                 mStateAnimation.gameOver(GameEvent.PLAYER_OUT_OF_MOVE);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.GAME_OVER);
                 clearView(1600);
                 mState = GameControllerState.GAME_OVER;
                 break;
@@ -169,19 +180,23 @@ public class GameController extends GameObject {
                 break;
             case REFRESH:
                 mStateAnimation.refreshGame();
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
                 refreshTile();
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_4:
                 mStateAnimation.startCombo(GameEvent.COMBO_4);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_5:
                 mStateAnimation.startCombo(GameEvent.COMBO_5);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_6:
                 mStateAnimation.startCombo(GameEvent.COMBO_6);
+                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
                 mState = GameControllerState.WAITING;
                 break;
         }
