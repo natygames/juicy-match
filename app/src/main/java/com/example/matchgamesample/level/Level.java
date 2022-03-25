@@ -4,13 +4,8 @@ import com.example.matchgamesample.R;
 
 import java.util.ArrayList;
 
-/** This class stores variables of each level
- *  First, Data class will pull data from XML file
- *  Then, LevelManager will assign to each variable in Level
- *  Our game will get a Level object to access level data
-**/
-
 public class Level {
+
     public int mLevel;
     public int mStar;
     public LevelType mLevelType;
@@ -18,13 +13,15 @@ public class Level {
     public int mScore;
     public int mColumn, mRow;
     public int mFruitNum = 4;
+
     public ArrayList<Integer> mTarget = new ArrayList<>();
     public ArrayList<Integer> mCollect = new ArrayList<>();
+
     // Game board in char
     public String board, fruit, ice, advance;
 
-    public void setLevelType(int type){
-        switch (type){
+    public void setLevelType(int type) {
+        switch (type) {
             case 1:
                 mLevelType = LevelType.LEVEL_TYPE_SCORE;
                 break;
@@ -40,37 +37,37 @@ public class Level {
         }
     }
 
-    public void addTarget(int target){
+    public void addTarget(int target) {
         mTarget.add(target);
     }
 
-    public void addCollect(String s){
-            switch (s) {
-                case ("strawberry"):
-                    mCollect.add(R.drawable.strawberry);
-                    break;
-                case ("cherry"):
-                    mCollect.add(R.drawable.cherry);
-                    break;
-                case ("lemon"):
-                    mCollect.add(R.drawable.lemon);
-                    break;
-                case ("striped"):
-                    mCollect.add(R.drawable.striped_ball);
-                    break;
-                case ("cracker"):
-                    mCollect.add(R.drawable.cracker);
-                    break;
-                case ("cookie"):
-                    mCollect.add(R.drawable.cookie);
-                    break;
-                case ("starfish"):
-                    mCollect.add(R.drawable.starfish);
-                    break;
-                case ("ice"):
-                    mCollect.add(R.drawable.ice);
-                    break;
-            }
+    public void addCollect(String s) {
+        switch (s) {
+            case ("strawberry"):
+                mCollect.add(R.drawable.strawberry);
+                break;
+            case ("cherry"):
+                mCollect.add(R.drawable.cherry);
+                break;
+            case ("lemon"):
+                mCollect.add(R.drawable.lemon);
+                break;
+            case ("striped"):
+                mCollect.add(R.drawable.striped_ball);
+                break;
+            case ("cracker"):
+                mCollect.add(R.drawable.cracker);
+                break;
+            case ("cookie"):
+                mCollect.add(R.drawable.cookie);
+                break;
+            case ("starfish"):
+                mCollect.add(R.drawable.starfish);
+                break;
+            case ("ice"):
+                mCollect.add(R.drawable.ice);
+                break;
+        }
 
     }
 

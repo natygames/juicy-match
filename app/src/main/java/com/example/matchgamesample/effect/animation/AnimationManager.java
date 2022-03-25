@@ -1,4 +1,4 @@
-package com.example.matchgamesample.effect;
+package com.example.matchgamesample.effect.animation;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -20,7 +20,7 @@ import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.Utils;
-import com.example.matchgamesample.effect.particle.ParticleExplosion;
+import com.example.matchgamesample.effect.animation.particle.ParticleExplosion;
 
 public class AnimationManager {
     private final Activity mActivity;
@@ -1306,59 +1306,59 @@ public class AnimationManager {
                 .y((float) (positY - mTileSize / 3))
                 .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(frag1);
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mEffect_board.removeView(frag1);
+                    }
+                });
         frag2.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
                 .y((float) (positY - mTileSize / 3))
                 .rotation(Math.random() > 0.5 ? -30 : 30).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(frag2);
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mEffect_board.removeView(frag2);
+                    }
+                });
         frag3.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
                 .x((float) (positX + mTileSize / 3))
                 .y((float) (positY - mTileSize / 3))
                 .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(frag3);
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mEffect_board.removeView(frag3);
+                    }
+                });
         frag4.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
                 .x((float) (positX - mTileSize / 3))
                 .y((float) (positY + mTileSize / 3))
                 .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(frag4);
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mEffect_board.removeView(frag4);
+                    }
+                });
         frag5.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
                 .y((float) (positY + mTileSize / 3))
                 .rotation(Math.random() > 0.5 ? -30 : 30).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(frag5);
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mEffect_board.removeView(frag5);
+                    }
+                });
         frag6.animate().setDuration(200 + (int) (Math.random() * 4) * 100)
                 .x((float) (positX + mTileSize / 3))
                 .y((float) (positY + mTileSize / 3))
                 .rotation(Math.random() > 0.5 ? -45 : 45).scaleX(0.7f).scaleY(0.7f).alpha(0.3f)
                 .setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mEffect_board.removeView(frag6);
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        mEffect_board.removeView(frag6);
+                    }
+                });
     }
 
     public void explodeCookie(Tile tile) {

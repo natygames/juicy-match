@@ -6,12 +6,14 @@ import com.example.matchgamesample.game.tile.Tile;
 
 import java.util.ArrayList;
 
-public class IceBaseGameState extends BaseGameState {
+public class CollectGameState extends BaseGameState {
+
     private final ArrayList<Integer> mTarget;
 
-    public IceBaseGameState(GameEngine gameEngine) {
+    public CollectGameState(GameEngine gameEngine) {
         super(gameEngine);
         mTarget = gameEngine.mLevel.mCollect;
+        mPlayerWin = false;
     }
 
     @Override
@@ -36,19 +38,8 @@ public class IceBaseGameState extends BaseGameState {
                     continue;
                 }
 
-                // Update ice
-                if (tile.ice == 1 && tile.isValidFruit()) {
-                    int target = mGameEngine.mLevel.mTarget.get(0);
-                    if (target > 0) {
-                        target--;
-                        mGameEngine.mLevel.mTarget.set(0, target);
-                        mGameEngine.onGameEvent(GameEvent.PLAYER_COLLECT);
-                    }
-                }
-
-                // Update mCollect item
                 int size = mTarget.size();
-                for (int n = 1; n < size; n++) {
+                for (int n = 0; n < size; n++) {
                     if (tile.kind == mTarget.get(n)) {
                         int target = mGameEngine.mLevel.mTarget.get(n);
                         if (target > 0) {
@@ -60,6 +51,6 @@ public class IceBaseGameState extends BaseGameState {
                 }
             }
         }
-    }
 
+    }
 }

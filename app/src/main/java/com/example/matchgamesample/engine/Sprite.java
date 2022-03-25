@@ -3,7 +3,7 @@ package com.example.matchgamesample.engine;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-public abstract class Sprite extends GameObject{
+public abstract class Sprite extends GameObject {
 
     public ImageView mImage;
     public int x, y;

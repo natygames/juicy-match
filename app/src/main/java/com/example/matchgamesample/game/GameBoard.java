@@ -14,11 +14,6 @@ import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 import com.example.matchgamesample.level.Level;
 
-/* This class let you design fruit board
- * Assign fruit board's block with char[]
- * Use createGameBoard() to get char[] value
- */
-
 public class GameBoard {
     private final GameEngine mGameEngine;
     private final Activity mActivity;

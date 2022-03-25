@@ -42,4 +42,5 @@ public class BasicInputController extends InputController {
             return true;
         }
     }
+
 }

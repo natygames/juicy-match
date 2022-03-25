@@ -3,11 +3,12 @@ package com.example.matchgamesample.game.state;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.level.Level;
 
-public class ScoreBaseGameState extends BaseGameState {
+public class ScoreGameState extends BaseGameState {
+
     private final Level mLevel;
     private final int mTarget;
 
-    public ScoreBaseGameState(GameEngine gameEngine) {
+    public ScoreGameState(GameEngine gameEngine) {
         super(gameEngine);
         mLevel = gameEngine.mLevel;
         mTarget = gameEngine.mLevel.mTarget.get(0);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -14,8 +15,8 @@ import java.util.HashMap;
 
 public class SoundManager {
 
-    private static final int MAX_STREAMS = 10;
-    private static final float DEFAULT_MUSIC_VOLUME = 0.6f;
+    private static final int MAX_STREAMS = 8;
+    private static final float DEFAULT_MUSIC_VOLUME = 0.3f;
 
     private static final String SOUNDS_PREF_KEY = "SOUND";
     private static final String MUSIC_PREF_KEY = "MUSIC";
@@ -28,14 +29,13 @@ public class SoundManager {
     private boolean mSoundEnabled;
     private boolean mMusicEnabled;
 
-    //private MediaPlayer mBgPlayer;
+    private MediaPlayer mBgPlayer;
 
     public SoundManager(Context context) {
         mContext = context;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         mSoundEnabled = prefs.getBoolean(SOUNDS_PREF_KEY, true);
         mMusicEnabled = prefs.getBoolean(MUSIC_PREF_KEY, true);
-        // Use SoundPool.Builder on API 21 http://developer.android.com/reference/android/media/SoundPool.Builder.html
         loadIfNeeded();
     }
 
@@ -86,6 +86,8 @@ public class SoundManager {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             mSoundPool = new SoundPool(MAX_STREAMS, AudioManager.STREAM_MUSIC, 0);
         } else {
+            // Use SoundPool.Builder on API 21
+            // http://developer.android.com/reference/android/media/SoundPool.Builder.html
             AudioAttributes audioAttributes = new AudioAttributes.Builder()
                     .setUsage(AudioAttributes.USAGE_GAME)
                     .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -103,21 +105,10 @@ public class SoundManager {
     }
 
     private void loadMusic() {
-        /*
-        try {
-            // Important to not reuse it. It can be on a strange state
-            mBgPlayer = new MediaPlayer();
-            AssetFileDescriptor afd = mContext.getAssets().openFd("sfx/Riccardo_Colombo_-_11_-_Something_mental.mp3");
-            mBgPlayer.setDataSource(afd.getFileDescriptor(),
-                    afd.getStartOffset(), afd.getLength());
-            mBgPlayer.setLooping(true);
-            mBgPlayer.setVolume(DEFAULT_MUSIC_VOLUME, DEFAULT_MUSIC_VOLUME);
-            mBgPlayer.prepare();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-         */
+        // Important to not reuse it. It can be on a strange state
+        mBgPlayer = MediaPlayer.create(mContext, R.raw.happy_and_joyful_children);
+        mBgPlayer.setLooping(true);
+        mBgPlayer.setVolume(DEFAULT_MUSIC_VOLUME, DEFAULT_MUSIC_VOLUME);
     }
 
     public void playSoundForSoundEvent(SoundEvent event) {
@@ -132,35 +123,30 @@ public class SoundManager {
     }
 
     public void pauseBgMusic() {
-        /*
         if (mMusicEnabled) {
             mBgPlayer.pause();
         }
-
-         */
     }
 
     public void resumeBgMusic() {
-        /*
-        if (mMusicEnabled) {
+        if (mMusicEnabled && !mBgPlayer.isPlaying()) {
             mBgPlayer.start();
         }
-
-         */
     }
 
-    private void unloadMusic() {
-        /*
-        mBgPlayer.stop();
-        mBgPlayer.release();
-
-         */
+    public void unloadMusic() {
+        if (mBgPlayer != null) {
+            mBgPlayer.stop();
+            mBgPlayer.release();
+        }
     }
 
-    private void unloadSounds() {
-        mSoundPool.release();
-        mSoundPool = null;
-        mSoundsMap.clear();
+    public void unloadSounds() {
+        if (mSoundPool != null) {
+            mSoundPool.release();
+            mSoundPool = null;
+            mSoundsMap.clear();
+        }
     }
 
     public void toggleMusicStatus() {

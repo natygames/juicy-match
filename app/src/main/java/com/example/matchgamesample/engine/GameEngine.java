@@ -85,11 +85,11 @@ public class GameEngine {
             mGameObjects.get(i).onUpdate(elapsedMillis);
         }
 
-        synchronized (mGameObjects){
-            while (!mObjectsToRemove.isEmpty()){
+        synchronized (mGameObjects) {
+            while (!mObjectsToRemove.isEmpty()) {
                 mGameObjects.remove(mObjectsToRemove.remove(0));
             }
-            while (!mObjectsToAdd.isEmpty()){
+            while (!mObjectsToAdd.isEmpty()) {
                 mGameObjects.add(mObjectsToAdd.remove(0));
             }
         }
@@ -105,7 +105,7 @@ public class GameEngine {
     }
 
     public void addGameObject(final GameObject gameObject) {
-        if(isRunning()){
+        if (isRunning()) {
             mObjectsToAdd.add(gameObject);
         } else {
             mGameObjects.add(gameObject);
@@ -124,10 +124,8 @@ public class GameEngine {
         // We notify all the GameObjects
         int numObjects = mGameObjects.size();
         for (int i = 0; i < numObjects; i++) {
-             mGameObjects.get(i).onGameEvent(gameEvent);
+            mGameObjects.get(i).onGameEvent(gameEvent);
         }
-
-        // Play Sound
-        //((MainActivity)mActivity).getSoundManager().playSoundForGameEvent(gameEvent);
     }
+
 }

@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,9 +27,11 @@ import com.example.matchgamesample.dialog.ExitDialog;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 
 public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDialogListener {
+
     private static final String LEVEL = "LEVEL";
     private static final String SCORE = "SCORE";
     private static final String STAR = "STAR";
+
     private int mLevel;
     private int mScore;
     private int mStar;
@@ -37,7 +40,7 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
     private ImageView mStar1, mStar2, mStar3;
     private static final int EXPLODE_TIME = 250;
     private final OvershootInterpolator mInterpolator = new OvershootInterpolator();
-    private final Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     public WinDialogFragment() {
         // Required empty public constructor

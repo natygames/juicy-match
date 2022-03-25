@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/font/baloo.xml" value="0.2838541666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_map.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_win_dialog.xml" value="0.18432971014492755" />

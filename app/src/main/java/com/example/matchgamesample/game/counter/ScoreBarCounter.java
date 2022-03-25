@@ -15,6 +15,7 @@ import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 
 public class ScoreBarCounter extends GameObject {
+
     private final GameEngine mGameEngine;
     private final MainActivity mActivity;
 

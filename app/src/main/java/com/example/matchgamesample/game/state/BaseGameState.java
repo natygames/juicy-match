@@ -4,6 +4,7 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.tile.Tile;
 
 public class BaseGameState {
+
     protected GameEngine mGameEngine;
     protected int mRow, mColumn;
     protected boolean mPlayerWin;

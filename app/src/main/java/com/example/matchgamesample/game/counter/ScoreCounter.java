@@ -12,6 +12,7 @@ import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.level.Level;
 
 public class ScoreCounter extends GameObject {
+
     private static final int POINTS_GAINED_PER_FRUIT = 10;
 
     private final TextView mText;

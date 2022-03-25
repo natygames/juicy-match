@@ -7,10 +7,11 @@ import com.example.matchgamesample.game.tile.TileUtils;
 
 import java.util.ArrayList;
 
-public class StarBaseGameState extends BaseGameState {
+public class StarGameState extends BaseGameState {
+
     private final ArrayList<Integer> mTarget;
 
-    public StarBaseGameState(GameEngine gameEngine) {
+    public StarGameState(GameEngine gameEngine) {
         super(gameEngine);
         mTarget = gameEngine.mLevel.mCollect;
     }
@@ -18,8 +19,8 @@ public class StarBaseGameState extends BaseGameState {
     @Override
     public boolean isPlayerReachTarget() {
         int size = mGameEngine.mLevel.mTarget.size();
-        for(int i = 0; i < size; i++){
-            if(mGameEngine.mLevel.mTarget.get(i) != 0){
+        for (int i = 0; i < size; i++) {
+            if (mGameEngine.mLevel.mTarget.get(i) != 0) {
                 return false;
             }
         }

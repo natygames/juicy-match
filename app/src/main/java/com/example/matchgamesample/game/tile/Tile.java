@@ -7,7 +7,6 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.Sprite;
 
 public class Tile extends Sprite {
-    private final int mFruitNum;
     public int row = 0, col = 0;                // Tile position
     public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute
     public int bounce = 0, wait = 0, diagonal = 0;            // Tile moving
@@ -18,13 +17,13 @@ public class Tile extends Sprite {
     public int iceCreamTarget = 0;
     public boolean entryPoint = false;
 
-    // Tile speed
     public static int mSpeed;
+    public static int mFruitNum;
 
     public Tile(GameEngine gameEngine) {
         super(gameEngine);
-        mFruitNum = gameEngine.mLevel.mFruitNum;
         mSpeed = mWidth / 4;
+        mFruitNum = gameEngine.mLevel.mFruitNum;
     }
 
     public void startGame() {

@@ -7,11 +7,11 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
-import com.example.matchgamesample.game.state.CollectBaseGameState;
+import com.example.matchgamesample.game.state.CollectGameState;
 import com.example.matchgamesample.game.state.BaseGameState;
-import com.example.matchgamesample.game.state.IceBaseGameState;
-import com.example.matchgamesample.game.state.ScoreBaseGameState;
-import com.example.matchgamesample.game.state.StarBaseGameState;
+import com.example.matchgamesample.game.state.IceGameState;
+import com.example.matchgamesample.game.state.ScoreGameState;
+import com.example.matchgamesample.game.state.StarGameState;
 
 public class GameAlgorithm extends BaseAlgorithm {
     private ImageView[][] iceArray, iceArray2;
@@ -38,16 +38,16 @@ public class GameAlgorithm extends BaseAlgorithm {
     private void initGameState() {
         switch (mGameEngine.mLevel.mLevelType) {
             case LEVEL_TYPE_SCORE:
-                mGameState = new ScoreBaseGameState(mGameEngine);
+                mGameState = new ScoreGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_COLLECT:
-                mGameState = new CollectBaseGameState(mGameEngine);
+                mGameState = new CollectGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_ICE:
-                mGameState = new IceBaseGameState(mGameEngine);
+                mGameState = new IceGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_STARFISH:
-                mGameState = new StarBaseGameState(mGameEngine);
+                mGameState = new StarGameState(mGameEngine);
                 break;
         }
 

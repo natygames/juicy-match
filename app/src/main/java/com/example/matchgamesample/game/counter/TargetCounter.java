@@ -107,7 +107,7 @@ public class TargetCounter extends GameObject {
             // Update mTarget text
             int txtSize = mText.size();
             for (int i = 0; i < txtSize; i++) {
-                if(mLevel.mTarget.get(i) == 0) {
+                if (mLevel.mTarget.get(i) == 0) {
                     mText.get(i).setBackgroundResource(R.drawable.check);
                     mText.get(i).setText("");
                 } else {
@@ -120,7 +120,7 @@ public class TargetCounter extends GameObject {
 
     @Override
     public void onGameEvent(GameEvent gameEvents) {
-        switch (gameEvents){
+        switch (gameEvents) {
             case PLAYER_COLLECT:
                 mTargetsHaveChanged = true;
                 break;

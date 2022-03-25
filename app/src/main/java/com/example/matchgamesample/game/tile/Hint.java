@@ -11,10 +11,10 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 
-/* Hint class check possible match on board
+/** Hint class check possible match on board
  * if founded, start hint animation
  * otherwise, refresh
- */
+ **/
 
 public class Hint extends GameObject {
     private final GameEngine mGameEngine;

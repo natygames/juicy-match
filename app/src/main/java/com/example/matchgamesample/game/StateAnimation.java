@@ -22,6 +22,7 @@ import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.level.LevelType;
 
 public class StateAnimation {
+
     private final MainActivity mActivity;
     private final RelativeLayout mRoot;
     private final int mTileSize;

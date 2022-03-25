@@ -69,6 +69,10 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
                 showDialog(dialog);
             }
         });
+
+        // Resume bgm
+        getMainActivity().getSoundManager().resumeBgMusic();
+
     }
 
     private void showLevelDialog(int level) {

@@ -31,11 +31,11 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btn_exit){
+        if (view.getId() == R.id.btn_exit) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             super.dismiss();
             mListener.exit();
-        } else if(view.getId() == R.id.btn_cancel){
+        } else if (view.getId() == R.id.btn_cancel) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             super.dismiss();

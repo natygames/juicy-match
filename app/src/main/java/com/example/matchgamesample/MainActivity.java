@@ -90,9 +90,8 @@ public class MainActivity extends AppCompatActivity {
         }
         mCurrentDialog = newDialog;
         mCurrentDialog.show();
-        getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP2);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -104,6 +103,25 @@ public class MainActivity extends AppCompatActivity {
         if (fragment == null || !fragment.onBackPressed()) {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mSoundManager.pauseBgMusic();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSoundManager.resumeBgMusic();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mSoundManager.unloadMusic();
+        mSoundManager.unloadSounds();
     }
 
     @Override

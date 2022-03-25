@@ -34,7 +34,9 @@ import com.example.matchgamesample.level.Level;
 import com.example.matchgamesample.level.LevelType;
 
 public class GameFragment extends BaseFragment implements PauseDialog.PauseDialogListener {
-    private static final String LEVEL = "level";
+
+    private static final String LEVEL = "LEVEL";
+
     private int level;
     private GameEngine mGameEngine;
     private AnimationDrawable mScoreBarAnimation;
@@ -79,6 +81,9 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
                 pauseGameAndShowPauseDialog();
             }
         });
+
+        // We don't need bgm in game
+        getMainActivity().getSoundManager().pauseBgMusic();
 
         startGame();
     }

@@ -20,6 +20,10 @@ import com.example.matchgamesample.game.algorithm.GameAlgorithm;
 import com.example.matchgamesample.game.tile.Tile;
 
 public class GameController extends GameObject {
+
+    private static final int WAITING_TIME = 1500;
+    private static final int SWAP_THRESHOLD = 50;
+
     private final GameEngine mGameEngine;
     private final MainActivity mActivity;
     private final Tile[][] mTileArray;
@@ -33,8 +37,6 @@ public class GameController extends GameObject {
     private GameControllerState mState;
     private final Button mSkipButton;
     private int mWaitingTime;
-    private static final int WAITING_TIME = 1500;
-    private static final int SWAP_THRESHOLD = 50;
 
     public GameController(GameEngine gameEngine, Tile[][] TileArray) {
         mGameEngine = gameEngine;

@@ -4,10 +4,15 @@ import android.os.Handler;
 import android.os.Looper;
 
 public class GameThread extends Thread {
+
+    private static final int SLEEP_TIME = 20;
+
     protected final GameEngine mGameEngine;
-    private final Object mLock = new Object();
+
     public volatile boolean mIsGameRunning;
     public volatile boolean mIsGamePause;
+
+    private final Object mLock = new Object();
     private final Handler mHandle = new Handler(Looper.getMainLooper());
 
     public GameThread(GameEngine gameEngine) {
@@ -18,7 +23,7 @@ public class GameThread extends Thread {
     protected void doIt(long elapsedMillis) {
 
         try {
-            Thread.sleep(20);
+            Thread.sleep(SLEEP_TIME);
         } catch (InterruptedException e) {
             // We just continue
         }

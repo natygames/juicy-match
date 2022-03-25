@@ -2,6 +2,7 @@ package com.example.matchgamesample.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,8 @@ import androidx.annotation.Nullable;
 import com.example.matchgamesample.R;
 
 public class LoadingFragment extends BaseFragment {
-    private final Handler mHandler = new Handler();
+
+    private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     public LoadingFragment() {
         // Required empty public constructor

@@ -1,4 +1,4 @@
-package com.example.matchgamesample.effect.particle;
+package com.example.matchgamesample.effect.animation.particle;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

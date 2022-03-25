@@ -1,18 +1,16 @@
 package com.example.matchgamesample.game.algorithm;
 
 import com.example.matchgamesample.MainActivity;
-import com.example.matchgamesample.effect.AnimationManager;
+import com.example.matchgamesample.effect.animation.AnimationManager;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.engine.GameEngine;
-import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 
 public class BaseAlgorithm {
     protected final GameEngine mGameEngine;
     protected final int mRow, mColumn;
-    protected int mFruitNum;
     protected final int mTileSize;
     protected final AnimationManager mAnimationManager;
     protected final SoundManager mSoundManager;
@@ -28,7 +26,6 @@ public class BaseAlgorithm {
         mGameEngine = gameEngine;
         mRow = gameEngine.mLevel.mRow;
         mColumn = gameEngine.mLevel.mColumn;
-        mFruitNum = gameEngine.mLevel.mFruitNum;
         mTileSize = gameEngine.mImageSize;
         mAnimationManager = new AnimationManager(gameEngine);
         MainActivity activity = (MainActivity) gameEngine.mActivity;
@@ -510,7 +507,7 @@ public class BaseAlgorithm {
         int target = 0;
         if (tile.iceCreamTarget == 0) {
             // Get a random fruit
-            target = TileUtils.FRUITS[(int) (Math.random() * mFruitNum)];
+            target = TileUtils.FRUITS[(int) (Math.random() * Tile.mFruitNum)];
         } else {
             target = tile.iceCreamTarget;
         }
