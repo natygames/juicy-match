@@ -1,19 +1,21 @@
 # Android-Game-MatchGame
 
-## This is a sample game developed using java and Android SDK
+## This is a sample game developed using Java and Android SDK
 
 ## Introduction
-### Player has to match 3 or move fruit in column or row to score, and collect target items specify in each level, the game including 4 type of level:
+### Players have to match 3 or move fruits in column or row to score and collect target items specified in each level. Players can also create special fruit by match 4 or 5 fruits, T or L shape, or even combine two special fruits. Players may encounter obstacle, such as cookie, empty tile, locked fruit. To win the game, players have to eliminate as many fruits as they can in limited moves speified in each level. Finally, the game including 4 type of level:
 
-Reach Target Score: Player has to reach score specify in level by eliminate fruit
+<1> Reach Target Score: Players have to reach score specified in level by eliminate fruit
 
-Collect items: Player has to collect specify fruits or items
+<2> Collect items: Players have to collect target fruits or items
 
-Break the ice: Player has to clear all the ice on board by eliminate the fruit above
+<3> Break the ice: Players have to clear all the ice on board by eliminate the fruits above
 
-Collect starfish: Player has to collect starfish by dropping the starfish to bottom
+<4> Collect starfish: Players have to collect starfish by dropping the starfish to bottom
 
 ## Demo
+
+https://user-images.githubusercontent.com/93536412/160224618-1bbc3d54-e911-4144-91ea-92d208c58688.mp4
 
 ## Credit for images and music
 Images: Fruit images from https://opengameart.org/content/flat-designed-fruits
