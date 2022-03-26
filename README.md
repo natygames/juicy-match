@@ -13,6 +13,8 @@
 
 <4> Collect starfish: Players have to collect starfish by dropping the starfish to bottom
 
+<img src="https://user-images.githubusercontent.com/93536412/160225436-533279ea-2a05-4124-95a8-b01150731eba.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/160225482-adb41f53-8297-451b-8ee0-b85ff0b655bb.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/160225488-23e2e9d8-27c7-410a-9a7c-588ce7d43d4c.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/160225492-b533e594-ca5b-4ad1-a26f-a31e5172824a.jpg" width="200">
+
 ## Demo
 
 https://user-images.githubusercontent.com/93536412/160224618-1bbc3d54-e911-4144-91ea-92d208c58688.mp4
