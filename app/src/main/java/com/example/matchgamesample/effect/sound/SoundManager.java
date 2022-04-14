@@ -163,6 +163,14 @@ public class SoundManager {
                 .apply();
     }
 
+    public void toggleMusicStatusInGame() {
+        mMusicEnabled = !mMusicEnabled;
+        // Save it to preferences
+        PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+                .putBoolean(MUSIC_PREF_KEY, mMusicEnabled)
+                .apply();
+    }
+
     public void toggleSoundStatus() {
         mSoundEnabled = !mSoundEnabled;
         if (mSoundEnabled) {

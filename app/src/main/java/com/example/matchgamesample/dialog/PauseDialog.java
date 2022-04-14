@@ -69,7 +69,7 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
             mParent.getSoundManager().toggleSoundStatus();
             updateSoundAndMusicButtons();
         } else if (view.getId() == R.id.btn_music) {
-            mParent.getSoundManager().toggleMusicStatus();
+            mParent.getSoundManager().toggleMusicStatusInGame();
             updateSoundAndMusicButtons();
         } else if (view.getId() == R.id.btn_quit) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,8 @@ public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogL
                 getMainActivity().navigateToFragment(new MapFragment());
             }
         });
+        Animation pulseAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.button_pulse);
+        btnPlay.startAnimation(pulseAnimation);
 
         ImageButton btnSetting = (ImageButton) getView().findViewById(R.id.btn_setting);
         Utils.createButtonEffect(btnSetting);

@@ -19,7 +19,7 @@ import com.example.matchgamesample.engine.GameObject;
 public class Hint extends GameObject {
     private final GameEngine mGameEngine;
     private final int mColumn, mRow;
-    private Tile[][] mTileArray;
+    private final Tile[][] mTileArray;
     private final Animation animation;
     private final ArrayList<ImageView> hintArray = new ArrayList<>();
 
@@ -584,7 +584,7 @@ public class Hint extends GameObject {
                                 //O
                                 // O
                                 hintArray.add(mTileArray[i][j].mImage);
-                                hintArray.add(mTileArray[i][j - 1].mImage);
+                                hintArray.add(mTileArray[i + 1][j - 1].mImage);
                                 hintArray.add(mTileArray[i + 2][j].mImage);
                                 return true;
                             }

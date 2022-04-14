@@ -114,7 +114,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        mSoundManager.resumeBgMusic();
+        final BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
+        if (fragment != null && !(fragment instanceof GameFragment)) {
+            mSoundManager.resumeBgMusic();
+        }
     }
 
     @Override
