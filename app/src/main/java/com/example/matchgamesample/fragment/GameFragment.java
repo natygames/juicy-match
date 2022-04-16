@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
@@ -37,7 +38,7 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
 
     private static final String LEVEL = "LEVEL";
 
-    private int level;
+    private int mLevel;
     private GameEngine mGameEngine;
     private AnimationDrawable mScoreBarAnimation;
 
@@ -57,7 +58,7 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            level = getArguments().getInt(LEVEL);
+            mLevel = getArguments().getInt(LEVEL);
         }
     }
 
@@ -72,6 +73,11 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Init level title
+        TextView textView = (TextView) getView().findViewById(R.id.txt_level);
+        textView.setText("LV. " + String.valueOf(mLevel));
+
+        // Init pause button
         ImageButton imageButton = (ImageButton) getView().findViewById(R.id.btn_pause);
         Utils.createButtonEffect(imageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -97,12 +103,12 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         int tileSize = (int) ((screen_width - 20) / 9);
 
         // Init Level
-        Level mLevel = getMainActivity().getLevelManager().getLevel(level);
-        int row = mLevel.mRow;
-        int column = mLevel.mColumn;
+        Level level = getMainActivity().getLevelManager().getLevel(mLevel);
+        int row = level.mRow;
+        int column = level.mColumn;
 
         // Init engine
-        mGameEngine = new GameEngine(getMainActivity(), mLevel, tileSize);
+        mGameEngine = new GameEngine(getMainActivity(), level, tileSize);
         GameAlgorithm gameAlgorithm = new GameAlgorithm(mGameEngine);
 
         // Init tile
@@ -112,14 +118,14 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         GameBoard mGameBoard = new GameBoard(mGameEngine);
         mGameBoard.createGridBoard(getView().findViewById(R.id.grid_board));
         mGameBoard.createFruitBoard(getView().findViewById(R.id.fruit_board), tileArray);
-        if (mLevel.mLevelType == LevelType.LEVEL_TYPE_ICE) {
+        if (level.mLevelType == LevelType.LEVEL_TYPE_ICE) {
             ImageView[][] iceArray = new ImageView[row][column];
             ImageView[][] iceArray2 = new ImageView[row][column];
             mGameBoard.createIceBoard(getView().findViewById(R.id.ice_board), iceArray,
                     getView().findViewById(R.id.ice_board2), iceArray2, tileArray);
             gameAlgorithm.setIceArray(iceArray, iceArray2);
         }
-        if (mLevel.advance != null) {
+        if (level.advance != null) {
             ImageView[][] advanceArray = new ImageView[row + 2][column];
             mGameBoard.createAdvanceBoard(getView().findViewById(R.id.advance_board),
                     advanceArray, tileArray);

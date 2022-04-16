@@ -44,7 +44,6 @@ public class Tile extends Sprite {
 
     @Override
     public void onUpdate(long elapsedMillis) {
-        // We do this in GameController
         int diff_x = 0, diff_y = 0;
         for (int i = 0; i < mSpeed; i++) {
             diff_x = x - col * mWidth;
@@ -77,7 +76,6 @@ public class Tile extends Sprite {
 
     @Override
     public void onDraw() {
-
         mImage.setX(x);
         mImage.setY(y);
 

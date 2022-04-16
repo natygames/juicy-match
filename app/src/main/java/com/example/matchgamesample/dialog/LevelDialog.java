@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
+import com.example.matchgamesample.database.DatabaseHelper;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.level.Level;
 import com.example.matchgamesample.level.LevelType;
@@ -18,9 +19,14 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
     private LevelDialogListener mListener;
     private int mSelectedId;
 
+    private DatabaseHelper mDatabaseHelper;
+
     public LevelDialog(MainActivity activity, int level) {
         super(activity);
         setContentView(R.layout.dialog_level);
+
+        // Load star data
+        mDatabaseHelper = new DatabaseHelper(activity);
 
         // Init button
         ImageButton btnPlay = (ImageButton) findViewById(R.id.btn_play);
@@ -43,6 +49,25 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
         // Init level text
         TextView txtLevel = (TextView) findViewById(R.id.txt_dialog_level);
         txtLevel.setText("Level " + String.valueOf(mLevel.mLevel));
+
+        // Init star
+        ImageView imgStar = (ImageView) findViewById(R.id.image_dialog_star);
+        int star = mDatabaseHelper.getLevelStar(mLevel.mLevel);
+        if (star != -1) {
+            switch (star) {
+                case 1:
+                    imgStar.setImageResource(R.drawable.star_set_1);
+                    break;
+                case 2:
+                    imgStar.setImageResource(R.drawable.star_set_2);
+                    break;
+                case 3:
+                    imgStar.setImageResource(R.drawable.star_set_3);
+                    break;
+                default:
+
+            }
+        }
 
         // Init level target text
         TextView txtTarget = (TextView) findViewById(R.id.txt_dialog_target);

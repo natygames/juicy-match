@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
+import com.example.matchgamesample.database.DatabaseHelper;
 import com.example.matchgamesample.dialog.ExitDialog;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 
@@ -35,6 +36,8 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
     private int mLevel;
     private int mScore;
     private int mStar;
+
+    private DatabaseHelper mDatabaseHelper;
 
     private ConstraintLayout mDialog;
     private ImageView mStar1, mStar2, mStar3;
@@ -77,6 +80,10 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Load star data
+        mDatabaseHelper = new DatabaseHelper(getMainActivity());
+        insertOrUpdateStar();
+
         // Init view
         TextView textView = (TextView) getView().findViewById(R.id.txt_level_win);
         textView.setText("Level " + String.valueOf(mLevel));
@@ -118,6 +125,21 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
 
         // Star animation
         createStarAnim(mStar);
+
+    }
+
+    private void insertOrUpdateStar() {
+        int oldStar = mDatabaseHelper.getLevelStar(mLevel);
+
+        if (oldStar == -1) {
+            // If data doesn't exist, we add one
+            mDatabaseHelper.insertLevelStar(mStar);
+        } else {
+            // If data exist and new star is bigger, we update
+            if (mStar > oldStar) {
+                mDatabaseHelper.updateLevelStar(mLevel, mStar);
+            }
+        }
 
     }
 
