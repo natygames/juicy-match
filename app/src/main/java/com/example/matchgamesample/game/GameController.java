@@ -37,6 +37,7 @@ public class GameController extends GameObject {
     private GameControllerState mState;
     private final Button mSkipButton;
     private int mWaitingTime;
+    private int mStartPhase;
 
     private static final int WAITING_TIME = 1500;
     private static final int REFRESH_TIME = 800;
@@ -71,6 +72,7 @@ public class GameController extends GameObject {
         }
 
         mWaitingTime = 0;
+        mStartPhase = 1;
         mStateAnimation.startGameBoard();
         mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
         mState = GameControllerState.START_GAME;
@@ -81,18 +83,21 @@ public class GameController extends GameObject {
         switch (mState) {
             case START_GAME:
                 mWaitingTime += elapsedMillis;
-                if (mWaitingTime > WAITING_TIME) {
+                if (mStartPhase == 1 && mWaitingTime > WAITING_TIME) {
                     // Start animation
                     mStateAnimation.startGame(mGameEngine.mLevel.mLevelType);
                     mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                     mSoundManager.playSoundForSoundEvent(SoundEvent.GAME_INTRO);
+                    mStartPhase = 2;
+                    mWaitingTime = 0;
+                }
+                if (mStartPhase == 2 && mWaitingTime > 2000) {
+                    // Start hint
+                    mAlgorithm.resumeHint();
 
                     // We disable player move when waiting
-                    mState = GameControllerState.WAITING;
+                    mState = GameControllerState.PLAY_GAME;
                     mWaitingTime = 0;
-
-                    // Start hint
-                    mGameEngine.onGameEvent(GameEvent.START_HINT);
                 }
                 break;
             case PLAY_GAME:
@@ -109,8 +114,9 @@ public class GameController extends GameObject {
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > REFRESH_TIME) {
                     mAlgorithm.refresh(mTileArray);
-                    mSoundManager.playSoundForSoundEvent(SoundEvent.GAME_INTRO);
-                    mState = GameControllerState.PLAY_GAME;
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_APPEAR);
+                    // Set interval for the next refresh
+                    mState = GameControllerState.WAITING;
                     mWaitingTime = 0;
                 }
                 break;
@@ -236,7 +242,7 @@ public class GameController extends GameObject {
                     mBoosterManager.clearHighlight();
 
                     // Resume hint
-                    mAlgorithm.mShowHint = true;
+                    mAlgorithm.resumeHint();
                 }
 
                 break;
@@ -259,7 +265,7 @@ public class GameController extends GameObject {
                     mBoosterManager.clearHighlight();
 
                     // Resume hint
-                    mAlgorithm.mShowHint = true;
+                    mAlgorithm.resumeHint();
                 }
 
                 break;
@@ -282,7 +288,7 @@ public class GameController extends GameObject {
                     mBoosterManager.clearHighlight();
 
                     // Resume hint
-                    mAlgorithm.mShowHint = true;
+                    mAlgorithm.resumeHint();
                 }
 
                 break;
@@ -312,7 +318,7 @@ public class GameController extends GameObject {
         mInputController.mUsingHammer = false;
 
         // Resume hint
-        mAlgorithm.mShowHint = true;
+        mAlgorithm.resumeHint();
     }
 
     private void useGloves() {
@@ -370,7 +376,7 @@ public class GameController extends GameObject {
         mInputController.mUsingGloves = false;
 
         // Resume hint
-        mAlgorithm.mShowHint = true;
+        mAlgorithm.resumeHint();
     }
 
     private void useBomb() {
@@ -392,7 +398,7 @@ public class GameController extends GameObject {
         mInputController.mUsingBomb = false;
 
         // Resume hint
-        mAlgorithm.mShowHint = true;
+        mAlgorithm.resumeHint();
     }
 
     private void swapTile() {
@@ -435,17 +441,8 @@ public class GameController extends GameObject {
             return;
         }
 
-        // Update Algorithm state
-        mAlgorithm.checkSpecialCombine(mTileArray[swapRow][swapCol], mTileArray[swapRow2][swapCol2]);
-        mAlgorithm.swap(mTileArray, mTileArray[swapRow][swapCol], mTileArray[swapRow2][swapCol2]);
-        mAlgorithm.mSwapCol = swapCol;
-        mAlgorithm.mSwapRow = swapRow;
-        mAlgorithm.mSwapCol2 = swapCol2;
-        mAlgorithm.mSwapRow2 = swapRow2;
-        mAlgorithm.mSwapping = true;
-        mAlgorithm.mMoveTile = true;
-        mAlgorithm.mShowHint = true;
-
+        // Notify Algorithm
+        mAlgorithm.playerSwap(mTileArray, swapRow, swapCol, swapRow2, swapCol2);
     }
 
     private void addSkipButton() {

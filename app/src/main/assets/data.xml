@@ -20,6 +20,7 @@
         <collect>cracker</collect>
         <collect>cherry</collect>
         <collect>strawberry</collect>
+        <fruit_num>5</fruit_num>
         <board>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</board>
         <fruit>eecnnceeeccnnccecccnncccnnnnnnnnnnnnnnnncccnnccceccnncceeecnncee</fruit>
     </level2>
@@ -45,6 +46,8 @@
         <collect>starfish</collect>
         <board>eqweeqweqnnuunnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeannseeeeeaseee</board>
         <fruit>exxeexxennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnwnnnnnnwewnnnnweeewwwweeeeewweee</fruit>
-        <ad>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnxxnnnnxxnxxnnxxnAnxxxxnAnAnnnnAnnnAnnAnnnnnAAnnn</ad>
+        <ad>
+            nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnxxnnnnxxnxxnnxxnAnxxxxnAnAnnnnAnnnAnnAnnnnnAAnnn
+        </ad>
     </level4>
 </levels>

@@ -20,8 +20,8 @@ public class GameAlgorithm extends BaseAlgorithm {
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
-    public int mSwapCol, mSwapRow, mSwapCol2, mSwapRow2;
-    public boolean mSwapping = false, mShowHint = false;
+    private int mSwapCol, mSwapRow, mSwapCol2, mSwapRow2;
+    private boolean mSwapping = false, mShowHint = false;
     private int mCombo = 0;
     // Tile moving control
     private static final int WAITING_TIME = 300;
@@ -707,6 +707,9 @@ public class GameAlgorithm extends BaseAlgorithm {
 
     }
 
+    //----------------------------------------------------------------------------------
+    // Method control refresh
+    //----------------------------------------------------------------------------------
     public void playRefreshAnimation(Tile[][] tileArray) {
         // Play fade out animation
         for (int i = 0; i < mRow; i++) {
@@ -743,12 +746,25 @@ public class GameAlgorithm extends BaseAlgorithm {
         }
 
         // Resume hint
-        mShowHint = true;
+        resumeHint();
     }
+    //==================================================================================
 
     //----------------------------------------------------------------------------------
     // Method control swap
     //----------------------------------------------------------------------------------
+    public void playerSwap(Tile[][] tileArray, int row1, int col1, int row2, int col2) {
+        checkSpecialCombine(tileArray[row1][col1], tileArray[row2][col2]);
+        swap(tileArray, tileArray[row1][col1], tileArray[row2][col2]);
+        mSwapCol = col1;
+        mSwapRow = row1;
+        mSwapCol2 = col2;
+        mSwapRow2 = row2;
+        mSwapping = true;
+        mMoveTile = true;
+        resumeHint();
+    }
+
     public boolean canPlayerSwap() {
         if (mIsMoving || mMatchFinding || mWaitFinding) {
             return false;
@@ -861,6 +877,10 @@ public class GameAlgorithm extends BaseAlgorithm {
             tile2.match++;
             tile2.iceCreamTarget = tile1.kind;
         }
+    }
+
+    public void resumeHint() {
+        mShowHint = true;
     }
     //==================================================================================
 

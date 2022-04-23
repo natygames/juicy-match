@@ -28,10 +28,10 @@ public class StateAnimation {
     private final int mTileSize;
     //Duration
     private static final int FALL_TIME_SHORT = 300;
-    private static final int FALL_TIME_LONG = 600;
+    private static final int FALL_TIME_LONG = 500;
     private static final int PAUSE_TIME_SHORT = 200;
     private static final int PAUSE_TIME_LONG = 400;
-    private static final int RETRY_TIME = 600;
+    private static final int RETRY_TIME = 500;
     //Interpolator
     private final AnticipateInterpolator mAnticipateInterpolator = new AnticipateInterpolator();
     private final OvershootInterpolator mOvershootInterpolator = new OvershootInterpolator();
