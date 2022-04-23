@@ -9,11 +9,16 @@ import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
 public class Utils {
     private static final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
     private static final Canvas CANVAS = new Canvas();
+    private static final BounceInterpolator mBounceInterpolator = new BounceInterpolator();
+    private static final OvershootInterpolator mOvershootInterpolator = new OvershootInterpolator();
+    private static final int POP_UP_TIME = 300;
+    private static final int POP_UP_INTERVAL = 150;
 
     private Utils() {
     }
@@ -31,27 +36,49 @@ public class Utils {
         //cosA = (B^2 + C^2 - A^2) / 2BC
     }
 
+    public static void createColorFilter(View view) {
+        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+        view.invalidate();
+    }
+
+    public static void clearColorFilter(View view) {
+        view.getBackground().clearColorFilter();
+        view.invalidate();
+    }
+
     public static void createButtonEffect(View button) {
         button.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View view, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        button.animate().setDuration(300).scaleX(0.8f).scaleY(0.8f)
-                                .setInterpolator(new BounceInterpolator());
-                        view.getBackground().setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
-                        view.invalidate();
+                        button.animate().setStartDelay(0).setDuration(300).scaleX(0.8f).scaleY(0.8f)
+                                .setInterpolator(mBounceInterpolator);
+                        createColorFilter(view);
                         break;
                     case MotionEvent.ACTION_UP:
-                        button.animate().setDuration(300).scaleX(1).scaleY(1)
-                                .setInterpolator(new BounceInterpolator());
-                        view.getBackground().clearColorFilter();
-                        view.invalidate();
+                        button.animate().setStartDelay(0).setDuration(300).scaleX(1).scaleY(1)
+                                .setInterpolator(mBounceInterpolator);
+                        clearColorFilter(view);
                         break;
                 }
                 return false;
             }
         });
+    }
+
+    public static void createPopUpEffect(View view) {
+        view.setScaleX(0);
+        view.setScaleY(0);
+        view.animate().setStartDelay(POP_UP_TIME).setDuration(200).scaleX(1).scaleY(1)
+                .setInterpolator(mOvershootInterpolator);
+    }
+
+    public static void createPopUpEffect(View view, long delay) {
+        view.setScaleX(0);
+        view.setScaleY(0);
+        view.animate().setStartDelay(POP_UP_TIME + POP_UP_INTERVAL * delay).setDuration(200).scaleX(1).scaleY(1)
+                .setInterpolator(mOvershootInterpolator);
     }
 
     public static Bitmap createBitmapFromView(View view) {

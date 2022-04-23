@@ -4,12 +4,12 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import java.util.ArrayList;
-
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
+
+import java.util.ArrayList;
 
 /** Hint class check possible match on board
  * if founded, start hint animation
@@ -32,7 +32,7 @@ public class Hint extends GameObject {
         mColumn = gameEngine.mLevel.mColumn;
         mRow = gameEngine.mLevel.mRow;
         mTileArray = tileArray;
-        animation = AnimationUtils.loadAnimation(gameEngine.mActivity, R.anim.hint_animation);
+        animation = AnimationUtils.loadAnimation(gameEngine.mActivity, R.anim.hint_twinkle);
         mShowHint = false;
     }
 
@@ -49,8 +49,6 @@ public class Hint extends GameObject {
             mDelayTime += elapsedMillis;
             if (mDelayTime > DELAY_TIME) {
                 startHint();
-                mDelayTime = 0;
-                mShowHint = false;
             }
         }
     }
@@ -64,7 +62,7 @@ public class Hint extends GameObject {
     public void onGameEvent(GameEvent gameEvent) {
         switch (gameEvent) {
             case START_HINT:
-                // When the player make a invalid swap, we stop the hint
+                // Stop the previous hint
                 stopHint();
 
                 boolean isFindMatch = checkPossibleMatch();
@@ -76,6 +74,9 @@ public class Hint extends GameObject {
 
                 break;
             case PLAYER_SWAP:
+            case PLAYER_PRESS_HAMMER:
+            case PLAYER_PRESS_GLOVES:
+            case PLAYER_PRESS_BOMB:
                 stopHint();
                 break;
             case PLAYER_REACH_TARGET:
@@ -92,6 +93,10 @@ public class Hint extends GameObject {
         for (int i = 0; i < size; i++) {
             hintArray.get(i).startAnimation(animation);
         }
+
+        // Reset
+        mDelayTime = 0;
+        mShowHint = false;
     }
 
     private void stopHint() {

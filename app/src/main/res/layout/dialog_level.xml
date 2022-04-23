@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="300dp"
-    android:layout_height="400dp"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="@dimen/dialog_level_height"
     android:layout_gravity="center"
     android:background="@drawable/dialog_level"
-    android:orientation="vertical"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/txt_dialog_level"
@@ -17,7 +17,7 @@
         android:gravity="center"
         android:text="Level 100"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="@dimen/text_dialog_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guideline_cancel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,8 +26,8 @@
 
     <ImageButton
         android:id="@+id/btn_cancel"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/image_round_btn_width"
+        android:layout_height="@dimen/image_round_btn_width"
         android:layout_margin="5dp"
         android:background="@drawable/btn_cancel"
         app:layout_constraintBottom_toTopOf="@id/guideline_cancel"
@@ -37,12 +37,12 @@
         android:id="@+id/image_dialog_star"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/star_set_background"
         android:layout_marginTop="-10dp"
+        android:src="@drawable/star_set_background"
         app:layout_constraintBottom_toBottomOf="@id/guideline_star"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_cancel"/>
+        app:layout_constraintTop_toTopOf="@+id/guideline_cancel" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -88,7 +88,7 @@
         android:gravity="center"
         android:text="100"
         android:textColor="@color/white"
-        android:textSize="35sp"
+        android:textSize="@dimen/text_dialog_size"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/guideline_target2"
@@ -104,7 +104,7 @@
         android:gravity="center"
         android:text="Collect Items"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_dialog_small_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -112,9 +112,8 @@
 
     <ImageButton
         android:id="@+id/btn_play"
-        android:layout_width="140dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="@dimen/image_btn_width"
+        android:layout_height="@dimen/image_btn_height"
         android:background="@drawable/btn_play"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

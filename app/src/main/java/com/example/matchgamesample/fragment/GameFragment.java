@@ -30,14 +30,12 @@ import com.example.matchgamesample.game.algorithm.GameAlgorithm;
 import com.example.matchgamesample.game.counter.ScoreCounter;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.GameController;
-import com.example.matchgamesample.input.BasicInputController;
+import com.example.matchgamesample.game.input.BasicInputController;
 import com.example.matchgamesample.level.Level;
 import com.example.matchgamesample.level.LevelType;
 
 public class GameFragment extends BaseFragment implements PauseDialog.PauseDialogListener {
-
     private static final String LEVEL = "LEVEL";
-
     private int mLevel;
     private GameEngine mGameEngine;
     private AnimationDrawable mScoreBarAnimation;
@@ -118,6 +116,8 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         GameBoard mGameBoard = new GameBoard(mGameEngine);
         mGameBoard.createGridBoard(getView().findViewById(R.id.grid_board));
         mGameBoard.createFruitBoard(getView().findViewById(R.id.fruit_board), tileArray);
+
+        // Optional init
         if (level.mLevelType == LevelType.LEVEL_TYPE_ICE) {
             ImageView[][] iceArray = new ImageView[row][column];
             ImageView[][] iceArray2 = new ImageView[row][column];
@@ -165,6 +165,9 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         super.onPause();
         if (mGameEngine.isRunning()) {
             pauseGameAndShowPauseDialog();
+
+            if (mScoreBarAnimation != null)
+                mScoreBarAnimation.stop();
         }
     }
 
@@ -191,9 +194,6 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         PauseDialog dialog = new PauseDialog(getMainActivity());
         dialog.setListener(this);
         showDialog(dialog);
-
-        if (mScoreBarAnimation != null)
-            mScoreBarAnimation.stop();
     }
 
     @Override
@@ -206,8 +206,6 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
     @Override
     public void quitGame() {
         mGameEngine.stopGame();
-        if (mScoreBarAnimation != null)
-            mScoreBarAnimation.stop();
         getMainActivity().navigateBack();
     }
 

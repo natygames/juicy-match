@@ -35,6 +35,10 @@ public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        init();
+    }
+
+    private void init() {
         ImageButton btnPlay = (ImageButton) getView().findViewById(R.id.btn_play);
         Utils.createButtonEffect(btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +50,9 @@ public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogL
         });
         Animation pulseAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.button_pulse);
         btnPlay.startAnimation(pulseAnimation);
+
+        // Init pop up
+        Utils.createPopUpEffect(btnPlay);
 
         ImageButton btnSetting = (ImageButton) getView().findViewById(R.id.btn_setting);
         Utils.createButtonEffect(btnSetting);

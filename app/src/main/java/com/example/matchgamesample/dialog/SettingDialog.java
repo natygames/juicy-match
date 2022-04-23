@@ -27,6 +27,10 @@ public class SettingDialog extends BaseDialog implements View.OnClickListener {
         btnCancel.setOnClickListener(this);
         Utils.createButtonEffect(btnCancel);
 
+        // Init pop up
+        Utils.createPopUpEffect(btnMusic);
+        Utils.createPopUpEffect(btnSound, 1);
+
         updateSoundAndMusicButtons();
     }
 

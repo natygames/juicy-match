@@ -1,48 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="200dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="@dimen/dialog_width"
+    android:layout_height="@dimen/dialog_height"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_exit"
-    android:orientation="vertical">
+    android:background="@drawable/dialog_exit">
 
     <ImageButton
         android:id="@+id/btn_resume"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_gravity="right"
+        android:layout_width="@dimen/image_round_btn_width"
+        android:layout_height="@dimen/image_round_btn_width"
         android:layout_margin="5dp"
-        android:background="@drawable/btn_cancel" />
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginBottom="5dp">
+    <ImageButton
+        android:id="@+id/btn_music"
+        android:layout_width="@dimen/image_round_btn_width"
+        android:layout_height="@dimen/image_round_btn_width"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/btn_music_on"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
 
-        <ImageButton
-            android:id="@+id/btn_music"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/btn_music_on" />
-
-        <ImageButton
-            android:id="@+id/btn_sound"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="10dp"
-            android:background="@drawable/btn_sound_on" />
-
-    </LinearLayout>
+    <ImageButton
+        android:id="@+id/btn_sound"
+        android:layout_width="@dimen/image_round_btn_width"
+        android:layout_height="@dimen/image_round_btn_width"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/btn_sound_on"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_music"
+        app:layout_constraintStart_toEndOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/btn_music" />
 
     <ImageButton
         android:id="@+id/btn_quit"
-        android:layout_width="120dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@drawable/btn_quit" />
+        android:layout_width="@dimen/image_btn_small_width"
+        android:layout_height="@dimen/image_btn_small_height"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_quit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_music" />
 
-</LinearLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

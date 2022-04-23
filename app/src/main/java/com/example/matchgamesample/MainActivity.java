@@ -13,6 +13,7 @@ import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.fragment.BaseFragment;
 import com.example.matchgamesample.fragment.GameFragment;
 import com.example.matchgamesample.fragment.LoadingFragment;
+import com.example.matchgamesample.fragment.WinDialogFragment;
 import com.example.matchgamesample.level.LevelManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         final BaseFragment fragment = (BaseFragment) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
-        if (fragment != null && !(fragment instanceof GameFragment)) {
+        if (fragment != null && !(fragment instanceof GameFragment || fragment instanceof WinDialogFragment)) {
             mSoundManager.resumeBgMusic();
         }
     }

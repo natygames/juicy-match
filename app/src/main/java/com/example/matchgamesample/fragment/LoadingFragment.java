@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import com.example.matchgamesample.R;
 
 public class LoadingFragment extends BaseFragment {
-
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     public LoadingFragment() {

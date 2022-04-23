@@ -37,8 +37,8 @@ public class IceGameState extends BaseGameState {
                     continue;
                 }
 
-                // Update ice
-                if (tile.ice == 1 && tile.isValidFruit()) {
+                // We update ice target only for fruit, ice cream, and empty tile
+                if (tile.ice == 1 && (tile.isUnblockFruitOrIceCream() || tile.kind == 0)) {
                     int target = mGameEngine.mLevel.mTarget.get(0);
                     if (target > 0) {
                         target--;

@@ -17,7 +17,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
     private int mBonusTime = 0;
     private boolean mLevelComplete = false;
 
-    private int combo = 0;
+    private int mCombo = 0;
 
     private BonusTimeState mState;
 
@@ -43,7 +43,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
 
         // 1. Find match
         updateWait(tileArray);
-        if (!waitFinding) {
+        if (!mWaitFinding) {
             findMatch(tileArray);
         }
 
@@ -71,7 +71,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
         updateMove(tileArray);
 
         // 3. Fruit wait
-        if (!isMoving && !waitFinding) {
+        if (!mIsMoving && !mWaitFinding) {
             // Play fruit bouncing sound when tile stop
             if (mMoveTile)
                 mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_BOUNCING);
@@ -90,26 +90,26 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
         updateMatch(tileArray);
 
         // Check combo
-        if (!isMoving) {
-            if (matchFinding) {
-                combo++;
-                if (combo == 1) {
+        if (!mIsMoving) {
+            if (mMatchFinding) {
+                mCombo++;
+                if (mCombo == 1) {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMB01);
-                } else if (combo == 2) {
+                } else if (mCombo == 2) {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMB02);
-                } else if (combo == 3) {
+                } else if (mCombo == 3) {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMB03);
                 } else {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMBO4);
                 }
             } else {
-                if (!waitFinding)
-                    combo = 0;
+                if (!mWaitFinding)
+                    mCombo = 0;
             }
         }
 
         // Bonus time
-        if (!isMoving && !waitFinding && !matchFinding) {
+        if (!mIsMoving && !mWaitFinding && !mMatchFinding) {
 
             if (mState == BonusTimeState.CLEAR_SPECIAL_FRUIT) {
 
@@ -154,7 +154,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
         }
 
         // 5. Update tile
-        if (!isMoving) {
+        if (!mIsMoving) {
 
             // (5.1) Check special fruit
             for (int j = 0; j < mColumn; j++) {
@@ -579,7 +579,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
         updateWait(tileArray);
         diagonalSwap(tileArray);
 
-        if (waitFinding) {
+        if (mWaitFinding) {
             tile2Top(tileArray);
             tileReset(tileArray);
         }

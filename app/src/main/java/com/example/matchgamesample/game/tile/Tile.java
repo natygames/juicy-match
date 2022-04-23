@@ -13,7 +13,7 @@ public class Tile extends Sprite {
     public boolean invalid = false, empty = false, tube = false;  // Tile movement
     public boolean special = false, lock = false, breakable = false;     // Tile attribute
     public boolean isExplode = false, isUpgrade = false, isAnimate = false, isChosen = false;       //Tile state
-    public char direct = 'N', machine = 'N', specialCombine = 'N';
+    public char direct = 'N', specialCombine = 'N';
     public int iceCreamTarget = 0;
     public boolean entryPoint = false;
 
@@ -106,15 +106,16 @@ public class Tile extends Sprite {
     }
 
     public boolean isFruit() {
-        for (int i = 0; i < 5; i++) {
+        int size = TileUtils.FRUITS.length;
+        for (int i = 0; i < size; i++) {
             if (kind == TileUtils.FRUITS[i])
                 return true;
         }
-
         return false;
     }
 
-    public boolean isValidFruit() {
+    // This method is for score calculation and ice detect
+    public boolean isUnblockFruitOrIceCream() {
         if (!invalid && (isFruit() || kind == TileUtils.ICE_CREAM)) {
             return true;
         }

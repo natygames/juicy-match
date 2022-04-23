@@ -20,9 +20,7 @@ import com.example.matchgamesample.effect.sound.SoundEvent;
 import java.util.ArrayList;
 
 public class MapFragment extends BaseFragment implements LevelDialog.LevelDialogListener {
-
     private int mLevel;
-
     private DatabaseHelper mDatabaseHelper;
 
     public MapFragment() {
@@ -44,6 +42,14 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         mDatabaseHelper = new DatabaseHelper(getMainActivity());
         loadStarData();
 
+        init();
+
+        // Resume bgm
+        getMainActivity().getSoundManager().resumeBgMusic();
+
+    }
+
+    private void init() {
         // Init view
         getView().findViewById(R.id.btn_level1).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,10 +87,6 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
                 showDialog(dialog);
             }
         });
-
-        // Resume bgm
-        getMainActivity().getSoundManager().resumeBgMusic();
-
     }
 
     private void showLevelDialog(int level) {

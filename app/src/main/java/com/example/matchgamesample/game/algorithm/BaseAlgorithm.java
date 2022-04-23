@@ -17,8 +17,8 @@ public class BaseAlgorithm {
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
-    protected boolean isMoving = false, matchFinding = false, waitFinding = false;
-    protected boolean isTransf = false;   // To control ice cream transform animation
+    protected boolean mIsMoving = false, mMatchFinding = false, mWaitFinding = false;
+    protected boolean mIsTransf = false;   // To control ice cream transform animation
     protected int mWaitingTime = 0;
     //==================================================================================
 
@@ -28,8 +28,7 @@ public class BaseAlgorithm {
         mColumn = gameEngine.mLevel.mColumn;
         mTileSize = gameEngine.mImageSize;
         mAnimationManager = new AnimationManager(gameEngine);
-        MainActivity activity = (MainActivity) gameEngine.mActivity;
-        mSoundManager = activity.getSoundManager();
+        mSoundManager = ((MainActivity) gameEngine.mActivity).getSoundManager();
     }
 
     public void update(Tile[][] tileArray, long elapsedMillis) {
@@ -229,12 +228,12 @@ public class BaseAlgorithm {
     }
 
     protected void updateMove(Tile[][] tileArray) {
-        isMoving = false;
+        mIsMoving = false;
         outer:
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
                 if (tileArray[i][j].isMoving()) {
-                    isMoving = true;
+                    mIsMoving = true;
                     break outer;
                 }
             }
@@ -242,12 +241,12 @@ public class BaseAlgorithm {
     }
 
     protected void updateWait(Tile[][] tileArray) {
-        waitFinding = false;
+        mWaitFinding = false;
         outer:
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
                 if (tileArray[i][j].wait == 1) {
-                    waitFinding = true;
+                    mWaitFinding = true;
                     break outer;
                 }
             }
@@ -255,12 +254,12 @@ public class BaseAlgorithm {
     }
 
     protected void updateMatch(Tile[][] tileArray) {
-        matchFinding = false;
+        mMatchFinding = false;
         outer:
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
                 if (tileArray[i][j].match != 0) {
-                    matchFinding = true;
+                    mMatchFinding = true;
                     break outer;
                 }
             }
@@ -429,7 +428,7 @@ public class BaseAlgorithm {
             explodeH(tileArray, tileArray[row][col]);
             explodeH(tileArray, tileArray[row + 1][col]);
         }
-        mAnimationManager.createShakingAnim_small();
+        mAnimationManager.createVerticalShakingAnim();
         mAnimationManager.createExplodeWave_small(tileArray[row][col]);
         mAnimationManager.createSquareFlash(tileArray[row][col]);
     }
@@ -449,7 +448,7 @@ public class BaseAlgorithm {
             explodeV(tileArray, tileArray[row][col]);
             explodeV(tileArray, tileArray[row][col + 1]);
         }
-        mAnimationManager.createShakingAnim_small();
+        mAnimationManager.createHorizontalShakingAnim();
         mAnimationManager.createExplodeWave_small(tileArray[row][col]);
         mAnimationManager.createSquareFlash(tileArray[row][col]);
     }
@@ -552,7 +551,7 @@ public class BaseAlgorithm {
         //Mark isExplode
         tile.isExplode = true;
         //Add animation
-        mAnimationManager.createShakingAnim();
+        mAnimationManager.createBigShakingAnim();
         mAnimationManager.createExplodeWave(tile);
         mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_EXPLODE);
         //Check same fruit kind
@@ -586,7 +585,7 @@ public class BaseAlgorithm {
     protected void transI(Tile[][] tileArray, Tile tile) {
 
         // Transform flag
-        isTransf = true;
+        mIsTransf = true;
         mWaitingTime = 0;
 
         // Mark isExplode
@@ -661,4 +660,3 @@ public class BaseAlgorithm {
     }
 
 }
-

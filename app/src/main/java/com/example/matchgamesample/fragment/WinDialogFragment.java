@@ -80,10 +80,6 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Load star data
-        mDatabaseHelper = new DatabaseHelper(getMainActivity());
-        insertOrUpdateStar();
-
         // Init view
         TextView textView = (TextView) getView().findViewById(R.id.txt_level_win);
         textView.setText("Level " + String.valueOf(mLevel));
@@ -92,12 +88,20 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
         mStar2 = (ImageView) getView().findViewById(R.id.image_star2);
         mStar3 = (ImageView) getView().findViewById(R.id.image_star3);
 
+        // Load star data
+        mDatabaseHelper = new DatabaseHelper(getMainActivity());
+        insertOrUpdateStar();
+
+        init();
+
+    }
+
+    private void init() {
         // Init button
         ImageButton btnNext = (ImageButton) getView().findViewById(R.id.btn_next_win);
         Utils.createButtonEffect(btnNext);
         btnNext.setScaleX(0);
         btnNext.setScaleY(0);
-        btnNext.animate().setDuration(1000).scaleX(1).scaleY(1).setInterpolator(mInterpolator);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -105,27 +109,10 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                 getMainActivity().navigateToFragment(new MapFragment());
             }
         });
+        btnNext.animate().setStartDelay(800).setDuration(500)
+                .scaleX(1).scaleY(1).setInterpolator(mInterpolator);
 
-        // Dialog animation
-        Animation inAnim = AnimationUtils.loadAnimation(getMainActivity(), R.anim.enter_from_left);
-        mDialog.startAnimation(inAnim);
-
-        // Run score
-        TextView mScoreText = (TextView) getView().findViewById(R.id.txt_score_win);
-        ValueAnimator animator = ValueAnimator.ofFloat(mScore - 150, mScore);
-        animator.setDuration(2000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float value = (float) animation.getAnimatedValue();
-                mScoreText.setText(String.valueOf((int) value));
-            }
-        });
-        animator.start();
-        getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_COUNT);
-
-        // Star animation
-        createStarAnim(mStar);
-
+        startAnimation();
     }
 
     private void insertOrUpdateStar() {
@@ -143,56 +130,89 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
 
     }
 
+    private void startAnimation() {
+        // Dialog animation
+        Animation inAnim = AnimationUtils.loadAnimation(getMainActivity(), R.anim.enter_from_left);
+        mDialog.startAnimation(inAnim);
+
+        // Run score
+        TextView mScoreText = (TextView) getView().findViewById(R.id.txt_score_win);
+        ValueAnimator animator = ValueAnimator.ofFloat(mScore - 150, mScore);
+        animator.setDuration(2000);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float value = (float) animation.getAnimatedValue();
+                mScoreText.setText(String.valueOf((int) value));
+            }
+        });
+        animator.start();
+
+        // Play score calculate sound
+        getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_COUNT);
+
+        // Star animation
+        createStarAnim(mStar);
+    }
+
     private void createStarAnim(int star) {
         if (star >= 1) {
-            mStar1.animate().setStartDelay(700).setDuration(300).scaleX(4).scaleY(4).alpha(1)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mStar1.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
-                                    .setInterpolator(mInterpolator);
-                        }
-                    });
+            // Init value
+            mStar1.setScaleX(0.25f);
+            mStar1.setScaleY(0.25f);
 
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mStar1.animate().setDuration(300).scaleX(2).scaleY(2).alpha(1)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    mStar1.animate().setDuration(100).scaleX(1).scaleY(1)
+                                            .setInterpolator(mInterpolator);
+                                }
+                            });
                     createExplode(mStar1);
                     getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 }
             }, 700);
         }
         if (star >= 2) {
-            mStar2.animate().setStartDelay(1000).setDuration(300).scaleX(4).scaleY(4).alpha(1)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mStar2.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
-                                    .setInterpolator(mInterpolator);
-                        }
-                    });
+            // Init value
+            mStar2.setScaleX(0.25f);
+            mStar2.setScaleY(0.25f);
 
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mStar2.animate().setDuration(300).scaleX(2).scaleY(2).alpha(1)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    mStar2.animate().setDuration(100).scaleX(1).scaleY(1)
+                                            .setInterpolator(mInterpolator);
+                                }
+                            });
                     createExplode(mStar2);
                     getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 }
             }, 1000);
         }
         if (star >= 3) {
-            mStar3.animate().setStartDelay(1300).setDuration(300).scaleX(4).scaleY(4).alpha(1)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            mStar3.animate().setStartDelay(0).setDuration(100).scaleX(3.15f).scaleY(3.15f)
-                                    .setInterpolator(mInterpolator);
-                        }
-                    });
+            // Init value
+            mStar3.setScaleX(0.25f);
+            mStar3.setScaleY(0.25f);
 
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    mStar3.animate().setDuration(300).scaleX(2).scaleY(2).alpha(1)
+                            .setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    mStar3.animate().setDuration(100).scaleX(1).scaleY(1)
+                                            .setInterpolator(mInterpolator);
+                                }
+                            });
                     createExplode(mStar3);
                     getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.SCORE_GET_STAR);
                 }
@@ -210,12 +230,12 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
         ImageView flash_bar1 = new ImageView(getMainActivity());
         flash_bar1.setImageResource(R.drawable.flash_bar);
         flash_bar1.setX(viewX + view_width * 0.5f);
-        flash_bar1.setY(viewY);
-        flash_bar1.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar1.setY(viewY + view_width * 0.25f);
+        flash_bar1.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar1.setRotation(45);
         flash_bar1.animate().setDuration(EXPLODE_TIME)
-                .x(viewX + view_width * 0.5f + view_width * 2)
-                .y(viewY - view_width * 2).scaleX(6).scaleY(6).alpha(0.1f)
+                .x(viewX + view_width * 0.5f + view_width).y(viewY + view_width * 0.25f - view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -223,17 +243,18 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                     }
                 });
         mDialog.addView(flash_bar1);
+
         //Bottom right
         ImageView flash_bar2 = new ImageView(getMainActivity());
         flash_bar2.setImageResource(R.drawable.flash_bar);
         flash_bar2.setX(viewX + view_width * 0.5f);
         flash_bar2.setY(viewY + view_width * 0.5f);
-        flash_bar2.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar2.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar2.setRotation(135);
         flash_bar2.animate().setDuration(EXPLODE_TIME)
-                .x(viewX + view_width * 0.5f + view_width * 2)
-                .y(viewY + view_width * 0.5f + view_width * 2)
-                .scaleX(6).scaleY(6).alpha(0.1f)
+                .x(viewX + view_width * 0.5f + view_width)
+                .y(viewY + view_width * 0.5f + view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -241,17 +262,18 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                     }
                 });
         mDialog.addView(flash_bar2);
+
         //Bottom left
         ImageView flash_bar3 = new ImageView(getMainActivity());
         flash_bar3.setImageResource(R.drawable.flash_bar);
-        flash_bar3.setX(viewX);
+        flash_bar3.setX(viewX + view_width * 0.25f);
         flash_bar3.setY(viewY + view_width * 0.5f);
-        flash_bar3.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar3.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar3.setRotation(225);
         flash_bar3.animate().setDuration(EXPLODE_TIME)
-                .x(viewX - view_width * 2)
-                .y(viewY + view_width * 0.5f + view_width * 2)
-                .scaleX(6).scaleY(6).alpha(0.1f)
+                .x(viewX + view_width * 0.25f - view_width)
+                .y(viewY + view_width * 0.5f + view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -259,17 +281,18 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                     }
                 });
         mDialog.addView(flash_bar3);
+
         //Top left
         ImageView flash_bar4 = new ImageView(getMainActivity());
         flash_bar4.setImageResource(R.drawable.flash_bar);
-        flash_bar4.setX(viewX);
-        flash_bar4.setY(viewY);
-        flash_bar4.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar4.setX(viewX + view_width * 0.25f);
+        flash_bar4.setY(viewY + view_width * 0.25f);
+        flash_bar4.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar4.setRotation(315);
         flash_bar4.animate().setDuration(EXPLODE_TIME)
-                .x(viewX - view_width * 2)
-                .y(viewY - view_width * 2)
-                .scaleX(6).scaleY(6).alpha(0.1f)
+                .x(viewX + view_width * 0.25f - view_width)
+                .y(viewY + view_width * 0.25f - view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -277,16 +300,17 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                     }
                 });
         mDialog.addView(flash_bar4);
+
         //Top
         ImageView flash_bar5 = new ImageView(getMainActivity());
         flash_bar5.setImageResource(R.drawable.flash_bar);
-        flash_bar5.setX(viewX + view_width * 0.25f);
-        flash_bar5.setY(viewY);
-        flash_bar5.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar5.setX(viewX + view_width * 0.375f);
+        flash_bar5.setY(viewY + view_width * 0.25f);
+        flash_bar5.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar5.setRotation(0);
         flash_bar5.animate().setDuration(EXPLODE_TIME)
-                .y(viewY - view_width * 2)
-                .scaleX(6).scaleY(6).alpha(0.1f)
+                .y(viewY + view_width * 0.25f - view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -294,16 +318,17 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                     }
                 });
         mDialog.addView(flash_bar5);
+
         //Right
         ImageView flash_bar6 = new ImageView(getMainActivity());
         flash_bar6.setImageResource(R.drawable.flash_bar);
         flash_bar6.setX(viewX + view_width * 0.5f);
-        flash_bar6.setY(viewY + view_width * 0.25f);
-        flash_bar6.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar6.setY(viewY + view_width * 0.375f);
+        flash_bar6.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar6.setRotation(90);
         flash_bar6.animate().setDuration(EXPLODE_TIME)
-                .x(viewX + view_width * 0.5f + view_width * 2)
-                .scaleX(6).scaleY(6).alpha(0.1f)
+                .x(viewX + view_width * 0.5f + view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -314,13 +339,13 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
         //Bottom
         ImageView flash_bar7 = new ImageView(getMainActivity());
         flash_bar7.setImageResource(R.drawable.flash_bar);
-        flash_bar7.setX(viewX + view_width * 0.25f);
+        flash_bar7.setX(viewX + view_width * 0.375f);
         flash_bar7.setY(viewY + view_width * 0.5f);
-        flash_bar7.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar7.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar7.setRotation(180);
         flash_bar7.animate().setDuration(EXPLODE_TIME)
-                .y(viewY + view_width * 0.5f + view_width * 2)
-                .scaleX(6).scaleY(6).alpha(0.1f)
+                .y(viewY + view_width * 0.5f + view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -331,13 +356,13 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
         //Left
         ImageView flash_bar8 = new ImageView(getMainActivity());
         flash_bar8.setImageResource(R.drawable.flash_bar);
-        flash_bar8.setX(viewX);
-        flash_bar8.setY(viewY + view_width * 0.25f);
-        flash_bar8.setLayoutParams(new ViewGroup.LayoutParams(view_width / 2, view_width / 2));
+        flash_bar8.setX(viewX + view_width * 0.25f);
+        flash_bar8.setY(viewY + view_width * 0.375f);
+        flash_bar8.setLayoutParams(new ViewGroup.LayoutParams(view_width / 4, view_width / 4));
         flash_bar8.setRotation(270);
         flash_bar8.animate().setDuration(EXPLODE_TIME)
-                .x(viewX - view_width * 2)
-                .scaleX(6).scaleY(6).alpha(0.1f)
+                .x(viewX + view_width * 0.25f - view_width)
+                .scaleX(6).scaleY(6).alpha(0)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
@@ -351,9 +376,9 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
     }
 
     private void createSparkler(ImageView view) {
-        int viewX = (int) view.getX();
-        int viewY = (int) view.getY();
-        int view_width = view.getWidth();
+        int view_width = view.getWidth() / 3;
+        int viewX = (int) view.getX() + view_width;
+        int viewY = (int) view.getY() + view_width;
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {

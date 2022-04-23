@@ -7,6 +7,11 @@ public class InputController {
     // User finger up position
     public int mX_Up = 0, mY_Up = 0;
 
+    // Player press item button
+    public boolean mUsingHammer = false;
+    public boolean mUsingGloves = false;
+    public boolean mUsingBomb = false;
+
     public void onStart() {
     }
 

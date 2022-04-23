@@ -36,6 +36,9 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
         btnCancel.setOnClickListener(this);
         Utils.createButtonEffect(btnCancel);
 
+        // Init pop up
+        Utils.createPopUpEffect(btnPlay);
+
         // We show and hide from left
         setShowAnimation(R.anim.enter_from_left);
         setHideAnimation(R.anim.exit_to_left);
@@ -89,31 +92,45 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
             TextView textView = (TextView) findViewById(R.id.txt_dialog_target_score);
             textView.setText(String.valueOf(mLevel.mTarget.get(0)));
             textView.setVisibility(View.VISIBLE);
+            // Init pop up
+            Utils.createPopUpEffect(textView);
         } else {
             if (mLevel.mCollect.size() == 1) {
                 ImageView imageView = (ImageView) findViewById(R.id.image_dialog_target_center);
                 imageView.setImageResource(mLevel.mCollect.get(0));
                 imageView.setVisibility(View.VISIBLE);
+                // Init pop up
+                Utils.createPopUpEffect(imageView);
             } else if (mLevel.mCollect.size() == 2) {
                 ImageView imageView = (ImageView) findViewById(R.id.image_dialog_target_left);
                 imageView.setImageResource(mLevel.mCollect.get(0));
                 imageView.setVisibility(View.VISIBLE);
+                // Init pop up
+                Utils.createPopUpEffect(imageView);
 
                 ImageView imageView2 = (ImageView) findViewById(R.id.image_dialog_target_right);
                 imageView2.setImageResource(mLevel.mCollect.get(1));
                 imageView2.setVisibility(View.VISIBLE);
+                // Init pop up
+                Utils.createPopUpEffect(imageView2, 1);
             } else if (mLevel.mCollect.size() == 3) {
                 ImageView imageView = (ImageView) findViewById(R.id.image_dialog_target_left);
                 imageView.setImageResource(mLevel.mCollect.get(0));
                 imageView.setVisibility(View.VISIBLE);
+                // Init pop up
+                Utils.createPopUpEffect(imageView);
 
                 ImageView imageView2 = (ImageView) findViewById(R.id.image_dialog_target_center);
                 imageView2.setImageResource(mLevel.mCollect.get(1));
                 imageView2.setVisibility(View.VISIBLE);
+                // Init pop up
+                Utils.createPopUpEffect(imageView2, 1);
 
                 ImageView imageView3 = (ImageView) findViewById(R.id.image_dialog_target_right);
                 imageView3.setImageResource(mLevel.mCollect.get(2));
                 imageView3.setVisibility(View.VISIBLE);
+                // Init pop up
+                Utils.createPopUpEffect(imageView3, 2);
             }
         }
 

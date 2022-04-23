@@ -14,19 +14,18 @@ import com.example.matchgamesample.game.state.ScoreGameState;
 import com.example.matchgamesample.game.state.StarGameState;
 
 public class GameAlgorithm extends BaseAlgorithm {
-    private ImageView[][] iceArray, iceArray2;
-    private ImageView[][] advanceArray;
+    private ImageView[][] mIceArray, mIceArray2;
+    private ImageView[][] mAdvanceArray;
     private BaseGameState mGameState;
     //----------------------------------------------------------------------------------
     // Var to change state of game
     //----------------------------------------------------------------------------------
-    public int swapCol, swapRow, swapCol2, swapRow2;
-    public boolean isSwap = false, mShowHint = false, mRefresh = false;
-    private int combo = 0;
+    public int mSwapCol, mSwapRow, mSwapCol2, mSwapRow2;
+    public boolean mSwapping = false, mShowHint = false;
+    private int mCombo = 0;
     // Tile moving control
     private static final int WAITING_TIME = 300;
     private static final int EFFECT_WAITING_TIME = 1200;
-    private static final int REFRESH_WAITING_TIME = 800;
     public boolean mMoveTile = false;
     //==================================================================================
 
@@ -54,51 +53,22 @@ public class GameAlgorithm extends BaseAlgorithm {
     }
 
     public void setIceArray(ImageView[][] iceArray, ImageView[][] iceArray2) {
-        this.iceArray = iceArray;
-        this.iceArray2 = iceArray2;
+        mIceArray = iceArray;
+        mIceArray2 = iceArray2;
     }
 
     public void setAdvanceArray(ImageView[][] advanceArray) {
-        this.advanceArray = advanceArray;
+        mAdvanceArray = advanceArray;
     }
 
     @Override
     public void update(Tile[][] tileArray, long elapsedMillis) {
 
         // Do nothing when waiting event
-        if (isTransf) {
+        if (mIsTransf) {
             mWaitingTime += elapsedMillis;
             if (mWaitingTime > EFFECT_WAITING_TIME) {
-                isTransf = false;
-                mWaitingTime = 0;
-            }
-            return;
-        }
-
-        if (mRefresh) {
-            mWaitingTime += elapsedMillis;
-            if (mWaitingTime > REFRESH_WAITING_TIME) {
-
-                for (int j = 0; j < mColumn; j++) {
-                    for (int i = mRow - 1; i >= 0; i--) {
-                        //Check tile state
-                        if (tileArray[i][j].isMovable()
-                                && tileArray[i][j].isFruit()
-                                && !tileArray[i][j].special) {
-
-                            //Assign new tile
-                            do {
-                                tileArray[i][j].setRandomFruit();
-                            } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
-                                    && tileArray[i + 2][j].kind == tileArray[i][j].kind)
-                                    || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind
-                                    && tileArray[i][j - 2].kind == tileArray[i][j].kind));
-                        }
-                    }
-                }
-
-                mGameEngine.onGameEvent(GameEvent.START_HINT);
-                mRefresh = false;
+                mIsTransf = false;
                 mWaitingTime = 0;
             }
             return;
@@ -106,12 +76,13 @@ public class GameAlgorithm extends BaseAlgorithm {
 
         // 1. Find match
         updateWait(tileArray);
-        if (!waitFinding) {
+        if (!mWaitFinding) {
             findMatch(tileArray);
         }
 
         // 2. Moving
         if (mMoveTile) {
+
             for (int i = 0; i < mRow; i++) {
                 for (int j = 0; j < mColumn; j++) {
 
@@ -134,9 +105,9 @@ public class GameAlgorithm extends BaseAlgorithm {
         updateMove(tileArray);
 
         // 3. Fruit wait
-        if (!isMoving && !waitFinding) {
+        if (!mIsMoving && !mWaitFinding) {
             // Play fruit bouncing sound when tile stop
-            if (mMoveTile && !isSwap)
+            if (mMoveTile && !mSwapping)
                 mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_BOUNCING);
             mMoveTile = false;
         } else {
@@ -153,41 +124,41 @@ public class GameAlgorithm extends BaseAlgorithm {
         updateMatch(tileArray);
 
         // Check combo
-        if (!isMoving) {
-            if (matchFinding) {
-                combo++;
-                if (combo == 1) {
+        if (!mIsMoving) {
+            if (mMatchFinding) {
+                mCombo++;
+                if (mCombo == 1) {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMB01);
-                } else if (combo == 2) {
+                } else if (mCombo == 2) {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMB02);
-                } else if (combo == 3) {
+                } else if (mCombo == 3) {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMB03);
                 } else {
                     mSoundManager.playSoundForSoundEvent(SoundEvent.COMBO4);
                 }
             } else {
-                if (!waitFinding) {
-                    if (combo >= 4) {
-                        if (combo == 4) {
+                if (!mWaitFinding) {
+                    if (mCombo >= 4) {
+                        if (mCombo == 4) {
                             mGameEngine.onGameEvent(GameEvent.COMBO_4);
-                        } else if (combo == 5) {
+                        } else if (mCombo == 5) {
                             mGameEngine.onGameEvent(GameEvent.COMBO_5);
                         } else {
                             mGameEngine.onGameEvent(GameEvent.COMBO_6);
                         }
 
-                        combo = 0;
+                        mCombo = 0;
                         return;
                     }
-                    combo = 0;
+                    mCombo = 0;
                 }
             }
         }
 
         // Check hint
-        if (!isSwap && !isMoving) {
+        if (!mSwapping && !mIsMoving) {
             //Check is potential moving
-            if (!matchFinding && !waitFinding && mShowHint) {
+            if (!mMatchFinding && !mWaitFinding && mShowHint) {
                 //Show hint
                 mGameEngine.onGameEvent(GameEvent.START_HINT);
                 mShowHint = false;
@@ -195,20 +166,20 @@ public class GameAlgorithm extends BaseAlgorithm {
         }
 
         // 4. Swap back if no match
-        if (isSwap && !isMoving) {
-            if (!matchFinding) {
+        if (mSwapping && !mIsMoving) {
+            if (!mMatchFinding) {
                 // Player make an invalid swap
-                swap(tileArray, tileArray[swapRow][swapCol], tileArray[swapRow2][swapCol2]);
+                swap(tileArray, tileArray[mSwapRow][mSwapCol], tileArray[mSwapRow2][mSwapCol2]);
                 mMoveTile = true;
             } else {
                 // Player make valid swap
                 mGameEngine.onGameEvent(GameEvent.PLAYER_SWAP);
             }
-            isSwap = false;
+            mSwapping = false;
         }
 
         // 5. Update tile
-        if (!isMoving) {
+        if (!mIsMoving) {
 
             // (5.1) Check special fruit
             for (int j = 0; j < mColumn; j++) {
@@ -272,7 +243,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                             //Check potential match
                             if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j - 1].kind
                                     && tileArray[i - 1][j - 1].match > 0) {            //Top left
-                                //If tile is coco, do not add
+                                //If tile is special, do not add
                                 if (!tileArray[i][j - 1].special) {
                                     if (i > 1 && tileArray[i - 2][j - 1].kind == tileArray[i][j].kind) {
                                         /* O
@@ -306,7 +277,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j - 1].kind
                                     && tileArray[i + 1][j - 1].match > 0) {         //Bottom Left
-                                //If tile is coco, do not add
+                                //If tile is special, do not add
                                 if (!tileArray[i][j - 1].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j - 1].kind == tileArray[i][j].kind) {
                                         /* X O O
@@ -325,7 +296,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j].kind && tileArray[i - 1][j].match > 0) {            //Top Center
-                                //If tile is coco, do not add
+                                //If tile is special, do not add
                                 if (!tileArray[i][j].special) {
                                     if (i > 1 && tileArray[i - 2][j].kind == tileArray[i][j].kind) {
                                         /*   O
@@ -359,7 +330,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j].kind
                                     && tileArray[i + 1][j].match > 0) {              //Bottom Center
-                                //If tile is coco, do not add
+                                //If tile is special, do not add
                                 if (!tileArray[i][j].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j].kind == tileArray[i][j].kind) {
                                         /* O X O
@@ -378,7 +349,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j + 1].kind && tileArray[i - 1][j + 1].match > 0) {           //Top Right
-                                //If tile is coco, do not add
+                                //If tile is special, do not add
                                 if (!tileArray[i][j + 1].special) {
                                     if (i > 1 && tileArray[i - 2][j + 1].kind == tileArray[i][j].kind) {
                                         /*     O
@@ -411,7 +382,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j + 1].kind && tileArray[i + 1][j + 1].match > 0) {                 //Bottom Right
-                                //If tile is coco, do not add
+                                //If tile is special, do not add
                                 if (!tileArray[i][j + 1].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j + 1].kind == tileArray[i][j].kind) {
                                         /* O O X
@@ -447,24 +418,25 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 && tileArray[i][j].kind == tileArray[i][j + 3].kind) {
                             //Check mRow for 5
                             if (j < mColumn - 4 && tileArray[i][j].kind == tileArray[i][j + 4].kind) {
-                                //If tile is already special, do not add
-                                if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
-                                    //Add upgrade animation
-                                    mAnimationManager.upgrade2I_h(tileArray[i][j + 2]);
-                                    mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
-                                    tileArray[i][j].isUpgrade = true;
-                                    tileArray[i][j + 1].isUpgrade = true;
-                                    tileArray[i][j + 3].isUpgrade = true;
-                                    tileArray[i][j + 4].isUpgrade = true;
-                                    //Make it special
-                                    tileArray[i][j + 2].direct = 'I';
-                                    tileArray[i][j + 2].kind = TileUtils.ICE_CREAM;
-                                }
+                                // O O X O O
+                                //Add upgrade animation
+                                mAnimationManager.upgrade2I_h(tileArray[i][j + 2]);
+                                mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
+                                tileArray[i][j].isUpgrade = true;
+                                tileArray[i][j + 1].isUpgrade = true;
+                                tileArray[i][j + 3].isUpgrade = true;
+                                tileArray[i][j + 4].isUpgrade = true;
+                                //Make it special
+                                tileArray[i][j + 2].direct = 'I';
+                                tileArray[i][j + 2].special = false;   // We make sure it will transform before explode
+                                tileArray[i][j + 2].isExplode = false;   // We make sure it will detect
+                                tileArray[i][j + 2].kind = TileUtils.ICE_CREAM;
                             } else {
                                 //Check is right or left be chosen
-                                if ((i == swapRow && j + 1 == swapCol) || (i == swapRow2 && j + 1 == swapCol2)) {
+                                if ((i == mSwapRow && j + 1 == mSwapCol) || (i == mSwapRow2 && j + 1 == mSwapCol2)) {
                                     //If tile is already special, do not add
                                     if (tileArray[i][j + 1].direct == 'N' && !tileArray[i][j + 1].isUpgrade) {
+                                        // O X O O
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2H_left(tileArray[i][j + 1]);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
@@ -477,6 +449,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 } else {
                                     //If tile is already special, do not add
                                     if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
+                                        // O O X O O
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2H_right(tileArray[i][j + 2]);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
@@ -505,23 +478,22 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 && tileArray[i][j].kind == tileArray[i + 3][j].kind) {
                             //Check mRow for 5
                             if (i < mRow - 4 && tileArray[i][j].kind == tileArray[i + 4][j].kind) {
-                                //If tile is already special, do not add
-                                if (tileArray[i + 2][j].direct == 'N' && !tileArray[i + 2][j].isUpgrade) {
-                                    //Add upgrade animation
-                                    mAnimationManager.upgrade2I_v(tileArray[i + 2][j]);
-                                    mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
-                                    tileArray[i][j].isUpgrade = true;
-                                    tileArray[i + 1][j].isUpgrade = true;
-                                    tileArray[i + 3][j].isUpgrade = true;
-                                    tileArray[i + 4][j].isUpgrade = true;
-                                    //Make it special
-                                    tileArray[i + 2][j].direct = 'I';
-                                    tileArray[i + 2][j].kind = TileUtils.ICE_CREAM;
-                                }
+                                //Add upgrade animation
+                                mAnimationManager.upgrade2I_v(tileArray[i + 2][j]);
+                                mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
+                                tileArray[i][j].isUpgrade = true;
+                                tileArray[i + 1][j].isUpgrade = true;
+                                tileArray[i + 3][j].isUpgrade = true;
+                                tileArray[i + 4][j].isUpgrade = true;
+                                //Make it special
+                                tileArray[i + 2][j].direct = 'I';
+                                tileArray[i + 2][j].special = false;   // We make sure it will transform before explode
+                                tileArray[i + 2][j].isExplode = false;   // We make sure it will detect
+                                tileArray[i + 2][j].kind = TileUtils.ICE_CREAM;
                             } else {
                                 //Check is top or bottom be chosen
-                                if ((i + 1 == swapRow && j == swapCol)
-                                        || (i + 1 == swapRow2 && j == swapCol2)) {
+                                if ((i + 1 == mSwapRow && j == mSwapCol)
+                                        || (i + 1 == mSwapRow2 && j == mSwapCol2)) {
                                     //If tile is already special, do not add
                                     if (tileArray[i + 1][j].direct == 'N' && !tileArray[i + 1][j].isUpgrade) {
                                         //Add upgrade animation
@@ -611,14 +583,14 @@ public class GameAlgorithm extends BaseAlgorithm {
 
             // (5.6) Update game state
             if (mGameState.isPlayerReachTarget()) {
-                if (!matchFinding && !waitFinding) {
+                if (!mMatchFinding && !mWaitFinding) {
                     playerWin(tileArray);
                     return;
                 }
             }
 
             if (mGameState.isPlayerOutOfMove()) {
-                if (!matchFinding && !waitFinding && !isTransf) {
+                if (!mMatchFinding && !mWaitFinding && !mIsTransf) {
                     playerLoss();
                     return;
                 }
@@ -629,7 +601,7 @@ public class GameAlgorithm extends BaseAlgorithm {
             // (5.7) Add score
             for (int j = 0; j < mColumn; j++) {
                 for (int i = 0; i < mRow; i++) {
-                    if (tileArray[i][j].match != 0 && tileArray[i][j].isValidFruit()) {
+                    if (tileArray[i][j].match != 0 && tileArray[i][j].isUnblockFruitOrIceCream()) {
                         mGameEngine.onGameEvent(GameEvent.PLAYER_SCORE);
                     }
                 }
@@ -641,15 +613,20 @@ public class GameAlgorithm extends BaseAlgorithm {
                     //Check is match
                     if (!tileArray[i][j].empty
                             && tileArray[i][j].match != 0
-                            && tileArray[i][j].kind != 0
                             && !tileArray[i][j].isAnimate) {
+
+                        if (tileArray[i][j].kind == 0) {
+                            if (tileArray[i][j].ice > 0)
+                                explodeIce(mIceArray[i][j], mIceArray2[i][j], tileArray[i][j]);
+                            continue;
+                        }
 
                         // Set isAnimate
                         tileArray[i][j].isAnimate = true;
 
                         //Check lock
                         if (tileArray[i][j].lock) {
-                            explodeLock(advanceArray[i + 1][j], tileArray[i][j]);
+                            explodeLock(mAdvanceArray[i + 1][j], tileArray[i][j]);
                             continue;
                         }
 
@@ -690,7 +667,7 @@ public class GameAlgorithm extends BaseAlgorithm {
 
                             // Explode ice
                             if (tileArray[i][j].ice > 0)
-                                explodeIce(iceArray[i][j], iceArray2[i][j], tileArray[i][j]);
+                                explodeIce(mIceArray[i][j], mIceArray2[i][j], tileArray[i][j]);
 
                             if (tileArray[i][j].direct != 'N' && !tileArray[i][j].special) {
                                 tileArray[i][j].special = true;
@@ -711,7 +688,7 @@ public class GameAlgorithm extends BaseAlgorithm {
             }
 
             // Do nothing when transform
-            if (isTransf)
+            if (mIsTransf)
                 return;
 
             // (5.9) Reset
@@ -723,23 +700,19 @@ public class GameAlgorithm extends BaseAlgorithm {
         updateWait(tileArray);
         diagonalSwap(tileArray);
 
-        if (waitFinding) {
+        if (mWaitFinding) {
             tile2Top(tileArray);
             tileReset(tileArray);
         }
 
     }
 
-    public void refresh(Tile[][] tileArray) {
-
-        mRefresh = true;
-        mWaitingTime = 0;
-
-        //Refresh fruit
+    public void playRefreshAnimation(Tile[][] tileArray) {
+        // Play fade out animation
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
                 //Check tile state
-                if (!tileArray[i][j].invalid
+                if (tileArray[i][j].isMovable()
                         && tileArray[i][j].isFruit()
                         && !tileArray[i][j].special) {
                     //Do not refresh special fruit
@@ -750,11 +723,34 @@ public class GameAlgorithm extends BaseAlgorithm {
 
     }
 
+    public void refresh(Tile[][] tileArray) {
+        // Refresh the screen, and generate random fruit
+        for (int j = 0; j < mColumn; j++) {
+            for (int i = mRow - 1; i >= 0; i--) {
+                //Check tile state
+                if (tileArray[i][j].isMovable()
+                        && tileArray[i][j].isFruit()
+                        && !tileArray[i][j].special) {
+                    //Assign new tile
+                    do {
+                        tileArray[i][j].setRandomFruit();
+                    } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
+                            && tileArray[i + 2][j].kind == tileArray[i][j].kind)
+                            || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind
+                            && tileArray[i][j - 2].kind == tileArray[i][j].kind));
+                }
+            }
+        }
+
+        // Resume hint
+        mShowHint = true;
+    }
+
     //----------------------------------------------------------------------------------
     // Method control swap
     //----------------------------------------------------------------------------------
     public boolean canPlayerSwap() {
-        if (isMoving || matchFinding || waitFinding) {
+        if (mIsMoving || mMatchFinding || mWaitFinding) {
             return false;
         }
         return true;
@@ -877,7 +873,7 @@ public class GameAlgorithm extends BaseAlgorithm {
 
                 //Check lock
                 if (tileArray[i][j].lock) {
-                    explodeLock(advanceArray[i + 1][j], tileArray[i][j]);
+                    explodeLock(mAdvanceArray[i + 1][j], tileArray[i][j]);
                 }
 
             }

@@ -1,4 +1,4 @@
-package com.example.matchgamesample.input;
+package com.example.matchgamesample.game.input;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,8 +34,19 @@ public class BasicInputController extends InputController {
                 // Log.d("input", "(" + mX_Up + ", " + mY_Up + ")");
                 mGameEngine.onGameEvent(GameEvent.PLAYER_RELEASE);
 
-                if (Math.abs(mX_Down - mX_Up) > 50 || Math.abs(mY_Down - mY_Up) > 50) {
-                    mGameEngine.onGameEvent(GameEvent.PLAYER_MOVE);
+                // Check player input
+                if (mUsingHammer) {
+                    mGameEngine.onGameEvent(GameEvent.PLAYER_USE_HAMMER);
+                } else if (mUsingGloves) {
+                    if (Math.abs(mX_Down - mX_Up) > 50 || Math.abs(mY_Down - mY_Up) > 50) {
+                        mGameEngine.onGameEvent(GameEvent.PLAYER_USE_GLOVES);
+                    }
+                } else if (mUsingBomb) {
+                    mGameEngine.onGameEvent(GameEvent.PLAYER_USE_BOMB);
+                } else {
+                    if (Math.abs(mX_Down - mX_Up) > 50 || Math.abs(mY_Down - mY_Up) > 50) {
+                        mGameEngine.onGameEvent(GameEvent.PLAYER_MOVE);
+                    }
                 }
             }
 

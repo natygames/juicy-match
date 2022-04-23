@@ -33,6 +33,11 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
         btnResume.setOnClickListener(this);
         Utils.createButtonEffect(btnResume);
 
+        // Init pop up
+        Utils.createPopUpEffect(btnMusic);
+        Utils.createPopUpEffect(btnSound, 1);
+        Utils.createPopUpEffect(btnQuit, 2);
+
         updateSoundAndMusicButtons();
     }
 

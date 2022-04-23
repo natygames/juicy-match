@@ -499,7 +499,7 @@ public class GameBoard {
         }
 
         //Arrow animation
-        final Animation arrow_anim = AnimationUtils.loadAnimation(mActivity, R.anim.arrow_animation);
+        final Animation arrow_anim = AnimationUtils.loadAnimation(mActivity, R.anim.arrow_pulse);
 
         //Create advance board
         advance_board.setColumnCount(mColumn);
@@ -541,86 +541,6 @@ public class GameBoard {
                         advance.setBackgroundResource(R.drawable.tube);
                         advance.setAlpha(0.7f);
                         advance_board.addView(advance);
-                        break;
-                    case ('H'):
-                        advance.setBackgroundResource(R.drawable.handler);
-                        advanceArray[i][j] = advance;
-                        RelativeLayout machine_h = new RelativeLayout(mActivity);
-                        machine_h.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
-                        machine_h.setBackgroundResource(R.drawable.machine_cherry_h);
-                        machine_h.addView(advance);
-                        advance_board.addView(machine_h);
-                        machine_h.animate().translationY((float) mTileSize / 4);
-
-                        // Add machine to whole mColumn
-                        for (int x = 1; x <= mRow; x++) {
-                            if (!tileArray[i - 1][j].empty)
-                                tileArray[i - 1][j].machine = 'H';
-                        }
-                        break;
-                    case ('V'):
-                        advance.setBackgroundResource(R.drawable.handler);
-                        advanceArray[i][j] = advance;
-                        RelativeLayout machine_v = new RelativeLayout(mActivity);
-                        machine_v.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
-                        machine_v.setBackgroundResource(R.drawable.machine_cherry_v);
-                        machine_v.addView(advance);
-                        advance_board.addView(machine_v);
-                        machine_v.animate().translationY((float) mTileSize / 4);
-
-                        // Add machine to whole mColumn
-                        for (int x = 1; x <= mRow; x++) {
-                            if (!tileArray[i - 1][j].empty)
-                                tileArray[i - 1][j].machine = 'V';
-                        }
-                        break;
-                    case ('S'):
-                        advance.setBackgroundResource(R.drawable.handler);
-                        advanceArray[i][j] = advance;
-                        RelativeLayout machine_s = new RelativeLayout(mActivity);
-                        machine_s.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
-                        machine_s.setBackgroundResource(R.drawable.machine_strawberry);
-                        machine_s.addView(advance);
-                        advance_board.addView(machine_s);
-                        machine_s.animate().translationY((float) mTileSize / 4);
-
-                        // Add machine to whole mColumn
-                        for (int x = 1; x <= mRow; x++) {
-                            if (!tileArray[i - 1][j].empty)
-                                tileArray[i - 1][j].machine = 'S';
-                        }
-                        break;
-                    case ('O'):
-                        advance.setBackgroundResource(R.drawable.handler);
-                        advanceArray[i][j] = advance;
-                        RelativeLayout machine_o = new RelativeLayout(mActivity);
-                        machine_o.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
-                        machine_o.setBackgroundResource(R.drawable.machine_icecream);
-                        machine_o.addView(advance);
-                        advance_board.addView(machine_o);
-                        machine_o.animate().translationY((float) mTileSize / 4);
-
-                        // Add machine to whole mColumn
-                        for (int x = 1; x <= mRow; x++) {
-                            if (!tileArray[i - 1][j].empty)
-                                tileArray[i - 1][j].machine = 'O';
-                        }
-                        break;
-                    case ('X'):
-                        advance.setBackgroundResource(R.drawable.handler);
-                        advanceArray[i][j] = advance;
-                        RelativeLayout machine_x = new RelativeLayout(mActivity);
-                        machine_x.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
-                        machine_x.setBackgroundResource(R.drawable.machine_star);
-                        machine_x.addView(advance);
-                        advance_board.addView(machine_x);
-                        machine_x.animate().translationY((float) mTileSize / 4);
-
-                        // Add machine to whole mColumn
-                        for (int x = 1; x <= mRow; x++) {
-                            if (!tileArray[i - 1][j].empty)
-                                tileArray[i - 1][j].machine = 'X';
-                        }
                         break;
                     default:
 

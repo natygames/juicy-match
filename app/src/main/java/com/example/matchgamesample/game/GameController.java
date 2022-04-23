@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 import com.example.matchgamesample.effect.sound.SoundEvent;
+import com.example.matchgamesample.effect.sound.SoundManager;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
@@ -17,13 +18,11 @@ import com.example.matchgamesample.fragment.MapFragment;
 import com.example.matchgamesample.fragment.WinDialogFragment;
 import com.example.matchgamesample.game.algorithm.BonusTimeAlgorithm;
 import com.example.matchgamesample.game.algorithm.GameAlgorithm;
+import com.example.matchgamesample.game.booster.BoosterManager;
 import com.example.matchgamesample.game.tile.Tile;
+import com.example.matchgamesample.game.tile.TileUtils;
 
 public class GameController extends GameObject {
-
-    private static final int WAITING_TIME = 1500;
-    private static final int SWAP_THRESHOLD = 50;
-
     private final GameEngine mGameEngine;
     private final MainActivity mActivity;
     private final Tile[][] mTileArray;
@@ -33,10 +32,15 @@ public class GameController extends GameObject {
     private final StateAnimation mStateAnimation;
     private GameAlgorithm mAlgorithm;
     private final BonusTimeAlgorithm mBonusTimeAlgorithm;
-
+    private final BoosterManager mBoosterManager;
+    private final SoundManager mSoundManager;
     private GameControllerState mState;
     private final Button mSkipButton;
     private int mWaitingTime;
+
+    private static final int WAITING_TIME = 1500;
+    private static final int REFRESH_TIME = 800;
+    private static final int SWAP_THRESHOLD = 50;
 
     public GameController(GameEngine gameEngine, Tile[][] TileArray) {
         mGameEngine = gameEngine;
@@ -48,6 +52,8 @@ public class GameController extends GameObject {
         mInputController = gameEngine.mInputController;
         mStateAnimation = new StateAnimation(gameEngine);
         mBonusTimeAlgorithm = new BonusTimeAlgorithm(gameEngine);
+        mBoosterManager = new BoosterManager(gameEngine);
+        mSoundManager = ((MainActivity) gameEngine.mActivity).getSoundManager();
         mSkipButton = (Button) mGameEngine.mActivity.findViewById(R.id.btn_skip);
     }
 
@@ -66,7 +72,7 @@ public class GameController extends GameObject {
 
         mWaitingTime = 0;
         mStateAnimation.startGameBoard();
-        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+        mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
         mState = GameControllerState.START_GAME;
     }
 
@@ -78,8 +84,8 @@ public class GameController extends GameObject {
                 if (mWaitingTime > WAITING_TIME) {
                     // Start animation
                     mStateAnimation.startGame(mGameEngine.mLevel.mLevelType);
-                    mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
-                    mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.GAME_INTRO);
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.GAME_INTRO);
 
                     // We disable player move when waiting
                     mState = GameControllerState.WAITING;
@@ -99,6 +105,15 @@ public class GameController extends GameObject {
                     mWaitingTime = 0;
                 }
                 break;
+            case REFRESHING:
+                mWaitingTime += elapsedMillis;
+                if (mWaitingTime > REFRESH_TIME) {
+                    mAlgorithm.refresh(mTileArray);
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.GAME_INTRO);
+                    mState = GameControllerState.PLAY_GAME;
+                    mWaitingTime = 0;
+                }
+                break;
             case BONUS_TIME:
                 mBonusTimeAlgorithm.update(mTileArray, elapsedMillis);
                 break;
@@ -106,7 +121,7 @@ public class GameController extends GameObject {
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > 1800) {
                     mStateAnimation.startBonusTime();
-                    mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+                    mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                     addSkipButton();
                     mState = GameControllerState.BONUS_TIME;
                     mWaitingTime = 0;
@@ -142,6 +157,7 @@ public class GameController extends GameObject {
     public void onGameEvent(GameEvent gameEvents) {
         switch (gameEvents) {
             case PLAYER_TOUCH:
+                // Check current state
                 if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
                     return;
                 }
@@ -150,6 +166,7 @@ public class GameController extends GameObject {
                 mTileArray[touchRow][touchCol].isChosen = true;
                 break;
             case PLAYER_RELEASE:
+                // Check current state
                 if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
                     return;
                 }
@@ -158,6 +175,7 @@ public class GameController extends GameObject {
                 mTileArray[releaseRow][releaseCol].isChosen = false;
                 break;
             case PLAYER_MOVE:
+                // Check current state
                 if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
                     return;
                 }
@@ -165,14 +183,14 @@ public class GameController extends GameObject {
                 break;
             case PLAYER_REACH_TARGET:
                 mStateAnimation.gameOver(GameEvent.PLAYER_REACH_TARGET);
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.GAME_WIN);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.GAME_WIN);
                 mState = GameControllerState.BONUS_TIME_WAITING;
                 break;
             case PLAYER_OUT_OF_MOVE:
                 mStateAnimation.gameOver(GameEvent.PLAYER_OUT_OF_MOVE);
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.GAME_OVER);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.GAME_OVER);
                 clearView(1600);
                 mState = GameControllerState.GAME_OVER;
                 break;
@@ -182,26 +200,199 @@ public class GameController extends GameObject {
                 break;
             case REFRESH:
                 mStateAnimation.refreshGame();
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
-                refreshTile();
-                mState = GameControllerState.WAITING;
+                mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mAlgorithm.playRefreshAnimation(mTileArray);
+                mState = GameControllerState.REFRESHING;
                 break;
             case COMBO_4:
                 mStateAnimation.startCombo(GameEvent.COMBO_4);
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_5:
                 mStateAnimation.startCombo(GameEvent.COMBO_5);
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                 mState = GameControllerState.WAITING;
                 break;
             case COMBO_6:
                 mStateAnimation.startCombo(GameEvent.COMBO_6);
-                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP1);
+                mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                 mState = GameControllerState.WAITING;
                 break;
+            case PLAYER_PRESS_HAMMER:
+                // Check current state
+                if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
+                    return;
+                }
+
+                // Check player enable or disable the item
+                if (!mInputController.mUsingHammer) {
+                    // Notifying inputController and show highlight
+                    mInputController.mUsingHammer = true;
+                    mBoosterManager.showHighlight();
+                } else {
+                    // Notifying inputController and clear highlight
+                    mInputController.mUsingHammer = false;
+                    mBoosterManager.clearHighlight();
+
+                    // Resume hint
+                    mAlgorithm.mShowHint = true;
+                }
+
+                break;
+            case PLAYER_USE_HAMMER:
+                useHammer();
+                break;
+            case PLAYER_PRESS_GLOVES:
+                // Check current state
+                if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
+                    return;
+                }
+
+                if (!mInputController.mUsingGloves) {
+                    // Notifying inputController and show highlight
+                    mInputController.mUsingGloves = true;
+                    mBoosterManager.showHighlight();
+                } else {
+                    // Notifying inputController and clear highlight
+                    mInputController.mUsingGloves = false;
+                    mBoosterManager.clearHighlight();
+
+                    // Resume hint
+                    mAlgorithm.mShowHint = true;
+                }
+
+                break;
+            case PLAYER_USE_GLOVES:
+                useGloves();
+                break;
+            case PLAYER_PRESS_BOMB:
+                // Check current state
+                if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
+                    return;
+                }
+
+                if (!mInputController.mUsingBomb) {
+                    // Notifying inputController and show highlight
+                    mInputController.mUsingBomb = true;
+                    mBoosterManager.showHighlight();
+                } else {
+                    // Notifying inputController and clear highlight
+                    mInputController.mUsingBomb = false;
+                    mBoosterManager.clearHighlight();
+
+                    // Resume hint
+                    mAlgorithm.mShowHint = true;
+                }
+
+                break;
+            case PLAYER_USE_BOMB:
+                useBomb();
+                break;
         }
+    }
+
+    private void useHammer() {
+        // Get the tile player press from inputController
+        int swapCol = mInputController.mX_Down / mTileSize;
+        int swapRow = mInputController.mY_Down / mTileSize;
+
+        // Check is valid tile
+        if (mTileArray[swapRow][swapCol].empty
+                || (mTileArray[swapRow][swapCol].kind == TileUtils.STAR_FISH && !mTileArray[swapRow][swapCol].lock))
+            return;
+
+        // We wait for the animation
+        mState = GameControllerState.WAITING;
+
+        // Play booster animation
+        mBoosterManager.useHammer(mTileArray[swapRow][swapCol]);
+
+        // Resume booster state
+        mInputController.mUsingHammer = false;
+
+        // Resume hint
+        mAlgorithm.mShowHint = true;
+    }
+
+    private void useGloves() {
+        // Get the tile player press from inputController
+        int swapCol = mInputController.mX_Down / mTileSize;
+        int swapRow = mInputController.mY_Down / mTileSize;
+        int swapCol2 = 0;
+        int swapRow2 = 0;
+
+        if (mInputController.mX_Down - mInputController.mX_Up < -SWAP_THRESHOLD) {
+            // Swap right
+            if (swapCol >= mColumn - 1)
+                return;
+            swapCol2 = swapCol + 1;
+            swapRow2 = swapRow;
+        } else if (mInputController.mX_Down - mInputController.mX_Up > SWAP_THRESHOLD) {
+            // Swap left
+            if (swapCol <= 0)
+                return;
+            swapCol2 = swapCol - 1;
+            swapRow2 = swapRow;
+        } else if (mInputController.mY_Down - mInputController.mY_Up > SWAP_THRESHOLD) {
+            // Swap up
+            if (swapRow <= 0)
+                return;
+            swapCol2 = swapCol;
+            swapRow2 = swapRow - 1;
+        } else if (mInputController.mY_Down - mInputController.mY_Up < -SWAP_THRESHOLD) {
+            // Swap down
+            if (swapRow >= mRow - 1)
+                return;
+            swapCol2 = swapCol;
+            swapRow2 = swapRow + 1;
+        } else {
+            return;
+        }
+
+        if (!mTileArray[swapRow][swapCol].isMovable()
+                || !mTileArray[swapRow2][swapCol2].isMovable()) {
+            return;
+        }
+
+        // We swap these tiles without losing move
+        mAlgorithm.swap(mTileArray, mTileArray[swapRow][swapCol], mTileArray[swapRow2][swapCol2]);
+        mAlgorithm.mMoveTile = true;
+        // We disable mAlgorithm.mSwapping, so it won't swap back
+
+        // We wait for the animation
+        mState = GameControllerState.WAITING;
+
+        // Play booster animation
+        mBoosterManager.useGloves(mTileArray[swapRow2][swapCol2], mTileArray[swapRow][swapCol]);
+
+        // Resume booster state
+        mInputController.mUsingGloves = false;
+
+        // Resume hint
+        mAlgorithm.mShowHint = true;
+    }
+
+    private void useBomb() {
+        // Get the tile player press from inputController
+        int swapCol = mInputController.mX_Down / mTileSize;
+        int swapRow = mInputController.mY_Down / mTileSize;
+
+        // Check is valid tile
+        if (mTileArray[swapRow][swapCol].empty)
+            return;
+
+        // We wait for the animation
+        mState = GameControllerState.WAITING;
+
+        // Play booster animation
+        mBoosterManager.useBomb(mTileArray[swapRow][swapCol], mTileArray);
+
+        // Resume booster state
+        mInputController.mUsingBomb = false;
+
+        // Resume hint
+        mAlgorithm.mShowHint = true;
     }
 
     private void swapTile() {
@@ -247,18 +438,14 @@ public class GameController extends GameObject {
         // Update Algorithm state
         mAlgorithm.checkSpecialCombine(mTileArray[swapRow][swapCol], mTileArray[swapRow2][swapCol2]);
         mAlgorithm.swap(mTileArray, mTileArray[swapRow][swapCol], mTileArray[swapRow2][swapCol2]);
-        mAlgorithm.swapCol = swapCol;
-        mAlgorithm.swapRow = swapRow;
-        mAlgorithm.swapCol2 = swapCol2;
-        mAlgorithm.swapRow2 = swapRow2;
-        mAlgorithm.isSwap = true;
+        mAlgorithm.mSwapCol = swapCol;
+        mAlgorithm.mSwapRow = swapRow;
+        mAlgorithm.mSwapCol2 = swapCol2;
+        mAlgorithm.mSwapRow2 = swapRow2;
+        mAlgorithm.mSwapping = true;
         mAlgorithm.mMoveTile = true;
         mAlgorithm.mShowHint = true;
 
-    }
-
-    private void refreshTile() {
-        mAlgorithm.refresh(mTileArray);
     }
 
     private void addSkipButton() {

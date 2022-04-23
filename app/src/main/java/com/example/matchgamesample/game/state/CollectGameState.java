@@ -1,5 +1,6 @@
 package com.example.matchgamesample.game.state;
 
+import com.example.matchgamesample.R;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
@@ -40,17 +41,26 @@ public class CollectGameState extends BaseGameState {
 
                 int size = mTarget.size();
                 for (int n = 0; n < size; n++) {
+                    // Check is match target
                     if (tile.kind == mTarget.get(n)) {
-                        int target = mGameEngine.mLevel.mTarget.get(n);
-                        if (target > 0) {
-                            target--;
-                            mGameEngine.mLevel.mTarget.set(n, target);
-                            mGameEngine.onGameEvent(GameEvent.PLAYER_COLLECT);
-                        }
+                        updateTarget(n);
+                    } else if (mTarget.get(n) == R.drawable.striped_ball) {
+                        if (tile.special && (tile.direct == 'H' || tile.direct == 'V'))
+                            updateTarget(n);
                     }
                 }
             }
         }
 
     }
+
+    private void updateTarget(int index) {
+        int target = mGameEngine.mLevel.mTarget.get(index);
+        if (target > 0) {
+            target--;
+            mGameEngine.mLevel.mTarget.set(index, target);
+            mGameEngine.onGameEvent(GameEvent.PLAYER_COLLECT);
+        }
+    }
+
 }

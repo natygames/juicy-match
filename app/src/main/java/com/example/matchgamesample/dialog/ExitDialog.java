@@ -23,6 +23,9 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
         ImageButton btnCancel = (ImageButton) findViewById(R.id.btn_cancel);
         btnCancel.setOnClickListener(this);
         Utils.createButtonEffect(btnCancel);
+
+        // Init pop up
+        Utils.createPopUpEffect(btnExit);
     }
 
     public void setListener(ExitDialogListener listener) {
