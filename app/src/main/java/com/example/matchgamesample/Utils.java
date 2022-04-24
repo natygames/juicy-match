@@ -18,7 +18,7 @@ public class Utils {
     private static final BounceInterpolator mBounceInterpolator = new BounceInterpolator();
     private static final OvershootInterpolator mOvershootInterpolator = new OvershootInterpolator();
     private static final int POP_UP_TIME = 300;
-    private static final int POP_UP_INTERVAL = 150;
+    private static final int POP_UP_INTERVAL = 50;
 
     private Utils() {
     }

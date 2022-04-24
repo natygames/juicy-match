@@ -480,12 +480,6 @@ public class GameBoard {
          * x for lock
          * A for arrow
          * I for tube
-         * H for horizontal cherry machine
-         * V for vertical cherry machine
-         * S for strawberry machine
-         * O for ice cream machine
-         * X for starfish machine
-         * h for honey
          *
          */
 

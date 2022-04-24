@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,8 @@ import java.util.ArrayList;
 public class MapFragment extends BaseFragment implements LevelDialog.LevelDialogListener {
     private int mLevel;
     private DatabaseHelper mDatabaseHelper;
+    private static final int TOTAL_BUTTON = 20;
+    private static final int TOTAL_LEVEL = 4;
 
     public MapFragment() {
         // Required empty public constructor
@@ -38,11 +41,12 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Load star data
+        // Load star database
         mDatabaseHelper = new DatabaseHelper(getMainActivity());
-        loadStarData();
 
+        // Init button and star
         init();
+        loadStarData();
 
         // Resume bgm
         getMainActivity().getSoundManager().resumeBgMusic();
@@ -50,31 +54,33 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
     }
 
     private void init() {
-        // Init view
-        getView().findViewById(R.id.btn_level1).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLevelDialog(1);
+        // Init button listener and star
+        for (int i = 1; i <= TOTAL_BUTTON; i++) {
+
+            // Get level button name
+            String levelName = "btn_level" + i;
+            int levelId = getResources().getIdentifier(levelName, "id", getMainActivity().getPackageName());
+
+            // Init button
+            TextView textView = (TextView) getView().findViewById(levelId);
+
+            // Init button listener
+            if (i <= TOTAL_LEVEL) {
+                Utils.createButtonEffect(textView);
+
+                int level = i;
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        getMainActivity().getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+                        showLevelDialog(level);
+                    }
+                });
             }
-        });
-        getView().findViewById(R.id.btn_level2).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLevelDialog(2);
-            }
-        });
-        getView().findViewById(R.id.btn_level3).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLevelDialog(3);
-            }
-        });
-        getView().findViewById(R.id.btn_level4).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLevelDialog(4);
-            }
-        });
+
+            // Init pop up
+            Utils.createPopUpEffect(textView, i - 1);
+        }
 
         // Init button
         ImageButton imageButton = (ImageButton) getView().findViewById(R.id.btn_setting);
@@ -89,20 +95,7 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         });
     }
 
-    private void showLevelDialog(int level) {
-        mLevel = level;
-        LevelDialog dialog = new LevelDialog(getMainActivity(), level);
-        dialog.setListener(this);
-        showDialog(dialog);
-    }
-
-    @Override
-    public void startLevel() {
-        getMainActivity().startGame(mLevel);
-    }
-
     private void loadStarData() {
-
         ImageView level1Star = (ImageView) getView().findViewById(R.id.image_level1_star);
         ImageView level2Star = (ImageView) getView().findViewById(R.id.image_level2_star);
         ImageView level3Star = (ImageView) getView().findViewById(R.id.image_level3_star);
@@ -117,21 +110,33 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         ArrayList<Integer> data = mDatabaseHelper.getAllLevelStar();
         int size = data.size();
         for (int i = 0; i < size; i++) {
+            star.get(i).setVisibility(View.VISIBLE);
+            Utils.createPopUpEffect(star.get(i), i);
             switch (data.get(i)) {
                 case 1:
-                    star.get(i).setImageResource(R.drawable.star_set_1);
+                    star.get(i).setBackgroundResource(R.drawable.star_set_1);
                     break;
                 case 2:
-                    star.get(i).setImageResource(R.drawable.star_set_2);
+                    star.get(i).setBackgroundResource(R.drawable.star_set_2);
                     break;
                 case 3:
-                    star.get(i).setImageResource(R.drawable.star_set_3);
+                    star.get(i).setBackgroundResource(R.drawable.star_set_3);
                     break;
-                default:
-
             }
         }
 
+    }
+
+    private void showLevelDialog(int level) {
+        mLevel = level;
+        LevelDialog dialog = new LevelDialog(getMainActivity(), level);
+        dialog.setListener(this);
+        showDialog(dialog);
+    }
+
+    @Override
+    public void startLevel() {
+        getMainActivity().startGame(mLevel);
     }
 
     @Override

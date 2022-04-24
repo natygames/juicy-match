@@ -8,82 +8,14 @@
     android:background="@drawable/background"
     tools:context=".fragment.MapFragment">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <include layout="@layout/view_map_item" />
 
-        <ImageView
-            android:id="@+id/image_level1_star"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:src="@drawable/star_set_background" />
-
-        <Button
-            android:id="@+id/btn_level1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:text="Level1"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/image_level2_star"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:src="@drawable/star_set_background" />
-
-        <Button
-            android:id="@+id/btn_level2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:text="Level2"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/image_level3_star"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:src="@drawable/star_set_background" />
-
-        <Button
-            android:id="@+id/btn_level3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:text="Level3"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/image_level4_star"
-            android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:src="@drawable/star_set_background" />
-
-        <Button
-            android:id="@+id/btn_level4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:text="Level4"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
+    <include layout="@layout/view_map_level" />
 
     <ImageButton
         android:id="@+id/btn_setting"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/image_round_btn_width"
+        android:layout_height="@dimen/image_round_btn_width"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/btn_setting"

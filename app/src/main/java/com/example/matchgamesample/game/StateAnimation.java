@@ -62,7 +62,7 @@ public class StateAnimation {
         view.animate().setStartDelay(delay).setDuration(600).x(view.getWidth())
                 .setInterpolator(mAnticipateInterpolator);
 
-        ConstraintLayout board_info = (ConstraintLayout) mActivity.findViewById(R.id.board_info);
+        ConstraintLayout board_info = (ConstraintLayout) mActivity.findViewById(R.id.board_game);
         board_info.animate().setStartDelay(delay).setDuration(0).alpha(0);
         ConstraintLayout board_button = (ConstraintLayout) mActivity.findViewById(R.id.board_button);
         board_button.animate().setStartDelay(delay).setDuration(0).alpha(0);

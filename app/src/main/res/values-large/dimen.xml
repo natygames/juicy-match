@@ -11,13 +11,15 @@
     <dimen name="text_loading_size">70sp</dimen>
 
     <!-- Text in map -->
-    <dimen name="text_size_level">30sp</dimen>
+    <dimen name="text_level_size">35sp</dimen>
+    <dimen name="text_field_size">30sp</dimen>
 
     <!-- Text in win_dialog -->
     <dimen name="text_win_dialog_size">70sp</dimen>
 
     <!-- Text in dialog -->
     <dimen name="text_dialog_size">50sp</dimen>
+    <dimen name="text_dialog_medium_size">42sp</dimen>
     <dimen name="text_dialog_small_size">28sp</dimen>
 
     <!-- Image width -->
@@ -30,10 +32,12 @@
     <dimen name="image_btn_small_height">85dp</dimen>
     <dimen name="image_round_btn_width">70dp</dimen>
 
+    <dimen name="image_field">170dp</dimen>
     <dimen name="image_progressbar_width">350dp</dimen>
 
     <!-- Dialog width -->
     <dimen name="dialog_width">420dp</dimen>
+    <dimen name="dialog_map_width">490dp</dimen>
     <dimen name="dialog_height">280dp</dimen>
     <dimen name="dialog_setting_height">490dp</dimen>
     <dimen name="dialog_level_height">560dp</dimen>
