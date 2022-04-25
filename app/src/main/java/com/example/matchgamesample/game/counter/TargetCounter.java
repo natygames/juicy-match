@@ -17,6 +17,10 @@ import com.example.matchgamesample.level.LevelType;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class TargetCounter extends GameObject {
 
     private GameEngine mGameEngine;

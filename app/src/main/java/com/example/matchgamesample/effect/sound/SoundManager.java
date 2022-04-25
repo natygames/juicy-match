@@ -13,6 +13,10 @@ import com.example.matchgamesample.R;
 
 import java.util.HashMap;
 
+/**
+ * SoundManager control sound by calling sound event
+ */
+
 public class SoundManager {
 
     private static final int MAX_STREAMS = 8;

@@ -13,6 +13,14 @@ import com.example.matchgamesample.game.state.IceGameState;
 import com.example.matchgamesample.game.state.ScoreGameState;
 import com.example.matchgamesample.game.state.StarGameState;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * GameAlgorithm contain the core algorithm of our match 3 game
+ */
+
 public class GameAlgorithm extends BaseAlgorithm {
     private ImageView[][] mIceArray, mIceArray2;
     private ImageView[][] mAdvanceArray;

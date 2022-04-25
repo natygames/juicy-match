@@ -10,6 +10,16 @@ import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.effect.sound.SoundManager;
 
+/**
+ * SettingDialog will show when player press
+ * setting button in menu and map, containing
+ * volume button and other customizing setting
+ */
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class SettingDialog extends BaseDialog implements View.OnClickListener {
 
     public SettingDialog(MainActivity activity) {

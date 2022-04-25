@@ -20,6 +20,10 @@ import com.example.matchgamesample.effect.sound.SoundEvent;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MapFragment extends BaseFragment implements LevelDialog.LevelDialogListener {
     private int mLevel;
     private DatabaseHelper mDatabaseHelper;
@@ -84,7 +88,6 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
 
         // Init button
         ImageButton imageButton = (ImageButton) getView().findViewById(R.id.btn_setting);
-        Utils.createButtonEffect(imageButton);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +96,10 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
                 showDialog(dialog);
             }
         });
+        Utils.createButtonEffect(imageButton);
+        Utils.createButtonEffect(getView().findViewById(R.id.btn_level_next));
+        Utils.createButtonEffect(getView().findViewById(R.id.btn_level_previous));
+        Utils.createButtonEffect(getView().findViewById(R.id.btn_shop));
     }
 
     private void loadStarData() {

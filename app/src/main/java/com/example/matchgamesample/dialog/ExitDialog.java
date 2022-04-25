@@ -8,6 +8,15 @@ import com.example.matchgamesample.R;
 import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 
+/**
+ * ExitDialog will show when player
+ * press back button in menu.
+ */
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ExitDialog extends BaseDialog implements View.OnClickListener {
 
     private ExitDialogListener mListener;

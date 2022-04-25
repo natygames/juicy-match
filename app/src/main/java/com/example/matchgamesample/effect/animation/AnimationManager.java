@@ -22,20 +22,25 @@ import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.effect.animation.particle.ParticleExplosion;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class AnimationManager {
     private final Activity mActivity;
     private final int mTileSize;
     private final RelativeLayout mEffectBoard;
-    //Score text
-    private static final int UPGRADE_TIME = 300;
+
     private final AccelerateInterpolator accelerateInterpolator = new AccelerateInterpolator();
     private final DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator();
     private final AnticipateInterpolator anticipateInterpolator = new AnticipateInterpolator();
     private final OvershootInterpolator overshootInterpolator = new OvershootInterpolator();
-    // Animation
+
     private final ParticleExplosion particleExplosion;
-    private final Animation scaleAnim, bigShakingAnim, horizontalShakingAnim, verticalShakingAnim, machineAnim;
+    private final Animation scaleAnim, bigShakingAnim, horizontalShakingAnim, verticalShakingAnim;
     private final Handler mHandler = new Handler();
+
+    private static final int UPGRADE_TIME = 300;
 
     public AnimationManager(GameEngine gameEngine) {
         mActivity = gameEngine.mActivity;
@@ -50,7 +55,6 @@ public class AnimationManager {
         bigShakingAnim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_big);
         horizontalShakingAnim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_horizontal);
         verticalShakingAnim = AnimationUtils.loadAnimation(mActivity, R.anim.shaking_vertical);
-        machineAnim = AnimationUtils.loadAnimation(mActivity, R.anim.machine_rotate);
     }
 
     //This create horizontal flash
@@ -1972,10 +1976,6 @@ public class AnimationManager {
     public void createVerticalShakingAnim() {
         mActivity.findViewById(R.id.board_frame).startAnimation(verticalShakingAnim);
         mActivity.findViewById(R.id.effect_board).startAnimation(verticalShakingAnim);
-    }
-
-    public void createMachineAnim(ImageView view) {
-        view.startAnimation(machineAnim);
     }
     //==================================================================================
 

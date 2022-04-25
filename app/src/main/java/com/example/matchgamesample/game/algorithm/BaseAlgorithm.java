@@ -8,6 +8,17 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * BaseAlgorithm contain all the operation of ours match 3 game,
+ * including find match, generate random tile, diagonal swap,
+ * generate special fruit, and fruit explode. For the detail
+ * algorithm, please look up update method in GameAlgorithm
+ */
+
 public class BaseAlgorithm {
     protected final GameEngine mGameEngine;
     protected final int mRow, mColumn;

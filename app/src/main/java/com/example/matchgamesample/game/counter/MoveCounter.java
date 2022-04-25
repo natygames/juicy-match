@@ -11,6 +11,10 @@ import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 import com.example.matchgamesample.level.Level;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MoveCounter extends GameObject {
 
     private final TextView mText;

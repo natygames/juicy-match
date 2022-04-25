@@ -6,6 +6,14 @@ import android.animation.AnimatorListenerAdapter;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.Sprite;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * Tile contain tile's attribute and helper method
+ */
+
 public class Tile extends Sprite {
     public int row = 0, col = 0;                // Tile position
     public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute

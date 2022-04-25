@@ -8,6 +8,16 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.InputController;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * InputController will handler player input,
+ * including press position, release position,
+ * and booster
+ */
+
 public class BasicInputController extends InputController {
     private final GameEngine mGameEngine;
 

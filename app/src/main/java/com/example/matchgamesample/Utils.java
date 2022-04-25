@@ -12,6 +12,10 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class Utils {
     private static final float DENSITY = Resources.getSystem().getDisplayMetrics().density;
     private static final Canvas CANVAS = new Canvas();

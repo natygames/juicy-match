@@ -4,8 +4,18 @@ import com.example.matchgamesample.R;
 
 import java.util.ArrayList;
 
-public class Level {
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
 
+/**
+ * Level contains level data we are going to
+ * use in game, it will be retrieved from a
+ * local XML file(assets/data), in which store
+ * all the level data
+ */
+
+public class Level {
     public int mLevel;
     public int mStar;
     public LevelType mLevelType;

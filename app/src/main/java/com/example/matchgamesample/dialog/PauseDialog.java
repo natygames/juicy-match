@@ -10,6 +10,16 @@ import com.example.matchgamesample.Utils;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.effect.sound.SoundManager;
 
+/**
+ * PauseDialog will show when player press
+ * pause button in game, containing volume
+ * and quit button
+ */
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class PauseDialog extends BaseDialog implements View.OnClickListener {
 
     private PauseDialogListener mListener;

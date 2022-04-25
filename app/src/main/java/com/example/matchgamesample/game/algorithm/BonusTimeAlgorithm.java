@@ -6,6 +6,17 @@ import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * BonusTimeAlgorithm handler the bonus time event,
+ * which is just a variation of GameAlgorithm. It
+ * will first clear all the special fruit, and turn
+ * remaining move into special fruit
+ */
+
 public class BonusTimeAlgorithm extends BaseAlgorithm {
     // Tile moving control
     private int mCurrentWaitingTime = 300;

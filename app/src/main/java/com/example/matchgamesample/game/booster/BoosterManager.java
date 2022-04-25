@@ -14,6 +14,16 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.game.tile.Tile;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * A helper class to handler booster player used.
+ * We first add the booster into the game, play
+ * booster animation, and finally update tile
+ */
+
 public class BoosterManager {
     private final GameEngine mGameEngine;
     private final SoundManager mSoundManager;

@@ -14,6 +14,10 @@ import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.engine.GameEvent;
 import com.example.matchgamesample.engine.GameObject;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ScoreBarCounter extends GameObject {
 
     private final GameEngine mGameEngine;

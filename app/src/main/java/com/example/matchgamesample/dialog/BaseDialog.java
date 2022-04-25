@@ -10,6 +10,12 @@ import android.view.animation.AnimationUtils;
 import com.example.matchgamesample.MainActivity;
 import com.example.matchgamesample.R;
 
+/**
+ * BaseDialog control dialog lifecycle, and contain
+ * method that can be override by child dialog, including
+ * show dialog, dismiss dialog, transition animation.
+ */
+
 public class BaseDialog implements View.OnTouchListener, Animation.AnimationListener {
 
     private boolean mIsShowing;

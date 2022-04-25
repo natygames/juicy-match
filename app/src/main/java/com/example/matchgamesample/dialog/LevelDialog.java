@@ -13,6 +13,16 @@ import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.level.Level;
 import com.example.matchgamesample.level.LevelType;
 
+/**
+ * LevelDialog will show when player press
+ * level button in map, and showing highest
+ * star, target, and description of level.
+ */
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LevelDialog extends BaseDialog implements View.OnClickListener {
 
     private final Level mLevel;

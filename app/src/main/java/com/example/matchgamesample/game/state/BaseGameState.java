@@ -3,6 +3,10 @@ package com.example.matchgamesample.game.state;
 import com.example.matchgamesample.engine.GameEngine;
 import com.example.matchgamesample.game.tile.Tile;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class BaseGameState {
 
     protected GameEngine mGameEngine;

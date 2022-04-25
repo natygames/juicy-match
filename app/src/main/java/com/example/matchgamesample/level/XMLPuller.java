@@ -9,6 +9,16 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * A helper class to pull level data
+ * from a local XML file (assets/data)
+ * to Level
+ */
+
 public class XMLPuller {
     private static final String FILE_NAME = "data.xml";
     private final Context mContext;

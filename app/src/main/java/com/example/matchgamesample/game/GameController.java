@@ -22,6 +22,14 @@ import com.example.matchgamesample.game.booster.BoosterManager;
 import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * GameController control game event and algorithm
+ */
+
 public class GameController extends GameObject {
     private final GameEngine mGameEngine;
     private final MainActivity mActivity;

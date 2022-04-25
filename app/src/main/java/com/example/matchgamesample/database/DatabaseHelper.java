@@ -8,6 +8,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * DatabaseHelper can access SQLite database where we
+ * store structural data such as level star, otherwise
+ * use SharePreference.
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     // Database Version
     private static final int DATABASE_VERSION = 1;

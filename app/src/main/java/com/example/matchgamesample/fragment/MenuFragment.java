@@ -18,6 +18,10 @@ import com.example.matchgamesample.dialog.ExitDialog;
 import com.example.matchgamesample.dialog.SettingDialog;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogListener {
 
     public MenuFragment() {

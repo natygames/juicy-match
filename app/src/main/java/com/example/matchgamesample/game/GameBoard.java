@@ -14,6 +14,14 @@ import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 import com.example.matchgamesample.level.Level;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * GameBoard will generate new game from Level data
+ */
+
 public class GameBoard {
     private final GameEngine mGameEngine;
     private final Activity mActivity;

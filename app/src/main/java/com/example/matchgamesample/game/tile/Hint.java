@@ -11,9 +11,14 @@ import com.example.matchgamesample.engine.GameObject;
 
 import java.util.ArrayList;
 
-/** Hint class check possible match on board
- * if founded, start hint animation
- * otherwise, refresh
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+/**
+ * Hint check possible match in game.
+ * If we find any, start hint animation
+ * otherwise, refresh the game
  **/
 
 public class Hint extends GameObject {
