@@ -13,21 +13,12 @@
 
 <4> Collect starfish: Players have to collect starfish by dropping the starfish to bottom
 
-<img src="https://user-images.githubusercontent.com/93536412/160225436-533279ea-2a05-4124-95a8-b01150731eba.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/160225482-adb41f53-8297-451b-8ee0-b85ff0b655bb.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/160225488-23e2e9d8-27c7-410a-9a7c-588ce7d43d4c.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/160225492-b533e594-ca5b-4ad1-a26f-a31e5172824a.jpg" width="200">
+<img src="https://user-images.githubusercontent.com/93536412/165109206-30a45683-717c-4489-ba2b-396f626b054c.jpg" width="200
+"> <img src="https://user-images.githubusercontent.com/93536412/165109528-cc0f418e-bb75-410d-b777-d9e14a1f1592.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/165109625-f7a8d5ec-8ca6-41b7-a379-c4b1ea875205.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/165109636-bedd9eee-0ead-45d6-b05a-c9554c3ec1e8.jpg" width="200">
 
 ## Demo
 
-https://user-images.githubusercontent.com/93536412/160224618-1bbc3d54-e911-4144-91ea-92d208c58688.mp4
-
-## Credit for images and music
-Images: Fruit images from https://opengameart.org/content/flat-designed-fruits
-
-Music: Happy and Joyful Children by Free Music | https://soundcloud.com/fm_freemusic
-Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/
-
-Sound Effects: https://mixkit.co/free-sound-effects/
+https://user-images.githubusercontent.com/93536412/165110073-3d9c0127-e571-443c-9191-a23d6ead4241.mp4
 
 ## Tools
 Engine: Game engine based on "Mastering Android Game Development" by Raul Pautals
@@ -35,3 +26,25 @@ Engine: Game engine based on "Mastering Android Game Development" by Raul Pautal
 Images: Edit images with Krita https://krita.org/zh-tw
 
 Music: Edit music and sound effects with Audacity https://www.audacityteam.org/
+
+## Credit for images and music
+### Images: 
+
+Fruit image from https://opengameart.org/content/flat-designed-fruits
+
+Heart image from https://opengameart.org/content/heart-7
+
+Bomb image by 千图网 from https://pngtree.com/freepng/cartoon-game-bomb-prop-material_4382522.html?sol=downref&id=bef
+
+Hammer image by 588ku from https://pngtree.com/freepng/cartoon-hammer-png-download_4402979.html?sol=downref&id=bef
+
+Treasure image by phichto from https://pngtree.com/freepng/cute-cartoon-treasure-chest-closed-isolated-vector_5594676.html?sol=downref&id=bef
+
+### Music: 
+Happy and Joyful Children by Free Music | https://soundcloud.com/fm_freemusic
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+
+### Sound Effects: 
+https://mixkit.co/free-sound-effects/
