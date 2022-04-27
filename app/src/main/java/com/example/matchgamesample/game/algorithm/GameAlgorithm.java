@@ -9,7 +9,6 @@ import com.example.matchgamesample.game.tile.Tile;
 import com.example.matchgamesample.game.tile.TileUtils;
 import com.example.matchgamesample.game.state.CollectGameState;
 import com.example.matchgamesample.game.state.BaseGameState;
-import com.example.matchgamesample.game.state.IceGameState;
 import com.example.matchgamesample.game.state.ScoreGameState;
 import com.example.matchgamesample.game.state.StarGameState;
 
@@ -48,10 +47,8 @@ public class GameAlgorithm extends BaseAlgorithm {
                 mGameState = new ScoreGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_COLLECT:
-                mGameState = new CollectGameState(mGameEngine);
-                break;
             case LEVEL_TYPE_ICE:
-                mGameState = new IceGameState(mGameEngine);
+                mGameState = new CollectGameState(mGameEngine);
                 break;
             case LEVEL_TYPE_STARFISH:
                 mGameState = new StarGameState(mGameEngine);
@@ -624,7 +621,8 @@ public class GameAlgorithm extends BaseAlgorithm {
                             && !tileArray[i][j].isAnimate) {
 
                         if (tileArray[i][j].kind == 0) {
-                            if (tileArray[i][j].ice > 0)
+                            // Check empty tile with ice
+                            if (tileArray[i][j].ice > 0 && tileArray[i][j].wait == 2)
                                 explodeIce(mIceArray[i][j], mIceArray2[i][j], tileArray[i][j]);
                             continue;
                         }
@@ -915,6 +913,7 @@ public class GameAlgorithm extends BaseAlgorithm {
 
     private void explodeIce(ImageView ice, ImageView ice2, Tile tile) {
         if (tile.ice == 1) {
+            mGameEngine.onGameEvent(GameEvent.BREAK_ICE);
             if (ice != null) {
                 mAnimationManager.explodeIce(ice, 10);
                 mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_EXPLODE);

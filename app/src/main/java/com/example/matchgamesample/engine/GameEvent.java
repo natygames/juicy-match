@@ -12,6 +12,7 @@ public enum GameEvent {
 
     PLAYER_SCORE,
     PLAYER_COLLECT,
+    BREAK_ICE,
     START_HINT,
     REFRESH,
     COMBO_4,

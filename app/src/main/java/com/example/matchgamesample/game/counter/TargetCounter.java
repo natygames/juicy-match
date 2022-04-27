@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class TargetCounter extends GameObject {
 
-    private GameEngine mGameEngine;
+    private final GameEngine mGameEngine;
     private final Level mLevel;
     private final ArrayList<TextView> mText = new ArrayList<>();
     private boolean mTargetsHaveChanged;
@@ -128,11 +128,24 @@ public class TargetCounter extends GameObject {
             case PLAYER_COLLECT:
                 mTargetsHaveChanged = true;
                 break;
+            case BREAK_ICE:
+                updateIce();
+                mTargetsHaveChanged = true;
+                break;
             case PLAYER_REACH_TARGET:
             case PLAYER_OUT_OF_MOVE:
                 mGameEngine.removeGameObject(this);
                 break;
 
+        }
+    }
+
+    private void updateIce() {
+        // The ice index is fixed at 0
+        int target = mLevel.mTarget.get(0);
+        if (target > 0) {
+            target--;
+            mGameEngine.mLevel.mTarget.set(0, target);
         }
     }
 }

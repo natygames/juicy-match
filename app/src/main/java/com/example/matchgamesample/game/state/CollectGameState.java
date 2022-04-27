@@ -18,7 +18,6 @@ public class CollectGameState extends BaseGameState {
     public CollectGameState(GameEngine gameEngine) {
         super(gameEngine);
         mTarget = gameEngine.mLevel.mCollect;
-        mPlayerWin = false;
     }
 
     @Override
