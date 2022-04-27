@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <levels>
     <level1>
-        <target_type>1</target_type>
+        <target_type>score</target_type>
         <move>10</move>
         <column>6</column>
         <row>6</row>
@@ -10,7 +10,7 @@
         <fruit>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnennnne</fruit>
     </level1>
     <level2>
-        <target_type>2</target_type>
+        <target_type>collect</target_type>
         <move>20</move>
         <column>8</column>
         <row>8</row>
@@ -24,7 +24,7 @@
         <fruit>eecnnceeeccnnccecccnncccnnnnnnnnnnnnnnnncccnnccceccnncceeecnncee</fruit>
     </level2>
     <level3>
-        <target_type>3</target_type>
+        <target_type>ice</target_type>
         <move>30</move>
         <column>7</column>
         <row>9</row>
@@ -37,7 +37,7 @@
         <ice>nniiinnnniiinnniiiiinniiiiinniiiiiniiiiiiiiiiiiiiiiiiiiiiiiiiii</ice>
     </level3>
     <level4>
-        <target_type>4</target_type>
+        <target_type>starfish</target_type>
         <move>30</move>
         <column>8</column>
         <row>9</row>

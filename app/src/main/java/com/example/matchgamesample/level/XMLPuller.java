@@ -80,7 +80,7 @@ public class XMLPuller {
                     // Assign mLevel data when found
                     switch (tagName) {
                         case ("target_type"):
-                            mLevel.setLevelType(Integer.parseInt(parser.nextText()));
+                            mLevel.setLevelType(parser.nextText());
                             break;
                         case ("move"):
                             mLevel.mMove = Integer.parseInt(parser.nextText());

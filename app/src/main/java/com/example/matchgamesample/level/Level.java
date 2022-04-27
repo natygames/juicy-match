@@ -30,18 +30,18 @@ public class Level {
     // Game board in char
     public String board, fruit, ice, advance;
 
-    public void setLevelType(int type) {
+    public void setLevelType(String type) {
         switch (type) {
-            case 1:
+            case "score":
                 mLevelType = LevelType.LEVEL_TYPE_SCORE;
                 break;
-            case 2:
+            case "collect":
                 mLevelType = LevelType.LEVEL_TYPE_COLLECT;
                 break;
-            case 3:
+            case "ice":
                 mLevelType = LevelType.LEVEL_TYPE_ICE;
                 break;
-            case 4:
+            case "starfish":
                 mLevelType = LevelType.LEVEL_TYPE_STARFISH;
                 break;
         }
@@ -82,14 +82,14 @@ public class Level {
     }
 
     /* Explanation:
-     * <mLevelType> is the mTarget type of level:
+     * <LevelType> is the mTarget type of level:
      *     1 for reach mTarget score
      *     2 for mCollect items
      *     3 for clear ice
      *     4 for starfish
-     * <mMove> is the maxim swaps
-     * <mFruitNum> is the number of fruit, default 4, maxim 5
-     * <mTarget> is the list stores each mTarget amount
-     * <mCollect> is the list stores items need to be mCollect
+     * <Move> is the maxim swaps
+     * <FruitNum> is the number of fruit, default 4, maxim 5
+     * <Target> is the list stores each mTarget amount
+     * <Collect> is the list stores items need to be mCollect
      */
 }

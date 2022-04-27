@@ -38,10 +38,11 @@ public class CollectGameState extends BaseGameState {
             for (int i = 0; i < mRow; i++) {
 
                 Tile tile = tileArray[i][j];
-                if (tile.match == 0 || tile.layer != 0) {
+                if (tile.match == 0 || tile.layer != 0 || tile.lock) {
                     continue;
                 }
 
+                // Update collect item
                 int size = mTarget.size();
                 for (int n = 0; n < size; n++) {
                     // Check is match target
@@ -65,5 +66,4 @@ public class CollectGameState extends BaseGameState {
             mGameEngine.onGameEvent(GameEvent.PLAYER_COLLECT);
         }
     }
-
 }
