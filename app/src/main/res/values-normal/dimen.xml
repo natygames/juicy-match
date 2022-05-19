@@ -5,22 +5,22 @@
     <dimen name="text_move_size">18sp</dimen>
     <dimen name="text_fruit_size">15sp</dimen>
     <dimen name="text_booster_amount_size">18sp</dimen>
-    <dimen name="text_skip_size">20sp</dimen>
+    <dimen name="text_skip_size">40sp</dimen>
 
     <!-- Text in loading -->
     <dimen name="text_loading_size">50sp</dimen>
 
     <!-- Text in map -->
     <dimen name="text_level_size">25sp</dimen>
-    <dimen name="text_field_size">22sp</dimen>
+    <dimen name="text_field_size">20sp</dimen>
 
     <!-- Text in win_dialog -->
     <dimen name="text_win_dialog_size">50sp</dimen>
 
     <!-- Text in dialog -->
-    <dimen name="text_dialog_size">35sp</dimen>
-    <dimen name="text_dialog_medium_size">30sp</dimen>
     <dimen name="text_dialog_small_size">20sp</dimen>
+    <dimen name="text_dialog_size">30sp</dimen>
+    <dimen name="text_dialog_large_size">35sp</dimen>
 
     <!-- Image width -->
     <dimen name="image_logo_width">350dp</dimen>
@@ -35,10 +35,17 @@
     <dimen name="image_field">120dp</dimen>
     <dimen name="image_progressbar_width">250dp</dimen>
 
+    <dimen name="image_shop_width">140dp</dimen>
+
     <!-- Dialog width -->
     <dimen name="dialog_width">300dp</dimen>
     <dimen name="dialog_map_width">350dp</dimen>
     <dimen name="dialog_height">200dp</dimen>
     <dimen name="dialog_setting_height">350dp</dimen>
     <dimen name="dialog_level_height">400dp</dimen>
+
+    <!-- Margin -->
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="margin">10dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
 </resources>

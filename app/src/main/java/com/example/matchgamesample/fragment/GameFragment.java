@@ -38,8 +38,10 @@ import com.example.matchgamesample.level.LevelType;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class GameFragment extends BaseFragment implements PauseDialog.PauseDialogListener {
+public class GameFragment extends BaseFragment {
+
     private static final String LEVEL = "LEVEL";
+
     private int mLevel;
     private GameEngine mGameEngine;
     private AnimationDrawable mScoreBarAnimation;
@@ -169,9 +171,15 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
         super.onPause();
         if (mGameEngine.isRunning()) {
             pauseGameAndShowPauseDialog();
+        }
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mGameEngine.isRunning() && !mGameEngine.isPaused()) {
             if (mScoreBarAnimation != null)
-                mScoreBarAnimation.stop();
+                mScoreBarAnimation.start();
         }
     }
 
@@ -195,22 +203,26 @@ public class GameFragment extends BaseFragment implements PauseDialog.PauseDialo
             return;
         }
         mGameEngine.pauseGame();
-        PauseDialog dialog = new PauseDialog(getMainActivity());
-        dialog.setListener(this);
-        showDialog(dialog);
-    }
-
-    @Override
-    public void resumeGame() {
-        mGameEngine.resumeGame();
         if (mScoreBarAnimation != null)
-            mScoreBarAnimation.start();
-    }
+            mScoreBarAnimation.stop();
 
-    @Override
-    public void quitGame() {
-        mGameEngine.stopGame();
-        getMainActivity().navigateBack();
+        PauseDialog dialog = new PauseDialog(getMainActivity()) {
+            @Override
+            public void resumeGame() {
+                mGameEngine.resumeGame();
+                if (mScoreBarAnimation != null)
+                    mScoreBarAnimation.start();
+            }
+
+            @Override
+            public void quitGame() {
+                mGameEngine.stopGame();
+
+                // We navigate back to map
+                getMainActivity().navigateBack();
+            }
+        };
+        showDialog(dialog);
     }
 
 }

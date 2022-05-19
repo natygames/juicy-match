@@ -19,8 +19,6 @@ import com.example.matchgamesample.effect.sound.SoundEvent;
 
 public class ExitDialog extends BaseDialog implements View.OnClickListener {
 
-    private ExitDialogListener mListener;
-
     public ExitDialog(MainActivity activity) {
         super(activity);
         setContentView(R.layout.dialog_exit);
@@ -37,25 +35,21 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
         Utils.createPopUpEffect(btnExit);
     }
 
-    public void setListener(ExitDialogListener listener) {
-        mListener = listener;
-    }
-
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_exit) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
+            exit();
             super.dismiss();
-            mListener.exit();
         } else if (view.getId() == R.id.btn_cancel) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
-            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             super.dismiss();
         }
     }
 
-    public interface ExitDialogListener {
-        void exit();
+    // Override this method to close the app
+    public void exit() {
+
     }
 
 }

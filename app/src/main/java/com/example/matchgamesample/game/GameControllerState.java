@@ -13,7 +13,7 @@ public enum GameControllerState {
     BONUS_TIME,
     BONUS_TIME_WAITING,
 
-    GAME_OVER,
-    GAME_COMPLETE
+    NAVIGATE_TO_MAP,
+    NAVIGATE_TO_WIN_DIALOG
 
 }

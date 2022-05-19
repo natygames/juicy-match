@@ -8,20 +8,20 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_map.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/activity_win_dialog.xml" value="0.18432971014492755" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_container.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_exit.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_level.xml" value="0.536" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_pause.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_exit.xml" value="0.1313376483279396" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_level.xml" value="0.12335526315789473" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_pause.xml" value="0.12335526315789473" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_quit.xml" value="0.2056159420289855" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_setting.xml" value="0.264" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_game.xml" value="0.264" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_loading.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/dialog_setting.xml" value="0.144" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_game.xml" value="0.12335526315789473" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_loading.xml" value="0.12335526315789473" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_map.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_menu.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/fragment_win_dialog.xml" value="0.18432971014492755" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_game_board.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_game_board.xml" value="0.12335526315789473" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_game_item.xml" value="0.18478260869565216" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_map_item.xml" value="0.4" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_map_level.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_map_item.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_map_level.xml" value="0.20380434782608695" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/layout/view_score_board.xml" value="0.2056159420289855" />
       </map>
     </option>

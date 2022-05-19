@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    tools:ignore="ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="@dimen/dialog_map_width"
@@ -22,9 +24,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="Select Level"
+            android:text="@string/txt_select_level"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_dialog_medium_size"
+            android:textSize="@dimen/text_dialog_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/guideline_up"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +38,7 @@
             android:id="@+id/btn_level1"
             android:layout_width="@dimen/image_round_btn_width"
             android:layout_height="@dimen/image_round_btn_width"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="@dimen/margin_large"
             android:background="@drawable/btn_level"
             android:fontFamily="@font/baloo"
             android:gravity="center"
@@ -55,7 +57,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/star_set_background"
-            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/btn_level1"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/btn_level1"
@@ -83,7 +84,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/star_set_background"
-            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/btn_level2"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/btn_level2"
@@ -111,7 +111,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/star_set_background"
-            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/btn_level3"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/btn_level3"
@@ -122,7 +121,7 @@
             android:id="@+id/btn_level4"
             android:layout_width="@dimen/image_round_btn_width"
             android:layout_height="@dimen/image_round_btn_width"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="@dimen/margin_large"
             android:background="@drawable/btn_level"
             android:fontFamily="@font/baloo"
             android:gravity="center"
@@ -140,7 +139,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/star_set_background"
-            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@id/btn_level4"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@id/btn_level4"
@@ -163,18 +161,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level1"
             app:layout_constraintTop_toBottomOf="@id/btn_level1" />
 
-        <ImageView
-            android:id="@+id/image_level5_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level5"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level5"
-            app:layout_constraintStart_toStartOf="@id/btn_level5"
-            app:layout_constraintTop_toTopOf="@id/btn_level5" />
-
         <TextView
             android:id="@+id/btn_level6"
             android:layout_width="@dimen/image_round_btn_width"
@@ -190,18 +176,6 @@
             app:layout_constraintEnd_toEndOf="@id/btn_level2"
             app:layout_constraintStart_toStartOf="@id/btn_level2"
             app:layout_constraintTop_toTopOf="@id/btn_level5" />
-
-        <ImageView
-            android:id="@+id/image_level6_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level6"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level6"
-            app:layout_constraintStart_toStartOf="@id/btn_level6"
-            app:layout_constraintTop_toTopOf="@id/btn_level6" />
 
         <TextView
             android:id="@+id/btn_level7"
@@ -219,18 +193,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level3"
             app:layout_constraintTop_toTopOf="@id/btn_level5" />
 
-        <ImageView
-            android:id="@+id/image_level7_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level7"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level7"
-            app:layout_constraintStart_toStartOf="@id/btn_level7"
-            app:layout_constraintTop_toTopOf="@id/btn_level7" />
-
         <TextView
             android:id="@+id/btn_level8"
             android:layout_width="@dimen/image_round_btn_width"
@@ -246,18 +208,6 @@
             app:layout_constraintEnd_toEndOf="@id/btn_level4"
             app:layout_constraintStart_toStartOf="@id/btn_level4"
             app:layout_constraintTop_toTopOf="@id/btn_level5" />
-
-        <ImageView
-            android:id="@+id/image_level8_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level8"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level8"
-            app:layout_constraintStart_toStartOf="@id/btn_level8"
-            app:layout_constraintTop_toTopOf="@id/btn_level8" />
 
         <TextView
             android:id="@+id/btn_level9"
@@ -275,18 +225,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level1"
             app:layout_constraintTop_toBottomOf="@id/btn_level5" />
 
-        <ImageView
-            android:id="@+id/image_level9_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level9"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level9"
-            app:layout_constraintStart_toStartOf="@id/btn_level9"
-            app:layout_constraintTop_toTopOf="@id/btn_level9" />
-
         <TextView
             android:id="@+id/btn_level10"
             android:layout_width="@dimen/image_round_btn_width"
@@ -302,18 +240,6 @@
             app:layout_constraintEnd_toEndOf="@id/btn_level2"
             app:layout_constraintStart_toStartOf="@id/btn_level2"
             app:layout_constraintTop_toTopOf="@id/btn_level9" />
-
-        <ImageView
-            android:id="@+id/image_level10_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level10"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level10"
-            app:layout_constraintStart_toStartOf="@id/btn_level10"
-            app:layout_constraintTop_toTopOf="@id/btn_level10" />
 
         <TextView
             android:id="@+id/btn_level11"
@@ -331,18 +257,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level3"
             app:layout_constraintTop_toTopOf="@id/btn_level9" />
 
-        <ImageView
-            android:id="@+id/image_level11_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level11"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level11"
-            app:layout_constraintStart_toStartOf="@id/btn_level11"
-            app:layout_constraintTop_toTopOf="@id/btn_level11" />
-
         <TextView
             android:id="@+id/btn_level12"
             android:layout_width="@dimen/image_round_btn_width"
@@ -358,18 +272,6 @@
             app:layout_constraintEnd_toEndOf="@id/btn_level4"
             app:layout_constraintStart_toStartOf="@id/btn_level4"
             app:layout_constraintTop_toTopOf="@id/btn_level9" />
-
-        <ImageView
-            android:id="@+id/image_level12_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level12"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level12"
-            app:layout_constraintStart_toStartOf="@id/btn_level12"
-            app:layout_constraintTop_toTopOf="@id/btn_level12" />
 
         <TextView
             android:id="@+id/btn_level13"
@@ -387,18 +289,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level1"
             app:layout_constraintTop_toBottomOf="@id/btn_level9" />
 
-        <ImageView
-            android:id="@+id/image_level13_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level13"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level13"
-            app:layout_constraintStart_toStartOf="@id/btn_level13"
-            app:layout_constraintTop_toTopOf="@id/btn_level13" />
-
         <TextView
             android:id="@+id/btn_level14"
             android:layout_width="@dimen/image_round_btn_width"
@@ -414,18 +304,6 @@
             app:layout_constraintEnd_toEndOf="@id/btn_level2"
             app:layout_constraintStart_toStartOf="@id/btn_level2"
             app:layout_constraintTop_toTopOf="@id/btn_level13" />
-
-        <ImageView
-            android:id="@+id/image_level14_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level14"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level14"
-            app:layout_constraintStart_toStartOf="@id/btn_level14"
-            app:layout_constraintTop_toTopOf="@id/btn_level14" />
 
         <TextView
             android:id="@+id/btn_level15"
@@ -443,18 +321,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level3"
             app:layout_constraintTop_toTopOf="@id/btn_level13" />
 
-        <ImageView
-            android:id="@+id/image_level15_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level15"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level15"
-            app:layout_constraintStart_toStartOf="@id/btn_level15"
-            app:layout_constraintTop_toTopOf="@id/btn_level15" />
-
         <TextView
             android:id="@+id/btn_level16"
             android:layout_width="@dimen/image_round_btn_width"
@@ -470,18 +336,6 @@
             app:layout_constraintEnd_toEndOf="@id/btn_level4"
             app:layout_constraintStart_toStartOf="@id/btn_level4"
             app:layout_constraintTop_toTopOf="@id/btn_level13" />
-
-        <ImageView
-            android:id="@+id/image_level16_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level16"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level16"
-            app:layout_constraintStart_toStartOf="@id/btn_level16"
-            app:layout_constraintTop_toTopOf="@id/btn_level16" />
 
         <TextView
             android:id="@+id/btn_level17"
@@ -499,18 +353,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level1"
             app:layout_constraintTop_toBottomOf="@id/btn_level13" />
 
-        <ImageView
-            android:id="@+id/image_level17_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level17"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level17"
-            app:layout_constraintStart_toStartOf="@id/btn_level17"
-            app:layout_constraintTop_toTopOf="@id/btn_level17" />
-
         <TextView
             android:id="@+id/btn_level18"
             android:layout_width="@dimen/image_round_btn_width"
@@ -526,18 +368,6 @@
             app:layout_constraintEnd_toEndOf="@id/btn_level2"
             app:layout_constraintStart_toStartOf="@id/btn_level2"
             app:layout_constraintTop_toTopOf="@id/btn_level17" />
-
-        <ImageView
-            android:id="@+id/image_level18_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level18"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level18"
-            app:layout_constraintStart_toStartOf="@id/btn_level18"
-            app:layout_constraintTop_toTopOf="@id/btn_level18" />
 
         <TextView
             android:id="@+id/btn_level19"
@@ -555,18 +385,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level3"
             app:layout_constraintTop_toTopOf="@id/btn_level17" />
 
-        <ImageView
-            android:id="@+id/image_level19_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level19"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level19"
-            app:layout_constraintStart_toStartOf="@id/btn_level19"
-            app:layout_constraintTop_toTopOf="@id/btn_level19" />
-
         <TextView
             android:id="@+id/btn_level20"
             android:layout_width="@dimen/image_round_btn_width"
@@ -583,18 +401,6 @@
             app:layout_constraintStart_toStartOf="@id/btn_level4"
             app:layout_constraintTop_toTopOf="@id/btn_level17" />
 
-        <ImageView
-            android:id="@+id/image_level20_star"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/star_set_background"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toTopOf="@id/btn_level20"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@id/btn_level20"
-            app:layout_constraintStart_toStartOf="@id/btn_level20"
-            app:layout_constraintTop_toTopOf="@id/btn_level20" />
-
         <ImageButton
             android:id="@+id/btn_level_previous"
             android:layout_width="0dp"
@@ -602,25 +408,34 @@
             android:background="@drawable/btn_level_next"
             android:rotation="180"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@id/txt_page"
+            app:layout_constraintEnd_toStartOf="@id/image_page"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline_down" />
+
+        <ImageView
+            android:id="@+id/image_page"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/image_btn_height"
+            android:background="@drawable/board_page"
+            app:layout_constraintDimensionRatio="3:2"
+            app:layout_constraintEnd_toStartOf="@id/btn_level_next"
+            app:layout_constraintStart_toEndOf="@id/btn_level_previous"
             app:layout_constraintTop_toTopOf="@id/guideline_down" />
 
         <TextView
             android:id="@+id/txt_page"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/image_btn_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"
             android:gravity="center"
             android:text="1"
             android:textColor="@color/white"
-            android:textSize="@dimen/text_dialog_medium_size"
+            android:textSize="@dimen/text_dialog_size"
             android:textStyle="bold"
-            android:background="@drawable/btn_txt"
-            app:layout_constraintDimensionRatio="3:2"
-            app:layout_constraintEnd_toStartOf="@id/btn_level_next"
-            app:layout_constraintStart_toEndOf="@id/btn_level_previous"
-            app:layout_constraintTop_toTopOf="@id/guideline_down"/>
+            app:layout_constraintBottom_toBottomOf="@+id/image_page"
+            app:layout_constraintEnd_toEndOf="@id/image_page"
+            app:layout_constraintStart_toStartOf="@id/image_page"
+            app:layout_constraintTop_toTopOf="@id/image_page" />
 
         <ImageButton
             android:id="@+id/btn_level_next"
@@ -629,7 +444,7 @@
             android:background="@drawable/btn_level_next"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/txt_page"
+            app:layout_constraintStart_toEndOf="@id/image_page"
             app:layout_constraintTop_toTopOf="@id/guideline_down" />
 
         <androidx.constraintlayout.widget.Guideline

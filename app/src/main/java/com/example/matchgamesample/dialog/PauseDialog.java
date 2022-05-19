@@ -22,7 +22,6 @@ import com.example.matchgamesample.effect.sound.SoundManager;
 
 public class PauseDialog extends BaseDialog implements View.OnClickListener {
 
-    private PauseDialogListener mListener;
     private int mSelectedId;
 
     public PauseDialog(MainActivity activity) {
@@ -56,7 +55,7 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
 
         // Update music state
         boolean music = soundManager.getMusicStatus();
-        ImageView btnMusic = (ImageView) findViewById(R.id.btn_music);
+        ImageButton btnMusic = (ImageButton) findViewById(R.id.btn_music);
         if (music) {
             btnMusic.setBackgroundResource(R.drawable.btn_music_on);
         } else {
@@ -65,17 +64,13 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
 
         // Update sound state
         boolean sound = soundManager.getSoundStatus();
-        ImageView btnSounds = (ImageView) findViewById(R.id.btn_sound);
+        ImageButton btnSounds = (ImageButton) findViewById(R.id.btn_sound);
         if (sound) {
             btnSounds.setBackgroundResource(R.drawable.btn_sound_on);
         } else {
             btnSounds.setBackgroundResource(R.drawable.btn_sound_off);
         }
 
-    }
-
-    public void setListener(PauseDialogListener listener) {
-        mListener = listener;
     }
 
     @Override
@@ -88,12 +83,10 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
             updateSoundAndMusicButtons();
         } else if (view.getId() == R.id.btn_quit) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
-            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             mSelectedId = view.getId();
             super.dismiss();
         } else if (view.getId() == R.id.btn_resume) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
-            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             mSelectedId = view.getId();
             super.dismiss();
         }
@@ -102,22 +95,20 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
     @Override
     protected void onDismissed() {
         if (mSelectedId == R.id.btn_quit) {
-            mListener.quitGame();
+            quitGame();
         } else if (mSelectedId == R.id.btn_resume) {
-            mListener.resumeGame();
+            resumeGame();
         }
     }
 
-    @Override
-    public void dismiss() {
-        super.dismiss();
-        mSelectedId = R.id.btn_resume;
+    // Override this method to quit the game
+    public void quitGame() {
+
     }
 
-    public interface PauseDialogListener {
+    // Override this method to resume the game
+    public void resumeGame() {
 
-        void quitGame();
-
-        void resumeGame();
     }
+
 }

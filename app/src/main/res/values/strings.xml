@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">MatchGameSample</string>
+    <string name="txt_exit">Exit Game?</string>
+    <string name="txt_dialog_level">Level %1$d</string>
+    <string name="txt_setting">Setting</string>
+    <string name="txt_skip">Tap to skip</string>
+    <string name="txt_loading">Loading . . .</string>
+    <string name="txt_win_level">Level %1$d</string>
+    <string name="txt_game_level">LV. %1$d</string>
+    <string name="txt_select_level">Select Level</string>
+
+    <!-- Text of level type -->
+    <string name="txt_reach_target_score">Reach target score</string>
+    <string name="txt_collect_items">Collect items</string>
+    <string name="txt_break_all_the_ice">Break all the ice</string>
 </resources>

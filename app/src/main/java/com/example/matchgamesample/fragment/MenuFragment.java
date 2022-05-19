@@ -22,7 +22,7 @@ import com.example.matchgamesample.effect.sound.SoundEvent;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogListener {
+public class MenuFragment extends BaseFragment {
 
     public MenuFragment() {
         // Required empty public constructor
@@ -71,15 +71,14 @@ public class MenuFragment extends BaseFragment implements ExitDialog.ExitDialogL
     }
 
     @Override
-    public void exit() {
-        getMainActivity().finish();
-    }
-
-    @Override
     public boolean onBackPressed() {
         if (!super.onBackPressed()) {
-            ExitDialog quitDialog = new ExitDialog(getMainActivity());
-            quitDialog.setListener(this);
+            ExitDialog quitDialog = new ExitDialog(getMainActivity()) {
+                @Override
+                public void exit() {
+                    getMainActivity().finish();
+                }
+            };
             showDialog(quitDialog);
             return true;
         }

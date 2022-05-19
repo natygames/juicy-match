@@ -2,22 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dialog_width"
     android:layout_height="@dimen/dialog_setting_height"
     android:layout_gravity="center"
     android:background="@drawable/dialog_setting"
-    android:orientation="vertical">
+    tools:ignore="ContentDescription">
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/margin_small"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="Setting"
+        android:text="@string/txt_setting"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_dialog_size"
+        android:textSize="@dimen/text_dialog_large_size"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,17 +28,18 @@
         android:id="@+id/btn_cancel"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="5dp"
+        android:layout_marginEnd="@dimen/margin_small"
         android:background="@drawable/btn_cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
 
     <ImageButton
         android:id="@+id/btn_music"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/margin"
         android:background="@drawable/btn_music_on"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/guideline"
@@ -48,7 +50,7 @@
         android:id="@+id/btn_sound"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/margin"
         android:background="@drawable/btn_sound_on"
         app:layout_constraintBottom_toBottomOf="@+id/btn_music"
         app:layout_constraintStart_toEndOf="@+id/guideline"

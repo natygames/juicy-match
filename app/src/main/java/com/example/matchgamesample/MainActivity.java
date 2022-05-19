@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.matchgamesample.database.DatabaseHelper;
 import com.example.matchgamesample.dialog.BaseDialog;
 import com.example.matchgamesample.effect.sound.SoundEvent;
 import com.example.matchgamesample.effect.sound.SoundManager;
@@ -20,7 +21,7 @@ import com.example.matchgamesample.level.LevelManager;
  * Created by Oscar Liang on 2022/02/23
  */
 
-/**
+/*
  *    Copyright 2022 Oscar Liang
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,13 +38,13 @@ import com.example.matchgamesample.level.LevelManager;
  */
 
 public class MainActivity extends AppCompatActivity {
-    private static final String TAG_FRAGMENT = "content";
 
-    private BaseDialog mCurrentDialog;
-    private boolean mShowingDialog;
+    private static final String TAG_FRAGMENT = "content";
 
     private LevelManager mLevelManager;
     private SoundManager mSoundManager;
+    private DatabaseHelper mDatabaseHelper;
+    private BaseDialog mCurrentDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,16 +54,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            //Add LoadingFragment to screen
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
-                    .add(R.id.container, new LoadingFragment(), TAG_FRAGMENT)
-                    .commit();
+            // Add LoadingFragment to screen
+            navigateToFragment(new LoadingFragment());
         }
 
         mLevelManager = new LevelManager(this);
         mSoundManager = new SoundManager(this);
+        mDatabaseHelper = new DatabaseHelper(this);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
     }
@@ -73,6 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
     public SoundManager getSoundManager() {
         return mSoundManager;
+    }
+
+    public DatabaseHelper getDatabaseHelper() {
+        return mDatabaseHelper;
     }
 
     public void startGame(int level) {
@@ -95,10 +97,6 @@ public class MainActivity extends AppCompatActivity {
     public void navigateBack() {
         // Do a push on the navigation history
         getSupportFragmentManager().popBackStack();
-    }
-
-    public void setShowingDialog(boolean b) {
-        mShowingDialog = b;
     }
 
     public void showDialog(BaseDialog newDialog, boolean dismissOtherDialog) {

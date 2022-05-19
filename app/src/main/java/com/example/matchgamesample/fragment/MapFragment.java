@@ -24,11 +24,13 @@ import java.util.ArrayList;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class MapFragment extends BaseFragment implements LevelDialog.LevelDialogListener {
-    private int mLevel;
+public class MapFragment extends BaseFragment {
+
     private DatabaseHelper mDatabaseHelper;
-    private static final int TOTAL_BUTTON = 20;
+
+    private ArrayList<Integer> mLevelStar;
     private static final int TOTAL_LEVEL = 4;
+    private static final int TOTAL_BUTTON = 20;
 
     public MapFragment() {
         // Required empty public constructor
@@ -46,7 +48,10 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         super.onViewCreated(view, savedInstanceState);
 
         // Load star database
-        mDatabaseHelper = new DatabaseHelper(getMainActivity());
+        mDatabaseHelper = getMainActivity().getDatabaseHelper();
+
+        // Init level
+        mLevelStar = mDatabaseHelper.getAllLevelStar();
 
         // Init button and star
         init();
@@ -60,6 +65,8 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
     private void init() {
         // Init button listener and star
         for (int i = 1; i <= TOTAL_BUTTON; i++) {
+            // Get current level
+            int level = i;
 
             // Get level button name
             String levelName = "btn_level" + i;
@@ -69,10 +76,9 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
             TextView textView = (TextView) getView().findViewById(levelId);
 
             // Init button listener
-            if (i <= TOTAL_LEVEL) {
+            if (level <= TOTAL_LEVEL) {
                 Utils.createButtonEffect(textView);
 
-                int level = i;
                 textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -99,7 +105,6 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         Utils.createButtonEffect(imageButton);
         Utils.createButtonEffect(getView().findViewById(R.id.btn_level_next));
         Utils.createButtonEffect(getView().findViewById(R.id.btn_level_previous));
-        Utils.createButtonEffect(getView().findViewById(R.id.btn_shop));
     }
 
     private void loadStarData() {
@@ -114,36 +119,42 @@ public class MapFragment extends BaseFragment implements LevelDialog.LevelDialog
         star.add(level3Star);
         star.add(level4Star);
 
-        ArrayList<Integer> data = mDatabaseHelper.getAllLevelStar();
-        int size = data.size();
-        for (int i = 0; i < size; i++) {
-            star.get(i).setVisibility(View.VISIBLE);
-            Utils.createPopUpEffect(star.get(i), i);
-            switch (data.get(i)) {
-                case 1:
-                    star.get(i).setBackgroundResource(R.drawable.star_set_1);
-                    break;
-                case 2:
-                    star.get(i).setBackgroundResource(R.drawable.star_set_2);
-                    break;
-                case 3:
-                    star.get(i).setBackgroundResource(R.drawable.star_set_3);
-                    break;
+        int size = mLevelStar.size();
+        for (int i = 0; i < TOTAL_LEVEL; i++) {
+
+            if (i < size) {
+                star.get(i).setVisibility(View.VISIBLE);
+
+                switch (mLevelStar.get(i)) {
+                    case 1:
+                        star.get(i).setBackgroundResource(R.drawable.star_set_1);
+                        break;
+                    case 2:
+                        star.get(i).setBackgroundResource(R.drawable.star_set_2);
+                        break;
+                    case 3:
+                        star.get(i).setBackgroundResource(R.drawable.star_set_3);
+                        break;
+                }
+
+                // Init pop up
+                Utils.createPopUpEffect(star.get(i), i);
+            } else {
+                star.get(i).setVisibility(View.INVISIBLE);
             }
+
         }
 
     }
 
     private void showLevelDialog(int level) {
-        mLevel = level;
-        LevelDialog dialog = new LevelDialog(getMainActivity(), level);
-        dialog.setListener(this);
+        LevelDialog dialog = new LevelDialog(getMainActivity(), level) {
+            @Override
+            public void startGame() {
+                getMainActivity().startGame(level);
+            }
+        };
         showDialog(dialog);
-    }
-
-    @Override
-    public void startLevel() {
-        getMainActivity().startGame(mLevel);
     }
 
     @Override

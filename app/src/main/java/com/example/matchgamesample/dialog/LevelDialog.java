@@ -26,10 +26,9 @@ import com.example.matchgamesample.level.LevelType;
 public class LevelDialog extends BaseDialog implements View.OnClickListener {
 
     private final Level mLevel;
-    private LevelDialogListener mListener;
     private int mSelectedId;
 
-    private DatabaseHelper mDatabaseHelper;
+    private final DatabaseHelper mDatabaseHelper;
 
     public LevelDialog(MainActivity activity, int level) {
         super(activity);
@@ -61,7 +60,7 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
 
         // Init level text
         TextView txtLevel = (TextView) findViewById(R.id.txt_dialog_level);
-        txtLevel.setText("Level " + String.valueOf(mLevel.mLevel));
+        txtLevel.setText(mParent.getResources().getString(R.string.txt_dialog_level, mLevel.mLevel));
 
         // Init star
         ImageView imgStar = (ImageView) findViewById(R.id.image_dialog_star);
@@ -77,7 +76,6 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
                 case 3:
                     imgStar.setImageResource(R.drawable.star_set_3);
                     break;
-                default:
 
             }
         }
@@ -86,14 +84,14 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
         TextView txtTarget = (TextView) findViewById(R.id.txt_dialog_target);
         switch (mLevel.mLevelType) {
             case LEVEL_TYPE_SCORE:
-                txtTarget.setText("Reach target score");
+                txtTarget.setText(mParent.getResources().getString(R.string.txt_reach_target_score));
                 break;
             case LEVEL_TYPE_COLLECT:
             case LEVEL_TYPE_STARFISH:
-                txtTarget.setText("Collect items");
+                txtTarget.setText(mParent.getResources().getString(R.string.txt_collect_items));
                 break;
             case LEVEL_TYPE_ICE:
-                txtTarget.setText("Break all the ice");
+                txtTarget.setText(mParent.getResources().getString(R.string.txt_break_all_the_ice));
                 break;
         }
 
@@ -146,10 +144,6 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
 
     }
 
-    public void setListener(LevelDialog.LevelDialogListener listener) {
-        mListener = listener;
-    }
-
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_play) {
@@ -158,7 +152,6 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
             super.dismiss();
         } else if (view.getId() == R.id.btn_cancel) {
             mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.BUTTON_CLICK);
-            mParent.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
             super.dismiss();
         }
     }
@@ -166,11 +159,13 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
     @Override
     protected void onDismissed() {
         if (mSelectedId == R.id.btn_play) {
-            mListener.startLevel();
+            startGame();
         }
     }
 
-    public interface LevelDialogListener {
-        void startLevel();
+    // Override this method to start the game
+    public void startGame() {
+
     }
+
 }

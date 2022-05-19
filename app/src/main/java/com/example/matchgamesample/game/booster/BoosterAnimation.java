@@ -62,11 +62,13 @@ public class BoosterAnimation {
         mEffectBoard.addView(hammer);
 
         // Play animation
+        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_APPEAR);
         hammer.animate().setDuration(SHOW_ITEM_TIME).scaleX(3).scaleY(3).alpha(1)
                 .setInterpolator(mOvershootInterpolator)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                         hammer.animate().setDuration(MOVE_ITEM_TIME).x(x + mTileSize * 0.3f).y(y - mTileSize * 2)
                                 .scaleX(1).scaleY(1).setInterpolator(mAnticipateInterpolator)
                                 .setListener(new AnimatorListenerAdapter() {
@@ -117,11 +119,13 @@ public class BoosterAnimation {
         mEffectBoard.addView(gloves);
 
         // Play animation
+        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_APPEAR);
         gloves.animate().setDuration(SHOW_ITEM_TIME).scaleX(3).scaleY(3).alpha(1)
                 .setInterpolator(mOvershootInterpolator)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                         gloves.animate().setDuration(MOVE_ITEM_TIME).x(xStart - mTileSize * 0.25f).y(yStart - mTileSize * 0.5f)
                                 .scaleX(1).scaleY(1).setInterpolator(mAnticipateInterpolator)
                                 .setListener(new AnimatorListenerAdapter() {
@@ -169,11 +173,13 @@ public class BoosterAnimation {
         mEffectBoard.addView(bomb);
 
         // Play animation
+        mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_APPEAR);
         bomb.animate().setDuration(SHOW_ITEM_TIME).scaleX(3).scaleY(3).alpha(1)
                 .setInterpolator(mOvershootInterpolator)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
+                        mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                         bomb.animate().setDuration(MOVE_ITEM_TIME).x(x - mTileSize * 0.5f).y(y - mTileSize * 3)
                                 .scaleX(1).scaleY(1).setInterpolator(mAnticipateInterpolator)
                                 .setListener(new AnimatorListenerAdapter() {

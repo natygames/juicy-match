@@ -17,6 +17,8 @@ import com.example.matchgamesample.R;
  */
 
 public class LoadingFragment extends BaseFragment {
+
+    private static final int WAIT_TIME = 800;
     private final Handler mHandler = new Handler(Looper.getMainLooper());
 
     public LoadingFragment() {
@@ -34,13 +36,14 @@ public class LoadingFragment extends BaseFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Add MapFragment to screen with delay
+        // We wait some time for the app open
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                // Add MapFragment to screen
                 getMainActivity().navigateToFragment(new MenuFragment());
             }
-        }, 500);
+        }, WAIT_TIME);
 
     }
 }

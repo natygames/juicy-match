@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    tools:ignore="ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
@@ -19,7 +21,6 @@
             android:id="@+id/field"
             android:layout_width="@dimen/image_field"
             android:layout_height="0dp"
-            android:layout_marginEnd="5dp"
             android:background="@drawable/field"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="2:1"
@@ -27,14 +28,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/heart"
+            android:id="@+id/txt_lives"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin"
             android:background="@drawable/heart"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="5"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_field_size"
             android:textStyle="bold"
@@ -43,39 +44,21 @@
             app:layout_constraintStart_toStartOf="@+id/field"
             app:layout_constraintTop_toTopOf="@+id/field" />
 
-        <TextView
-            android:id="@+id/txt_lives"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:text="Full"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_field_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/field"
-            app:layout_constraintDimensionRatio="2:1"
-            app:layout_constraintEnd_toEndOf="@+id/field"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toEndOf="@id/heart"
-            app:layout_constraintTop_toTopOf="@id/field" />
-
         <ImageView
             android:id="@+id/field2"
             android:layout_width="@dimen/image_field"
             android:layout_height="0dp"
-            android:layout_marginStart="5dp"
             android:background="@drawable/field"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/coin"
+        <ImageButton
+            android:id="@+id/btn_coin"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin"
             android:background="@drawable/coin"
             app:layout_constraintBottom_toBottomOf="@+id/field2"
             app:layout_constraintDimensionRatio="1.1:1"
@@ -83,25 +66,25 @@
             app:layout_constraintTop_toTopOf="@+id/field2" />
 
         <TextView
-            android:id="@+id/txt_coins"
+            android:id="@+id/txt_coin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="0"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_field_size"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/field2"
             app:layout_constraintDimensionRatio="2:1"
             app:layout_constraintEnd_toEndOf="@+id/field2"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintStart_toEndOf="@id/coin"
+            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintStart_toEndOf="@id/btn_coin"
             app:layout_constraintTop_toTopOf="@id/field2" />
 
         <ImageButton
             android:id="@+id/btn_shop"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/image_shop_width"
             android:layout_height="0dp"
             android:background="@drawable/btn_shop"
             app:layout_constraintDimensionRatio="4:3"

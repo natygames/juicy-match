@@ -2,16 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dialog_width"
     android:layout_height="@dimen/dialog_height"
     android:layout_gravity="center"
-    android:background="@drawable/dialog_exit">
+    android:background="@drawable/dialog"
+    tools:ignore="ContentDescription">
 
     <ImageButton
         android:id="@+id/btn_resume"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/margin_small"
         android:background="@drawable/btn_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -20,7 +22,7 @@
         android:id="@+id/btn_music"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/margin"
         android:background="@drawable/btn_music_on"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/guideline"
@@ -31,7 +33,7 @@
         android:id="@+id/btn_sound"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="@dimen/margin"
         android:background="@drawable/btn_sound_on"
         app:layout_constraintBottom_toBottomOf="@+id/btn_music"
         app:layout_constraintStart_toEndOf="@+id/guideline"
@@ -41,7 +43,7 @@
         android:id="@+id/btn_quit"
         android:layout_width="@dimen/image_btn_small_width"
         android:layout_height="@dimen/image_btn_small_height"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/margin_small"
         android:background="@drawable/btn_quit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

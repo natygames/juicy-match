@@ -2,9 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false">
+    android:clipChildren="false"
+    tools:ignore="ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/board_button"
@@ -52,9 +54,10 @@
             android:id="@+id/txt_hammer"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/item_field"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="0"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_booster_amount_size"
             android:textStyle="bold"
@@ -67,9 +70,10 @@
             android:id="@+id/txt_gloves"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/item_field"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="0"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_booster_amount_size"
             android:textStyle="bold"
@@ -82,9 +86,10 @@
             android:id="@+id/txt_bomb"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/item_field"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="0"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_booster_amount_size"
             android:textStyle="bold"

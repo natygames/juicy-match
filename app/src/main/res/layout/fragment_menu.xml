@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".fragment.MenuFragment">
+    tools:context=".fragment.MenuFragment"
+    tools:ignore="ContentDescription">
 
     <TextView
         android:id="@+id/text"
@@ -38,7 +39,7 @@
         android:id="@+id/btn_setting"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_large"
         android:background="@drawable/btn_setting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

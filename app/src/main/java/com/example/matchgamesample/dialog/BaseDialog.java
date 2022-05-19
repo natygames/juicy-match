@@ -122,7 +122,6 @@ public class BaseDialog implements View.OnTouchListener, Animation.AnimationList
         hideViews();
         mIsShowing = false;
         onDismissed();
-        mParent.setShowingDialog(false);
     }
 
     @Override

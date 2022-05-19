@@ -31,7 +31,7 @@ import com.example.matchgamesample.effect.sound.SoundEvent;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDialogListener {
+public class WinDialogFragment extends BaseFragment {
 
     private static final String LEVEL = "LEVEL";
     private static final String SCORE = "SCORE";
@@ -406,11 +406,6 @@ public class WinDialogFragment extends BaseFragment implements ExitDialog.ExitDi
                         });
             }
         }
-    }
-
-    @Override
-    public void exit() {
-        getMainActivity().finish();
     }
 
     @Override

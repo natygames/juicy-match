@@ -27,12 +27,13 @@ import com.example.matchgamesample.game.tile.Tile;
 public class BoosterManager {
     private final GameEngine mGameEngine;
     private final SoundManager mSoundManager;
+    private final BoosterAnimation mBoosterAnimation;
+
     private final ImageButton mBtnHammer, mBtnGloves, mBtnBomb, mBtnPause;
     private final TextView mTxtHammer, mTxtGloves, mTxtBomb;
     private final ImageView mHighLight;
-    private final BoosterAnimation mBoosterAnimation;
-    private BOOSTER mBooster;         // The current item player use
 
+    private BOOSTER mBooster;         // The current item player use
     private int mHammerNum = 5;
     private int mGlovesNum = 5;
     private int mBombNum = 5;
@@ -136,9 +137,9 @@ public class BoosterManager {
                 Utils.createColorFilter(mBtnBomb);
                 mBtnGloves.setEnabled(false);
                 mBtnBomb.setEnabled(false);
-                // Set text color to gray
-                mTxtGloves.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.gray));
-                mTxtBomb.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.gray));
+                // Set text
+                Utils.createColorFilter(mTxtGloves);
+                Utils.createColorFilter(mTxtBomb);
                 break;
             case GLOVES:
                 // If current item is hand, we disable hammer and bomb
@@ -146,9 +147,9 @@ public class BoosterManager {
                 Utils.createColorFilter(mBtnBomb);
                 mBtnHammer.setEnabled(false);
                 mBtnBomb.setEnabled(false);
-                // Set text color to gray
-                mTxtHammer.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.gray));
-                mTxtBomb.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.gray));
+                // Set text
+                Utils.createColorFilter(mTxtHammer);
+                Utils.createColorFilter(mTxtBomb);
                 break;
             case BOMB:
                 // If current item is bomb, we disable hand and hammer
@@ -156,9 +157,9 @@ public class BoosterManager {
                 Utils.createColorFilter(mBtnHammer);
                 mBtnGloves.setEnabled(false);
                 mBtnHammer.setEnabled(false);
-                // Set text color to gray
-                mTxtGloves.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.gray));
-                mTxtHammer.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.gray));
+                // Set text
+                Utils.createColorFilter(mTxtGloves);
+                Utils.createColorFilter(mTxtHammer);
                 break;
         }
     }
@@ -182,10 +183,10 @@ public class BoosterManager {
         mBtnGloves.setEnabled(true);
         mBtnBomb.setEnabled(true);
 
-        // Resume text color to white
-        mTxtHammer.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.white));
-        mTxtGloves.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.white));
-        mTxtBomb.setTextColor(mGameEngine.mActivity.getResources().getColor(R.color.white));
+        // Resume text
+        Utils.clearColorFilter(mTxtHammer);
+        Utils.clearColorFilter(mTxtGloves);
+        Utils.clearColorFilter(mTxtBomb);
     }
 
     public void useHammer(Tile tile) {

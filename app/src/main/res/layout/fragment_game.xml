@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:clipChildren="false"
-    tools:context=".fragment.GameFragment">
+    tools:context=".fragment.GameFragment"
+    tools:ignore="ContentDescription">
 
     <include layout="@layout/view_game_board" />
 
@@ -75,11 +76,11 @@
         android:id="@+id/txt_fps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="@dimen/margin"
         android:alpha="0.4"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="0"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="@dimen/text_fruit_size"
         android:textStyle="bold"
@@ -90,11 +91,10 @@
         android:id="@+id/btn_pause"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="20dp"
+        android:layout_margin="@dimen/margin_large"
         android:background="@drawable/btn_setting"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_lower_bound" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_skip"
@@ -104,7 +104,9 @@
         android:background="@android:color/transparent"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="Tap to skip"
+        android:scaleX="0"
+        android:scaleY="0"
+        android:text="@string/txt_skip"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/text_skip_size"

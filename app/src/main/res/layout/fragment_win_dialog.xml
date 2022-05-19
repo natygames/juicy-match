@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:clipChildren="false"
-    tools:context=".fragment.WinDialogFragment">
+    tools:context=".fragment.WinDialogFragment"
+    tools:ignore="ContentDescription">
 
     <include layout="@layout/dialog_container" />
 
@@ -38,7 +39,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="Level 1"
+            android:text="@string/txt_win_level"
             android:textColor="@color/white"
             android:textSize="@dimen/text_win_dialog_size"
             android:textStyle="bold"
@@ -120,7 +121,7 @@
             android:background="@drawable/board_final_score"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="10000"
+            android:text=""
             android:textColor="@color/white"
             android:textSize="@dimen/text_win_dialog_size"
             android:textStyle="bold"
@@ -133,7 +134,7 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin"
             android:background="@drawable/title_bar_score"
             app:layout_constraintBottom_toBottomOf="@id/guideline_score_title"
             app:layout_constraintDimensionRatio="5:2"

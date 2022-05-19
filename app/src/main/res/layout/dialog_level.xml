@@ -2,12 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/dialog_width"
     android:layout_height="@dimen/dialog_level_height"
     android:layout_gravity="center"
     android:background="@drawable/dialog_level"
     android:clipChildren="false"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:ignore="ContentDescription">
 
     <TextView
         android:id="@+id/txt_dialog_level"
@@ -15,9 +17,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="Level 100"
+        android:text="@string/txt_dialog_level"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_dialog_size"
+        android:textSize="@dimen/text_dialog_large_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/guideline_cancel"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +30,7 @@
         android:id="@+id/btn_cancel"
         android:layout_width="@dimen/image_round_btn_width"
         android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="5dp"
+        android:layout_margin="@dimen/margin_small"
         android:background="@drawable/btn_cancel"
         app:layout_constraintBottom_toTopOf="@id/guideline_cancel"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -37,12 +39,12 @@
         android:id="@+id/image_dialog_star"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="-10dp"
+        android:layout_marginTop="@dimen/margin"
         android:src="@drawable/star_set_background"
         app:layout_constraintBottom_toBottomOf="@id/guideline_star"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_cancel" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_dialog_level" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -56,25 +58,25 @@
 
         <ImageView
             android:id="@+id/image_dialog_target_left"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_margin="5dp"
+            android:layout_width="@dimen/image_round_btn_width"
+            android:layout_height="@dimen/image_round_btn_width"
+            android:layout_margin="@dimen/margin_small"
             android:src="@drawable/cherry"
             android:visibility="gone" />
 
         <ImageView
             android:id="@+id/image_dialog_target_center"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_margin="5dp"
+            android:layout_width="@dimen/image_round_btn_width"
+            android:layout_height="@dimen/image_round_btn_width"
+            android:layout_margin="@dimen/margin_small"
             android:src="@drawable/strawberry"
             android:visibility="gone" />
 
         <ImageView
             android:id="@+id/image_dialog_target_right"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_margin="5dp"
+            android:layout_width="@dimen/image_round_btn_width"
+            android:layout_height="@dimen/image_round_btn_width"
+            android:layout_margin="@dimen/margin_small"
             android:src="@drawable/lemon"
             android:visibility="gone" />
 
@@ -86,9 +88,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="100"
+        android:text=""
         android:textColor="@color/white"
-        android:textSize="@dimen/text_dialog_size"
+        android:textSize="@dimen/text_dialog_large_size"
         android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/guideline_target2"
@@ -102,7 +104,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="Collect Items"
+        android:text="@string/txt_collect_items"
         android:textColor="@color/white"
         android:textSize="@dimen/text_dialog_small_size"
         android:textStyle="bold"

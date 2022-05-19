@@ -22,24 +22,25 @@ public class SoundManager {
     private static final int MAX_STREAMS = 8;
     private static final float DEFAULT_MUSIC_VOLUME = 0.3f;
 
-    private static final String SOUNDS_PREF_KEY = "SOUND";
-    private static final String MUSIC_PREF_KEY = "MUSIC";
-
-    private HashMap<SoundEvent, Integer> mSoundsMap;
+    private static final String PREFS_NAME = "prefs_setting";
+    private static final String SOUNDS_PREF_KEY = "sound";
+    private static final String MUSIC_PREF_KEY = "music";
 
     private final Context mContext;
+    private final SharedPreferences mPrefs;
+    private MediaPlayer mBgPlayer;
     private SoundPool mSoundPool;
+
+    private HashMap<SoundEvent, Integer> mSoundsMap;
 
     private boolean mSoundEnabled;
     private boolean mMusicEnabled;
 
-    private MediaPlayer mBgPlayer;
-
     public SoundManager(Context context) {
         mContext = context;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        mSoundEnabled = prefs.getBoolean(SOUNDS_PREF_KEY, true);
-        mMusicEnabled = prefs.getBoolean(MUSIC_PREF_KEY, true);
+        mPrefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        mSoundEnabled = mPrefs.getBoolean(SOUNDS_PREF_KEY, true);
+        mMusicEnabled = mPrefs.getBoolean(MUSIC_PREF_KEY, true);
         loadIfNeeded();
     }
 
@@ -162,7 +163,7 @@ public class SoundManager {
             unloadMusic();
         }
         // Save it to preferences
-        PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+        mPrefs.edit()
                 .putBoolean(MUSIC_PREF_KEY, mMusicEnabled)
                 .apply();
     }
@@ -170,7 +171,7 @@ public class SoundManager {
     public void toggleMusicStatusInGame() {
         mMusicEnabled = !mMusicEnabled;
         // Save it to preferences
-        PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+        mPrefs.edit()
                 .putBoolean(MUSIC_PREF_KEY, mMusicEnabled)
                 .apply();
     }
@@ -183,7 +184,7 @@ public class SoundManager {
             unloadSounds();
         }
         // Save it to preferences
-        PreferenceManager.getDefaultSharedPreferences(mContext).edit()
+        mPrefs.edit()
                 .putBoolean(SOUNDS_PREF_KEY, mSoundEnabled)
                 .apply();
     }

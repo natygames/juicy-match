@@ -141,17 +141,17 @@ public class GameController extends GameObject {
                     mWaitingTime = 0;
                 }
                 break;
-            case GAME_OVER:
+            case NAVIGATE_TO_MAP:
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > 2300) {
-                    showGameOverDialog();
+                    navigateToMap();
                     mWaitingTime = 0;
                 }
                 break;
-            case GAME_COMPLETE:
+            case NAVIGATE_TO_WIN_DIALOG:
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > 700) {
-                    showGameCompleteDialog();
+                    navigateToWinDialog();
                     mWaitingTime = 0;
                 }
                 break;
@@ -206,11 +206,11 @@ public class GameController extends GameObject {
                 mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                 mSoundManager.playSoundForSoundEvent(SoundEvent.GAME_OVER);
                 clearView(1600);
-                mState = GameControllerState.GAME_OVER;
+                mState = GameControllerState.NAVIGATE_TO_MAP;
                 break;
             case BONUS_TIME_COMPLETE:
                 clearView(0);
-                mState = GameControllerState.GAME_COMPLETE;
+                mState = GameControllerState.NAVIGATE_TO_WIN_DIALOG;
                 break;
             case REFRESH:
                 mStateAnimation.refreshGame();
@@ -455,7 +455,7 @@ public class GameController extends GameObject {
 
     private void addSkipButton() {
         mSkipButton.animate().setStartDelay(300).setDuration(400)
-                .scaleX(2).scaleY(2).alpha(1).setInterpolator(new OvershootInterpolator());
+                .scaleX(1).scaleY(1).alpha(1).setInterpolator(new OvershootInterpolator());
         mSkipButton.setVisibility(View.VISIBLE);
         mSkipButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -475,14 +475,14 @@ public class GameController extends GameObject {
         mSkipButton.setVisibility(View.GONE);
     }
 
-    private void showGameOverDialog() {
+    private void navigateToMap() {
         // We stop the game here, or the pause dialog will pop up
         mGameEngine.stopGame();
         MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
         mainActivity.navigateToFragment(new MapFragment());
     }
 
-    private void showGameCompleteDialog() {
+    private void navigateToWinDialog() {
         // We stop the game here, or the pause dialog will pop up
         mGameEngine.stopGame();
         MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
