@@ -1,6 +1,9 @@
-# Android-Game-MatchGame
+# Android-Match3Game
 
 ## This is a sample game developed using Java and Android SDK
+### You can also download the game on play store
+
+<a href='https://play.google.com/store/apps/details?id=com.nativegame.juicymatch&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="200"/></a>
 
 ## Introduction
 ### Players have to match 3 or move fruits in column or row to score and collect target items specified in each level. Players can also create special fruit by match 4 or 5 fruits, T or L shape, or even combine two special fruits. Players may encounter obstacle, such as cookie, empty tile, locked fruit. To win the game, players have to eliminate as many fruits as they can in limited moves speified in each level. Finally, the game including 4 type of level:
