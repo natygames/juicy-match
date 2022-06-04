@@ -1,0 +1,28 @@
+package com.nativegame.match3game.engine;
+
+public enum GameEvent {
+    PLAYER_TOUCH,
+    PLAYER_RELEASE,
+    PLAYER_MOVE,
+    PLAYER_SWAP,
+
+    PLAYER_REACH_TARGET,
+    PLAYER_OUT_OF_MOVE,
+    BONUS_TIME_COMPLETE,
+
+    PLAYER_SCORE,
+    PLAYER_COLLECT,
+    BREAK_ICE,
+    START_HINT,
+    REFRESH,
+    COMBO_4,
+    COMBO_5,
+    COMBO_6,
+
+    PLAYER_PRESS_HAMMER,
+    PLAYER_USE_HAMMER,
+    PLAYER_PRESS_GLOVES,
+    PLAYER_USE_GLOVES,
+    PLAYER_PRESS_BOMB,
+    PLAYER_USE_BOMB
+}

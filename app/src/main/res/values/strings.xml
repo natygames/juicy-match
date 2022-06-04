@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MatchGameSample</string>
+    <string name="app_name">Match3Game</string>
     <string name="txt_exit">Exit Game?</string>
     <string name="txt_dialog_level">Level %1$d</string>
     <string name="txt_setting">Setting</string>
