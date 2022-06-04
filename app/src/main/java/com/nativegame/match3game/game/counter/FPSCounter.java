@@ -1,5 +1,7 @@
 package com.nativegame.match3game.game.counter;
 
+import android.content.Context;
+import android.view.View;
 import android.widget.TextView;
 
 import com.nativegame.match3game.R;
@@ -12,6 +14,9 @@ import com.nativegame.match3game.engine.GameObject;
 
 public class FPSCounter extends GameObject {
 
+    private static final String PREFS_NAME = "prefs_setting";
+    private static final String FPS_PREF_KEY = "fps";
+
     private final TextView mText;
     private long mTotalMillis;
     private int mDraws;
@@ -20,6 +25,14 @@ public class FPSCounter extends GameObject {
 
     public FPSCounter(GameEngine gameEngine) {
         mText = (TextView) gameEngine.mActivity.findViewById(R.id.txt_fps);
+
+        // Check if the fps is on
+        boolean fpsEnable = gameEngine.mActivity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .getBoolean(FPS_PREF_KEY, true);
+        if (!fpsEnable) {
+            mText.setVisibility(View.INVISIBLE);
+            gameEngine.removeGameObject(this);
+        }
     }
 
     @Override

@@ -56,6 +56,79 @@
         app:layout_constraintStart_toEndOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/btn_music" />
 
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginEnd="@dimen/margin"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_hint"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_dialog_large_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/btn_music" />
+
+    <ImageView
+        android:id="@+id/switch_hint_track"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_round_btn_width"
+        android:layout_marginStart="@dimen/margin"
+        android:background="@drawable/switch_track_on"
+        app:layout_constraintBottom_toBottomOf="@id/text2"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/text2" />
+
+    <ImageButton
+        android:id="@+id/switch_hint_thumb"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_round_btn_width"
+        android:background="@drawable/switch_thumb"
+        app:layout_constraintBottom_toBottomOf="@id/switch_hint_track"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/switch_hint_track"
+        app:layout_constraintTop_toTopOf="@id/switch_hint_track" />
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginEnd="@dimen/margin"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_fps"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_dialog_large_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/text2" />
+
+    <ImageView
+        android:id="@+id/switch_fps_track"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_round_btn_width"
+        android:layout_marginStart="@dimen/margin"
+        android:background="@drawable/switch_track_on"
+        app:layout_constraintBottom_toBottomOf="@id/text3"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toTopOf="@id/text3" />
+
+    <ImageButton
+        android:id="@+id/switch_fps_thumb"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_round_btn_width"
+        android:background="@drawable/switch_thumb"
+        app:layout_constraintBottom_toBottomOf="@id/switch_fps_track"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="@id/switch_fps_track"
+        app:layout_constraintTop_toTopOf="@id/switch_fps_track" />
+
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"

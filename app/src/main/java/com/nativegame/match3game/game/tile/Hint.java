@@ -1,5 +1,6 @@
 package com.nativegame.match3game.game.tile;
 
+import android.content.Context;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -22,15 +23,20 @@ import java.util.ArrayList;
  **/
 
 public class Hint extends GameObject {
+
+    private static final String PREFS_NAME = "prefs_setting";
+    private static final String HINT_PREF_KEY = "hint";
+    private static final int DELAY_TIME = 4000;
+
     private final GameEngine mGameEngine;
     private final int mColumn, mRow;
     private final Tile[][] mTileArray;
     private final Animation animation;
     private final ArrayList<ImageView> hintArray = new ArrayList<>();
 
+    private final boolean mHintEnable;
     private boolean mShowHint;
     private int mDelayTime;
-    private static final int DELAY_TIME = 4000;
 
     public Hint(GameEngine gameEngine, Tile[][] tileArray) {
         mGameEngine = gameEngine;
@@ -38,6 +44,10 @@ public class Hint extends GameObject {
         mRow = gameEngine.mLevel.mRow;
         mTileArray = tileArray;
         animation = AnimationUtils.loadAnimation(gameEngine.mActivity, R.anim.hint_twinkle);
+
+        // Check if the hint is on
+        mHintEnable = gameEngine.mActivity.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+                .getBoolean(HINT_PREF_KEY, true);
         mShowHint = false;
     }
 
@@ -54,6 +64,9 @@ public class Hint extends GameObject {
             mDelayTime += elapsedMillis;
             if (mDelayTime > DELAY_TIME) {
                 startHint();
+                // Reset
+                mDelayTime = 0;
+                mShowHint = false;
             }
         }
     }
@@ -93,15 +106,13 @@ public class Hint extends GameObject {
     }
 
     private void startHint() {
-        // Start hint animation
-        int size = hintArray.size();
-        for (int i = 0; i < size; i++) {
-            hintArray.get(i).startAnimation(animation);
+        if (mHintEnable) {
+            // Start hint animation
+            int size = hintArray.size();
+            for (int i = 0; i < size; i++) {
+                hintArray.get(i).startAnimation(animation);
+            }
         }
-
-        // Reset
-        mDelayTime = 0;
-        mShowHint = false;
     }
 
     private void stopHint() {
@@ -799,5 +810,5 @@ public class Hint extends GameObject {
 
         return false;
     }
-}
 
+}

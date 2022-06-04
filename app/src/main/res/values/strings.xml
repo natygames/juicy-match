@@ -3,6 +3,8 @@
     <string name="txt_exit">Exit Game?</string>
     <string name="txt_dialog_level">Level %1$d</string>
     <string name="txt_setting">Setting</string>
+    <string name="txt_hint">Hint :</string>
+    <string name="txt_fps">FPS :</string>
     <string name="txt_skip">Tap to skip</string>
     <string name="txt_loading">Loading . . .</string>
     <string name="txt_win_level">Level %1$d</string>
