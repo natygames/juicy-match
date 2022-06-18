@@ -2,11 +2,10 @@
 
 ## This is a sample game developed using Java and Android SDK
 ### You can also download the game on play store
-
 <a href='https://play.google.com/store/apps/details?id=com.nativegame.juicymatch&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="200"/></a>
 
-## Introduction
-### Players have to match 3 or move fruits in column or row to score and collect target items specified in each level. Players can also create special fruit by match 4 or 5 fruits, T or L shape, or even combine two special fruits. Players may encounter obstacle, such as cookie, empty tile, locked fruit. To win the game, players have to eliminate as many fruits as they can in limited moves speified in each level. Finally, the game including 4 type of level:
+## Gameplay
+### Players have to match 3 or move fruits in column or row to score and collect target items. Players can also create special fruit by match 4 or 5 fruits, T or L shape, or even combine two special fruits. Players may encounter obstacle, such as cookie, empty tile, locked tile. Finally, the game including 4 type of level:
 
 <1> Reach Target Score: Players have to reach score specified in level by eliminate fruit
 
@@ -20,19 +19,15 @@
 "> <img src="https://user-images.githubusercontent.com/93536412/165109528-cc0f418e-bb75-410d-b777-d9e14a1f1592.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/165109625-f7a8d5ec-8ca6-41b7-a379-c4b1ea875205.jpg" width="200"> <img src="https://user-images.githubusercontent.com/93536412/165109636-bedd9eee-0ead-45d6-b05a-c9554c3ec1e8.jpg" width="200">
 
 ## Demo
-
 https://user-images.githubusercontent.com/93536412/165110073-3d9c0127-e571-443c-9191-a23d6ead4241.mp4
 
 ## Tools
-Engine: Game engine based on "Mastering Android Game Development" by Raul Pautals
+Images: Edit images with Krita https://krita.org
 
-Images: Edit images with Krita https://krita.org/zh-tw
-
-Music: Edit music and sound effects with Audacity https://www.audacityteam.org/
+Music: Edit music and sound effects with Audacity https://www.audacityteam.org
 
 ## Credit for images and music
 ### Images: 
-
 Fruit image from https://opengameart.org/content/flat-designed-fruits
 
 Heart image from https://opengameart.org/content/heart-7
@@ -45,25 +40,35 @@ Treasure image by phichto from https://pngtree.com/freepng/cute-cartoon-treasure
 
 ### Music: 
 Happy and Joyful Children by Free Music | https://soundcloud.com/fm_freemusic
+
 Music promoted by https://www.chosic.com/free-music/all/
-Creative Commons CC BY 3.0
-https://creativecommons.org/licenses/by/3.0/
 
 ### Sound Effects: 
 https://mixkit.co/free-sound-effects/
 
+## Reference
+Game engine based on "Mastering Android Game Development" by Raul Pautals
+
 ## License:
 
-       Copyright 2022 Oscar Liang
+       MIT License
 
-       Licensed under the Apache License, Version 2.0 (the "License");
-       you may not use this file except in compliance with the License.
-       You may obtain a copy of the License at
+       Copyright (c) 2022 Oscar Liang
 
-       http://www.apache.org/licenses/LICENSE-2.0
+       Permission is hereby granted, free of charge, to any person obtaining a copy
+       of this software and associated documentation files (the "Software"), to deal
+       in the Software without restriction, including without limitation the rights
+       to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+       copies of the Software, and to permit persons to whom the Software is
+       furnished to do so, subject to the following conditions:
 
-       Unless required by applicable law or agreed to in writing, software
-       distributed under the License is distributed on an "AS IS" BASIS,
-       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-       See the License for the specific language governing permissions and
-       limitations under the License.
+       The above copyright notice and this permission notice shall be included in all
+       copies or substantial portions of the Software.
+
+       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+       IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+       FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+       AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+       LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+       OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+       SOFTWARE.
