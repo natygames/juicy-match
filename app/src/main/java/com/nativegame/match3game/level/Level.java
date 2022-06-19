@@ -27,8 +27,7 @@ public class Level {
     public ArrayList<Integer> mTarget = new ArrayList<>();
     public ArrayList<Integer> mCollect = new ArrayList<>();
 
-    // Game board in char
-    public String board, fruit, ice, advance;
+    public String board, fruit, ice, advance;   // Game board in char
 
     public void setLevelType(String type) {
         switch (type) {
@@ -81,15 +80,4 @@ public class Level {
 
     }
 
-    /* Explanation:
-     * <LevelType> is the mTarget type of level:
-     *     1 for reach mTarget score
-     *     2 for mCollect items
-     *     3 for clear ice
-     *     4 for starfish
-     * <Move> is the maxim swaps
-     * <FruitNum> is the number of fruit, default 4, maxim 5
-     * <Target> is the list stores each mTarget amount
-     * <Collect> is the list stores items need to be mCollect
-     */
 }

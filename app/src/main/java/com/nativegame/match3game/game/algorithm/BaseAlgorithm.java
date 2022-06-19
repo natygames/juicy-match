@@ -51,7 +51,7 @@ public class BaseAlgorithm {
     //----------------------------------------------------------------------------------
     protected void findMatch(Tile[][] tileArray) {
 
-        // Check match 3 in mColumn
+        // Check match 3 in column
         for (int j = 0; j < mColumn; j++) {
             for (int i = 0; i < mRow - 2; i++) {
                 //Check state
@@ -70,16 +70,16 @@ public class BaseAlgorithm {
             }
         }
 
-        // Check match 3 in mRow
+        // Check match 3 in row
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn - 2; j++) {
-                //Check state
+                // Check state
                 if (tileArray[i][j].isFruit() && tileArray[i][j].wait == 0) {
 
                     // Check is there a sequence
                     if ((tileArray[i][j].kind == tileArray[i][j + 1].kind) &&
                             (tileArray[i][j].kind == tileArray[i][j + 2].kind)) {
-                        //Add match and explode around
+                        // Add match and explode around
                         for (int n = 0; n <= 2; n++) {
                             tileArray[i][j + n].match = 1;
                             explodeAround(tileArray, tileArray[i][j + n]);
@@ -94,11 +94,11 @@ public class BaseAlgorithm {
     protected void tile2Top(Tile[][] tileArray) {
         for (int j = 0; j < mColumn; j++) {
             for (int i = mRow - 1; i >= 0; i--) {
-                //Check match
+                // Check match
                 if (tileArray[i][j].match != 0) {
-                    //Swap tile
+                    // Swap tile
                     for (int n = i - 1; n >= 0; n--) {
-                        //If empty tube do not swap
+                        // If empty tube do not swap
                         if (tileArray[n][j].match == 0 && !tileArray[n][j].tube) {
 
                             if (tileArray[n][j].invalid) {
@@ -145,13 +145,13 @@ public class BaseAlgorithm {
         for (int j = 0; j < mColumn; j++) {
             for (int i = 0; i < mRow; i++) {
 
-                //Find waiting tile
+                // Find waiting tile
                 if (tileArray[i][j].wait != 0) {
 
-                    //Look up
+                    // Look up
                     for (int n = i - 1; n >= 0; n--) {
 
-                        //Find obstacle
+                        // Find obstacle
                         if ((tileArray[n][j].invalid && !tileArray[n][j].tube) || tileArray[n][j].wait == 2) {
 
                             //Check is blocked
@@ -177,14 +177,14 @@ public class BaseAlgorithm {
         for (int j = 0; j < mColumn; j++) {
             for (int i = mRow - 1; i >= 0; i--) {
 
-                //Find waiting tile
+                // Find waiting tile
                 if (tileArray[i][j].wait != 0) {
 
-                    //Look up
+                    // Look up
                     outer:
                     for (int n = i - 1; n >= 0; n--) {
 
-                        //Find obstacle
+                        // Find obstacle
                         if ((tileArray[n][j].invalid && !tileArray[n][j].tube) || tileArray[n][j].wait == 2) {
 
                             if (tileArray[n + 1][j].tube) {
@@ -196,7 +196,7 @@ public class BaseAlgorithm {
                                 break;
                             }
 
-                            //Look right
+                            // Look right
                             for (int m = n; m >= 0; m--) {
                                 if (j == mColumn - 1 || tileArray[m][j + 1].invalid || (tileArray[m][j + 1].y - tileArray[m][j + 1].row * mTileSize != 0)) {
                                     break;
@@ -213,7 +213,7 @@ public class BaseAlgorithm {
                                 }
                             }
 
-                            //Look left
+                            // Look left
                             for (int m = n; m >= 0; m--) {
                                 if (j == 0 || tileArray[m][j - 1].invalid || (tileArray[m][j - 1].y - tileArray[m][j - 1].row * mTileSize != 0)) {
                                     break;
@@ -278,31 +278,31 @@ public class BaseAlgorithm {
     }
 
     public void swap(Tile[][] tileArray, Tile tile1, Tile tile2) {
-        //Exchange mRow
+        // Exchange row
         int temp_row = tile1.row;
         tile1.row = tile2.row;
         tile2.row = temp_row;
 
-        //Exchange mColumn
+        // Exchange column
         int temp_col = tile1.col;
         tile1.col = tile2.col;
         tile2.col = temp_col;
 
-        //If ice do not swap
+        // If ice do not swap
         if (tile1.ice != 0 || tile2.ice != 0) {
             int temp = tile1.ice;
             tile1.ice = tile2.ice;
             tile2.ice = temp;
         }
 
-        //If entryPoint do not swap
+        // If entryPoint do not swap
         if (tile1.entryPoint || tile2.entryPoint) {
             boolean temp = tile1.entryPoint;
             tile1.entryPoint = tile2.entryPoint;
             tile2.entryPoint = temp;
         }
 
-        //Exchange tile
+        // Exchange tile
         tileArray[tile1.row][tile1.col] = tile1;
         tileArray[tile2.row][tile2.col] = tile2;
 
@@ -313,24 +313,24 @@ public class BaseAlgorithm {
     // Method of special fruit
     //----------------------------------------------------------------------------------
     protected void explodeH(Tile[][] tileArray, Tile tile) {
-        //Mark isExplode
+        // Mark isExplode
         tile.isExplode = true;
-        //Add horizontal flash
+        // Add horizontal flash
         mAnimationManager.createHorizontalFlash(tile);
         mSoundManager.playSoundForSoundEvent(SoundEvent.VERTICAL_EXPLODE);
-        //Add match in mRow
+        // Add match in mRow
         for (int j = 0; j < mColumn; j++) {
-            //Check is empty fruit
+            // Check is empty fruit
             if (!tileArray[tile.row][j].empty) {
 
                 // Add match
                 tileArray[tile.row][j].match++;
 
-                //Check fruit is special in mRow
+                // Check fruit is special in mRow
                 if (tileArray[tile.row][j].special) {
-                    //Check is explode
+                    // Check is explode
                     if (!tileArray[tile.row][j].isExplode && !tileArray[tile.row][j].lock) {
-                        //Check direct
+                        // Check direct
                         if (tileArray[tile.row][j].direct == 'V') {
                             explodeV(tileArray, tileArray[tile.row][j]);
                         } else if (tileArray[tile.row][j].direct == 'H') {
@@ -347,24 +347,24 @@ public class BaseAlgorithm {
     }
 
     protected void explodeV(Tile[][] tileArray, Tile tile) {
-        //Mark isExplode
+        // Mark isExplode
         tile.isExplode = true;
-        //Add vertical flash
+        // Add vertical flash
         mAnimationManager.createVerticalFlash(tile);
         mSoundManager.playSoundForSoundEvent(SoundEvent.VERTICAL_EXPLODE);
-        //Add match in mColumn
+        // Add match in mColumn
         for (int i = 0; i < mRow; i++) {
-            //Check is empty fruit
+            // Check is empty fruit
             if (!tileArray[i][tile.col].empty) {
 
                 // Add match
                 tileArray[i][tile.col].match++;
 
-                //Check fruit is special in mColumn
+                // Check fruit is special in mColumn
                 if (tileArray[i][tile.col].special) {
-                    //Check is explode
+                    // Check is explode
                     if (!tileArray[i][tile.col].isExplode && !tileArray[i][tile.col].lock) {
-                        //Check direct
+                        // Check direct
                         if (tileArray[i][tile.col].direct == 'H') {
                             explodeH(tileArray, tileArray[i][tile.col]);
                         } else if (tileArray[i][tile.col].direct == 'V') {
@@ -384,30 +384,30 @@ public class BaseAlgorithm {
         int row = tile.row;
         int col = tile.col;
 
-        //Mark isExplode
+        // Mark isExplode
         tile.isExplode = true;
-        //Add square flash
+        // Add square flash
         mAnimationManager.createScaleAnim();
         mAnimationManager.createSquareFlash(tile);
         mSoundManager.playSoundForSoundEvent(SoundEvent.SQUARE_EXPLODE);
-        //Add match in square
+        // Add match in square
         for (int i = row - 1; i <= row + 1; i++) {
             for (int j = col - 1; j <= col + 1; j++) {
 
                 if (i < 0 || i >= mRow || j < 0 || j >= mColumn)
                     continue;
 
-                //Check is empty fruit
+                // Check is empty fruit
                 if (!tileArray[i][j].empty) {
 
                     // Add match
                     tileArray[i][j].match++;
 
-                    //Check fruit is special in square
+                    // Check fruit is special in square
                     if (tileArray[i][j].special) {
-                        //Check is explode
+                        // Check is explode
                         if (!tileArray[i][j].isExplode && !tileArray[i][j].lock) {
-                            //Check direct
+                            // Check direct
                             if (tileArray[i][j].direct == 'H') {
                                 explodeH(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].direct == 'V') {
@@ -467,32 +467,32 @@ public class BaseAlgorithm {
     protected void explodeBigS(Tile[][] tileArray, Tile tile) {
         int row = tile.row;
         int col = tile.col;
-        //Mark isExplode
+        // Mark isExplode
         tile.isExplode = true;
-        //Add square flash
+        // Add square flash
         mAnimationManager.createScaleAnim();
         mAnimationManager.createSquareFlash_big(tile);
         mSoundManager.playSoundForSoundEvent(SoundEvent.SQUARE_EXPLODE);
 
-        //Add match in 5x5 square
+        // Add match in 5x5 square
         for (int i = row - 2; i <= row + 2; i++) {
             for (int j = col - 2; j <= col + 2; j++) {
 
-                //Check index not out of bound
+                // Check index not out of bound
                 if (i < 0 || i >= mRow || j < 0 || j >= mColumn)
                     continue;
 
-                //Check is empty fruit
+                // Check is empty fruit
                 if (!tileArray[i][j].empty) {
 
                     // Add match
                     tileArray[i][j].match++;
 
-                    //Check fruit is special in square
+                    // Check fruit is special in square
                     if (tileArray[i][j].special) {
-                        //Check is explode
+                        // Check is explode
                         if (!tileArray[i][j].isExplode && !tileArray[i][j].lock) {
-                            //Check direct
+                            // Check direct
                             if (tileArray[i][j].direct == 'H') {
                                 explodeH(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].direct == 'V') {
@@ -513,7 +513,7 @@ public class BaseAlgorithm {
         // Mark isExplode
         tile.isExplode = true;
 
-        // Get mTarget fruit
+        // Get target fruit
         int target = 0;
         if (tile.iceCreamTarget == 0) {
             // Get a random fruit
@@ -531,14 +531,14 @@ public class BaseAlgorithm {
                 // Check state
                 if (!tileArray[i][j].empty && !tileArray[i][j].isExplode && tileArray[i][j].kind != 0) {
 
-                    //Check is mTarget fruit
+                    // Check is target fruit
                     if (target == tileArray[i][j].kind) {
 
                         // Add lightning animation
                         mAnimationManager.createLightning(tile, tileArray[i][j]);
                         mAnimationManager.createLightning_fruit(tileArray[i][j], false);
 
-                        // Add match to mTarget and explode around
+                        // Add match to target and explode around
                         tileArray[i][j].match = 1;
                         explodeAround(tileArray, tileArray[i][j]);
 
@@ -559,26 +559,26 @@ public class BaseAlgorithm {
     }
 
     protected void explodeBigI(Tile[][] tileArray, Tile tile) {
-        //Mark isExplode
+        // Mark isExplode
         tile.isExplode = true;
         //Add animation
         mAnimationManager.createBigShakingAnim();
         mAnimationManager.createExplodeWave(tile);
         mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_EXPLODE);
-        //Check same fruit kind
+        // Check same fruit kind
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
                 if (!tileArray[i][j].empty
                         && !tileArray[i][j].isExplode) {
 
-                    //Add lightning animation
+                    // Add lightning animation
                     mAnimationManager.createLightning(tile, tileArray[i][j]);
                     mAnimationManager.createLightning_fruit(tileArray[i][j], false);
 
                     // Add match
                     tileArray[i][j].match++;
 
-                    //Check fruit is special
+                    // Check fruit is special
                     if (tileArray[i][j].special && !tileArray[i][j].lock) {
                         if (tileArray[i][j].direct == 'H') {
                             explodeH(tileArray, tileArray[i][j]);
@@ -602,6 +602,14 @@ public class BaseAlgorithm {
         // Mark isExplode
         tile.isExplode = true;
 
+        // Reset all the tile except the ice cream and target
+        for (int i = 0; i < mRow; i++) {
+            for (int j = 0; j < mColumn; j++) {
+                if (!tileArray[i][j].isExplode)
+                    tileArray[i][j].match = 0;
+            }
+        }
+
         mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_EXPLODE);
 
         // Check same fruit kind
@@ -614,7 +622,7 @@ public class BaseAlgorithm {
                         && !tileArray[i][j].isExplode
                         && tileArray[i][j].isFruit()) {
 
-                    // Check ice cream mTarget
+                    // Check ice cream target
                     if ((target == tileArray[i][j].kind) && !tileArray[i][j].special) {
 
                         // Add lightning animation

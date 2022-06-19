@@ -3,7 +3,6 @@ package com.nativegame.match3game;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.AudioManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.Theme_MatchGameSample);
+        setTheme(R.style.Theme_Match3Game);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_main);
 
@@ -70,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         mSoundManager = new SoundManager(this);
         mDatabaseHelper = new DatabaseHelper(this);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
-
     }
 
     public LevelManager getLevelManager() {

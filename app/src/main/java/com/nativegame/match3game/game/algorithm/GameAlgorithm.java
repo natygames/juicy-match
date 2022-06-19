@@ -116,7 +116,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                 mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_BOUNCING);
             mMoveTile = false;
         } else {
-            //Check is player swapping
+            // Check is player swapping
             if (!mMoveTile) {
                 mWaitingTime += elapsedMillis;
                 if (mWaitingTime > WAITING_TIME) {
@@ -187,15 +187,16 @@ public class GameAlgorithm extends BaseAlgorithm {
         if (!mIsMoving) {
 
             // (5.1) Check special fruit
+            outer:
             for (int j = 0; j < mColumn; j++) {
                 for (int i = 0; i < mRow; i++) {
-                    //Check is special fruit
+                    // Check is special fruit
                     if (tileArray[i][j].special
                             && tileArray[i][j].match != 0
                             && !tileArray[i][j].lock) {
                         // Check direction
                         if (tileArray[i][j].direct == 'H') {
-                            //Check special combine
+                            // Check special combine
                             if (tileArray[i][j].specialCombine == 'R') {
                                 explodeV(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].specialCombine == 'G') {
@@ -205,7 +206,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     explodeH(tileArray, tileArray[i][j]);
                             }
                         } else if (tileArray[i][j].direct == 'V') {
-                            //Check special combine
+                            // Check special combine
                             if (tileArray[i][j].specialCombine == 'R') {
                                 explodeH(tileArray, tileArray[i][j]);
                             } else if (tileArray[i][j].specialCombine == 'G') {
@@ -215,18 +216,20 @@ public class GameAlgorithm extends BaseAlgorithm {
                                     explodeV(tileArray, tileArray[i][j]);
                             }
                         } else if (tileArray[i][j].direct == 'S' && !tileArray[i][j].isExplode) {
-                            //Check special combine
+                            // Check special combine
                             if (tileArray[i][j].specialCombine == 'B') {
                                 explodeBigS(tileArray, tileArray[i][j]);
                             } else {
                                 explodeS(tileArray, tileArray[i][j]);
                             }
                         } else if (tileArray[i][j].direct == 'I' && !tileArray[i][j].isExplode) {
-                            //Check special combine
+                            // Check special combine
                             if (tileArray[i][j].specialCombine == 'T') {
-                                transI(tileArray, tileArray[i][j]);
+                                transI(tileArray, tileArray[i][j]);   // We break the loop
+                                break outer;
                             } else if (tileArray[i][j].specialCombine == 'S') {
-                                transI(tileArray, tileArray[i][j]);
+                                transI(tileArray, tileArray[i][j]);   // We break the loop
+                                break outer;
                             } else if (tileArray[i][j].specialCombine == 'M') {
                                 explodeBigI(tileArray, tileArray[i][j]);
                             } else {
@@ -240,168 +243,171 @@ public class GameAlgorithm extends BaseAlgorithm {
             // (5.2) Add square special fruit
             for (int i = 0; i < mRow; i++) {
                 for (int j = 1; j < mColumn - 1; j++) {
-                    //Check state
+                    // Check state
                     if (tileArray[i][j].isFruit() && tileArray[i][j].wait == 0) {
-                        //Check mRow for 3
+                        // Check row for 3
                         if (tileArray[i][j].kind == tileArray[i][j - 1].kind &&
                                 tileArray[i][j].kind == tileArray[i][j + 1].kind) {
-                            //Check potential match
+                            // Check potential match
                             if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j - 1].kind
-                                    && tileArray[i - 1][j - 1].match > 0) {            //Top left
-                                //If tile is special, do not add
+                                    && tileArray[i - 1][j - 1].match > 0) {   //Top left
+                                // If tile is special, do not add
                                 if (!tileArray[i][j - 1].special) {
                                     if (i > 1 && tileArray[i - 2][j - 1].kind == tileArray[i][j].kind) {
                                         /* O
                                          * O
                                          * X O O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 1);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j - 1].isUpgrade = true;
                                         tileArray[i - 2][j - 1].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j - 1].direct = 'S';
                                     } else if (i < mRow - 1 && tileArray[i + 1][j - 1].kind == tileArray[i][j].kind) {
                                         /* O
                                          * X O O
                                          * O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 2);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j - 1].isUpgrade = true;
                                         tileArray[i + 1][j - 1].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j - 1].direct = 'S';
                                     }
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j - 1].kind
-                                    && tileArray[i + 1][j - 1].match > 0) {         //Bottom Left
-                                //If tile is special, do not add
+                                    && tileArray[i + 1][j - 1].match > 0) {   //Bottom Left
+                                // If tile is special, do not add
                                 if (!tileArray[i][j - 1].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j - 1].kind == tileArray[i][j].kind) {
                                         /* X O O
                                          * O
                                          * O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j - 1], 'L', 3);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i + 1][j - 1].isUpgrade = true;
                                         tileArray[i + 2][j - 1].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j - 1].direct = 'S';
                                     }
                                 }
-                            } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j].kind && tileArray[i - 1][j].match > 0) {            //Top Center
-                                //If tile is special, do not add
+                            } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j].kind
+                                    && tileArray[i - 1][j].match > 0) {   //Top Center
+                                // If tile is special, do not add
                                 if (!tileArray[i][j].special) {
                                     if (i > 1 && tileArray[i - 2][j].kind == tileArray[i][j].kind) {
                                         /*   O
                                          *   O
                                          * O X O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j], 'C', 1);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j].isUpgrade = true;
                                         tileArray[i - 2][j].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j].direct = 'S';
                                     } else if (i < mRow - 1 && tileArray[i + 1][j].kind == tileArray[i][j].kind) {
                                         /*   O
                                          * O X O
                                          *   O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j], 'C', 2);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i - 1][j].isUpgrade = true;
                                         tileArray[i + 1][j].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j].direct = 'S';
                                     }
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j].kind
-                                    && tileArray[i + 1][j].match > 0) {              //Bottom Center
-                                //If tile is special, do not add
+                                    && tileArray[i + 1][j].match > 0) {   //Bottom Center
+                                // If tile is special, do not add
                                 if (!tileArray[i][j].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j].kind == tileArray[i][j].kind) {
                                         /* O X O
                                          *   O
                                          *   O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j], 'C', 3);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i + 1][j].isUpgrade = true;
                                         tileArray[i + 2][j].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j].direct = 'S';
                                     }
                                 }
-                            } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j + 1].kind && tileArray[i - 1][j + 1].match > 0) {           //Top Right
-                                //If tile is special, do not add
+                            } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j + 1].kind
+                                    && tileArray[i - 1][j + 1].match > 0) {   //Top Right
+                                // If tile is special, do not add
                                 if (!tileArray[i][j + 1].special) {
                                     if (i > 1 && tileArray[i - 2][j + 1].kind == tileArray[i][j].kind) {
                                         /*     O
                                          *     O
                                          * O O X
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 1);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i - 1][j + 1].isUpgrade = true;
                                         tileArray[i - 2][j + 1].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j + 1].direct = 'S';
                                     } else if (i < mRow - 1 && tileArray[i + 1][j + 1].kind == tileArray[i][j].kind) {
                                         /*     O
                                          * O O X
                                          *     O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 2);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i - 1][j + 1].isUpgrade = true;
                                         tileArray[i + 1][j + 1].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j + 1].direct = 'S';
                                     }
                                 }
-                            } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j + 1].kind && tileArray[i + 1][j + 1].match > 0) {                 //Bottom Right
-                                //If tile is special, do not add
+                            } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j + 1].kind
+                                    && tileArray[i + 1][j + 1].match > 0) {   //Bottom Right
+                                // If tile is special, do not add
                                 if (!tileArray[i][j + 1].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j + 1].kind == tileArray[i][j].kind) {
                                         /* O O X
                                          *     O
                                          *     O
                                          */
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2S(tileArray[i][j + 1], 'R', 3);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j - 1].isUpgrade = true;
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 1][j + 1].isUpgrade = true;
                                         tileArray[i + 2][j + 1].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j + 1].direct = 'S';
                                     }
                                 }
@@ -414,54 +420,54 @@ public class GameAlgorithm extends BaseAlgorithm {
             // (5.3) Add vertical special fruit
             for (int i = 0; i < mRow; i++) {
                 for (int j = 0; j < mColumn - 3; j++) {
-                    //Check state
+                    // Check state
                     if (tileArray[i][j].isFruit() && tileArray[i][j].wait == 0) {
-                        // Check mRow for >= 4
+                        // Check row for >= 4
                         if (tileArray[i][j].match > 0 && tileArray[i][j + 1].match > 0
                                 && tileArray[i][j].kind == tileArray[i][j + 1].kind
                                 && tileArray[i][j].kind == tileArray[i][j + 2].kind
                                 && tileArray[i][j].kind == tileArray[i][j + 3].kind) {
-                            //Check mRow for 5
+                            // Check row for 5
                             if (j < mColumn - 4 && tileArray[i][j].kind == tileArray[i][j + 4].kind) {
                                 // O O X O O
-                                //Add upgrade animation
+                                // Add upgrade animation
                                 mAnimationManager.upgrade2I_h(tileArray[i][j + 2]);
                                 mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
                                 tileArray[i][j].isUpgrade = true;
                                 tileArray[i][j + 1].isUpgrade = true;
                                 tileArray[i][j + 3].isUpgrade = true;
                                 tileArray[i][j + 4].isUpgrade = true;
-                                //Make it special
+                                // Make it special
                                 tileArray[i][j + 2].direct = 'I';
                                 tileArray[i][j + 2].special = false;   // We make sure it will transform before explode
                                 tileArray[i][j + 2].isExplode = false;   // We make sure it will detect
                                 tileArray[i][j + 2].kind = TileUtils.ICE_CREAM;
                             } else {
-                                //Check is right or left be chosen
+                                // Check is right or left be chosen
                                 if ((i == mSwapRow && j + 1 == mSwapCol) || (i == mSwapRow2 && j + 1 == mSwapCol2)) {
-                                    //If tile is already special, do not add
+                                    // If tile is already special, do not add
                                     if (tileArray[i][j + 1].direct == 'N' && !tileArray[i][j + 1].isUpgrade) {
                                         // O X O O
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2H_left(tileArray[i][j + 1]);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 2].isUpgrade = true;
                                         tileArray[i][j + 3].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j + 1].direct = 'V';
                                     }
                                 } else {
-                                    //If tile is already special, do not add
+                                    // If tile is already special, do not add
                                     if (tileArray[i][j + 2].direct == 'N' && !tileArray[i][j + 2].isUpgrade) {
                                         // O O X O O
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2H_right(tileArray[i][j + 2]);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i][j + 1].isUpgrade = true;
                                         tileArray[i][j + 3].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i][j + 2].direct = 'V';
                                     }
                                 }
@@ -474,14 +480,14 @@ public class GameAlgorithm extends BaseAlgorithm {
             // (5.4) Add horizontal special fruit
             for (int j = 0; j < mColumn; j++) {
                 for (int i = 0; i < mRow - 3; i++) {
-                    //Check state
+                    // Check state
                     if (tileArray[i][j].isFruit() && tileArray[i][j].wait == 0) {
-                        //Check mColumn for >= 4
+                        // Check column for >= 4
                         if (tileArray[i][j].match > 0 && tileArray[i + 1][j].match > 0
                                 && tileArray[i][j].kind == tileArray[i + 1][j].kind
                                 && tileArray[i][j].kind == tileArray[i + 2][j].kind
                                 && tileArray[i][j].kind == tileArray[i + 3][j].kind) {
-                            //Check mRow for 5
+                            // Check row for 5
                             if (i < mRow - 4 && tileArray[i][j].kind == tileArray[i + 4][j].kind) {
                                 //Add upgrade animation
                                 mAnimationManager.upgrade2I_v(tileArray[i + 2][j]);
@@ -490,16 +496,16 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 tileArray[i + 1][j].isUpgrade = true;
                                 tileArray[i + 3][j].isUpgrade = true;
                                 tileArray[i + 4][j].isUpgrade = true;
-                                //Make it special
+                                // Make it special
                                 tileArray[i + 2][j].direct = 'I';
                                 tileArray[i + 2][j].special = false;   // We make sure it will transform before explode
                                 tileArray[i + 2][j].isExplode = false;   // We make sure it will detect
                                 tileArray[i + 2][j].kind = TileUtils.ICE_CREAM;
                             } else {
-                                //Check is top or bottom be chosen
+                                // Check is top or bottom be chosen
                                 if ((i + 1 == mSwapRow && j == mSwapCol)
                                         || (i + 1 == mSwapRow2 && j == mSwapCol2)) {
-                                    //If tile is already special, do not add
+                                    // If tile is already special, do not add
                                     if (tileArray[i + 1][j].direct == 'N' && !tileArray[i + 1][j].isUpgrade) {
                                         //Add upgrade animation
                                         mAnimationManager.upgrade2V_top(tileArray[i + 1][j]);
@@ -507,19 +513,19 @@ public class GameAlgorithm extends BaseAlgorithm {
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 2][j].isUpgrade = true;
                                         tileArray[i + 3][j].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i + 1][j].direct = 'H';
                                     }
                                 } else {
-                                    //If tile is already special, do not add
+                                    // If tile is already special, do not add
                                     if (tileArray[i + 2][j].direct == 'N' && !tileArray[i + 2][j].isUpgrade) {
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2V_bottom(tileArray[i + 2][j]);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
                                         tileArray[i + 1][j].isUpgrade = true;
                                         tileArray[i + 3][j].isUpgrade = true;
-                                        //Make it special
+                                        // Make it special
                                         tileArray[i + 2][j].direct = 'H';
                                     }
 
@@ -538,7 +544,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                     if (tileArray[i][j].invalid && tileArray[i][j].match != 0) {
 
                         if (i == 0) {
-                            // Add match to whole mColumn if not waiting
+                            // Add match to whole column if not waiting
                             for (int m = i + 1; m < mRow; m++) {
                                 // Check invalid obstacle (if match != 0 means can go down)
                                 if (tileArray[m][j].tube) {
@@ -551,7 +557,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 }
                             }
                         } else {
-                            // Check up 3 in mRow, if any mColumn tile is available, then can falling down
+                            // Check up 3 in mRow, if any column tile is available, then can falling down
                             for (int n = j - 1; n <= j + 1; n++) {
 
                                 if (n < 0 || n >= mColumn)
@@ -566,7 +572,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                      *     x o x  <-- tile (No diagonal swapping)
                                      */
 
-                                    // Add match to whole mColumn if not waiting
+                                    // Add match to whole column if not waiting
                                     for (int m = i + 1; m < mRow; m++) {
                                         // Check invalid obstacle (if match != 0 means can go down)
                                         if (tileArray[m][j].tube) {
@@ -615,7 +621,8 @@ public class GameAlgorithm extends BaseAlgorithm {
             // (5.8) Add animation and sound
             for (int j = 0; j < mColumn; j++) {
                 for (int i = 0; i < mRow; i++) {
-                    //Check is match
+
+                    // Check is match
                     if (!tileArray[i][j].empty
                             && tileArray[i][j].match != 0
                             && !tileArray[i][j].isAnimate) {
@@ -630,7 +637,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                         // Set isAnimate
                         tileArray[i][j].isAnimate = true;
 
-                        //Check lock
+                        // Check lock
                         if (tileArray[i][j].lock) {
                             explodeLock(mAdvanceArray[i + 1][j], tileArray[i][j]);
                             continue;
@@ -656,7 +663,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                             // Check how many layer
                             switch (tileArray[i][j].layer) {
                                 case 0:
-                                    //Explode cookie
+                                    // Explode cookie
                                     tileArray[i][j].invalid = false;
                                     mAnimationManager.explodeCookie(tileArray[i][j]);
                                     mSoundManager.playSoundForSoundEvent(SoundEvent.COOKIE_EXPLODE);
@@ -720,11 +727,11 @@ public class GameAlgorithm extends BaseAlgorithm {
         // Play fade out animation
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
-                //Check tile state
+                // Check tile state
                 if (tileArray[i][j].isMovable()
                         && tileArray[i][j].isFruit()
                         && !tileArray[i][j].special) {
-                    //Do not refresh special fruit
+                    // Do not refresh special fruit
                     mAnimationManager.createRefreshAnim(tileArray[i][j].mImage);
                 }
             }
@@ -736,11 +743,11 @@ public class GameAlgorithm extends BaseAlgorithm {
         // Refresh the screen, and generate random fruit
         for (int j = 0; j < mColumn; j++) {
             for (int i = mRow - 1; i >= 0; i--) {
-                //Check tile state
+                // Check tile state
                 if (tileArray[i][j].isMovable()
                         && tileArray[i][j].isFruit()
                         && !tileArray[i][j].special) {
-                    //Assign new tile
+                    // Assign new tile
                     do {
                         tileArray[i][j].setRandomFruit();
                     } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
@@ -897,7 +904,7 @@ public class GameAlgorithm extends BaseAlgorithm {
         for (int j = 0; j < mColumn; j++) {
             for (int i = 0; i < mRow; i++) {
 
-                //Check lock
+                // Check lock
                 if (tileArray[i][j].lock) {
                     explodeLock(mAdvanceArray[i + 1][j], tileArray[i][j]);
                 }
