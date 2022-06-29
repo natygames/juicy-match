@@ -32,13 +32,13 @@ public class ParticleSystem extends ValueAnimator {
         this.mView = view;
         this.mBound = new Rect(bound);
         this.mPaint = new Paint();
-        //partLen is pieces amount
+        // Set pieces amount
         this.mParticlesArray = new Particle[partLen * partLen];
         Random random = new Random(System.currentTimeMillis());
-        //Pieces width and height
+        // Pieces width and height
         int w = bitmap.getWidth() / (partLen + 2);
         int h = bitmap.getHeight() / (partLen + 2);
-        //Generate Pieces
+        // Generate Pieces
         for (int i = 0; i < partLen; i++) {
             for (int j = 0; j < partLen; j++) {
                 mParticlesArray[(i * partLen) + j] = generateParticle(bitmap.getPixel((j + 1) * w, (i + 1) * h), random);

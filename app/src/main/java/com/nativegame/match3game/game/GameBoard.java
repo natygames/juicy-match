@@ -71,7 +71,7 @@ public class GameBoard {
         grid_board.getLayoutParams().width = mTileSize * mColumn;
         grid_board.getLayoutParams().height = mTileSize * mRow;
 
-        //Implement blocks
+        // Implement blocks
         int size = board_char.length;
         for (int i = 0; i < size; i++) {
             ImageView block = new ImageView(mActivity);
@@ -173,7 +173,7 @@ public class GameBoard {
             }
         }
 
-        //Set fruit board
+        // Set fruit board
         char[][] fruit_char = new char[mRow][mColumn];
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
@@ -182,13 +182,13 @@ public class GameBoard {
             }
         }
 
-        //Create fruit board
+        // Create fruit board
         fruit_board.setColumnCount(mColumn);
         fruit_board.setRowCount(mRow);
         fruit_board.getLayoutParams().width = mTileSize * mColumn;
         fruit_board.getLayoutParams().height = mTileSize * mRow;
 
-        //Set tile's parameter
+        // Set tile's parameter
         for (int j = 0; j < mColumn; j++) {
             for (int i = mRow - 1; i >= 0; i--) {
 
@@ -197,7 +197,7 @@ public class GameBoard {
                 tileArray[i][j].x = j * mTileSize;
                 tileArray[i][j].y = i * mTileSize;
 
-                //Set fruit kind
+                // Set fruit kind
                 switch (fruit_char[i][j]) {
                     case ('n'):
                         break;
@@ -273,8 +273,10 @@ public class GameBoard {
                 // Set random fruit
                 do {
                     tileArray[i][j].setRandomFruit();
-                } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind && tileArray[i + 2][j].kind == tileArray[i][j].kind)
-                        || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind && tileArray[i][j - 2].kind == tileArray[i][j].kind));
+                } while ((i < mRow - 2 && tileArray[i + 1][j].kind == tileArray[i][j].kind
+                        && tileArray[i + 2][j].kind == tileArray[i][j].kind)
+                        || (j >= 2 && tileArray[i][j - 1].kind == tileArray[i][j].kind
+                        && tileArray[i][j - 2].kind == tileArray[i][j].kind));
             }
         }
 
@@ -313,15 +315,15 @@ public class GameBoard {
         ice_board2.getLayoutParams().height = mTileSize * mRow;
 
 
-        //Set ice image
+        // Set ice image
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
 
-                //First layer
+                // First layer
                 ImageView ice = new ImageView(mActivity);
                 ice.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
 
-                //Second layer
+                // Second layer
                 ImageView ice2 = new ImageView(mActivity);
                 ice2.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
 
@@ -490,7 +492,6 @@ public class GameBoard {
          *
          */
 
-        char[] board_char = mLevel.board.toCharArray();
         char[][] advance_char = new char[mRow + 2][mColumn];
         for (int i = 0; i < mRow + 2; i++) {
             for (int j = 0; j < mColumn; j++) {
@@ -499,19 +500,19 @@ public class GameBoard {
             }
         }
 
-        //Arrow animation
+        // Arrow animation
         final Animation arrow_anim = AnimationUtils.loadAnimation(mActivity, R.anim.arrow_pulse);
 
-        //Create advance board
+        // Create advance board
         advance_board.setColumnCount(mColumn);
         advance_board.setRowCount(mRow + 2);
         advance_board.getLayoutParams().width = mTileSize * mColumn;
         advance_board.getLayoutParams().height = mTileSize * (mRow + 2);
 
-        //Set advance image
+        // Set advance image
         for (int i = 0; i < mRow + 2; i++) {
             for (int j = 0; j < mColumn; j++) {
-                //First layer
+                // First layer
                 ImageView advance = new ImageView(mActivity);
                 advance.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
 

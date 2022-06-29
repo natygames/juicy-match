@@ -15,12 +15,12 @@ import com.nativegame.match3game.engine.Sprite;
  */
 
 public class Tile extends Sprite {
-    public int row = 0, col = 0;                // Tile position
-    public int kind = 0, match = 0, ice = 0, layer = 0;       // Tile attribute
-    public int bounce = 0, wait = 0, diagonal = 0;            // Tile moving
-    public boolean invalid = false, empty = false, tube = false;  // Tile movement
-    public boolean special = false, lock = false, breakable = false;     // Tile attribute
-    public boolean isExplode = false, isUpgrade = false, isAnimate = false, isChosen = false;       //Tile state
+    public int row = 0, col = 0;   // Tile position
+    public int kind = 0, match = 0, ice = 0, layer = 0;   // Tile attribute
+    public int bounce = 0, wait = 0, diagonal = 0;   // Tile moving
+    public boolean invalid = false, empty = false, tube = false;   // Tile movement
+    public boolean special = false, lock = false, breakable = false;   // Tile attribute
+    public boolean isExplode = false, isUpgrade = false, isAnimate = false, isChosen = false;   //Tile state
     public char direct = 'N', specialCombine = 'N';
     public int iceCreamTarget = 0;
     public boolean entryPoint = false;
@@ -145,7 +145,7 @@ public class Tile extends Sprite {
     }
 
     public void setRandomFruit() {
-        //Assign fruit kind
+        // Assign fruit kind
         kind = TileUtils.FRUITS[(int) (Math.random() * mFruitNum)];
     }
 }

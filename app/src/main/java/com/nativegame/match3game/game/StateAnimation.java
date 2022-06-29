@@ -30,13 +30,13 @@ public class StateAnimation {
     private final MainActivity mActivity;
     private final RelativeLayout mRoot;
     private final int mTileSize;
-    //Duration
+    // Duration
     private static final int FALL_TIME_SHORT = 300;
     private static final int FALL_TIME_LONG = 500;
     private static final int PAUSE_TIME_SHORT = 200;
     private static final int PAUSE_TIME_LONG = 400;
     private static final int RETRY_TIME = 500;
-    //Interpolator
+    // Interpolator
     private final AnticipateInterpolator mAnticipateInterpolator = new AnticipateInterpolator();
     private final OvershootInterpolator mOvershootInterpolator = new OvershootInterpolator();
     private final DecelerateInterpolator mDecelerateInterpolator = new DecelerateInterpolator();
@@ -73,17 +73,10 @@ public class StateAnimation {
     }
 
     public void startGame(LevelType type) {
-        /* This method create guide when fruit begin
-         *  type is the mTarget type:
-         *  1 for reach mTarget score
-         *  2 for mCollect items
-         *  3 for eliminate item
-         */
-
-        //Add black screen
+        // Add black screen
         createBlackScreen();
 
-        //Add board
+        // Add board
         LinearLayout board = new LinearLayout(mActivity);
         board.setOrientation(LinearLayout.HORIZONTAL);
         board.setGravity(Gravity.CENTER);
@@ -92,7 +85,7 @@ public class StateAnimation {
         board.setY(-mTileSize * 4);
         board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mTileSize * 4));
         mRoot.addView(board);
-        //Add guide
+        // Add guide
         ImageView guide = new ImageView(mActivity);
         if (type == LevelType.LEVEL_TYPE_SCORE) {
             guide.setImageResource(R.drawable.guide_taeget_score);
@@ -133,7 +126,7 @@ public class StateAnimation {
         guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 7, mTileSize * 2));
         board.addView(guide);
 
-        //Set animation (total 2000 ms)
+        // Set animation (total 2000 ms)
         board.animate().setDuration(FALL_TIME_LONG)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
                 .setInterpolator(mOvershootInterpolator)
@@ -162,7 +155,7 @@ public class StateAnimation {
     }
 
     public void refreshGame() {
-        //Add guide
+        // Add guide
         ImageView refresh = new ImageView(mActivity);
         refresh.setImageResource(R.drawable.guide_refresh);
         refresh.setX((int) (mRoot.getWidth() / 2 - mTileSize * 4));
@@ -170,7 +163,7 @@ public class StateAnimation {
         refresh.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 3));
         mRoot.addView(refresh);
 
-        //Set animation (total 1600 ms)
+        // Set animation (total 1600 ms)
         refresh.animate().setDuration(FALL_TIME_LONG)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5))
                 .setInterpolator(mOvershootInterpolator)
@@ -198,13 +191,7 @@ public class StateAnimation {
     }
 
     public void startCombo(GameEvent gameEvent) {
-        /* This method create guide when player make combo
-         *  nice for 4 combo
-         * great for 5 combo
-         * wonderful for 6 combo
-         */
-
-        //Add guide
+        // Add guide
         ImageView guide = new ImageView(mActivity);
 
         switch (gameEvent) {
@@ -224,7 +211,7 @@ public class StateAnimation {
         guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 3));
         mRoot.addView(guide);
 
-        //Set animation (total 1300 ms)
+        // Set animation (total 1300 ms)
         guide.animate().setDuration(FALL_TIME_SHORT)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 1.5))
                 .setInterpolator(mDecelerateInterpolator)
@@ -253,7 +240,7 @@ public class StateAnimation {
     }
 
     public void startBonusTime() {
-        //Add guide
+        // Add guide
         ImageView bonusTime = new ImageView(mActivity);
         bonusTime.setImageResource(R.drawable.guide_bonus);
         bonusTime.setX((int) (mRoot.getWidth() / 2 - mTileSize * 4));
@@ -261,8 +248,7 @@ public class StateAnimation {
         bonusTime.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 8, mTileSize * 6));
         mRoot.addView(bonusTime);
 
-        //Set animation
-        //Set dropping
+        // Set animation
         bonusTime.animate().setDuration(FALL_TIME_LONG)
                 .y((float) (mRoot.getHeight() / 2 - mTileSize * 3))
                 .setInterpolator(mOvershootInterpolator)
@@ -290,15 +276,9 @@ public class StateAnimation {
     }
 
     public void gameOver(GameEvent gameEvent) {
-        /* This method create guide when fruit end
-         *  type is the state:
-         *  0 for player loss
-         *  1 for player win
-         */
-
-        //Add black screen
+        // Add black screen
         createBlackScreen();
-        //Add board
+        // Add board
         RelativeLayout board = new RelativeLayout(mActivity);
         board.setGravity(Gravity.CENTER);
         board.setBackgroundResource(R.drawable.guide_board);
@@ -306,7 +286,7 @@ public class StateAnimation {
         board.setY(-mTileSize * 4);
         board.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, mTileSize * 4));
         mRoot.addView(board);
-        //Add guide
+        // Add guide
         ImageView guide = new ImageView(mActivity);
 
         switch (gameEvent) {
@@ -321,33 +301,33 @@ public class StateAnimation {
         guide.setLayoutParams(new ViewGroup.LayoutParams(mTileSize * 7, mTileSize * 2));
         board.addView(guide);
 
-        //Set animation
+        // Set animation
         board.animate().setDuration(FALL_TIME_LONG).y((float) (mRoot.getHeight() / 2 - mTileSize * 2))
                 .setInterpolator(mOvershootInterpolator).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                board.animate().setDuration(PAUSE_TIME_LONG).alpha(1)
-                        .setListener(new AnimatorListenerAdapter() {
-                            @Override
-                            public void onAnimationEnd(Animator animation) {
-                                mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
-                                //Set retry
-                                board.animate().setDuration(RETRY_TIME).y(mRoot.getHeight())
-                                        .setInterpolator(mAnticipateInterpolator)
-                                        .setListener(new AnimatorListenerAdapter() {
-                                            @Override
-                                            public void onAnimationEnd(Animator animation) {
-                                                mRoot.removeAllViews();
-                                            }
-                                        });
-                            }
-                        });
-            }
-        });
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        board.animate().setDuration(PAUSE_TIME_LONG).alpha(1)
+                                .setListener(new AnimatorListenerAdapter() {
+                                    @Override
+                                    public void onAnimationEnd(Animator animation) {
+                                        mActivity.getSoundManager().playSoundForSoundEvent(SoundEvent.SWEEP2);
+                                        //Set retry
+                                        board.animate().setDuration(RETRY_TIME).y(mRoot.getHeight())
+                                                .setInterpolator(mAnticipateInterpolator)
+                                                .setListener(new AnimatorListenerAdapter() {
+                                                    @Override
+                                                    public void onAnimationEnd(Animator animation) {
+                                                        mRoot.removeAllViews();
+                                                    }
+                                                });
+                                    }
+                                });
+                    }
+                });
     }
 
     private void createBlackScreen() {
-        //Add black screen
+        // Add black screen
         ImageView black_screen = new ImageView(mActivity);
         black_screen.setImageResource(R.color.black);
         black_screen.setImageAlpha(150);

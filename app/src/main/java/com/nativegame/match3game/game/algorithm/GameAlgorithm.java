@@ -162,7 +162,7 @@ public class GameAlgorithm extends BaseAlgorithm {
 
         // Check hint
         if (!mSwapping && !mIsMoving) {
-            //Check is potential moving
+            // Check is potential moving
             if (!mMatchFinding && !mWaitFinding && mShowHint) {
                 //Show hint
                 mGameEngine.onGameEvent(GameEvent.START_HINT);
@@ -489,7 +489,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 && tileArray[i][j].kind == tileArray[i + 3][j].kind) {
                             // Check row for 5
                             if (i < mRow - 4 && tileArray[i][j].kind == tileArray[i + 4][j].kind) {
-                                //Add upgrade animation
+                                // Add upgrade animation
                                 mAnimationManager.upgrade2I_v(tileArray[i + 2][j]);
                                 mSoundManager.playSoundForSoundEvent(SoundEvent.ICE_CREAM_UPGRADE);
                                 tileArray[i][j].isUpgrade = true;
@@ -507,7 +507,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                         || (i + 1 == mSwapRow2 && j == mSwapCol2)) {
                                     // If tile is already special, do not add
                                     if (tileArray[i + 1][j].direct == 'N' && !tileArray[i + 1][j].isUpgrade) {
-                                        //Add upgrade animation
+                                        // Add upgrade animation
                                         mAnimationManager.upgrade2V_top(tileArray[i + 1][j]);
                                         mSoundManager.playSoundForSoundEvent(SoundEvent.FRUIT_UPGRADE);
                                         tileArray[i][j].isUpgrade = true;
@@ -557,7 +557,7 @@ public class GameAlgorithm extends BaseAlgorithm {
                                 }
                             }
                         } else {
-                            // Check up 3 in mRow, if any column tile is available, then can falling down
+                            // Check up 3 in row, if any column tile is available, then can falling down
                             for (int n = j - 1; n <= j + 1; n++) {
 
                                 if (n < 0 || n >= mColumn)
@@ -792,7 +792,12 @@ public class GameAlgorithm extends BaseAlgorithm {
                     case 'H':
                         tile1.match++;
                         tile2.match++;
-                        tile1.specialCombine = 'R';
+                        // Check reverse tile
+                        if (tile1.row == tile2.row) {
+                            tile1.specialCombine = 'R';
+                        } else {
+                            tile2.specialCombine = 'R';
+                        }
                         break;
                     case 'V':
                         tile1.match++;
@@ -820,7 +825,12 @@ public class GameAlgorithm extends BaseAlgorithm {
                     case 'V':
                         tile1.match++;
                         tile2.match++;
-                        tile2.specialCombine = 'R';
+                        // Check reverse tile
+                        if (tile1.row == tile2.row) {
+                            tile2.specialCombine = 'R';
+                        } else {
+                            tile1.specialCombine = 'R';
+                        }
                         break;
                     case 'S':
                         tile1.match++;

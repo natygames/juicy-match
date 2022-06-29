@@ -71,13 +71,13 @@ public class LevelManager {
                 tagName = parser.getName();
 
                 if (mCurrentLevel.equals(tagName)) {
-                    // Initialize mLevel when finding mCurrentLevel
+                    // Initialize level when finding current Level
                     mLevel = new Level();
                 } else if (mNextLevel.equals(tagName)) {
-                    // Break loop when finish assign mLevel data
+                    // Break loop when finish assign level data
                     break;
                 } else if (this.mLevel != null) {
-                    // Assign mLevel data when found
+                    // Assign level data when found
                     switch (tagName) {
                         case ("target_type"):
                             mLevel.setLevelType(parser.nextText());

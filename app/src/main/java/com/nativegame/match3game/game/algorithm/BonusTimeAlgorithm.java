@@ -199,7 +199,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                                 tileArray[i][j].kind == tileArray[i][j + 1].kind) {
                             // Check potential match
                             if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j - 1].kind
-                                    && tileArray[i - 1][j - 1].match > 0) {   //Top left
+                                    && tileArray[i - 1][j - 1].match > 0) {   // Top left
                                 // If tile is coco, do not add
                                 if (!tileArray[i][j - 1].special) {
                                     if (i > 1 && tileArray[i - 2][j - 1].kind == tileArray[i][j].kind) {
@@ -233,7 +233,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j - 1].kind
-                                    && tileArray[i + 1][j - 1].match > 0) {   //Bottom Left
+                                    && tileArray[i + 1][j - 1].match > 0) {   // Bottom Left
                                 // If tile is coco, do not add
                                 if (!tileArray[i][j - 1].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j - 1].kind == tileArray[i][j].kind) {
@@ -253,7 +253,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j].kind
-                                    && tileArray[i - 1][j].match > 0) {   //Top Center
+                                    && tileArray[i - 1][j].match > 0) {   // Top Center
                                 // If tile is coco, do not add
                                 if (!tileArray[i][j].special) {
                                     if (i > 1 && tileArray[i - 2][j].kind == tileArray[i][j].kind) {
@@ -287,7 +287,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j].kind
-                                    && tileArray[i + 1][j].match > 0) {   //Bottom Center
+                                    && tileArray[i + 1][j].match > 0) {   // Bottom Center
                                 // If tile is coco, do not add
                                 if (!tileArray[i][j].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j].kind == tileArray[i][j].kind) {
@@ -307,7 +307,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i > 0 && tileArray[i][j].kind == tileArray[i - 1][j + 1].kind
-                                    && tileArray[i - 1][j + 1].match > 0) {   //Top Right
+                                    && tileArray[i - 1][j + 1].match > 0) {   // Top Right
                                 // If tile is coco, do not add
                                 if (!tileArray[i][j + 1].special) {
                                     if (i > 1 && tileArray[i - 2][j + 1].kind == tileArray[i][j].kind) {
@@ -341,7 +341,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                                     }
                                 }
                             } else if (i < mRow - 1 && tileArray[i][j].kind == tileArray[i + 1][j + 1].kind
-                                    && tileArray[i + 1][j + 1].match > 0) {   //Bottom Right
+                                    && tileArray[i + 1][j + 1].match > 0) {   // Bottom Right
                                 // If tile is coco, do not add
                                 if (!tileArray[i][j + 1].special) {
                                     if (i < mRow - 2 && tileArray[i + 2][j + 1].kind == tileArray[i][j].kind) {
@@ -473,7 +473,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                                 }
                             }
                         } else {
-                            // Check up 3 in mRow, if any mColumn tile is available, then can falling down
+                            // Check up 3 in row, if any mColumn tile is available, then can falling down
                             for (int n = j - 1; n <= j + 1; n++) {
 
                                 if (n < 0 || n >= mColumn)

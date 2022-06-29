@@ -133,7 +133,7 @@ public class Hint extends GameObject {
          * 5. ice cream
          */
 
-        //Check special combine
+        // Check special combine
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn - 1; j++) {
 
@@ -155,7 +155,7 @@ public class Hint extends GameObject {
                 if (!mTileArray[i][j].invalid && !mTileArray[i + 1][j].invalid
                         && mTileArray[i][j].special && mTileArray[i + 1][j].special) {
 
-                    //Check honey
+                    // Check honey
                     hintArray.add(mTileArray[i][j].mImage);
                     hintArray.add(mTileArray[i + 1][j].mImage);
                     return true;
@@ -163,10 +163,10 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 5 in column
+        // Check match 5 in column
         for (int i = 0; i < mRow - 4; i++) {
             for (int j = 0; j < mColumn; j++) {
-                //Check tile state
+                // Check tile state
                 if (!mTileArray[i][j].empty && mTileArray[i][j].isFruit()) {
 
                     int kind = mTileArray[i][j].kind;
@@ -174,9 +174,9 @@ public class Hint extends GameObject {
                             && kind == mTileArray[i + 3][j].kind
                             && kind == mTileArray[i + 4][j].kind) {
 
-                        //Check potential match
+                        // Check potential match
                         if (j > 0 && kind == mTileArray[i + 2][j - 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 2][j - 1].isMovable()
                                     && mTileArray[i + 2][j].isMovable()) {
                                 // O
@@ -192,7 +192,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (j < mColumn - 1 && kind == mTileArray[i + 2][j + 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 2][j + 1].isMovable()
                                     && mTileArray[i + 2][j].isMovable()) {
                                 //O
@@ -213,10 +213,10 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 5 in row
+        // Check match 5 in row
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn - 4; j++) {
-                //Check tile state
+                // Check tile state
                 if (!mTileArray[i][j].empty && mTileArray[i][j].isFruit()) {
 
                     int kind = mTileArray[i][j].kind;
@@ -224,9 +224,9 @@ public class Hint extends GameObject {
                             && kind == mTileArray[i][j + 3].kind
                             && kind == mTileArray[i][j + 4].kind) {
 
-                        //Check potential match
+                        // Check potential match
                         if (i > 0 && kind == mTileArray[i - 1][j + 2].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j + 2].isMovable()
                                     && mTileArray[i][j + 2].isMovable()) {
                                 //  O
@@ -239,7 +239,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (i < mRow - 1 && kind == mTileArray[i + 1][j + 2].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j + 2].isMovable()
                                     && mTileArray[i][j + 2].isMovable()) {
                                 //OO OO
@@ -257,22 +257,22 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 4 T L in column
+        // Check match 4 T L in column
         for (int i = 0; i < mRow - 1; i++) {
             for (int j = 0; j < mColumn; j++) {
 
-                //Check tile state
+                // Check tile state
                 if (!mTileArray[i][j].empty && mTileArray[i][j].isFruit()) {
 
                     int kind = mTileArray[i][j].kind;
-                    //Check next 1 mRow
+                    // Check next 1 row
                     if (kind == mTileArray[i + 1][j].kind) {
 
-                        //Check potential match
+                        // Check potential match
                         if (i < mRow - 3 && j > 0
                                 && kind == mTileArray[i + 2][j - 1].kind
                                 && kind == mTileArray[i + 3][j].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 2][j - 1].isMovable()
                                     && mTileArray[i + 2][j].isMovable()) {
                                 // O
@@ -309,7 +309,7 @@ public class Hint extends GameObject {
                         } else if (i < mRow - 3 && j < mColumn - 1
                                 && kind == mTileArray[i + 2][j + 1].kind
                                 && kind == mTileArray[i + 3][j].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 2][j + 1].isMovable()
                                     && mTileArray[i + 2][j].isMovable()) {
                                 //O
@@ -332,7 +332,7 @@ public class Hint extends GameObject {
                         } else if (i > 1 && j > 0
                                 && kind == mTileArray[i - 1][j - 1].kind
                                 && kind == mTileArray[i - 2][j].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j - 1].isMovable() && mTileArray[i - 1][j].isMovable()) {
                                 // O
                                 //O
@@ -368,7 +368,7 @@ public class Hint extends GameObject {
                         } else if (i > 1 && j < mColumn - 1
                                 && kind == mTileArray[i - 1][j + 1].kind
                                 && kind == mTileArray[i - 2][j].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j + 1].isMovable() && mTileArray[i - 1][j].isMovable()) {
                                 //O
                                 // O
@@ -393,21 +393,21 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 4 T L in row
+        // Check match 4 T L in row
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn - 1; j++) {
                 if (!mTileArray[i][j].empty
                         && mTileArray[i][j].isFruit()) {
 
-                    //Check next 1 mColumn
+                    // Check next 1 column
                     if (mTileArray[i][j].kind == mTileArray[i][j + 1].kind) {
 
                         int kind = mTileArray[i][j].kind;
-                        //Check potential match
+                        // Check potential match
                         if (i > 0 && j < mColumn - 3
                                 && kind == mTileArray[i - 1][j + 2].kind
                                 && kind == mTileArray[i][j + 3].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j + 2].isMovable()
                                     && mTileArray[i][j + 2].isMovable()) {
                                 //  O
@@ -440,7 +440,7 @@ public class Hint extends GameObject {
                         } else if (i < mRow - 1 && j < mColumn - 3
                                 && kind == mTileArray[i + 1][j + 2].kind
                                 && kind == mTileArray[i][j + 3].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j + 2].isMovable()
                                     && mTileArray[i][j + 2].isMovable()) {
                                 //OO O
@@ -460,7 +460,7 @@ public class Hint extends GameObject {
                         } else if (i > 0 && j > 1
                                 && kind == mTileArray[i - 1][j - 1].kind
                                 && kind == mTileArray[i][j - 2].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j - 1].isMovable()
                                     && mTileArray[i][j - 1].isMovable()) {
                                 // O
@@ -493,7 +493,7 @@ public class Hint extends GameObject {
                         } else if (i < mRow - 1 && j > 1
                                 && kind == mTileArray[i + 1][j - 1].kind
                                 && kind == mTileArray[i][j - 2].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j - 1].isMovable()
                                     && mTileArray[i][j - 1].isMovable()) {
                                 //O OO
@@ -516,20 +516,20 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in column 1
+        // Check match 3 in column 1
         for (int i = 0; i < mRow - 1; i++) {
             for (int j = 0; j < mColumn; j++) {
-                //Check tile state
+                // Check tile state
                 if (!mTileArray[i][j].empty
                         && mTileArray[i][j].isFruit()) {
 
                     int kind = mTileArray[i][j].kind;
-                    //Check next 1 mRow
+                    // Check next 1 row
                     if (kind == mTileArray[i + 1][j].kind) {
-                        //Check potential match
+                        // Check potential match
                         if (i < mRow - 2 && j > 0
                                 && kind == mTileArray[i + 2][j - 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 2][j - 1].isMovable()
                                     && mTileArray[i + 2][j].isMovable()) {
                                 // O
@@ -542,7 +542,7 @@ public class Hint extends GameObject {
                             }
                         } else if (i < mRow - 2 && j < mColumn - 1
                                 && kind == mTileArray[i + 2][j + 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 2][j + 1].isMovable()
                                     && mTileArray[i + 2][j].isMovable()) {
                                 //O
@@ -555,7 +555,7 @@ public class Hint extends GameObject {
                             }
                         } else if (i > 0 && j > 0
                                 && kind == mTileArray[i - 1][j - 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j - 1].isMovable()
                                     && mTileArray[i - 1][j].isMovable()) {
                                 //O
@@ -568,7 +568,7 @@ public class Hint extends GameObject {
                             }
                         } else if (i > 0 && j < mColumn - 1
                                 && kind == mTileArray[i - 1][j + 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j + 1].isMovable()
                                     && mTileArray[i - 1][j].isMovable()) {
                                 // O
@@ -585,20 +585,20 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in column 2
+        // Check match 3 in column 2
         for (int i = 0; i < mRow - 2; i++) {
             for (int j = 0; j < mColumn; j++) {
-                //Check tile state
+                // Check tile state
                 if (!mTileArray[i][j].empty
                         && mTileArray[i][j].isFruit()) {
 
                     int kind = mTileArray[i][j].kind;
-                    //Check next 2 mRow
+                    // Check next 2 row
                     if (kind == mTileArray[i + 2][j].kind) {
 
-                        //Check potential match
+                        // Check potential match
                         if (j > 0 && kind == mTileArray[i + 1][j - 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j - 1].isMovable()
                                     && mTileArray[i + 1][j].isMovable()) {
                                 // O
@@ -610,7 +610,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (j < mColumn - 1 && kind == mTileArray[i + 1][j + 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j + 1].isMovable()
                                     && mTileArray[i + 1][j].isMovable()) {
                                 //O
@@ -622,7 +622,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (i < mRow - 3 && kind == mTileArray[i + 3][j].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i][j].isMovable()
                                     && mTileArray[i + 1][j].isMovable()) {
                                 //O
@@ -635,7 +635,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (i > 0 && kind == mTileArray[i - 1][j].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j].isMovable()
                                     && mTileArray[i + 2][j].isMovable()) {
                                 //O
@@ -653,18 +653,18 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in row 1
+        // Check match 3 in row 1
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn - 1; j++) {
                 if (!mTileArray[i][j].empty && mTileArray[i][j].isFruit()) {
 
                     int kind = mTileArray[i][j].kind;
-                    //Check next 1 mColumn
+                    // Check next 1 column
                     if (kind == mTileArray[i][j + 1].kind) {
-                        //Check potential match
+                        // Check potential match
                         if (i > 0 && j < mColumn - 2
                                 && kind == mTileArray[i - 1][j + 2].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j + 2].isMovable()
                                     && mTileArray[i][j + 2].isMovable()) {
                                 //  O
@@ -676,7 +676,7 @@ public class Hint extends GameObject {
                             }
                         } else if (i < mRow - 1 && j < mColumn - 2
                                 && kind == mTileArray[i + 1][j + 2].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j + 2].isMovable()
                                     && mTileArray[i][j + 2].isMovable()) {
                                 //OO
@@ -688,7 +688,7 @@ public class Hint extends GameObject {
                             }
                         } else if (i > 0 && j > 0
                                 && kind == mTileArray[i - 1][j - 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j - 1].isMovable()
                                     && mTileArray[i][j - 1].isMovable()) {
                                 //O
@@ -700,7 +700,7 @@ public class Hint extends GameObject {
                             }
                         } else if (i < mRow - 1 && j > 0
                                 && kind == mTileArray[i + 1][j - 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j - 1].isMovable()
                                     && mTileArray[i][j - 1].isMovable()) {
                                 // OO
@@ -716,19 +716,19 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check match 3 in row 2
+        // Check match 3 in row 2
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn - 2; j++) {
                 if (!mTileArray[i][j].empty
                         && mTileArray[i][j].isFruit()) {
 
                     int kind = mTileArray[i][j].kind;
-                    //Check next 2 mColumn
+                    // Check next 2 column
                     if (kind == mTileArray[i][j + 2].kind) {
 
-                        //Check potential match
+                        // Check potential match
                         if (i > 0 && kind == mTileArray[i - 1][j + 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i - 1][j + 1].isMovable()
                                     && mTileArray[i][j + 1].isMovable()) {
                                 // O
@@ -739,7 +739,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (i < mRow - 1 && kind == mTileArray[i + 1][j + 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i + 1][j + 1].isMovable()
                                     && mTileArray[i][j + 1].isMovable()) {
                                 //O O
@@ -750,7 +750,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (j < mColumn - 3 && kind == mTileArray[i][j + 3].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i][j].isMovable()
                                     && mTileArray[i][j + 1].isMovable()) {
                                 //O OO
@@ -760,7 +760,7 @@ public class Hint extends GameObject {
                                 return true;
                             }
                         } else if (j > 0 && kind == mTileArray[i][j - 1].kind) {
-                            //Check is swappable
+                            // Check is swappable
                             if (mTileArray[i][j + 2].isMovable()
                                     && mTileArray[i][j + 1].isMovable()) {
                                 //OO O
@@ -775,13 +775,13 @@ public class Hint extends GameObject {
             }
         }
 
-        //Check ice cream
+        // Check ice cream
         for (int i = 0; i < mRow; i++) {
             for (int j = 0; j < mColumn; j++) {
 
                 if (mTileArray[i][j].direct == 'I' && mTileArray[i][j].isMovable()) {
 
-                    //Check nearby fruit is swappable
+                    // Check nearby fruit is swappable
                     if (i > 0 && mTileArray[i - 1][j].isMovable()
                             && mTileArray[i - 1][j].isFruit()) {
                         hintArray.add(mTileArray[i][j].mImage);
