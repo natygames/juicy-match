@@ -1,48 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Text in game -->
-    <dimen name="text_score_size">35sp</dimen>
-    <dimen name="text_move_size">25sp</dimen>
-    <dimen name="text_fruit_size">20sp</dimen>
-    <dimen name="text_booster_amount_size">24sp</dimen>
-    <dimen name="text_skip_size">56sp</dimen>
+    <dimen name="text_score_size">32sp</dimen>
+    <dimen name="text_move_size">23sp</dimen>
+    <dimen name="text_fruit_size">19sp</dimen>
+    <dimen name="text_booster_amount_size">23sp</dimen>
+    <dimen name="text_skip_size">52sp</dimen>
 
     <!-- Text in loading -->
-    <dimen name="text_loading_size">70sp</dimen>
+    <dimen name="text_loading_size">65sp</dimen>
 
     <!-- Text in map -->
-    <dimen name="text_level_size">35sp</dimen>
-    <dimen name="text_field_size">28sp</dimen>
+    <dimen name="text_level_size">32sp</dimen>
+    <dimen name="text_field_size">26sp</dimen>
 
     <!-- Text in win_dialog -->
-    <dimen name="text_win_dialog_size">70sp</dimen>
+    <dimen name="text_win_dialog_size">55sp</dimen>
 
     <!-- Text in dialog -->
-    <dimen name="text_dialog_small_size">28sp</dimen>
-    <dimen name="text_dialog_size">42sp</dimen>
-    <dimen name="text_dialog_large_size">50sp</dimen>
+    <dimen name="text_dialog_small_size">26sp</dimen>
+    <dimen name="text_dialog_size">39sp</dimen>
+    <dimen name="text_dialog_large_size">45sp</dimen>
 
     <!-- Image width -->
-    <dimen name="image_logo_width">480dp</dimen>
-    <dimen name="image_logo_background_width">550dp</dimen>
+    <dimen name="image_logo_width">455dp</dimen>
+    <dimen name="image_logo_background_width">520dp</dimen>
 
-    <dimen name="image_btn_width">230dp</dimen>
-    <dimen name="image_btn_height">115dp</dimen>
-    <dimen name="image_btn_small_width">170dp</dimen>
-    <dimen name="image_btn_small_height">85dp</dimen>
-    <dimen name="image_round_btn_width">70dp</dimen>
+    <dimen name="image_btn_width">208dp</dimen>
+    <dimen name="image_btn_height">104dp</dimen>
+    <dimen name="image_btn_small_width">156dp</dimen>
+    <dimen name="image_btn_small_height">78dp</dimen>
+    <dimen name="image_round_btn_width">65dp</dimen>
+    <dimen name="image_btn_shop_width">169dp</dimen>
 
-    <dimen name="image_field">170dp</dimen>
-    <dimen name="image_progressbar_width">350dp</dimen>
-
-    <dimen name="image_shop_width">196dp</dimen>
+    <dimen name="image_field">156dp</dimen>
+    <dimen name="image_progressbar_width">325dp</dimen>
 
     <!-- Dialog width -->
-    <dimen name="dialog_width">420dp</dimen>
-    <dimen name="dialog_map_width">490dp</dimen>
-    <dimen name="dialog_height">280dp</dimen>
-    <dimen name="dialog_setting_height">490dp</dimen>
-    <dimen name="dialog_level_height">560dp</dimen>
+    <dimen name="dialog_width">390dp</dimen>
+    <dimen name="dialog_map_width">455dp</dimen>
+    <dimen name="dialog_height">260dp</dimen>
+    <dimen name="dialog_setting_height">455dp</dimen>
+    <dimen name="dialog_level_height">520dp</dimen>
 
     <!-- Margin -->
     <dimen name="margin_small">7dp</dimen>

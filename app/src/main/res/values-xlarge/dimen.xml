@@ -15,7 +15,7 @@
     <dimen name="text_field_size">36sp</dimen>
 
     <!-- Text in win_dialog -->
-    <dimen name="text_win_dialog_size">90sp</dimen>
+    <dimen name="text_win_dialog_size">75sp</dimen>
 
     <!-- Text in dialog -->
     <dimen name="text_dialog_small_size">36sp</dimen>
@@ -31,11 +31,10 @@
     <dimen name="image_btn_small_width">216dp</dimen>
     <dimen name="image_btn_small_height">108dp</dimen>
     <dimen name="image_round_btn_width">90dp</dimen>
+    <dimen name="image_btn_shop_width">234dp</dimen>
 
     <dimen name="image_field">216dp</dimen>
     <dimen name="image_progressbar_width">450dp</dimen>
-
-    <dimen name="image_shop_width">250dp</dimen>
 
     <!-- Dialog width -->
     <dimen name="dialog_width">540dp</dimen>
