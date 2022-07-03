@@ -84,8 +84,8 @@ public class WinDialogFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         // Init view
-        TextView textView = (TextView) getView().findViewById(R.id.txt_level_win);
-        textView.setText("Level " + String.valueOf(mLevel));
+        TextView textView = (TextView) getView().findViewById(R.id.txt_win_level);
+        textView.setText(getResources().getString(R.string.txt_level, mLevel));
         mDialog = (ConstraintLayout) getView().findViewById(R.id.dialog_win);
         mStar1 = (ImageView) getView().findViewById(R.id.image_star1);
         mStar2 = (ImageView) getView().findViewById(R.id.image_star2);
@@ -101,7 +101,7 @@ public class WinDialogFragment extends BaseFragment {
 
     private void init() {
         // Init button
-        ImageButton btnNext = (ImageButton) getView().findViewById(R.id.btn_next_win);
+        ImageButton btnNext = (ImageButton) getView().findViewById(R.id.btn_win_next);
         Utils.createButtonEffect(btnNext);
         btnNext.setScaleX(0);
         btnNext.setScaleY(0);
@@ -139,7 +139,7 @@ public class WinDialogFragment extends BaseFragment {
         mDialog.startAnimation(inAnim);
 
         // Run score
-        TextView mScoreText = (TextView) getView().findViewById(R.id.txt_score_win);
+        TextView mScoreText = (TextView) getView().findViewById(R.id.txt_win_score);
         ValueAnimator animator = ValueAnimator.ofFloat(mScore - 150, mScore);
         animator.setDuration(2000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

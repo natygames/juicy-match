@@ -32,29 +32,29 @@ public class BasicInputController extends InputController {
             int action = event.getActionMasked();
             if (action == MotionEvent.ACTION_DOWN) {
 
-                mX_Down = (int) event.getX();
-                mY_Down = (int) event.getY();
-                // Log.d("input", "(" + mX_Down + ", " + mY_Down + ")");
+                mXDown = (int) event.getX();
+                mYDown = (int) event.getY();
+                // Log.d("input", "(" + mXDown + ", " + mYDown + ")");
                 mGameEngine.onGameEvent(GameEvent.PLAYER_TOUCH);
 
             } else if (action == MotionEvent.ACTION_UP) {
 
-                mX_Up = (int) event.getX();
-                mY_Up = (int) event.getY();
-                // Log.d("input", "(" + mX_Up + ", " + mY_Up + ")");
+                mXUp = (int) event.getX();
+                mYUp = (int) event.getY();
+                // Log.d("input", "(" + mXUp + ", " + mYUp + ")");
                 mGameEngine.onGameEvent(GameEvent.PLAYER_RELEASE);
 
                 // Check player input
                 if (mUsingHammer) {
                     mGameEngine.onGameEvent(GameEvent.PLAYER_USE_HAMMER);
                 } else if (mUsingGloves) {
-                    if (Math.abs(mX_Down - mX_Up) > 50 || Math.abs(mY_Down - mY_Up) > 50) {
+                    if (Math.abs(mXDown - mXUp) > 50 || Math.abs(mYDown - mYUp) > 50) {
                         mGameEngine.onGameEvent(GameEvent.PLAYER_USE_GLOVES);
                     }
                 } else if (mUsingBomb) {
                     mGameEngine.onGameEvent(GameEvent.PLAYER_USE_BOMB);
                 } else {
-                    if (Math.abs(mX_Down - mX_Up) > 50 || Math.abs(mY_Down - mY_Up) > 50) {
+                    if (Math.abs(mXDown - mXUp) > 50 || Math.abs(mYDown - mYUp) > 50) {
                         mGameEngine.onGameEvent(GameEvent.PLAYER_MOVE);
                     }
                 }

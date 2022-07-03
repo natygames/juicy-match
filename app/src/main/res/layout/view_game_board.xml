@@ -329,7 +329,7 @@
             android:alpha="0.4"
             android:fontFamily="@font/baloo"
             android:gravity="center"
-            android:text="@string/txt_game_level"
+            android:text="@string/txt_lv"
             android:textColor="@color/black"
             android:textSize="@dimen/text_fruit_size"
             android:textStyle="bold"

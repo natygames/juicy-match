@@ -60,7 +60,7 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
 
         // Init level text
         TextView txtLevel = (TextView) findViewById(R.id.txt_dialog_level);
-        txtLevel.setText(mParent.getResources().getString(R.string.txt_dialog_level, mLevel.mLevel));
+        txtLevel.setText(mParent.getResources().getString(R.string.txt_level, mLevel.mLevel));
 
         // Init star
         ImageView imgStar = (ImageView) findViewById(R.id.image_dialog_star);

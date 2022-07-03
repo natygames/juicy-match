@@ -79,7 +79,7 @@ public class GameFragment extends BaseFragment {
 
         // Init level title
         TextView textView = (TextView) getView().findViewById(R.id.txt_level);
-        textView.setText("LV. " + String.valueOf(mLevel));
+        textView.setText(getResources().getString(R.string.txt_lv, mLevel));
 
         // Init pause button
         ImageButton imageButton = (ImageButton) getView().findViewById(R.id.btn_pause);

@@ -30,14 +30,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txt_level_win"
+            android:id="@+id/txt_win_level"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/ribbon"
             android:fontFamily="@font/baloo"
             android:gravity="center"
             android:paddingBottom="@dimen/margin_large"
-            android:text="@string/txt_win_level"
+            android:text="@string/txt_level"
             android:textColor="@color/white"
             android:textSize="@dimen/text_win_dialog_size"
             android:textStyle="bold"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toTopOf="@id/star3" />
 
         <TextView
-            android:id="@+id/txt_score_win"
+            android:id="@+id/txt_win_score"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/board_final_score"
@@ -141,14 +141,14 @@
             app:layout_constraintTop_toTopOf="@id/guideline_star_4" />
 
         <ImageButton
-            android:id="@+id/btn_next_win"
+            android:id="@+id/btn_win_next"
             android:layout_width="@dimen/image_btn_width"
             android:layout_height="@dimen/image_btn_height"
             android:background="@drawable/btn_next"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_score_win"
+            app:layout_constraintTop_toBottomOf="@id/txt_win_score"
             app:layout_constraintVertical_bias="0.3" />
 
         <androidx.constraintlayout.widget.Guideline

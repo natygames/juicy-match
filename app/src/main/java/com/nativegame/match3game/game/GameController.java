@@ -175,8 +175,8 @@ public class GameController extends GameObject {
                 if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
                     return;
                 }
-                int touchCol = mInputController.mX_Down / mTileSize;
-                int touchRow = mInputController.mY_Down / mTileSize;
+                int touchCol = mInputController.mXDown / mTileSize;
+                int touchRow = mInputController.mYDown / mTileSize;
                 mTileArray[touchRow][touchCol].isChosen = true;
                 break;
             case PLAYER_RELEASE:
@@ -184,8 +184,8 @@ public class GameController extends GameObject {
                 if (mState != GameControllerState.PLAY_GAME || !mAlgorithm.canPlayerSwap()) {
                     return;
                 }
-                int releaseCol = mInputController.mX_Down / mTileSize;
-                int releaseRow = mInputController.mY_Down / mTileSize;
+                int releaseCol = mInputController.mXDown / mTileSize;
+                int releaseRow = mInputController.mYDown / mTileSize;
                 mTileArray[releaseRow][releaseCol].isChosen = false;
                 break;
             case PLAYER_MOVE:
@@ -308,8 +308,8 @@ public class GameController extends GameObject {
 
     private void useHammer() {
         // Get the tile player press from inputController
-        int swapCol = mInputController.mX_Down / mTileSize;
-        int swapRow = mInputController.mY_Down / mTileSize;
+        int swapCol = mInputController.mXDown / mTileSize;
+        int swapRow = mInputController.mYDown / mTileSize;
 
         // Check is valid tile
         if (mTileArray[swapRow][swapCol].empty
@@ -331,30 +331,30 @@ public class GameController extends GameObject {
 
     private void useGloves() {
         // Get the tile player press from inputController
-        int swapCol = mInputController.mX_Down / mTileSize;
-        int swapRow = mInputController.mY_Down / mTileSize;
+        int swapCol = mInputController.mXDown / mTileSize;
+        int swapRow = mInputController.mYDown / mTileSize;
         int swapCol2 = 0;
         int swapRow2 = 0;
 
-        if (mInputController.mX_Down - mInputController.mX_Up < -SWAP_THRESHOLD) {
+        if (mInputController.mXDown - mInputController.mXUp < -SWAP_THRESHOLD) {
             // Swap right
             if (swapCol >= mColumn - 1)
                 return;
             swapCol2 = swapCol + 1;
             swapRow2 = swapRow;
-        } else if (mInputController.mX_Down - mInputController.mX_Up > SWAP_THRESHOLD) {
+        } else if (mInputController.mXDown - mInputController.mXUp > SWAP_THRESHOLD) {
             // Swap left
             if (swapCol <= 0)
                 return;
             swapCol2 = swapCol - 1;
             swapRow2 = swapRow;
-        } else if (mInputController.mY_Down - mInputController.mY_Up > SWAP_THRESHOLD) {
+        } else if (mInputController.mYDown - mInputController.mYUp > SWAP_THRESHOLD) {
             // Swap up
             if (swapRow <= 0)
                 return;
             swapCol2 = swapCol;
             swapRow2 = swapRow - 1;
-        } else if (mInputController.mY_Down - mInputController.mY_Up < -SWAP_THRESHOLD) {
+        } else if (mInputController.mYDown - mInputController.mYUp < -SWAP_THRESHOLD) {
             // Swap down
             if (swapRow >= mRow - 1)
                 return;
@@ -389,8 +389,8 @@ public class GameController extends GameObject {
 
     private void useBomb() {
         // Get the tile player press from inputController
-        int swapCol = mInputController.mX_Down / mTileSize;
-        int swapRow = mInputController.mY_Down / mTileSize;
+        int swapCol = mInputController.mXDown / mTileSize;
+        int swapRow = mInputController.mYDown / mTileSize;
 
         // Check is valid tile
         if (mTileArray[swapRow][swapCol].empty)
@@ -411,30 +411,30 @@ public class GameController extends GameObject {
 
     private void swapTile() {
         // Get the tile player press from inputController
-        int swapCol = mInputController.mX_Down / mTileSize;
-        int swapRow = mInputController.mY_Down / mTileSize;
+        int swapCol = mInputController.mXDown / mTileSize;
+        int swapRow = mInputController.mYDown / mTileSize;
         int swapCol2 = 0;
         int swapRow2 = 0;
 
-        if (mInputController.mX_Down - mInputController.mX_Up < -SWAP_THRESHOLD) {
+        if (mInputController.mXDown - mInputController.mXUp < -SWAP_THRESHOLD) {
             // Swap right
             if (swapCol >= mColumn - 1)
                 return;
             swapCol2 = swapCol + 1;
             swapRow2 = swapRow;
-        } else if (mInputController.mX_Down - mInputController.mX_Up > SWAP_THRESHOLD) {
+        } else if (mInputController.mXDown - mInputController.mXUp > SWAP_THRESHOLD) {
             // Swap left
             if (swapCol <= 0)
                 return;
             swapCol2 = swapCol - 1;
             swapRow2 = swapRow;
-        } else if (mInputController.mY_Down - mInputController.mY_Up > SWAP_THRESHOLD) {
+        } else if (mInputController.mYDown - mInputController.mYUp > SWAP_THRESHOLD) {
             // Swap up
             if (swapRow <= 0)
                 return;
             swapCol2 = swapCol;
             swapRow2 = swapRow - 1;
-        } else if (mInputController.mY_Down - mInputController.mY_Up < -SWAP_THRESHOLD) {
+        } else if (mInputController.mYDown - mInputController.mYUp < -SWAP_THRESHOLD) {
             // Swap down
             if (swapRow >= mRow - 1)
                 return;

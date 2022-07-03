@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="@string/txt_dialog_level"
+        android:text="@string/txt_level"
         android:textColor="@color/white"
         android:textSize="@dimen/text_dialog_large_size"
         android:textStyle="bold"
