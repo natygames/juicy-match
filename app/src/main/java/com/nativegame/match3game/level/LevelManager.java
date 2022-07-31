@@ -1,6 +1,7 @@
 package com.nativegame.match3game.level;
 
 import android.content.Context;
+import android.util.Xml;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -20,103 +21,127 @@ import java.io.InputStream;
  */
 
 public class LevelManager {
+
     private static final String FILE_NAME = "data.xml";
+    private static final String FILE_TAG = "level";
+
+    private String mLevelTagName;
+
     private final Context mContext;
     private Level mLevel;
-    private String mCurrentLevel, mNextLevel;
 
     public LevelManager(Context context) {
         mContext = context;
+        // Use Xml.newPullParser()
+        // https://developer.android.com/training/basics/network-ops/xml
     }
 
     public Level getLevel(int level) {
-        mCurrentLevel = "level" + level;
-        mNextLevel = "level" + (level + 1);
-        parseXML();
-        mLevel.mLevel = level;
+        mLevelTagName = "level" + level;
+        mLevel = new Level(level);
+        // Open file
+        try {
+            InputStream file = mContext.getAssets().open(FILE_NAME);
+            parse(file);
+        } catch (IOException | XmlPullParserException e) {
+            e.printStackTrace();
+        }
+
         return mLevel;
     }
 
-    private void parseXML() {
-        XmlPullParserFactory parserFactory;
-        InputStream file = null;
+    private void parse(InputStream in) throws XmlPullParserException, IOException {
         try {
-            parserFactory = XmlPullParserFactory.newInstance();
-            XmlPullParser parser = parserFactory.newPullParser();
-            file = mContext.getAssets().open(FILE_NAME);
+            XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-            parser.setInput(file, null);
-            processParsing(parser);
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            parser.setInput(in, null);
+            parser.nextTag();
+            read(parser);
         } finally {
-            if (file != null) {
-                try {
-                    file.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            in.close();
+        }
+    }
+
+    private void read(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, FILE_TAG);
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            // Starts by looking for the level tag
+            if (name.equals(mLevelTagName)) {
+                readLevel(parser);
+            } else {
+                skip(parser);
             }
         }
     }
 
-    private void processParsing(XmlPullParser parser) throws IOException, XmlPullParserException {
-        int eventType = parser.getEventType();
-
-        while (eventType != XmlPullParser.END_DOCUMENT) {
-            String tagName = null;
-            if (eventType == XmlPullParser.START_TAG) {
-                tagName = parser.getName();
-
-                if (mCurrentLevel.equals(tagName)) {
-                    // Initialize level when finding current Level
-                    mLevel = new Level();
-                } else if (mNextLevel.equals(tagName)) {
-                    // Break loop when finish assign level data
-                    break;
-                } else if (this.mLevel != null) {
-                    // Assign level data when found
-                    switch (tagName) {
-                        case ("target_type"):
-                            mLevel.setLevelType(parser.nextText());
-                            break;
-                        case ("move"):
-                            mLevel.mMove = Integer.parseInt(parser.nextText());
-                            break;
-                        case ("fruit_num"):
-                            mLevel.mFruitNum = Integer.parseInt(parser.nextText());
-                            break;
-                        case ("column"):
-                            mLevel.mColumn = Integer.parseInt(parser.nextText());
-                            break;
-                        case ("row"):
-                            mLevel.mRow = Integer.parseInt(parser.nextText());
-                            break;
-                        case ("target"):
-                            mLevel.addTarget(Integer.parseInt(parser.nextText()));
-                            break;
-                        case ("collect"):
-                            mLevel.addCollect(parser.nextText());
-                            break;
-                        case ("board"):
-                            mLevel.board = parser.nextText();
-                            break;
-                        case ("fruit"):
-                            mLevel.fruit = parser.nextText();
-                            break;
-                        case ("ice"):
-                            mLevel.ice = parser.nextText();
-                            break;
-                        case ("ad"):
-                            mLevel.advance = parser.nextText();
-                            break;
-                    }
-                }
+    private void readLevel(XmlPullParser parser) throws XmlPullParserException, IOException {
+        parser.require(XmlPullParser.START_TAG, null, mLevelTagName);
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
             }
+            String name = parser.getName();
+            // Starts by looking for the level info tag
+            setLevelInfo(name, parser.nextText());   // We pass in tag name and text
+        }
+    }
 
-            eventType = parser.next();
+    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
+        if (parser.getEventType() != XmlPullParser.START_TAG) {
+            throw new IllegalStateException();
+        }
+        int depth = 1;
+        while (depth != 0) {
+            switch (parser.next()) {
+                case XmlPullParser.END_TAG:
+                    depth--;
+                    break;
+                case XmlPullParser.START_TAG:
+                    depth++;
+                    break;
+            }
+        }
+    }
+
+    private void setLevelInfo(String name, String text) {
+        switch (name) {
+            case ("target_type"):
+                mLevel.setLevelType(text);
+                break;
+            case ("move"):
+                mLevel.mMove = Integer.parseInt(text);
+                break;
+            case ("fruit_num"):
+                mLevel.mFruitNum = Integer.parseInt(text);
+                break;
+            case ("column"):
+                mLevel.mColumn = Integer.parseInt(text);
+                break;
+            case ("row"):
+                mLevel.mRow = Integer.parseInt(text);
+                break;
+            case ("target"):
+                mLevel.addTarget(Integer.parseInt(text));
+                break;
+            case ("collect"):
+                mLevel.addCollect(text);
+                break;
+            case ("board"):
+                mLevel.board = text;
+                break;
+            case ("fruit"):
+                mLevel.fruit = text;
+                break;
+            case ("ice"):
+                mLevel.ice = text;
+                break;
+            case ("ad"):
+                mLevel.advance = text;
+                break;
         }
     }
 

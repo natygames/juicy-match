@@ -63,7 +63,7 @@ public class GameController extends GameObject {
         mBonusTimeAlgorithm = new BonusTimeAlgorithm(gameEngine);
         mBoosterManager = new BoosterManager(gameEngine);
         mSoundManager = ((MainActivity) gameEngine.mActivity).getSoundManager();
-        mSkipButton = (Button) mGameEngine.mActivity.findViewById(R.id.btn_skip);
+        mSkipButton = (Button) mActivity.findViewById(R.id.btn_skip);
     }
 
     public void setMyAlgorithm(GameAlgorithm gameAlgorithm) {
@@ -137,6 +137,7 @@ public class GameController extends GameObject {
                     mStateAnimation.startBonusTime();
                     mSoundManager.playSoundForSoundEvent(SoundEvent.SWEEP1);
                     addSkipButton();
+                    Tile.mFruitNum = TileUtils.FRUITS.length;   // Set fruit amount to 5
                     mState = GameControllerState.BONUS_TIME;
                     mWaitingTime = 0;
                 }
@@ -465,7 +466,7 @@ public class GameController extends GameObject {
             }
         });
 
-        ConstraintLayout board_button = (ConstraintLayout) mGameEngine.mActivity.findViewById(R.id.board_button);
+        ConstraintLayout board_button = (ConstraintLayout) mActivity.findViewById(R.id.board_button);
         board_button.setVisibility(View.INVISIBLE);
     }
 
@@ -478,15 +479,13 @@ public class GameController extends GameObject {
     private void navigateToMap() {
         // We stop the game here, or the pause dialog will pop up
         mGameEngine.stopGame();
-        MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
-        mainActivity.navigateToFragment(new MapFragment());
+        mActivity.navigateBack();
     }
 
     private void navigateToWinDialog() {
         // We stop the game here, or the pause dialog will pop up
         mGameEngine.stopGame();
-        MainActivity mainActivity = (MainActivity) mGameEngine.mActivity;
-        mainActivity.navigateToFragment(WinDialogFragment
+        mActivity.navigateToFragment(WinDialogFragment
                 .newInstance(mGameEngine.mLevel.mLevel,
                         mGameEngine.mLevel.mScore,
                         mGameEngine.mLevel.mStar));

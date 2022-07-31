@@ -1630,7 +1630,13 @@ public class AnimationManager {
         starfish.setX(tile.x);
         starfish.setY(tile.y);
         starfish.setLayoutParams(new ViewGroup.LayoutParams(mTileSize, mTileSize));
-        starfish.animate().setDuration(500).scaleX(0).scaleY(0).y(tile.y + mTileSize);
+        starfish.animate().setDuration(500).scaleX(0).scaleY(0).y(tile.y + mTileSize)
+                .setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                mEffectBoard.removeView(starfish);
+            }
+        });
         mEffectBoard.addView(starfish);
     }
 

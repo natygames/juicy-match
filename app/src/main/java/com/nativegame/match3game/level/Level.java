@@ -29,6 +29,10 @@ public class Level {
 
     public String board, fruit, ice, advance;   // Game board in char
 
+    public Level(int level) {
+        mLevel = level;
+    }
+
     public void setLevelType(String type) {
         switch (type) {
             case "score":

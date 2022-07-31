@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<levels>
+<level>
     <level1>
         <target_type>score</target_type>
         <move>10</move>
@@ -48,4 +48,4 @@
         <fruit>exxeexxennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnwnnnnnnwewnnnnweeewwwweeeeewweee</fruit>
         <ad>nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnxxnnnnxxnxxnnxxnAnxxxxnAnAnnnnAnnnAnnAnnnnnAAnnn</ad>
     </level4>
-</levels>
+</level>

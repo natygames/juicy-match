@@ -143,7 +143,6 @@ public class BonusTimeAlgorithm extends BaseAlgorithm {
                         mState = BonusTimeState.GAME_OVER;
                     } else {
                         mState = BonusTimeState.BONUS_TIME;
-                        Tile.mFruitNum = TileUtils.FRUITS.length;
                     }
                 }
 

@@ -3,12 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/drawable/lightning_animation.xml" value="0.1895" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/font/baloo.xml" value="0.2838541666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_container.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_exit.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_level.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_setting.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_game.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_loading.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_win_dialog.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_game_board.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_map_item.xml" value="0.2" />
