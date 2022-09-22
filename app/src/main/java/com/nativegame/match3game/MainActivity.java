@@ -12,7 +12,7 @@ import com.nativegame.match3game.effect.sound.SoundEvent;
 import com.nativegame.match3game.effect.sound.SoundManager;
 import com.nativegame.match3game.fragment.BaseFragment;
 import com.nativegame.match3game.fragment.GameFragment;
-import com.nativegame.match3game.fragment.LoadingFragment;
+import com.nativegame.match3game.fragment.MenuFragment;
 import com.nativegame.match3game.fragment.WinDialogFragment;
 import com.nativegame.match3game.level.LevelManager;
 
@@ -59,16 +59,15 @@ public class MainActivity extends AppCompatActivity {
         setTheme(R.style.Theme_Match3Game);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_main);
-
-        if (savedInstanceState == null) {
-            // Add LoadingFragment to screen
-            navigateToFragment(new LoadingFragment());
-        }
-
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         mLevelManager = new LevelManager(this);
         mSoundManager = new SoundManager(this);
         mDatabaseHelper = new DatabaseHelper(this);
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        // Show the menu fragment
+        if (savedInstanceState == null) {
+            navigateToFragment(new MenuFragment());
+        }
     }
 
     public LevelManager getLevelManager() {

@@ -9,17 +9,23 @@
     tools:context=".fragment.MenuFragment"
     tools:ignore="ContentDescription">
 
-    <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:text="Match3\nGame"
-        android:textColor="@color/white"
-        android:textSize="70sp"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/image_logo_background"
+        android:layout_width="@dimen/image_logo_background_width"
+        android:layout_height="@dimen/image_logo_background_width"
+        android:background="@drawable/logo_background"
+        app:layout_constraintBottom_toBottomOf="@+id/image_logo"
+        app:layout_constraintEnd_toEndOf="@+id/image_logo"
+        app:layout_constraintStart_toStartOf="@+id/image_logo"
+        app:layout_constraintTop_toTopOf="@+id/image_logo" />
+
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="@dimen/image_logo_width"
+        android:layout_height="0dp"
+        android:background="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1.28:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text" />
+        app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
     <ImageButton
         android:id="@+id/btn_setting"

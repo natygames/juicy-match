@@ -1,5 +1,7 @@
 package com.nativegame.match3game.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -7,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +47,24 @@ public class MenuFragment extends BaseFragment {
     }
 
     private void init() {
+        // Init logo
+        ImageView imageLogo = (ImageView) getView().findViewById(R.id.image_logo);
+        Animation scaleAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_scale);
+        imageLogo.setScaleX(0);
+        imageLogo.setScaleY(0);
+        imageLogo.animate().setDuration(1000).scaleX(1).scaleY(1).setInterpolator(new OvershootInterpolator())
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        imageLogo.startAnimation(scaleAnimation);
+                    }
+                });
+
+        ImageView imageLogoBackground = (ImageView) getView().findViewById(R.id.image_logo_background);
+        Animation rotateAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_rotate);
+        imageLogoBackground.startAnimation(rotateAnimation);
+
+        // Init button
         ImageButton btnPlay = (ImageButton) getView().findViewById(R.id.btn_play);
         Utils.createButtonEffect(btnPlay);
         btnPlay.setOnClickListener(new View.OnClickListener() {

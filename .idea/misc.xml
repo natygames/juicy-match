@@ -9,11 +9,15 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_container.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_exit.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_level.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_pause.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_setting.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_game.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_loading.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_win_dialog.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_map.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_win_dialog.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_game_board.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_game_item.xml" value="0.1503623188405797" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_map_item.xml" value="0.2" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_map_level.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.187" />
