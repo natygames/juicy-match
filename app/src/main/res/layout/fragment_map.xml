@@ -5,19 +5,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".fragment.MapFragment"
     tools:ignore="ContentDescription">
 
-    <include layout="@layout/view_map_item" />
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include layout="@layout/view_map_state" />
 
     <include layout="@layout/view_map_level" />
 
-    <ImageButton
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_wheel"
+        android:layout_width="@dimen/btn_small_width"
+        android:layout_height="@dimen/btn_small_width"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/btn_wheel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_setting"
-        android:layout_width="@dimen/image_round_btn_width"
-        android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="@dimen/margin_large"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:layout_margin="@dimen/margin_20"
         android:background="@drawable/btn_setting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

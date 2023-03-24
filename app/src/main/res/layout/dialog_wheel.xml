@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <ImageButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:layout_margin="@dimen/margin_20"
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_dialog_wheel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_10"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_wheel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_dialog_large_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/image_wheel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_wheel"
+        android:layout_width="@dimen/image_wheel_width"
+        android:layout_height="@dimen/image_wheel_width"
+        android:background="@drawable/wheel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <ImageView
+        android:id="@+id/image_pointer"
+        android:layout_width="@dimen/image_wheel_pointer_width"
+        android:layout_height="0dp"
+        android:background="@drawable/wheel_pointer"
+        app:layout_constraintDimensionRatio="2:3"
+        app:layout_constraintEnd_toEndOf="@id/image_wheel"
+        app:layout_constraintStart_toStartOf="@id/image_wheel"
+        app:layout_constraintTop_toTopOf="@id/image_wheel" />
+
+    <ImageView
+        android:layout_width="@dimen/image_wheel_pivot_width"
+        android:layout_height="@dimen/image_wheel_pivot_width"
+        android:background="@drawable/wheel_pivot"
+        app:layout_constraintBottom_toBottomOf="@+id/image_wheel"
+        app:layout_constraintEnd_toEndOf="@+id/image_wheel"
+        app:layout_constraintStart_toStartOf="@+id/image_wheel"
+        app:layout_constraintTop_toTopOf="@+id/image_wheel" />
+
+    <ImageButton
+        android:id="@+id/btn_play"
+        android:layout_width="@dimen/btn_large_width"
+        android:layout_height="0dp"
+        android:background="@drawable/btn_play"
+        android:layout_marginTop="@dimen/margin_30"
+        app:layout_constraintDimensionRatio="5:2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_wheel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

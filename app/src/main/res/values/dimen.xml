@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Text in game -->
-    <dimen name="text_score_size">25sp</dimen>
-    <dimen name="text_move_size">18sp</dimen>
-    <dimen name="text_fruit_size">15sp</dimen>
-    <dimen name="text_booster_amount_size">18sp</dimen>
-    <dimen name="text_skip_size">40sp</dimen>
+    <!-- Text size -->
+    <dimen name="txt_dialog_small_size">20sp</dimen>
+    <dimen name="txt_dialog_size">30sp</dimen>
+    <dimen name="txt_dialog_large_size">35sp</dimen>
 
-    <!-- Text in loading -->
-    <dimen name="text_loading_size">50sp</dimen>
+    <dimen name="txt_state_score_size">25sp</dimen>
+    <dimen name="txt_state_move_size">18sp</dimen>
+    <dimen name="txt_state_target_size">15sp</dimen>
+    <dimen name="txt_state_booster_size">18sp</dimen>
+    <dimen name="txt_state_item_size">20sp</dimen>
 
-    <!-- Text in map -->
-    <dimen name="text_level_size">25sp</dimen>
-    <dimen name="text_field_size">20sp</dimen>
+    <dimen name="txt_level_size">25sp</dimen>
+    <dimen name="txt_loading_size">50sp</dimen>
 
-    <!-- Text in win_dialog -->
-    <dimen name="text_win_dialog_size">42sp</dimen>
-
-    <!-- Text in dialog -->
-    <dimen name="text_dialog_small_size">20sp</dimen>
-    <dimen name="text_dialog_size">30sp</dimen>
-    <dimen name="text_dialog_large_size">35sp</dimen>
+    <!-- Button width -->
+    <dimen name="btn_large_width">160dp</dimen>
+    <dimen name="btn_width">120dp</dimen>
+    <dimen name="btn_small_width">80dp</dimen>
+    <dimen name="btn_round_width">50dp</dimen>
+    <dimen name="btn_booster_width">60dp</dimen>
+    <dimen name="btn_shop_width">130dp</dimen>
 
     <!-- Image width -->
+    <dimen name="image_state_board">125dp</dimen>
+    <dimen name="image_state_move">95dp</dimen>
+    <dimen name="image_state_target">27dp</dimen>
+    <dimen name="image_state_booster">25dp</dimen>
+    <dimen name="image_state_item">110dp</dimen>
+
     <dimen name="image_logo_width">350dp</dimen>
-    <dimen name="image_logo_background_width">400dp</dimen>
+    <dimen name="image_logo_bg_width">400dp</dimen>
 
-    <dimen name="image_btn_width">160dp</dimen>
-    <dimen name="image_btn_height">80dp</dimen>
-    <dimen name="image_btn_small_width">120dp</dimen>
-    <dimen name="image_btn_small_height">60dp</dimen>
-    <dimen name="image_round_btn_width">50dp</dimen>
-    <dimen name="image_btn_shop_width">130dp</dimen>
+    <dimen name="image_star_small_width">20dp</dimen>
+    <dimen name="image_star_width">100dp</dimen>
+    <dimen name="image_star_large_width">130dp</dimen>
+    <dimen name="image_star_progress_width">250dp</dimen>
 
-    <dimen name="image_field">120dp</dimen>
-    <dimen name="image_progressbar_width">250dp</dimen>
+    <dimen name="image_wheel_width">300dp</dimen>
+    <dimen name="image_wheel_pivot_width">70dp</dimen>
+    <dimen name="image_wheel_pointer_width">40dp</dimen>
+
+    <dimen name="image_ribbon_width">320dp</dimen>
+
+    <dimen name="image_booster_width">150dp</dimen>
+    <dimen name="image_booster_bg_width">250dp</dimen>
+
+    <!-- Image height -->
+    <dimen name="image_game_board_height">125dp</dimen>
+    <dimen name="image_map_board_height">80dp</dimen>
 
     <!-- Dialog width -->
+    <dimen name="dialog_small_width">250dp</dimen>
     <dimen name="dialog_width">300dp</dimen>
-    <dimen name="dialog_map_width">350dp</dimen>
-    <dimen name="dialog_height">200dp</dimen>
-    <dimen name="dialog_setting_height">350dp</dimen>
-    <dimen name="dialog_level_height">400dp</dimen>
+    <dimen name="dialog_large_width">350dp</dimen>
 
     <!-- Margin -->
-    <dimen name="margin_small">5dp</dimen>
-    <dimen name="margin">10dp</dimen>
-    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_5">5dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_negative_20">-20dp</dimen>
+    <dimen name="margin_negative_30">-30dp</dimen>
+    <dimen name="margin_negative_40">-40dp</dimen>
 
-    <!-- Ratio in 1 : 1.3 : 1.8 for view -->
+    <!-- Ratio in 1 : 1.2 : 1.6 for view -->
     <!-- Ratio in 1 : 1.4 : 1.8 for margin -->
 </resources>

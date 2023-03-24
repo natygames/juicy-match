@@ -1,20 +1,23 @@
 package com.nativegame.match3game.level;
 
-/**
- * Created by Oscar Liang on 2022/02/23
- */
-
-/**
- * Ours game has 4 type of level, including
- * 1. Reach target score
- * 2. Collect all the item
- * 3. Break all the ice
- * 4. Collect star fish
- */
+import com.nativegame.match3game.R;
 
 public enum LevelType {
-    LEVEL_TYPE_SCORE,
-    LEVEL_TYPE_COLLECT,
-    LEVEL_TYPE_ICE,
-    LEVEL_TYPE_STARFISH
+    COLLECT,
+    ICE,
+    STARFISH;
+
+    public int getDrawableId() {
+        switch (this) {
+            case COLLECT:
+                return R.drawable.text_target_collect;
+            case ICE:
+                return R.drawable.text_target_ice;
+            case STARFISH:
+                return R.drawable.text_target_collect;
+            default:
+                throw new IllegalArgumentException("Level target drawable not found!");
+        }
+    }
+
 }

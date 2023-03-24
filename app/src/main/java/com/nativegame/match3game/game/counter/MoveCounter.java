@@ -1,72 +1,58 @@
 package com.nativegame.match3game.game.counter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.view.View;
 import android.widget.TextView;
 
 import com.nativegame.match3game.R;
-import com.nativegame.match3game.engine.GameEngine;
-import com.nativegame.match3game.engine.GameEvent;
-import com.nativegame.match3game.engine.GameObject;
+import com.nativegame.match3game.game.GameEvent;
 import com.nativegame.match3game.level.Level;
+import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.engine.event.Event;
+import com.nativegame.nattyengine.engine.event.EventListener;
+import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
+import com.nativegame.nattyengine.ui.GameActivity;
 
-/**
- * Created by Oscar Liang on 2022/02/23
- */
-
-public class MoveCounter extends GameObject {
+public class MoveCounter extends RunnableEntity implements EventListener {
 
     private final TextView mText;
-    private final Level mLevel;
+
     private int mMoves;
-    private boolean mMovesHaveChanged;
 
-    public MoveCounter(GameEngine gameEngine) {
-        mText = (TextView) gameEngine.mActivity.findViewById(R.id.move);
-        mLevel = gameEngine.mLevel;
-        mMoves = gameEngine.mLevel.mMove;
-        mMovesHaveChanged = false;
+    public MoveCounter(GameActivity activity, Engine engine) {
+        super(activity, engine);
+        mText = activity.findViewById(R.id.txt_move);
+    }
+
+    //--------------------------------------------------------
+    // Overriding methods
+    //--------------------------------------------------------
+    @Override
+    public void onStart() {
+        mMoves = Level.LEVEL_DATA.getMove();
+        setPostRunnable(true);
     }
 
     @Override
-    public void startGame() {
-        mMovesHaveChanged = true;
+    protected void onUpdateRunnable() {
+        mText.setText(String.valueOf(mMoves));
     }
 
     @Override
-    public void onUpdate(long elapsedMillis) {
-
-    }
-
-    @Override
-    public void onDraw() {
-        if (mMovesHaveChanged) {
-            mText.setText(String.valueOf(mMoves));
-            createTextAnim(mText);
-            mMovesHaveChanged = false;
+    public void onEvent(Event event) {
+        switch ((GameEvent) event) {
+            case PLAYER_SWAP:
+            case ADD_BONUS:
+                if (mMoves > 0) {
+                    mMoves--;
+                    Level.LEVEL_DATA.setMove(mMoves);
+                }
+                setPostRunnable(true);
+                break;
+            case GAME_OVER:
+            case BONUS_TIME_END:
+                removeFromGame();
+                break;
         }
     }
-
-    @Override
-    public void onGameEvent(GameEvent gameEvents) {
-        if (gameEvents == GameEvent.PLAYER_SWAP) {
-            if (mMoves > 0) {
-                mMoves--;
-                mLevel.mMove--;
-            }
-            mMovesHaveChanged = true;
-        }
-    }
-
-    private void createTextAnim(View view) {
-        view.animate().cancel();
-        view.animate().scaleX(1.5f).scaleY(1.5f).setDuration(100).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.animate().scaleX(1).scaleY(1).setDuration(100);
-            }
-        });
-    }
+    //========================================================
 
 }

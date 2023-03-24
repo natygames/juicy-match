@@ -7,33 +7,38 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-
-/**
- * Created by Oscar Liang on 2022/02/23
- */
-
-/**
- * DatabaseHelper can access SQLite database where we
- * store structural data such as level star, otherwise
- * use SharePreference.
- */
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    // Database Version
-    private static final int DATABASE_VERSION = 1;
 
-    // Database Name
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "star.db";
 
-    // Database Column
     private static final String TABLE_NAME = "STAR_TABLE";
     private static final String COLUMN_ID = "ID";
     private static final String COLUMN_STAR = "STAR";
 
-    public DatabaseHelper(Context context) {
+    private static DatabaseHelper INSTANCE;
+
+    private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //--------------------------------------------------------
+    // Static methods
+    //--------------------------------------------------------
+    public static DatabaseHelper getInstance(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new DatabaseHelper(context);
+        }
+
+        return INSTANCE;
+    }
+    //========================================================
+
+    //--------------------------------------------------------
+    // Overriding methods
+    //--------------------------------------------------------
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         // This method will call only when the app first init
@@ -49,7 +54,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // This method will call when new version release
         // if (oldVersion == 1 && newVersion == 2) ...
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
     public boolean insertLevelStar(int star) {
         // Get writable database as we want to write data
         SQLiteDatabase db = getWritableDatabase();
@@ -66,12 +75,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (id == -1) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public boolean updateLevelStar(int levelID, int star) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(COLUMN_STAR, star);
@@ -83,13 +93,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         if (id == -1) {
             return false;
+        } else {
+            return true;
         }
-        return true;
     }
 
     public int getLevelStar(int levelID) {
         // Get readable database as we are not inserting anything
-        SQLiteDatabase db = this.getReadableDatabase();
+        SQLiteDatabase db = getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_NAME,
                 new String[]{COLUMN_STAR},
@@ -109,8 +120,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return star;
     }
 
-    public ArrayList<Integer> getAllLevelStar() {
-        ArrayList<Integer> stars = new ArrayList<>();
+    public List<Integer> getAllLevelStar() {
+        List<Integer> stars = new ArrayList<>();
 
         // Select All Query
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
@@ -131,5 +142,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return stars;
     }
+    //========================================================
 
 }

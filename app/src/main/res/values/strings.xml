@@ -1,18 +1,45 @@
 <resources>
-    <string name="app_name">Juicy Match</string>
-
+    <string name="app_name" translatable="false">Juicy Match</string>
+    <string name="txt_ad_coins">Watch Ad for\n more coins?</string>
+    <string name="txt_ad_extra_moves">Watch Ad for\n 3 extra moves?</string>
+    <string name="txt_ad_lives">Watch Ad for\n more lives?</string>
+    <string name="txt_confirm">Buy this item?</string>
+    <string name="txt_error">Connect Error\n Try Again?</string>
     <string name="txt_exit">Exit Game?</string>
     <string name="txt_setting">Setting</string>
     <string name="txt_hint">Hint :</string>
     <string name="txt_fps">FPS :</string>
     <string name="txt_skip">Tap to skip</string>
     <string name="txt_loading">Loading . . .</string>
+    <string name="txt_version" translatable="false">V1.2</string>
+    <string name="txt_shop">Shop</string>
     <string name="txt_level">Level %1$d</string>
-    <string name="txt_lv">LV. %1$d</string>
+    <string name="txt_score">Score:</string>
+    <string name="txt_lives_full">Full</string>
     <string name="txt_select_level">Select Level</string>
+    <string name="txt_booster">New Booster</string>
+    <string name="txt_booster_num">X %1$d</string>
+    <string name="txt_wheel">Daily Bonus</string>
 
     <!-- Text of level type -->
-    <string name="txt_reach_target_score">Reach target score</string>
     <string name="txt_collect_items">Collect items</string>
     <string name="txt_break_all_the_ice">Break all the ice</string>
+    <string name="txt_collect_starfish">Collect starfish</string>
+
+    <!-- Text of tutorial -->
+    <string name="txt_tutorial_match_3">Swipe the fruit to\n match 3 of the same!</string>
+    <string name="txt_tutorial_match_4">Match 4 to get\n special fruit!</string>
+    <string name="txt_tutorial_match_t">Match T or L shape\n to get chocolate fruit!</string>
+    <string name="txt_tutorial_match_5">Match 5 to get\n ice cream!</string>
+    <string name="txt_tutorial_combo">Match 2 special fruits\n to get big explode!</string>
+    <string name="txt_tutorial_ice">Match the fruit to\n break the ice!</string>
+    <string name="txt_tutorial_starfish">Match the fruit to send\n the starfish to bottom!</string>
+    <string name="txt_tutorial_cracker">Match the fruit around\n the cracker to break it!</string>
+    <string name="txt_tutorial_cookie">Match the fruit around\n the cookie to break it!</string>
+    <string name="txt_tutorial_machine">Machines will produce\n special items!</string>
+
+    <!-- Text of Ad code -->
+    <string name="txt_admob_banner">ca-app-pub-8290330430049037/3555060418</string>
+    <string name="txt_admob_reward">ca-app-pub-8290330430049037/7287256019</string>
+    <string name="txt_target">Target</string>
 </resources>

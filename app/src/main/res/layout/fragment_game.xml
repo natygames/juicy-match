@@ -5,128 +5,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:clipChildren="false"
-    tools:context=".fragment.GameFragment"
     tools:ignore="ContentDescription">
 
-    <include layout="@layout/view_game_board" />
-
     <ImageView
-        android:id="@+id/highlight"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#aa000000"
-        android:visibility="gone"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/board_frame"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/game_lower_bound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_upper_bound">
+    <include
+        android:id="@+id/view_game_state"
+        layout="@layout/view_game_state" />
 
-        <GridLayout
-            android:id="@+id/grid_board"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal" />
-
-        <GridLayout
-            android:id="@+id/ice_board"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal" />
-
-        <GridLayout
-            android:id="@+id/ice_board2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal" />
-
-        <GridLayout
-            android:id="@+id/fruit_board"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:orientation="horizontal" />
-
-        <GridLayout
-            android:id="@+id/advance_board"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:clipChildren="false"
-            android:orientation="horizontal" />
-
-    </FrameLayout>
-
-    <include layout="@layout/view_game_item" />
-
-    <TextView
-        android:id="@+id/txt_fps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/margin"
-        android:alpha="0.4"
-        android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_fruit_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btn_pause"
-        android:layout_width="@dimen/image_round_btn_width"
-        android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="@dimen/margin_large"
-        android:background="@drawable/btn_setting"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/btn_skip"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:scaleX="0"
-        android:scaleY="0"
-        android:text="@string/txt_skip"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_skip_size"
-        android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/game_lower_bound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <RelativeLayout
-        android:id="@+id/effect_board"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/game_lower_bound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/game_upper_bound" />
-
-    <RelativeLayout
-        android:id="@+id/guide_board"
+    <com.nativegame.nattyengine.ui.GameView
+        android:id="@+id/game_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -134,18 +30,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/game_upper_bound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.16" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/game_lower_bound"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.88" />
+    <include
+        android:id="@+id/view_game_booster"
+        layout="@layout/view_game_booster" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

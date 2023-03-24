@@ -1,0 +1,47 @@
+package com.nativegame.match3game.game.booster;
+
+import com.nativegame.match3game.asset.Sounds;
+import com.nativegame.match3game.asset.Textures;
+import com.nativegame.match3game.game.GameEvent;
+import com.nativegame.match3game.game.JuicyMatch;
+import com.nativegame.match3game.game.algorithm.special.handler.ExplosionSpecialTileHandler;
+import com.nativegame.match3game.game.effect.booster.BombEffect;
+import com.nativegame.match3game.game.layer.tile.Tile;
+import com.nativegame.match3game.game.layer.tile.TileSystem;
+import com.nativegame.match3game.game.layer.tile.type.EmptyTile;
+import com.nativegame.nattyengine.engine.Engine;
+
+public class BombController extends BoosterController {
+
+    private final ExplosionSpecialTileHandler mExplosionSpecialTileHandler;
+    private final BombEffect mBombEffect;
+
+    public BombController(Engine engine, TileSystem tileSystem) {
+        super(engine, tileSystem);
+        mExplosionSpecialTileHandler = new ExplosionSpecialTileHandler(engine);
+        mBombEffect = new BombEffect(engine, Textures.BOMB);
+    }
+
+    //--------------------------------------------------------
+    // Overriding methods
+    //--------------------------------------------------------
+    @Override
+    protected boolean isAddBooster(Tile touchDownTile, Tile touchUpTile) {
+        return !(touchDownTile instanceof EmptyTile);
+    }
+
+    @Override
+    protected void onAddBooster(Tile[][] tiles, Tile touchDownTile, Tile touchUpTile, int row, int col) {
+        mBombEffect.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f,
+                touchDownTile.getX(), touchDownTile.getY());
+        Sounds.TILE_SLIDE.play();
+    }
+
+    @Override
+    protected void onRemoveBooster(Tile[][] tiles, Tile touchDownTile, Tile touchUpTile, int row, int col) {
+        mExplosionSpecialTileHandler.handleSpecialTile(tiles, touchDownTile, row, col);
+        dispatchEvent(GameEvent.PLAYER_USE_BOOSTER);
+    }
+    //========================================================
+
+}

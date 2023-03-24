@@ -1,87 +1,51 @@
 package com.nativegame.match3game.level;
 
-import com.nativegame.match3game.R;
+import android.content.Context;
 
-import java.util.ArrayList;
+import com.nativegame.nattyengine.util.storage.xml.XMLOpenHelper;
+import com.nativegame.nattyengine.util.storage.xml.XMLResultSet;
 
-/**
- * Created by Oscar Liang on 2022/02/23
- */
+import org.xmlpull.v1.XmlPullParserException;
 
-/**
- * Level contains level data we are going to
- * use in game, it will be retrieved from a
- * local XML file(assets/data), in which store
- * all the level data
- */
+import java.io.IOException;
+import java.io.InputStream;
 
 public class Level {
-    public int mLevel;
-    public int mStar;
-    public LevelType mLevelType;
-    public int mMove;
-    public int mScore;
-    public int mColumn, mRow;
-    public int mFruitNum = 4;
 
-    public ArrayList<Integer> mTarget = new ArrayList<>();
-    public ArrayList<Integer> mCollect = new ArrayList<>();
+    private static final String FILE_NAME = "level.xml";
 
-    public String board, fruit, ice, advance;   // Game board in char
+    public static LevelData LEVEL_DATA;
 
-    public Level(int level) {
-        mLevel = level;
-    }
-
-    public void setLevelType(String type) {
-        switch (type) {
-            case "score":
-                mLevelType = LevelType.LEVEL_TYPE_SCORE;
-                break;
-            case "collect":
-                mLevelType = LevelType.LEVEL_TYPE_COLLECT;
-                break;
-            case "ice":
-                mLevelType = LevelType.LEVEL_TYPE_ICE;
-                break;
-            case "starfish":
-                mLevelType = LevelType.LEVEL_TYPE_STARFISH;
-                break;
+    //--------------------------------------------------------
+    // Static methods
+    //--------------------------------------------------------
+    public static void load(Context context, int level) {
+        // Read level data from xml
+        XMLOpenHelper helper = XMLOpenHelper.getInstance();
+        try {
+            InputStream in = context.getAssets().open(FILE_NAME);
+            XMLResultSet resultSet = helper.open(context, in, "level" + level);
+            LEVEL_DATA = new LevelData(
+                    resultSet.getString("level_type"),
+                    resultSet.getString("grid"),
+                    resultSet.getString("ices"),
+                    resultSet.getString("tile"),
+                    resultSet.getString("lock"),
+                    resultSet.getString("entr"),
+                    resultSet.getString("gene"),
+                    resultSet.getString("target_type"),
+                    resultSet.getString("target_num"),
+                    level,
+                    resultSet.getInt("row"),
+                    resultSet.getInt("column"),
+                    resultSet.getInt("fruit_num"),
+                    resultSet.getInt("move"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
         }
     }
-
-    public void addTarget(int target) {
-        mTarget.add(target);
-    }
-
-    public void addCollect(String s) {
-        switch (s) {
-            case ("strawberry"):
-                mCollect.add(R.drawable.strawberry);
-                break;
-            case ("cherry"):
-                mCollect.add(R.drawable.cherry);
-                break;
-            case ("lemon"):
-                mCollect.add(R.drawable.lemon);
-                break;
-            case ("striped"):
-                mCollect.add(R.drawable.striped_ball);
-                break;
-            case ("cracker"):
-                mCollect.add(R.drawable.cracker);
-                break;
-            case ("cookie"):
-                mCollect.add(R.drawable.cookie);
-                break;
-            case ("starfish"):
-                mCollect.add(R.drawable.starfish);
-                break;
-            case ("ice"):
-                mCollect.add(R.drawable.ice);
-                break;
-        }
-
-    }
+    //========================================================
 
 }

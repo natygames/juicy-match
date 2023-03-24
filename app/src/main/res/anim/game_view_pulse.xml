@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:anim/overshoot_interpolator">
+
+    <scale
+        android:fromXScale="100%"
+        android:fromYScale="100%"
+        android:toXScale="110%"
+        android:toYScale="110%"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="150"
+        android:fillAfter="true"/>
+
+    <scale
+        android:fromXScale="100%"
+        android:fromYScale="100%"
+        android:toXScale="90%"
+        android:toYScale="90%"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="150"
+        android:duration="150" />
+
+</set>

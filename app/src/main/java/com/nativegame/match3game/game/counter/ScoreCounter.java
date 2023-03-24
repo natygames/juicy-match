@@ -1,72 +1,63 @@
 package com.nativegame.match3game.game.counter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.nativegame.match3game.R;
-import com.nativegame.match3game.engine.GameEngine;
-import com.nativegame.match3game.engine.GameEvent;
-import com.nativegame.match3game.engine.GameObject;
+import com.nativegame.match3game.game.GameEvent;
 import com.nativegame.match3game.level.Level;
+import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.engine.event.Event;
+import com.nativegame.nattyengine.engine.event.EventListener;
+import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
+import com.nativegame.nattyengine.ui.GameActivity;
 
-/**
- * Created by Oscar Liang on 2022/02/23
- */
+public class ScoreCounter extends RunnableEntity implements EventListener {
 
-public class ScoreCounter extends GameObject {
-
-    private static final int POINTS_GAINED_PER_FRUIT = 10;
+    private static final int POINTS_PER_FRUIT = 10;
 
     private final TextView mText;
-    private final Level mLevel;
+    private final Animation mTextAnimation;
+
     private int mPoints;
-    private boolean mPointsHaveChanged;
 
-    public ScoreCounter(GameEngine gameEngine) {
-        mText = (TextView) gameEngine.mActivity.findViewById(R.id.score);
-        mLevel = gameEngine.mLevel;
-        mPointsHaveChanged = false;
+    public ScoreCounter(GameActivity activity, Engine engine) {
+        super(activity, engine);
+        mText = activity.findViewById(R.id.txt_score);
+        mTextAnimation = AnimationUtils.loadAnimation(activity, R.anim.text_pulse);
     }
 
+    //--------------------------------------------------------
+    // Overriding methods
+    //--------------------------------------------------------
     @Override
-    public void startGame() {
+    public void onStart() {
         mPoints = 0;
-        mPointsHaveChanged = true;
+        setPostRunnable(true);
     }
 
     @Override
-    public void onUpdate(long elapsedMillis) {
-
+    protected void onUpdateRunnable() {
+        mText.setText(String.valueOf(mPoints));
+        mText.startAnimation(mTextAnimation);
     }
 
     @Override
-    public void onDraw() {
-        if (mPointsHaveChanged) {
-            mText.setText(String.valueOf(mPoints));
-            createTextAnim(mText);
-            mPointsHaveChanged = false;
+    public void onEvent(Event event) {
+        switch ((GameEvent) event) {
+            case PLAYER_SCORE:
+            case ADD_BONUS:
+                mPoints += POINTS_PER_FRUIT;
+                Level.LEVEL_DATA.setScore(mPoints);
+                setPostRunnable(true);
+                break;
+            case GAME_OVER:
+            case BONUS_TIME_END:
+                removeFromGame();
+                break;
         }
     }
-
-    @Override
-    public void onGameEvent(GameEvent gameEvents) {
-        if (gameEvents == GameEvent.PLAYER_SCORE) {
-            mPoints += POINTS_GAINED_PER_FRUIT;
-            mLevel.mScore += POINTS_GAINED_PER_FRUIT;
-            mPointsHaveChanged = true;
-        }
-    }
-
-    private void createTextAnim(View view) {
-        view.animate().cancel();
-        view.animate().scaleX(1.5f).scaleY(1.5f).setDuration(100).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                view.animate().scaleX(1).scaleY(1).setDuration(100);
-            }
-        });
-    }
+    //========================================================
 
 }

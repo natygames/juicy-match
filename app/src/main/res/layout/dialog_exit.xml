@@ -3,44 +3,56 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/dialog_width"
-    android:layout_height="@dimen/dialog_height"
-    android:layout_gravity="center"
-    android:background="@drawable/dialog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:ignore="ContentDescription">
 
-    <ImageButton
-        android:id="@+id/btn_cancel"
-        android:layout_width="@dimen/image_round_btn_width"
-        android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="@dimen/margin_small"
-        android:background="@drawable/btn_cancel"
+    <ImageView
+        android:id="@+id/image_dialog"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="0dp"
+        android:background="@drawable/dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="3:2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/txt_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:text="@string/txt_exit"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_dialog_large_size"
+        android:textSize="@dimen/txt_dialog_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintBottom_toBottomOf="@id/image_dialog"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog"
+        app:layout_constraintVertical_bias="0.2" />
 
-    <ImageButton
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog" />
+
+    <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_exit"
-        android:layout_width="@dimen/image_btn_small_width"
-        android:layout_height="@dimen/image_btn_small_height"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_10"
         android:background="@drawable/btn_exit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text" />
+        app:layout_constraintDimensionRatio="5:2"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@id/txt_exit" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

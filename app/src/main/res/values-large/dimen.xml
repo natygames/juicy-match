@@ -1,50 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Text in game -->
-    <dimen name="text_score_size">32sp</dimen>
-    <dimen name="text_move_size">23sp</dimen>
-    <dimen name="text_fruit_size">19sp</dimen>
-    <dimen name="text_booster_amount_size">23sp</dimen>
-    <dimen name="text_skip_size">52sp</dimen>
+    <!-- Text size -->
+    <dimen name="txt_dialog_small_size">24sp</dimen>
+    <dimen name="txt_dialog_size">36sp</dimen>
+    <dimen name="txt_dialog_large_size">42sp</dimen>
 
-    <!-- Text in loading -->
-    <dimen name="text_loading_size">65sp</dimen>
+    <dimen name="txt_state_score_size">30sp</dimen>
+    <dimen name="txt_state_move_size">21sp</dimen>
+    <dimen name="txt_state_target_size">18sp</dimen>
+    <dimen name="txt_state_booster_size">21sp</dimen>
+    <dimen name="txt_state_item_size">24sp</dimen>
 
-    <!-- Text in map -->
-    <dimen name="text_level_size">32sp</dimen>
-    <dimen name="text_field_size">26sp</dimen>
+    <dimen name="txt_level_size">30sp</dimen>
+    <dimen name="txt_loading_size">60sp</dimen>
 
-    <!-- Text in win_dialog -->
-    <dimen name="text_win_dialog_size">55sp</dimen>
-
-    <!-- Text in dialog -->
-    <dimen name="text_dialog_small_size">26sp</dimen>
-    <dimen name="text_dialog_size">39sp</dimen>
-    <dimen name="text_dialog_large_size">45sp</dimen>
+    <!-- Button width -->
+    <dimen name="btn_large_width">192dp</dimen>
+    <dimen name="btn_width">144dp</dimen>
+    <dimen name="btn_small_width">96dp</dimen>
+    <dimen name="btn_round_width">60dp</dimen>
+    <dimen name="btn_booster_width">72dp</dimen>
+    <dimen name="btn_shop_width">156dp</dimen>
 
     <!-- Image width -->
-    <dimen name="image_logo_width">455dp</dimen>
-    <dimen name="image_logo_background_width">520dp</dimen>
+    <dimen name="image_state_board">150dp</dimen>
+    <dimen name="image_state_move">114dp</dimen>
+    <dimen name="image_state_target">32dp</dimen>
+    <dimen name="image_state_booster">30dp</dimen>
+    <dimen name="image_state_item">132dp</dimen>
 
-    <dimen name="image_btn_width">208dp</dimen>
-    <dimen name="image_btn_height">104dp</dimen>
-    <dimen name="image_btn_small_width">156dp</dimen>
-    <dimen name="image_btn_small_height">78dp</dimen>
-    <dimen name="image_round_btn_width">65dp</dimen>
-    <dimen name="image_btn_shop_width">169dp</dimen>
+    <dimen name="image_logo_width">420dp</dimen>
+    <dimen name="image_logo_bg_width">480dp</dimen>
 
-    <dimen name="image_field">156dp</dimen>
-    <dimen name="image_progressbar_width">325dp</dimen>
+    <dimen name="image_star_small_width">24dp</dimen>
+    <dimen name="image_star_width">120dp</dimen>
+    <dimen name="image_star_large_width">156dp</dimen>
+    <dimen name="image_star_progress_width">300dp</dimen>
+
+    <dimen name="image_wheel_width">360dp</dimen>
+    <dimen name="image_wheel_pivot_width">84dp</dimen>
+    <dimen name="image_wheel_pointer_width">48dp</dimen>
+
+    <dimen name="image_ribbon_width">384dp</dimen>
+
+    <dimen name="image_booster_width">180dp</dimen>
+    <dimen name="image_booster_bg_width">300dp</dimen>
+
+    <!-- Image height -->
+    <dimen name="image_game_board_height">150dp</dimen>
+    <dimen name="image_map_board_height">96dp</dimen>
 
     <!-- Dialog width -->
-    <dimen name="dialog_width">390dp</dimen>
-    <dimen name="dialog_map_width">455dp</dimen>
-    <dimen name="dialog_height">260dp</dimen>
-    <dimen name="dialog_setting_height">455dp</dimen>
-    <dimen name="dialog_level_height">520dp</dimen>
+    <dimen name="dialog_small_width">300dp</dimen>
+    <dimen name="dialog_width">360dp</dimen>
+    <dimen name="dialog_large_width">420dp</dimen>
 
     <!-- Margin -->
-    <dimen name="margin_small">7dp</dimen>
-    <dimen name="margin">14dp</dimen>
-    <dimen name="margin_large">28dp</dimen>
+    <dimen name="margin_5">7dp</dimen>
+    <dimen name="margin_10">14dp</dimen>
+    <dimen name="margin_20">28dp</dimen>
+    <dimen name="margin_30">42dp</dimen>
+    <dimen name="margin_negative_20">-28dp</dimen>
+    <dimen name="margin_negative_30">-42dp</dimen>
+    <dimen name="margin_negative_40">-56dp</dimen>
+
+    <!-- Ratio in 1 : 1.2 : 1.6 for view -->
+    <!-- Ratio in 1 : 1.4 : 1.8 for margin -->
 </resources>

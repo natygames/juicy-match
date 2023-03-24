@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level>
+    <level1>
+        <level_type>collect</level_type>
+        <fruit_num>5</fruit_num>
+        <move>20</move>
+        <row>8</row>
+        <column>8</column>
+        <target_type>cookie cherry strawberry</target_type>
+        <target_num>24 20 20</target_num>
+        <grid>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</grid>
+        <tile>eecnnceeeccnnccecccnncccnnnnnnnnnnnnnnnncccnnccceccnncceeecnncee</tile>
+    </level1>
+    <level2>
+        <level_type>ice</level_type>
+        <fruit_num>4</fruit_num>
+        <move>30</move>
+        <row>9</row>
+        <column>7</column>
+        <target_type>ice cake</target_type>
+        <target_num>49 22</target_num>
+        <grid>eequweeeelnreeeqnnnweelnnnreelnnnreqnnnnnwlnnnnnrlnnnnnraddddds</grid>
+        <ices>eeQUWeeeeLNReeeQNNNWeeLNNNReeLNNNReQNNNNNWLNNNNNRLNNNNNRADDDDDS</ices>
+        <tile>eeslseeeelsleeeoolooeewoloweewoooweowwwwwoowwwwwoowwwwwoooooooo</tile>
+    </level2>
+    <level3>
+        <level_type>starfish</level_type>
+        <fruit_num>4</fruit_num>
+        <move>30</move>
+        <row>9</row>
+        <column>8</column>
+        <target_type>starfish</target_type>
+        <target_num>4</target_num>
+        <grid>eqweeqweqnnuunnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeannseeeeeaseee</grid>
+        <tile>exxeexxennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnwnnnnnnwewnnnnweeewwwweeeeewweee</tile>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXXeeeeXXeXXeeXXeeeXXXXeeeeeeeeeeeeeeeeee</lock>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeAeAeeeeAeeeAeeAeeeeeAAeee</entr>
+    </level3>
+</level>

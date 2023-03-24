@@ -3,150 +3,119 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/dialog_width"
-    android:layout_height="@dimen/dialog_level_height"
-    android:layout_gravity="center"
-    android:background="@drawable/dialog_level"
-    android:clipChildren="false"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:ignore="ContentDescription">
 
-    <TextView
-        android:id="@+id/txt_dialog_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:text="@string/txt_level"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_dialog_large_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/guideline_cancel"
+    <ImageView
+        android:id="@+id/image_dialog"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="0dp"
+        android:background="@drawable/dialog_level"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="3:4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btn_cancel"
-        android:layout_width="@dimen/image_round_btn_width"
-        android:layout_height="@dimen/image_round_btn_width"
-        android:layout_margin="@dimen/margin_small"
-        android:background="@drawable/btn_cancel"
-        app:layout_constraintBottom_toTopOf="@id/guideline_cancel"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/image_dialog_star"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin"
-        android:src="@drawable/star_set_background"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_star"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_dialog_level" />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_target2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_target1">
-
-        <ImageView
-            android:id="@+id/image_dialog_target_left"
-            android:layout_width="@dimen/image_round_btn_width"
-            android:layout_height="@dimen/image_round_btn_width"
-            android:layout_margin="@dimen/margin_small"
-            android:src="@drawable/cherry"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/image_dialog_target_center"
-            android:layout_width="@dimen/image_round_btn_width"
-            android:layout_height="@dimen/image_round_btn_width"
-            android:layout_margin="@dimen/margin_small"
-            android:src="@drawable/strawberry"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/image_dialog_target_right"
-            android:layout_width="@dimen/image_round_btn_width"
-            android:layout_height="@dimen/image_round_btn_width"
-            android:layout_margin="@dimen/margin_small"
-            android:src="@drawable/lemon"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
     <TextView
-        android:id="@+id/txt_dialog_target_score"
+        android:id="@+id/txt_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text=""
+        android:text="@string/txt_level"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_dialog_large_size"
+        android:textSize="@dimen/txt_dialog_large_size"
         android:textStyle="bold"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/guideline_target2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_target1" />
+        app:layout_constraintEnd_toEndOf="@+id/image_dialog"
+        app:layout_constraintStart_toStartOf="@+id/image_dialog"
+        app:layout_constraintTop_toTopOf="@+id/image_dialog" />
+
+    <ImageView
+        android:id="@+id/image_star"
+        android:layout_width="@dimen/btn_large_width"
+        android:layout_height="0dp"
+        android:src="@drawable/star_set_bg"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintEnd_toEndOf="@+id/image_dialog"
+        app:layout_constraintStart_toStartOf="@+id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/txt_level" />
 
     <TextView
-        android:id="@+id/txt_dialog_target"
+        android:id="@+id/txt_target"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_target"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_dialog_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/image_dialog"
+        app:layout_constraintStart_toStartOf="@+id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@id/image_star" />
+
+    <com.nativegame.nattyengine.ui.GameImage
+        android:id="@+id/image_target_01"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:src="@drawable/cherry"
+        app:layout_constraintEnd_toStartOf="@id/image_target_02"
+        app:layout_constraintTop_toTopOf="@id/image_target_02" />
+
+    <com.nativegame.nattyengine.ui.GameImage
+        android:id="@+id/image_target_02"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:src="@drawable/strawberry"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@id/txt_target" />
+
+    <com.nativegame.nattyengine.ui.GameImage
+        android:id="@+id/image_target_03"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:src="@drawable/lemon"
+        app:layout_constraintStart_toEndOf="@id/image_target_02"
+        app:layout_constraintTop_toTopOf="@id/image_target_02" />
+
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_level_target"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:text="@string/txt_collect_items"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_dialog_small_size"
+        android:textSize="@dimen/txt_dialog_small_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_target2" />
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@id/image_target_02" />
 
-    <ImageButton
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:layout_marginTop="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_5"
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintEnd_toEndOf="@+id/image_dialog"
+        app:layout_constraintTop_toTopOf="@+id/txt_level" />
+
+    <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_play"
-        android:layout_width="@dimen/image_btn_width"
-        android:layout_height="@dimen/image_btn_height"
+        android:layout_width="@dimen/btn_large_width"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_5"
         android:background="@drawable/btn_play"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_dialog_target" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_target1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.51" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_target2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
+        app:layout_constraintDimensionRatio="5:2"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@+id/txt_level_target" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

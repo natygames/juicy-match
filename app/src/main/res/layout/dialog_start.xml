@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/image_dialog"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/dialog_game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="3:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_level_type"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="0dp"
+        android:src="@drawable/text_target_collect"
+        app:layout_constraintBottom_toBottomOf="@id/image_dialog"
+        app:layout_constraintDimensionRatio="3:1"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog" />
+
+    <ImageView
+        android:id="@+id/image_ribbon"
+        android:layout_width="@dimen/dialog_small_width"
+        android:layout_height="0dp"
+        android:src="@drawable/ribbon"
+        app:layout_constraintBottom_toTopOf="@id/image_dialog"
+        app:layout_constraintDimensionRatio="3:1"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog" />
+
+    <TextView
+        android:id="@+id/txt_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_level"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_dialog_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/image_ribbon"
+        app:layout_constraintStart_toStartOf="@id/image_ribbon"
+        app:layout_constraintTop_toTopOf="@id/image_ribbon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
