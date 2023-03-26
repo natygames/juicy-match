@@ -11,6 +11,7 @@
     <!-- Custom color -->
     <color name="blue">#FFBBDEFB</color>
     <color name="white_25">#40FFFFFF</color>
+    <color name="black_25">#40000000</color>
     <color name="black_60">#99000000</color>
     <color name="black_80">#CC000000</color>
 </resources>

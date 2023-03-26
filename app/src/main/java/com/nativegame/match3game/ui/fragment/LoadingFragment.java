@@ -39,8 +39,13 @@ public class LoadingFragment extends GameFragment {
         Colors.load(getContext());
         Preferences.load(getContext());
 
-        // Navigate to menu when finish
-        getGameActivity().navigateToFragment(new MenuFragment());
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Navigate to menu when finish
+                getGameActivity().navigateToFragment(new MenuFragment());
+            }
+        }, 500);
     }
     //========================================================
 

@@ -12,7 +12,6 @@
     <dimen name="txt_state_item_size">24sp</dimen>
 
     <dimen name="txt_level_size">30sp</dimen>
-    <dimen name="txt_loading_size">60sp</dimen>
 
     <!-- Button width -->
     <dimen name="btn_large_width">192dp</dimen>

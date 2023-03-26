@@ -10,7 +10,6 @@
     <string name="txt_hint">Hint :</string>
     <string name="txt_fps">FPS :</string>
     <string name="txt_skip">Tap to skip</string>
-    <string name="txt_loading">Loading . . .</string>
     <string name="txt_version" translatable="false">V1.2</string>
     <string name="txt_shop">Shop</string>
     <string name="txt_level">Level %1$d</string>

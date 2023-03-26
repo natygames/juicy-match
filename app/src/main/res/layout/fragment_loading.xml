@@ -18,6 +18,15 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/black_25"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
         android:id="@+id/image_logo"
         android:layout_width="@dimen/image_logo_width"
         android:layout_height="@dimen/image_logo_width"
@@ -28,18 +37,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:text="@string/txt_loading"
-        android:textColor="@color/white"
-        android:textSize="@dimen/txt_loading_size"
-        android:textStyle="bold"
+    <ImageView
+        android:id="@+id/image_engine"
+        android:layout_width="@dimen/btn_large_width"
+        android:layout_height="0dp"
+        android:src="@drawable/made_with_engine"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="25:11"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_logo" />
+        app:layout_constraintTop_toBottomOf="@id/image_logo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
