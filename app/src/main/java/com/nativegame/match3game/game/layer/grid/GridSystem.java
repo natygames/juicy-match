@@ -4,10 +4,17 @@ import com.nativegame.match3game.game.layer.LayerSystem;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class GridSystem extends LayerSystem<Grid> {
 
     private final Grid[][] mGrids;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public GridSystem(Engine engine) {
         super(engine);
         mGrids = new Grid[mTotalRow][mTotalCol];

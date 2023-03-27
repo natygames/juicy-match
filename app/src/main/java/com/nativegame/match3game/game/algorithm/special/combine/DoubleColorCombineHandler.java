@@ -19,6 +19,10 @@ import com.nativegame.nattyengine.entity.timer.Timer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class DoubleColorCombineHandler extends BaseSpecialCombineHandler implements Timer.TimerListener {
 
     private static final long START_DELAY = 2000;
@@ -34,6 +38,9 @@ public class DoubleColorCombineHandler extends BaseSpecialCombineHandler impleme
 
     private final List<Tile> mPopTiles = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public DoubleColorCombineHandler(Engine engine) {
         super(engine);
         mColorCombineEffectSystem = new ColorCombineEffectSystem(engine, 1);
@@ -56,6 +63,7 @@ public class DoubleColorCombineHandler extends BaseSpecialCombineHandler impleme
         mShadowBg.setLayer(Layer.EFFECT_LAYER);
         mTimer = new Timer(engine, this, START_DELAY);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -10,12 +10,19 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.particles.ParticleSystem;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ExplosionRowColumnCombineHandler extends BaseSpecialCombineHandler {
 
     private final RowFlashEffectSystem mRowFlashEffectSystem;
     private final ColumnFlashEffectSystem mColumnFlashEffectSystem;
     private final ParticleSystem mRingLightParticleSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ExplosionRowColumnCombineHandler(Engine engine) {
         super(engine);
         mRowFlashEffectSystem = new RowFlashEffectSystem(engine, 3);
@@ -26,6 +33,7 @@ public class ExplosionRowColumnCombineHandler extends BaseSpecialCombineHandler 
                 .setAlpha(255, 55)
                 .setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

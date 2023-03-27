@@ -11,16 +11,14 @@ import com.nativegame.match3game.game.layer.tile.type.TubeTile;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class TileInitializer {
 
-    private static int FRUIT_NUM;
-
-    public static void init() {
-        FRUIT_NUM = Level.LEVEL_DATA.getFruitNum();
-    }
-
     //--------------------------------------------------------
-    // Getter and Setter
+    // Static methods
     //--------------------------------------------------------
     public static Tile createTile(TileSystem tileSystem, Engine engine, char c) {
         switch (c) {
@@ -56,7 +54,7 @@ public class TileInitializer {
     }
 
     public static FruitType getRandomFruit() {
-        int random = (int) (Math.random() * FRUIT_NUM);
+        int random = (int) (Math.random() * Level.LEVEL_DATA.getFruitNum());
         switch (random) {
             case 0:
                 return FruitType.CHERRY;

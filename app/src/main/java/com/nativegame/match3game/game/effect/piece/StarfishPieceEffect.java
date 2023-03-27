@@ -7,18 +7,28 @@ import com.nativegame.nattyengine.entity.sprite.modifier.PositionYModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class StarfishPieceEffect extends Sprite {
+
+    private static final long TIME_TO_LIVE = 500;
 
     private final ScaleOutModifier mScaleOutModifier;
     private final PositionYModifier mPositionModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public StarfishPieceEffect(Engine engine, Texture texture) {
         super(engine, texture);
-        mScaleOutModifier = new ScaleOutModifier(500);
-        mPositionModifier = new PositionYModifier(500);
+        mScaleOutModifier = new ScaleOutModifier(TIME_TO_LIVE);
+        mPositionModifier = new PositionYModifier(TIME_TO_LIVE);
         mPositionModifier.setAutoRemove(true);
         setLayer(Layer.TEXT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

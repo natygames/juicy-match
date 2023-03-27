@@ -4,15 +4,23 @@ import com.nativegame.match3game.game.layer.LayerSystem;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class IceSystem extends LayerSystem<Ice> {
 
     private final Ice[][] mIces;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public IceSystem(Engine engine) {
         super(engine);
         mIces = new Ice[mTotalRow][mTotalCol];
         init(Level.LEVEL_DATA.getIce().toCharArray());
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

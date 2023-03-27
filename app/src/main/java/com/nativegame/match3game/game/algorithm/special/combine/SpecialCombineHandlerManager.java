@@ -6,12 +6,18 @@ import com.nativegame.nattyengine.engine.Engine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class SpecialCombineHandlerManager {
 
     private final List<SpecialCombineHandler> mSpecialCombineHandlers = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public SpecialCombineHandlerManager(Engine engine) {
-        mSpecialCombineHandlers.clear();
         // Add all the special combine handler
         mSpecialCombineHandlers.add(new ColorFruitCombineHandler(engine));
         mSpecialCombineHandlers.add(new ColorRowColumnCombineHandler(engine));
@@ -21,6 +27,7 @@ public class SpecialCombineHandlerManager {
         mSpecialCombineHandlers.add(new DoubleRowColumnCombineHandler(engine));
         mSpecialCombineHandlers.add(new ExplosionRowColumnCombineHandler(engine));
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Methods

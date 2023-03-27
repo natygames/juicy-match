@@ -1,7 +1,14 @@
 package com.nativegame.match3game.game.layer.lock;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LockInitializer {
 
+    //--------------------------------------------------------
+    // Static methods
+    //--------------------------------------------------------
     public static LockType getType(char c) {
         switch (c) {
             case 'X':
@@ -10,5 +17,6 @@ public class LockInitializer {
                 throw new IllegalArgumentException("LockType not found!");
         }
     }
+    //========================================================
 
 }

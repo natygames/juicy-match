@@ -10,15 +10,23 @@ import com.nativegame.nattyengine.entity.sprite.Sprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class Generator extends LayerSprite {
 
     private final GeneratorPivot mPivot;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public Generator(Engine engine, Texture texture) {
         super(engine, texture);
         mPivot = new GeneratorPivot(engine, Textures.GENERATOR_PIVOT);
         setLayer(Layer.GENERATOR_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

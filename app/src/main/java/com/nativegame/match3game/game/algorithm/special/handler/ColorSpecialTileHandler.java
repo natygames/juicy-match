@@ -9,6 +9,10 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.game.layer.tile.TileInitializer;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColorSpecialTileHandler extends BaseSpecialTileHandler {
 
     private static final int MAX_LIGHTNING_NUM = 10;
@@ -17,12 +21,16 @@ public class ColorSpecialTileHandler extends BaseSpecialTileHandler {
     private final LightningGlitterEffectSystem mLightningGlitterEffectSystem;
     private final IceCreamPieceEffectSystem mIceCreamPieceEffectSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorSpecialTileHandler(Engine engine) {
         super(engine);
         mLightningEffectSystem = new LightningEffectSystem(engine, MAX_LIGHTNING_NUM);
         mLightningGlitterEffectSystem = new LightningGlitterEffectSystem(engine, MAX_LIGHTNING_NUM);
         mIceCreamPieceEffectSystem = new IceCreamPieceEffectSystem(engine, 1);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

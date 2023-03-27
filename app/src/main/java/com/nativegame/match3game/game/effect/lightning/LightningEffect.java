@@ -4,7 +4,11 @@ import com.nativegame.match3game.game.layer.Layer;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.texture.TextureGroup;
+import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
 
 public class LightningEffect extends AnimatedSprite implements AnimatedSprite.AnimationListener {
 
@@ -14,7 +18,10 @@ public class LightningEffect extends AnimatedSprite implements AnimatedSprite.An
     private final LightningEffectSystem mParent;
     private final FadeOutModifier mFadeOutModifier;
 
-    public LightningEffect(LightningEffectSystem lightningEffectSystem, Engine engine, TextureGroup textureGroup) {
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
+    public LightningEffect(LightningEffectSystem lightningEffectSystem, Engine engine, Texture2DGroup textureGroup) {
         super(engine, textureGroup);
         mParent = lightningEffectSystem;
         mFadeOutModifier = new FadeOutModifier(TIME_TO_FADE, TIME_TO_ANIMATE);
@@ -26,6 +33,7 @@ public class LightningEffect extends AnimatedSprite implements AnimatedSprite.An
         setRotationPivotY(0);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

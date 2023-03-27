@@ -12,18 +12,26 @@ import com.nativegame.match3game.game.layer.tile.TileSystem;
 import com.nativegame.match3game.game.layer.tile.type.EmptyTile;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class HammerController extends BoosterController {
 
     private final RowSpecialTileHandler mRowSpecialTileHandler;
     private final ColumnSpecialTileHandler mColumnSpecialTileHandler;
     private final HammerEffect mHammerEffect;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public HammerController(Engine engine, TileSystem tileSystem) {
         super(engine, tileSystem);
         mRowSpecialTileHandler = new RowSpecialTileHandler(engine);
         mColumnSpecialTileHandler = new ColumnSpecialTileHandler(engine);
         mHammerEffect = new HammerEffect(engine, Textures.HAMMER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

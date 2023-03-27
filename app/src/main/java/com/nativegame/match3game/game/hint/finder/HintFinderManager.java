@@ -5,10 +5,17 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class HintFinderManager {
 
     private final List<HintFinder> mHintFinders = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public HintFinderManager() {
         mHintFinders.add(new SpecialCombineHint());
         mHintFinders.add(new MatchColorSpecialTileHint());
@@ -16,6 +23,7 @@ public class HintFinderManager {
         mHintFinders.add(new MatchTileHint());
         mHintFinders.add(new ColorSpecialTileHint());
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Methods

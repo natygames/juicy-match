@@ -10,6 +10,10 @@ import com.nativegame.nattyengine.entity.timer.Timer;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColorExplosionCombineHandler extends ColorCombineHandler implements Timer.TimerListener {
 
     private static final long START_DELAY = 1200;
@@ -18,10 +22,14 @@ public class ColorExplosionCombineHandler extends ColorCombineHandler implements
 
     private final List<Tile> mSpecialTiles = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorExplosionCombineHandler(Engine engine) {
         super(engine);
         mTimer = new Timer(engine, this, START_DELAY);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

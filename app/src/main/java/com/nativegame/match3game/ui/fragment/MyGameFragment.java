@@ -13,13 +13,21 @@ import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.ui.GameFragment;
 import com.nativegame.nattyengine.ui.GameView;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MyGameFragment extends GameFragment implements View.OnClickListener {
 
     private Game mGame;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public MyGameFragment() {
         // Required empty public constructor
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

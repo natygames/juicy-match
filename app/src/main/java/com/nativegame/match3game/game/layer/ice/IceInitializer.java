@@ -1,9 +1,13 @@
 package com.nativegame.match3game.game.layer.ice;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class IceInitializer {
 
     //--------------------------------------------------------
-    // Getter and Setter
+    // Static methods
     //--------------------------------------------------------
     public static IceType getType(char c) {
         char lower = Character.toLowerCase(c);

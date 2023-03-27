@@ -4,15 +4,23 @@ import com.nativegame.match3game.game.layer.LayerSystem;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class TileSystem extends LayerSystem<Tile> {
 
     private final Tile[][] mTiles;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public TileSystem(Engine engine) {
         super(engine);
         mTiles = new Tile[mTotalRow][mTotalCol];
         initTile(Level.LEVEL_DATA.getTile().toCharArray());
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods
@@ -32,8 +40,6 @@ public class TileSystem extends LayerSystem<Tile> {
     // Methods
     //--------------------------------------------------------
     private void initTile(char[] chars) {
-        TileInitializer.init();
-        // Init the tile and add to array
         for (int i = 0; i < mTotalRow; i++) {
             for (int j = 0; j < mTotalCol; j++) {
                 char c = chars[i * mTotalCol + j];

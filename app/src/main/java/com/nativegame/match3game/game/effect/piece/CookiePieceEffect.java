@@ -8,6 +8,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
 import com.nativegame.nattyengine.texture.Texture;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class CookiePieceEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 500;
@@ -19,6 +23,9 @@ public class CookiePieceEffect extends Sprite {
     private float mSpeedX;
     private float mSpeedY;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public CookiePieceEffect(Engine engine, Texture texture, CookiePiece cookiePiece) {
         super(engine, texture);
         mCookiePiece = cookiePiece;
@@ -27,6 +34,7 @@ public class CookiePieceEffect extends Sprite {
         mFadeOutModifier.setAutoRemove(true);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

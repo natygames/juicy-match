@@ -3,6 +3,10 @@ package com.nativegame.match3game.game.layer.tile;
 import com.nativegame.match3game.asset.Textures;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public enum SpecialType {
     NONE,
     UPGRADE,
@@ -11,6 +15,9 @@ public enum SpecialType {
     EXPLOSION_SPECIAL_TILE,
     COLOR_SPECIAL_TILE;
 
+    //--------------------------------------------------------
+    // Getter and Setter
+    //--------------------------------------------------------
     public boolean hasPower() {
         return this != NONE && this != UPGRADE;
     }
@@ -46,9 +53,10 @@ public enum SpecialType {
                 throw new IllegalArgumentException("No such tile drawable!");
         }
     }
+    //========================================================
 
     //--------------------------------------------------------
-    // Methods to get special tile drawable
+    // Static methods
     //--------------------------------------------------------
     private static Texture getRowSpecialTileTexture(FruitType fruitType) {
         switch (fruitType) {
@@ -100,11 +108,7 @@ public enum SpecialType {
                 throw new IllegalArgumentException("No such tile drawable!");
         }
     }
-    //========================================================
 
-    //--------------------------------------------------------
-    // Methods to get special tile pieces drawables
-    //--------------------------------------------------------
     private static Texture[] getRowSpecialTilePiecesTexture(FruitType fruitType) {
         switch (fruitType) {
             case CHERRY:

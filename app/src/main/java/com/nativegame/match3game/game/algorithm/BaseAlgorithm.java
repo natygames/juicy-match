@@ -6,6 +6,10 @@ import com.nativegame.match3game.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.Entity;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class BaseAlgorithm extends Entity implements Algorithm {
 
     protected final Tile[][] mTiles;
@@ -14,6 +18,9 @@ public abstract class BaseAlgorithm extends Entity implements Algorithm {
 
     protected final SpecialTileFinderManager mSpecialTileFinder;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected BaseAlgorithm(Engine engine, TileSystem tileSystem) {
         super(engine);
         mTiles = tileSystem.getChild();
@@ -21,5 +28,6 @@ public abstract class BaseAlgorithm extends Entity implements Algorithm {
         mTotalCol = tileSystem.getTotalColumn();
         mSpecialTileFinder = new SpecialTileFinderManager(engine);
     }
+    //========================================================
 
 }

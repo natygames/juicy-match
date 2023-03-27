@@ -16,8 +16,15 @@ import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ScoreDialog extends BaseDialog {
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ScoreDialog(GameActivity activity) {
         super(activity);
         setContentView(R.layout.dialog_score);
@@ -34,6 +41,7 @@ public class ScoreDialog extends BaseDialog {
         init();
         insertOrUpdateStar();
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

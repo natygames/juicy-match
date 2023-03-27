@@ -19,6 +19,10 @@ import com.nativegame.nattyengine.entity.timer.TimerEvent;
 
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class HintController extends Entity implements EventListener,
         Timer.TimerListener, TimerEvent.TimerEventListener {
 
@@ -39,6 +43,9 @@ public class HintController extends Entity implements EventListener,
 
     private List<Tile> mHintTiles;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public HintController(Engine engine, TileSystem tileSystem) {
         super(engine);
         mTiles = tileSystem.getChild();
@@ -53,6 +60,7 @@ public class HintController extends Entity implements EventListener,
         mSoundTimer.addTimerEvent(new TimerEvent(this, 300));
         mHintEnable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_HINT, true);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

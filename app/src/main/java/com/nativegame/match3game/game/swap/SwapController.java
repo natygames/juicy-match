@@ -15,6 +15,10 @@ import com.nativegame.nattyengine.entity.timer.Timer;
 import com.nativegame.nattyengine.input.touch.TouchEvent;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class SwapController extends Entity implements TouchEventListener,
         EventListener, SwapModifier.SwapListener, Timer.TimerListener {
 
@@ -32,6 +36,9 @@ public class SwapController extends Entity implements TouchEventListener,
     private Tile mTouchUpTile;
     private boolean mEnable = false;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public SwapController(Engine engine, TileSystem tileSystem) {
         super(engine);
         mTiles = tileSystem.getChild();
@@ -45,6 +52,7 @@ public class SwapController extends Entity implements TouchEventListener,
         mSpecialCombineHandler = new SpecialCombineHandlerManager(engine);
         mTimer = new Timer(engine, this);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

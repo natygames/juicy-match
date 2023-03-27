@@ -9,6 +9,10 @@ import com.nativegame.match3game.game.layer.tile.TileSystem;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class RegularTimeAlgorithm extends BaseAlgorithm {
 
     private static final int TIME_TO_PAUSE = 300;
@@ -25,12 +29,16 @@ public class RegularTimeAlgorithm extends BaseAlgorithm {
         PAUSE_TILE
     }
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public RegularTimeAlgorithm(Engine engine, TileSystem tileSystem, LayerHandlerManager layerHandlerManager,
                                 TargetHandlerManager targetHandlerManager) {
         super(engine, tileSystem);
         mLayerHandlerManager = layerHandlerManager;
         mTargetHandlerManager = targetHandlerManager;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods
@@ -123,7 +131,7 @@ public class RegularTimeAlgorithm extends BaseAlgorithm {
             Sounds.TILE_BOUNCE.play();
             mState = AlgorithmState.CHECK_MATCH;
         }
-        // Not sure
+        // Use this if run into bug
 //        if (!Match3Algorithm.isMoving(mTiles, mTotalRow, mTotalCol)
 //                && !Match3Algorithm.isWaiting(mTiles, mTotalRow, mTotalCol)) {
 //            mState = AlgorithmState.CHECK_MATCH;

@@ -5,15 +5,23 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.Entity;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class SwapModifier extends Entity {
 
     private SwapListener mListener;
     private Tile mTileA;
     private Tile mTileB;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public SwapModifier(Engine engine) {
         super(engine);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

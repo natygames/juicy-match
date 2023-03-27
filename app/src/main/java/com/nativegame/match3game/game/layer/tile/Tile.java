@@ -8,6 +8,10 @@ import com.nativegame.match3game.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class Tile extends LayerSprite implements Match3Tile {
 
     protected FruitType mFruitType;
@@ -15,6 +19,9 @@ public abstract class Tile extends LayerSprite implements Match3Tile {
     protected TileState mTileState;
     private boolean mIsSelect = false;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected Tile(Engine engine, Texture texture, FruitType fruitType) {
         this(engine, texture, fruitType, SpecialType.NONE, TileState.IDLE);
     }
@@ -34,6 +41,7 @@ public abstract class Tile extends LayerSprite implements Match3Tile {
         mTileState = tileState;
         setLayer(Layer.TILE_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

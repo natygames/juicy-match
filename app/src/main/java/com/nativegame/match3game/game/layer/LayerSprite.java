@@ -6,6 +6,10 @@ import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class LayerSprite extends Sprite {
 
     protected final int mMarginX;
@@ -14,11 +18,15 @@ public abstract class LayerSprite extends Sprite {
     protected int mRow;
     protected int mCol;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected LayerSprite(Engine engine, Texture texture) {
         super(engine, texture);
         mMarginX = (JuicyMatch.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * mWidth) / 2;
         mMarginY = (JuicyMatch.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * mHeight) / 2;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

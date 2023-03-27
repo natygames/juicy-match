@@ -12,6 +12,10 @@ import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.Entity;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ComboCounter extends Entity implements EventListener {
 
     private static final int COMBO_NICE = 4;
@@ -22,11 +26,15 @@ public class ComboCounter extends Entity implements EventListener {
 
     private int mCombo;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ComboCounter(Engine engine) {
         super(engine);
         mComboText = new TextEffect(engine, Textures.TEXT_COMBO_NICE);
         mCombo = 0;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

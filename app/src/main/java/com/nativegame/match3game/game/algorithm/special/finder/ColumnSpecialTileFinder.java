@@ -6,11 +6,19 @@ import com.nativegame.match3game.game.layer.tile.SpecialType;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColumnSpecialTileFinder extends TripleSpecialTileFinder {
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColumnSpecialTileFinder(Engine engine) {
         super(engine);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

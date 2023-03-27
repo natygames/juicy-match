@@ -8,17 +8,25 @@ import com.nativegame.nattyengine.engine.Engine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class GeneratorSystem extends LayerSystem<Generator> {
 
     private final Generator[][] mGenerators;
 
     private final List<TileResetter> mResetters = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public GeneratorSystem(Engine engine) {
         super(engine);
         mGenerators = new Generator[mTotalRow][mTotalCol];
         init(Level.LEVEL_DATA.getGenerator().toCharArray());
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

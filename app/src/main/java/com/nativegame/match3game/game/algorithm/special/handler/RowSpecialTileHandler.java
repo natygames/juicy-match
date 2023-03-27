@@ -5,14 +5,22 @@ import com.nativegame.match3game.game.effect.flash.RowFlashEffectSystem;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class RowSpecialTileHandler extends BaseSpecialTileHandler {
 
     private final RowFlashEffectSystem mFlashEffectSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public RowSpecialTileHandler(Engine engine) {
         super(engine);
         mFlashEffectSystem = new RowFlashEffectSystem(engine, 1);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

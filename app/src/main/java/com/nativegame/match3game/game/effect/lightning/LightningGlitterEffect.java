@@ -9,6 +9,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.texture.Texture;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LightningGlitterEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 600;
@@ -22,6 +26,9 @@ public class LightningGlitterEffect extends Sprite {
 
     private long mTotalTime;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public LightningGlitterEffect(LightningGlitterEffectSystem lightningGlitterEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = lightningGlitterEffectSystem;
@@ -30,8 +37,9 @@ public class LightningGlitterEffect extends Sprite {
         mFadeOutModifier = new FadeOutModifier(TIME_TO_FADE, TIME_TO_LIVE - TIME_TO_FADE);
         mFadeOutModifier.setAutoRemove(true);
         mRotationSpeed = RandomUtils.nextSign() * 180f / 1000;
-        setLayer(Layer.GRID_LAYER);   // We make sure not cover effect
+        setLayer(Layer.GRID_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

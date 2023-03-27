@@ -8,6 +8,10 @@ import com.nativegame.match3game.level.TargetType;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class TargetHandlerManager {
 
     private final List<TargetType> mTargetTypes;
@@ -17,6 +21,9 @@ public class TargetHandlerManager {
 
     private final List<TargetHandler> mTargetHandlers = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public TargetHandlerManager() {
         mTargetTypes = Level.LEVEL_DATA.getTargetTypes();
         mTargetNums = Level.LEVEL_DATA.getTargetNums();
@@ -28,7 +35,11 @@ public class TargetHandlerManager {
             mTargetHandlers.add(getTargetHandle(type));
         }
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
     public void checkTargets(Tile[][] tiles, int row, int col) {
         mIsTargetChanged = false;
         for (int i = 0; i < row; i++) {
@@ -95,5 +106,6 @@ public class TargetHandlerManager {
 
         return null;
     }
+    //========================================================
 
 }

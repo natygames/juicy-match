@@ -4,6 +4,10 @@ import android.content.Context;
 
 import com.nativegame.nattyengine.util.storage.preference.Preference;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class Preferences {
 
     private static final String PREFS_SETTING_NAME = "prefs_setting";

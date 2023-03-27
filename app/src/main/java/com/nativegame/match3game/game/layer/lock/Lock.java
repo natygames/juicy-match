@@ -11,6 +11,10 @@ import com.nativegame.nattyengine.texture.Texture;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class Lock extends LayerSprite {
 
     private static final int LOCK_PIECE_NUM = 5;
@@ -19,6 +23,9 @@ public class Lock extends LayerSprite {
 
     private final List<LockPieceEffect> mLockPieceEffects = new ArrayList<>(LOCK_PIECE_NUM);
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public Lock(Engine engine, Texture texture, LockType lockType) {
         super(engine, texture);
         mLockType = lockType;
@@ -29,11 +36,19 @@ public class Lock extends LayerSprite {
         }
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Getter and Setter
+    //--------------------------------------------------------
     public LockType getLockType() {
         return mLockType;
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
     public void playLockEffect() {
         // play explosion effect
         for (int i = 0; i < LOCK_PIECE_NUM; i++) {
@@ -45,5 +60,6 @@ public class Lock extends LayerSprite {
         // Remove the lock
         removeFromGame();
     }
+    //========================================================
 
 }

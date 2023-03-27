@@ -1,5 +1,9 @@
 package com.nativegame.match3game.game.effect;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public enum EffectDirection {
     TOP,
     DOWN,
@@ -17,6 +21,10 @@ public enum EffectDirection {
     //      \ / | \ /
     //  225  -------  135
     //         180
+
+    //--------------------------------------------------------
+    // Getter and Setter
+    //--------------------------------------------------------
     public int getAngle() {
         switch (this) {
             case TOP:
@@ -75,5 +83,6 @@ public enum EffectDirection {
 
         return 0;
     }
+    //========================================================
 
 }

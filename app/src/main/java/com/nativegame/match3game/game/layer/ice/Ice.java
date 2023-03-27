@@ -7,6 +7,10 @@ import com.nativegame.match3game.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class Ice extends LayerSprite {
 
     private final IcePieceEffectSystem mIcePieceEffect;
@@ -14,6 +18,9 @@ public class Ice extends LayerSprite {
 
     private int mIceLayer;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public Ice(Engine engine, Texture texture, IceType iceType, int iceLayer) {
         super(engine, texture);
         mIcePieceEffect = new IcePieceEffectSystem(engine, 20);
@@ -22,6 +29,7 @@ public class Ice extends LayerSprite {
         setRotation(iceType.getAngle());
         setLayer(Layer.GRID_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

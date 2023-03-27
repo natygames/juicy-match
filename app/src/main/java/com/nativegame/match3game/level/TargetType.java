@@ -2,6 +2,10 @@ package com.nativegame.match3game.level;
 
 import com.nativegame.match3game.R;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public enum TargetType {
     STRAWBERRY,
     CHERRY,

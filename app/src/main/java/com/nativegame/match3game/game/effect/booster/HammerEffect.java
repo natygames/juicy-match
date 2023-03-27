@@ -12,6 +12,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class HammerEffect extends Sprite {
 
     private static final long TIME_TO_SCALE = 500;
@@ -26,6 +30,9 @@ public class HammerEffect extends Sprite {
     private final PositionModifier mPositionModifier;
     private final RotationModifier mRotationModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public HammerEffect(Engine engine, Texture texture) {
         super(engine, texture);
         mScaleInModifier = new ScaleModifier(0, 2, TIME_TO_SCALE, OvershootTweener.getInstance());
@@ -40,7 +47,11 @@ public class HammerEffect extends Sprite {
                 TIME_TO_SCALE + TIME_TO_MOVE, AnticipateTweener.getInstance());
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Overriding methods
+    //--------------------------------------------------------
     @Override
     public void onUpdate(long elapsedMillis) {
         mScaleInModifier.update(this, elapsedMillis);
@@ -50,7 +61,11 @@ public class HammerEffect extends Sprite {
         mPositionModifier.update(this, elapsedMillis);
         mRotationModifier.update(this, elapsedMillis);
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
     public void activate(float x, float y, float targetX, float targetY) {
         setCenterX(x);
         setCenterY(y);
@@ -63,5 +78,6 @@ public class HammerEffect extends Sprite {
         mRotationModifier.init(this);
         addToGame();
     }
+    //========================================================
 
 }

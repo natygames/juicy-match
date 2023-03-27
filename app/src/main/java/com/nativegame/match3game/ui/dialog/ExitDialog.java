@@ -6,10 +6,17 @@ import com.nativegame.match3game.R;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ExitDialog extends BaseDialog implements View.OnClickListener {
 
     private int mSelectedId;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ExitDialog(GameActivity activity) {
         super(activity);
         setContentView(R.layout.dialog_exit);
@@ -23,6 +30,7 @@ public class ExitDialog extends BaseDialog implements View.OnClickListener {
         GameButton btnCancel = (GameButton) findViewById(R.id.btn_cancel);
         btnCancel.setOnClickListener(this);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

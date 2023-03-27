@@ -11,6 +11,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class FruitPieceEffect extends Sprite implements Modifier.ModifierListener {
 
     private static final long TIME_TO_LIVE = 500;
@@ -20,6 +24,9 @@ public class FruitPieceEffect extends Sprite implements Modifier.ModifierListene
     private final FadeOutModifier mFadeOutModifier;
     private final PositionModifier mPositionModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public FruitPieceEffect(Engine engine, Texture texture, FruitPieceDirection direction) {
         super(engine, texture);
         mFruitPieceDirection = direction;
@@ -31,6 +38,7 @@ public class FruitPieceEffect extends Sprite implements Modifier.ModifierListene
         setActive(false);
         setVisible(false);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

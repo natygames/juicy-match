@@ -13,6 +13,10 @@ import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
 import com.nativegame.nattyengine.ui.GameActivity;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ScoreCounter extends RunnableEntity implements EventListener {
 
     private static final int POINTS_PER_FRUIT = 10;
@@ -22,11 +26,15 @@ public class ScoreCounter extends RunnableEntity implements EventListener {
 
     private int mPoints;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ScoreCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
         mText = activity.findViewById(R.id.txt_score);
         mTextAnimation = AnimationUtils.loadAnimation(activity, R.anim.text_pulse);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

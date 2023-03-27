@@ -6,6 +6,10 @@ import com.nativegame.match3game.game.effect.piece.IceCreamPieceEffectSystem;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class ColorCombineHandler extends BaseSpecialCombineHandler {
 
     private static final int MAX_LIGHTNING_NUM = 20;
@@ -14,12 +18,16 @@ public abstract class ColorCombineHandler extends BaseSpecialCombineHandler {
     private final LightningGlitterEffectSystem mLightningGlitterEffectSystem;
     private final IceCreamPieceEffectSystem mIceCreamPieceEffectSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected ColorCombineHandler(Engine engine) {
         super(engine);
         mLightningEffectSystem = new LightningEffectSystem(engine, MAX_LIGHTNING_NUM);
         mLightningGlitterEffectSystem = new LightningGlitterEffectSystem(engine, MAX_LIGHTNING_NUM);
         mIceCreamPieceEffectSystem = new IceCreamPieceEffectSystem(engine, 1);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

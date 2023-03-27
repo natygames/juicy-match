@@ -7,6 +7,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.FadeInModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColorCombineRingEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 600;
@@ -15,6 +19,9 @@ public class ColorCombineRingEffect extends Sprite {
     private final ScaleModifier mScaleModifier;
     private final FadeInModifier mFadeInModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorCombineRingEffect(ColorCombineRingEffectSystem colorCombineRingEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = colorCombineRingEffectSystem;
@@ -23,6 +30,7 @@ public class ColorCombineRingEffect extends Sprite {
         mFadeInModifier.setAutoRemove(true);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

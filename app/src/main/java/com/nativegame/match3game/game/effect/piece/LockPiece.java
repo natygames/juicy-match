@@ -3,6 +3,10 @@ package com.nativegame.match3game.game.effect.piece;
 import com.nativegame.match3game.asset.Textures;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public enum LockPiece {
     CENTER_LEFT,
     CENTER_RIGHT,
@@ -10,6 +14,9 @@ public enum LockPiece {
     TOP_LEFT,
     RIGHT;
 
+    //--------------------------------------------------------
+    // Getter and Setter
+    //--------------------------------------------------------
     public Texture getTexture() {
         switch (this) {
             case CENTER_LEFT:
@@ -41,5 +48,6 @@ public enum LockPiece {
                 throw new IllegalArgumentException("LockPiece texture not found!");
         }
     }
+    //========================================================
 
 }

@@ -7,14 +7,21 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.game.layer.tile.type.StarfishTile;
 import com.nativegame.match3game.level.TargetType;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class EntryPointLayerHandler extends BaseLayerHandler {
 
     private final EntryPointSystem mEntryPointSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public EntryPointLayerHandler(EntryPointSystem entryPointSystem) {
-        super();
         mEntryPointSystem = entryPointSystem;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

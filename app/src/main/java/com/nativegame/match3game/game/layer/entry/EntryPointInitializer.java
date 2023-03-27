@@ -1,9 +1,13 @@
 package com.nativegame.match3game.game.layer.entry;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class EntryPointInitializer {
 
     //--------------------------------------------------------
-    // Getter and Setter
+    // Static methods
     //--------------------------------------------------------
     public static EntryPointType getType(char c) {
         switch (c) {
@@ -11,7 +15,6 @@ public class EntryPointInitializer {
                 return EntryPointType.ENTRY;
             default:
                 throw new IllegalArgumentException("EntryPointType not found!");
-
         }
     }
     //========================================================

@@ -34,6 +34,10 @@ import com.nativegame.nattyengine.util.math.RandomUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class SolidTile extends Tile implements EventListener {
 
     private static final long TIME_TO_SHUFFLE = 800;
@@ -63,6 +67,9 @@ public class SolidTile extends Tile implements EventListener {
 
     private final List<TileResetter> mTileResetters = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public SolidTile(TileSystem tileSystem, Engine engine, Texture texture, FruitType fruitType) {
         this(tileSystem, engine, texture, fruitType, SpecialType.NONE, TileState.IDLE);
     }
@@ -105,7 +112,7 @@ public class SolidTile extends Tile implements EventListener {
         mLightFilter = new PorterDuffColorFilter(Colors.WHITE_25, PorterDuff.Mode.SRC_ATOP);
         mSpeed = 2500f / 1000;
     }
-
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

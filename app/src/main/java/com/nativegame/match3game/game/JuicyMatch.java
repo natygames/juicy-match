@@ -21,11 +21,19 @@ import com.nativegame.nattyengine.engine.camera.Camera;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameView;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+
 public class JuicyMatch extends Game {
 
     public static final int WORLD_WIDTH = 2700;
     public static final int WORLD_HEIGHT = 2700;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public JuicyMatch(GameActivity activity, GameView gameView) {
         super(activity, gameView);
 
@@ -60,6 +68,7 @@ public class JuicyMatch extends Game {
         new BoosterCounter(mActivity, mEngine, tileSystem).addToGame();
         new GameController(mActivity, mEngine, regularTimeAlgorithm, bonusTimeAlgorithm).addToGame();
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -9,10 +9,17 @@ import com.nativegame.match3game.level.LevelType;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class StartDialog extends BaseDialog {
 
     private static final long TIME_TO_LIVE = 1500;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public StartDialog(GameActivity activity) {
         super(activity);
         setContentView(R.layout.dialog_start);
@@ -21,6 +28,7 @@ public class StartDialog extends BaseDialog {
         setExitAnimationId(R.anim.exit_to_bottom);
         init();
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Methods

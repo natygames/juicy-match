@@ -9,14 +9,21 @@ import com.nativegame.match3game.game.layer.tile.SpecialType;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.level.TargetType;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class IceLayerHandler extends BaseLayerHandler {
 
     private final IceSystem mIceSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public IceLayerHandler(IceSystem iceSystem) {
-        super();
         mIceSystem = iceSystem;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

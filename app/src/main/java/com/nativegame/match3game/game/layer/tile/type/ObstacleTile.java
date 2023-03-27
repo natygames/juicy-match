@@ -6,15 +6,23 @@ import com.nativegame.match3game.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class ObstacleTile extends SolidTile {
 
     protected int mObstacleLayer;
     protected boolean mIsObstacle = true;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected ObstacleTile(TileSystem tileSystem, Engine engine, Texture texture, FruitType fruitType, int obstacleLayer) {
         super(tileSystem, engine, texture, fruitType);
         mObstacleLayer = obstacleLayer;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

@@ -11,16 +11,24 @@ import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
 import com.nativegame.nattyengine.ui.GameActivity;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MoveCounter extends RunnableEntity implements EventListener {
 
     private final TextView mText;
 
     private int mMoves;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public MoveCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
         mText = activity.findViewById(R.id.txt_move);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

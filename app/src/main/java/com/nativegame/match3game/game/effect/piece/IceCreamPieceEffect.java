@@ -6,6 +6,10 @@ import com.nativegame.nattyengine.entity.sprite.Sprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class IceCreamPieceEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 500;
@@ -13,6 +17,9 @@ public class IceCreamPieceEffect extends Sprite {
     private final IceCreamPieceEffectSystem mParent;
     private final ScaleOutModifier mScaleOutModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public IceCreamPieceEffect(IceCreamPieceEffectSystem iceCreamPieceEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = iceCreamPieceEffectSystem;
@@ -20,6 +27,7 @@ public class IceCreamPieceEffect extends Sprite {
         mScaleOutModifier.setAutoRemove(true);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -6,11 +6,19 @@ import com.nativegame.match3game.game.layer.tile.TileResetter;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class EmptyTile extends Tile {
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public EmptyTile(Engine engine, Texture texture) {
         super(engine, texture, FruitType.NONE);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

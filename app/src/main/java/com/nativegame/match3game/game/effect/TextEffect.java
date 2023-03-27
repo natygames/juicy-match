@@ -8,6 +8,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class TextEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 1300;
@@ -16,6 +20,9 @@ public class TextEffect extends Sprite {
     private final ScaleModifier mScaleModifier;
     private final FadeOutModifier mFadeOutModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public TextEffect(Engine engine, Texture texture) {
         super(engine, texture);
         mScaleModifier = new ScaleModifier(5, 2, TIME_TO_FADE, OvershootTweener.getInstance());
@@ -23,6 +30,7 @@ public class TextEffect extends Sprite {
         mFadeOutModifier.setAutoRemove(true);
         setLayer(Layer.TEXT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

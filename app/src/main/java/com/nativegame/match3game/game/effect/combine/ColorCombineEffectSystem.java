@@ -4,19 +4,28 @@ import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.asset.Textures;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.util.pool.ObjectPool;
+import com.nativegame.nattyengine.util.pool.Pool;
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
 
 public class ColorCombineEffectSystem {
 
-    private final ObjectPool<ColorCombineEffect> mEffectPool;
+    private final Pool<ColorCombineEffect> mEffectPool;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorCombineEffectSystem(Engine engine, int size) {
-        mEffectPool = new ObjectPool<>(new ObjectPool.PoolObjectFactory<ColorCombineEffect>() {
+        mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<ColorCombineEffect>() {
             @Override
             public ColorCombineEffect createObject() {
                 return new ColorCombineEffect(ColorCombineEffectSystem.this, engine, Textures.ICE_CREAM);
             }
         }, size * 2);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Methods

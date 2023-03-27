@@ -10,6 +10,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class GloveEffect extends Sprite {
 
     private static final long TIME_TO_SCALE = 500;
@@ -25,6 +29,9 @@ public class GloveEffect extends Sprite {
     private final PositionModifier mPositionModifier;
     private final PositionModifier mSwapPositionModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public GloveEffect(Engine engine, Texture texture) {
         super(engine, texture);
         mScaleInModifier = new ScaleModifier(0, 2, TIME_TO_SCALE, OvershootTweener.getInstance());
@@ -39,7 +46,11 @@ public class GloveEffect extends Sprite {
         mSwapPositionModifier.setModifyBefore(false);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Overriding methods
+    //--------------------------------------------------------
     @Override
     public void onUpdate(long elapsedMillis) {
         mScaleInModifier.update(this, elapsedMillis);
@@ -49,7 +60,11 @@ public class GloveEffect extends Sprite {
         mPositionModifier.update(this, elapsedMillis);
         mSwapPositionModifier.update(this, elapsedMillis);
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
     public void activate(float x, float y, float targetX, float targetY, float swapX, float swapY) {
         setCenterX(x);
         setCenterY(y);
@@ -63,5 +78,6 @@ public class GloveEffect extends Sprite {
         mSwapPositionModifier.init(this);
         addToGame();
     }
+    //========================================================
 
 }

@@ -4,7 +4,11 @@ import com.nativegame.match3game.game.layer.Layer;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.texture.TextureGroup;
+import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
 
 public class ExplosionFlashEffect extends AnimatedSprite {
 
@@ -14,7 +18,10 @@ public class ExplosionFlashEffect extends AnimatedSprite {
     private final ExplosionFlashEffectSystem mParent;
     private final FadeOutModifier mFadeOutModifier;
 
-    public ExplosionFlashEffect(ExplosionFlashEffectSystem explosionFlashEffectSystem, Engine engine, TextureGroup textureGroup) {
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
+    public ExplosionFlashEffect(ExplosionFlashEffectSystem explosionFlashEffectSystem, Engine engine, Texture2DGroup textureGroup) {
         super(engine, textureGroup);
         mParent = explosionFlashEffectSystem;
         mFadeOutModifier = new FadeOutModifier(TIME_TO_FADE, TIME_TO_ANIMATE);
@@ -23,6 +30,7 @@ public class ExplosionFlashEffect extends AnimatedSprite {
         setAnimationAutoStart(true);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

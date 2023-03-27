@@ -3,6 +3,10 @@ package com.nativegame.match3game.game.algorithm.layer;
 import com.nativegame.match3game.game.algorithm.target.TargetHandlerManager;
 import com.nativegame.match3game.game.layer.tile.Tile;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class BaseLayerHandler implements LayerHandler {
 
     //--------------------------------------------------------

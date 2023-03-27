@@ -6,14 +6,21 @@ import com.nativegame.match3game.game.layer.lock.Lock;
 import com.nativegame.match3game.game.layer.lock.LockSystem;
 import com.nativegame.match3game.game.layer.tile.Tile;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LockLayerHandler extends BaseLayerHandler {
 
     private final LockSystem mLockSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public LockLayerHandler(LockSystem lockSystem) {
-        super();
         mLockSystem = lockSystem;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

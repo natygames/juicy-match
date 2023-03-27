@@ -7,6 +7,11 @@ import com.nativegame.nattyengine.entity.Entity;
 import com.nativegame.nattyengine.entity.modifier.DurationModifier;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 import com.nativegame.nattyengine.util.pool.ObjectPool;
+import com.nativegame.nattyengine.util.pool.Pool;
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
 
 public class ColorCombineBeamEffectSystem extends Entity {
 
@@ -14,16 +19,19 @@ public class ColorCombineBeamEffectSystem extends Entity {
     private static final long TIME_TO_SPAWN = 200;
     private static final int SPAWN_COUNT = 5;
 
-    private final ObjectPool<ColorCombineBeamEffect> mEffectPool;
+    private final Pool<ColorCombineBeamEffect> mEffectPool;
     private final DurationModifier<ColorCombineBeamEffectSystem> mDurationModifier;
 
     private float mTargetX;
     private float mTargetY;
     private long mTotalTime;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorCombineBeamEffectSystem(Engine engine, int size) {
         super(engine);
-        mEffectPool = new ObjectPool<>(new ObjectPool.PoolObjectFactory<ColorCombineBeamEffect>() {
+        mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<ColorCombineBeamEffect>() {
             @Override
             public ColorCombineBeamEffect createObject() {
                 return new ColorCombineBeamEffect(ColorCombineBeamEffectSystem.this, engine,
@@ -33,6 +41,7 @@ public class ColorCombineBeamEffectSystem extends Entity {
         mDurationModifier = new DurationModifier<>(TIME_TO_LIVE);
         mDurationModifier.setAutoRemove(true);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -13,6 +13,10 @@ import com.nativegame.nattyengine.texture.Texture;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class CakeTile extends ObstacleTile {
 
     private static final int CAKE_PIECE_NUM = 6;
@@ -20,6 +24,9 @@ public class CakeTile extends ObstacleTile {
     private final SmokeEffect mSmokeEffect;
     private final List<CakePieceEffect> mCakePieceEffects = new ArrayList<>(CAKE_PIECE_NUM);
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public CakeTile(TileSystem tileSystem, Engine engine, Texture texture, int obstacleLayer) {
         super(tileSystem, engine, texture, FruitType.NONE, obstacleLayer);
         mSmokeEffect = new SmokeEffect(engine, Textures.SMOKE_ANIMATION);
@@ -29,6 +36,7 @@ public class CakeTile extends ObstacleTile {
             mCakePieceEffects.add(new CakePieceEffect(engine, cakePiece.getTexture(), cakePiece));
         }
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

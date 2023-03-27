@@ -17,6 +17,11 @@ import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.Entity;
 import com.nativegame.nattyengine.ui.GameActivity;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
+
 public class GameController extends Entity implements EventListener {
 
     private final GameActivity mParent;
@@ -26,6 +31,9 @@ public class GameController extends Entity implements EventListener {
     private GameState mState;
     private long mTotalTime;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public GameController(GameActivity activity, Engine engine,
                           Algorithm regularTimeAlgorithm, Algorithm bonusTimeAlgorithm) {
         super(engine);
@@ -33,6 +41,7 @@ public class GameController extends Entity implements EventListener {
         mRegularTimeAlgorithm = regularTimeAlgorithm;
         mBonusTimeAlgorithm = bonusTimeAlgorithm;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -9,16 +9,24 @@ import com.nativegame.match3game.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class StarfishTile extends SolidTile {
 
     private final StarfishPieceEffect mStarfishPieceEffect;
 
     private boolean mIsStarfish = true;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public StarfishTile(TileSystem tileSystem, Engine engine, Texture texture) {
         super(tileSystem, engine, texture, FruitType.NONE);
         mStarfishPieceEffect = new StarfishPieceEffect(engine, Textures.STARFISH);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

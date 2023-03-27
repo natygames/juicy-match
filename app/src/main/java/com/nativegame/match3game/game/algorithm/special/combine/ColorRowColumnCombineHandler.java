@@ -11,6 +11,10 @@ import com.nativegame.nattyengine.util.math.RandomUtils;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColorRowColumnCombineHandler extends ColorCombineHandler implements Timer.TimerListener {
 
     private static final long START_DELAY = 1200;
@@ -19,10 +23,14 @@ public class ColorRowColumnCombineHandler extends ColorCombineHandler implements
 
     private final List<Tile> mSpecialTiles = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorRowColumnCombineHandler(Engine engine) {
         super(engine);
         mTimer = new Timer(engine, this, START_DELAY);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

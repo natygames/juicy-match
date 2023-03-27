@@ -23,6 +23,10 @@ import com.nativegame.nattyengine.input.touch.TouchEvent;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListener {
 
     private static final int MAX_TRANSFORM_NUM = 20;
@@ -47,6 +51,9 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
         ADD_BONUS
     }
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public BonusTimeAlgorithm(Engine engine, TileSystem tileSystem) {
         super(engine, tileSystem);
         mTransformFlashEffect = new TransformFlashEffectSystem(engine, MAX_TRANSFORM_NUM);
@@ -57,6 +64,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
                 SpecialType.COLUMN_SPECIAL_TILE,
                 SpecialType.EXPLOSION_SPECIAL_TILE};
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

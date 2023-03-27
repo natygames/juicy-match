@@ -1,9 +1,16 @@
 package com.nativegame.match3game.game.effect.piece;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public enum FruitPieceDirection {
     LEFT,
     RIGHT;
 
+    //--------------------------------------------------------
+    // Getter and Setter
+    //--------------------------------------------------------
     public int getIndex() {
         switch (this) {
             case LEFT:
@@ -25,5 +32,6 @@ public enum FruitPieceDirection {
                 throw new IllegalArgumentException("FruitPiece not found!");
         }
     }
+    //========================================================
 
 }

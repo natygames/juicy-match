@@ -3,6 +3,10 @@ package com.nativegame.match3game.game.effect.piece;
 import com.nativegame.match3game.asset.Textures;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public enum CookiePiece {
     TOP_LEFT,
     TOP,
@@ -11,6 +15,9 @@ public enum CookiePiece {
     DOWN,
     DOWN_RIGHT;
 
+    //--------------------------------------------------------
+    // Getter and Setter
+    //--------------------------------------------------------
     public Texture getTexture() {
         switch (this) {
             case TOP_LEFT:
@@ -60,5 +67,6 @@ public enum CookiePiece {
                 throw new IllegalArgumentException("CookiePiece not found!");
         }
     }
+    //========================================================
 
 }

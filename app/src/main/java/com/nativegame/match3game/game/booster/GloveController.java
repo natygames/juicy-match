@@ -11,17 +11,25 @@ import com.nativegame.match3game.game.layer.tile.TileSystem;
 import com.nativegame.match3game.game.swap.SwapModifier;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class GloveController extends BoosterController implements SwapModifier.SwapListener {
 
     private final SwapModifier mSwapModifier;
     private final GloveEffect mGloveEffect;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public GloveController(Engine engine, TileSystem tileSystem) {
         super(engine, tileSystem);
         mSwapModifier = new SwapModifier(engine);
         mSwapModifier.setListener(this);
         mGloveEffect = new GloveEffect(engine, Textures.GLOVE);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

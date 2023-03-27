@@ -14,11 +14,21 @@ import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.asset.Textures;
 import com.nativegame.nattyengine.ui.GameFragment;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LoadingFragment extends GameFragment {
 
+    private static final long TIME_TO_LOAD = 800;
+
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public LoadingFragment() {
         // Required empty public constructor
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods
@@ -42,10 +52,10 @@ public class LoadingFragment extends GameFragment {
         view.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Navigate to menu when finish
+                // Navigate to menu when loading finish
                 getGameActivity().navigateToFragment(new MenuFragment());
             }
-        }, 500);
+        }, TIME_TO_LOAD);
     }
     //========================================================
 

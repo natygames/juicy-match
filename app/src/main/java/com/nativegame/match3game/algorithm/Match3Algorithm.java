@@ -1,10 +1,21 @@
 package com.nativegame.match3game.algorithm;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class Match3Algorithm {
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     private Match3Algorithm() {
     }
+    //========================================================
 
+    //--------------------------------------------------------
+    // Static methods
+    //--------------------------------------------------------
     public static void findMatchTile(Match3Tile[][] tiles, int row, int col) {
         // Find match 3 in row
         for (int i = 0; i < row; i++) {
@@ -301,5 +312,6 @@ public class Match3Algorithm {
 
         return false;
     }
+    //========================================================
 
 }

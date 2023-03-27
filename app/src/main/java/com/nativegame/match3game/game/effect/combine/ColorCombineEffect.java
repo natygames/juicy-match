@@ -6,6 +6,10 @@ import com.nativegame.nattyengine.entity.sprite.Sprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColorCombineEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 2000;
@@ -20,6 +24,9 @@ public class ColorCombineEffect extends Sprite {
     private float mSpeedX;
     private long mTotalTime;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorCombineEffect(ColorCombineEffectSystem colorCombineEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = colorCombineEffectSystem;
@@ -28,6 +35,7 @@ public class ColorCombineEffect extends Sprite {
         mSpeedX = 1500f / 1000;
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

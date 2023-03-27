@@ -6,6 +6,10 @@ import com.nativegame.nattyengine.entity.Entity;
 
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class HintModifier extends Entity {
 
     private static final int MAX_ALPHA = 255;
@@ -15,9 +19,13 @@ public class HintModifier extends Entity {
     private float mAlpha;
     private float mAlphaSpeed;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public HintModifier(Engine engine) {
         super(engine);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

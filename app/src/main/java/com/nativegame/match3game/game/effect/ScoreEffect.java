@@ -10,6 +10,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.PositionYModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleInModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ScoreEffect extends Sprite {
 
     private static final long TIME_TO_SCALE = 500;
@@ -20,6 +24,9 @@ public class ScoreEffect extends Sprite {
     private final FadeOutModifier mFadeOutModifier;
     private final PositionYModifier mPositionModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ScoreEffect(ScoreEffectSystem scoreEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = scoreEffectSystem;
@@ -29,6 +36,7 @@ public class ScoreEffect extends Sprite {
         mPositionModifier.setAutoRemove(true);
         setLayer(Layer.TEXT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -12,10 +12,17 @@ import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class PauseDialog extends BaseDialog {
 
     private int mSelectedId;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public PauseDialog(GameActivity activity) {
         super(activity);
         setContentView(R.layout.dialog_pause);
@@ -40,6 +47,7 @@ public class PauseDialog extends BaseDialog {
         updateMusicButton();
         updateSoundButton();
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

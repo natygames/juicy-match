@@ -17,10 +17,17 @@ import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LevelDialog extends BaseDialog {
 
     private int mSelectedId;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public LevelDialog(GameActivity activity) {
         super(activity);
         setContentView(R.layout.dialog_level);
@@ -40,6 +47,7 @@ public class LevelDialog extends BaseDialog {
         initTargetImage();
         initTargetText();
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

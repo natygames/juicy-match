@@ -9,6 +9,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColorCombineBeamEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 200;
@@ -21,6 +25,9 @@ public class ColorCombineBeamEffect extends Sprite {
     private float mSpeedX;
     private float mSpeedY;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorCombineBeamEffect(ColorCombineBeamEffectSystem colorCombineBeamEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = colorCombineBeamEffectSystem;
@@ -30,6 +37,7 @@ public class ColorCombineBeamEffect extends Sprite {
         mSpeed = 2000f / 1000;
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

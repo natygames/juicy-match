@@ -8,6 +8,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class IcePieceEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 700;
@@ -24,6 +28,9 @@ public class IcePieceEffect extends Sprite {
     private long mStartDelay;
     private long mTotalTime;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public IcePieceEffect(IcePieceEffectSystem icePieceEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = icePieceEffectSystem;
@@ -34,6 +41,7 @@ public class IcePieceEffect extends Sprite {
         mGravity = 10f / 1000;
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

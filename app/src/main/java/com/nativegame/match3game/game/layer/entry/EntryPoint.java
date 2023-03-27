@@ -5,6 +5,10 @@ import com.nativegame.match3game.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class EntryPoint extends LayerSprite {
 
     private static final long START_DELAY = 300;
@@ -16,12 +20,16 @@ public class EntryPoint extends LayerSprite {
     private float mMaxY;
     private long mTotalTime;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public EntryPoint(Engine engine, Texture texture, EntryPointType entryPointType) {
         super(engine, texture);
         mEntryPointType = entryPointType;
         mSpeedY = 100f / 1000;
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

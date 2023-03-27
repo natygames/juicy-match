@@ -6,12 +6,18 @@ import com.nativegame.nattyengine.engine.Engine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class SpecialTileFinderManager {
 
     private final List<SpecialTileFinder> mSpecialTileFinders = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public SpecialTileFinderManager(Engine engine) {
-        mSpecialTileFinders.clear();
         // Add all the special tile finder
         mSpecialTileFinders.add(new ColorSpecialTileFinder(engine));
         mSpecialTileFinders.add(new ExplosionXSpecialTileFinder(engine));
@@ -20,6 +26,7 @@ public class SpecialTileFinderManager {
         mSpecialTileFinders.add(new RowSpecialTileFinder(engine));
         mSpecialTileFinders.add(new ColumnSpecialTileFinder(engine));
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Methods

@@ -2,6 +2,10 @@ package com.nativegame.match3game.game.effect.combine;
 
 import com.nativegame.match3game.game.layer.Layer;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public enum ColorCombineDirection {
     LEFT,
     RIGHT;

@@ -7,7 +7,11 @@ import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.PositionYModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
-import com.nativegame.nattyengine.texture.TextureGroup;
+import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
 
 public class ColumnFlashEffect extends AnimatedSprite {
 
@@ -19,7 +23,10 @@ public class ColumnFlashEffect extends AnimatedSprite {
     private final FadeOutModifier mFadeOutModifier;
     private final PositionYModifier mPositionModifier;
 
-    public ColumnFlashEffect(ColumnFlashEffectSystem columnFlashEffectSystem, Engine engine, TextureGroup textureGroup) {
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
+    public ColumnFlashEffect(ColumnFlashEffectSystem columnFlashEffectSystem, Engine engine, Texture2DGroup textureGroup) {
         super(engine, textureGroup);
         mParent = columnFlashEffectSystem;
         mScaleModifier = new ScaleModifier(1f, 0.5f, 1f, 1.5f, TIME_TO_FADE, TIME_TO_ANIMATE);
@@ -31,6 +38,7 @@ public class ColumnFlashEffect extends AnimatedSprite {
         setRotationPivotY(0);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

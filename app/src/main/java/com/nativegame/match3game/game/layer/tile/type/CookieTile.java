@@ -14,6 +14,10 @@ import com.nativegame.nattyengine.texture.Texture;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class CookieTile extends ObstacleTile {
 
     private static final int GLITTER_NUM = 4;
@@ -23,6 +27,9 @@ public class CookieTile extends ObstacleTile {
     private final ParticleSystem mGlitterParticleSystem;
     private final List<CookiePieceEffect> mCookiePieceEffects = new ArrayList<>(COOKIE_PIECE_NUM);
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public CookieTile(TileSystem tileSystem, Engine engine, Texture texture) {
         super(tileSystem, engine, texture, FruitType.NONE, 1);
         mExplosionParticleSystem = new ParticleSystem(engine, Textures.LIGHT_BG, 1)
@@ -44,6 +51,7 @@ public class CookieTile extends ObstacleTile {
             mCookiePieceEffects.add(new CookiePieceEffect(engine, cookiePiece.getTexture(), cookiePiece));
         }
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -4,15 +4,23 @@ import com.nativegame.match3game.game.layer.LayerSystem;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class EntryPointSystem extends LayerSystem<EntryPoint> {
 
     private final EntryPoint[][] mEntryPoints;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public EntryPointSystem(Engine engine) {
         super(engine);
         mEntryPoints = new EntryPoint[mTotalRow][mTotalCol];
         init(Level.LEVEL_DATA.getEntry().toCharArray());
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

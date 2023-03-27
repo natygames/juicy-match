@@ -11,6 +11,10 @@ import com.nativegame.nattyengine.util.bitmap.ClipUtils;
 import com.nativegame.nattyengine.util.bitmap.ShapeUtils;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class Textures {
 
     public static Texture2D GRID_CENTER;

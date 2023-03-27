@@ -6,11 +6,18 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.particles.ParticleSystem;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class BaseSpecialCombineHandler implements SpecialCombineHandler {
 
     protected final Engine mEngine;
     private final ParticleSystem mLightBgParticleSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected BaseSpecialCombineHandler(Engine engine) {
         mEngine = engine;
         mLightBgParticleSystem = new ParticleSystem(engine, Textures.LIGHT_BG, 1)
@@ -19,6 +26,7 @@ public abstract class BaseSpecialCombineHandler implements SpecialCombineHandler
                 .setScale(5, 5)
                 .setLayer(Layer.GRID_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Methods

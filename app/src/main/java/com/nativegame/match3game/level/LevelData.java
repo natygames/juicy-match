@@ -3,6 +3,10 @@ package com.nativegame.match3game.level;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LevelData {
 
     private final LevelType mLevelType;
@@ -22,6 +26,9 @@ public class LevelData {
     private int mScore = 0;
     private int mStar = 0;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public LevelData(String levelType,
                      String grid,
                      String ice,
@@ -51,6 +58,7 @@ public class LevelData {
         mFruitNum = fruitNum;
         mMove = move;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

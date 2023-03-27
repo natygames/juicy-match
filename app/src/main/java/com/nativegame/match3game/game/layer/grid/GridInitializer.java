@@ -1,9 +1,13 @@
 package com.nativegame.match3game.game.layer.grid;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class GridInitializer {
 
     //--------------------------------------------------------
-    // Getter and Setter
+    // Static methods
     //--------------------------------------------------------
     public static GridType getType(char c) {
         switch (c) {

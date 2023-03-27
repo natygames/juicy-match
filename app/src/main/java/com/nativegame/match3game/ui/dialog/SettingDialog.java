@@ -10,10 +10,17 @@ import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.ui.GameImage;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class SettingDialog extends BaseDialog {
 
     private boolean mHintEnable;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public SettingDialog(GameActivity activity) {
         super(activity);
         setContentView(R.layout.dialog_setting);
@@ -39,6 +46,7 @@ public class SettingDialog extends BaseDialog {
         updateSoundButton();
         updateHintButton();
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

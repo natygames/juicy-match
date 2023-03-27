@@ -7,14 +7,21 @@ import com.nativegame.match3game.game.layer.tile.TileResetter;
 
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class GeneratorLayerHandler extends BaseLayerHandler {
 
     private final GeneratorSystem mGeneratorSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public GeneratorLayerHandler(GeneratorSystem generatorSystem) {
-        super();
         mGeneratorSystem = generatorSystem;
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

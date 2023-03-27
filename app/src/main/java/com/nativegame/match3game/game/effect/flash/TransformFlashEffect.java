@@ -6,7 +6,11 @@ import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleOutModifier;
-import com.nativegame.nattyengine.texture.TextureGroup;
+import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
+
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
 
 public class TransformFlashEffect extends AnimatedSprite {
 
@@ -18,7 +22,10 @@ public class TransformFlashEffect extends AnimatedSprite {
     private final ScaleOutModifier mScaleOutModifier;
     private final FadeOutModifier mFadeOutModifier;
 
-    public TransformFlashEffect(TransformFlashEffectSystem transformFlashEffectSystem, Engine engine, TextureGroup textureGroup) {
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
+    public TransformFlashEffect(TransformFlashEffectSystem transformFlashEffectSystem, Engine engine, Texture2DGroup textureGroup) {
         super(engine, textureGroup);
         mParent = transformFlashEffectSystem;
         mRotationModifier = new RotationModifier(0, 90, TIME_TO_LIVE);
@@ -29,6 +36,7 @@ public class TransformFlashEffect extends AnimatedSprite {
         setAnimationAutoStart(true);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

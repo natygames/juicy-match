@@ -15,6 +15,10 @@ import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
 import com.nativegame.nattyengine.ui.GameActivity;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class StarCounter extends RunnableEntity implements EventListener {
 
     private static final int STAR_PROGRESS_01 = 2800;
@@ -30,6 +34,9 @@ public class StarCounter extends RunnableEntity implements EventListener {
     private int mObtainedStar;
     private boolean mIsUpdateStar = false;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public StarCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
         ImageView imageView = activity.findViewById(R.id.image_star_progress);
@@ -37,6 +44,7 @@ public class StarCounter extends RunnableEntity implements EventListener {
         mStarAnimation = AnimationUtils.loadAnimation(activity, R.anim.star_pulse);
         mProgressIncrement = 10000 / (Level.LEVEL_DATA.getMove() * 4);   // Progress max is 10000
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

@@ -10,6 +10,10 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.particles.ParticleSystem;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ExplosionSpecialTileHandler extends BaseSpecialTileHandler {
 
     private static final int GLITTER_NUM = 8;
@@ -18,6 +22,9 @@ public class ExplosionSpecialTileHandler extends BaseSpecialTileHandler {
     private final ExplosionBeamEffectSystem mBeamEffectSystem;
     private final ParticleSystem mGlitterParticleSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ExplosionSpecialTileHandler(Engine engine) {
         super(engine);
         mFlashEffectSystem = new ExplosionFlashEffectSystem(engine, 1);
@@ -31,6 +38,7 @@ public class ExplosionSpecialTileHandler extends BaseSpecialTileHandler {
                 .setScale(1.2f, 0.5f, 200)
                 .setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

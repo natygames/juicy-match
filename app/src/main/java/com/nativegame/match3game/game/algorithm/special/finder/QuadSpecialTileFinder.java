@@ -7,6 +7,10 @@ import com.nativegame.match3game.game.layer.tile.SpecialType;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class QuadSpecialTileFinder extends BaseSpecialTileFinder {
 
     private static final int UPGRADE_NUM = 4;
@@ -16,10 +20,14 @@ public abstract class QuadSpecialTileFinder extends BaseSpecialTileFinder {
     private final int[] mPositionXFactors = new int[UPGRADE_NUM];
     private final int[] mPositionYFactors = new int[UPGRADE_NUM];
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected QuadSpecialTileFinder(Engine engine) {
         super(engine);
         mUpgradeFruitEffectSystem = new UpgradeFruitEffectSystem(engine, MAX_FIND_NUM * UPGRADE_NUM);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

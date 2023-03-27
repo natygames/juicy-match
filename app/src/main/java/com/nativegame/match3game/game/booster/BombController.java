@@ -11,16 +11,24 @@ import com.nativegame.match3game.game.layer.tile.TileSystem;
 import com.nativegame.match3game.game.layer.tile.type.EmptyTile;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class BombController extends BoosterController {
 
     private final ExplosionSpecialTileHandler mExplosionSpecialTileHandler;
     private final BombEffect mBombEffect;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public BombController(Engine engine, TileSystem tileSystem) {
         super(engine, tileSystem);
         mExplosionSpecialTileHandler = new ExplosionSpecialTileHandler(engine);
         mBombEffect = new BombEffect(engine, Textures.BOMB);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

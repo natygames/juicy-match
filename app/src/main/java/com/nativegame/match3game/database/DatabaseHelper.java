@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -20,9 +24,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static DatabaseHelper INSTANCE;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Static methods

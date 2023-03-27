@@ -5,6 +5,10 @@ import android.content.Context;
 import com.nativegame.match3game.R;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class Colors {
 
     public static int BLUE;

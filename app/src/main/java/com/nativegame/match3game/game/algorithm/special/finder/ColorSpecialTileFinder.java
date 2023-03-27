@@ -9,14 +9,22 @@ import com.nativegame.match3game.game.layer.tile.SpecialType;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class ColorSpecialTileFinder extends QuadSpecialTileFinder {
 
     private final TransformFlashEffectSystem mTransformFlashEffectSystem;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public ColorSpecialTileFinder(Engine engine) {
         super(engine);
         mTransformFlashEffectSystem = new TransformFlashEffectSystem(engine, MAX_FIND_NUM);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

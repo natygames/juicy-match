@@ -9,6 +9,10 @@ import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class UpgradeFruitEffect extends Sprite {
 
     private static final int TIME_TO_LIVE = 300;
@@ -17,6 +21,9 @@ public class UpgradeFruitEffect extends Sprite {
     private final ScaleModifier mScaleModifier;
     private final PositionModifier mPositionModifier;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public UpgradeFruitEffect(UpgradeFruitEffectSystem upgradeFruitEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
         mParent = upgradeFruitEffectSystem;
@@ -25,6 +32,7 @@ public class UpgradeFruitEffect extends Sprite {
         mPositionModifier.setAutoRemove(true);
         setLayer(Layer.EFFECT_LAYER);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

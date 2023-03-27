@@ -19,14 +19,22 @@ import com.nativegame.nattyengine.ui.GameText;
 
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MapFragment extends GameFragment implements View.OnClickListener {
 
     private static final int TOTAL_LEVEL = 3;
     private static final int TOTAL_BUTTON = 20;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public MapFragment() {
         // Required empty public constructor
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

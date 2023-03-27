@@ -19,6 +19,10 @@ import com.nativegame.nattyengine.ui.GameActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class TargetCounter extends RunnableEntity implements EventListener {
 
     private final List<TargetType> mTargetTypes;
@@ -27,12 +31,16 @@ public class TargetCounter extends RunnableEntity implements EventListener {
     private final List<TextView> mTexts = new ArrayList<>();
     private final List<ImageView> mImages = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public TargetCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
         mTargetTypes = Level.LEVEL_DATA.getTargetTypes();
         mTargetNums = Level.LEVEL_DATA.getTargetNums();
         init();
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods

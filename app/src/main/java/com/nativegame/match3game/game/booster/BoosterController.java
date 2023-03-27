@@ -11,6 +11,10 @@ import com.nativegame.nattyengine.entity.timer.Timer;
 import com.nativegame.nattyengine.input.touch.TouchEvent;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public abstract class BoosterController extends Entity implements TouchEventListener, Timer.TimerListener {
 
     private static final long TIME_TO_LIVE = 1500;
@@ -27,6 +31,9 @@ public abstract class BoosterController extends Entity implements TouchEventList
     private Tile mTouchDownTile;
     private Tile mTouchUpTile;
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     protected BoosterController(Engine engine, TileSystem tileSystem) {
         super(engine);
         mTiles = tileSystem.getChild();
@@ -37,6 +44,7 @@ public abstract class BoosterController extends Entity implements TouchEventList
         mTimer = new Timer(engine, this, TIME_TO_LIVE);
         mShadowBg = new Color(engine, Colors.BLACK_80);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

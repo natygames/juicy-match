@@ -6,10 +6,17 @@ import com.nativegame.match3game.game.layer.tile.Tile;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MatchTileHint implements HintFinder {
 
     private final List<Tile> mHintTiles = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Overriding methods
+    //--------------------------------------------------------
     @Override
     public List<Tile> findHint(Tile[][] tiles, int row, int col) {
         // Clear the previous hint
@@ -245,5 +252,6 @@ public class MatchTileHint implements HintFinder {
 
         return mHintTiles;
     }
+    //========================================================
 
 }

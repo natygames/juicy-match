@@ -13,10 +13,17 @@ import com.nativegame.nattyengine.engine.Engine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class LayerHandlerManager {
 
     private final List<LayerHandler> mLayerHandlers = new ArrayList<>();
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public LayerHandlerManager(Engine engine) {
         LevelData levelData = Level.LEVEL_DATA;
         // We add the layer from top to bottom
@@ -33,6 +40,7 @@ public class LayerHandlerManager {
             mLayerHandlers.add(new IceLayerHandler(new IceSystem(engine)));
         }
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter

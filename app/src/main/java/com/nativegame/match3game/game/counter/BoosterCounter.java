@@ -17,6 +17,10 @@ import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class BoosterCounter extends RunnableEntity implements View.OnClickListener,
         EventListener, BoosterController.BoosterListener {
 
@@ -46,6 +50,9 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
         BOMB
     }
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public BoosterCounter(GameActivity activity, Engine engine, TileSystem tileSystem) {
         super(activity, engine);
         mTxtHammer = (TextView) activity.findViewById(R.id.txt_hammer);
@@ -66,6 +73,7 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
         mGloveController.setListener(this);
         mBombController.setListener(this);
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods
