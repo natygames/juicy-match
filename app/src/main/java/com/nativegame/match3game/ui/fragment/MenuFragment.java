@@ -17,11 +17,19 @@ import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.ui.GameFragment;
 import com.nativegame.nattyengine.ui.GameImage;
 
+/**
+ * Created by Oscar Liang on 2022/02/23
+ */
+
 public class MenuFragment extends GameFragment implements View.OnClickListener {
 
+    //--------------------------------------------------------
+    // Constructors
+    //--------------------------------------------------------
     public MenuFragment() {
         // Required empty public constructor
     }
+    //========================================================
 
     //--------------------------------------------------------
     // Overriding methods
