@@ -33,10 +33,22 @@ public class IceLayerHandler extends BaseLayerHandler {
     }
 
     @Override
-    protected void onUpdateLayer(TargetHandlerManager targetHandlerManager, Tile tile) {
+    protected void onUpdateLayer(Tile tile, TargetHandlerManager targetHandlerManager, Tile[][] tiles, int row, int col) {
         if (tile.getTileState() != TileState.MATCH) {
             return;
         }
+        updateIce(targetHandlerManager, tile);
+    }
+
+    @Override
+    protected void onRemoveLayer(Tile tile) {
+    }
+    //========================================================
+
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
+    private void updateIce(TargetHandlerManager targetHandlerManager, Tile tile) {
         // Check is tile has ice
         Ice ice = mIceSystem.getChildAt(tile.getRow(), tile.getColumn());
         if (ice != null && ice.isRunning()) {
@@ -49,10 +61,6 @@ public class IceLayerHandler extends BaseLayerHandler {
                 }
             }
         }
-    }
-
-    @Override
-    protected void onRemoveLayer(Tile tile) {
     }
     //========================================================
 

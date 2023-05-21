@@ -20,7 +20,7 @@ public class LightningGlitterEffectSystem {
         mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<LightningGlitterEffect>() {
             @Override
             public LightningGlitterEffect createObject() {
-                return new LightningGlitterEffect(LightningGlitterEffectSystem.this, engine, Textures.LIGHTNING_GLITTER);
+                return new LightningGlitterEffect(LightningGlitterEffectSystem.this, engine, Textures.GLITTER_BLUE);
             }
         }, size);
     }

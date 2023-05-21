@@ -1,13 +1,15 @@
 package com.nativegame.match3game.game.algorithm.layer;
 
 import com.nativegame.match3game.game.algorithm.target.TargetHandlerManager;
-import com.nativegame.match3game.game.layer.entry.EntryPointSystem;
+import com.nativegame.match3game.game.layer.honey.HoneySystem;
+import com.nativegame.match3game.game.layer.entrypoint.EntryPointSystem;
 import com.nativegame.match3game.game.layer.generator.GeneratorSystem;
 import com.nativegame.match3game.game.layer.ice.IceSystem;
 import com.nativegame.match3game.game.layer.lock.LockSystem;
+import com.nativegame.match3game.game.layer.sand.SandSystem;
+import com.nativegame.match3game.game.layer.shell.ShellSystem;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.level.Level;
-import com.nativegame.match3game.level.LevelData;
 import com.nativegame.nattyengine.engine.Engine;
 
 import java.util.ArrayList;
@@ -25,19 +27,23 @@ public class LayerHandlerManager {
     // Constructors
     //--------------------------------------------------------
     public LayerHandlerManager(Engine engine) {
-        LevelData levelData = Level.LEVEL_DATA;
-        // We add the layer from top to bottom
-        if (levelData.getEntry() != null) {
-            mLayerHandlers.add(new EntryPointLayerHandler(new EntryPointSystem(engine)));
-        }
-        if (levelData.getGenerator() != null) {
-            mLayerHandlers.add(new GeneratorLayerHandler(new GeneratorSystem(engine)));
-        }
-        if (levelData.getLock() != null) {
+        if (Level.LEVEL_DATA.getLock() != null) {
             mLayerHandlers.add(new LockLayerHandler(new LockSystem(engine)));
         }
-        if (levelData.getIce() != null) {
+        if (Level.LEVEL_DATA.getIce() != null) {
             mLayerHandlers.add(new IceLayerHandler(new IceSystem(engine)));
+        }
+        if (Level.LEVEL_DATA.getHoney() != null) {
+            mLayerHandlers.add(new HoneyLayerHandler(new HoneySystem(engine)));
+        }
+        if (Level.LEVEL_DATA.getEntry() != null) {
+            mLayerHandlers.add(new EntryPointLayerHandler(new EntryPointSystem(engine)));
+        }
+        if (Level.LEVEL_DATA.getSand() != null) {
+            mLayerHandlers.add(new SandLayerHandler(new SandSystem(engine), new ShellSystem(engine)));
+        }
+        if (Level.LEVEL_DATA.getGenerator() != null) {
+            mLayerHandlers.add(new GeneratorLayerHandler(new GeneratorSystem(engine)));
         }
     }
     //========================================================

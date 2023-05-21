@@ -56,14 +56,6 @@ public class StarfishTile extends SolidTile {
         }
         super.playTileEffect();
     }
-
-    @Override
-    public boolean isShufflable() {
-        if (mIsStarfish) {
-            return false;
-        }
-        return super.isShufflable();
-    }
     //========================================================
 
     //--------------------------------------------------------
@@ -71,13 +63,10 @@ public class StarfishTile extends SolidTile {
     //--------------------------------------------------------
     public void popStarfishTile() {
         // Important to not reuse popTile() or matchTile()
-        if (!mIsStarfish) {
-            return;
-        }
         mTileState = TileState.MATCH;
     }
 
-    public void playStarfishEffect() {
+    private void playStarfishEffect() {
         mStarfishPieceEffect.activate(getCenterX(), getCenterY());
         Sounds.COLLECT_STARFISH.play();
     }

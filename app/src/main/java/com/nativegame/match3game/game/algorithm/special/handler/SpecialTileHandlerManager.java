@@ -20,10 +20,10 @@ public class SpecialTileHandlerManager {
     //--------------------------------------------------------
     public SpecialTileHandlerManager(Engine engine) {
         // Add all the special tile handler
-        mSpecialTileHandlers.put(SpecialType.COLOR_SPECIAL_TILE, new ColorSpecialTileHandler(engine));
-        mSpecialTileHandlers.put(SpecialType.EXPLOSION_SPECIAL_TILE, new ExplosionSpecialTileHandler(engine));
-        mSpecialTileHandlers.put(SpecialType.ROW_SPECIAL_TILE, new RowSpecialTileHandler(engine));
-        mSpecialTileHandlers.put(SpecialType.COLUMN_SPECIAL_TILE, new ColumnSpecialTileHandler(engine));
+        mSpecialTileHandlers.put(SpecialType.ICE_CREAM, new IceCreamHandler(engine));
+        mSpecialTileHandlers.put(SpecialType.EXPLOSIVE, new ExplosiveTileHandler(engine));
+        mSpecialTileHandlers.put(SpecialType.ROW_STRIPED, new RowStripedTileHandler(engine));
+        mSpecialTileHandlers.put(SpecialType.COLUMN_STRIPED, new ColumnStripedTileHandler(engine));
     }
     //========================================================
 

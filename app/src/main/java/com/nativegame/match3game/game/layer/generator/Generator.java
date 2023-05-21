@@ -33,7 +33,7 @@ public abstract class Generator extends LayerSprite {
     //--------------------------------------------------------
     @Override
     public void onStart() {
-        mY -= 200;
+        mY -= 225;
         mPivot.setX(mX);
         mPivot.setEndY(getEndY());
         mPivot.addToGame();
@@ -60,21 +60,33 @@ public abstract class Generator extends LayerSprite {
 
         private final RotationModifier mRotationModifier;
 
+        //--------------------------------------------------------
+        // Constructors
+        //--------------------------------------------------------
         public GeneratorPivot(Engine engine, Texture texture) {
             super(engine, texture);
             mRotationModifier = new RotationModifier(0, 180, TIME_TO_ROTATE, TIME_TO_PAUSE,
                     OvershootTweener.getInstance());
             setLayer(Layer.GENERATOR_LAYER);
         }
+        //========================================================
 
+        //--------------------------------------------------------
+        // Overriding methods
+        //--------------------------------------------------------
         @Override
         public void onUpdate(long elapsedMillis) {
             mRotationModifier.update(this, elapsedMillis);
         }
+        //========================================================
 
+        //--------------------------------------------------------
+        // Methods
+        //--------------------------------------------------------
         public void activate() {
             mRotationModifier.init(this);
         }
+        //========================================================
 
     }
     //========================================================

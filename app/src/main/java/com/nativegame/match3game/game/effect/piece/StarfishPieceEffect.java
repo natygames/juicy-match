@@ -26,7 +26,7 @@ public class StarfishPieceEffect extends Sprite {
         mScaleOutModifier = new ScaleOutModifier(TIME_TO_LIVE);
         mPositionModifier = new PositionYModifier(TIME_TO_LIVE);
         mPositionModifier.setAutoRemove(true);
-        setLayer(Layer.TEXT_LAYER);
+        setLayer(Layer.EFFECT_LAYER);
     }
     //========================================================
 

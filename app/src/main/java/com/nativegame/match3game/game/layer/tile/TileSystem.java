@@ -1,6 +1,6 @@
 package com.nativegame.match3game.game.layer.tile;
 
-import com.nativegame.match3game.game.layer.LayerSystem;
+import com.nativegame.match3game.game.layer.LayerSpriteSystem;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
@@ -8,7 +8,7 @@ import com.nativegame.nattyengine.engine.Engine;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class TileSystem extends LayerSystem<Tile> {
+public class TileSystem extends LayerSpriteSystem<Tile> {
 
     private final Tile[][] mTiles;
 
@@ -43,7 +43,7 @@ public class TileSystem extends LayerSystem<Tile> {
         for (int i = 0; i < mTotalRow; i++) {
             for (int j = 0; j < mTotalCol; j++) {
                 char c = chars[i * mTotalCol + j];
-                Tile tile = TileInitializer.createTile(this, mEngine, c);
+                Tile tile = TileInitializer.createTile(this, mEngine, i, j, c);
                 tile.setPosition(i, j);
                 if (c != 'e') {
                     // We do not add empty tile

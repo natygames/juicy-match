@@ -1,5 +1,7 @@
 package com.nativegame.match3game.game.counter;
 
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.nativegame.match3game.R;
@@ -17,7 +19,10 @@ import com.nativegame.nattyengine.ui.GameActivity;
 
 public class MoveCounter extends RunnableEntity implements EventListener {
 
-    private final TextView mText;
+    private static final int EXTRA_MOVES = 3;
+
+    private final TextView mTxtMove;
+    private final Animation mPulseAnimation;
 
     private int mMoves;
 
@@ -26,7 +31,8 @@ public class MoveCounter extends RunnableEntity implements EventListener {
     //--------------------------------------------------------
     public MoveCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
-        mText = activity.findViewById(R.id.txt_move);
+        mTxtMove = activity.findViewById(R.id.txt_move);
+        mPulseAnimation = AnimationUtils.loadAnimation(activity, R.anim.text_pulse);
     }
     //========================================================
 
@@ -41,7 +47,8 @@ public class MoveCounter extends RunnableEntity implements EventListener {
 
     @Override
     protected void onUpdateRunnable() {
-        mText.setText(String.valueOf(mMoves));
+        mTxtMove.setText(String.valueOf(mMoves));
+        mTxtMove.startAnimation(mPulseAnimation);
     }
 
     @Override
@@ -53,6 +60,11 @@ public class MoveCounter extends RunnableEntity implements EventListener {
                     mMoves--;
                     Level.LEVEL_DATA.setMove(mMoves);
                 }
+                setPostRunnable(true);
+                break;
+            case ADD_EXTRA_MOVES:
+                mMoves += EXTRA_MOVES;
+                Level.LEVEL_DATA.setMove(mMoves);
                 setPostRunnable(true);
                 break;
             case GAME_OVER:

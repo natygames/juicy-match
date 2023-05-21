@@ -24,7 +24,7 @@ public abstract class BaseSpecialCombineHandler implements SpecialCombineHandler
                 .setDuration(750)
                 .setAlpha(255, 0)
                 .setScale(5, 5)
-                .setLayer(Layer.GRID_LAYER);
+                .setLayer(Layer.EFFECT_BG_LAYER);
     }
     //========================================================
 

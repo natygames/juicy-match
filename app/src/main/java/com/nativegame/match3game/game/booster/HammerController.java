@@ -4,8 +4,8 @@ import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.asset.Textures;
 import com.nativegame.match3game.game.GameEvent;
 import com.nativegame.match3game.game.JuicyMatch;
-import com.nativegame.match3game.game.algorithm.special.handler.ColumnSpecialTileHandler;
-import com.nativegame.match3game.game.algorithm.special.handler.RowSpecialTileHandler;
+import com.nativegame.match3game.game.algorithm.special.handler.ColumnStripedTileHandler;
+import com.nativegame.match3game.game.algorithm.special.handler.RowStripedTileHandler;
 import com.nativegame.match3game.game.effect.booster.HammerEffect;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.game.layer.tile.TileSystem;
@@ -18,8 +18,8 @@ import com.nativegame.nattyengine.engine.Engine;
 
 public class HammerController extends BoosterController {
 
-    private final RowSpecialTileHandler mRowSpecialTileHandler;
-    private final ColumnSpecialTileHandler mColumnSpecialTileHandler;
+    private final RowStripedTileHandler mRowStripedTileHandler;
+    private final ColumnStripedTileHandler mColumnStripedTileHandler;
     private final HammerEffect mHammerEffect;
 
     //--------------------------------------------------------
@@ -27,8 +27,8 @@ public class HammerController extends BoosterController {
     //--------------------------------------------------------
     public HammerController(Engine engine, TileSystem tileSystem) {
         super(engine, tileSystem);
-        mRowSpecialTileHandler = new RowSpecialTileHandler(engine);
-        mColumnSpecialTileHandler = new ColumnSpecialTileHandler(engine);
+        mRowStripedTileHandler = new RowStripedTileHandler(engine);
+        mColumnStripedTileHandler = new ColumnStripedTileHandler(engine);
         mHammerEffect = new HammerEffect(engine, Textures.HAMMER);
     }
     //========================================================
@@ -50,8 +50,8 @@ public class HammerController extends BoosterController {
 
     @Override
     protected void onRemoveBooster(Tile[][] tiles, Tile touchDownTile, Tile touchUpTile, int row, int col) {
-        mRowSpecialTileHandler.handleSpecialTile(tiles, touchDownTile, row, col);
-        mColumnSpecialTileHandler.handleSpecialTile(tiles, touchDownTile, row, col);
+        mRowStripedTileHandler.handleSpecialTile(tiles, touchDownTile, row, col);
+        mColumnStripedTileHandler.handleSpecialTile(tiles, touchDownTile, row, col);
         dispatchEvent(GameEvent.PLAYER_USE_BOOSTER);
     }
     //========================================================

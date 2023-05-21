@@ -2,7 +2,6 @@ package com.nativegame.match3game.game.effect.flash;
 
 import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.asset.Textures;
-import com.nativegame.match3game.game.effect.EffectDirection;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.util.pool.ObjectPool;
 import com.nativegame.nattyengine.util.pool.Pool;
@@ -22,7 +21,7 @@ public class RowFlashEffectSystem {
         mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<RowFlashEffect>() {
             @Override
             public RowFlashEffect createObject() {
-                return new RowFlashEffect(RowFlashEffectSystem.this, engine, Textures.ROW_FLASH_ANIMATION);
+                return new RowFlashEffect(RowFlashEffectSystem.this, engine, Textures.FLASH_ROW_ANIMATION);
             }
         }, size * 2);
     }
@@ -32,9 +31,9 @@ public class RowFlashEffectSystem {
     // Methods
     //--------------------------------------------------------
     public void activate(float x, float y) {
-        mEffectPool.obtainObject().activate(x, y, EffectDirection.LEFT);
-        mEffectPool.obtainObject().activate(x, y, EffectDirection.RIGHT);
-        Sounds.STRIPED_SPECIAL_TILE_EXPLODE.play();
+        mEffectPool.obtainObject().activate(x, y, FlashDirection.LEFT);
+        mEffectPool.obtainObject().activate(x, y, FlashDirection.RIGHT);
+        Sounds.STRIPED_EXPLODE.play();
     }
 
     public void returnToPool(RowFlashEffect effect) {

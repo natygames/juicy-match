@@ -15,10 +15,10 @@ public class CakeTargetHandler implements TargetHandler {
     @Override
     public boolean checkTarget(Tile tile) {
         if (tile instanceof CakeTile) {
-            return ((CakeTile) tile).getObstacleLayer() == 1;
-        } else {
-            return false;
+            CakeTile cake = ((CakeTile) tile);
+            return cake.isObstacle() && cake.getObstacleLayer() == 1;
         }
+        return false;
     }
     //========================================================
 

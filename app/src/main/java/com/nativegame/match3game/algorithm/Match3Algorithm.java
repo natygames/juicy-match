@@ -73,26 +73,27 @@ public class Match3Algorithm {
             for (int i = row - 1; i >= 0; i--) {
                 Match3Tile currentTile = tiles[i][j];
                 // Find the match tile
-                if (currentTile.getTileState() == TileState.MATCH) {
-                    // Search the column bottom up
-                    for (int n = i - 1; n >= 0; n--) {
-                        Match3Tile upperTile = tiles[n][j];
-                        // We skip the negligible tile
-                        if (upperTile.isNegligible()) {
-                            continue;
-                        }
-                        // We first check if upper tile is swappable
-                        if (!upperTile.isSwappable()) {
-                            // Put it to waiting state and hide it before reset
-                            currentTile.setTileState(TileState.WAITING);
-                            currentTile.hideTile();
-                            break;
-                        }
-                        // Otherwise, swap with the idle upper tile
-                        if (upperTile.getTileState() == TileState.IDLE) {
-                            swapTile(tiles, currentTile, upperTile);
-                            break;
-                        }
+                if (currentTile.getTileState() != TileState.MATCH) {
+                    continue;
+                }
+                // Search the column bottom up
+                for (int n = i - 1; n >= 0; n--) {
+                    Match3Tile upperTile = tiles[n][j];
+                    // We skip the negligible tile
+                    if (upperTile.isNegligible()) {
+                        continue;
+                    }
+                    // We first check if upper tile is swappable
+                    if (!upperTile.isSwappable()) {
+                        // Put it to waiting state and hide it before reset
+                        currentTile.setTileState(TileState.WAITING);
+                        currentTile.hideTile();
+                        break;
+                    }
+                    // Otherwise, swap with the idle upper tile
+                    if (upperTile.getTileState() == TileState.IDLE) {
+                        swapTile(tiles, currentTile, upperTile);
+                        break;
                     }
                 }
             }
@@ -104,9 +105,9 @@ public class Match3Algorithm {
                 Match3Tile t = tiles[i][j];
                 // Find the match tile
                 if (t.getTileState() == TileState.MATCH) {
-                    t.resetTile();
                     t.resetXByColumn(t.getColumn());
                     t.resetYByRow(-n++);
+                    t.resetTile();
                 }
             }
         }
@@ -118,28 +119,29 @@ public class Match3Algorithm {
             for (int j = 0; j < col; j++) {
                 Match3Tile currentTile = tiles[i][j];
                 // Find the waiting tile
-                if (currentTile.getTileState() == TileState.WAITING) {
-                    // Search the column bottom up
-                    for (int n = i - 1; n >= 0; n--) {
-                        Match3Tile upperTile = tiles[n][j];
-                        // We skip the negligible tile
-                        if (upperTile.isNegligible()) {
-                            continue;
-                        }
-                        // Check is the 3 upper tile swappable
-                        //  X X X
-                        //    O
-                        //    O
-                        if ((j == 0 || !tiles[n][j - 1].isSwappable())
-                                && !tiles[n][j].isSwappable()
-                                && (j == col - 1 || !tiles[n][j + 1].isSwappable())) {
-                            // Put it to unreachable state
-                            currentTile.setTileState(TileState.UNREACHABLE);
-                        }
-
-                        // No need to check the next one if it is reachable
-                        break;
+                if (currentTile.getTileState() != TileState.WAITING) {
+                    continue;
+                }
+                // Search the column bottom up
+                for (int n = i - 1; n >= 0; n--) {
+                    Match3Tile upperTile = tiles[n][j];
+                    // We skip the negligible tile
+                    if (upperTile.isNegligible()) {
+                        continue;
                     }
+                    // Check is the 3 upper tile swappable
+                    //  X X X
+                    //    O
+                    //    O
+                    if ((j == 0 || !tiles[n][j - 1].isSwappable())
+                            && !tiles[n][j].isSwappable()
+                            && (j == col - 1 || !tiles[n][j + 1].isSwappable())) {
+                        // The tile is not reachable, we put it to unreachable state
+                        currentTile.setTileState(TileState.UNREACHABLE);
+                    }
+
+                    // No need to check the next one if it is reachable
+                    break;
                 }
             }
         }
@@ -151,28 +153,29 @@ public class Match3Algorithm {
             for (int j = 0; j < col; j++) {
                 Match3Tile currentTile = tiles[i][j];
                 // Find the unreachable tile
-                if (currentTile.getTileState() == TileState.UNREACHABLE) {
-                    // Search the column bottom up
-                    for (int n = i - 1; n >= 0; n--) {
-                        Match3Tile upperTile = tiles[n][j];
-                        // We skip the negligible tile
-                        if (upperTile.isNegligible()) {
-                            continue;
-                        }
-                        // Check is the 3 upper tile swappable
-                        //  X X X
-                        //    O
-                        //    O
-                        if ((j > 0 && tiles[n][j - 1].isSwappable())
-                                || tiles[n][j].isSwappable()
-                                || (j < col - 1 && tiles[n][j + 1].isSwappable())) {
-                            // The tile is now reachable, we put it to match state
-                            currentTile.setTileState(TileState.MATCH);
-                        }
-
-                        // No need to check the next one if it is unreachable
-                        break;
+                if (currentTile.getTileState() != TileState.UNREACHABLE) {
+                    continue;
+                }
+                // Search the column bottom up
+                for (int n = i - 1; n >= 0; n--) {
+                    Match3Tile upperTile = tiles[n][j];
+                    // We skip the negligible tile
+                    if (upperTile.isNegligible()) {
+                        continue;
                     }
+                    // Check is the 3 upper tile swappable
+                    //  X X X
+                    //    O
+                    //    O
+                    if ((j > 0 && tiles[n][j - 1].isSwappable())
+                            || tiles[n][j].isSwappable()
+                            || (j < col - 1 && tiles[n][j + 1].isSwappable())) {
+                        // The tile is now reachable, we put it to match state
+                        currentTile.setTileState(TileState.MATCH);
+                    }
+
+                    // No need to check the next one if it is unreachable
+                    break;
                 }
             }
         }
@@ -183,53 +186,54 @@ public class Match3Algorithm {
             for (int i = row - 1; i > 0; i--) {
                 Match3Tile currentTile = tiles[i][j];
                 // Find the waiting tile
-                if (currentTile.getTileState() == TileState.WAITING) {
-                    // Search the column bottom up
-                    for (int n = i - 1; n >= 0; n--) {
-                        Match3Tile upperTile = tiles[n][j];
-                        // We skip the negligible tile
-                        if (upperTile.isNegligible()) {
-                            continue;
-                        }
-                        // Find the unswappable tile
-                        if (!upperTile.isSwappable()) {
-                            // Search the right one next to it
-                            //    X O
-                            //    O
-                            //    O
-                            if (j < col - 1) {
-                                Match3Tile targetTile = tiles[n][j + 1];
-                                // We make sure the tile is not unswappable or still moving
-                                if (targetTile.isSwappable()
-                                        && !targetTile.isMoving()
-                                        && targetTile.getTileState() != TileState.WAITING) {
-                                    // Put the tile to match state and swap
-                                    currentTile.setTileState(TileState.MATCH);
-                                    swapTile(tiles, targetTile, currentTile);
-                                    // We find available tile from right, so we do not search left
-                                    break;
-                                }
+                if (currentTile.getTileState() != TileState.WAITING) {
+                    continue;
+                }
+                // Search the column bottom up
+                for (int n = i - 1; n >= 0; n--) {
+                    Match3Tile upperTile = tiles[n][j];
+                    // We skip the negligible tile
+                    if (upperTile.isNegligible()) {
+                        continue;
+                    }
+                    // Find the unswappable tile
+                    if (!upperTile.isSwappable()) {
+                        // Search the right one next to it
+                        //    X O
+                        //    O
+                        //    O
+                        if (j < col - 1) {
+                            Match3Tile targetTile = tiles[n][j + 1];
+                            // We make sure the tile is not unswappable or still moving
+                            if (targetTile.isSwappable()
+                                    && !targetTile.isMoving()
+                                    && targetTile.getTileState() != TileState.WAITING) {
+                                // Put the tile to match state and swap
+                                currentTile.setTileState(TileState.MATCH);
+                                swapTile(tiles, targetTile, currentTile);
+                                // We find available tile from right, so we do not search left
+                                break;
                             }
-
-                            // Search the left one next to it
-                            //  O X
-                            //    O
-                            //    O
-                            if (j > 0) {
-                                Match3Tile targetTile = tiles[n][j - 1];
-                                // We make sure the tile is not unswappable or still moving
-                                if (targetTile.isSwappable()
-                                        && !targetTile.isMoving()
-                                        && targetTile.getTileState() != TileState.WAITING) {
-                                    // Put the tile to match state and swap
-                                    currentTile.setTileState(TileState.MATCH);
-                                    swapTile(tiles, targetTile, currentTile);
-                                }
-                            }
-
-                            // No need to find the next unswappable tile
-                            break;
                         }
+
+                        // Search the left one next to it
+                        //  O X
+                        //    O
+                        //    O
+                        if (j > 0) {
+                            Match3Tile targetTile = tiles[n][j - 1];
+                            // We make sure the tile is not unswappable or still moving
+                            if (targetTile.isSwappable()
+                                    && !targetTile.isMoving()
+                                    && targetTile.getTileState() != TileState.WAITING) {
+                                // Put the tile to match state and swap
+                                currentTile.setTileState(TileState.MATCH);
+                                swapTile(tiles, targetTile, currentTile);
+                            }
+                        }
+
+                        // No need to find the next unswappable tile
+                        break;
                     }
                 }
             }
@@ -252,6 +256,15 @@ public class Match3Algorithm {
         // Swap tile
         tiles[rowA][colA] = tileB;
         tiles[rowB][colB] = tileA;
+    }
+
+    public static void initTile(Match3Tile[][] tiles, int row, int col) {
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                Match3Tile t = tiles[i][j];
+                t.initTile();
+            }
+        }
     }
 
     public static void shuffleTile(Match3Tile[][] tiles, int row, int col) {

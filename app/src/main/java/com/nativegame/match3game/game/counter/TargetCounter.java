@@ -1,10 +1,10 @@
 package com.nativegame.match3game.game.counter;
 
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.nativegame.match3game.R;
 import com.nativegame.match3game.game.GameEvent;
@@ -15,6 +15,9 @@ import com.nativegame.nattyengine.engine.event.Event;
 import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
 import com.nativegame.nattyengine.ui.GameActivity;
+import com.nativegame.nattyengine.ui.GameImage;
+import com.nativegame.nattyengine.ui.GameText;
+import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +28,22 @@ import java.util.List;
 
 public class TargetCounter extends RunnableEntity implements EventListener {
 
-    private final List<TargetType> mTargetTypes;
-    private final List<Integer> mTargetNums;
+    private final Animation mPulseAnimation;
 
-    private final List<TextView> mTexts = new ArrayList<>();
-    private final List<ImageView> mImages = new ArrayList<>();
+    private final List<Integer> mTargetCounts = new ArrayList<>();
+    private final List<ImageView> mTargetImages = new ArrayList<>();
+    private final List<TextView> mTargetTexts = new ArrayList<>();
 
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
     public TargetCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
-        mTargetTypes = Level.LEVEL_DATA.getTargetTypes();
-        mTargetNums = Level.LEVEL_DATA.getTargetNums();
-        init();
+        mPulseAnimation = AnimationUtils.loadAnimation(activity, R.anim.image_pulse);
+        mTargetCounts.addAll(Level.LEVEL_DATA.getTargetCounts());
+        initLevelText();
+        initTargetImage();
+        initTargetText();
     }
     //========================================================
 
@@ -52,16 +57,28 @@ public class TargetCounter extends RunnableEntity implements EventListener {
 
     @Override
     protected void onUpdateRunnable() {
-        int size = mTargetNums.size();
+        List<Integer> targetCounts = Level.LEVEL_DATA.getTargetCounts();
+        int size = mTargetCounts.size();
         for (int i = 0; i < size; i++) {
-            TextView textView = mTexts.get(i);
-            int num = mTargetNums.get(i);
-            if (num == 0) {
-                textView.setText("");
-                textView.setBackgroundResource(R.drawable.check);
-            } else {
-                textView.setText(String.valueOf(num));
+            // Check is target change
+            int count = targetCounts.get(i);
+            if (count == mTargetCounts.get(i)) {
+                continue;
             }
+            mTargetCounts.set(i, count);
+
+            // Update target text
+            TextView txtTarget = mTargetTexts.get(i);
+            if (count == 0) {
+                txtTarget.setText("");
+                txtTarget.setBackgroundResource(R.drawable.sign_check);
+            } else {
+                txtTarget.setText(String.valueOf(count));
+            }
+
+            // Play target image animation
+            ImageView imageTarget = mTargetImages.get(i);
+            imageTarget.startAnimation(mPulseAnimation);
         }
     }
 
@@ -82,40 +99,82 @@ public class TargetCounter extends RunnableEntity implements EventListener {
     //--------------------------------------------------------
     // Methods
     //--------------------------------------------------------
-    private void init() {
-        // Init target layout
-        ConstraintLayout layout = (ConstraintLayout) mActivity.findViewById(R.id.layout_target);
-        int size = mTargetNums.size();
-        switch (size) {
+    private void initLevelText() {
+        TextView txtLevel = (TextView) mActivity.findViewById(R.id.txt_level);
+        txtLevel.setText(ResourceUtils.getString(mActivity, R.string.txt_level, Level.LEVEL_DATA.getLevel()));
+    }
+
+    private void initTargetImage() {
+        List<TargetType> targetTypes = Level.LEVEL_DATA.getTargetTypes();
+        // Init target image from TargetType
+        GameImage imageTargetA = (GameImage) mActivity.findViewById(R.id.image_target_01);
+        GameImage imageTargetB = (GameImage) mActivity.findViewById(R.id.image_target_02);
+        GameImage imageTargetC = (GameImage) mActivity.findViewById(R.id.image_target_03);
+        switch (targetTypes.size()) {
             case 1:
-                mTexts.add(mActivity.findViewById(R.id.target_txt_center));
-                mImages.add(mActivity.findViewById(R.id.target_image_center));
-                layout.setBackgroundResource(R.drawable.board_target_01);
+                imageTargetB.setImageResource(targetTypes.get(0).getDrawableId());
+                imageTargetA.setVisibility(View.GONE);
+                imageTargetB.setVisibility(View.VISIBLE);
+                imageTargetC.setVisibility(View.GONE);
+                mTargetImages.add(imageTargetB);
                 break;
             case 2:
-                mTexts.add(mActivity.findViewById(R.id.target_txt_leftCenter));
-                mTexts.add(mActivity.findViewById(R.id.target_txt_rightCenter));
-                mImages.add(mActivity.findViewById(R.id.target_image_leftCenter));
-                mImages.add(mActivity.findViewById(R.id.target_image_rightCenter));
-                layout.setBackgroundResource(R.drawable.board_target_02);
+                imageTargetA.setImageResource(targetTypes.get(0).getDrawableId());
+                imageTargetC.setImageResource(targetTypes.get(1).getDrawableId());
+                imageTargetA.setVisibility(View.VISIBLE);
+                imageTargetB.setVisibility(View.GONE);
+                imageTargetC.setVisibility(View.VISIBLE);
+                mTargetImages.add(imageTargetA);
+                mTargetImages.add(imageTargetC);
                 break;
             case 3:
-                mTexts.add(mActivity.findViewById(R.id.target_txt_left));
-                mTexts.add(mActivity.findViewById(R.id.target_txt_center));
-                mTexts.add(mActivity.findViewById(R.id.target_txt_right));
-                mImages.add(mActivity.findViewById(R.id.target_image_left));
-                mImages.add(mActivity.findViewById(R.id.target_image_center));
-                mImages.add(mActivity.findViewById(R.id.target_image_right));
-                layout.setBackgroundResource(R.drawable.board_target_03);
+                imageTargetA.setImageResource(targetTypes.get(0).getDrawableId());
+                imageTargetB.setImageResource(targetTypes.get(1).getDrawableId());
+                imageTargetC.setImageResource(targetTypes.get(2).getDrawableId());
+                imageTargetA.setVisibility(View.VISIBLE);
+                imageTargetB.setVisibility(View.VISIBLE);
+                imageTargetC.setVisibility(View.VISIBLE);
+                mTargetImages.add(imageTargetA);
+                mTargetImages.add(imageTargetB);
+                mTargetImages.add(imageTargetC);
                 break;
         }
+    }
 
-        // Init target image
-        for (int i = 0; i < size; i++) {
-            int id = mTargetTypes.get(i).getDrawableId();
-            mImages.get(i).setImageResource(id);
-            mImages.get(i).setVisibility(View.VISIBLE);
-            mTexts.get(i).setVisibility(View.VISIBLE);
+    private void initTargetText() {
+        List<Integer> targetCounts = Level.LEVEL_DATA.getTargetCounts();
+        // Init target text from TargetType
+        GameText txtTargetA = (GameText) mActivity.findViewById(R.id.txt_target_01);
+        GameText txtTargetB = (GameText) mActivity.findViewById(R.id.txt_target_02);
+        GameText txtTargetC = (GameText) mActivity.findViewById(R.id.txt_target_03);
+        switch (targetCounts.size()) {
+            case 1:
+                txtTargetB.setText(String.valueOf(targetCounts.get(0)));
+                txtTargetA.setVisibility(View.GONE);
+                txtTargetB.setVisibility(View.VISIBLE);
+                txtTargetC.setVisibility(View.GONE);
+                mTargetTexts.add(txtTargetB);
+                break;
+            case 2:
+                txtTargetA.setText(String.valueOf(targetCounts.get(0)));
+                txtTargetC.setText(String.valueOf(targetCounts.get(1)));
+                txtTargetA.setVisibility(View.VISIBLE);
+                txtTargetB.setVisibility(View.GONE);
+                txtTargetC.setVisibility(View.VISIBLE);
+                mTargetTexts.add(txtTargetA);
+                mTargetTexts.add(txtTargetC);
+                break;
+            case 3:
+                txtTargetA.setText(String.valueOf(targetCounts.get(0)));
+                txtTargetB.setText(String.valueOf(targetCounts.get(1)));
+                txtTargetC.setText(String.valueOf(targetCounts.get(2)));
+                txtTargetA.setVisibility(View.VISIBLE);
+                txtTargetB.setVisibility(View.VISIBLE);
+                txtTargetC.setVisibility(View.VISIBLE);
+                mTargetTexts.add(txtTargetA);
+                mTargetTexts.add(txtTargetB);
+                mTargetTexts.add(txtTargetC);
+                break;
         }
     }
     //========================================================

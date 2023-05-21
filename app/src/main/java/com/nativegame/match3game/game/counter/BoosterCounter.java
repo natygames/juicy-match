@@ -4,12 +4,17 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nativegame.match3game.R;
+import com.nativegame.match3game.asset.Sounds;
+import com.nativegame.match3game.database.DatabaseHelper;
 import com.nativegame.match3game.game.GameEvent;
 import com.nativegame.match3game.game.booster.BombController;
 import com.nativegame.match3game.game.booster.BoosterController;
 import com.nativegame.match3game.game.booster.GloveController;
 import com.nativegame.match3game.game.booster.HammerController;
 import com.nativegame.match3game.game.layer.tile.TileSystem;
+import com.nativegame.match3game.item.Item;
+import com.nativegame.match3game.level.Level;
+import com.nativegame.match3game.level.TutorialType;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.engine.event.Event;
 import com.nativegame.nattyengine.engine.event.EventListener;
@@ -24,20 +29,24 @@ import com.nativegame.nattyengine.ui.GameButton;
 public class BoosterCounter extends RunnableEntity implements View.OnClickListener,
         EventListener, BoosterController.BoosterListener {
 
+    private static final String INFINITE = "∞";
+
     private final TextView mTxtHammer;
-    private final TextView mTxtGloves;
     private final TextView mTxtBomb;
+    private final TextView mTxtGlove;
     private final GameButton mBtnHammer;
-    private final GameButton mBtnGlove;
     private final GameButton mBtnBomb;
+    private final GameButton mBtnGlove;
     private final HammerController mHammerController;
-    private final GloveController mGloveController;
     private final BombController mBombController;
+    private final GloveController mGloveController;
+    private final TutorialType mTutorialType;
+    private final DatabaseHelper mDatabaseHelper;
 
     private BoosterState mState;
-    private int mHammerCount = 5;
-    private int mGlovesCount = 5;
-    private int mBombCount = 5;
+    private int mHammerCount;
+    private int mBombCount;
+    private int mGloveCount;
     private boolean mIsEnable = false;
 
     private boolean mIsAddBooster = false;
@@ -46,8 +55,8 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
     private enum BoosterState {
         WAITING,
         HAMMER,
-        GLOVE,
-        BOMB
+        BOMB,
+        GLOVE
     }
 
     //--------------------------------------------------------
@@ -55,23 +64,46 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
     //--------------------------------------------------------
     public BoosterCounter(GameActivity activity, Engine engine, TileSystem tileSystem) {
         super(activity, engine);
+
+        // Init booster count text
         mTxtHammer = (TextView) activity.findViewById(R.id.txt_hammer);
-        mTxtGloves = (TextView) activity.findViewById(R.id.txt_gloves);
         mTxtBomb = (TextView) activity.findViewById(R.id.txt_bomb);
+        mTxtGlove = (TextView) activity.findViewById(R.id.txt_gloves);
 
+        // Init booster button
         mBtnHammer = (GameButton) activity.findViewById(R.id.btn_hammer);
-        mBtnGlove = (GameButton) activity.findViewById(R.id.btn_gloves);
         mBtnBomb = (GameButton) activity.findViewById(R.id.btn_bomb);
+        mBtnGlove = (GameButton) activity.findViewById(R.id.btn_glove);
         mBtnHammer.setOnClickListener(this);
-        mBtnGlove.setOnClickListener(this);
         mBtnBomb.setOnClickListener(this);
+        mBtnGlove.setOnClickListener(this);
 
+        // Init booster controller
         mHammerController = new HammerController(engine, tileSystem);
-        mGloveController = new GloveController(engine, tileSystem);
         mBombController = new BombController(engine, tileSystem);
+        mGloveController = new GloveController(engine, tileSystem);
         mHammerController.setListener(this);
-        mGloveController.setListener(this);
         mBombController.setListener(this);
+        mGloveController.setListener(this);
+
+        // Check is current level has booster tutorial
+        mTutorialType = Level.LEVEL_DATA.getTutorialType();
+        switch (mTutorialType) {
+            case HAMMER:
+                mTxtHammer.setText(INFINITE);
+                break;
+            case BOMB:
+                mTxtBomb.setText(INFINITE);
+                break;
+            case GLOVE:
+                mTxtGlove.setText(INFINITE);
+                break;
+        }
+
+        mDatabaseHelper = DatabaseHelper.getInstance(activity);
+        mHammerCount = mDatabaseHelper.getItemCount(Item.HAMMER);
+        mBombCount = mDatabaseHelper.getItemCount(Item.BOMB);
+        mGloveCount = mDatabaseHelper.getItemCount(Item.GLOVE);
     }
     //========================================================
 
@@ -102,9 +134,15 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
 
     @Override
     protected void onUpdateRunnable() {
-        mTxtHammer.setText(String.valueOf(mHammerCount));
-        mTxtGloves.setText(String.valueOf(mGlovesCount));
-        mTxtBomb.setText(String.valueOf(mBombCount));
+        if (mTutorialType != TutorialType.HAMMER) {
+            mTxtHammer.setText(String.valueOf(mHammerCount));
+        }
+        if (mTutorialType != TutorialType.BOMB) {
+            mTxtBomb.setText(String.valueOf(mBombCount));
+        }
+        if (mTutorialType != TutorialType.GLOVE) {
+            mTxtGlove.setText(String.valueOf(mGloveCount));
+        }
         unLockButton();
     }
 
@@ -118,10 +156,10 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
                 int id = view.getId();
                 if (id == R.id.btn_hammer) {
                     mState = BoosterState.HAMMER;
-                } else if (id == R.id.btn_gloves) {
-                    mState = BoosterState.GLOVE;
                 } else if (id == R.id.btn_bomb) {
                     mState = BoosterState.BOMB;
+                } else if (id == R.id.btn_glove) {
+                    mState = BoosterState.GLOVE;
                 }
                 lockButton();
                 mIsAddBooster = true;
@@ -129,6 +167,7 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
                 unLockButton();
                 mIsRemoveBooster = true;
             }
+            Sounds.BUTTON_CLICK.play();
         }
     }
 
@@ -137,6 +176,7 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
         switch ((GameEvent) event) {
             case START_GAME:
             case STOP_COMBO:
+            case ADD_EXTRA_MOVES:
                 mIsEnable = true;
                 break;
             case PLAYER_SWAP:
@@ -153,13 +193,22 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
     public void onConsumeBooster() {
         switch (mState) {
             case HAMMER:
-                mHammerCount--;
-                break;
-            case GLOVE:
-                mGlovesCount--;
+                if (mTutorialType != TutorialType.HAMMER) {
+                    mHammerCount--;
+                    mDatabaseHelper.updateItemCount(Item.HAMMER, mHammerCount);
+                }
                 break;
             case BOMB:
-                mBombCount--;
+                if (mTutorialType != TutorialType.BOMB) {
+                    mBombCount--;
+                    mDatabaseHelper.updateItemCount(Item.BOMB, mBombCount);
+                }
+                break;
+            case GLOVE:
+                if (mTutorialType != TutorialType.GLOVE) {
+                    mGloveCount--;
+                    mDatabaseHelper.updateItemCount(Item.GLOVE, mGloveCount);
+                }
                 break;
         }
         setPostRunnable(true);
@@ -176,11 +225,11 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
             case HAMMER:
                 mHammerController.addToGame();
                 break;
-            case GLOVE:
-                mGloveController.addToGame();
-                break;
             case BOMB:
                 mBombController.addToGame();
+                break;
+            case GLOVE:
+                mGloveController.addToGame();
                 break;
         }
     }
@@ -190,11 +239,11 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
             case HAMMER:
                 mHammerController.removeFromGame();
                 break;
-            case GLOVE:
-                mGloveController.removeFromGame();
-                break;
             case BOMB:
                 mBombController.removeFromGame();
+                break;
+            case GLOVE:
+                mGloveController.removeFromGame();
                 break;
         }
     }
@@ -207,28 +256,28 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
                 mBtnGlove.setEnabled(false);
                 mBtnBomb.setEnabled(false);
                 break;
-            case GLOVE:
-                mBtnHammer.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnBomb.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnHammer.setEnabled(false);
-                mBtnBomb.setEnabled(false);
-                break;
             case BOMB:
                 mBtnHammer.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
                 mBtnGlove.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
                 mBtnHammer.setEnabled(false);
                 mBtnGlove.setEnabled(false);
                 break;
+            case GLOVE:
+                mBtnHammer.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                mBtnBomb.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                mBtnHammer.setEnabled(false);
+                mBtnBomb.setEnabled(false);
+                break;
         }
     }
 
     private void unLockButton() {
         mBtnHammer.removeColorFilter();
-        mBtnGlove.removeColorFilter();
         mBtnBomb.removeColorFilter();
+        mBtnGlove.removeColorFilter();
         mBtnHammer.setEnabled(true);
-        mBtnGlove.setEnabled(true);
         mBtnBomb.setEnabled(true);
+        mBtnGlove.setEnabled(true);
     }
     //========================================================
 

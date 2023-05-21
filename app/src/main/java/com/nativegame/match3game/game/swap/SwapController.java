@@ -124,9 +124,9 @@ public class SwapController extends Entity implements TouchEventListener,
             Match3Algorithm.findMatchTile(mTiles, mTotalRow, mTotalCol);
             if (Match3Algorithm.isMatch(mTiles, mTotalRow, mTotalCol)) {
                 // Start the Algorithm if found
-                dispatchEvent(GameEvent.PLAYER_SWAP);
                 tileA.setSelect(true);
                 tileB.setSelect(true);
+                dispatchEvent(GameEvent.PLAYER_SWAP);
             } else {
                 // Swap back if not found
                 Match3Algorithm.swapTile(mTiles, tileA, tileB);
@@ -142,6 +142,7 @@ public class SwapController extends Entity implements TouchEventListener,
             case START_GAME:
             case STOP_COMBO:
             case REMOVE_BOOSTER:
+            case ADD_EXTRA_MOVES:
                 mEnable = true;
                 break;
             case ADD_BOOSTER:

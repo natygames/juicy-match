@@ -24,18 +24,8 @@
         android:layout_marginBottom="@dimen/margin_20"
         android:background="@drawable/btn_hammer"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btn_gloves"
-        app:layout_constraintStart_toEndOf="@id/btn_pause" />
-
-    <com.nativegame.nattyengine.ui.GameButton
-        android:id="@+id/btn_gloves"
-        android:layout_width="@dimen/btn_booster_width"
-        android:layout_height="@dimen/btn_booster_width"
-        android:layout_marginBottom="@dimen/margin_20"
-        android:background="@drawable/btn_gloves"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_bomb"
-        app:layout_constraintStart_toEndOf="@id/btn_hammer" />
+        app:layout_constraintStart_toEndOf="@id/btn_pause" />
 
     <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_bomb"
@@ -44,8 +34,18 @@
         android:layout_marginBottom="@dimen/margin_20"
         android:background="@drawable/btn_bomb"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btn_glove"
+        app:layout_constraintStart_toEndOf="@id/btn_hammer" />
+
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_glove"
+        android:layout_width="@dimen/btn_booster_width"
+        android:layout_height="@dimen/btn_booster_width"
+        android:layout_marginBottom="@dimen/margin_20"
+        android:background="@drawable/btn_glove"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btn_gloves" />
+        app:layout_constraintStart_toEndOf="@+id/btn_bomb" />
 
     <TextView
         android:id="@+id/txt_hammer"
@@ -61,19 +61,6 @@
         app:layout_constraintEnd_toEndOf="@id/btn_hammer" />
 
     <TextView
-        android:id="@+id/txt_gloves"
-        android:layout_width="@dimen/image_state_booster"
-        android:layout_height="@dimen/image_state_booster"
-        android:background="@drawable/item_field"
-        android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="@dimen/txt_state_booster_size"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/btn_gloves"
-        app:layout_constraintEnd_toEndOf="@id/btn_gloves" />
-
-    <TextView
         android:id="@+id/txt_bomb"
         android:layout_width="@dimen/image_state_booster"
         android:layout_height="@dimen/image_state_booster"
@@ -85,5 +72,18 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/btn_bomb"
         app:layout_constraintEnd_toEndOf="@id/btn_bomb" />
+
+    <TextView
+        android:id="@+id/txt_gloves"
+        android:layout_width="@dimen/image_state_booster"
+        android:layout_height="@dimen/image_state_booster"
+        android:background="@drawable/item_field"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_booster_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/btn_glove"
+        app:layout_constraintEnd_toEndOf="@id/btn_glove" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

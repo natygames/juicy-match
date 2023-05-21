@@ -43,41 +43,8 @@ public class MenuFragment extends GameFragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Musics.BG_MUSIC.play();
-        init();
-    }
 
-    @Override
-    public boolean onBackPressed() {
-        ExitDialog quitDialog = new ExitDialog(getGameActivity()) {
-            @Override
-            public void exit() {
-                getGameActivity().finish();
-            }
-        };
-        showDialog(quitDialog);
-        return true;
-    }
-
-    @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        if (id == R.id.btn_start) {
-            getGameActivity().navigateToFragment(new MapFragment());
-            Sounds.BUTTON_CLICK.play();
-        } else if (id == R.id.btn_setting) {
-            SettingDialog dialog = new SettingDialog(getGameActivity());
-            showDialog(dialog);
-            Sounds.BUTTON_CLICK.play();
-        }
-    }
-    //========================================================
-
-    //--------------------------------------------------------
-    // Methods
-    //--------------------------------------------------------
-    private void init() {
-        // Init logo
+        // Init logo image
         GameImage imageLogo = (GameImage) getView().findViewById(R.id.image_logo);
         imageLogo.popUp(1000, 300);
         Animation scaleAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_pulse);
@@ -90,7 +57,7 @@ public class MenuFragment extends GameFragment implements View.OnClickListener {
 
         // Init button
         GameButton btnPlay = (GameButton) getView().findViewById(R.id.btn_start);
-        btnPlay.popUp(300, 500);
+        btnPlay.popUp(200, 600);
         btnPlay.setOnClickListener(this);
         Animation pulseAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.button_pulse);
         btnPlay.startAnimation(pulseAnimation);
@@ -98,11 +65,50 @@ public class MenuFragment extends GameFragment implements View.OnClickListener {
         GameButton btnSetting = (GameButton) getView().findViewById(R.id.btn_setting);
         btnSetting.setOnClickListener(this);
 
-        // Init audio state
+        // Init audio state from Preference
         boolean musicEnable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_MUSIC, true);
         boolean soundEnable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_SOUND, true);
         getGameActivity().getMusicManager().setAudioEnable(musicEnable);
         getGameActivity().getSoundManager().setAudioEnable(soundEnable);
+
+        // Play bg music
+        Musics.BG_MUSIC.play();
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        showExitDialog();
+        return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        Sounds.BUTTON_CLICK.play();
+        int id = view.getId();
+        if (id == R.id.btn_start) {
+            getGameActivity().navigateToFragment(new MapFragment());
+        } else if (id == R.id.btn_setting) {
+            showSettingDialog();
+        }
+    }
+    //========================================================
+
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
+    private void showExitDialog() {
+        ExitDialog exitDialog = new ExitDialog(getGameActivity()) {
+            @Override
+            public void exit() {
+                getGameActivity().finish();
+            }
+        };
+        showDialog(exitDialog);
+    }
+
+    private void showSettingDialog() {
+        SettingDialog settingDialog = new SettingDialog(getGameActivity());
+        showDialog(settingDialog);
     }
     //========================================================
 

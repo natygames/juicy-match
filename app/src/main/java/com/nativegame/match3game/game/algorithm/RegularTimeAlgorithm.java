@@ -66,6 +66,7 @@ public class RegularTimeAlgorithm extends BaseAlgorithm {
     @Override
     public void initAlgorithm() {
         mLayerHandlerManager.initLayers(mTiles, mTotalRow, mTotalCol);
+        Match3Algorithm.initTile(mTiles, mTotalRow, mTotalCol);
     }
 
     @Override
@@ -86,7 +87,6 @@ public class RegularTimeAlgorithm extends BaseAlgorithm {
     //--------------------------------------------------------
     private void checkMatch() {
         Match3Algorithm.findMatchTile(mTiles, mTotalRow, mTotalCol);
-        // Update target and layer
         mTargetHandlerManager.checkTargets(mTiles, mTotalRow, mTotalCol);
         mLayerHandlerManager.updateLayers(mTargetHandlerManager, mTiles, mTotalRow, mTotalCol);
         if (mTargetHandlerManager.isTargetChange()) {
@@ -100,15 +100,16 @@ public class RegularTimeAlgorithm extends BaseAlgorithm {
                 dispatchEvent(GameEvent.GAME_WIN);
             } else if (Level.LEVEL_DATA.getMove() == 0) {
                 // Player run out of moves
-                dispatchEvent(GameEvent.GAME_OVER);
+                dispatchEvent(GameEvent.PLAYER_OUT_OF_MOVE);
             } else {
                 // Continue the game
                 dispatchEvent(GameEvent.STOP_COMBO);
             }
             removeFromGame();
         } else {
-            // Add one combo and run the algorithm if found
+            // Add one combo
             dispatchEvent(GameEvent.ADD_COMBO);
+            // Run the algorithm if found
             mSpecialTileFinder.findSpecialTile(mTiles, mTotalRow, mTotalCol);
             Match3Algorithm.playTileEffect(mTiles, mTotalRow, mTotalCol);
             Match3Algorithm.checkUnreachableTile(mTiles, mTotalRow, mTotalCol);
@@ -131,11 +132,6 @@ public class RegularTimeAlgorithm extends BaseAlgorithm {
             Sounds.TILE_BOUNCE.play();
             mState = AlgorithmState.CHECK_MATCH;
         }
-        // Use this if run into bug
-//        if (!Match3Algorithm.isMoving(mTiles, mTotalRow, mTotalCol)
-//                && !Match3Algorithm.isWaiting(mTiles, mTotalRow, mTotalCol)) {
-//            mState = AlgorithmState.CHECK_MATCH;
-//        }
     }
     //========================================================
 

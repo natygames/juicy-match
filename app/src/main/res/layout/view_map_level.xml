@@ -21,9 +21,11 @@
 
     <ImageView
         android:id="@+id/image_ribbon"
-        android:layout_width="@dimen/image_ribbon_width"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_negative_40"
+        android:layout_marginStart="@dimen/margin_20"
+        android:layout_marginEnd="@dimen/margin_20"
         android:src="@drawable/ribbon"
         app:layout_constraintDimensionRatio="3:1"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
@@ -471,7 +473,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_level_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@id/btn_level_previous"
+        app:layout_constraintBottom_toTopOf="@id/btn_page_previous"
         app:layout_constraintEnd_toEndOf="@id/btn_level_1"
         app:layout_constraintStart_toStartOf="@id/btn_level_1"
         app:layout_constraintTop_toBottomOf="@id/btn_level_13" />
@@ -566,7 +568,7 @@
         app:layout_constraintTop_toTopOf="@id/btn_level_20" />
 
     <com.nativegame.nattyengine.ui.GameButton
-        android:id="@+id/btn_level_previous"
+        android:id="@+id/btn_page_previous"
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="@dimen/btn_small_width"
         android:layout_marginBottom="@dimen/margin_negative_20"
@@ -581,24 +583,24 @@
         android:layout_width="@dimen/btn_width"
         android:layout_height="0dp"
         android:background="@drawable/board_page"
-        app:layout_constraintBottom_toBottomOf="@id/btn_level_previous"
+        app:layout_constraintBottom_toBottomOf="@id/btn_page_previous"
         app:layout_constraintDimensionRatio="3:2"
-        app:layout_constraintEnd_toStartOf="@id/btn_level_next"
-        app:layout_constraintStart_toEndOf="@id/btn_level_previous"
-        app:layout_constraintTop_toTopOf="@id/btn_level_previous" />
+        app:layout_constraintEnd_toStartOf="@id/btn_page_next"
+        app:layout_constraintStart_toEndOf="@id/btn_page_previous"
+        app:layout_constraintTop_toTopOf="@id/btn_page_previous" />
 
     <com.nativegame.nattyengine.ui.GameButton
-        android:id="@+id/btn_level_next"
+        android:id="@+id/btn_page_next"
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="@dimen/btn_small_width"
         android:background="@drawable/btn_level_next"
-        app:layout_constraintBottom_toBottomOf="@id/btn_level_previous"
+        app:layout_constraintBottom_toBottomOf="@id/btn_page_previous"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintStart_toEndOf="@id/image_page"
-        app:layout_constraintTop_toTopOf="@id/btn_level_previous" />
+        app:layout_constraintTop_toTopOf="@id/btn_page_previous" />
 
     <TextView
-        android:id="@+id/txt_page_previous"
+        android:id="@+id/txt_previous_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_10"
@@ -609,17 +611,17 @@
         android:textSize="@dimen/txt_dialog_small_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/image_page"
-        app:layout_constraintEnd_toStartOf="@id/txt_page"
+        app:layout_constraintEnd_toStartOf="@id/txt_current_page"
         app:layout_constraintStart_toStartOf="@id/image_page"
         app:layout_constraintTop_toTopOf="@id/image_page" />
 
     <TextView
-        android:id="@+id/txt_page"
+        android:id="@+id/txt_current_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="1"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/txt_dialog_size"
         android:textStyle="bold"
@@ -629,19 +631,19 @@
         app:layout_constraintTop_toTopOf="@id/image_page" />
 
     <TextView
-        android:id="@+id/txt_page_next"
+        android:id="@+id/txt_next_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/margin_10"
         android:fontFamily="@font/baloo"
         android:gravity="center"
-        android:text="2"
+        android:text=""
         android:textColor="@color/white"
         android:textSize="@dimen/txt_dialog_small_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/image_page"
         app:layout_constraintEnd_toEndOf="@id/image_page"
-        app:layout_constraintStart_toEndOf="@id/txt_page"
+        app:layout_constraintStart_toEndOf="@id/txt_current_page"
         app:layout_constraintTop_toTopOf="@id/image_page" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

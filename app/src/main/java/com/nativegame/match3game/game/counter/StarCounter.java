@@ -39,10 +39,10 @@ public class StarCounter extends RunnableEntity implements EventListener {
     //--------------------------------------------------------
     public StarCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
-        ImageView imageView = activity.findViewById(R.id.image_star_progress);
-        mProgress = (ClipDrawable) imageView.getDrawable();
+        ImageView imageProgress = activity.findViewById(R.id.image_star_progress);
+        mProgress = (ClipDrawable) imageProgress.getDrawable();
         mStarAnimation = AnimationUtils.loadAnimation(activity, R.anim.star_pulse);
-        mProgressIncrement = 10000 / (Level.LEVEL_DATA.getMove() * 4);   // Progress max is 10000
+        mProgressIncrement = 10000 / (Level.LEVEL_DATA.getMove() * 10);   // Progress max is 10000
     }
     //========================================================
 
@@ -107,21 +107,21 @@ public class StarCounter extends RunnableEntity implements EventListener {
 
     private void updateView() {
         if (mCurrentStar >= 1 && mObtainedStar == 0) {
-            ImageView imageView = (ImageView) mActivity.findViewById(R.id.image_progress_star_01);
-            imageView.setImageResource(R.drawable.star);
-            imageView.startAnimation(mStarAnimation);
+            ImageView imageStar = (ImageView) mActivity.findViewById(R.id.image_progress_star_01);
+            imageStar.setImageResource(R.drawable.star);
+            imageStar.startAnimation(mStarAnimation);
             mObtainedStar = 1;
         }
         if (mCurrentStar >= 2 && mObtainedStar == 1) {
-            ImageView imageView = (ImageView) mActivity.findViewById(R.id.image_progress_star_02);
-            imageView.setImageResource(R.drawable.star);
-            imageView.startAnimation(mStarAnimation);
+            ImageView imageStar = (ImageView) mActivity.findViewById(R.id.image_progress_star_02);
+            imageStar.setImageResource(R.drawable.star);
+            imageStar.startAnimation(mStarAnimation);
             mObtainedStar = 2;
         }
         if (mCurrentStar >= 3 && mObtainedStar == 2) {
-            ImageView imageView = (ImageView) mActivity.findViewById(R.id.image_progress_star_03);
-            imageView.setImageResource(R.drawable.star);
-            imageView.startAnimation(mStarAnimation);
+            ImageView imageStar = (ImageView) mActivity.findViewById(R.id.image_progress_star_03);
+            imageStar.setImageResource(R.drawable.star);
+            imageStar.startAnimation(mStarAnimation);
             mObtainedStar = 3;
         }
     }

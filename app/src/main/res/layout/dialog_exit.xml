@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.nativegame.nattyengine.ui.GameText
         android:id="@+id/txt_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

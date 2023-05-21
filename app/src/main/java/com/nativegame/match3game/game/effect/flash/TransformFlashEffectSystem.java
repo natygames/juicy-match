@@ -21,7 +21,7 @@ public class TransformFlashEffectSystem {
             @Override
             public TransformFlashEffect createObject() {
                 return new TransformFlashEffect(TransformFlashEffectSystem.this, engine,
-                        Textures.TRANSFORM_FLASH_ANIMATION);
+                        Textures.FLASH_TRANSFORM_ANIMATION);
             }
         }, size);
     }

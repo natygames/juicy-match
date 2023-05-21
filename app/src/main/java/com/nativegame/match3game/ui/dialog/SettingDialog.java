@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.nativegame.match3game.R;
 import com.nativegame.match3game.asset.Preferences;
+import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.nattyengine.audio.music.MusicManager;
 import com.nativegame.nattyengine.audio.sound.SoundManager;
 import com.nativegame.nattyengine.ui.GameActivity;
@@ -14,9 +15,7 @@ import com.nativegame.nattyengine.ui.GameImage;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class SettingDialog extends BaseDialog {
-
-    private boolean mHintEnable;
+public class SettingDialog extends BaseDialog implements View.OnClickListener {
 
     //--------------------------------------------------------
     // Constructors
@@ -28,19 +27,22 @@ public class SettingDialog extends BaseDialog {
         setEnterAnimationId(R.anim.enter_from_center);
         setExitAnimationId(R.anim.exit_to_center);
 
-        mHintEnable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_HINT, true);
-
+        // Init button
         GameButton btnMusic = (GameButton) findViewById(R.id.btn_music);
         btnMusic.popUp(200, 300);
         btnMusic.setOnClickListener(this);
+
         GameButton btnSound = (GameButton) findViewById(R.id.btn_sound);
         btnSound.popUp(200, 400);
         btnSound.setOnClickListener(this);
+
+        GameButton btnCancel = (GameButton) findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(this);
+
+        // Init switch
         GameImage imageSwitch = (GameImage) findViewById(R.id.switch_hint);
         imageSwitch.popUp(200, 500);
         imageSwitch.setOnClickListener(this);
-        GameButton btnCancel = (GameButton) findViewById(R.id.btn_cancel);
-        btnCancel.setOnClickListener(this);
 
         updateMusicButton();
         updateSoundButton();
@@ -53,7 +55,7 @@ public class SettingDialog extends BaseDialog {
     //--------------------------------------------------------
     @Override
     public void onClick(View view) {
-        super.onClick(view);
+        Sounds.BUTTON_CLICK.play();
         int id = view.getId();
         if (id == R.id.btn_music) {
             toggleMusic();
@@ -90,9 +92,9 @@ public class SettingDialog extends BaseDialog {
     }
 
     private void toggleHint() {
-        mHintEnable = !mHintEnable;
+        boolean enable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_HINT, true);
         // Save to Preference
-        Preferences.PREF_SETTING.putBoolean(Preferences.KEY_HINT, mHintEnable);
+        Preferences.PREF_SETTING.putBoolean(Preferences.KEY_HINT, !enable);
     }
 
     private void updateMusicButton() {
@@ -116,8 +118,9 @@ public class SettingDialog extends BaseDialog {
     }
 
     private void updateHintButton() {
+        boolean enable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_HINT, true);
         GameImage imageSwitch = (GameImage) findViewById(R.id.switch_hint);
-        if (mHintEnable) {
+        if (enable) {
             imageSwitch.setImageResource(R.drawable.switch_thumb_on);
             imageSwitch.setBackgroundResource(R.drawable.switch_track_on);
         } else {

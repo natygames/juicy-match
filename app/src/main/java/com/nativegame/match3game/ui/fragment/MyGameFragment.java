@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nativegame.match3game.R;
+import com.nativegame.match3game.asset.Musics;
 import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.game.JuicyMatch;
 import com.nativegame.nattyengine.Game;
@@ -41,8 +42,16 @@ public class MyGameFragment extends GameFragment implements View.OnClickListener
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Init button
         GameButton btnPause = (GameButton) view.findViewById(R.id.btn_pause);
         btnPause.setOnClickListener(this);
+
+        // Update bg music
+        Musics.BG_MUSIC.setCurrentStream(false);
+        Musics.BG_MUSIC.stop();
+        Musics.GAME_MUSIC.setCurrentStream(true);
+        Musics.GAME_MUSIC.play();
     }
 
     @Override
@@ -61,6 +70,12 @@ public class MyGameFragment extends GameFragment implements View.OnClickListener
     public void onDestroy() {
         super.onDestroy();
         mGame.stop();
+
+        // Update bg music
+        Musics.GAME_MUSIC.setCurrentStream(false);
+        Musics.GAME_MUSIC.stop();
+        Musics.BG_MUSIC.setCurrentStream(true);
+        Musics.BG_MUSIC.play();
     }
 
     @Override

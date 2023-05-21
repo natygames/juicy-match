@@ -5,11 +5,11 @@
     <dimen name="txt_dialog_size">30sp</dimen>
     <dimen name="txt_dialog_large_size">35sp</dimen>
 
-    <dimen name="txt_state_score_size">25sp</dimen>
-    <dimen name="txt_state_move_size">18sp</dimen>
-    <dimen name="txt_state_target_size">15sp</dimen>
+    <dimen name="txt_state_level_size">10sp</dimen>
+    <dimen name="txt_state_target_size">12sp</dimen>
+    <dimen name="txt_state_score_size">15sp</dimen>
     <dimen name="txt_state_booster_size">18sp</dimen>
-    <dimen name="txt_state_item_size">20sp</dimen>
+    <dimen name="txt_state_move_size">30sp</dimen>
 
     <dimen name="txt_level_size">25sp</dimen>
 
@@ -21,12 +21,15 @@
     <dimen name="btn_booster_width">60dp</dimen>
     <dimen name="btn_shop_width">130dp</dimen>
 
+    <!-- Dialog width -->
+    <dimen name="dialog_small_width">250dp</dimen>
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="dialog_large_width">350dp</dimen>
+
     <!-- Image width -->
-    <dimen name="image_state_board">125dp</dimen>
-    <dimen name="image_state_move">95dp</dimen>
-    <dimen name="image_state_target">27dp</dimen>
+    <dimen name="image_state_item">40dp</dimen>
+    <dimen name="image_state_target">30dp</dimen>
     <dimen name="image_state_booster">25dp</dimen>
-    <dimen name="image_state_item">110dp</dimen>
 
     <dimen name="image_logo_width">350dp</dimen>
     <dimen name="image_logo_bg_width">400dp</dimen>
@@ -40,19 +43,11 @@
     <dimen name="image_wheel_pivot_width">70dp</dimen>
     <dimen name="image_wheel_pointer_width">40dp</dimen>
 
-    <dimen name="image_ribbon_width">320dp</dimen>
-
-    <dimen name="image_booster_width">150dp</dimen>
-    <dimen name="image_booster_bg_width">250dp</dimen>
-
     <!-- Image height -->
-    <dimen name="image_game_board_height">125dp</dimen>
+    <dimen name="image_game_board_height">100dp</dimen>
+    <dimen name="image_game_board_field_height">60dp</dimen>
     <dimen name="image_map_board_height">80dp</dimen>
-
-    <!-- Dialog width -->
-    <dimen name="dialog_small_width">250dp</dimen>
-    <dimen name="dialog_width">300dp</dimen>
-    <dimen name="dialog_large_width">350dp</dimen>
+    <dimen name="image_map_board_field_height">50dp</dimen>
 
     <!-- Margin -->
     <dimen name="margin_5">5dp</dimen>

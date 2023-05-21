@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="@+id/image_dialog"
         app:layout_constraintTop_toTopOf="@+id/image_dialog" />
 
-    <ImageView
+    <com.nativegame.nattyengine.ui.GameImage
         android:id="@+id/image_star"
         android:layout_width="@dimen/btn_large_width"
         android:layout_height="0dp"
@@ -54,22 +54,26 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_dialog_size"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/image_dialog"
         app:layout_constraintEnd_toEndOf="@+id/image_dialog"
         app:layout_constraintStart_toStartOf="@+id/image_dialog"
-        app:layout_constraintTop_toBottomOf="@id/image_star" />
+        app:layout_constraintTop_toTopOf="@+id/image_dialog"
+        app:layout_constraintVertical_bias="0.45" />
 
     <com.nativegame.nattyengine.ui.GameImage
         android:id="@+id/image_target_01"
-        android:layout_width="@dimen/btn_round_width"
-        android:layout_height="@dimen/btn_round_width"
+        android:layout_width="@dimen/image_state_item"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_margin="@dimen/margin_5"
         android:src="@drawable/cherry"
         app:layout_constraintEnd_toStartOf="@id/image_target_02"
-        app:layout_constraintTop_toTopOf="@id/image_target_02" />
+        app:layout_constraintTop_toBottomOf="@id/txt_target" />
 
     <com.nativegame.nattyengine.ui.GameImage
         android:id="@+id/image_target_02"
-        android:layout_width="@dimen/btn_round_width"
-        android:layout_height="@dimen/btn_round_width"
+        android:layout_width="@dimen/image_state_item"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_marginTop="@dimen/margin_5"
         android:src="@drawable/strawberry"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintStart_toStartOf="@id/image_dialog"
@@ -77,25 +81,54 @@
 
     <com.nativegame.nattyengine.ui.GameImage
         android:id="@+id/image_target_03"
-        android:layout_width="@dimen/btn_round_width"
-        android:layout_height="@dimen/btn_round_width"
+        android:layout_width="@dimen/image_state_item"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_margin="@dimen/margin_5"
         android:src="@drawable/lemon"
         app:layout_constraintStart_toEndOf="@id/image_target_02"
-        app:layout_constraintTop_toTopOf="@id/image_target_02" />
+        app:layout_constraintTop_toBottomOf="@id/txt_target" />
 
     <com.nativegame.nattyengine.ui.GameText
-        android:id="@+id/txt_level_target"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/txt_target_01"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_marginTop="@dimen/margin_5"
         android:fontFamily="@font/baloo"
-        android:gravity="center"
-        android:text="@string/txt_collect_items"
+        android:gravity="bottom|end"
         android:textColor="@color/white"
-        android:textSize="@dimen/txt_dialog_small_size"
+        android:textSize="@dimen/txt_state_score_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/image_dialog"
-        app:layout_constraintStart_toStartOf="@id/image_dialog"
-        app:layout_constraintTop_toBottomOf="@id/image_target_02" />
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toEndOf="@+id/image_target_01"
+        app:layout_constraintTop_toTopOf="@+id/image_target_01" />
+
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_target_02"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_marginTop="@dimen/margin_5"
+        android:fontFamily="@font/baloo"
+        android:gravity="bottom|end"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_score_size"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toEndOf="@+id/image_target_02"
+        app:layout_constraintTop_toTopOf="@+id/image_target_02" />
+
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_target_03"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_marginTop="@dimen/margin_5"
+        android:fontFamily="@font/baloo"
+        android:gravity="bottom|end"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_score_size"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toEndOf="@+id/image_target_03"
+        app:layout_constraintTop_toTopOf="@+id/image_target_03" />
 
     <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_cancel"
@@ -111,11 +144,12 @@
         android:id="@+id/btn_play"
         android:layout_width="@dimen/btn_large_width"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/margin_5"
         android:background="@drawable/btn_play"
+        app:layout_constraintBottom_toBottomOf="@id/image_dialog"
         app:layout_constraintDimensionRatio="5:2"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintStart_toStartOf="@id/image_dialog"
-        app:layout_constraintTop_toBottomOf="@+id/txt_level_target" />
+        app:layout_constraintTop_toTopOf="@id/image_dialog"
+        app:layout_constraintVertical_bias="0.87" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

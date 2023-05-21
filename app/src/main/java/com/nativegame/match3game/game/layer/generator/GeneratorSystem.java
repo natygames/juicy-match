@@ -1,6 +1,6 @@
 package com.nativegame.match3game.game.layer.generator;
 
-import com.nativegame.match3game.game.layer.LayerSystem;
+import com.nativegame.match3game.game.layer.LayerSpriteSystem;
 import com.nativegame.match3game.game.layer.tile.TileResetter;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class GeneratorSystem extends LayerSystem<Generator> {
+public class GeneratorSystem extends LayerSpriteSystem<Generator> {
 
     private final Generator[][] mGenerators;
 
@@ -57,8 +57,8 @@ public class GeneratorSystem extends LayerSystem<Generator> {
         for (int i = 0; i < mTotalRow; i++) {
             for (int j = 0; j < mTotalCol; j++) {
                 char c = chars[i * mTotalCol + j];
-                if (c == '0') {
-                    // We skip the empty layer
+                if (c == 'e') {
+                    // We skip the empty type
                     continue;
                 }
                 Generator generator = GeneratorInitializer.getGenerator(mEngine, c);

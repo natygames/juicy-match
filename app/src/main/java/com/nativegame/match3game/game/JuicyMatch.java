@@ -1,5 +1,6 @@
 package com.nativegame.match3game.game;
 
+import com.nativegame.match3game.MainActivity;
 import com.nativegame.match3game.game.algorithm.Algorithm;
 import com.nativegame.match3game.game.algorithm.BonusTimeAlgorithm;
 import com.nativegame.match3game.game.algorithm.RegularTimeAlgorithm;
@@ -28,8 +29,8 @@ import com.nativegame.nattyengine.ui.GameView;
 
 public class JuicyMatch extends Game {
 
-    public static final int WORLD_WIDTH = 2700;
-    public static final int WORLD_HEIGHT = 2700;
+    public static final int WORLD_WIDTH = 2760;
+    public static final int WORLD_HEIGHT = 2760;
 
     //--------------------------------------------------------
     // Constructors
@@ -40,9 +41,9 @@ public class JuicyMatch extends Game {
         // Init camera
         int cameraSize;
         if (gameView.getHeight() / gameView.getWidth() < 2) {
-            cameraSize = gameView.getHeight() / 2 - 20;
+            cameraSize = gameView.getHeight() / 2;   // We use half screen height if screen too wide
         } else {
-            cameraSize = gameView.getWidth() - 20;
+            cameraSize = gameView.getWidth();   // Otherwise, we just use screen width
         }
         mEngine.setCamera(new Camera(gameView, cameraSize, cameraSize, WORLD_WIDTH, WORLD_HEIGHT));
 
@@ -89,7 +90,7 @@ public class JuicyMatch extends Game {
     // Methods
     //--------------------------------------------------------
     private void showPauseDialog() {
-        PauseDialog dialog = new PauseDialog(getActivity()) {
+        PauseDialog dialog = new PauseDialog(mActivity) {
             @Override
             public void resumeGame() {
                 resume();
@@ -97,10 +98,12 @@ public class JuicyMatch extends Game {
 
             @Override
             public void quitGame() {
-                getActivity().navigateBack();
+                // Reduce one live
+                ((MainActivity) mActivity).getLivesTimer().reduceLive();
+                mActivity.navigateBack();
             }
         };
-        getActivity().showDialog(dialog);
+        mActivity.showDialog(dialog);
     }
     //========================================================
 

@@ -4,7 +4,7 @@ import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.asset.Textures;
 import com.nativegame.match3game.game.GameEvent;
 import com.nativegame.match3game.game.JuicyMatch;
-import com.nativegame.match3game.game.algorithm.special.handler.ExplosionSpecialTileHandler;
+import com.nativegame.match3game.game.algorithm.special.handler.ExplosiveTileHandler;
 import com.nativegame.match3game.game.effect.booster.BombEffect;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.game.layer.tile.TileSystem;
@@ -17,7 +17,7 @@ import com.nativegame.nattyengine.engine.Engine;
 
 public class BombController extends BoosterController {
 
-    private final ExplosionSpecialTileHandler mExplosionSpecialTileHandler;
+    private final ExplosiveTileHandler mExplosiveTileHandler;
     private final BombEffect mBombEffect;
 
     //--------------------------------------------------------
@@ -25,7 +25,7 @@ public class BombController extends BoosterController {
     //--------------------------------------------------------
     public BombController(Engine engine, TileSystem tileSystem) {
         super(engine, tileSystem);
-        mExplosionSpecialTileHandler = new ExplosionSpecialTileHandler(engine);
+        mExplosiveTileHandler = new ExplosiveTileHandler(engine);
         mBombEffect = new BombEffect(engine, Textures.BOMB);
     }
     //========================================================
@@ -47,7 +47,7 @@ public class BombController extends BoosterController {
 
     @Override
     protected void onRemoveBooster(Tile[][] tiles, Tile touchDownTile, Tile touchUpTile, int row, int col) {
-        mExplosionSpecialTileHandler.handleSpecialTile(tiles, touchDownTile, row, col);
+        mExplosiveTileHandler.handleSpecialTile(tiles, touchDownTile, row, col);
         dispatchEvent(GameEvent.PLAYER_USE_BOOSTER);
     }
     //========================================================

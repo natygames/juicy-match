@@ -26,6 +26,8 @@ public interface Match3Tile {
 
     void resetYByRow(int row);
 
+    void initTile();
+
     void popTile();
 
     void matchTile();

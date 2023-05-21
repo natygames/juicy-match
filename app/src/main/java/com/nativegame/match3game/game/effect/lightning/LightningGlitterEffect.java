@@ -37,7 +37,7 @@ public class LightningGlitterEffect extends Sprite {
         mFadeOutModifier = new FadeOutModifier(TIME_TO_FADE, TIME_TO_LIVE - TIME_TO_FADE);
         mFadeOutModifier.setAutoRemove(true);
         mRotationSpeed = RandomUtils.nextSign() * 180f / 1000;
-        setLayer(Layer.GRID_LAYER);
+        setLayer(Layer.EFFECT_BG_LAYER);
     }
     //========================================================
 

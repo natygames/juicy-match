@@ -37,7 +37,7 @@ public class GeneratorLayerHandler extends BaseLayerHandler {
     }
 
     @Override
-    protected void onUpdateLayer(TargetHandlerManager targetHandlerManager, Tile tile) {
+    protected void onUpdateLayer(Tile tile, TargetHandlerManager targetHandlerManager, Tile[][] tiles, int row, int col) {
     }
 
     @Override

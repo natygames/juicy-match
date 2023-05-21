@@ -1,13 +1,12 @@
 package com.nativegame.match3game.ui.dialog;
 
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nativegame.match3game.R;
+import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.database.DatabaseHelper;
 import com.nativegame.match3game.level.Level;
-import com.nativegame.match3game.level.LevelType;
 import com.nativegame.match3game.level.TargetType;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
@@ -21,7 +20,7 @@ import java.util.List;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class LevelDialog extends BaseDialog {
+public class LevelDialog extends BaseDialog implements View.OnClickListener {
 
     private int mSelectedId;
 
@@ -35,13 +34,17 @@ public class LevelDialog extends BaseDialog {
         setEnterAnimationId(R.anim.enter_from_center);
         setExitAnimationId(R.anim.exit_to_center);
 
+        // Init level text
+        TextView txtLevel = (TextView) findViewById(R.id.txt_level);
+        txtLevel.setText(ResourceUtils.getString(activity, R.string.txt_level, Level.LEVEL_DATA.getLevel()));
+
+        // Init button
         GameButton btnPlay = (GameButton) findViewById(R.id.btn_play);
         btnPlay.popUp(200, 700);
         btnPlay.setOnClickListener(this);
+
         GameButton btnCancel = (GameButton) findViewById(R.id.btn_cancel);
         btnCancel.setOnClickListener(this);
-        TextView txtLevel = (TextView) findViewById(R.id.txt_level);
-        txtLevel.setText(ResourceUtils.getString(activity, R.string.txt_level, Level.LEVEL_DATA.getLevel()));
 
         initStar();
         initTargetImage();
@@ -61,13 +64,12 @@ public class LevelDialog extends BaseDialog {
 
     @Override
     public void onClick(View view) {
-        super.onClick(view);
+        Sounds.BUTTON_CLICK.play();
         int id = view.getId();
-        if (id == R.id.btn_play) {
-            mSelectedId = R.id.btn_play;
+        if (id == R.id.btn_cancel) {
             dismiss();
-        } else if (id == R.id.btn_cancel) {
-            mSelectedId = R.id.btn_cancel;
+        } else if (id == R.id.btn_play) {
+            mSelectedId = id;
             dismiss();
         }
     }
@@ -78,20 +80,21 @@ public class LevelDialog extends BaseDialog {
     //--------------------------------------------------------
     private void initStar() {
         int level = Level.LEVEL_DATA.getLevel();
-
-        ImageView image = (ImageView) findViewById(R.id.image_star);
+        // Init star image from current level star
+        GameImage imageStar = (GameImage) findViewById(R.id.image_star);
+        imageStar.popUp(200, 200);
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(mParent);
         int star = databaseHelper.getLevelStar(level);
         if (star != -1) {
             switch (star) {
                 case 1:
-                    image.setImageResource(R.drawable.star_set_01);
+                    imageStar.setImageResource(R.drawable.star_set_01);
                     break;
                 case 2:
-                    image.setImageResource(R.drawable.star_set_02);
+                    imageStar.setImageResource(R.drawable.star_set_02);
                     break;
                 case 3:
-                    image.setImageResource(R.drawable.star_set_03);
+                    imageStar.setImageResource(R.drawable.star_set_03);
                     break;
 
             }
@@ -100,7 +103,7 @@ public class LevelDialog extends BaseDialog {
 
     private void initTargetImage() {
         List<TargetType> targetTypes = Level.LEVEL_DATA.getTargetTypes();
-
+        // Init target image from TargetType
         GameImage imageTargetA = (GameImage) findViewById(R.id.image_target_01);
         GameImage imageTargetB = (GameImage) findViewById(R.id.image_target_02);
         GameImage imageTargetC = (GameImage) findViewById(R.id.image_target_03);
@@ -108,9 +111,9 @@ public class LevelDialog extends BaseDialog {
             case 1:
                 imageTargetB.setImageResource(targetTypes.get(0).getDrawableId());
                 imageTargetB.popUp(200, 300);
-                imageTargetA.setVisibility(View.INVISIBLE);
+                imageTargetA.setVisibility(View.GONE);
                 imageTargetB.setVisibility(View.VISIBLE);
-                imageTargetC.setVisibility(View.INVISIBLE);
+                imageTargetC.setVisibility(View.GONE);
                 break;
             case 2:
                 imageTargetA.setImageResource(targetTypes.get(0).getDrawableId());
@@ -118,7 +121,7 @@ public class LevelDialog extends BaseDialog {
                 imageTargetA.popUp(200, 300);
                 imageTargetC.popUp(200, 400);
                 imageTargetA.setVisibility(View.VISIBLE);
-                imageTargetB.setVisibility(View.INVISIBLE);
+                imageTargetB.setVisibility(View.GONE);
                 imageTargetC.setVisibility(View.VISIBLE);
                 break;
             case 3:
@@ -136,19 +139,38 @@ public class LevelDialog extends BaseDialog {
     }
 
     private void initTargetText() {
-        LevelType levelType = Level.LEVEL_DATA.getLevelType();
-
-        GameText txtTarget = (GameText) findViewById(R.id.txt_level_target);
-        txtTarget.popUp(200, 600);
-        switch (levelType) {
-            case COLLECT:
-                txtTarget.setText(mParent.getResources().getString(R.string.txt_collect_items));
+        List<Integer> targetTypes = Level.LEVEL_DATA.getTargetCounts();
+        // Init target image from TargetType
+        GameText txtTargetA = (GameText) findViewById(R.id.txt_target_01);
+        GameText txtTargetB = (GameText) findViewById(R.id.txt_target_02);
+        GameText txtTargetC = (GameText) findViewById(R.id.txt_target_03);
+        switch (targetTypes.size()) {
+            case 1:
+                txtTargetB.setText(String.valueOf(targetTypes.get(0)));
+                txtTargetB.popUp(200, 300);
+                txtTargetA.setVisibility(View.GONE);
+                txtTargetB.setVisibility(View.VISIBLE);
+                txtTargetC.setVisibility(View.GONE);
                 break;
-            case ICE:
-                txtTarget.setText(mParent.getResources().getString(R.string.txt_break_all_the_ice));
+            case 2:
+                txtTargetA.setText(String.valueOf(targetTypes.get(0)));
+                txtTargetC.setText(String.valueOf(targetTypes.get(1)));
+                txtTargetA.popUp(200, 300);
+                txtTargetC.popUp(200, 400);
+                txtTargetA.setVisibility(View.VISIBLE);
+                txtTargetB.setVisibility(View.GONE);
+                txtTargetC.setVisibility(View.VISIBLE);
                 break;
-            case STARFISH:
-                txtTarget.setText(mParent.getResources().getString(R.string.txt_collect_starfish));
+            case 3:
+                txtTargetA.setText(String.valueOf(targetTypes.get(0)));
+                txtTargetB.setText(String.valueOf(targetTypes.get(1)));
+                txtTargetC.setText(String.valueOf(targetTypes.get(2)));
+                txtTargetA.popUp(200, 300);
+                txtTargetB.popUp(200, 400);
+                txtTargetC.popUp(200, 500);
+                txtTargetA.setVisibility(View.VISIBLE);
+                txtTargetB.setVisibility(View.VISIBLE);
+                txtTargetC.setVisibility(View.VISIBLE);
                 break;
         }
     }

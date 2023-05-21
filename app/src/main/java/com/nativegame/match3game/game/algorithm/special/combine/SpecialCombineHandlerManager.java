@@ -19,13 +19,13 @@ public class SpecialCombineHandlerManager {
     //--------------------------------------------------------
     public SpecialCombineHandlerManager(Engine engine) {
         // Add all the special combine handler
-        mSpecialCombineHandlers.add(new ColorFruitCombineHandler(engine));
-        mSpecialCombineHandlers.add(new ColorRowColumnCombineHandler(engine));
-        mSpecialCombineHandlers.add(new ColorExplosionCombineHandler(engine));
-        mSpecialCombineHandlers.add(new DoubleColorCombineHandler(engine));
-        mSpecialCombineHandlers.add(new DoubleExplosionCombineHandler(engine));
-        mSpecialCombineHandlers.add(new DoubleRowColumnCombineHandler(engine));
-        mSpecialCombineHandlers.add(new ExplosionRowColumnCombineHandler(engine));
+        mSpecialCombineHandlers.add(new IceCreamTileCombineHandler(engine));
+        mSpecialCombineHandlers.add(new IceCreamStripedTileCombineHandler(engine));
+        mSpecialCombineHandlers.add(new IceCreamExplosiveTileCombineHandler(engine));
+        mSpecialCombineHandlers.add(new DoubleIceCreamCombineHandler(engine));
+        mSpecialCombineHandlers.add(new DoubleExplosiveTileCombineHandler(engine));
+        mSpecialCombineHandlers.add(new DoubleStripedTileCombineHandler(engine));
+        mSpecialCombineHandlers.add(new ExplosiveStripedTileCombineHandler(engine));
     }
     //========================================================
 

@@ -30,20 +30,24 @@ public class Level {
             InputStream in = context.getAssets().open(FILE_NAME);
             XMLResultSet resultSet = helper.open(context, in, "level" + level);
             LEVEL_DATA = new LevelData(
-                    resultSet.getString("level_type"),
-                    resultSet.getString("grid"),
-                    resultSet.getString("ices"),
-                    resultSet.getString("tile"),
-                    resultSet.getString("lock"),
-                    resultSet.getString("entr"),
-                    resultSet.getString("gene"),
-                    resultSet.getString("target_type"),
-                    resultSet.getString("target_num"),
                     level,
                     resultSet.getInt("row"),
                     resultSet.getInt("column"),
-                    resultSet.getInt("fruit_num"),
-                    resultSet.getInt("move"));
+                    resultSet.getInt("move"),
+                    resultSet.getInt("fruit_count"),
+                    resultSet.getString("grid"),
+                    resultSet.getString("tile"),
+                    resultSet.getString("ices"),
+                    resultSet.getString("hone"),
+                    resultSet.getString("sand"),
+                    resultSet.getString("shel"),
+                    resultSet.getString("lock"),
+                    resultSet.getString("entr"),
+                    resultSet.getString("gene"),
+                    resultSet.getString("tuto"),
+                    resultSet.getString("tutorial_type"),
+                    resultSet.getString("target_type"),
+                    resultSet.getString("target_count"));
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {

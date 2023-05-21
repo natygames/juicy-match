@@ -1,6 +1,5 @@
 package com.nativegame.match3game.game.effect.flash;
 
-import com.nativegame.match3game.game.effect.EffectDirection;
 import com.nativegame.match3game.game.layer.Layer;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
@@ -58,7 +57,7 @@ public class ExplosionBeamEffect extends Sprite {
     //--------------------------------------------------------
     // Methods
     //--------------------------------------------------------
-    public void activate(float x, float y, EffectDirection direction) {
+    public void activate(float x, float y, FlashDirection direction) {
         setCenterX(x);
         setCenterY(y);
         setRotation(direction.getAngle());

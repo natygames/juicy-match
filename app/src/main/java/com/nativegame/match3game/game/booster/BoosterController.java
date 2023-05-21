@@ -42,7 +42,7 @@ public abstract class BoosterController extends Entity implements TouchEventList
         mMarginX = (JuicyMatch.WORLD_WIDTH - mTotalCol * 300) / 2;
         mMarginY = (JuicyMatch.WORLD_HEIGHT - mTotalRow * 300) / 2;
         mTimer = new Timer(engine, this, TIME_TO_LIVE);
-        mShadowBg = new Color(engine, Colors.BLACK_80);
+        mShadowBg = new Color(engine, Colors.BLACK_60);
     }
     //========================================================
 

@@ -24,7 +24,7 @@ public abstract class BaseSpecialTileHandler implements SpecialTileHandler {
                 .setDuration(750)
                 .setAlpha(255, 0)
                 .setScale(4, 4)
-                .setLayer(Layer.GRID_LAYER);
+                .setLayer(Layer.EFFECT_BG_LAYER);
     }
     //========================================================
 

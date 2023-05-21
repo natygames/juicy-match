@@ -17,11 +17,11 @@ public class HintFinderManager {
     // Constructors
     //--------------------------------------------------------
     public HintFinderManager() {
-        mHintFinders.add(new SpecialCombineHint());
-        mHintFinders.add(new MatchColorSpecialTileHint());
-        mHintFinders.add(new MatchExplosionSpecialTileHint());
-        mHintFinders.add(new MatchTileHint());
-        mHintFinders.add(new ColorSpecialTileHint());
+        mHintFinders.add(new SpecialCombineHintFinder());
+        mHintFinders.add(new IceCreamHintFinder());
+        mHintFinders.add(new ExplosiveStripedTileHintFinder());
+        mHintFinders.add(new TileHintFinder());
+        mHintFinders.add(new IceCreamTileHintFind());
     }
     //========================================================
 

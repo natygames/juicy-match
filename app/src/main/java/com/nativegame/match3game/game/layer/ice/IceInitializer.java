@@ -30,6 +30,20 @@ public class IceInitializer {
                 return IceType.DOWN_LEFT;
             case 's':
                 return IceType.DOWN_RIGHT;
+            case 't':
+                return IceType.TOP_MARGIN;
+            case 'b':
+                return IceType.DOWN_MARGIN;
+            case 'z':
+                return IceType.LEFT_MARGIN;
+            case 'x':
+                return IceType.RIGHT_MARGIN;
+            case 'h':
+                return IceType.HORIZONTAL;
+            case 'v':
+                return IceType.VERTICAL;
+            case 'o':
+                return IceType.SOLE;
             default:
                 throw new IllegalArgumentException("IceType not found!");
         }

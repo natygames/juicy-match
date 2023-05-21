@@ -33,7 +33,7 @@ public class HintModifier extends Entity {
     @Override
     public void onStart() {
         mAlpha = MAX_ALPHA;
-        mAlphaSpeed = -280f / 1000;
+        mAlphaSpeed = -300f / 1000;
     }
 
     @Override

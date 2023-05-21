@@ -1,8 +1,8 @@
 package com.nativegame.match3game.game.algorithm.layer;
 
 import com.nativegame.match3game.game.algorithm.target.TargetHandlerManager;
-import com.nativegame.match3game.game.layer.entry.EntryPoint;
-import com.nativegame.match3game.game.layer.entry.EntryPointSystem;
+import com.nativegame.match3game.game.layer.entrypoint.EntryPoint;
+import com.nativegame.match3game.game.layer.entrypoint.EntryPointSystem;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.game.layer.tile.type.StarfishTile;
 import com.nativegame.match3game.level.TargetType;
@@ -31,24 +31,39 @@ public class EntryPointLayerHandler extends BaseLayerHandler {
     }
 
     @Override
-    protected void onUpdateLayer(TargetHandlerManager targetHandlerManager, Tile tile) {
-        // Check is tile starfish
+    protected void onUpdateLayer(Tile tile, TargetHandlerManager targetHandlerManager, Tile[][] tiles, int row, int col) {
         if (tile instanceof StarfishTile) {
             StarfishTile starfish = ((StarfishTile) tile);
-            if (!starfish.isStarfish()) {
-                return;
-            }
-            // Check is starfish at entry point
-            EntryPoint entryPoint = mEntryPointSystem.getChildAt(tile.getRow(), tile.getColumn());
-            if (entryPoint != null && entryPoint.isRunning()) {
-                starfish.popStarfishTile();
-                targetHandlerManager.updateTarget(TargetType.STARFISH);
+            if (starfish.isStarfish()) {
+                updateStarfish(targetHandlerManager, starfish);
             }
         }
     }
 
     @Override
     protected void onRemoveLayer(Tile tile) {
+        // Remove starfish when layer removed
+        if (tile instanceof StarfishTile) {
+            StarfishTile starfish = ((StarfishTile) tile);
+            if (!starfish.isStarfish()) {
+                return;
+            }
+            starfish.popStarfishTile();
+        }
+    }
+    //========================================================
+
+    //--------------------------------------------------------
+    // Methods
+    //--------------------------------------------------------
+    private void updateStarfish(TargetHandlerManager targetHandlerManager, StarfishTile starfish) {
+        // Check is starfish at entry point
+        EntryPoint entryPoint = mEntryPointSystem.getChildAt(starfish.getRow(), starfish.getColumn());
+        if (entryPoint != null && entryPoint.isRunning()) {
+            // Remove starfish and update target
+            starfish.popStarfishTile();
+            targetHandlerManager.updateTarget(TargetType.STARFISH);
+        }
     }
     //========================================================
 

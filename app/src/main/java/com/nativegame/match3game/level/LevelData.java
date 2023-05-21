@@ -9,74 +9,95 @@ import java.util.List;
 
 public class LevelData {
 
-    private final LevelType mLevelType;
     private final String mGrid;
     private final String mIce;
     private final String mTile;
     private final String mLock;
     private final String mEntry;
+    private final String mHoney;
+    private final String mSand;
+    private final String mShell;
     private final String mGenerator;
+    private final String mTutorialHint;
+    private final TutorialType mTutorialType;
     private final List<TargetType> mTargetTypes;
-    private final List<Integer> mTargetNums;
+    private final List<Integer> mTargetCounts;
     private final int mLevel;
     private final int mRow;
     private final int mColumn;
-    private int mFruitNum;
+
     private int mMove;
+    private int mFruitCount;
     private int mScore = 0;
     private int mStar = 0;
 
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public LevelData(String levelType,
+    public LevelData(int level,
+                     int row,
+                     int column,
+                     int move,
+                     int fruitCount,
                      String grid,
-                     String ice,
                      String tile,
+                     String ice,
+                     String honey,
+                     String sand,
+                     String shell,
                      String lock,
                      String entry,
                      String generator,
+                     String tutorialHint,
+                     String tutorialType,
                      String targetType,
-                     String targetNum,
-                     int level,
-                     int row,
-                     int column,
-                     int fruitNum,
-                     int move) {
-        mLevelType = getLevelType(levelType);
-        mGrid = grid;
-        mIce = ice;
-        mTile = tile;
-        mLock = lock;
-        mEntry = entry;
-        mGenerator = generator;
-        mTargetTypes = getTargetTypes(targetType);
-        mTargetNums = getTargetNums(targetNum);
+                     String targetCount) {
         mLevel = level;
         mRow = row;
         mColumn = column;
-        mFruitNum = fruitNum;
         mMove = move;
+        mFruitCount = fruitCount;
+        mGrid = grid;
+        mTile = tile;
+        mIce = ice;
+        mHoney = honey;
+        mSand = sand;
+        mShell = shell;
+        mLock = lock;
+        mEntry = entry;
+        mGenerator = generator;
+        mTutorialHint = tutorialHint;
+        mTutorialType = getTutorialType(tutorialType);
+        mTargetTypes = getTargetTypes(targetType);
+        mTargetCounts = getTargetCounts(targetCount);
     }
     //========================================================
 
     //--------------------------------------------------------
     // Getter and Setter
     //--------------------------------------------------------
-    public LevelType getLevelType() {
-        return mLevelType;
-    }
-
     public String getGrid() {
         return mGrid;
+    }
+
+    public String getTile() {
+        return mTile;
     }
 
     public String getIce() {
         return mIce;
     }
 
-    public String getTile() {
-        return mTile;
+    public String getHoney() {
+        return mHoney;
+    }
+
+    public String getSand() {
+        return mSand;
+    }
+
+    public String getShell() {
+        return mShell;
     }
 
     public String getLock() {
@@ -91,12 +112,20 @@ public class LevelData {
         return mGenerator;
     }
 
+    public String getTutorialHint() {
+        return mTutorialHint;
+    }
+
+    public TutorialType getTutorialType() {
+        return mTutorialType;
+    }
+
     public List<TargetType> getTargetTypes() {
         return mTargetTypes;
     }
 
-    public List<Integer> getTargetNums() {
-        return mTargetNums;
+    public List<Integer> getTargetCounts() {
+        return mTargetCounts;
     }
 
     public int getLevel() {
@@ -111,20 +140,20 @@ public class LevelData {
         return mColumn;
     }
 
-    public int getFruitNum() {
-        return mFruitNum;
-    }
-
-    public void setFruitNum(int fruitNum) {
-        mFruitNum = fruitNum;
-    }
-
     public int getMove() {
         return mMove;
     }
 
     public void setMove(int move) {
         mMove = move;
+    }
+
+    public int getFruitCount() {
+        return mFruitCount;
+    }
+
+    public void setFruitCount(int fruitCount) {
+        mFruitCount = fruitCount;
     }
 
     public int getScore() {
@@ -147,16 +176,55 @@ public class LevelData {
     //--------------------------------------------------------
     // Methods
     //--------------------------------------------------------
-    private LevelType getLevelType(String text) {
+    private TutorialType getTutorialType(String text) {
+        if (text == null) {
+            // If text is null means no tutorial in current level
+            return TutorialType.NONE;
+        }
+
         switch (text) {
-            case "collect":
-                return LevelType.COLLECT;
+            case "match_3":
+                return TutorialType.MATCH_3;
+            case "match_4":
+                return TutorialType.MATCH_4;
+            case "match_t":
+                return TutorialType.MATCH_T;
+            case "match_l":
+                return TutorialType.MATCH_L;
+            case "match_5":
+                return TutorialType.MATCH_5;
+            case "combine":
+                return TutorialType.COMBINE;
+            case "lock":
+                return TutorialType.LOCK;
+            case "cookie":
+                return TutorialType.COOKIE;
+            case "cake":
+                return TutorialType.CAKE;
+            case "candy":
+                return TutorialType.CANDY;
+            case "pie":
+                return TutorialType.PIE;
             case "ice":
-                return LevelType.ICE;
+                return TutorialType.ICE;
+            case "honey":
+                return TutorialType.HONEY;
             case "starfish":
-                return LevelType.STARFISH;
+                return TutorialType.STARFISH;
+            case "shell":
+                return TutorialType.SHELL;
+            case "pipe":
+                return TutorialType.PIPE;
+            case "generator":
+                return TutorialType.GENERATOR;
+            case "hammer":
+                return TutorialType.HAMMER;
+            case "bomb":
+                return TutorialType.BOMB;
+            case "glove":
+                return TutorialType.GLOVE;
             default:
-                throw new IllegalArgumentException("LevelType not found!");
+                throw new IllegalArgumentException("TutorialType not found!");
         }
     }
 
@@ -180,20 +248,32 @@ public class LevelData {
                     case ("lemon"):
                         type = TargetType.LEMON;
                         break;
-                    case ("striped"):
-                        type = TargetType.STRIPED;
-                        break;
                     case ("cookie"):
                         type = TargetType.COOKIE;
                         break;
                     case ("cake"):
                         type = TargetType.CAKE;
                         break;
+                    case ("pie"):
+                        type = TargetType.PIE;
+                        break;
+                    case ("candy"):
+                        type = TargetType.CANDY;
+                        break;
                     case ("ice"):
                         type = TargetType.ICE;
                         break;
+                    case ("lock"):
+                        type = TargetType.LOCK;
+                        break;
                     case ("starfish"):
                         type = TargetType.STARFISH;
+                        break;
+                    case ("shell"):
+                        type = TargetType.SHELL;
+                        break;
+                    case ("honey"):
+                        type = TargetType.HONEY;
                         break;
                 }
                 targetTypes.add(type);
@@ -205,7 +285,7 @@ public class LevelData {
         return targetTypes;
     }
 
-    private List<Integer> getTargetNums(String text) {
+    private List<Integer> getTargetCounts(String text) {
         List<Integer> targetNums = new ArrayList<>();
         text = text + " ";
         int preIndex = 0;

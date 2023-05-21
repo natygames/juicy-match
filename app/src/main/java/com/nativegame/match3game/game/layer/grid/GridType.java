@@ -16,7 +16,14 @@ public enum GridType {
     TOP_LEFT,
     TOP_RIGHT,
     DOWN_LEFT,
-    DOWN_RIGHT;
+    DOWN_RIGHT,
+    TOP_MARGIN,
+    DOWN_MARGIN,
+    LEFT_MARGIN,
+    RIGHT_MARGIN,
+    VERTICAL,
+    HORIZONTAL,
+    SOLE;
 
     //--------------------------------------------------------
     // Getter and Setter
@@ -29,14 +36,24 @@ public enum GridType {
             case DOWN:
             case LEFT:
             case RIGHT:
-                return Textures.GRID_MARGIN;
+                return Textures.GRID_SIDE;
             case TOP_LEFT:
             case TOP_RIGHT:
             case DOWN_LEFT:
             case DOWN_RIGHT:
                 return Textures.GRID_CORNER;
+            case TOP_MARGIN:
+            case DOWN_MARGIN:
+            case LEFT_MARGIN:
+            case RIGHT_MARGIN:
+                return Textures.GRID_MARGIN;
+            case VERTICAL:
+            case HORIZONTAL:
+                return Textures.GRID_PIPE;
+            case SOLE:
+                return Textures.GRID_SOLE;
             default:
-                throw new IllegalArgumentException("Grid texture not found!");
+                throw new IllegalArgumentException("Grid Texture not found!");
         }
     }
 
@@ -45,18 +62,25 @@ public enum GridType {
             case CENTER:
             case TOP:
             case TOP_LEFT:
+            case TOP_MARGIN:
+            case HORIZONTAL:
+            case SOLE:
                 return 0;
             case RIGHT:
             case TOP_RIGHT:
+            case RIGHT_MARGIN:
+            case VERTICAL:
                 return 90;
             case DOWN:
             case DOWN_RIGHT:
+            case DOWN_MARGIN:
                 return 180;
             case LEFT:
             case DOWN_LEFT:
+            case LEFT_MARGIN:
                 return 270;
             default:
-                throw new IllegalArgumentException("Grid not found!");
+                throw new IllegalArgumentException("Grid angle not found!");
         }
     }
     //========================================================

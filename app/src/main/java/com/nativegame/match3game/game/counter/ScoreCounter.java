@@ -21,8 +21,8 @@ public class ScoreCounter extends RunnableEntity implements EventListener {
 
     private static final int POINTS_PER_FRUIT = 10;
 
-    private final TextView mText;
-    private final Animation mTextAnimation;
+    private final TextView mTxtScore;
+    private final Animation mPulseAnimation;
 
     private int mPoints;
 
@@ -31,8 +31,8 @@ public class ScoreCounter extends RunnableEntity implements EventListener {
     //--------------------------------------------------------
     public ScoreCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
-        mText = activity.findViewById(R.id.txt_score);
-        mTextAnimation = AnimationUtils.loadAnimation(activity, R.anim.text_pulse);
+        mTxtScore = activity.findViewById(R.id.txt_score);
+        mPulseAnimation = AnimationUtils.loadAnimation(activity, R.anim.text_pulse);
     }
     //========================================================
 
@@ -47,8 +47,8 @@ public class ScoreCounter extends RunnableEntity implements EventListener {
 
     @Override
     protected void onUpdateRunnable() {
-        mText.setText(String.valueOf(mPoints));
-        mText.startAnimation(mTextAnimation);
+        mTxtScore.setText(String.valueOf(mPoints));
+        mTxtScore.startAnimation(mPulseAnimation);
     }
 
     @Override

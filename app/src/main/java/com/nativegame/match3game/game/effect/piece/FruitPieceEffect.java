@@ -4,22 +4,23 @@ import com.nativegame.match3game.game.layer.Layer;
 import com.nativegame.match3game.game.layer.tile.FruitType;
 import com.nativegame.match3game.game.layer.tile.SpecialType;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.Modifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
 import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
 import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
+import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class FruitPieceEffect extends Sprite implements Modifier.ModifierListener {
+public class FruitPieceEffect extends Sprite {
 
     private static final long TIME_TO_LIVE = 500;
 
-    private final FruitPieceDirection mFruitPieceDirection;
+    private final FruitPieceEffectSystem mParent;
+    private final ScaleModifier mScaleModifier;
     private final RotationModifier mRotationModifier;
     private final FadeOutModifier mFadeOutModifier;
     private final PositionModifier mPositionModifier;
@@ -27,24 +28,15 @@ public class FruitPieceEffect extends Sprite implements Modifier.ModifierListene
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public FruitPieceEffect(Engine engine, Texture texture, FruitPieceDirection direction) {
+    public FruitPieceEffect(FruitPieceEffectSystem fruitPieceEffectSystem, Engine engine, Texture texture) {
         super(engine, texture);
-        mFruitPieceDirection = direction;
+        mParent = fruitPieceEffectSystem;
+        mScaleModifier = new ScaleModifier(1, 0.5f, TIME_TO_LIVE);
         mRotationModifier = new RotationModifier(0, -45, TIME_TO_LIVE);
         mFadeOutModifier = new FadeOutModifier(TIME_TO_LIVE);
         mPositionModifier = new PositionModifier(TIME_TO_LIVE);
-        mPositionModifier.setListener(this);
-        setLayer(Layer.TEXT_LAYER);
-        setActive(false);
-        setVisible(false);
-    }
-    //========================================================
-
-    //--------------------------------------------------------
-    // Getter and Setter
-    //--------------------------------------------------------
-    public FruitPieceDirection getFruitPieceDirection() {
-        return mFruitPieceDirection;
+        mPositionModifier.setAutoRemove(true);
+        setLayer(Layer.EFFECT_LAYER + 1);   // Fruit pieces need to be above flash effect
     }
     //========================================================
 
@@ -52,13 +44,13 @@ public class FruitPieceEffect extends Sprite implements Modifier.ModifierListene
     // Overriding methods
     //--------------------------------------------------------
     @Override
-    public void onModifierComplete() {
-        setActive(false);
-        setVisible(false);
+    public void onRemove() {
+        mParent.returnToPool(this);
     }
 
     @Override
     public void onUpdate(long elapsedMillis) {
+        mScaleModifier.update(this, elapsedMillis);
         mRotationModifier.update(this, elapsedMillis);
         mFadeOutModifier.update(this, elapsedMillis);
         mPositionModifier.update(this, elapsedMillis);
@@ -68,20 +60,20 @@ public class FruitPieceEffect extends Sprite implements Modifier.ModifierListene
     //--------------------------------------------------------
     // Methods
     //--------------------------------------------------------
-    public void activate(float x, float y, FruitType fruitType, SpecialType specialType) {
+    public void activate(float x, float y, FruitType fruitType, SpecialType specialType, FruitPiece direction) {
         setCenterX(x);
         setCenterY(y);
         if (specialType != SpecialType.NONE) {
-            setTexture(specialType.getPiecesTexture(fruitType)[mFruitPieceDirection.getIndex()]);
+            setTexture(specialType.getPiecesTexture(fruitType)[direction.getIndex()]);
         } else {
-            setTexture(fruitType.getPiecesTexture()[mFruitPieceDirection.getIndex()]);
+            setTexture(fruitType.getPiecesTexture()[direction.getIndex()]);
         }
+        mScaleModifier.init(this);
         mRotationModifier.init(this);
         mFadeOutModifier.init(this);
-        mPositionModifier.setValue(mX, mX + 80 * mFruitPieceDirection.getDirection(), mY, mY + 80);
+        mPositionModifier.setValue(mX, mX + 80 * direction.getDirection(), mY, mY + 80);
         mPositionModifier.init(this);
-        setActive(true);
-        setVisible(true);
+        addToGame();
     }
     //========================================================
 

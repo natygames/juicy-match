@@ -11,8 +11,7 @@ import com.nativegame.match3game.asset.Textures;
 import com.nativegame.match3game.game.GameEvent;
 import com.nativegame.match3game.game.algorithm.special.handler.SpecialTileHandlerManager;
 import com.nativegame.match3game.game.effect.ScoreEffectSystem;
-import com.nativegame.match3game.game.effect.piece.FruitPieceDirection;
-import com.nativegame.match3game.game.effect.piece.FruitPieceEffect;
+import com.nativegame.match3game.game.effect.piece.FruitPieceEffectSystem;
 import com.nativegame.match3game.game.layer.Layer;
 import com.nativegame.match3game.game.layer.tile.FruitType;
 import com.nativegame.match3game.game.layer.tile.SpecialType;
@@ -44,7 +43,7 @@ public class SolidTile extends Tile implements EventListener {
     private static final long TIME_TO_BOUNCE = 200;
     private static final int GLITTER_NUM = 4;
 
-    private final TileSystem mParent;
+    protected final TileSystem mParent;
     private final SpecialTileHandlerManager mSpecialTileHandler;
     private final ScaleInModifier mShuffleScaleModifier;
     private final FadeInModifier mShuffleFadeModifier;
@@ -52,8 +51,7 @@ public class SolidTile extends Tile implements EventListener {
     private final ScaleModifier mBounceOutModifier;
     private final ParticleSystem mLightBgParticleSystem;
     private final ParticleSystem mGlitterParticleSystem;
-    private final FruitPieceEffect mLeftFruitPieceEffect;
-    private final FruitPieceEffect mRightFruitPieceEffect;
+    private final FruitPieceEffectSystem mFruitPieceEffect;
     private final ScoreEffectSystem mScoreEffect;
     private final LightCircle mLightCircle;
     private final ColorFilter mLightFilter;
@@ -88,8 +86,6 @@ public class SolidTile extends Tile implements EventListener {
         mSpecialTileHandler = new SpecialTileHandlerManager(engine);
         mShuffleScaleModifier = new ScaleInModifier(0, TIME_TO_SHUFFLE);
         mShuffleFadeModifier = new FadeInModifier(0, TIME_TO_SHUFFLE);
-        mShuffleScaleModifier.setResetBefore(false);
-        mShuffleFadeModifier.setResetBefore(false);
         mBounceInModifier = new ScaleModifier(1, 1, 1, 0.8f, TIME_TO_BOUNCE);
         mBounceOutModifier = new ScaleModifier(1, 1, 0.8f, 1, TIME_TO_BOUNCE, TIME_TO_BOUNCE);
         mLightBgParticleSystem = new ParticleSystem(engine, Textures.LIGHT_BG, 1)
@@ -105,11 +101,10 @@ public class SolidTile extends Tile implements EventListener {
                 .setAlpha(255, 0, 400)
                 .setScale(1, 0, 400)
                 .setLayer(Layer.EFFECT_LAYER);
-        mLeftFruitPieceEffect = new FruitPieceEffect(engine, Textures.CHERRY, FruitPieceDirection.LEFT);
-        mRightFruitPieceEffect = new FruitPieceEffect(engine, Textures.CHERRY, FruitPieceDirection.RIGHT);
+        mFruitPieceEffect = new FruitPieceEffectSystem(engine, 4);
         mScoreEffect = new ScoreEffectSystem(engine, 3);
         mLightCircle = new LightCircle(engine, 250);
-        mLightFilter = new PorterDuffColorFilter(Colors.WHITE_25, PorterDuff.Mode.SRC_ATOP);
+        mLightFilter = new PorterDuffColorFilter(Colors.WHITE_20, PorterDuff.Mode.SRC_ATOP);
         mSpeed = 2500f / 1000;
     }
     //========================================================
@@ -118,20 +113,7 @@ public class SolidTile extends Tile implements EventListener {
     // Overriding methods
     //--------------------------------------------------------
     @Override
-    public void onStart() {
-        mLeftFruitPieceEffect.addToGame();
-        mRightFruitPieceEffect.addToGame();
-    }
-
-    @Override
-    public void onRemove() {
-        mLeftFruitPieceEffect.removeFromGame();
-        mRightFruitPieceEffect.removeFromGame();
-    }
-
-    @Override
     public void onUpdate(long elapsedMillis) {
-        super.onUpdate(elapsedMillis);
         // Show the tile when appear from top
         if (mY >= mMarginY - mHeight / 2f && mY < mMarginY) {
             setVisible(true);
@@ -157,9 +139,18 @@ public class SolidTile extends Tile implements EventListener {
     }
 
     @Override
+    public void initTile() {
+        if (mIsShufflable
+                && mFruitType != FruitType.NONE
+                && mTileState == TileState.IDLE) {
+            addShuffleEffect();
+        }
+    }
+
+    @Override
     public void popTile() {
         mTileState = TileState.MATCH;
-        if (mSpecialType.hasPower()) {
+        if (isPoppable() && mSpecialType.hasPower()) {
             checkSpecialTile();
         }
     }
@@ -167,13 +158,15 @@ public class SolidTile extends Tile implements EventListener {
     @Override
     public void matchTile() {
         popTile();
-        // We only check obstacle when match 3 detected
-        checkObstacleTile();
+        if (isPoppable()) {
+            // We only check obstacle when match 3 detected
+            checkObstacleTile();
+        }
     }
 
     @Override
     public void resetTile() {
-        setTileType(TileInitializer.getRandomFruit());
+        setTileType(TileInitializer.getRandomType());
         mSpecialType = SpecialType.NONE;
         mTileState = TileState.IDLE;
         setSelect(false);
@@ -195,24 +188,8 @@ public class SolidTile extends Tile implements EventListener {
 
     @Override
     public void shuffleTile() {
-        // We only shuffle swappable tile
-        if (isSwappable()) {
-            // Start the shuffle modifier
-            addShuffleEffect();
-        }
-
-        // Important to not shuffle predefined FruitType
-        if (!mEngine.isRunning() && mFruitType != FruitType.NONE) {
-            return;
-        }
-
-        // Reset tile type if match detected
-        do {
-            setTileType(TileInitializer.getRandomFruit());
-        } while ((mRow >= 2 && mParent.getChildAt(mRow - 1, mCol).getTileType() == mFruitType
-                && mParent.getChildAt(mRow - 2, mCol).getTileType() == mFruitType)
-                || (mCol >= 2 && mParent.getChildAt(mRow, mCol - 1).getTileType() == mFruitType
-                && mParent.getChildAt(mRow, mCol - 2).getTileType() == mFruitType));
+        setTileType(TileInitializer.getShuffledRandomType(mParent, mRow, mCol));
+        addShuffleEffect();
     }
 
     @Override
@@ -225,8 +202,7 @@ public class SolidTile extends Tile implements EventListener {
         if (mSpecialType != SpecialType.UPGRADE) {
             mLightBgParticleSystem.oneShot(getCenterX(), getCenterY(), 1);
             mGlitterParticleSystem.oneShot(getCenterX(), getCenterY(), GLITTER_NUM);
-            mLeftFruitPieceEffect.activate(getCenterX(), getCenterY(), mFruitType, mSpecialType);
-            mRightFruitPieceEffect.activate(getCenterX(), getCenterY(), mFruitType, mSpecialType);
+            mFruitPieceEffect.activate(getCenterX(), getCenterY(), mFruitType, mSpecialType);
         }
         // Play score effect and notify score counter
         mScoreEffect.activate(getCenterX(), getCenterY(), mFruitType);
@@ -344,7 +320,9 @@ public class SolidTile extends Tile implements EventListener {
 
     @Override
     public boolean isShufflable() {
+        // Do not shuffle obstacle, special tile, and unreachable tile
         return mIsShufflable
+                && mFruitType != FruitType.NONE
                 && mSpecialType == SpecialType.NONE
                 && mTileState == TileState.IDLE;
     }
@@ -375,30 +353,12 @@ public class SolidTile extends Tile implements EventListener {
     }
 
     @Override
-    public void addShuffleEffect() {
-        long duration = RandomUtils.nextInt(200, 700);
-        mShuffleScaleModifier.setDuration(duration);
-        mShuffleFadeModifier.setDuration(duration);
-        mShuffleScaleModifier.init(this);
-        mShuffleFadeModifier.init(this);
-        setScalePivotY(mHeight / 2f);
-    }
-
-    @Override
-    public void removeShuffleEffect() {
-        mShuffleScaleModifier.reset(this);
-        mShuffleFadeModifier.reset(this);
-    }
-
-    @Override
     public void selectTile() {
         // We only select swappable tile
         if (!isSwappable()) {
             return;
         }
-        // Add select effect
-        mLightCircle.activate(getCenterX(), getCenterY());
-        setColorFilter(mLightFilter);
+        addLightEffect();
     }
 
     @Override
@@ -407,9 +367,7 @@ public class SolidTile extends Tile implements EventListener {
         if (!isSwappable()) {
             return;
         }
-        // Remove select effect
-        mLightCircle.removeFromGame();
-        clearColorFilter();
+        removeLightEffect();
     }
 
     @Override
@@ -441,30 +399,57 @@ public class SolidTile extends Tile implements EventListener {
         if (mRow > 0) {
             Tile upperTile = mParent.getChildAt(mRow - 1, mCol);
             if (upperTile instanceof ObstacleTile && upperTile.isPoppable()) {
-                ((ObstacleTile) upperTile).popObstacleTile();
+                if (((ObstacleTile) upperTile).isObstacle()) {
+                    upperTile.popTile();
+                }
             }
         }
         // Check down tile
         if (mRow < mParent.getTotalRow() - 1) {
             Tile downTile = mParent.getChildAt(mRow + 1, mCol);
             if (downTile instanceof ObstacleTile && downTile.isPoppable()) {
-                ((ObstacleTile) downTile).popObstacleTile();
+                if (((ObstacleTile) downTile).isObstacle()) {
+                    downTile.popTile();
+                }
             }
         }
         // Check left tile
         if (mCol > 0) {
             Tile leftTile = mParent.getChildAt(mRow, mCol - 1);
             if (leftTile instanceof ObstacleTile && leftTile.isPoppable()) {
-                ((ObstacleTile) leftTile).popObstacleTile();
+                if (((ObstacleTile) leftTile).isObstacle()) {
+                    leftTile.popTile();
+                }
             }
         }
         // Check right tile
         if (mCol < mParent.getTotalColumn() - 1) {
             Tile rightTile = mParent.getChildAt(mRow, mCol + 1);
             if (rightTile instanceof ObstacleTile && rightTile.isPoppable()) {
-                ((ObstacleTile) rightTile).popObstacleTile();
+                if (((ObstacleTile) rightTile).isObstacle()) {
+                    rightTile.popTile();
+                }
             }
         }
+    }
+
+    private void addShuffleEffect() {
+        long duration = RandomUtils.nextInt(200, 700);
+        mShuffleScaleModifier.setDuration(duration);
+        mShuffleFadeModifier.setDuration(duration);
+        mShuffleScaleModifier.init(this);
+        mShuffleFadeModifier.init(this);
+        setScalePivotY(mHeight / 2f);
+    }
+
+    private void addLightEffect() {
+        mLightCircle.activate(getCenterX(), getCenterY());
+        setColorFilter(mLightFilter);
+    }
+
+    private void removeLightEffect() {
+        mLightCircle.removeFromGame();
+        clearColorFilter();
     }
     //========================================================
 
@@ -473,18 +458,26 @@ public class SolidTile extends Tile implements EventListener {
     //--------------------------------------------------------
     private static class LightCircle extends Circle {
 
+        //--------------------------------------------------------
+        // Constructors
+        //--------------------------------------------------------
         public LightCircle(Engine engine, int radius) {
             super(engine, radius);
             setColor(Colors.WHITE);
             setMaskFilter(new BlurMaskFilter(150 * mPixelFactor, BlurMaskFilter.Blur.NORMAL));
-            setLayer(Layer.GRID_LAYER);
+            setLayer(Layer.EFFECT_BG_LAYER);
         }
+        //========================================================
 
+        //--------------------------------------------------------
+        // Methods
+        //--------------------------------------------------------
         public void activate(float x, float y) {
             setCenterX(x);
             setCenterY(y);
             addToGame();
         }
+        //========================================================
 
     }
     //========================================================

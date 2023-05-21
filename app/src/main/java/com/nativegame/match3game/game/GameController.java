@@ -4,12 +4,20 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.nativegame.match3game.MainActivity;
 import com.nativegame.match3game.R;
+import com.nativegame.match3game.ad.AdManager;
 import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.game.algorithm.Algorithm;
+import com.nativegame.match3game.game.tutorial.Tutorial;
+import com.nativegame.match3game.level.Level;
+import com.nativegame.match3game.level.TutorialType;
+import com.nativegame.match3game.ui.dialog.ErrorDialog;
 import com.nativegame.match3game.ui.dialog.LossDialog;
+import com.nativegame.match3game.ui.dialog.MoreMoveDialog;
 import com.nativegame.match3game.ui.dialog.ScoreDialog;
 import com.nativegame.match3game.ui.dialog.StartDialog;
+import com.nativegame.match3game.ui.dialog.TutorialDialog;
 import com.nativegame.match3game.ui.dialog.WinDialog;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.engine.event.Event;
@@ -22,7 +30,7 @@ import com.nativegame.nattyengine.ui.GameActivity;
  */
 
 
-public class GameController extends Entity implements EventListener {
+public class GameController extends Entity implements EventListener, AdManager.AdRewardListener {
 
     private final GameActivity mParent;
     private final Algorithm mRegularTimeAlgorithm;
@@ -30,6 +38,7 @@ public class GameController extends Entity implements EventListener {
 
     private GameState mState;
     private long mTotalTime;
+    private boolean mExtraLives = true;
 
     //--------------------------------------------------------
     // Constructors
@@ -69,9 +78,18 @@ public class GameController extends Entity implements EventListener {
                     mTotalTime = 0;
                 }
                 break;
+            case SHOW_TUTORIAL:
+                Tutorial tutorial = Level.LEVEL_DATA.getTutorialType().getTutorial(mEngine);
+                tutorial.show(mParent);
+                mState = GameState.WAITING;
+                break;
             case SHOW_START_DIALOG:
                 mTotalTime += elapsedMillis;
                 if (mTotalTime >= 2500) {
+                    // Check is current level has tutorial
+                    if (Level.LEVEL_DATA.getTutorialType() != TutorialType.NONE) {
+                        showTutorialDialog();
+                    }
                     dispatchEvent(GameEvent.START_GAME);
                     mState = GameState.WAITING;
                     mTotalTime = 0;
@@ -96,8 +114,8 @@ public class GameController extends Entity implements EventListener {
             case SHOW_SCORE_DIALOG:
                 mTotalTime += elapsedMillis;
                 if (mTotalTime >= 1200) {
-                    showScoreDialog();
                     mEngine.stopGame();
+                    showScoreDialog();
                     mState = GameState.WAITING;
                     mTotalTime = 0;
                 }
@@ -105,6 +123,7 @@ public class GameController extends Entity implements EventListener {
             case NAVIGATE_BACK:
                 mTotalTime += elapsedMillis;
                 if (mTotalTime >= 1200) {
+                    mEngine.stopGame();
                     mParent.navigateBack();
                     mState = GameState.WAITING;
                     mTotalTime = 0;
@@ -137,11 +156,34 @@ public class GameController extends Entity implements EventListener {
                 Sounds.GAME_OVER.play();
                 mState = GameState.SHOW_LOSS_DIALOG;
                 break;
+            case PLAYER_OUT_OF_MOVE:
+                // Check player has extra lives
+                if (mExtraLives) {
+                    showMoreMoveDialog();
+                    mExtraLives = false;
+                } else {
+                    dispatchEvent(GameEvent.GAME_OVER);
+                }
+                break;
             case BONUS_TIME_END:
                 removeGameView();
                 mState = GameState.SHOW_SCORE_DIALOG;
                 break;
         }
+    }
+
+    @Override
+    public void onEarnReward() {
+        // The ad will pause the game, so we resume it
+        mEngine.resumeGame();
+        dispatchEvent(GameEvent.ADD_EXTRA_MOVES);
+    }
+
+    @Override
+    public void onLossReward() {
+        // The ad will pause the game, so we resume it
+        mEngine.resumeGame();
+        dispatchEvent(GameEvent.GAME_OVER);
     }
     //========================================================
 
@@ -200,6 +242,21 @@ public class GameController extends Entity implements EventListener {
         });
     }
 
+    private void showTutorialDialog() {
+        mParent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TutorialDialog tutorialDialog = new TutorialDialog(mParent) {
+                    @Override
+                    public void showTutorial() {
+                        mState = GameState.SHOW_TUTORIAL;
+                    }
+                };
+                mParent.showDialog(tutorialDialog);
+            }
+        });
+    }
+
     private void showWinDialog() {
         mParent.runOnUiThread(new Runnable() {
             @Override
@@ -228,6 +285,53 @@ public class GameController extends Entity implements EventListener {
                 mParent.showDialog(scoreDialog);
             }
         });
+    }
+
+    private void showMoreMoveDialog() {
+        mParent.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                MoreMoveDialog moreMoveDialog = new MoreMoveDialog(mParent) {
+                    @Override
+                    public void showAd() {
+                        showRewardedAd();
+                    }
+
+                    @Override
+                    public void quit() {
+                        dispatchEvent(GameEvent.GAME_OVER);
+                    }
+                };
+                mParent.showDialog(moreMoveDialog);
+            }
+        });
+    }
+
+    private void showRewardedAd() {
+        // Show rewarded ad
+        AdManager adManager = ((MainActivity) mParent).getAdManager();
+        adManager.setListener(this);
+        boolean isConnect = adManager.showRewardAd();
+        // Check connection
+        if (isConnect) {
+            // Pause the game when loading ad, or the pause dialog will show
+            mEngine.pauseGame();
+        } else {
+            // Show error dialog if no internet connect
+            ErrorDialog dialog = new ErrorDialog(mParent) {
+                @Override
+                public void retry() {
+                    adManager.requestAd();
+                    showRewardedAd();
+                }
+
+                @Override
+                public void quit() {
+                    dispatchEvent(GameEvent.GAME_OVER);
+                }
+            };
+            mParent.showDialog(dialog);
+        }
     }
     //========================================================
 

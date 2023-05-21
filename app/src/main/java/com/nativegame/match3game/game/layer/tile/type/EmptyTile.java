@@ -32,6 +32,10 @@ public class EmptyTile extends Tile {
     }
 
     @Override
+    public void initTile() {
+    }
+
+    @Override
     public void popTile() {
     }
 
@@ -125,14 +129,6 @@ public class EmptyTile extends Tile {
 
     @Override
     public void removeResetter(TileResetter resetter) {
-    }
-
-    @Override
-    public void addShuffleEffect() {
-    }
-
-    @Override
-    public void removeShuffleEffect() {
     }
 
     @Override

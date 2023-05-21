@@ -1,6 +1,6 @@
 package com.nativegame.match3game.game.layer.lock;
 
-import com.nativegame.match3game.game.layer.LayerSystem;
+import com.nativegame.match3game.game.layer.LayerSpriteSystem;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 
@@ -8,7 +8,7 @@ import com.nativegame.nattyengine.engine.Engine;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class LockSystem extends LayerSystem<Lock> {
+public class LockSystem extends LayerSpriteSystem<Lock> {
 
     private final Lock[][] mLocke;
 
@@ -44,7 +44,7 @@ public class LockSystem extends LayerSystem<Lock> {
             for (int j = 0; j < mTotalCol; j++) {
                 char c = chars[i * mTotalCol + j];
                 if (c == 'e') {
-                    // We skip the empty lock
+                    // We skip the empty type
                     continue;
                 }
                 LockType type = LockInitializer.getType(c);

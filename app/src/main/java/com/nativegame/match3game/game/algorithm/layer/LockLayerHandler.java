@@ -5,6 +5,7 @@ import com.nativegame.match3game.game.algorithm.target.TargetHandlerManager;
 import com.nativegame.match3game.game.layer.lock.Lock;
 import com.nativegame.match3game.game.layer.lock.LockSystem;
 import com.nativegame.match3game.game.layer.tile.Tile;
+import com.nativegame.match3game.level.TargetType;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -32,28 +33,26 @@ public class LockLayerHandler extends BaseLayerHandler {
             tile.setPoppable(false);
             tile.setSwappable(false);
             tile.setShufflable(false);
-            tile.removeShuffleEffect();
         }
     }
 
     @Override
-    protected void onUpdateLayer(TargetHandlerManager targetHandlerManager, Tile tile) {
+    protected void onUpdateLayer(Tile tile, TargetHandlerManager targetHandlerManager, Tile[][] tiles, int row, int col) {
         if (tile.getTileState() != TileState.MATCH) {
             return;
         }
-        removeLock(tile);
+        updateLock(targetHandlerManager, tile);
     }
 
     @Override
     protected void onRemoveLayer(Tile tile) {
-        removeLock(tile);
     }
     //========================================================
 
     //--------------------------------------------------------
     // Methods
     //--------------------------------------------------------
-    private void removeLock(Tile tile) {
+    private void updateLock(TargetHandlerManager targetHandlerManager, Tile tile) {
         Lock lock = mLockSystem.getChildAt(tile.getRow(), tile.getColumn());
         if (lock != null && lock.isRunning()) {
             lock.playLockEffect();
@@ -61,6 +60,7 @@ public class LockLayerHandler extends BaseLayerHandler {
             tile.setSwappable(true);
             tile.setShufflable(true);
             tile.setTileState(TileState.IDLE);
+            targetHandlerManager.updateTarget(TargetType.LOCK);
         }
     }
     //========================================================

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/image_dialog"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="0dp"
+        android:background="@drawable/dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="5:6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.nativegame.nattyengine.ui.GameImage
+        android:id="@+id/image_extra_move"
+        android:layout_width="@dimen/btn_large_width"
+        android:layout_height="@dimen/btn_large_width"
+        android:layout_marginTop="@dimen/margin_20"
+        android:src="@drawable/extra_move"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog" />
+
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_extra_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_ad_extra_moves"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_dialog_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@id/image_extra_move" />
+
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog" />
+
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_watch_ad"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="0dp"
+        android:background="@drawable/btn_watch_ad"
+        app:layout_constraintDimensionRatio="5:2"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@id/txt_extra_move" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

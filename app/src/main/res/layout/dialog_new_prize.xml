@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/image_ribbon"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="0dp"
+        android:background="@drawable/ribbon"
+        app:layout_constraintBottom_toTopOf="@id/image_prize"
+        app:layout_constraintDimensionRatio="3:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_booster"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_dialog_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/image_ribbon"
+        app:layout_constraintStart_toStartOf="@id/image_ribbon"
+        app:layout_constraintTop_toTopOf="@id/image_ribbon" />
+
+    <ImageView
+        android:id="@+id/image_prize_bg"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="@dimen/dialog_width"
+        android:src="@drawable/logo_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <ImageView
+        android:id="@+id/image_prize"
+        android:layout_width="@dimen/dialog_small_width"
+        android:layout_height="@dimen/dialog_small_width"
+        android:src="@drawable/bomb"
+        app:layout_constraintBottom_toBottomOf="@id/image_prize_bg"
+        app:layout_constraintEnd_toEndOf="@id/image_prize_bg"
+        app:layout_constraintStart_toStartOf="@id/image_prize_bg"
+        app:layout_constraintTop_toTopOf="@id/image_prize_bg" />
+
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_next"
+        android:layout_width="@dimen/btn_large_width"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_20"
+        android:background="@drawable/btn_next"
+        app:layout_constraintDimensionRatio="5:2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_prize_bg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

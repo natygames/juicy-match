@@ -15,10 +15,10 @@ public class CookieTargetHandler implements TargetHandler {
     @Override
     public boolean checkTarget(Tile tile) {
         if (tile instanceof CookieTile) {
-            return ((CookieTile) tile).isObstacle();
-        } else {
-            return false;
+            CookieTile cookie = ((CookieTile) tile);
+            return cookie.isObstacle();
         }
+        return false;
     }
     //========================================================
 

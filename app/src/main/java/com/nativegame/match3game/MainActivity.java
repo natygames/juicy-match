@@ -2,6 +2,8 @@ package com.nativegame.match3game;
 
 import android.os.Bundle;
 
+import com.nativegame.match3game.ad.AdManager;
+import com.nativegame.match3game.timer.LivesTimer;
 import com.nativegame.match3game.ui.fragment.LoadingFragment;
 import com.nativegame.nattyengine.ui.GameActivity;
 
@@ -35,6 +37,21 @@ import com.nativegame.nattyengine.ui.GameActivity;
 
 public class MainActivity extends GameActivity {
 
+    private AdManager mAdManager;
+    private LivesTimer mLivesTimer;
+
+    //--------------------------------------------------------
+    // Getter and Setter
+    //--------------------------------------------------------
+    public AdManager getAdManager() {
+        return mAdManager;
+    }
+
+    public LivesTimer getLivesTimer() {
+        return mLivesTimer;
+    }
+    //========================================================
+
     //--------------------------------------------------------
     // Overriding methods
     //--------------------------------------------------------
@@ -45,6 +62,9 @@ public class MainActivity extends GameActivity {
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_main);
         setContainerView(R.id.layout_container);
+
+        mAdManager = new AdManager(this);
+        mLivesTimer = new LivesTimer(this);
 
         // Show the menu fragment
         if (savedInstanceState == null) {

@@ -14,7 +14,7 @@ import com.nativegame.nattyengine.texture.Texture;
 
 public class TextEffect extends Sprite {
 
-    private static final long TIME_TO_LIVE = 1300;
+    private static final long TIME_TO_LIVE = 1000;
     private static final long TIME_TO_FADE = 300;
 
     private final ScaleModifier mScaleModifier;
@@ -26,7 +26,7 @@ public class TextEffect extends Sprite {
     public TextEffect(Engine engine, Texture texture) {
         super(engine, texture);
         mScaleModifier = new ScaleModifier(5, 2, TIME_TO_FADE, OvershootTweener.getInstance());
-        mFadeOutModifier = new FadeOutModifier(TIME_TO_FADE, TIME_TO_LIVE - TIME_TO_FADE);
+        mFadeOutModifier = new FadeOutModifier(TIME_TO_FADE, TIME_TO_LIVE);
         mFadeOutModifier.setAutoRemove(true);
         setLayer(Layer.TEXT_LAYER);
     }

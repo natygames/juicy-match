@@ -1,7 +1,6 @@
 package com.nativegame.match3game.game.effect.flash;
 
 import com.nativegame.match3game.asset.Textures;
-import com.nativegame.match3game.game.effect.EffectDirection;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.util.pool.ObjectPool;
 import com.nativegame.nattyengine.util.pool.Pool;
@@ -21,7 +20,7 @@ public class ExplosionBeamEffectSystem {
         mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<ExplosionBeamEffect>() {
             @Override
             public ExplosionBeamEffect createObject() {
-                return new ExplosionBeamEffect(ExplosionBeamEffectSystem.this, engine, Textures.EXPLOSION_BEAM);
+                return new ExplosionBeamEffect(ExplosionBeamEffectSystem.this, engine, Textures.FLASH_BEAM);
             }
         }, size);
     }
@@ -31,9 +30,9 @@ public class ExplosionBeamEffectSystem {
     // Methods
     //--------------------------------------------------------
     public void activate(float x, float y) {
-        int size = EffectDirection.values().length;
+        int size = FlashDirection.values().length;
         for (int i = 0; i < size; i++) {
-            mEffectPool.obtainObject().activate(x, y, EffectDirection.values()[i]);
+            mEffectPool.obtainObject().activate(x, y, FlashDirection.values()[i]);
         }
     }
 

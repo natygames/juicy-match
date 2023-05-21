@@ -60,9 +60,9 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
         mBonusText = new TextEffect(engine, Textures.TEXT_BONUS);
         mSkipText = new SkipText(engine, "Tap to skip");
         mBonusSpecialTypes = new SpecialType[]{
-                SpecialType.ROW_SPECIAL_TILE,
-                SpecialType.COLUMN_SPECIAL_TILE,
-                SpecialType.EXPLOSION_SPECIAL_TILE};
+                SpecialType.ROW_STRIPED,
+                SpecialType.COLUMN_STRIPED,
+                SpecialType.EXPLOSIVE};
     }
     //========================================================
 
@@ -71,7 +71,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
     //--------------------------------------------------------
     @Override
     public void onStart() {
-        mSkipText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT + 300);
+        mSkipText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT + 500);
         mBonusText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f);
     }
 
@@ -124,6 +124,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
 
     @Override
     public void startAlgorithm() {
+        Level.LEVEL_DATA.setFruitCount(5);
         mRemainingMove = Level.LEVEL_DATA.getMove();
         mState = AlgorithmState.CHECK_MATCH;
         addToGame();
@@ -239,7 +240,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
             setTextAlign(Paint.Align.CENTER);
             setTextSize(300);
             setTextTypeface(Fonts.BALOO);
-            setLayer(Layer.GRID_LAYER);
+            setLayer(Layer.EFFECT_LAYER);
         }
 
         public void activate(float x, float y) {

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:ignore="ContentDescription">
 
-    <ImageButton
+    <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_cancel"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -16,8 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_dialog_wheel"
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_wheel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_10"
@@ -43,7 +43,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <ImageView
-        android:id="@+id/image_pointer"
+        android:id="@+id/image_wheel_pointer"
         android:layout_width="@dimen/image_wheel_pointer_width"
         android:layout_height="0dp"
         android:background="@drawable/wheel_pointer"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="@+id/image_wheel"
         app:layout_constraintTop_toTopOf="@+id/image_wheel" />
 
-    <ImageButton
+    <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_play"
         android:layout_width="@dimen/btn_large_width"
         android:layout_height="0dp"

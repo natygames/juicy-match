@@ -1,5 +1,6 @@
 package com.nativegame.match3game.ui.dialog;
 
+import com.nativegame.match3game.MainActivity;
 import com.nativegame.match3game.R;
 import com.nativegame.nattyengine.ui.GameActivity;
 
@@ -20,14 +21,11 @@ public class LossDialog extends BaseDialog {
         setContainerView(R.layout.dialog_container_game);
         setEnterAnimationId(R.anim.enter_from_top);
         setExitAnimationId(R.anim.exit_to_bottom);
-        init();
-    }
-    //========================================================
 
-    //--------------------------------------------------------
-    // Methods
-    //--------------------------------------------------------
-    private void init() {
+        // Reduce one live
+        ((MainActivity) mParent).getLivesTimer().reduceLive();
+
+        // Dismiss the dialog after 1500ms
         getContentView().postDelayed(new Runnable() {
             @Override
             public void run() {

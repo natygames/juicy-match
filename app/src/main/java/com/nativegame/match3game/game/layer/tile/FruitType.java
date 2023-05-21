@@ -36,7 +36,7 @@ public enum FruitType implements TileType {
             case BANANA:
                 return Textures.BANANA;
             default:
-                throw new IllegalArgumentException("No such tile drawable!");
+                throw new IllegalArgumentException("Fruit Texture not found!");
         }
     }
 
@@ -53,7 +53,7 @@ public enum FruitType implements TileType {
             case BANANA:
                 return new Texture[]{Textures.BANANA_PIECE_01, Textures.BANANA_PIECE_02};
             default:
-                throw new IllegalArgumentException("No such pieces drawable!");
+                throw new IllegalArgumentException("Fruit pieces Texture not found!");
         }
     }
 
@@ -70,7 +70,7 @@ public enum FruitType implements TileType {
             case BANANA:
                 return Textures.SCORE_WHITE;
             default:
-                throw new IllegalArgumentException("No such score drawable!");
+                throw new IllegalArgumentException("Fruit score Texture not found!");
         }
     }
     //========================================================

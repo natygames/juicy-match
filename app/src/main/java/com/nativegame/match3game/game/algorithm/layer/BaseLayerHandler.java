@@ -27,7 +27,7 @@ public abstract class BaseLayerHandler implements LayerHandler {
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < col; j++) {
                 Tile t = tiles[i][j];
-                onUpdateLayer(targetHandlerManager, t);
+                onUpdateLayer(t, targetHandlerManager, tiles, row, col);
             }
         }
     }
@@ -48,7 +48,7 @@ public abstract class BaseLayerHandler implements LayerHandler {
     //--------------------------------------------------------
     protected abstract void onInitLayer(Tile tile);
 
-    protected abstract void onUpdateLayer(TargetHandlerManager targetHandlerManager, Tile tile);
+    protected abstract void onUpdateLayer(Tile tile, TargetHandlerManager targetHandlerManager, Tile[][] tiles, int row, int col);
 
     protected abstract void onRemoveLayer(Tile tile);
     //========================================================

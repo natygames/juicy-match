@@ -20,14 +20,8 @@ public class WinDialog extends BaseDialog {
         setContainerView(R.layout.dialog_container_game);
         setEnterAnimationId(R.anim.enter_from_top);
         setExitAnimationId(R.anim.exit_to_bottom);
-        init();
-    }
-    //========================================================
 
-    //--------------------------------------------------------
-    // Methods
-    //--------------------------------------------------------
-    private void init() {
+        // Dismiss the dialog after 1500ms
         getContentView().postDelayed(new Runnable() {
             @Override
             public void run() {

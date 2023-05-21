@@ -18,7 +18,7 @@ public enum LockType {
             case CENTER:
                 return Textures.LOCK;
             default:
-                throw new IllegalArgumentException("Lock texture not found!");
+                throw new IllegalArgumentException("Lock Texture not found!");
         }
     }
     //========================================================

@@ -5,11 +5,11 @@
     <dimen name="txt_dialog_size">48sp</dimen>
     <dimen name="txt_dialog_large_size">56sp</dimen>
 
-    <dimen name="txt_state_score_size">40sp</dimen>
-    <dimen name="txt_state_move_size">28sp</dimen>
-    <dimen name="txt_state_target_size">24sp</dimen>
+    <dimen name="txt_state_level_size">16sp</dimen>
+    <dimen name="txt_state_target_size">20sp</dimen>
+    <dimen name="txt_state_score_size">24sp</dimen>
     <dimen name="txt_state_booster_size">28sp</dimen>
-    <dimen name="txt_state_item_size">32sp</dimen>
+    <dimen name="txt_state_move_size">48sp</dimen>
 
     <dimen name="txt_level_size">40sp</dimen>
 
@@ -22,11 +22,9 @@
     <dimen name="btn_shop_width">208dp</dimen>
 
     <!-- Image width -->
-    <dimen name="image_state_board">200dp</dimen>
-    <dimen name="image_state_move">152dp</dimen>
-    <dimen name="image_state_target">43dp</dimen>
+    <dimen name="image_state_item">64dp</dimen>
+    <dimen name="image_state_target">48dp</dimen>
     <dimen name="image_state_booster">40dp</dimen>
-    <dimen name="image_state_item">176dp</dimen>
 
     <dimen name="image_logo_width">560dp</dimen>
     <dimen name="image_logo_bg_width">640dp</dimen>
@@ -40,14 +38,11 @@
     <dimen name="image_wheel_pivot_width">112dp</dimen>
     <dimen name="image_wheel_pointer_width">64dp</dimen>
 
-    <dimen name="image_ribbon_width">512dp</dimen>
-
-    <dimen name="image_booster_width">240dp</dimen>
-    <dimen name="image_booster_bg_width">400dp</dimen>
-
     <!-- Image height -->
-    <dimen name="image_game_board_height">200dp</dimen>
+    <dimen name="image_game_board_height">160dp</dimen>
+    <dimen name="image_game_board_field_height">96dp</dimen>
     <dimen name="image_map_board_height">128dp</dimen>
+    <dimen name="image_map_board_field_height">80dp</dimen>
 
     <!-- Dialog width -->
     <dimen name="dialog_small_width">400dp</dimen>

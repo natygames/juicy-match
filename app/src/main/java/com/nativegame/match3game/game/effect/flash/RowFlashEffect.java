@@ -1,6 +1,5 @@
 package com.nativegame.match3game.game.effect.flash;
 
-import com.nativegame.match3game.game.effect.EffectDirection;
 import com.nativegame.match3game.game.layer.Layer;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
@@ -59,7 +58,7 @@ public class RowFlashEffect extends AnimatedSprite {
     //--------------------------------------------------------
     // Methods
     //--------------------------------------------------------
-    public void activate(float x, float y, EffectDirection direction) {
+    public void activate(float x, float y, FlashDirection direction) {
         setX(x);
         setY(y - mHeight / 2f);
         setRotation(direction.getAngle() - 90);

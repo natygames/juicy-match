@@ -10,6 +10,10 @@ import com.nativegame.nattyengine.audio.sound.SoundManager;
 
 public class Sounds {
 
+    public static Sound BUTTON_CLICK;
+    public static Sound DIALOG_SLIDE;
+    public static Sound WHEEL_SPIN;
+
     public static Sound GAME_START;
     public static Sound GAME_WIN;
     public static Sound GAME_OVER;
@@ -18,9 +22,7 @@ public class Sounds {
     public static Sound ADD_COMBO;
     public static Sound ADD_BONUS;
     public static Sound COLLECT_STARFISH;
-
-    public static Sound BUTTON_CLICK;
-    public static Sound DIALOG_SLIDE;
+    public static Sound COLLECT_SHELL;
 
     public static Sound TILE_COMBO_01;
     public static Sound TILE_COMBO_02;
@@ -32,22 +34,33 @@ public class Sounds {
     public static Sound TILE_BOUNCE;
     public static Sound TILE_UPGRADE;
 
-    public static Sound COLOR_SPECIAL_TILE_UPGRADE;
-    public static Sound COLOR_SPECIAL_TILE_TRANSFORM;
-    public static Sound COLOR_SPECIAL_TILE_COMBINE;
-    public static Sound COLOR_SPECIAL_TILE_EXPLODE;
-    public static Sound STRIPED_SPECIAL_TILE_EXPLODE;
-    public static Sound EXPLOSION_SPECIAL_TILE_EXPLODE;
+    public static Sound ICE_CREAM_UPGRADE;
+    public static Sound ICE_CREAM_TRANSFORM;
+    public static Sound ICE_CREAM_COMBINE;
+    public static Sound ICE_CREAM_EXPLODE;
+    public static Sound STRIPED_EXPLODE;
+    public static Sound EXPLOSIVE_EXPLODE;
+    public static Sound EXPLOSIVE_STRIPED_COMBINE;
 
     public static Sound COOKIE_EXPLODE;
     public static Sound CAKE_EXPLODE;
+    public static Sound PIE_EXPLODE;
+    public static Sound PIE_PAN_EXPLODE;
+    public static Sound CANDY_EXPLODE;
+    public static Sound CANDY_WRAPPER_EXPLODE;
     public static Sound ICE_EXPLODE;
     public static Sound LOCK_EXPLODE;
+    public static Sound HONEY_EXPLODE;
+    public static Sound SAND_EXPLODE;
 
     //--------------------------------------------------------
     // Static methods
     //--------------------------------------------------------
     public static void load(SoundManager soundManager) {
+        BUTTON_CLICK = soundManager.load(R.raw.button_click);
+        DIALOG_SLIDE = soundManager.load(R.raw.dialog_slide);
+        WHEEL_SPIN = soundManager.load(R.raw.wheel_spin);
+
         GAME_START = soundManager.load(R.raw.game_start);
         GAME_WIN = soundManager.load(R.raw.game_win);
         GAME_OVER = soundManager.load(R.raw.game_over);
@@ -56,9 +69,7 @@ public class Sounds {
         ADD_COMBO = soundManager.load(R.raw.add_combo);
         ADD_BONUS = soundManager.load(R.raw.add_bonus);
         COLLECT_STARFISH = soundManager.load(R.raw.collect_starfish);
-
-        BUTTON_CLICK = soundManager.load(R.raw.button_click);
-        DIALOG_SLIDE = soundManager.load(R.raw.dialog_slide);
+        COLLECT_SHELL = soundManager.load(R.raw.collect_shell);
 
         TILE_COMBO_01 = soundManager.load(R.raw.tile_combo_01);
         TILE_COMBO_02 = soundManager.load(R.raw.tile_combo_02);
@@ -70,17 +81,24 @@ public class Sounds {
         TILE_BOUNCE = soundManager.load(R.raw.tile_bounce);
         TILE_UPGRADE = soundManager.load(R.raw.tile_upgrade);
 
-        COLOR_SPECIAL_TILE_UPGRADE = soundManager.load(R.raw.color_special_tile_upgrade);
-        COLOR_SPECIAL_TILE_TRANSFORM = soundManager.load(R.raw.color_special_tile_transform);
-        COLOR_SPECIAL_TILE_COMBINE = soundManager.load(R.raw.color_special_tile_combine);
-        COLOR_SPECIAL_TILE_EXPLODE = soundManager.load(R.raw.color_special_tile__explode);
-        STRIPED_SPECIAL_TILE_EXPLODE = soundManager.load(R.raw.striped_special_tile_explode);
-        EXPLOSION_SPECIAL_TILE_EXPLODE = soundManager.load(R.raw.explosion_special_tile_explode);
+        ICE_CREAM_UPGRADE = soundManager.load(R.raw.ice_cream_upgrade);
+        ICE_CREAM_TRANSFORM = soundManager.load(R.raw.ice_cream_transform);
+        ICE_CREAM_COMBINE = soundManager.load(R.raw.ice_cream_combine);
+        ICE_CREAM_EXPLODE = soundManager.load(R.raw.ice_cream_explode);
+        STRIPED_EXPLODE = soundManager.load(R.raw.striped_explode);
+        EXPLOSIVE_EXPLODE = soundManager.load(R.raw.explosive_explode);
+        EXPLOSIVE_STRIPED_COMBINE = soundManager.load(R.raw.explosive_striped_combine);
 
         COOKIE_EXPLODE = soundManager.load(R.raw.cookie_explode);
         CAKE_EXPLODE = soundManager.load(R.raw.cake_explode);
+        PIE_EXPLODE = soundManager.load(R.raw.pie_explode);
+        PIE_PAN_EXPLODE = soundManager.load(R.raw.pie_pan_explode);
+        CANDY_EXPLODE = soundManager.load(R.raw.candy_explode);
+        CANDY_WRAPPER_EXPLODE = soundManager.load(R.raw.candy_wrapper_explode);
         ICE_EXPLODE = soundManager.load(R.raw.ice_explode);
         LOCK_EXPLODE = soundManager.load(R.raw.lock_explode);
+        HONEY_EXPLODE = soundManager.load(R.raw.honey_explode);
+        SAND_EXPLODE = soundManager.load(R.raw.sand_explode);
     }
     //========================================================
 

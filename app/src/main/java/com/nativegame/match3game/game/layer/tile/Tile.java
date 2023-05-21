@@ -105,10 +105,6 @@ public abstract class Tile extends LayerSprite implements Match3Tile {
 
     public abstract void removeResetter(TileResetter resetter);
 
-    public abstract void addShuffleEffect();
-
-    public abstract void removeShuffleEffect();
-
     public abstract void selectTile();
 
     public abstract void unSelectTile();

@@ -19,12 +19,12 @@ public class SpecialTileFinderManager {
     //--------------------------------------------------------
     public SpecialTileFinderManager(Engine engine) {
         // Add all the special tile finder
-        mSpecialTileFinders.add(new ColorSpecialTileFinder(engine));
-        mSpecialTileFinders.add(new ExplosionXSpecialTileFinder(engine));
-        mSpecialTileFinders.add(new ExplosionTSpecialTileFinder(engine));
-        mSpecialTileFinders.add(new ExplosionLSpecialTileFinder(engine));
-        mSpecialTileFinders.add(new RowSpecialTileFinder(engine));
-        mSpecialTileFinders.add(new ColumnSpecialTileFinder(engine));
+        mSpecialTileFinders.add(new IceCreamFinder(engine));
+        mSpecialTileFinders.add(new ExplosiveTileXFinder(engine));
+        mSpecialTileFinders.add(new ExplosiveTileTFinder(engine));
+        mSpecialTileFinders.add(new ExplosiveTileLFinder(engine));
+        mSpecialTileFinders.add(new RowStripedTileFinder(engine));
+        mSpecialTileFinders.add(new ColumnStripedTileFinder(engine));
     }
     //========================================================
 

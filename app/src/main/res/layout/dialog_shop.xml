@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="ContentDescription">
+
+    <ImageView
+        android:id="@+id/image_treasure"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="0dp"
+        android:src="@drawable/treasure"
+        app:layout_constraintBottom_toTopOf="@id/image_dialog"
+        app:layout_constraintDimensionRatio="4:3"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog" />
+
+    <ImageView
+        android:id="@+id/image_dialog"
+        android:layout_width="@dimen/dialog_width"
+        android:layout_height="0dp"
+        android:background="@drawable/dialog"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="4:5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.65" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_product"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/margin_20"
+        app:layout_constraintBottom_toBottomOf="@id/image_dialog"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toBottomOf="@id/txt_shop" />
+
+    <ImageView
+        android:id="@+id/image_ribbon"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_negative_30"
+        android:src="@drawable/ribbon"
+        app:layout_constraintDimensionRatio="3:1"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintStart_toStartOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog" />
+
+    <TextView
+        android:id="@+id/txt_shop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_10"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_shop"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_dialog_large_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/image_ribbon"
+        app:layout_constraintStart_toStartOf="@id/image_ribbon"
+        app:layout_constraintTop_toTopOf="@id/image_ribbon" />
+
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_cancel"
+        android:layout_width="@dimen/btn_round_width"
+        android:layout_height="@dimen/btn_round_width"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/btn_cancel"
+        app:layout_constraintEnd_toEndOf="@id/image_dialog"
+        app:layout_constraintTop_toTopOf="@id/image_dialog" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

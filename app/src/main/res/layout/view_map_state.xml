@@ -18,31 +18,39 @@
 
     <ImageView
         android:id="@+id/image_lives_field"
-        android:layout_width="@dimen/image_state_item"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_map_board_field_height"
         android:layout_margin="@dimen/margin_5"
-        android:background="@drawable/field"
+        android:background="@drawable/board_field"
+        app:layout_constraintBottom_toBottomOf="@id/image_board"
         app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintEnd_toStartOf="@id/btn_shop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/image_board"/>
+        app:layout_constraintTop_toTopOf="@id/image_board" />
+
+    <com.nativegame.nattyengine.ui.GameButton
+        android:id="@+id/btn_lives"
+        android:layout_width="@dimen/image_state_item"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_marginStart="@dimen/margin_5"
+        android:background="@drawable/lives"
+        app:layout_constraintBottom_toBottomOf="@+id/image_lives_field"
+        app:layout_constraintStart_toStartOf="@+id/image_lives_field"
+        app:layout_constraintTop_toTopOf="@+id/image_lives_field" />
 
     <TextView
         android:id="@+id/txt_lives"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/margin_10"
-        android:background="@drawable/lives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:text=""
         android:textColor="@color/white"
-        android:textSize="@dimen/txt_state_item_size"
+        android:textSize="@dimen/txt_state_booster_size"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/image_lives_field"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintStart_toStartOf="@+id/image_lives_field"
-        app:layout_constraintTop_toTopOf="@+id/image_lives_field" />
+        app:layout_constraintBottom_toBottomOf="@+id/btn_lives"
+        app:layout_constraintEnd_toEndOf="@+id/btn_lives"
+        app:layout_constraintStart_toStartOf="@+id/btn_lives"
+        app:layout_constraintTop_toTopOf="@+id/btn_lives" />
 
     <TextView
         android:id="@+id/txt_lives_time"
@@ -52,34 +60,32 @@
         android:gravity="center"
         android:text="@string/txt_lives_full"
         android:textColor="@color/white"
-        android:textSize="@dimen/txt_state_item_size"
+        android:textSize="@dimen/txt_state_booster_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/image_lives_field"
-        app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintEnd_toEndOf="@+id/image_lives_field"
-        app:layout_constraintHorizontal_bias="0.3"
-        app:layout_constraintStart_toEndOf="@id/txt_lives"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toEndOf="@id/btn_lives"
         app:layout_constraintTop_toTopOf="@id/image_lives_field" />
 
     <ImageView
         android:id="@+id/image_field_coin"
-        android:layout_width="@dimen/image_state_item"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_map_board_field_height"
         android:layout_margin="@dimen/margin_5"
-        android:background="@drawable/field"
+        android:background="@drawable/board_field"
+        app:layout_constraintBottom_toBottomOf="@id/image_board"
         app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintStart_toEndOf="@id/btn_shop"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/image_board"/>
+        app:layout_constraintTop_toTopOf="@id/image_board" />
 
-    <ImageButton
+    <com.nativegame.nattyengine.ui.GameButton
         android:id="@+id/btn_coin"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/margin_10"
+        android:layout_width="@dimen/image_state_item"
+        android:layout_height="@dimen/image_state_item"
+        android:layout_marginStart="@dimen/margin_5"
         android:background="@drawable/coin"
         app:layout_constraintBottom_toBottomOf="@+id/image_field_coin"
-        app:layout_constraintDimensionRatio="1.1:1"
         app:layout_constraintStart_toStartOf="@+id/image_field_coin"
         app:layout_constraintTop_toTopOf="@+id/image_field_coin" />
 
@@ -91,10 +97,9 @@
         android:gravity="center"
         android:text=""
         android:textColor="@color/white"
-        android:textSize="@dimen/txt_state_item_size"
+        android:textSize="@dimen/txt_state_booster_size"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/image_field_coin"
-        app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintEnd_toEndOf="@+id/image_field_coin"
         app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toEndOf="@id/btn_coin"

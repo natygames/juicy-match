@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.ads.MobileAds;
 import com.nativegame.match3game.R;
 import com.nativegame.match3game.asset.Colors;
 import com.nativegame.match3game.asset.Fonts;
@@ -40,7 +41,9 @@ public class LoadingFragment extends GameFragment {
     }
 
     @Override
-    protected void onLayoutCreated(View view) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
         // Load assets
         Textures.load(getGameActivity().getTextureManager(), getContext());
         Sounds.load(getGameActivity().getSoundManager());
@@ -49,10 +52,13 @@ public class LoadingFragment extends GameFragment {
         Colors.load(getContext());
         Preferences.load(getContext());
 
+        // Init ad
+        MobileAds.initialize(getContext());
+
+        // Navigate to menu when loading complete
         view.postDelayed(new Runnable() {
             @Override
             public void run() {
-                // Navigate to menu when loading finish
                 getGameActivity().navigateToFragment(new MenuFragment());
             }
         }, TIME_TO_LOAD);

@@ -11,7 +11,6 @@ import com.nativegame.match3game.R;
 import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.database.DatabaseHelper;
 import com.nativegame.match3game.level.Level;
-import com.nativegame.match3game.ui.fragment.MapFragment;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
@@ -20,7 +19,7 @@ import com.nativegame.nattyengine.util.resource.ResourceUtils;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class ScoreDialog extends BaseDialog {
+public class ScoreDialog extends BaseDialog implements View.OnClickListener {
 
     //--------------------------------------------------------
     // Constructors
@@ -32,13 +31,17 @@ public class ScoreDialog extends BaseDialog {
         setEnterAnimationId(R.anim.enter_from_left);
         setExitAnimationId(android.R.anim.fade_out);
 
-        GameButton button = (GameButton) findViewById(R.id.btn_next);
-        button.setOnClickListener(this);
-        button.popUp(300, 600);
+        // Init text
         TextView txtLevel = (TextView) findViewById(R.id.txt_level);
         txtLevel.setText(ResourceUtils.getString(activity, R.string.txt_level, Level.LEVEL_DATA.getLevel()));
 
-        init();
+        // Init button
+        GameButton button = (GameButton) findViewById(R.id.btn_next);
+        button.setOnClickListener(this);
+        button.popUp(300, 600);
+
+        initScore();
+        initStar();
         insertOrUpdateStar();
     }
     //========================================================
@@ -48,12 +51,12 @@ public class ScoreDialog extends BaseDialog {
     //--------------------------------------------------------
     @Override
     protected void onDismiss() {
-        mParent.navigateToFragment(new MapFragment());
+        mParent.navigateBack();
     }
 
     @Override
     public void onClick(View view) {
-        super.onClick(view);
+        Sounds.BUTTON_CLICK.play();
         int id = view.getId();
         if (id == R.id.btn_next) {
             dismiss();
@@ -64,10 +67,8 @@ public class ScoreDialog extends BaseDialog {
     //--------------------------------------------------------
     // Methods
     //--------------------------------------------------------
-    private void init() {
-        // Init level data
+    private void initScore() {
         int score = Level.LEVEL_DATA.getScore();
-        int star = Level.LEVEL_DATA.getStar();
 
         // Update score text
         TextView txtScore = (TextView) findViewById(R.id.txt_final_score);
@@ -82,6 +83,10 @@ public class ScoreDialog extends BaseDialog {
         });
         animator.start();
         Sounds.ADD_SCORE.play();
+    }
+
+    private void initStar() {
+        int star = Level.LEVEL_DATA.getStar();
 
         // Update star image
         StarAnimationListener listener = new StarAnimationListener();

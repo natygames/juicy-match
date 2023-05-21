@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.nativegame.match3game.R;
 import com.nativegame.match3game.asset.Preferences;
+import com.nativegame.match3game.asset.Sounds;
 import com.nativegame.match3game.level.Level;
 import com.nativegame.nattyengine.audio.music.MusicManager;
 import com.nativegame.nattyengine.audio.sound.SoundManager;
@@ -16,9 +17,9 @@ import com.nativegame.nattyengine.util.resource.ResourceUtils;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class PauseDialog extends BaseDialog {
+public class PauseDialog extends BaseDialog implements View.OnClickListener {
 
-    private int mSelectedId;
+    private int mSelectedId = R.id.btn_resume;
 
     //--------------------------------------------------------
     // Constructors
@@ -30,19 +31,25 @@ public class PauseDialog extends BaseDialog {
         setEnterAnimationId(R.anim.enter_from_center);
         setExitAnimationId(R.anim.exit_to_center);
 
+        // Init text
+        TextView txtLevel = (TextView) findViewById(R.id.txt_level);
+        txtLevel.setText(ResourceUtils.getString(activity, R.string.txt_level, Level.LEVEL_DATA.getLevel()));
+
+        // Init button
         GameButton btnMusic = (GameButton) findViewById(R.id.btn_music);
         btnMusic.popUp(200, 300);
         btnMusic.setOnClickListener(this);
+
         GameButton btnSound = (GameButton) findViewById(R.id.btn_sound);
         btnSound.popUp(200, 400);
         btnSound.setOnClickListener(this);
+
         GameButton btnQuit = (GameButton) findViewById(R.id.btn_quit);
         btnQuit.popUp(200, 500);
         btnQuit.setOnClickListener(this);
+
         GameButton btnResume = (GameButton) findViewById(R.id.btn_resume);
         btnResume.setOnClickListener(this);
-        TextView txtLevel = (TextView) findViewById(R.id.txt_level);
-        txtLevel.setText(ResourceUtils.getString(activity, R.string.txt_level, Level.LEVEL_DATA.getLevel()));
 
         updateMusicButton();
         updateSoundButton();
@@ -56,14 +63,14 @@ public class PauseDialog extends BaseDialog {
     protected void onHide() {
         if (mSelectedId == R.id.btn_quit) {
             quitGame();
-        } else {
+        } else if (mSelectedId == R.id.btn_resume) {
             resumeGame();
         }
     }
 
     @Override
     public void onClick(View view) {
-        super.onClick(view);
+        Sounds.BUTTON_CLICK.play();
         int id = view.getId();
         if (id == R.id.btn_music) {
             toggleMusic();

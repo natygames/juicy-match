@@ -13,6 +13,7 @@ public enum GameEvent implements Event {
     PLAYER_SCORE,
     PLAYER_COLLECT,
     PLAYER_USE_BOOSTER,
+    PLAYER_OUT_OF_MOVE,
 
     // Event of booster
     ADD_BOOSTER,
@@ -30,5 +31,6 @@ public enum GameEvent implements Event {
     BONUS_TIME_END,
     BONUS_TIME_SKIP,
     GAME_WIN,
-    GAME_OVER
+    GAME_OVER,
+    ADD_EXTRA_MOVES
 }

@@ -10,6 +10,8 @@ import com.nativegame.match3game.game.effect.TextEffect;
 import com.nativegame.match3game.game.hint.finder.HintFinderManager;
 import com.nativegame.match3game.game.layer.tile.Tile;
 import com.nativegame.match3game.game.layer.tile.TileSystem;
+import com.nativegame.match3game.level.Level;
+import com.nativegame.match3game.level.TutorialType;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.engine.event.Event;
 import com.nativegame.nattyengine.engine.event.EventListener;
@@ -67,14 +69,18 @@ public class HintController extends Entity implements EventListener,
     //--------------------------------------------------------
     @Override
     public void onStart() {
-        // Shuffle tile when start
-        shuffleTile();
+        mSoundTimer.startTimer();
     }
 
     @Override
     public void onEvent(Event event) {
         switch ((GameEvent) event) {
             case START_GAME:
+                // Start hint if no tutorial
+                if (Level.LEVEL_DATA.getTutorialType() == TutorialType.NONE) {
+                    startHint();
+                }
+                break;
             case STOP_COMBO:
             case REMOVE_BOOSTER:
                 startHint();
@@ -115,8 +121,6 @@ public class HintController extends Entity implements EventListener,
         if (mHintTiles == null) {
             // Shuffle the tile if hint not found
             shuffleTile();
-            mShuffleTimer.startTimer();
-            mShuffleText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f);
             return;
         }
         if (mHintEnable) {
@@ -143,6 +147,8 @@ public class HintController extends Entity implements EventListener,
     private void shuffleTile() {
         Match3Algorithm.shuffleTile(mTiles, mTotalRow, mTotalCol);
         mSoundTimer.startTimer();
+        mShuffleTimer.startTimer();
+        mShuffleText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f);
     }
     //========================================================
 

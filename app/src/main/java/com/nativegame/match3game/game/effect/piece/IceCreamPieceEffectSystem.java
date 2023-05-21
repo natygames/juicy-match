@@ -32,7 +32,7 @@ public class IceCreamPieceEffectSystem {
     //--------------------------------------------------------
     public void activate(float x, float y) {
         mEffectPool.obtainObject().activate(x, y);
-        Sounds.COLOR_SPECIAL_TILE_TRANSFORM.play();
+        Sounds.ICE_CREAM_TRANSFORM.play();
     }
 
     public void returnToPool(IceCreamPieceEffect effect) {

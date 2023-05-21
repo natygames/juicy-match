@@ -26,8 +26,7 @@ public class TargetHandlerManager {
     //--------------------------------------------------------
     public TargetHandlerManager() {
         mTargetTypes = Level.LEVEL_DATA.getTargetTypes();
-        mTargetNums = Level.LEVEL_DATA.getTargetNums();
-        mTargetHandlers.clear();
+        mTargetNums = Level.LEVEL_DATA.getTargetCounts();
         // Init TargetHandler from TargetType
         int size = mTargetTypes.size();
         for (int i = 0; i < size; i++) {
@@ -96,12 +95,14 @@ public class TargetHandlerManager {
                 return new CherryTargetHandler();
             case LEMON:
                 return new LemonTargetHandler();
-            case STRIPED:
-                return new StripedTargetHandler();
             case COOKIE:
                 return new CookieTargetHandler();
             case CAKE:
                 return new CakeTargetHandler();
+            case PIE:
+                return new PieTargetHandler();
+            case CANDY:
+                return new CandyTargetHandler();
         }
 
         return null;

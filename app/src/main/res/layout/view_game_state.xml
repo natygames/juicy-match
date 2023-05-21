@@ -16,227 +16,157 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_score"
-        android:layout_width="@dimen/image_state_board"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/margin_5"
-        android:layout_marginBottom="@dimen/margin_5"
-        android:background="@drawable/board_score"
-        app:layout_constraintBottom_toBottomOf="@+id/layout_move"
-        app:layout_constraintDimensionRatio="7:5"
-        app:layout_constraintEnd_toStartOf="@id/layout_move"
-        app:layout_constraintTop_toTopOf="parent">
+    <ImageView
+        android:id="@+id/image_score_field"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_game_board_field_height"
+        android:layout_marginStart="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_5"
+        android:background="@drawable/board_field"
+        app:layout_constraintDimensionRatio="2:1"
+        app:layout_constraintStart_toStartOf="@+id/image_board"
+        app:layout_constraintTop_toTopOf="@+id/image_board" />
 
-        <TextView
-            android:id="@+id/txt_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_state_score_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.95" />
+    <TextView
+        android:id="@+id/txt_moves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_move"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_target_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/image_score_field"
+        app:layout_constraintStart_toStartOf="@+id/image_score_field"
+        app:layout_constraintTop_toTopOf="@+id/image_score_field" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txt_move"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_move_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/image_score_field"
+        app:layout_constraintEnd_toEndOf="@+id/image_score_field"
+        app:layout_constraintStart_toStartOf="@+id/image_score_field" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_move"
-        android:layout_width="@dimen/image_state_move"
-        android:layout_height="@dimen/image_state_move"
-        android:background="@drawable/board_move"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/txt_move"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_state_move_size"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.73" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_target"
-        android:layout_width="@dimen/image_state_board"
-        android:layout_height="0dp"
+    <ImageView
+        android:id="@+id/image_target_field"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_game_board_field_height"
         android:layout_marginStart="@dimen/margin_5"
-        android:layout_marginBottom="@dimen/margin_5"
-        android:background="@drawable/board_target_01"
-        app:layout_constraintBottom_toBottomOf="@+id/layout_move"
-        app:layout_constraintDimensionRatio="7:5"
-        app:layout_constraintStart_toEndOf="@id/layout_move"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_marginTop="@dimen/margin_5"
+        android:layout_marginEnd="@dimen/margin_10"
+        android:background="@drawable/board_field"
+        app:layout_constraintEnd_toEndOf="@id/image_board"
+        app:layout_constraintStart_toEndOf="@id/image_score_field"
+        app:layout_constraintTop_toTopOf="@+id/image_board" />
 
-        <ImageView
-            android:id="@+id/target_image_left"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:src="@drawable/ice_center_01"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+    <TextView
+        android:id="@+id/txt_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_5"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:text="@string/txt_level"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_level_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/image_target_field"
+        app:layout_constraintStart_toStartOf="@+id/image_target_field"
+        app:layout_constraintTop_toTopOf="@+id/image_target_field" />
 
-        <TextView
-            android:id="@+id/target_txt_left"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_state_target_size"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.94" />
+    <com.nativegame.nattyengine.ui.GameImage
+        android:id="@+id/image_target_01"
+        android:layout_width="@dimen/image_state_target"
+        android:layout_height="@dimen/image_state_target"
+        android:layout_marginEnd="@dimen/margin_5"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:src="@drawable/cherry"
+        app:layout_constraintBottom_toBottomOf="@id/image_target_field"
+        app:layout_constraintEnd_toStartOf="@id/image_target_02" />
 
-        <ImageView
-            android:id="@+id/target_image_leftCenter"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+    <com.nativegame.nattyengine.ui.GameImage
+        android:id="@+id/image_target_02"
+        android:layout_width="@dimen/image_state_target"
+        android:layout_height="@dimen/image_state_target"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:src="@drawable/strawberry"
+        app:layout_constraintBottom_toBottomOf="@id/image_target_field"
+        app:layout_constraintEnd_toEndOf="@id/image_target_field"
+        app:layout_constraintStart_toStartOf="@id/image_target_field" />
 
-        <TextView
-            android:id="@+id/target_txt_leftCenter"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_state_target_size"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.24"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.94" />
+    <com.nativegame.nattyengine.ui.GameImage
+        android:id="@+id/image_target_03"
+        android:layout_width="@dimen/image_state_target"
+        android:layout_height="@dimen/image_state_target"
+        android:layout_marginStart="@dimen/margin_5"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:src="@drawable/lemon"
+        app:layout_constraintBottom_toBottomOf="@id/image_target_field"
+        app:layout_constraintStart_toEndOf="@id/image_target_02" />
 
-        <ImageView
-            android:id="@+id/target_image_center"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:src="@drawable/ice_center_01"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_target_01"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_state_target"
+        android:layout_marginTop="@dimen/margin_10"
+        android:fontFamily="@font/baloo"
+        android:gravity="center|end"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_target_size"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toEndOf="@+id/image_target_01"
+        app:layout_constraintTop_toTopOf="@+id/image_target_01" />
 
-        <TextView
-            android:id="@+id/target_txt_center"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_state_target_size"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.94" />
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_target_02"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_state_target"
+        android:layout_marginTop="@dimen/margin_10"
+        android:fontFamily="@font/baloo"
+        android:gravity="center|end"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_target_size"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toEndOf="@+id/image_target_02"
+        app:layout_constraintTop_toTopOf="@+id/image_target_02" />
 
-        <ImageView
-            android:id="@+id/target_image_rightCenter"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.76"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
+    <com.nativegame.nattyengine.ui.GameText
+        android:id="@+id/txt_target_03"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/image_state_target"
+        android:layout_marginTop="@dimen/margin_10"
+        android:fontFamily="@font/baloo"
+        android:gravity="center|end"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_target_size"
+        android:textStyle="bold"
+        app:layout_constraintDimensionRatio="1:2"
+        app:layout_constraintEnd_toEndOf="@+id/image_target_03"
+        app:layout_constraintTop_toTopOf="@+id/image_target_03" />
 
-        <TextView
-            android:id="@+id/target_txt_rightCenter"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_state_target_size"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.76"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.94" />
-
-        <ImageView
-            android:id="@+id/target_image_right"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.85"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5" />
-
-        <TextView
-            android:id="@+id/target_txt_right"
-            android:layout_width="@dimen/image_state_target"
-            android:layout_height="@dimen/image_state_target"
-            android:fontFamily="@font/baloo"
-            android:gravity="center"
-            android:text=""
-            android:textColor="@color/white"
-            android:textSize="@dimen/txt_state_target_size"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.85"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.94" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/txt_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/baloo"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/txt_state_score_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/image_star_progress"
+        app:layout_constraintEnd_toStartOf="@id/image_star_progress"
+        app:layout_constraintStart_toStartOf="@id/image_score_field"
+        app:layout_constraintTop_toTopOf="@id/image_star_progress" />
 
     <ImageView
         android:id="@+id/image_star_progress"
@@ -246,10 +176,9 @@
         android:src="@drawable/star_progress_clip"
         app:layout_constraintBottom_toBottomOf="@id/image_board"
         app:layout_constraintDimensionRatio="18:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_move"
-        app:layout_constraintVertical_bias="0.25" />
+        app:layout_constraintEnd_toEndOf="@id/image_board"
+        app:layout_constraintStart_toStartOf="@id/image_board"
+        app:layout_constraintTop_toBottomOf="@id/image_score_field" />
 
     <ImageView
         android:id="@+id/image_progress_star_01"

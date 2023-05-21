@@ -8,20 +8,41 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/font/baloo.xml" value="0.2838541666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/activity_main.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_ad_coin.xml" value="0.15715579710144928" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_ad_extra_move.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_ad_lives.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_confirm.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_container.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_container_game.xml" value="0.14990942028985507" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_error.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_exit.xml" value="0.25364583333333335" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_level.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_level.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_loss.xml" value="0.14221014492753623" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_more_coin.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_more_lives.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_more_move.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_new_booster.xml" value="0.15217391304347827" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_new_prize.xml" value="0.15217391304347827" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_pause.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_setting.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_shop.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_start.xml" value="0.536" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_tutorial.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_wheel.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/dialog_win.xml" value="0.14221014492753623" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_game.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_loading.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_map.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_menu.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/fragment_win_dialog.xml" value="0.1" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_game_board.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_game_booster.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_game_item.xml" value="0.1503623188405797" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_game_state.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_map_item.xml" value="0.2" />
-        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_map_level.xml" value="0.14855072463768115" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_map_level.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_map_state.xml" value="0.264" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_recycler_product.xml" value="0.6" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/layout/view_shop_product.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.187" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Match3Game/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.187" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MatchGameSample/app/src/main/res/font/baloo.xml" value="0.2838541666666667" />

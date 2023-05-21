@@ -1,39 +1,1172 @@
 <?xml version="1.0" encoding="utf-8"?>
 <level>
     <level1>
-        <level_type>collect</level_type>
-        <fruit_num>5</fruit_num>
-        <move>20</move>
-        <row>8</row>
-        <column>8</column>
-        <target_type>cookie cherry strawberry</target_type>
-        <target_num>24 20 20</target_num>
-        <grid>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</grid>
-        <tile>eecnnceeeccnnccecccnncccnnnnnnnnnnnnnnnncccnnccceccnncceeecnncee</tile>
+        <row>7</row>
+        <column>7</column>
+        <move>10</move>
+        <fruit_count>4</fruit_count>
+        <tutorial_type>match_3</tutorial_type>
+        <target_type>strawberry</target_type>
+        <target_count>15</target_count>
+        <grid>eequweeeqnnnweqnnnnnwlnnnnnrannnnnseannnseeeadsee</grid>
+        <tile>eensneeelslslennnnnnnnnnnnnnnnnnnnnennnnneeennnee</tile>
+        <tuto>eeneneeeneeenennnnnnnnnnnnnnnnnnnnnennnnneeennnee</tuto>
     </level1>
     <level2>
-        <level_type>ice</level_type>
-        <fruit_num>4</fruit_num>
-        <move>30</move>
         <row>9</row>
-        <column>7</column>
-        <target_type>ice cake</target_type>
-        <target_num>49 22</target_num>
-        <grid>eequweeeelnreeeqnnnweelnnnreelnnnreqnnnnnwlnnnnnrlnnnnnraddddds</grid>
-        <ices>eeQUWeeeeLNReeeQNNNWeeLNNNReeLNNNReQNNNNNWLNNNNNRLNNNNNRADDDDDS</ices>
-        <tile>eeslseeeelsleeeoolooeewoloweewoooweowwwwwoowwwwwoowwwwwoooooooo</tile>
+        <column>9</column>
+        <move>12</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>cookie</tutorial_type>
+        <target_type>cookie</target_type>
+        <target_count>15</target_count>
+        <grid>equuuuuweelnnnnnreqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnselnnnnnreeadddddse</grid>
+        <tile>ennnnnnneesnnnnnnenlcncncnnnscncncnnnscncncnnnncncncnnnncncncnnennnnnnneennnnnnne</tile>
+        <tuto>ennnnnnneeennnnnneneennnnnnneennnnnnneennnnnnnnnnnnnnnnnnnnnnnnennnnnnneennnnnnne</tuto>
     </level2>
     <level3>
-        <level_type>starfish</level_type>
-        <fruit_num>4</fruit_num>
-        <move>30</move>
+        <row>8</row>
+        <column>7</column>
+        <move>12</move>
+        <fruit_count>4</fruit_count>
+        <tutorial_type>match_4</tutorial_type>
+        <target_type>cookie strawberry</target_type>
+        <target_count>18 18</target_count>
+        <grid>equuuweelnnnreelnnnreelnnnreqnnnnnwlnnnnnrannnnnseadddse</grid>
+        <tile>elcccleeslclseelcccleelccclencncncnnncncnnncncncnennnnne</tile>
+        <tuto>eennnneeeennneeennnneeennnnennnnnnnnnnnnnnnnnnnnnennnnne</tuto>
+    </level3>
+    <level4>
+        <row>8</row>
+        <column>7</column>
+        <move>12</move>
+        <fruit_count>4</fruit_count>
+        <tutorial_type>match_t</tutorial_type>
+        <target_type>cookie lemon</target_type>
+        <target_count>20 20</target_count>
+        <grid>eequweeeelnreeeqnnnweelnnnreqnnnnnwlnnnnnrannnnnseadddse</grid>
+        <tile>eeclceeeelsleeenclcneenclcnecncccncccnnnccncccccnennnnne</tile>
+        <tuto>eeneneeeeeeeeeennenneennennennnnnnnnnnnnnnnnnnnnnennnnne</tuto>
+    </level4>
+    <level5>
         <row>9</row>
         <column>8</column>
+        <move>15</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>match_l</tutorial_type>
+        <target_type>cookie strawberry lemon</target_type>
+        <target_count>30 20 10</target_count>
+        <grid>equuuuweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeannseeeeeaseee</grid>
+        <tile>eclcclcecclcclccllsccsllcclcclccnnnnnnnncccnnccceccnncceeecnnceeeeenneee</tile>
+        <tuto>enennnnennennnnneeennnnnnnennnnnnnnnnnnnnnnnnnnnennnnnneeennnneeeeenneee</tuto>
+    </level5>
+    <level6>
+        <row>9</row>
+        <column>9</column>
+        <move>18</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>match_5</tutorial_type>
+        <target_type>cookie strawberry lemon</target_type>
+        <target_count>37 27 17</target_count>
+        <grid>eequuuweeeqnnnnnweelnnnnnreqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreeannnnnseeeadddsee</grid>
+        <tile>eennnnneeenccnccneenccnccnencccccccnncccscccnncsslsscneccccccceeccccccceeennnnnee</tile>
+        <tuto>eennnnneeennnnnnneennnnnnnennnnnnnnnnnnnennnnnneeeeennennnnnnneennnnnnneeennnnnee</tuto>
+    </level6>
+    <level7>
+        <row>8</row>
+        <column>8</column>
+        <move>18</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>ice</tutorial_type>
+        <target_type>ice</target_type>
+        <target_count>24</target_count>
+        <grid>eequuweeeelnnreeeqnnnnweelnnnnreqnnnnnnwlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>eennnneeeenlnneeenlsnnneennlnnnennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</tile>
+        <ices>eeeeeeeeeeenneeeeeenneeeeennnneeeennnneeennnnnneennnnnneeeeeeeee</ices>
+        <tuto>eennnneeeenenneeeneennneennennnennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</tuto>
+    </level7>
+    <level8>
+        <row>9</row>
+        <column>7</column>
+        <move>20</move>
+        <fruit_count>4</fruit_count>
+        <target_type>ice cookie</target_type>
+        <target_count>42 16</target_count>
+        <grid>quuuweelnnnnwelnnnnnwlnndnnrlnrelnrlnnunnrannnnnreannnnreeaddds</grid>
+        <tile>cccnneecEcnnnecccnnnnnnnnnnnnnnennnnnnnnnnnnnncccennncEceennccc</tile>
+        <ices>quueeeelnnneeelnnnneelnndnnelnrelnrennunnreennnnreeennnreeeedds</ices>
+    </level8>
+    <level9>
+        <row>8</row>
+        <column>7</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>combine</tutorial_type>
+        <target_type>ice cookie</target_type>
+        <target_count>44 28</target_count>
+        <grid>eequweeeqnnnweqnnnnnwlnnnnnrlnnnnnrannnnnseannnseeeadsee</grid>
+        <tile>eennneeencccnencccccncccCccccccEcccncccccnencccneeennnee</tile>
+        <ices>eequweeeqnnnweqnnnnnwlnnnnnrlnnnnnrannnnnseannnseeeadsee</ices>
+        <tuto>eennneeennnnnennnnnnnnnnennnnnnennnnnnnnnnennnnneeennnee</tuto>
+    </level9>
+    <level10>
+        <row>9</row>
+        <column>9</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cookie</target_type>
+        <target_count>49 12</target_count>
+        <grid>quuwequuwlnnnunnnrlnnnnnnnrannnnnnnselnnnnnreqnnnnnnnwlnnnnnnnrlnnndnnnraddseadds</grid>
+        <tile>lslseslslslslclslslslscslslslslclslseccclccceslslclslslslscslslslslclslslslseslsl</tile>
+        <ices>eeeeeeeeeennnunnneenNNnNNneenNNnNNneelnnnnnreenNNnNNneenNNnNNneennndnnneeeeeeeeee</ices>
+    </level10>
+    <level11>
+        <row>9</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>lock</tutorial_type>
+        <target_type>cookie lock</target_type>
+        <target_count>18 6</target_count>
+        <grid>equuuuweelnnnnreelnnnnreqnnnnnnwlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</grid>
+        <tile>elslslseeslslsleelslslsewwwwwwwwwwwwwwwwcncncncnncncncncecccccceeeccccee</tile>
+        <lock>eeeeeeeeeeeeeeeeeXXXXXXeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</lock>
+        <tuto>enennnneeeennnneenennnnennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnennnnnneeennnnee</tuto>
+    </level11>
+    <level12>
+        <row>8</row>
+        <column>7</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice lock</target_type>
+        <target_count>30 9</target_count>
+        <grid>quuuuuwlnnnnnrlnnnnnrlnnnnnrlnnnnnradnnnnreeadnnreeeeads</grid>
+        <tile>nnnnnnnnnnnnnnnnnnnnnwwnnnnnwwwwnnnwwwwwwweewwwwweeeewww</tile>
+        <ices>eeeeeeeeeeeeeelnneeeeLNnnneeLNNNnnrADNNNNReeADNNReeeeADS</ices>
+        <lock>eeeeeeeeeeeeeeXXXeeeeeeXXXeeeeeeXXXeeeeeeeeeeeeeeeeeeeee</lock>
+    </level12>
+    <level13>
+        <row>8</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cookie lock</target_type>
+        <target_count>10 16</target_count>
+        <grid>equuuuweelnnnnreelnnnnreqnnnnnnwlnnnnnnrlnnnnnnrannnnnnseaddddse</grid>
+        <tile>ennnnnneennnnnneennnnnnennnnnnnnnnnnnnnnwwwwwwwwccwwwwccecccccce</tile>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeXXXXXXXXXXXXXXXXeeeeeeeeeeeeeeeeeeeeeeee</lock>
+    </level13>
+    <level14>
+        <row>9</row>
+        <column>9</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>hammer</tutorial_type>
+        <target_type>cookie strawberry</target_type>
+        <target_count>36 36</target_count>
+        <grid>eeeeteeeeeeeqnweeeeeqnnnweeeqnnnnnweznnnnnnnxeannnnnseeeannnseeeeeanseeeeeeebeeee</grid>
+        <tile>eeeeceeeeeeeccceeeeeccccceeeccscscceccccscccceccscscceeeccccceeeeeccceeeeeeeceeee</tile>
+        <tuto>eeeeneeeeeeennneeeeennnnneeennnnnnnennnnennnnennnnnnneeennnnneeeeennneeeeeeeneeee</tuto>
+    </level14>
+    <level15>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>cookie lock</target_type>
+        <target_count>14 18</target_count>
+        <grid>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</grid>
+        <tile>eennnneeennnnnnecnnnnnnccnnnnnnccnnnnnnccnwwwwnccnwwwwncenwwwwneeeccccee</tile>
+        <lock>eeeeeeeeeXeeeeXeeXeeeeXeeXeeeeXeeXXXXXXeeXeeeeXeeXeeeeXeeXeeeeXeeeeeeeee</lock>
+    </level15>
+    <level16>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>bomb</tutorial_type>
+        <target_type>ice cookie lock</target_type>
+        <target_count>45 32 5</target_count>
+        <grid>eequuuweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeadddsee</grid>
+        <tile>eeccccceeeclslslceclslslslccslccclscclscIcslccslccclscclslslslceclslslceeecccccee</tile>
+        <ices>eeeeeeeeeeennnnneeennNNNnneenNNNNNneenNNNNNneenNNNNNneennNNNnneeennnnneeeeeeeeeee</ices>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeXeeeeeeeeeeeeeeeXeXeXeeeeeeeeeeeeeeeXeeeeeeeeeeeeeeeeeeeeee</lock>
+        <tuto>eennnnneeennnnnnnennnnnnnnnnnnnnnnnnnnnnennnnnnnnnnnnnnnnnnnnnnennnnnnneeennnnnee</tuto>
+    </level16>
+    <level17>
+        <row>8</row>
+        <column>7</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>ice cookie</target_type>
+        <target_count>39 39</target_count>
+        <grid>tetetetlununurlnnnnnrlnnnnnrlnnnnnrannnnnseannnseeeadsee</grid>
+        <tile>CeCeCeCCcCcCcCcccccccccccccccccccccccccccceccccceeecccee</tile>
+        <ices>eeeeeeeeUeUeUelNnNnNrlNnNnNrlNnNnNraNnNnNseAnNnSeeeaDsee</ices>
+    </level17>
+    <level18>
+        <row>8</row>
+        <column>9</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>glove</tutorial_type>
+        <target_type>cookie lock</target_type>
+        <target_count>35 17</target_count>
+        <grid>eequuuweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseadddddse</grid>
+        <tile>eeccCcceeescccccseclccEcclccscccccscclslslslccslslslscclslslslceccccccce</tile>
+        <lock>eeeeeeeeeeXeeeeeXeeXeeeeeXeeXeeeeeXeeXeeeeeXeeXeeeeeXeeXXXXXXXeeeeeeeeee</lock>
+        <tuto>eennenneeennnennnennnnennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnennnnnnne</tuto>
+    </level18>
+    <level19>
+        <row>9</row>
+        <column>7</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice lock</target_type>
+        <target_count>34 21</target_count>
+        <grid>eequweeeqnnnweqnnnnnwlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>eennneeennnnnennnnnnnnnnnnnnnnnEnnnnnnnnnnwnCnCnwwnnnnnwwwwnwww</tile>
+        <ices>eeeeeeeeeeeeeeeeeeeeeeeNNNeeeeNNNeelNNNNNrlNNNNNrlNNNNNraddddds</ices>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeXXXeeeeXeXeeXXXXXXXeXeXeXeeXXXXXeeeeXeee</lock>
+    </level19>
+    <level20>
+        <row>9</row>
+        <column>9</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cookie</target_type>
+        <target_count>41 32</target_count>
+        <grid>eeeeteeeeeeeqnweeeeeqnnnweeeqnnnnnweznnnnnnnxeannnnnseeeannnseeeeeanseeeeeeebeeee</grid>
+        <tile>eeeeceeeeeeeccceeeeeccscceeecccsccceccsslssccecccsccceeeccscceeeeeccceeeeeeeceeee</tile>
+        <ices>eeeeteeeeeeeqnweeeeeqnNnweeeqnnNnnweznNNNNNnxeannNnnseeeanNnseeeeeanseeeeeeebeeee</ices>
+    </level20>
+    <level21>
+        <row>9</row>
+        <column>9</column>
+        <move>15</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>cake</tutorial_type>
+        <target_type>cake</target_type>
+        <target_count>35</target_count>
+        <grid>eequuuweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeadddsee</grid>
+        <tile>eennnnneeennnnnnnel1111111l1111s111111sslss11111111111l1111111lennnnnnneeennnnnee</tile>
+        <tuto>eennnnneeennnnnnnennnnnnnnnnnnnennnnnneeeeennnnnnnnnnnnnnnnnnnnennnnnnneeennnnnee</tuto>
+    </level21>
+    <level22>
+        <row>9</row>
+        <column>9</column>
+        <move>18</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cake</target_type>
+        <target_count>35</target_count>
+        <grid>eequuuweeeqnnnnnweqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreelnnnnnreelnnnnnreeadddddse</grid>
+        <tile>ee1sls1eeew1lsl1we1w11l11w11ww1l1ww1111111111e1ww1ww1ee1ww1ww1ee1ww1ww1ee1ww1ww1e</tile>
+    </level22>
+    <level23>
+        <row>9</row>
+        <column>7</column>
+        <move>20</move>
+        <fruit_count>4</fruit_count>
+        <target_type>ice cake</target_type>
+        <target_count>49 22</target_count>
+        <grid>eequweeeelnreeeqnnnweelnnnreelnnnreqnnnnnwlnnnnnrlnnnnnraddddds</grid>
+        <tile>eeslseeeelsleee11l11eew1l1weew111we1wwwww11wwwww11wwwww11111111</tile>
+        <ices>eequweeeelnreeeqnnnweelnnnreelnnnreqnnnnnwlnnnnnrlnnnnnraddddds</ices>
+    </level23>
+    <level24>
+        <row>9</row>
+        <column>7</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake</target_type>
+        <target_count>63 24</target_count>
+        <grid>quuuuuwlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>ohhohhoh11l11hh11s11ho11s11ohsslssho11s11oh11s11hh11l11hohhohho</tile>
+        <ices>quuuuuwlNNnNNrlNNnNNrlNNnNNrlnnnnnrlNNnNNrlNNnNNrlNNnNNraddddds</ices>
+    </level24>
+    <level25>
+        <row>8</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cake cookie</target_type>
+        <target_count>26 28</target_count>
+        <grid>equuuuweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseaddddse</grid>
+        <tile>ec1sl1cecc1ls1cc111sl111cc1cc1cccc1cc1cc11111111cc1cc1ccec1cc1ce</tile>
+    </level25>
+    <level26>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake cookie</target_type>
+        <target_count>45 18 18</target_count>
+        <grid>quuuuuweelnnnnnreeannnnnreeelnnnnnweelnnnnnreeannnnnreeelnnnnnweelnnnnnreeaddddds</grid>
+        <tile>1cnnnc1ee1cnnnc1ee1cnnnc1eee1cnnnc1ee1cnnnc1ee1cnnnc1eee1cnnnc1ee1cnnnc1ee1cnnnc1</tile>
+        <ices>euUUUueeeenNNNneeeenNNNneeeeenNNNneeeenNNNneeeenNNNneeeeenNNNneeeenNNNneeeedDDDde</ices>
+    </level26>
+    <level27>
+        <row>8</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cake lock</target_type>
+        <target_count>12 16</target_count>
+        <grid>eequuuuweqnnnnnrqnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnslnnnnnseaddddsee</grid>
+        <tile>eennnnn1ennnnnn11nnnnnn11nnnnnn11nnnnnn11nnnnnn11nnnnnne1nnnnnee</tile>
+        <lock>eeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeee</lock>
+    </level27>
+    <level28>
+        <row>8</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake lock</target_type>
+        <target_count>56 16 16</target_count>
+        <grid>equuuuweelnnnnreqnnnnnnwlnnnnnnrlnnnnnnrannnnnnselnnnnreeaddddse</grid>
+        <tile>el1nn1leel1nn1lels1nn1slsl1nn1lsls1nn1slsl1nn1lses1nn1sees1nn1se</tile>
+        <ices>eqUUUUweelNNNNreqnNNNNnwlnNNNNnrlnNNNNnranNNNNnselNNNNreeaDDDDse</ices>
+        <lock>eeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeee</lock>
+    </level28>
+    <level29>
+        <row>8</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake lock</target_type>
+        <target_count>32 13 10</target_count>
+        <grid>eeequweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrannnnnnnseadddddse</grid>
+        <tile>eeennneeeeennnnneeennnnnnnennnn1nnnnnnn1n1nnnnn1n1n1nnn1n1n1n1nen1n1n1ne</tile>
+        <ices>eeeeeeeeeeeeeeeeeeeeeeneeeeeeenNneeeeenNNNneeenNNNNNneaNNNNNNNseADDDDDSe</ices>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXeeeeeeeXeXeeeeeXeXeXeeeXeXeXeXe</lock>
+    </level29>
+    <level30>
+        <row>9</row>
+        <column>7</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cake cookie lock</target_type>
+        <target_count>19 14 17</target_count>
+        <grid>eequweeeqnnnweqnnnnnwlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>eeccceeencscne1ncscn11nslsn11ncscn11ncscn11ncccn11nnnnn11111111</tile>
+        <lock>eeeeeeeeXeeeXeeXeeeXeeXeeeXeeXeeeXeeXeeeXeeXeeeXeeXXXXXeeeeeeee</lock>
+    </level30>
+    <level31>
+        <row>8</row>
+        <column>8</column>
+        <move>12</move>
+        <fruit_count>4</fruit_count>
+        <tutorial_type>pie</tutorial_type>
+        <target_type>pie</target_type>
+        <target_count>3</target_count>
+        <grid>eequuweeeqnnnnweelnnnnreqnnnnnnwannnnnnselnnnnreeannnnseeeaddsee</grid>
+        <tile>eelnnneeensnnnneeslnnnne00snnn0009snnn09ennnnnneenn00nneeen09nee</tile>
+        <tuto>eennnneeenennnneeeennnneeeennnnneeennnnnennnnnneennnnnneeennnnee</tuto>
+    </level31>
+    <level32>
+        <row>9</row>
+        <column>8</column>
+        <move>15</move>
+        <fruit_count>4</fruit_count>
+        <target_type>pie</target_type>
+        <target_count>4</target_count>
+        <grid>equuuuweqnnnnnnwaddnnddseeelreeeeeqnnweeeqnnnnweqnnnnnnwlnnnnnnradddddds</grid>
+        <tile>ennnnnnennnnnnnnnnnnnnnneee00eeeeew06weeewwwwwwewwwwwwww00w00w0008w09w08</tile>
+    </level32>
+    <level33>
+        <row>8</row>
+        <column>8</column>
+        <move>18</move>
+        <fruit_count>5</fruit_count>
+        <target_type>pie cookie</target_type>
+        <target_count>4 15</target_count>
+        <grid>equuuuweelnnnnreelnnnnreqnnnnnnwannnnnnselnnnnreelnnnnreeaddddse</grid>
+        <tile>eclclcleelclclceeclclcle0000000008090908ewwwwwweewwwwwweecccccce</tile>
+    </level33>
+    <level34>
+        <row>9</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice pie cake</target_type>
+        <target_count>48 4 8</target_count>
+        <grid>quuuuuuwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>nnnnnnnnnnnnnnnnnnnnnnnn11111111wwwwwwwww00ww00ww07ww07ww00ww00ww08ww08w</tile>
+        <ices>eeeeeeeeeeeeeeeeeeeeeeeelnnnnnnrlnnnnnnrlNNnnNNrlNNnnNNrlNNnnNNraDDddDDs</ices>
+    </level34>
+    <level35>
+        <row>9</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>4</fruit_count>
+        <target_type>ice pie cake</target_type>
+        <target_count>50 2 6</target_count>
+        <grid>quweequwlnreelnrlnreelnrlnreelnrlnreelnrlnnuunnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>slseeslslsleelslslseeslslsleelsl111ee111www00wwwwww09wwwwww00wwwwww09www</tile>
+        <ices>eeeeeeeeeeeeeeeelnreelnrlnreelnrlnreelnrLNNuuNNRLNNnnNNRLNNnnNNRADDddDDS</ices>
+    </level35>
+    <level36>
+        <row>8</row>
+        <column>8</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice pie lock</target_type>
+        <target_count>40 3 16</target_count>
+        <grid>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>eennnneeennnnnnennnnnnnnnnnnnnnnwwnwwnwwwwnwwnww00n00n0008n09n08</tile>
+        <ices>eeeeeeeeeeeeeeeeeeeeeeeelnnnnnnrLNnNNnNRLNnNNnNRlnnnnnnradddddds</ices>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeXXXXXXXXeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXee</lock>
+    </level36>
+    <level37>
+        <row>9</row>
+        <column>8</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>pie lock</target_type>
+        <target_count>6 12</target_count>
+        <grid>quuuuuuwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnselnnnnreeannnnseeelnnreeeeaddsee</grid>
+        <tile>nnnnnnnnnnnnnnnnnnnnnnnn00nnnn0007nnnn07e00nn00ee08nn08eee0000eeee0909ee</tile>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeXXXXeeeeXXXXeeeeeXXeeeeeeXXeeeeeeeeeeeeeeeeeee</lock>
+    </level37>
+    <level38>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cake cookie lock</target_type>
+        <target_count>24 15 4</target_count>
+        <grid>eeequweeeeeqnnnweeeqnnnnnweelnnnnnreqnnnnnnnwlnnnnnnnrannnnnnnseannnnnseeeadddsee</grid>
+        <tile>eeeslseeeee1lsl1eee1s111s1eec1www1cecc1www1cc11s111s11cc1www1ccec1www1ceee1ccc1ee</tile>
+        <lock>eeeeeeeeeeeeeeeeeeeeXeeeXeeeeeeeeeeeeeeeeeeeeeeXeeeXeeeeeeeeeeeeeeeeeeeeeeeeeeeee</lock>
+    </level38>
+    <level39>
+        <row>9</row>
+        <column>9</column>
+        <move>28</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake</target_type>
+        <target_count>45 25</target_count>
+        <grid>eeequweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrannnnnnnseannnnnseeeannnseeeeeadseee</grid>
+        <tile>eeennneeeeennnnneeennnnnnne1nnnnnnn11111111111w1w1w1w1e1w1w1w1eee1w1w1eeeee1w1eee</tile>
+        <ices>eeeeueeeeeeeneneeeeeneneneeqnenenenwlnnnnnnnraNnNnNnNseaNnNnNseeeaNnNseeeeeaDseee</ices>
+    </level39>
+    <level40>
+        <row>8</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice pie cake</target_type>
+        <target_count>36 6 12</target_count>
+        <grid>quuuuuuwannnnnnselnnnnreqnnnnnnwannnnnnselnnnnreqnnnnnnwadddddds</grid>
+        <tile>00slss0007lsll07e111111e00wwww0008wwww08e111111e00wwww0009wwww09</tile>
+        <ices>eeUUUUeeeeNNNNeeelnnnnreeeNNNNeeeeNNNNeeelnnnnreeeNNNNeeeeDDDDee</ices>
+    </level40>
+    <level41>
+        <row>9</row>
+        <column>7</column>
+        <move>15</move>
+        <fruit_count>4</fruit_count>
+        <tutorial_type>starfish</tutorial_type>
         <target_type>starfish</target_type>
-        <target_num>4</target_num>
+        <target_count>3</target_count>
+        <grid>tequwetvelnrevvelnrevlunnnurlnnnnnrlnnnnnrannnnnselnnnreeadddse</grid>
+        <tile>xenxnexlennnensennnenlsnnnnnsnnnnnnlnnnnnnlnnnnnnennnnneennnnne</tile>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeAeeeeeeeeAAAAAe</entr>
+        <tuto>eennnennennneneennneneennnnnennnnnnnnnnnnnnnnnnnnennnnneennnnne</tuto>
+    </level41>
+    <level42>
+        <row>9</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish lock</target_type>
+        <target_count>4 12</target_count>
         <grid>eqweeqweqnnuunnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeannseeeeeaseee</grid>
         <tile>exxeexxennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnwnnnnnnwewnnnnweeewwwweeeeewweee</tile>
         <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXXeeeeXXeXXeeXXeeeXXXXeeeeeeeeeeeeeeeeee</lock>
         <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeAeAeeeeAeeeAeeAeeeeeAAeee</entr>
-    </level3>
+    </level42>
+    <level43>
+        <row>9</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish cookie</target_type>
+        <target_count>4 32</target_count>
+        <grid>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>eexxxxeeenccccnennccccnnnnccccnnnnccccnnnnccccnnnnccccnnnnccccnnnnccccnn</tile>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAA</entr>
+    </level43>
+    <level44>
+        <row>9</row>
+        <column>8</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish ice cookie</target_type>
+        <target_count>4 64 32</target_count>
+        <grid>teteetetlunuunurlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>xexeexexcncnncnccncnncnccncnncnccncnncnccncnncnccncnncnccncnncnccncnncnc</tile>
+        <ices>eeeeeeeelUnUUnUrlNnNNnNrlNnNNnNrlNnNNnNrlNnNNnNrlNnNNnNrlNnNNnNraDdDDdDs</ices>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAA</entr>
+    </level44>
+    <level45>
+        <row>9</row>
+        <column>8</column>
+        <move>28</move>
+        <fruit_count>4</fruit_count>
+        <target_type>starfish pie lock</target_type>
+        <target_count>4 5 8</target_count>
+        <grid>eqweeqweqnnuunnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnselnnnnreeaddddse</grid>
+        <tile>exxeexxennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn00nnnn0008nnnn08e000000ee090909e</tile>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXXXXeeeeXXXXeeeeeeeeeeeeeeeeee</lock>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeAeeeeeeeeeAAAAAAe</entr>
+    </level45>
+    <level46>
+        <row>9</row>
+        <column>7</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish ice cake</target_type>
+        <target_count>3 35 32</target_count>
+        <grid>teeteetluunuurlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>xeexeex1ls1sl11sl1ls11ls1sl111111111ww1ww11ww1ww11ww1ww11111111</tile>
+        <ices>eeeeeeeeUUnUUeeNNnNNeeNNnNNeeNNnNNeeNNnNNeeNNnNNeeNNnNNeeeeeeee</ices>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAA</entr>
+    </level46>
+    <level47>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>pie cake cookie</target_type>
+        <target_count>4 9 12</target_count>
+        <grid>quweeequwlnnweqnnrannnunnnseannnnnseeelnnnreeeqnnnnnweqnnndnnnwlnnseannradseeeads</grid>
+        <tile>nnneeennnnnnnennnnnnnn1nnnnennn1nnneee11111eeec00100cecc08108cc00ccecc0009ceeec09</tile>
+    </level47>
+    <level48>
+        <row>9</row>
+        <column>7</column>
+        <move>28</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake cookie</target_type>
+        <target_count>42 30 15</target_count>
+        <grid>eequweeeqnnnweqnnnnnwlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>eeccceeeccccceccccccc11111111s1s1s11s1s1s11l1l1l11s1s1s11111111</tile>
+        <ices>eeeeeeeeeeeeeeeeeeeeelnnnnnrlNnNnNrlNnNnNrlNnNnNrlNnNnNraddddds</ices>
+    </level48>
+    <level49>
+        <row>8</row>
+        <column>9</column>
+        <move>28</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish ice lock</target_type>
+        <target_count>5 25 16</target_count>
+        <grid>eeeeteeeeeeeqnweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnraddddddds</grid>
+        <tile>eeeexeeeeeeennneeeeexnnnxeeennnnnnnexnnnnnnnxnnnnnnnnnnnnnnnnnnnnnnnnnnn</tile>
+        <ices>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeenNneeeeenNNNneeenNNNNNneaDDDDDDDs</ices>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXeeeeeeeXXXeeeeeXXXXXeeeXXXXXXXe</lock>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAAA</entr>
+    </level49>
+    <level50>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cookie lock</target_type>
+        <target_count>18 20</target_count>
+        <grid>eqhuuuhweevelnreveelunnnureqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreelnndnnreeadseadse</grid>
+        <tile>ennnnnnneenennneneennnnnnnecnnnnnnnccnccnccnccccnnncccenccnccneennnnnnneennnennne</tile>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXeeeeeeeXXXeeeeXeeXeeXeeXXXXXXXeeXXXeXXXe</lock>
+    </level50>
+    <level51>
+        <row>8</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>4</fruit_count>
+        <tutorial_type>honey</tutorial_type>
+        <target_type>honey</target_type>
+        <target_count>36</target_count>
+        <grid>eeeqweeeeeqnnweeeqnnnnweqnnnnnnwannnnnnseannnnseeeannseeeeeaseee</grid>
+        <tile>eeenneeeeenlnneeenlsnnnennnlnnnnnnnnnnnnennnnnneeennnneeeeenneee</tile>
+        <hone>eeeqweeeeeqnnweeeqnnnnweqnnNNnnwannNNnnseannnnseeeannseeeeeaseee</hone>
+        <tuto>eeenneeeeenenneeeneennnennnennnnnnnnnnnnennnnnneeennnneeeeenneee</tuto>
+    </level51>
+    <level52>
+        <row>8</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey lock</target_type>
+        <target_count>44 12</target_count>
+        <grid>equuuuweelnnnnreqnnnnnnwlnnnnnnrlnnnnnnrannnnnnselnnnnreeaddddse</grid>
+        <tile>ennnnnneennnnnnennnnnnnnnnnnnnnnnnnnnnnnwwnnnnwwewnnnnweewwwwwwe</tile>
+        <hone>equuuuweelnnnnreqnnnnnnwlnnnnnnrlnnnnnnrANnnnnNSeLnnnnReeADDDDSe</hone>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXXXeeXXXeeXeeXeeeeXXXXeeeeeeeeee</lock>
+    </level52>
+    <level53>
+        <row>8</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>honey cookie lock</target_type>
+        <target_count>46 14 14</target_count>
+        <grid>quweequwlnnuunnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseaddddse</grid>
+        <tile>cnneennccnnnnnnccnnnnnnccnnnnnnccnnnnnnccnnnnnnccnnnnnncennnnnne</tile>
+        <hone>quweequwlnnUUnnrlnnNNnnrlnnNNnnrlnnNNnnrlnnNNnnrannNNnnseadDDdse</hone>
+        <lock>eeeeeeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeeeeeeXXeee</lock>
+    </level53>
+    <level54>
+        <row>9</row>
+        <column>8</column>
+        <move>28</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey cake</target_type>
+        <target_count>40 20</target_count>
+        <grid>eeeqweeeeeqnnweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrlnnddnnrlnseeanraseeeeas</grid>
+        <tile>eeelseeeeelslseee11ls11eww1ls1wwww1111wwww1111wwww1111wwww1ee1wwwweeeeww</tile>
+        <hone>eeeQWeeeeeQNNWeeeqnNNnweqnnNNnnwlnnnnnnrlnnnnnnrlnnddnnrlnseeanrASeeeeAS</hone>
+    </level54>
+    <level55>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>starfish honey pie</target_type>
+        <target_count>2 54 3</target_count>
+        <grid>quweequwlnreelnrlnreelnrlnnuunnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>nxneenxnnnneennnnnneennnnnn00nnnnnn09nnnnnn00nnnnnn09nnnnnn00nnnnnn09nnn</tile>
+        <hone>QUWeeQUWLNReeLNRlnreelnrlnnuunnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</hone>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAA</entr>
+    </level55>
+    <level56>
+        <row>8</row>
+        <column>8</column>
+        <move>28</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey cake cookie</target_type>
+        <target_count>48 24 12</target_count>
+        <grid>equuuuweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseaddddse</grid>
+        <tile>ec1sl1cecc1ls1cc111sl111ww1ls1wwww1sl1ww11111111cc1ww1ccec1ww1ce</tile>
+        <hone>equuuuweqnnnnnnwlnnnnnnrLNnnnnNRLNnnnnNRlnnnnnnrannNNnnseadDDdse</hone>
+    </level56>
+    <level57>
+        <row>9</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish honey cake</target_type>
+        <target_count>4 46 24</target_count>
+        <grid>equuuuweelnnnnreqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnselnnnnreeaddddse</grid>
+        <tile>enxnnxneen1nn1nexn1nn1nx1n1nn1n11n1nn1n11n1nn1n11n1nn1n1en1nn1neen1nn1ne</tile>
+        <hone>equUUuweelnNNnreqnnNNnnwlnnNNnnrlnnNNnnrlnnNNnnrannNNnnselnNNnreeadDDdse</hone>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeAeeeeeeeeeAAAAAAe</entr>
+    </level57>
+    <level58>
+        <row>8</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey cake cookie</target_type>
+        <target_count>48 24 12</target_count>
+        <grid>quuuuuuwannnnnnselnnnnreqnnnnnnwannnnnnselnnnnreqnnnnnnwadddddds</grid>
+        <tile>c1lsls1cc1slsl1ce111111ec1wwww1cc1wwww1ce111111ec1wwww1cc1wwww1c</tile>
+        <hone>QuuuuuuWAnnnnnnSelnnnnreQnnnnnnWAnnnnnnSelnnnnreQnnnnnnWAddddddS</hone>
+    </level58>
+    <level59>
+        <row>8</row>
+        <column>8</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish ice cake</target_type>
+        <target_count>6 38 24</target_count>
+        <grid>equuuuweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</grid>
+        <tile>ennnnnnennnnnnnn1nnnnnn1x1nnnn1x1x1nn1x111x11x11e111111eee1111ee</tile>
+        <ices>eeeeeeeeqeeeeeewLneeeenRLNneenNRLNNnnNNRANNNNNNSeANNNNSeeeADDSee</ices>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeAeAeeeeAeeeAAAAee</entr>
+    </level59>
+    <level60>
+        <row>9</row>
+        <column>7</column>
+        <move>28</move>
+        <fruit_count>4</fruit_count>
+        <target_type>honey cake lock</target_type>
+        <target_count>56 14 14</target_count>
+        <grid>quuuuuwlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>nnnnnnnnnnnnnnnnnnnnnnnnnnnn1n1n1n1n1n1n1n1n1n1n1n1n1n1nwwwwwww</tile>
+        <hone>quuuuuwlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrADDDDDS</hone>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeXeXeXeXeXeXeXeXeXeXeXeXeXeXeeeeeee</lock>
+    </level60>
+    <level61>
+        <row>9</row>
+        <column>9</column>
+        <move>15</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>candy</tutorial_type>
+        <target_type>candy</target_type>
+        <target_count>19</target_count>
+        <grid>eeequweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrannnnnnnseannnnnseeeannnseeeeeadseee</grid>
+        <tile>eeennneeeeenndnneeenndddnnenndsdldnnndsdddldnnndsdldnnenndddnneeenndnneeeeennneee</tile>
+        <tuto>eeennneeeeennnnneeennnnnnnennnennnnnnneennnnnnnnennnnnennnnnnneeennnnneeeeennneee</tuto>
+    </level61>
+    <level62>
+        <row>9</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>pie candy</target_type>
+        <target_count>4 18</target_count>
+        <grid>quweequwlnnuunnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>dnneennddnn00nnddnn06nnddnn00nnddnn07nnddnn00nnddnn08nnddnn00nnddnn09nnd</tile>
+    </level62>
+    <level63>
+        <row>8</row>
+        <column>7</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice candy</target_type>
+        <target_count>42 30</target_count>
+        <grid>eequweeeqnnnweqnnnnnwlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>eeslseeellslleddddddddsdldsddsdsdsddldldlddsdldsdddddddd</tile>
+        <ices>eeeeeeeeeeeeeeqnnnnnwlNnNnNrlNnNnNrlNnNnNrlNnNnNraddddds</ices>
+    </level63>
+    <level64>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey candy</target_type>
+        <target_count>42 27</target_count>
+        <grid>eequuuweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeadddsee</grid>
+        <tile>eendddneeenndddnnennndddnnnnnndddnnnnnndddnnnnnndddnnnnnndddnnnenndddnneeendddnee</tile>
+        <hone>eeqUUUweeeqnNNNnweqnnNNNnnwlnnNNNnnrlnnNNNnnrlnnNNNnnrannNNNnnseanNNNnseeeaDDDsee</hone>
+    </level64>
+    <level65>
+        <row>9</row>
+        <column>8</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>pie candy</target_type>
+        <target_count>4 20</target_count>
+        <grid>eequuweeeqnnnnweelnnnnreqnnnnnnwlnnnnnnrannnnnnselnnnnreeannnnseeeaddsee</grid>
+        <tile>eennnneeennnnnneennnnnnedddnnddd00dnnd0008dddd08e00dd00ee09dd09eeeddddee</tile>
+    </level65>
+    <level66>
+        <row>9</row>
+        <column>9</column>
+        <move>28</move>
+        <fruit_count>4</fruit_count>
+        <target_type>starfish cake candy</target_type>
+        <target_count>2 9 18</target_count>
+        <grid>eeteeeteeeqnweqnweqnnnunnnwlnnnnnnnrannnnnnnseannnnnseeeannnseeeeeanseeeeeeebeeee</grid>
+        <tile>eexeeexeeennnennnednnnnnnndddnnnnndd1ddnnndd1e1ddndd1eee1ddd1eeeee1d1eeeeeee1eeee</tile>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeeAeAeeeeeAeeeAeeeAeeeeeAeAeeeeeeeAeeee</entr>
+    </level66>
+    <level67>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish cake candy</target_type>
+        <target_count>2 16 15</target_count>
+        <grid>eeeteteeeeeqnunweeeqnnnnnweqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreelnnnnnreeadddddse</grid>
+        <tile>eeexexeeeeen1n1neeenn1n1nnennn1n1nnnnnn1n1nnnnnn1n1nnnedd1d1ddeedd1d1ddeedd1d1dde</tile>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeeAeeeeeeeeeeeeeeeeeeeAAAAAAAe</entr>
+    </level67>
+    <level68>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>ice candy</target_type>
+        <target_count>52 26</target_count>
+        <grid>eeeequuweeeqnnnreeqnnnnreqnnnnnrqnnnnnnslnnnnnselnnnnseelnnnseeeaddseeee</grid>
+        <tile>eeeednndeeeddnndeenddnndennddnnddnnddnnddnnddnnednnddneednnddeeednndeeee</tile>
+        <ices>eeeeqUUweeeqnNNreeQnnNNreQNnnNNrqNNnnNNslNNnnNSelNNnnSeelNNnseeeaDDseeee</ices>
+    </level68>
+    <level69>
+        <row>8</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>honey cake candy</target_type>
+        <target_count>60 12 16</target_count>
+        <grid>quweeequwlnnweqnnrlnnnunnnrlnnnnnnnrlnnnnnnnrlnnndnnnrlnnseannradseeeads</grid>
+        <tile>dnneeennddnn1e1nnddnn1w1nnddnn1w1nnddnn1w1nnddnn1w1nnddnn1e1nnddnneeennd</tile>
+        <hone>quweeequwlnnweqnnrlnnnUnnnrlnnnNnnnrlnnnNnnnrlnnnDnnnrlnnseannradseeeads</hone>
+    </level69>
+    <level70>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>pie lock</target_type>
+        <target_count>4 17</target_count>
+        <grid>eequuuuuweqnnnnnnrqnnnnnnnrlnnnnnnnrlnnnnnndslnnnnnreelnnnndseelnnnreeeeadddseeee</grid>
+        <tile>eennnnnnnennnnnn00nnnnnnn08nnnnn00wwnnnnn09wwnnn00wweennn09wween00wweeeen08wweeee</tile>
+        <lock>eeeeeeXXXeeeeeeXeeeeeeXXXeeeeeeXeeeeeeXXXeeeeeeXeeeeeeXXXeeeeeeXeeeeeeeeXeeeeeeee</lock>
+    </level70>
+    <level71>
+        <row>9</row>
+        <column>9</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>shell</tutorial_type>
+        <target_type>shell</target_type>
+        <target_count>5</target_count>
+        <grid>eequuuweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeadddsee</grid>
+        <tile>eennnnneeennnnnnnensnnnnnnnslnnnnnnnnsnnnnnnnnnnnnnnnnnnnnnnnnnennnnnnneeennnnnee</tile>
+        <sand>eequuuweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeadddsee</sand>
+        <shel>eeeeeeeeeeeeeeeeeeeVeeeeeVeeeeLeeeeeeeeeeeeeeeMeeeeMeeeeeeeeeeeeeeeeeeeeeeeeeeeee</shel>
+        <tuto>eennnnneeennnnnnnenennnnnnneennnnnnnnennnnnnnnnnnnnnnnnnnnnnnnnennnnnnneeennnnnee</tuto>
+    </level71>
+    <level72>
+        <row>9</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell cookie</target_type>
+        <target_count>7 30</target_count>
+        <grid>equuuuweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseannnnseeeaddsee</grid>
+        <tile>ennccnnecnnccnnccnnccnnccnnccnnccnnccnnccnnccnnccnnccnncennccnneeenccnee</tile>
+        <sand>eQUuuUWeqNNnnNNwlNNnnNNrlNNnnNNrlNNnnNNrlNNnnNNraNNnnNNseANnnNSeeeAddSee</sand>
+        <shel>eeeeeeeeeeMeMeeeeeeeeeeeeHeeHeeeLeeeeLeeeeeeeeeeeeeMeeeeeeeeeeeeeeeeeeee</shel>
+    </level72>
+    <level73>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell cake</target_type>
+        <target_count>8 32</target_count>
+        <grid>equuuuuweelnnnnnreqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnselnnnnnreeadddddse</grid>
+        <tile>e1holoh1ee1llsll1e111111111w1wwwww1ww1wwwww1ww1wwwww1w111111111e1wwwww1ee1wwwww1e</tile>
+        <sand>eqUUUUUweelNNNNNreqnnnnnnnwLnNNNNNnRLnNNNNNnRLnNNNNNnRannnnnnnselNNNNNreeaDDDDDse</sand>
+        <shel>eeeeeeeeeeeeeeeeeeeeeLeeeeeMeeeeeeMeeeeeeeeeeeHeeVHeeeeeeeeeeeeeeMeeMeeeeeeeeeeee</shel>
+    </level73>
+    <level74>
+        <row>9</row>
+        <column>8</column>
+        <move>28</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell candy</target_type>
+        <target_count>6 26</target_count>
+        <grid>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseaddddse</grid>
+        <tile>eednndeeeddnnddedddnndddddnnnndddnnnnnnddnnnnnnddnnnnnnddnnnnnndednnnnde</tile>
+        <sand>eeqUUweeeqnNNnweqnnNNnnwlnNNNNnrlNNNNNNrlNNNNNNrlNNNNNNraNNNNNNseaDDDDse</sand>
+        <shel>eeeeeeeeeeeeeeeeeHeeLeeeeMeeeeeeeeeeeeeeeLeeeMeeeeeeeeeeeeeeHeeeeeeeeeee</shel>
+    </level74>
+    <level75>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell starfish pie</target_type>
+        <target_count>6 2 4</target_count>
+        <grid>eeeqweeeeeqnnweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>eeexxeeeeen00neeenn08nnennn00nnnnnn08nnnnnn00nnnnnn09nnnnnn00nnnnnn09nnn</tile>
+        <sand>eeeqweeeeeQnnWeeeQNnnNWeQNNnnNNWLNNnnNNRLNNnnNNRLNNnnNNRLNNnnNNRADDddDDS</sand>
+        <shel>eeeeeeeeeeeeeeeeeeeeeeeeHeeeeHeeeMeeeMeeeeeeeeeeLeeeeLeeeeeeeeeeeeeeeeee</shel>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAA</entr>
+    </level75>
+    <level76>
+        <row>9</row>
+        <column>9</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell cake lock</target_type>
+        <target_count>8 15 10</target_count>
+        <grid>eeeeteeeeeeeqnweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnraddddddds</grid>
+        <tile>eeeeneeeeeeennneeeeennnnneeennnnnnnennnn1nnnnnnn1n1nnnnn1n1n1nnn1n1n1n1n1n1n1n1n1</tile>
+        <sand>eeeeteeeeeeeqnweeeeeqnnnweeeqnnnnnweqnnnNnnnwlnnNNNnnrlnNNNNNnrlNNNNNNNrADDDDDDDS</sand>
+        <shel>eeeeeeeeeeeeeVeeeeeeeeeeeeeeHeeeHeeeeMeeeeMeeeeeeeeeeeeVeLeeeVeeeeeeeeeeeeeeeeeee</shel>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXeeeeeeeXeXeeeeeXeXeXeeeXeXeXeXe</lock>
+    </level76>
+    <level77>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell cake cookie</target_type>
+        <target_count>6 20 24</target_count>
+        <grid>quuwequuwlnnrelnnrlnnrelnnrlnnnunnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeadddsee</grid>
+        <tile>ccccecccccccceccccccccecccc1111n1111111nnn11111nnnnn111nnnnnnn1ennnnnnneeennnnnee</tile>
+        <sand>quuwequuwlnnrelnnrlnnrelnnrlnnnUnnnrlnnNNNnnrlnNNNNNnraNNNNNNNseANNNNNSeeeADDDSee</sand>
+        <shel>eeeeeeeeeeMeeeeMeeeeeeeeeeeeeeeVeeeeeeeeeeeeeHeeeeeHeeeeeLeeeeeeeeeeeeeeeeeeeeeee</shel>
+    </level77>
+    <level78>
+        <row>9</row>
+        <column>7</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish ice cake</target_type>
+        <target_count>3 63 33</target_count>
+        <grid>quuuuuwlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>1xlslx11ssxss111111111wwwww11wwwww111111111wwwww11wwwww11111111</tile>
+        <ices>qUUUUUwlNNNNNrlnnnnnrlNNNNNrlNNNNNrlnnnnnrlNNNNNrlNNNNNraddddds</ices>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAA</entr>
+    </level78>
+    <level79>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish candy lock</target_type>
+        <target_count>2 16 18</target_count>
+        <grid>quuuuuuwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnselnnnnreeaddddse</grid>
+        <tile>nnnxxnnnnnnddnnnnnnddnnnnnnddnnnnnnddnnnnnnddnnnnnnddnnnennddnneennddnne</tile>
+        <lock>eeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXee</lock>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeAeeeeeeeeeAAAAAAe</entr>
+    </level79>
+    <level80>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey pie lock</target_type>
+        <target_count>61 4 24</target_count>
+        <grid>eeequweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrlnnnnnnnraddddddds</grid>
+        <tile>eeelsleeeeelslsleeelslslslelslnEnlslslsnnnsls00nCnCn0008nnnnn08ww00n00wwww09n09ww</tile>
+        <hone>eeequweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrLNnnnnnNRADdddddDS</hone>
+        <lock>eeeeeeeeeeeeeeeeeeeeeXXXeeeeeeXeXeeeXXXXXXXXXeeXeXeXeeeeXXXXXeeeeeeXeeeeeeeeXeeee</lock>
+    </level80>
+    <level81>
+        <row>9</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>4</fruit_count>
+        <tutorial_type>pipe</tutorial_type>
+        <target_type>pie cookie</target_type>
+        <target_count>5 24</target_count>
+        <grid>quuuuuuwaddddddseeeeeeeequuuuuuwlnnnnnnrlnnnnnnrannnnnnselnnnnreeaddddse</grid>
+        <tile>ccccccccccccccccppppppppslslslsllslslsls00cccc0008cccc08e000000ee090909e</tile>
+        <tuto>eeennnnneeennnnneeennnnneeennnnneeennnnnnnnnnnnnnnnnnnnnennnnnneennnnnne</tuto>
+    </level81>
+    <level82>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>4</fruit_count>
+        <target_type>shell cookie</target_type>
+        <target_count>7 26</target_count>
+        <grid>eequuweeeqnnnnweqnnnnnnwaddddddseeeeeeeequuuuuuwlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>eecccceeecccccceccccccccccccccccppppppppnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</tile>
+        <sand>eequuweeeqnnnnweqnnnnnnwaddddddseeeeeeeeQUUUUUUWLNNNNNNRLNNNNNNRADDDDDDS</sand>
+        <shel>eeeeeeeeeLeeLeeeeeeeeeeeeeeeeeeeeeeeeeeeeMeeeMeeeeeMeeeeHeeeeHeeeeeeeeee</shel>
+    </level82>
+    <level83>
+        <row>9</row>
+        <column>7</column>
+        <move>28</move>
+        <fruit_count>4</fruit_count>
+        <target_type>shell candy</target_type>
+        <target_count>7 21</target_count>
+        <grid>quuuuuwlnnnnnraddnddseeeveeeeeqnweeeqnnnweqnnnnnwlnnnnnraddddds</grid>
+        <tile>dddddddddddddddddddddpppnpppppnnnpppnnnnnpnnnnnnnnnnnnnnnnnnnnn</tile>
+        <sand>quuuuuwlnnnnnraddnddseeeVeeeeeQNWeeeQNNNWeQNNNNNWLNNNNNRADDDDDS</sand>
+        <shel>eeeVeeeHeeeHeeeeeeeeeeeeeeeeeeeeeeeeeLeeeeeeeeeeeMeeeeMeeeHeeee</shel>
+    </level83>
+    <level84>
+        <row>9</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>4</fruit_count>
+        <target_type>starfish honey</target_type>
+        <target_count>4 48</target_count>
+        <grid>eqweeqweqnnuunnwlnnnnnnraddddddseeeeeeeequuuuuuwlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>exxeexxennnnnnnnnnnnnnnnnnnnnnnnppppppppnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</tile>
+        <hone>eQWeeQWeqnnuunnwlnnnnnnraddddddseeeeeeeequuuuuuwlnnnnnnrlnnnnnnrADDDDDDS</hone>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAA</entr>
+    </level84>
+    <level85>
+        <row>9</row>
+        <column>9</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>pie cake cookie</target_type>
+        <target_count>6 14 23</target_count>
+        <grid>equuuuuweelnnnnnreqnnnnnnnwlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnselnnnnnreeadddddse</grid>
+        <tile>eslsclsleelslcslse100ccc001107ccc0711ccccccc1100ccc001108ccc081e100c001ee109c091e</tile>
+    </level85>
+    <level86>
+        <row>8</row>
+        <column>9</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey cake cookie</target_type>
+        <target_count>49 24 12</target_count>
+        <grid>zuuuuuuuxelnnnnnreznnnnnnnxelnnnnnreznnnnnnnxelnnnnnreznnnnnnnxebebebebe</grid>
+        <tile>c111h111ce11hoh11ec1holoh1ceholslohec1holoh1ce11hoh11ec111h111cecececece</tile>
+        <hone>ZuuuuuuuXelnnnnnreZnnnnnnnXelnnnnnreZnnnnnnnXelnnnnnreZnnnnnnnXeBeBeBeBe</hone>
+    </level86>
+    <level87>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake lock</target_type>
+        <target_count>68 12 14</target_count>
+        <grid>eequuuweeeqnnnnnweqnnnnnnnwlnnndnnnrlnnrelnnrlnnnunnnrannnnnnnseannnnnseeeadddsee</grid>
+        <tile>eennnnneeennnnnnnennnnnnnnnnnnnnnnnn1111e1111nnnn1nnnnwwwn1nwwwewwn1nwweeewn1nwee</tile>
+        <ices>eequuuweeeqnnnnnweqnnnnnnnwlnnndnnnrlnnrelnnrLNNNuNNNRANNNnNNNSeANNnNNSeeeADdDSee</ices>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXXXXeXXXXeeeXeXeeeeeeXeXeeeeeeXeXeee</lock>
+    </level87>
+    <level88>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey candy cookie</target_type>
+        <target_count>57 24 28</target_count>
+        <grid>qwequweqwanunnnunselnnnnnreqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreqndnnndnwaseadseas</grid>
+        <tile>ccedddecccccdddccceccnnncceddnnnnnddddnnnnnddddnnnnnddeccnnnccecccdddcccccedddecc</tile>
+        <hone>QWequweQWANunnnuNSelnnnnnreqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreQNdnnndNWASeadseAS</hone>
+    </level88>
+    <level89>
+        <row>9</row>
+        <column>7</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell starfish cake</target_type>
+        <target_count>8 3 29</target_count>
+        <grid>teeteetluunuurlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnrlnnnnnraddddds</grid>
+        <tile>xeeseex1ssxss111111111wwwww11wwwww111111111wwwww11wwwww11111111</tile>
+        <sand>teeteetlUUNUUrlnnnnnrlNNNNNrlNNNNNrlnnnnnrlNNNNNrlNNNNNraddddds</sand>
+        <shel>eeeeeeeeeeeeeeHeeeHeeeMeVMeeeeeeeeeeVeeeVeeeLeeeeeeeeeeeeeeeeee</shel>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAA</entr>
+    </level89>
+    <level90>
+        <row>8</row>
+        <column>8</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey pie cake</target_type>
+        <target_count>60 3 20</target_count>
+        <grid>quuuuuuwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>001lslsl081slsls111111slww1001lsww1091slww111111wwwww100wwwww108</tile>
+        <hone>quuuuuuwlnnnnnnrlnnnnnnrlnnNNnnrlnnNNnnrlnnnnnnrlnnnnnnradddddds</hone>
+    </level90>
+    <level91>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <tutorial_type>generator</tutorial_type>
+        <target_type>honey lock</target_type>
+        <target_count>46 18</target_count>
+        <grid>eequuweeeqnnnnweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnradddddds</grid>
+        <tile>eensnneeenslnnnewnnsnnnwwnnnnnnwwnnnnnnwwnnnnnnwwnnnnnnwwnnnnnnwwwwwwwww</tile>
+        <hone>eequuweeeqnnnnweQnnnnnnWLnnnnnnRLnnnnnnRLnnnnnnRLnnnnnnRLnnnnnnRADDDDDDS</hone>
+        <lock>eeeeeeeeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXXXXXXeeeeeeeee</lock>
+        <gene>eeeMMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+        <tuto>eenenneeeneennnennnennnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn</tuto>
+    </level91>
+    <level92>
+        <row>9</row>
+        <column>9</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish cookie</target_type>
+        <target_count>3 51</target_count>
+        <grid>teeeteeetveeeveeevveeqnweevveqnnnwevlunnnnnurlnnnnnnnrlnnnnnnnrlnnnnnnnraddddddds</grid>
+        <tile>xeeexeeexceeeceeecceeccceeccecccccecccccccccccccccccccccclslccccccslscccccclslccc</tile>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAAA</entr>
+        <gene>CeeeMeeeCeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+    </level92>
+    <level93>
+        <row>9</row>
+        <column>9</column>
+        <move>28</move>
+        <fruit_count>5</fruit_count>
+        <target_type>ice cake candy</target_type>
+        <target_count>63 21 21</target_count>
+        <grid>quuuuuweelnnnnnreeannnnnreeelnnnnnweelnnnnnreeannnnnreeelnnnnnweelnnnnnreeaddddds</grid>
+        <tile>dddddddeedddddddeedddddddeeennnnnnneennnnnnneennnnnnneee1111111ee1111111ee1111111</tile>
+        <ices>quuuuuweelnnnnnreeannnnnreeeLNNNNNWeeLNNNNNReeANNNNNReeelnnnnnweelnnnnnreeaddddds</ices>
+        <gene>eMeEeMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+    </level93>
+    <level94>
+        <row>9</row>
+        <column>9</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey cake</target_type>
+        <target_count>51 36</target_count>
+        <grid>quuwequuwlnnnunnnrlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeannnseeeeeadseee</grid>
+        <tile>1lslelsl111lslsl11111lsl1111111l1111w1111111www11111wweww111wweeeww1wweeeeewwweee</tile>
+        <hone>quuwequuwlnnnunnnrlnnnnnnnrlnnnnnnnrLnnnnnnnRANnnnnnNSeANnnnNSeeeANnNSeeeeeADSeee</hone>
+        <gene>eMMeeeMMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+    </level94>
+    <level95>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell cake cookie</target_type>
+        <target_count>8 30 26</target_count>
+        <grid>eeequweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnndnnnrlnnrelnnrlnnseannradseeeads</grid>
+        <tile>eeeslseeeee1lsl1eeec1clc1ce1c1clc1c11c1ccc1c11c1ccc1c11c11e11c11ccceccc1111eee111</tile>
+        <sand>eeeQUWeeeeeqNNNweeeQnNNNnWeqNnNNNnNwlNnNNNnNrlNnNDNnNrlNnrelnNrlNNSeANNradseeeads</sand>
+        <shel>eeeeVeeeeeeeeeeeeeeHeeeHeeeeVeLeeeVeeeeeeeeeeeeeeeeeeeeMeeeeMeeeeeeeeeeeeeeeeeeee</shel>
+        <gene>eeeeEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+    </level95>
+    <level96>
+        <row>9</row>
+        <column>8</column>
+        <move>20</move>
+        <fruit_count>5</fruit_count>
+        <target_type>cake candy lock</target_type>
+        <target_count>28 8 16</target_count>
+        <grid>equuuuweqnnnnnnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseaddddse</grid>
+        <tile>ennnnnne1nnnnnn111nnnn1111nnnn1111nddn1111nddn1111nddn1111nddn11e1nnnn1e</tile>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeXXXXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXeeXeeeeXXXXee</lock>
+        <gene>eeMeeMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+    </level96>
+    <level97>
+        <row>7</row>
+        <column>9</column>
+        <move>20</move>
+        <fruit_count>4</fruit_count>
+        <target_type>honey cookie</target_type>
+        <target_count>56 42</target_count>
+        <grid>quuuuuuuwlnnnnnnnrlnnnnnnnrlnnnnnnnrlnnnnnnnrlnnnnnnnraddddddds</grid>
+        <tile>nnnccccccnnnccccccnnnccccccnnnccccccnnnccccccnnnccccccnnncccccc</tile>
+        <hone>quuuuuuuWlnnnnnnnRlnnnnnnnRlnnnnnnnRlnnnnnnnRlnnnnnnnRadddddddS</hone>
+    </level97>
+    <level98>
+        <row>9</row>
+        <column>8</column>
+        <move>25</move>
+        <fruit_count>5</fruit_count>
+        <target_type>starfish ice pie</target_type>
+        <target_count>4 62 5</target_count>
+        <grid>eqweeqweqnnuunnwlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrlnnnnnnrannnnnnseaddddse</grid>
+        <tile>exxeexxen00nn00nn08nn08nnnnnnnnnnnn00nnnnnn09nnnnnnnnnnnn00nn00ne08nn08e</tile>
+        <ices>eeeeeeeeqnnUUnnwlnnNNnnrlNNNNNNrlNNnnNNrlNNnnNNrlNNNNNNrannNNnnseadDDdse</ices>
+        <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAeeeeeeAeAAAAAAe</entr>
+    </level98>
+    <level99>
+        <row>9</row>
+        <column>9</column>
+        <move>23</move>
+        <fruit_count>5</fruit_count>
+        <target_type>honey cake candy</target_type>
+        <target_count>56 21 15</target_count>
+        <grid>equuuuuweqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreqnnnnnnnwlnnnnnnnrannnnnnnseadseadse</grid>
+        <tile>e1ddddd1ew1ddddd1ww1ddddd1ww1nnnnn1we1nnnnn1ew1nnnnn1ww1nnnnn1ww1111111wewwwewwwe</tile>
+        <hone>equuuuuweQnnnnnnnWLnnnnnnnRAnnnnnnnSelnnnnnreQnnnnnnnWLnnnnnnnRAnnnnnnnSeADSeADSe</hone>
+        <gene>eeMeEeMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+    </level99>
+    <level100>
+        <row>9</row>
+        <column>9</column>
+        <move>30</move>
+        <fruit_count>5</fruit_count>
+        <target_type>shell pie cookie</target_type>
+        <target_count>9 6 18</target_count>
+        <grid>quuuuuuuwlnnnnnnnradnnnnndseelnnnreeeelnnnreeeelnnnreequnnnnnuwlnnnnnnnraddddddds</grid>
+        <tile>nnnnnnnnnnnnnnnnnnnnnnnnnnnpp00c00pppp09c09pppp00c00ppcc09c09cc00ccccc0008ccccc08</tile>
+        <sand>QUUUUUUUWLNNNNNNNRADNNNNNDSeelnNnreeeelnNnreeeelnNnreeQUnnNnnUWlnNNNNNnradDDDDDds</sand>
+        <shel>eeeLeeeeeHeeeeeHeeeeeeeeeeeeeeeVeeeeeeMeeMeeeeeeeeeeeeeeeLeeeeeHeeeeeHeeeeeeeeeee</shel>
+        <gene>eEMeeeMEeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+    </level100>
 </level>

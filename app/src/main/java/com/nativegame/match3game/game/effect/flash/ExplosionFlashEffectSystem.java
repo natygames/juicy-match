@@ -21,7 +21,7 @@ public class ExplosionFlashEffectSystem {
         mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<ExplosionFlashEffect>() {
             @Override
             public ExplosionFlashEffect createObject() {
-                return new ExplosionFlashEffect(ExplosionFlashEffectSystem.this, engine, Textures.EXPLOSION_FLASH_ANIMATION);
+                return new ExplosionFlashEffect(ExplosionFlashEffectSystem.this, engine, Textures.FLASH_EXPLOSION_ANIMATION);
             }
         }, size);
     }
@@ -32,7 +32,7 @@ public class ExplosionFlashEffectSystem {
     //--------------------------------------------------------
     public void activate(float x, float y) {
         mEffectPool.obtainObject().activate(x, y);
-        Sounds.EXPLOSION_SPECIAL_TILE_EXPLODE.play();
+        Sounds.EXPLOSIVE_EXPLODE.play();
     }
 
     public void returnToPool(ExplosionFlashEffect effect) {
