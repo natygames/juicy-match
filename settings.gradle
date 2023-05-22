@@ -13,5 +13,5 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-rootProject.name = "Match3Game"
+rootProject.name = "JuicyMatch"
 include ':app'
