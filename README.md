@@ -14,17 +14,9 @@
 ---
 
 ## :pushpin: Features
-Juicy Match is a classic Match-3-Game where players match 3 or more tiles in the same kind through column or row, the goal is to eliminate tiles on field until certain target (like reaching target score or items) is fulfilled. Players can also create special tiles by match 4 or 5 tiles, T or L shape, or even combine two special tiles. 
+Juicy Match is a classic Match-3-Game where players match 3 or more tiles in the same kind through column or row, the goal is to eliminate tiles on field until certain goal (like reaching target score or collecting items) is fulfilled. Players can also create special tiles by match 4 or 5 tiles, T or L shape, or even combine two special tiles. 
 
 ## :video_game: Gameplay
-The game includes 3 type of level:
-
-<1> Collect items: Players have to collect target fruits or items
-
-<2> Break all the ice: Players have to clear all the ice by eliminate the fruits above
-
-<3> Collect starfish: Players have to collect starfish by dropping the starfish to bottom
-
 <img src="https://user-images.githubusercontent.com/93536412/191763415-a74e536d-6cda-46a0-af8f-45b9074c9fd7.gif" width="200"> <img src="https://user-images.githubusercontent.com/93536412/191765139-cd09b128-7479-4dc0-a704-b07f26ee86d8.gif" width="200"> <img src="https://user-images.githubusercontent.com/93536412/191765788-6407b57c-db08-4b2b-87a3-f51dea3337a3.gif" width="200">
 
 ## :gear: Game UI
@@ -41,5 +33,5 @@ https://user-images.githubusercontent.com/93536412/191766820-ff952d4f-2320-4ac4-
 [Free Music](https://soundcloud.com/fm_freemusic),
 [mixkit]( https://mixkit.co/free-sound-effects)
 
-## :scroll: License:
+## :balance_scale: License:
 Juicy Match is licensed under the [MIT license](https://github.com/nativegamestudio/juicy-match/blob/master/LICENSE)
