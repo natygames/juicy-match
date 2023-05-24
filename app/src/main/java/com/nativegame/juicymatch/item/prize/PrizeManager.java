@@ -25,8 +25,8 @@ public class PrizeManager {
     //--------------------------------------------------------
     public PrizeManager() {
         // Init all the prize
-        Prize prizeCoin50 = new Prize(Item.COIN, 50, R.drawable.product_coin_50);
-        Prize prizeCoin150 = new Prize(Item.COIN, 150, R.drawable.product_coin_150);
+        Prize prizeCoin50 = new Prize(Item.COIN, 50, R.drawable.coin_50);
+        Prize prizeCoin150 = new Prize(Item.COIN, 150, R.drawable.coin_150);
         Prize prizeGlove = new Prize(Item.GLOVE, 1, R.drawable.glove);
         Prize prizeBomb = new Prize(Item.BOMB, 1, R.drawable.bomb);
         Prize prizeHammer = new Prize(Item.HAMMER, 1, R.drawable.hammer);

@@ -557,20 +557,20 @@
     <level49>
         <row>8</row>
         <column>9</column>
-        <move>28</move>
+        <move>25</move>
         <fruit_count>5</fruit_count>
         <target_type>starfish ice lock</target_type>
-        <target_count>5 25 16</target_count>
+        <target_count>5 25 10</target_count>
         <grid>eeeeteeeeeeeqnweeeeeqnnnweeeqnnnnnweqnnnnnnnwlnnnnnnnrlnnnnnnnraddddddds</grid>
         <tile>eeeexeeeeeeennneeeeexnnnxeeennnnnnnexnnnnnnnxnnnnnnnnnnnnnnnnnnnnnnnnnnn</tile>
         <ices>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeneeeeeeenNneeeeenNNNneeenNNNNNneaDDDDDDDs</ices>
-        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXeeeeeeeXXXeeeeeXXXXXeeeXXXXXXXe</lock>
+        <lock>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeXeeeeeeeXeXeeeeeXeXeXeeeXeXeXeXe</lock>
         <entr>eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeAAAAAAAAA</entr>
     </level49>
     <level50>
         <row>9</row>
         <column>9</column>
-        <move>25</move>
+        <move>30</move>
         <fruit_count>5</fruit_count>
         <target_type>cookie lock</target_type>
         <target_count>18 20</target_count>

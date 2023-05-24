@@ -15,7 +15,7 @@ import com.nativegame.nattyengine.ui.GameText;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class MoreLivesDialog extends BaseDialog implements AdManager.AdRewardListener, View.OnClickListener {
+public class MoreLivesDialog extends BaseDialog implements View.OnClickListener, AdManager.AdRewardListener {
 
     private int mSelectedId;
 

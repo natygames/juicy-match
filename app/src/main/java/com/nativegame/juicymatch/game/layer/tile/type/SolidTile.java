@@ -443,12 +443,17 @@ public class SolidTile extends Tile implements EventListener {
     }
 
     private void addLightEffect() {
-        mLightCircle.activate(getCenterX(), getCenterY());
+        // We prevent adding multiple times from multiTouch
+        if (!mLightCircle.isRunning()) {
+            mLightCircle.activate(getCenterX(), getCenterY());
+        }
         setColorFilter(mLightFilter);
     }
 
     private void removeLightEffect() {
-        mLightCircle.removeFromGame();
+        if (mLightCircle.isRunning()) {
+            mLightCircle.removeFromGame();
+        }
         clearColorFilter();
     }
     //========================================================

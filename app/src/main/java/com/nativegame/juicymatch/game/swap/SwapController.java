@@ -102,7 +102,7 @@ public class SwapController extends Entity implements TouchEventListener,
                     }
                 }
                 // Check is tile swappable
-                if (mTouchUpTile != null && mTouchDownTile.isSwappable() && mTouchUpTile.isSwappable()) {
+                if (mTouchUpTile != null && mTouchUpTile.isSwappable() && mTouchDownTile.isSwappable()) {
                     Match3Algorithm.swapTile(mTiles, mTouchDownTile, mTouchUpTile);
                     mSwapModifier.activate(mTouchDownTile, mTouchUpTile);
                     mEnable = false;

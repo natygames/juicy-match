@@ -17,7 +17,7 @@ import com.nativegame.nattyengine.ui.GameText;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class MoreCoinDialog extends BaseDialog implements AdManager.AdRewardListener, View.OnClickListener {
+public class MoreCoinDialog extends BaseDialog implements View.OnClickListener, AdManager.AdRewardListener {
 
     private static final int REWARD_COIN = 50;
 

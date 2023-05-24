@@ -23,7 +23,7 @@
         android:layout_width="@dimen/btn_large_width"
         android:layout_height="@dimen/btn_large_width"
         android:layout_marginTop="@dimen/margin_20"
-        android:src="@drawable/product_coin_50"
+        android:src="@drawable/coin_50"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintStart_toStartOf="@id/image_dialog"
         app:layout_constraintTop_toTopOf="@id/image_dialog" />
