@@ -29,26 +29,18 @@ import com.nativegame.nattyengine.ui.GameButton;
 public class BoosterCounter extends RunnableEntity implements View.OnClickListener,
         EventListener, BoosterController.BoosterListener {
 
-    private static final String INFINITE = "∞";
+    private static final String SIGN_INFINITE = "∞";
+    private static final int INFINITE = -1;
 
-    private final TextView mTxtHammer;
-    private final TextView mTxtBomb;
-    private final TextView mTxtGlove;
-    private final GameButton mBtnHammer;
-    private final GameButton mBtnBomb;
-    private final GameButton mBtnGlove;
     private final HammerController mHammerController;
     private final BombController mBombController;
     private final GloveController mGloveController;
-    private final TutorialType mTutorialType;
-    private final DatabaseHelper mDatabaseHelper;
 
     private BoosterState mState;
     private int mHammerCount;
     private int mBombCount;
     private int mGloveCount;
     private boolean mIsEnable = false;
-
     private boolean mIsAddBooster = false;
     private boolean mIsRemoveBooster = false;
 
@@ -65,19 +57,6 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
     public BoosterCounter(GameActivity activity, Engine engine, TileSystem tileSystem) {
         super(activity, engine);
 
-        // Init booster count text
-        mTxtHammer = (TextView) activity.findViewById(R.id.txt_hammer);
-        mTxtBomb = (TextView) activity.findViewById(R.id.txt_bomb);
-        mTxtGlove = (TextView) activity.findViewById(R.id.txt_gloves);
-
-        // Init booster button
-        mBtnHammer = (GameButton) activity.findViewById(R.id.btn_hammer);
-        mBtnBomb = (GameButton) activity.findViewById(R.id.btn_bomb);
-        mBtnGlove = (GameButton) activity.findViewById(R.id.btn_glove);
-        mBtnHammer.setOnClickListener(this);
-        mBtnBomb.setOnClickListener(this);
-        mBtnGlove.setOnClickListener(this);
-
         // Init booster controller
         mHammerController = new HammerController(engine, tileSystem);
         mBombController = new BombController(engine, tileSystem);
@@ -86,24 +65,23 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
         mBombController.setListener(this);
         mGloveController.setListener(this);
 
-        // Check is current level has booster tutorial
-        mTutorialType = Level.LEVEL_DATA.getTutorialType();
-        switch (mTutorialType) {
-            case HAMMER:
-                mTxtHammer.setText(INFINITE);
-                break;
-            case BOMB:
-                mTxtBomb.setText(INFINITE);
-                break;
-            case GLOVE:
-                mTxtGlove.setText(INFINITE);
-                break;
-        }
+        // Init booster count
+        DatabaseHelper databaseHelper = DatabaseHelper.getInstance(activity);
+        TutorialType tutorialType = Level.LEVEL_DATA.getTutorialType();   // Check is current level has Tutorial
+        mHammerCount = tutorialType == TutorialType.HAMMER ? INFINITE : databaseHelper.getItemCount(Item.HAMMER);
+        mBombCount = tutorialType == TutorialType.BOMB ? INFINITE : databaseHelper.getItemCount(Item.BOMB);
+        mGloveCount = tutorialType == TutorialType.GLOVE ? INFINITE : databaseHelper.getItemCount(Item.GLOVE);
 
-        mDatabaseHelper = DatabaseHelper.getInstance(activity);
-        mHammerCount = mDatabaseHelper.getItemCount(Item.HAMMER);
-        mBombCount = mDatabaseHelper.getItemCount(Item.BOMB);
-        mGloveCount = mDatabaseHelper.getItemCount(Item.GLOVE);
+        // Init booster button
+        GameButton btnHammer = (GameButton) mActivity.findViewById(R.id.btn_hammer);
+        btnHammer.setOnClickListener(this);
+        GameButton btnBomb = (GameButton) mActivity.findViewById(R.id.btn_bomb);
+        btnBomb.setOnClickListener(this);
+        GameButton btnGlove = (GameButton) mActivity.findViewById(R.id.btn_glove);
+        btnGlove.setOnClickListener(this);
+
+        // Init booster text
+        updateText();
     }
     //========================================================
 
@@ -134,15 +112,7 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
 
     @Override
     protected void onUpdateRunnable() {
-        if (mTutorialType != TutorialType.HAMMER) {
-            mTxtHammer.setText(String.valueOf(mHammerCount));
-        }
-        if (mTutorialType != TutorialType.BOMB) {
-            mTxtBomb.setText(String.valueOf(mBombCount));
-        }
-        if (mTutorialType != TutorialType.GLOVE) {
-            mTxtGlove.setText(String.valueOf(mGloveCount));
-        }
+        updateText();
         unLockButton();
     }
 
@@ -155,10 +125,19 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
             if (mState == BoosterState.WAITING) {
                 int id = view.getId();
                 if (id == R.id.btn_hammer) {
+                    if (mHammerCount == 0) {
+                        return;
+                    }
                     mState = BoosterState.HAMMER;
                 } else if (id == R.id.btn_bomb) {
+                    if (mBombCount == 0) {
+                        return;
+                    }
                     mState = BoosterState.BOMB;
                 } else if (id == R.id.btn_glove) {
+                    if (mGloveCount == 0) {
+                        return;
+                    }
                     mState = BoosterState.GLOVE;
                 }
                 lockButton();
@@ -193,21 +172,24 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
     public void onConsumeBooster() {
         switch (mState) {
             case HAMMER:
-                if (mTutorialType != TutorialType.HAMMER) {
+                if (mHammerCount != INFINITE) {
                     mHammerCount--;
-                    mDatabaseHelper.updateItemCount(Item.HAMMER, mHammerCount);
+                    DatabaseHelper databaseHelper = DatabaseHelper.getInstance(mActivity);
+                    databaseHelper.updateItemCount(Item.HAMMER, mHammerCount);
                 }
                 break;
             case BOMB:
-                if (mTutorialType != TutorialType.BOMB) {
+                if (mBombCount != INFINITE) {
                     mBombCount--;
-                    mDatabaseHelper.updateItemCount(Item.BOMB, mBombCount);
+                    DatabaseHelper databaseHelper = DatabaseHelper.getInstance(mActivity);
+                    databaseHelper.updateItemCount(Item.BOMB, mBombCount);
                 }
                 break;
             case GLOVE:
-                if (mTutorialType != TutorialType.GLOVE) {
+                if (mGloveCount != INFINITE) {
                     mGloveCount--;
-                    mDatabaseHelper.updateItemCount(Item.GLOVE, mGloveCount);
+                    DatabaseHelper databaseHelper = DatabaseHelper.getInstance(mActivity);
+                    databaseHelper.updateItemCount(Item.GLOVE, mGloveCount);
                 }
                 break;
         }
@@ -249,35 +231,57 @@ public class BoosterCounter extends RunnableEntity implements View.OnClickListen
     }
 
     private void lockButton() {
+        GameButton btnHammer = (GameButton) mActivity.findViewById(R.id.btn_hammer);
+        GameButton btnBomb = (GameButton) mActivity.findViewById(R.id.btn_bomb);
+        GameButton btnGlove = (GameButton) mActivity.findViewById(R.id.btn_glove);
         switch (mState) {
             case HAMMER:
-                mBtnGlove.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnBomb.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnGlove.setEnabled(false);
-                mBtnBomb.setEnabled(false);
+                btnGlove.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                btnGlove.setEnabled(false);
+
+                btnBomb.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                btnBomb.setEnabled(false);
                 break;
             case BOMB:
-                mBtnHammer.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnGlove.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnHammer.setEnabled(false);
-                mBtnGlove.setEnabled(false);
+                btnHammer.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                btnHammer.setEnabled(false);
+
+                btnGlove.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                btnGlove.setEnabled(false);
                 break;
             case GLOVE:
-                mBtnHammer.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnBomb.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
-                mBtnHammer.setEnabled(false);
-                mBtnBomb.setEnabled(false);
+                btnHammer.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                btnHammer.setEnabled(false);
+
+                btnBomb.addColorFilter(GameButton.DEFAULT_PRESS_COLOR);
+                btnBomb.setEnabled(false);
                 break;
         }
     }
 
     private void unLockButton() {
-        mBtnHammer.removeColorFilter();
-        mBtnBomb.removeColorFilter();
-        mBtnGlove.removeColorFilter();
-        mBtnHammer.setEnabled(true);
-        mBtnBomb.setEnabled(true);
-        mBtnGlove.setEnabled(true);
+        GameButton btnHammer = (GameButton) mActivity.findViewById(R.id.btn_hammer);
+        btnHammer.removeColorFilter();
+        btnHammer.setEnabled(true);
+
+        GameButton btnBomb = (GameButton) mActivity.findViewById(R.id.btn_bomb);
+        btnBomb.removeColorFilter();
+        btnBomb.setEnabled(true);
+
+        GameButton btnGlove = (GameButton) mActivity.findViewById(R.id.btn_glove);
+        btnGlove.removeColorFilter();
+        btnGlove.setEnabled(true);
+    }
+
+    private void updateText() {
+        TextView txtHammer = (TextView) mActivity.findViewById(R.id.txt_hammer);
+        txtHammer.setText(mHammerCount == INFINITE ? SIGN_INFINITE : String.valueOf(mHammerCount));
+
+        TextView txtBomb = (TextView) mActivity.findViewById(R.id.txt_bomb);
+        txtBomb.setText(mBombCount == INFINITE ? SIGN_INFINITE : String.valueOf(mBombCount));
+
+        TextView txtGlove = (TextView) mActivity.findViewById(R.id.txt_gloves);
+        txtGlove.setText(mGloveCount == INFINITE ? SIGN_INFINITE : String.valueOf(mGloveCount));
     }
     //========================================================
 

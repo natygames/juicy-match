@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_more_coin.xml" value="0.5142857142857142" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_more_move.xml" value="0.1539855072463768" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_new_prize.xml" value="0.15942028985507245" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_setting.xml" value="0.15942028985507245" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/view_game_booster.xml" value="0.15942028985507245" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/view_map_level.xml" value="0.1539855072463768" />
+      </map>
+    </option>
+  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+</project>
