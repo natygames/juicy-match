@@ -102,6 +102,9 @@ public class ComboCounter extends Entity implements EventListener {
                 }
                 mCombo = 0;
                 break;
+            case ADD_EXTRA_MOVES:
+                mCombo = 0;
+                break;
             case GAME_WIN:
             case GAME_OVER:
                 removeFromGame();
