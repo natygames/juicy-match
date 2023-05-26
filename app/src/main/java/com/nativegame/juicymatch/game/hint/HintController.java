@@ -83,6 +83,7 @@ public class HintController extends Entity implements EventListener,
                 break;
             case STOP_COMBO:
             case REMOVE_BOOSTER:
+            case ADD_EXTRA_MOVES:
                 startHint();
                 break;
             case PLAYER_SWAP:
