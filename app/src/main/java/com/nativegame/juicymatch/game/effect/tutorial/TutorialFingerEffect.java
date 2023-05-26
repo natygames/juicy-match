@@ -31,9 +31,9 @@ public class TutorialFingerEffect extends Sprite implements TouchEventListener, 
         super(engine, texture);
         mPositionModifier = new PositionModifier(TIME_TO_LIVE, TIME_TO_PAUSE);
         mFadeOutModifier = new FadeOutModifier(TIME_TO_FADE, TIME_TO_LIVE + TIME_TO_PAUSE);
-        mFadeOutModifier.setListener(this);
-        mDurationModifier = new DurationModifier(TIME_TO_LIVE);
+        mDurationModifier = new DurationModifier(TIME_TO_LIVE, TIME_TO_LIVE + TIME_TO_PAUSE + TIME_TO_FADE);
         mDurationModifier.setListener(this);
+        mDurationModifier.setLooping(true);
         setLayer(Layer.EFFECT_LAYER);
     }
     //========================================================
@@ -56,12 +56,8 @@ public class TutorialFingerEffect extends Sprite implements TouchEventListener, 
 
     @Override
     public void onModifierComplete() {
-        if (mDurationModifier.isRunning()) {
-            mPositionModifier.init(this);
-            mFadeOutModifier.init(this);
-        } else {
-            mDurationModifier.init(this);
-        }
+        mPositionModifier.init(this);
+        mFadeOutModifier.init(this);
     }
     //========================================================
 
@@ -72,6 +68,7 @@ public class TutorialFingerEffect extends Sprite implements TouchEventListener, 
         mPositionModifier.setValue(startX, endX, startY, endY);
         mPositionModifier.init(this);
         mFadeOutModifier.init(this);
+        mDurationModifier.init(this);
         addToGame();
     }
     //========================================================
