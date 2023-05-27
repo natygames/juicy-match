@@ -219,7 +219,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
             GameImage imageStar = (GameImage) getView().findViewById(id);
 
             int level = i + increment;
-            if (level <= mCurrentLevel) {
+            if (level < mCurrentLevel) {
                 int star = stars.get(level - 1);
                 switch (star) {
                     case 1:
