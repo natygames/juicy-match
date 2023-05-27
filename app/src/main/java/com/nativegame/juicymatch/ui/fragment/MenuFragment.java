@@ -45,24 +45,24 @@ public class MenuFragment extends GameFragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
 
         // Init logo image
-        GameImage imageLogo = (GameImage) getView().findViewById(R.id.image_logo);
+        GameImage imageLogo = (GameImage) view.findViewById(R.id.image_logo);
         imageLogo.popUp(1000, 300);
         Animation scaleAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_pulse);
         imageLogo.startAnimation(scaleAnimation);
 
-        GameImage imageLogoBg = (GameImage) getView().findViewById(R.id.image_logo_bg);
+        GameImage imageLogoBg = (GameImage) view.findViewById(R.id.image_logo_bg);
         imageLogoBg.popUp(300, 300);
         Animation rotateAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.logo_rotate);
         imageLogoBg.startAnimation(rotateAnimation);
 
         // Init button
-        GameButton btnPlay = (GameButton) getView().findViewById(R.id.btn_start);
+        GameButton btnPlay = (GameButton) view.findViewById(R.id.btn_start);
         btnPlay.popUp(200, 600);
         btnPlay.setOnClickListener(this);
         Animation pulseAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.button_pulse);
         btnPlay.startAnimation(pulseAnimation);
 
-        GameButton btnSetting = (GameButton) getView().findViewById(R.id.btn_setting);
+        GameButton btnSetting = (GameButton) view.findViewById(R.id.btn_setting);
         btnSetting.setOnClickListener(this);
 
         // Init audio state from Preference

@@ -82,10 +82,10 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
         GameButton btnWheel = (GameButton) view.findViewById(R.id.btn_wheel);
         btnWheel.setOnClickListener(this);
 
-        GameButton btnLives = (GameButton) getView().findViewById(R.id.btn_lives);
+        GameButton btnLives = (GameButton) view.findViewById(R.id.btn_lives);
         btnLives.setOnClickListener(this);
 
-        GameButton btnCoin = (GameButton) getView().findViewById(R.id.btn_coin);
+        GameButton btnCoin = (GameButton) view.findViewById(R.id.btn_coin);
         btnCoin.setOnClickListener(this);
 
         // Init level button and star
@@ -219,7 +219,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
             GameImage imageStar = (GameImage) getView().findViewById(id);
 
             int level = i + increment;
-            if (level < mCurrentLevel) {
+            if (level <= mCurrentLevel) {
                 int star = stars.get(level - 1);
                 switch (star) {
                     case 1:
