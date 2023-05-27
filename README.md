@@ -1,7 +1,7 @@
 <div align="center">
 <img src="https://user-images.githubusercontent.com/93536412/227904311-5ada46db-a4fa-4f28-b841-d83b1f1e4374.png" width="600">
 
-![version](https://img.shields.io/badge/version-1.2-brightgreen)
+![version](https://img.shields.io/badge/version-1.3-brightgreen)
 ![platform](https://img.shields.io/badge/platform-Android-brightgreen)
 ![minSdk](https://img.shields.io/badge/minSdk-21-brightgreen)
 ![license](https://img.shields.io/badge/license-MIT-brightgreen)
