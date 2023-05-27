@@ -699,7 +699,7 @@
     <level61>
         <row>9</row>
         <column>9</column>
-        <move>15</move>
+        <move>20</move>
         <fruit_count>5</fruit_count>
         <tutorial_type>candy</tutorial_type>
         <target_type>candy</target_type>
@@ -711,7 +711,7 @@
     <level62>
         <row>9</row>
         <column>8</column>
-        <move>20</move>
+        <move>23</move>
         <fruit_count>5</fruit_count>
         <target_type>pie candy</target_type>
         <target_count>4 18</target_count>
@@ -721,7 +721,7 @@
     <level63>
         <row>8</row>
         <column>7</column>
-        <move>23</move>
+        <move>25</move>
         <fruit_count>5</fruit_count>
         <target_type>ice candy</target_type>
         <target_count>42 30</target_count>
@@ -732,7 +732,7 @@
     <level64>
         <row>9</row>
         <column>9</column>
-        <move>25</move>
+        <move>28</move>
         <fruit_count>5</fruit_count>
         <target_type>honey candy</target_type>
         <target_count>42 27</target_count>
@@ -936,9 +936,9 @@
         <fruit_count>4</fruit_count>
         <tutorial_type>pipe</tutorial_type>
         <target_type>pie cookie</target_type>
-        <target_count>5 24</target_count>
+        <target_count>5 16</target_count>
         <grid>quuuuuuwaddddddseeeeeeeequuuuuuwlnnnnnnrlnnnnnnrannnnnnselnnnnreeaddddse</grid>
-        <tile>ccccccccccccccccppppppppslslslsllslslsls00cccc0008cccc08e000000ee090909e</tile>
+        <tile>ccccccccccccccccppppppppslslslsllslslsls00slsl0008lsls08e000000ee090909e</tile>
         <tuto>eeennnnneeennnnneeennnnneeennnnneeennnnnnnnnnnnnnnnnnnnnennnnnneennnnnne</tuto>
     </level81>
     <level82>
@@ -994,9 +994,9 @@
         <fruit_count>5</fruit_count>
         <target_type>honey cake cookie</target_type>
         <target_count>49 24 12</target_count>
-        <grid>zuuuuuuuxelnnnnnreznnnnnnnxelnnnnnreznnnnnnnxelnnnnnreznnnnnnnxebebebebe</grid>
+        <grid>zuuuuuuuxelnnnnnreznnnnnnnxelnnnnnreznnnnnnnxelnnnnnrezndndndnxebebebebe</grid>
         <tile>c111h111ce11hoh11ec1holoh1ceholslohec1holoh1ce11hoh11ec111h111cecececece</tile>
-        <hone>ZuuuuuuuXelnnnnnreZnnnnnnnXelnnnnnreZnnnnnnnXelnnnnnreZnnnnnnnXeBeBeBeBe</hone>
+        <hone>ZuuuuuuuXelnnnnnreZnnnnnnnXelnnnnnreZnnnnnnnXelnnnnnreZndndndnXeBeBeBeBe</hone>
     </level86>
     <level87>
         <row>9</row>
@@ -1094,7 +1094,7 @@
         <grid>quuwequuwlnnnunnnrlnnnnnnnrlnnnnnnnrlnnnnnnnrannnnnnnseannnnnseeeannnseeeeeadseee</grid>
         <tile>1lslelsl111lslsl11111lsl1111111l1111w1111111www11111wweww111wweeeww1wweeeeewwweee</tile>
         <hone>quuwequuwlnnnunnnrlnnnnnnnrlnnnnnnnrLnnnnnnnRANnnnnnNSeANnnnNSeeeANnNSeeeeeADSeee</hone>
-        <gene>eMMeeeMMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+        <gene>eeMeeeMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
     </level94>
     <level95>
         <row>9</row>
@@ -1154,7 +1154,7 @@
         <grid>equuuuuweqnnnnnnnwlnnnnnnnrannnnnnnselnnnnnreqnnnnnnnwlnnnnnnnrannnnnnnseadseadse</grid>
         <tile>e1ddddd1ew1ddddd1ww1ddddd1ww1nnnnn1we1nnnnn1ew1nnnnn1ww1nnnnn1ww1111111wewwwewwwe</tile>
         <hone>equuuuuweQnnnnnnnWLnnnnnnnRAnnnnnnnSelnnnnnreQnnnnnnnWLnnnnnnnRAnnnnnnnSeADSeADSe</hone>
-        <gene>eeMeEeMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
+        <gene>eeMeeeMeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</gene>
     </level99>
     <level100>
         <row>9</row>
