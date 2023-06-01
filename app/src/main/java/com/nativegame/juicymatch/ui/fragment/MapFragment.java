@@ -191,6 +191,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
                 txtLevel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Sounds.BUTTON_CLICK.play();
                         showLevelDialog(level);
                     }
                 });
