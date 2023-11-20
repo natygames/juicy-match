@@ -1,14 +1,14 @@
 package com.nativegame.juicymatch.game.layer.generator;
 
 import com.nativegame.juicymatch.asset.Textures;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.juicymatch.game.layer.tile.TileResetter;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.tween.OvershootTweener;
+import com.nativegame.nattyengine.entity.modifier.RotationModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.tween.OvershootTweener;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -24,7 +24,7 @@ public abstract class Generator extends LayerSprite {
     public Generator(Engine engine, Texture texture) {
         super(engine, texture);
         mPivot = new GeneratorPivot(engine, Textures.GENERATOR_PIVOT);
-        setLayer(Layer.GENERATOR_LAYER);
+        setLayer(GameLayer.GENERATOR_LAYER);
     }
     //========================================================
 
@@ -67,7 +67,7 @@ public abstract class Generator extends LayerSprite {
             super(engine, texture);
             mRotationModifier = new RotationModifier(0, 180, TIME_TO_ROTATE, TIME_TO_PAUSE,
                     OvershootTweener.getInstance());
-            setLayer(Layer.GENERATOR_LAYER);
+            setLayer(GameLayer.GENERATOR_LAYER);
         }
         //========================================================
 

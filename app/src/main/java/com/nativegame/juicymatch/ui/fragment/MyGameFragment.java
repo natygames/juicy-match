@@ -55,8 +55,8 @@ public class MyGameFragment extends GameFragment implements View.OnClickListener
     }
 
     @Override
-    protected void onLayoutCreated(View view) {
-        mGame = new JuicyMatch(getGameActivity(), (GameView) view.findViewById(R.id.game_view));
+    protected void onViewCreated(View view) {
+        mGame = new JuicyMatch(getGameActivity(), (GameView) view.findViewById(R.id.game_view), getGameActivity().getEngine());
         mGame.start();
     }
 

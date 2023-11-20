@@ -4,7 +4,7 @@ import com.nativegame.juicymatch.algorithm.Match3Algorithm;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.booster.GloveEffect;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
@@ -41,7 +41,7 @@ public class GloveController extends BoosterController implements SwapModifier.S
 
     @Override
     protected void onAddBooster(Tile[][] tiles, Tile touchDownTile, Tile touchUpTile, int row, int col) {
-        mGloveEffect.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f,
+        mGloveEffect.activate(GameWorld.WORLD_WIDTH / 2f, GameWorld.WORLD_HEIGHT / 2f,
                 touchDownTile.getX(), touchDownTile.getY(), touchUpTile.getX(), touchUpTile.getY());
         Sounds.TILE_SLIDE.play();
     }

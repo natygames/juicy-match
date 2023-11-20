@@ -4,12 +4,12 @@ import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.effect.piece.HoneyPiece;
 import com.nativegame.juicymatch.game.effect.piece.HoneyPieceEffect;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.tween.OvershootTweener;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleInModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleInModifier;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.tween.OvershootTweener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +40,7 @@ public class Honey extends LayerSprite {
             mHoneyPieceEffects.add(new HoneyPieceEffect(engine, Textures.HONEY_PIECE, HoneyPiece.values()[i]));
         }
         setRotation(honeyType.getAngle());
-        setLayer(Layer.HONEY_LAYER);
+        setLayer(GameLayer.HONEY_LAYER);
     }
     //========================================================
 

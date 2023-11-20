@@ -4,13 +4,13 @@ import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.effect.SmokeEffect;
 import com.nativegame.juicymatch.game.effect.piece.ExplosionPieceEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.tween.OvershootTweener;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.tween.OvershootTweener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,7 +168,7 @@ public class PieTile extends LayerObstacleTile {
             mBounceInModifier = new ScaleModifier(1.2f, 1, TIME_TO_BOUNCE_IN, TIME_TO_BOUNCE_OUT,
                     OvershootTweener.getInstance());
             mBounceInModifier.setModifyBefore(false);
-            setLayer(Layer.TILE_LAYER);
+            setLayer(GameLayer.TILE_LAYER);
         }
         //========================================================
 

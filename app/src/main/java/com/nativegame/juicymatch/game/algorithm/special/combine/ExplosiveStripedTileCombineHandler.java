@@ -3,16 +3,18 @@ package com.nativegame.juicymatch.game.algorithm.special.combine;
 import com.nativegame.juicymatch.algorithm.TileState;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.effect.combine.ExplosiveStripedTileCombineEffect;
 import com.nativegame.juicymatch.game.effect.combine.ExplosiveStripedTileCombineRingEffectSystem;
 import com.nativegame.juicymatch.game.effect.flash.ColumnFlashEffectSystem;
 import com.nativegame.juicymatch.game.effect.flash.RowFlashEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.particles.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
 import com.nativegame.nattyengine.entity.timer.Timer;
+import com.nativegame.nattyengine.entity.timer.TimerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.List;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class ExplosiveStripedTileCombineHandler extends BaseSpecialCombineHandler implements Timer.TimerListener {
+public class ExplosiveStripedTileCombineHandler extends BaseSpecialCombineHandler implements TimerEvent.TimerEventListener {
 
     private static final long START_DELAY = 600;
 
@@ -46,17 +48,18 @@ public class ExplosiveStripedTileCombineHandler extends BaseSpecialCombineHandle
         mColumnFlashEffect = new ColumnFlashEffectSystem(engine, 3);
         mExplosiveStripedTileCombineEffect = new ExplosiveStripedTileCombineEffect(engine, Textures.CHERRY);
         mExplosionRowColumnCombineRingEffect = new ExplosiveStripedTileCombineRingEffectSystem(engine, 2);
-        mRingLightParticleSystem = new ParticleSystem(engine, Textures.FLASH_RING, 1)
+        mRingLightParticleSystem = new SpriteParticleSystem(engine, Textures.FLASH_RING, 1)
                 .setDuration(500)
                 .setScale(0, 10)
                 .setAlpha(255, 55)
-                .setLayer(Layer.EFFECT_LAYER);
-        mLightParticleSystem = new ParticleSystem(engine, Textures.LIGHT_BG, 1)
+                .setLayer(GameLayer.EFFECT_LAYER);
+        mLightParticleSystem = new SpriteParticleSystem(engine, Textures.LIGHT_BG, 1)
                 .setDuration(900)
                 .setAlpha(255, 0, 500)
                 .setScale(4, 4)
-                .setLayer(Layer.EFFECT_LAYER);
-        mTimer = new Timer(engine, this, START_DELAY);
+                .setLayer(GameLayer.EFFECT_LAYER);
+        mTimer = new Timer(engine);
+        mTimer.addTimerEvent(new TimerEvent(this, START_DELAY));
     }
     //========================================================
 
@@ -105,7 +108,7 @@ public class ExplosiveStripedTileCombineHandler extends BaseSpecialCombineHandle
     }
 
     @Override
-    public void onTimerComplete(Timer timer) {
+    public void onTimerEvent(long eventTime) {
         int size = mTilesToRemove.size();
         for (int i = 0; i < size; i++) {
             Tile tile = mTilesToRemove.get(i);

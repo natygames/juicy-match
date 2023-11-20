@@ -6,6 +6,7 @@ import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.timer.Timer;
+import com.nativegame.nattyengine.entity.timer.TimerEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class IceCreamExplosiveTileCombineHandler extends IceCreamCombineHandler implements Timer.TimerListener {
+public class IceCreamExplosiveTileCombineHandler extends IceCreamCombineHandler implements TimerEvent.TimerEventListener {
 
     private static final long START_DELAY = 1200;
 
@@ -27,7 +28,8 @@ public class IceCreamExplosiveTileCombineHandler extends IceCreamCombineHandler 
     //--------------------------------------------------------
     public IceCreamExplosiveTileCombineHandler(Engine engine) {
         super(engine);
-        mTimer = new Timer(engine, this, START_DELAY);
+        mTimer = new Timer(engine);
+        mTimer.addTimerEvent(new TimerEvent(this, START_DELAY));
     }
     //========================================================
 
@@ -65,7 +67,7 @@ public class IceCreamExplosiveTileCombineHandler extends IceCreamCombineHandler 
     }
 
     @Override
-    public void onTimerComplete(Timer timer) {
+    public void onTimerEvent(long eventTime) {
         int size = mSpecialTiles.size();
         for (int i = 0; i < size; i++) {
             Tile tile = mSpecialTiles.get(i);

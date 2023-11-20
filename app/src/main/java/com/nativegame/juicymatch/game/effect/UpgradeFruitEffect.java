@@ -1,13 +1,13 @@
 package com.nativegame.juicymatch.game.effect;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.tile.FruitType;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.tween.AccelerateTweener;
+import com.nativegame.nattyengine.entity.modifier.PositionModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.tween.AccelerateTweener;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -30,7 +30,7 @@ public class UpgradeFruitEffect extends Sprite {
         mScaleModifier = new ScaleModifier(1.5f, 0.75f, TIME_TO_LIVE, AccelerateTweener.getInstance());
         mPositionModifier = new PositionModifier(TIME_TO_LIVE, AccelerateTweener.getInstance());
         mPositionModifier.setAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

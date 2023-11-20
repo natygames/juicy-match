@@ -1,16 +1,16 @@
 package com.nativegame.juicymatch.game.effect;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.sprite.AnimateSprite;
 import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
 
 /**
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class SmokeEffect extends AnimatedSprite {
+public class SmokeEffect extends AnimateSprite {
 
     private static final long TIME_TO_LIVE = 400;
 
@@ -25,7 +25,7 @@ public class SmokeEffect extends AnimatedSprite {
         setAnimation(50, false);
         setAnimationAutoStart(true);
         setAnimationAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

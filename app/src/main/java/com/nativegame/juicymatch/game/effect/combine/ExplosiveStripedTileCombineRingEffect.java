@@ -1,10 +1,10 @@
 package com.nativegame.juicymatch.game.effect.combine;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
@@ -29,7 +29,7 @@ public class ExplosiveStripedTileCombineRingEffect extends Sprite {
         mScaleModifier = new ScaleModifier(1, 2.75f, TIME_TO_LIVE);
         mFadeOutModifier = new FadeOutModifier(TIME_TO_LIVE / 2, TIME_TO_LIVE / 2);
         mFadeOutModifier.setAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

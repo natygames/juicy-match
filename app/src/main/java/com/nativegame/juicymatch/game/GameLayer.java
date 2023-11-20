@@ -1,10 +1,10 @@
-package com.nativegame.juicymatch.game.layer;
+package com.nativegame.juicymatch.game;
 
 /**
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class Layer {
+public class GameLayer {
 
     public static final int GRID_LAYER = 1;
     public static final int ICE_LAYER = 2;

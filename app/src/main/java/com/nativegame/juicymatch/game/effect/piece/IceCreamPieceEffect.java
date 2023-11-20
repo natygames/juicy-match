@@ -1,9 +1,9 @@
 package com.nativegame.juicymatch.game.effect.piece;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.entity.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
@@ -25,7 +25,7 @@ public class IceCreamPieceEffect extends Sprite {
         mParent = iceCreamPieceEffectSystem;
         mScaleOutModifier = new ScaleOutModifier(TIME_TO_LIVE);
         mScaleOutModifier.setAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

@@ -1,10 +1,11 @@
 package com.nativegame.juicymatch.game.algorithm.special.finder;
 
 import com.nativegame.juicymatch.asset.Textures;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.particles.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -20,11 +21,11 @@ public abstract class BaseSpecialTileFinder implements SpecialTileFinder {
     // Constructors
     //--------------------------------------------------------
     protected BaseSpecialTileFinder(Engine engine) {
-        mLightBgParticleSystem = new ParticleSystem(engine, Textures.LIGHT_BG, MAX_FIND_NUM)
+        mLightBgParticleSystem = new SpriteParticleSystem(engine, Textures.LIGHT_BG, MAX_FIND_NUM)
                 .setDuration(750)
                 .setAlpha(255, 0)
                 .setScale(3, 3)
-                .setLayer(Layer.EFFECT_LAYER);
+                .setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

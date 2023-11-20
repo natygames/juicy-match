@@ -1,18 +1,18 @@
 package com.nativegame.juicymatch.game.effect.flash;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.PositionXModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.PositionXModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
+import com.nativegame.nattyengine.entity.sprite.AnimateSprite;
 import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
 
 /**
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class RowFlashEffect extends AnimatedSprite {
+public class RowFlashEffect extends AnimateSprite {
 
     private static final long TIME_TO_ANIMATE = 300;
     private static final long TIME_TO_FADE = 300;
@@ -35,7 +35,7 @@ public class RowFlashEffect extends AnimatedSprite {
         setAnimation(30, false);
         setAnimationAutoStart(true);
         setRotationPivotX(0);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 
@@ -60,7 +60,7 @@ public class RowFlashEffect extends AnimatedSprite {
     //--------------------------------------------------------
     public void activate(float x, float y, FlashDirection direction) {
         setX(x);
-        setY(y - mHeight / 2f);
+        setY(y - getHeight() / 2f);
         setRotation(direction.getAngle() - 90);
         mScaleModifier.init(this);
         mFadeOutModifier.init(this);

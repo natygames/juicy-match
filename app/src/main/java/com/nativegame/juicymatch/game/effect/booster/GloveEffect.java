@@ -1,14 +1,14 @@
 package com.nativegame.juicymatch.game.effect.booster;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.tween.OvershootTweener;
+import com.nativegame.nattyengine.entity.modifier.FadeInModifier;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.PositionModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeInModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.tween.OvershootTweener;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -44,7 +44,7 @@ public class GloveEffect extends Sprite {
         mPositionModifier = new PositionModifier(TIME_TO_MOVE, TIME_TO_SCALE);
         mSwapPositionModifier = new PositionModifier(TIME_TO_SWAP, TIME_TO_SCALE + TIME_TO_MOVE + TIME_TO_PAUSE);
         mSwapPositionModifier.setModifyBefore(false);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

@@ -6,12 +6,12 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 
 import com.nativegame.juicymatch.asset.Colors;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
+import com.nativegame.nattyengine.camera.Camera;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.camera.Camera;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.texture.Texture;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
@@ -45,7 +45,7 @@ public class ExplosionPieceEffect extends Sprite {
         mFadeOutModifier.setAutoRemove(true);
         mEffectShadow = new EffectShadow(engine, texture);
         mGravity = 10f / 1000;
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 
@@ -109,7 +109,7 @@ public class ExplosionPieceEffect extends Sprite {
         public EffectShadow(Engine engine, Texture texture) {
             super(engine, texture);
             setColorFilter(SHADOW_FILTER);
-            setLayer(Layer.EFFECT_LAYER - 1);
+            setLayer(GameLayer.EFFECT_LAYER - 1);
         }
         //========================================================
 

@@ -3,13 +3,14 @@ package com.nativegame.juicymatch.game.algorithm.special.combine;
 import com.nativegame.juicymatch.algorithm.TileState;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.effect.flash.ExplosionBeamEffectSystem;
 import com.nativegame.juicymatch.game.effect.flash.ExplosionFlashEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.particles.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -31,19 +32,19 @@ public class DoubleExplosiveTileCombineHandler extends BaseSpecialCombineHandler
         super(engine);
         mFlashEffectSystem = new ExplosionFlashEffectSystem(engine, 1);
         mBeamEffectSystem = new ExplosionBeamEffectSystem(engine, 8);
-        mGlitterParticleSystem = new ParticleSystem(engine, Textures.GLITTER, GLITTER_NUM)
+        mGlitterParticleSystem = new SpriteParticleSystem(engine, Textures.GLITTER, GLITTER_NUM)
                 .setDuration(600)
                 .setSpeedWithAngle(1500, 2500)
                 .setInitialRotation(0, 360)
                 .setRotationSpeed(-360, 360)
                 .setAlpha(255, 0, 200)
                 .setScale(1.2f, 0.5f, 200)
-                .setLayer(Layer.EFFECT_LAYER);
-        mRingLightParticleSystem = new ParticleSystem(engine, Textures.FLASH_RING, 1)
+                .setLayer(GameLayer.EFFECT_LAYER);
+        mRingLightParticleSystem = new SpriteParticleSystem(engine, Textures.FLASH_RING, 1)
                 .setDuration(500)
                 .setScale(0, 10)
                 .setAlpha(255, 55)
-                .setLayer(Layer.EFFECT_LAYER);
+                .setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

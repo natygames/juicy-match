@@ -3,16 +3,16 @@ package com.nativegame.juicymatch.game.counter;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameLayer;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.TextEffect;
-import com.nativegame.juicymatch.game.layer.Layer;
 import com.nativegame.nattyengine.audio.sound.Sound;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.Entity;
-import com.nativegame.nattyengine.entity.particles.ParticleSystem;
-import com.nativegame.nattyengine.entity.particles.ParticleSystemGroup;
+import com.nativegame.nattyengine.entity.particle.ParticleSystemGroup;
+import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
@@ -36,20 +36,22 @@ public class ComboCounter extends Entity implements EventListener {
     //--------------------------------------------------------
     public ComboCounter(Engine engine) {
         super(engine);
-        mLeftConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_BLUE, 15));
-        mLeftConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_GREEN, 15));
-        mLeftConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_PINK, 15));
-        mLeftConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_YELLOW, 15));
-        mRightConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_BLUE, 15));
-        mRightConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_GREEN, 15));
-        mRightConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_PINK, 15));
-        mRightConfettiParticleSystem.addParticleSystem(new ParticleSystem(engine, Textures.CONFETTI_YELLOW, 15));
+        mLeftConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_BLUE, 15));
+        mLeftConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_GREEN, 15));
+        mLeftConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_PINK, 15));
+        mLeftConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_YELLOW, 15));
+        mRightConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_BLUE, 15));
+        mRightConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_GREEN, 15));
+        mRightConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_PINK, 15));
+        mRightConfettiParticleSystem.addParticleSystem(new SpriteParticleSystem(engine, Textures.CONFETTI_YELLOW, 15));
+        int emissionStartY = GameWorld.WORLD_HEIGHT / 2;
+        int emissionEndY = emissionStartY + 2000;
         mLeftConfettiParticleSystem
                 .setDuration(1500)
                 .setEmissionDuration(800)
                 .setEmissionRate(100)
                 .setEmissionPositionX(0)
-                .setEmissionRangeY(1000, 3000)
+                .setEmissionRangeY(emissionStartY, emissionEndY)
                 .setSpeedX(1000, 1500)
                 .setSpeedY(-4000, -3000)
                 .setAccelerationX(-2, 0)
@@ -58,13 +60,13 @@ public class ComboCounter extends Entity implements EventListener {
                 .setRotationSpeed(-720, 720)
                 .setAlpha(255, 0, 500)
                 .setScale(0.75f, 0, 1000)
-                .setLayer(Layer.EFFECT_LAYER);
+                .setLayer(GameLayer.EFFECT_LAYER);
         mRightConfettiParticleSystem
                 .setDuration(1500)
                 .setEmissionDuration(800)
                 .setEmissionRate(100)
-                .setEmissionPositionX(JuicyMatch.WORLD_WIDTH)
-                .setEmissionRangeY(1000, 3000)
+                .setEmissionPositionX(GameWorld.WORLD_WIDTH)
+                .setEmissionRangeY(emissionStartY, emissionEndY)
                 .setSpeedX(-1500, -1000)
                 .setSpeedY(-4000, -3000)
                 .setAccelerationX(0, 2)
@@ -73,7 +75,7 @@ public class ComboCounter extends Entity implements EventListener {
                 .setRotationSpeed(-720, 720)
                 .setAlpha(255, 0, 500)
                 .setScale(0.75f, 0, 1000)
-                .setLayer(Layer.EFFECT_LAYER);
+                .setLayer(GameLayer.EFFECT_LAYER);
         mComboText = new TextEffect(engine, Textures.TEXT_COMBO_NICE);
     }
     //========================================================
@@ -140,7 +142,7 @@ public class ComboCounter extends Entity implements EventListener {
 
     private void playComboTextEffect() {
         mComboText.setTexture(getComboTexture());
-        mComboText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f);
+        mComboText.activate(GameWorld.WORLD_WIDTH / 2f, GameWorld.WORLD_HEIGHT / 2f);
         Sounds.ADD_COMBO.play();
     }
 

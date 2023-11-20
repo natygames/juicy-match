@@ -1,17 +1,16 @@
 package com.nativegame.juicymatch.game.algorithm;
 
 import android.graphics.Color;
-import android.graphics.Paint;
 
 import com.nativegame.juicymatch.algorithm.Match3Algorithm;
 import com.nativegame.juicymatch.asset.Fonts;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameLayer;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.TextEffect;
 import com.nativegame.juicymatch.game.effect.flash.TransformFlashEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
 import com.nativegame.juicymatch.game.layer.tile.FruitType;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
@@ -58,7 +57,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
         super(engine, tileSystem);
         mTransformFlashEffect = new TransformFlashEffectSystem(engine, MAX_TRANSFORM_NUM);
         mBonusText = new TextEffect(engine, Textures.TEXT_BONUS);
-        mSkipText = new SkipText(engine, "Tap to skip");
+        mSkipText = new SkipText(engine, 1500, 600, "Tap to skip");
         mBonusSpecialTypes = new SpecialType[]{
                 SpecialType.ROW_STRIPED,
                 SpecialType.COLUMN_STRIPED,
@@ -71,8 +70,8 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
     //--------------------------------------------------------
     @Override
     public void onStart() {
-        mSkipText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT + 500);
-        mBonusText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f);
+        mSkipText.activate(GameWorld.WORLD_WIDTH / 2f, GameWorld.WORLD_HEIGHT / 2f + 1650);
+        mBonusText.activate(GameWorld.WORLD_WIDTH / 2f, GameWorld.WORLD_HEIGHT / 2f);
     }
 
     @Override
@@ -234,20 +233,27 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
     //--------------------------------------------------------
     private static class SkipText extends Text {
 
-        public SkipText(Engine engine, String text) {
-            super(engine, text);
+        //--------------------------------------------------------
+        // Constructors
+        //--------------------------------------------------------
+        public SkipText(Engine engine, int width, int height, String text) {
+            super(engine, width, height, text);
             setColor(Color.WHITE);
-            setTextAlign(Paint.Align.CENTER);
             setTextSize(300);
             setTextTypeface(Fonts.BALOO);
-            setLayer(Layer.EFFECT_LAYER);
+            setLayer(GameLayer.EFFECT_LAYER);
         }
+        //========================================================
 
+        //--------------------------------------------------------
+        // Methods
+        //--------------------------------------------------------
         public void activate(float x, float y) {
             setCenterX(x);
             setCenterY(y);
             addToGame();
         }
+        //========================================================
 
     }
     //========================================================

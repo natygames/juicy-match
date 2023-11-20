@@ -1,16 +1,16 @@
 package com.nativegame.juicymatch.game.effect.lightning;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.sprite.AnimateSprite;
 import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
 
 /**
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class LightningEffect extends AnimatedSprite implements AnimatedSprite.AnimationListener {
+public class LightningEffect extends AnimateSprite implements AnimateSprite.AnimationListener {
 
     private static final long TIME_TO_ANIMATE = 200;
     private static final long TIME_TO_FADE = 400;
@@ -31,7 +31,7 @@ public class LightningEffect extends AnimatedSprite implements AnimatedSprite.An
         setAnimationAutoStart(true);
         setScalePivotY(0);
         setRotationPivotY(0);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 
@@ -67,7 +67,7 @@ public class LightningEffect extends AnimatedSprite implements AnimatedSprite.An
     @Override
     public void onAnimationRepeat() {
         // We only repeat the full lightning animation
-        setStartIndex(5);
+        setStartFrameIndex(5);
     }
     //========================================================
 
@@ -75,9 +75,9 @@ public class LightningEffect extends AnimatedSprite implements AnimatedSprite.An
     // Methods
     //--------------------------------------------------------
     public void activate(float x, float y, int distance, int angle) {
-        setX(x - mWidth / 2f);
+        setX(x - getWidth() / 2f);
         setY(y);
-        setScaleY(distance * 1f / mHeight);
+        setScaleY(distance * 1f / getHeight());
         setRotation(angle);
         mFadeOutModifier.init(this);
         addToGame();

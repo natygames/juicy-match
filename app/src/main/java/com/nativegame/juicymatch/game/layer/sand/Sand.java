@@ -3,7 +3,7 @@ package com.nativegame.juicymatch.game.layer.sand;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.effect.piece.ExplosionPieceEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
@@ -32,7 +32,7 @@ public class Sand extends LayerSprite {
         mYellowSandPieceEffect = new ExplosionPieceEffectSystem(engine, Textures.YELLOW_SAND_PIECE, SAND_PIECES);
         mBrownSandPieceEffect = new ExplosionPieceEffectSystem(engine, Textures.BROWN_SAND_PIECE, SAND_PIECES);
         setRotation(sandType.getAngle());
-        setLayer(Layer.SAND_LAYER);
+        setLayer(GameLayer.SAND_LAYER);
     }
     //========================================================
 

@@ -2,16 +2,17 @@ package com.nativegame.juicymatch.game.swap;
 
 import com.nativegame.juicymatch.algorithm.Match3Algorithm;
 import com.nativegame.juicymatch.game.GameEvent;
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.algorithm.special.combine.SpecialCombineHandler;
 import com.nativegame.juicymatch.game.algorithm.special.combine.SpecialCombineHandlerManager;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.Entity;
 import com.nativegame.nattyengine.entity.timer.Timer;
+import com.nativegame.nattyengine.entity.timer.TimerEvent;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.input.touch.TouchEvent;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
 
@@ -20,7 +21,7 @@ import com.nativegame.nattyengine.input.touch.TouchEventListener;
  */
 
 public class SwapController extends Entity implements TouchEventListener,
-        EventListener, SwapModifier.SwapListener, Timer.TimerListener {
+        EventListener, SwapModifier.SwapListener, TimerEvent.TimerEventListener {
 
     private final Tile[][] mTiles;
     private final int mTotalRow;
@@ -44,13 +45,14 @@ public class SwapController extends Entity implements TouchEventListener,
         mTiles = tileSystem.getChild();
         mTotalRow = tileSystem.getTotalRow();
         mTotalCol = tileSystem.getTotalColumn();
-        mMarginX = (JuicyMatch.WORLD_WIDTH - mTotalCol * 300) / 2;
-        mMarginY = (JuicyMatch.WORLD_HEIGHT - mTotalRow * 300) / 2;
+        mMarginX = (GameWorld.WORLD_WIDTH - mTotalCol * 300) / 2;
+        mMarginY = (GameWorld.WORLD_HEIGHT - mTotalRow * 300) / 2;
         mSwapModifier = new SwapModifier(engine);
         mSwapModifier.setListener(this);
         mSwapBackModifier = new SwapModifier(engine);
         mSpecialCombineHandler = new SpecialCombineHandlerManager(engine);
-        mTimer = new Timer(engine, this);
+        mTimer = new Timer(engine);
+        mTimer.addTimerEvent(new TimerEvent(this));
     }
     //========================================================
 
@@ -65,7 +67,10 @@ public class SwapController extends Entity implements TouchEventListener,
         switch (type) {
             case TouchEvent.TOUCH_DOWN:
                 // Check is out of bound
-                if (touchX < mMarginX || touchY < mMarginY || touchX > 2700 - mMarginX || touchY > 2700 - mMarginY) {
+                if (touchX < mMarginX
+                        || touchY < mMarginY
+                        || touchX > GameWorld.WORLD_WIDTH - mMarginX
+                        || touchY > GameWorld.WORLD_HEIGHT - mMarginY) {
                     return;
                 }
                 int touchDownCol = (int) ((touchX - mMarginX) / 300);
@@ -156,7 +161,7 @@ public class SwapController extends Entity implements TouchEventListener,
     }
 
     @Override
-    public void onTimerComplete(Timer timer) {
+    public void onTimerEvent(long eventTime) {
         dispatchEvent(GameEvent.PLAYER_SWAP);
     }
     //========================================================
@@ -167,7 +172,7 @@ public class SwapController extends Entity implements TouchEventListener,
     private boolean checkSpecialCombine(Tile tileA, Tile tileB) {
         SpecialCombineHandler handler = mSpecialCombineHandler.checkSpecialCombine(mTiles, tileA, tileB, mTotalRow, mTotalCol);
         if (handler != null) {
-            mTimer.setPeriod(handler.getStartDelay());
+            mTimer.getAllTimerEvents().get(0).setEventTime(handler.getStartDelay());
             return true;
         }
 

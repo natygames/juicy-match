@@ -2,6 +2,7 @@ package com.nativegame.juicymatch.game.tutorial;
 
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Textures;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialFingerEffect;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialHintEffectSystem;
 import com.nativegame.juicymatch.level.Level;
@@ -33,7 +34,9 @@ public class BombTutorial implements Tutorial {
     @Override
     public void show(GameActivity activity) {
         mHintEffect.activate(Level.LEVEL_DATA.getTutorialHint().toCharArray());
-        mFingerEffect.activate(1300, 1200, 1200, 1300);
+        int marginX = (GameWorld.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * 300) / 2;
+        int marginY = (GameWorld.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * 300) / 2;
+        mFingerEffect.activate(marginX + 1300, marginX + 1200, marginY + 1200, marginY + 1300);
 
         // Click the booster button
         GameButton btnBomb = (GameButton) activity.findViewById(R.id.btn_bomb);

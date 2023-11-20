@@ -3,7 +3,7 @@ package com.nativegame.juicymatch.game.layer.ice;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.effect.piece.ExplosionPieceEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
@@ -32,7 +32,7 @@ public class Ice extends LayerSprite {
         mWhiteIcePieceEffect = new ExplosionPieceEffectSystem(engine, Textures.WHITE_ICE_PIECE, ICE_PIECE);
         mBlueIcePieceEffect = new ExplosionPieceEffectSystem(engine, Textures.BLUE_ICE_PIECE, ICE_PIECE);
         setRotation(iceType.getAngle());
-        setLayer(Layer.ICE_LAYER);
+        setLayer(GameLayer.ICE_LAYER);
     }
     //========================================================
 

@@ -1,6 +1,6 @@
 package com.nativegame.juicymatch.game.layer.tile.type;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
 
@@ -16,7 +16,7 @@ public class PipeTile extends EmptyTile {
     public PipeTile(Engine engine, Texture texture) {
         super(engine, texture);
         // We let the pipe on top of tile, so they will pass underneath
-        mLayer = Layer.TILE_LAYER + 1;
+        mLayer = GameLayer.TILE_LAYER + 1;
     }
     //========================================================
 

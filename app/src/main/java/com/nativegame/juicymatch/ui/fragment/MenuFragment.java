@@ -103,12 +103,12 @@ public class MenuFragment extends GameFragment implements View.OnClickListener {
                 getGameActivity().finish();
             }
         };
-        showDialog(exitDialog);
+        getGameActivity().showDialog(exitDialog);
     }
 
     private void showSettingDialog() {
         SettingDialog settingDialog = new SettingDialog(getGameActivity());
-        showDialog(settingDialog);
+        getGameActivity().showDialog(settingDialog);
     }
     //========================================================
 

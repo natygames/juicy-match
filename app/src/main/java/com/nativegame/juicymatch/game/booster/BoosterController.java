@@ -1,13 +1,14 @@
 package com.nativegame.juicymatch.game.booster;
 
 import com.nativegame.juicymatch.asset.Colors;
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.Entity;
-import com.nativegame.nattyengine.entity.primitive.Color;
+import com.nativegame.nattyengine.entity.shape.primitive.Plane;
 import com.nativegame.nattyengine.entity.timer.Timer;
+import com.nativegame.nattyengine.entity.timer.TimerEvent;
 import com.nativegame.nattyengine.input.touch.TouchEvent;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
 
@@ -15,13 +16,13 @@ import com.nativegame.nattyengine.input.touch.TouchEventListener;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public abstract class BoosterController extends Entity implements TouchEventListener, Timer.TimerListener {
+public abstract class BoosterController extends Entity implements TouchEventListener, TimerEvent.TimerEventListener {
 
     private static final long TIME_TO_LIVE = 1500;
 
     private final Tile[][] mTiles;
+    private final Plane mShadowBg;
     private final Timer mTimer;
-    private final Color mShadowBg;
     private final int mTotalRow;
     private final int mTotalCol;
     private final int mMarginX;
@@ -39,10 +40,11 @@ public abstract class BoosterController extends Entity implements TouchEventList
         mTiles = tileSystem.getChild();
         mTotalRow = tileSystem.getTotalRow();
         mTotalCol = tileSystem.getTotalColumn();
-        mMarginX = (JuicyMatch.WORLD_WIDTH - mTotalCol * 300) / 2;
-        mMarginY = (JuicyMatch.WORLD_HEIGHT - mTotalRow * 300) / 2;
-        mTimer = new Timer(engine, this, TIME_TO_LIVE);
-        mShadowBg = new Color(engine, Colors.BLACK_60);
+        mMarginX = (GameWorld.WORLD_WIDTH - mTotalCol * 300) / 2;
+        mMarginY = (GameWorld.WORLD_HEIGHT - mTotalRow * 300) / 2;
+        mShadowBg = new Plane(engine, Colors.BLACK_60);
+        mTimer = new Timer(engine);
+        mTimer.addTimerEvent(new TimerEvent(this, TIME_TO_LIVE));
     }
     //========================================================
 
@@ -79,7 +81,10 @@ public abstract class BoosterController extends Entity implements TouchEventList
                 mTouchDownTile = null;
                 mTouchUpTile = null;
                 // Check is out of bound
-                if (touchX < mMarginX || touchY < mMarginY || touchX > 2700 - mMarginX || touchY > 2700 - mMarginY) {
+                if (touchX < mMarginX
+                        || touchY < mMarginY
+                        || touchX > GameWorld.WORLD_WIDTH - mMarginX
+                        || touchY > GameWorld.WORLD_HEIGHT - mMarginY) {
                     return;
                 }
                 int touchDownCol = (int) ((touchX - mMarginX) / 300);
@@ -128,7 +133,7 @@ public abstract class BoosterController extends Entity implements TouchEventList
     }
 
     @Override
-    public void onTimerComplete(Timer timer) {
+    public void onTimerEvent(long eventTime) {
         onRemoveBooster(mTiles, mTouchDownTile, mTouchUpTile, mTotalRow, mTotalCol);
     }
     //========================================================

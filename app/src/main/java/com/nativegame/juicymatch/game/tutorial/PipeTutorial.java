@@ -2,6 +2,7 @@ package com.nativegame.juicymatch.game.tutorial;
 
 import com.nativegame.juicymatch.asset.Colors;
 import com.nativegame.juicymatch.asset.Textures;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialFingerEffect;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialHintEffectSystem;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialShadowEffect;
@@ -36,7 +37,9 @@ public class PipeTutorial implements Tutorial {
     public void show(GameActivity activity) {
         mShadowBg.addToGame();
         mHintEffect.activate(Level.LEVEL_DATA.getTutorialHint().toCharArray());
-        mFingerEffect.activate(450, 450, 1000, 1300);
+        int marginX = (GameWorld.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * 300) / 2;
+        int marginY = (GameWorld.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * 300) / 2;
+        mFingerEffect.activate(marginX + 300, marginX + 300, marginY + 1000, marginY + 1300);
     }
     //========================================================
 

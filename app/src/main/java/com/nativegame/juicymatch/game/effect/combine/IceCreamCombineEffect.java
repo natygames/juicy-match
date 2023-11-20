@@ -1,9 +1,9 @@
 package com.nativegame.juicymatch.game.effect.combine;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
@@ -33,7 +33,7 @@ public class IceCreamCombineEffect extends Sprite {
         mScaleModifier = new ScaleModifier(1.2f, 0.9f, TIME_TO_LIVE);
         mScaleModifier.setAutoRemove(true);
         mSpeedX = 1500f / 1000;
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 
@@ -78,7 +78,7 @@ public class IceCreamCombineEffect extends Sprite {
     public void activate(float x, float y, ColorCombineDirection direction) {
         setCenterX(x);
         setCenterY(y);
-        mMinX = x - mWidth;
+        mMinX = x - getWidth();
         mMaxX = x;
         mSpeedX = Math.abs(mSpeedX) * direction.getSpeedFactor();
         mLayer = direction.getLayer();
@@ -109,9 +109,9 @@ public class IceCreamCombineEffect extends Sprite {
         public int getLayer() {
             switch (this) {
                 case LEFT:
-                    return Layer.EFFECT_LAYER;
+                    return GameLayer.EFFECT_LAYER;
                 case RIGHT:
-                    return Layer.EFFECT_LAYER + 1;
+                    return GameLayer.EFFECT_LAYER + 1;
             }
 
             return 0;

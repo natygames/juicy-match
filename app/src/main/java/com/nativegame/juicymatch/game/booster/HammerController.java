@@ -3,7 +3,7 @@ package com.nativegame.juicymatch.game.booster;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.algorithm.special.handler.ColumnStripedTileHandler;
 import com.nativegame.juicymatch.game.algorithm.special.handler.RowStripedTileHandler;
 import com.nativegame.juicymatch.game.effect.booster.HammerEffect;
@@ -43,7 +43,7 @@ public class HammerController extends BoosterController {
 
     @Override
     protected void onAddBooster(Tile[][] tiles, Tile touchDownTile, Tile touchUpTile, int row, int col) {
-        mHammerEffect.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f,
+        mHammerEffect.activate(GameWorld.WORLD_WIDTH / 2f, GameWorld.WORLD_HEIGHT / 2f,
                 touchDownTile.getX(), touchDownTile.getY());
         Sounds.TILE_SLIDE.play();
     }

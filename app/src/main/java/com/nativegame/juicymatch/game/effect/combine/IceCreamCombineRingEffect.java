@@ -1,10 +1,10 @@
 package com.nativegame.juicymatch.game.effect.combine;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.entity.modifier.FadeInModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeInModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
@@ -28,7 +28,7 @@ public class IceCreamCombineRingEffect extends Sprite {
         mScaleModifier = new ScaleModifier(TIME_TO_LIVE);
         mFadeInModifier = new FadeInModifier(TIME_TO_LIVE);
         mFadeInModifier.setAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

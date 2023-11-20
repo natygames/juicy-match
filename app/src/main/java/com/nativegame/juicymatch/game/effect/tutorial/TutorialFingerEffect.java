@@ -1,14 +1,14 @@
 package com.nativegame.juicymatch.game.effect.tutorial;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.modifier.DurationModifier;
-import com.nativegame.nattyengine.entity.modifier.Modifier;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.PositionModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.Modifier;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -34,7 +34,7 @@ public class TutorialFingerEffect extends Sprite implements TouchEventListener, 
         mDurationModifier = new DurationModifier(TIME_TO_LIVE, TIME_TO_LIVE + TIME_TO_PAUSE + TIME_TO_FADE);
         mDurationModifier.setListener(this);
         mDurationModifier.setLooping(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

@@ -1,6 +1,6 @@
 package com.nativegame.juicymatch.game.layer.entrypoint;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
@@ -27,7 +27,7 @@ public class EntryPoint extends LayerSprite {
         super(engine, texture);
         mEntryPointType = entryPointType;
         mSpeedY = 100f / 1000;
-        setLayer(Layer.ENTRY_POINT_LAYER);
+        setLayer(GameLayer.ENTRY_POINT_LAYER);
     }
     //========================================================
 

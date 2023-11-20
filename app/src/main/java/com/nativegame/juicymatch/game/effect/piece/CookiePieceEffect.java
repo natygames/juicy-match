@@ -1,10 +1,10 @@
 package com.nativegame.juicymatch.game.effect.piece;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.RotationModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
 import com.nativegame.nattyengine.texture.Texture;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
@@ -32,7 +32,7 @@ public class CookiePieceEffect extends Sprite {
         mRotationModifier = new RotationModifier(0, RandomUtils.nextSign() * 30f, TIME_TO_LIVE);
         mFadeOutModifier = new FadeOutModifier(TIME_TO_LIVE);
         mFadeOutModifier.setAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

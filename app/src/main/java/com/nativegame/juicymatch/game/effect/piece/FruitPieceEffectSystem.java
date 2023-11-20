@@ -4,8 +4,8 @@ import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.layer.tile.FruitType;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.util.pool.ObjectPool;
 import com.nativegame.nattyengine.util.pool.Pool;
+import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -19,7 +19,7 @@ public class FruitPieceEffectSystem {
     // Constructors
     //--------------------------------------------------------
     public FruitPieceEffectSystem(Engine engine, int size) {
-        mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<FruitPieceEffect>() {
+        mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<FruitPieceEffect>() {
             @Override
             public FruitPieceEffect createObject() {
                 return new FruitPieceEffect(FruitPieceEffectSystem.this, engine, Textures.CHERRY);

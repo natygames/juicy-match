@@ -1,14 +1,14 @@
 package com.nativegame.juicymatch.game.effect.piece;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.tile.FruitType;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.PositionModifier;
+import com.nativegame.nattyengine.entity.modifier.RotationModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.PositionModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
@@ -36,7 +36,7 @@ public class FruitPieceEffect extends Sprite {
         mFadeOutModifier = new FadeOutModifier(TIME_TO_LIVE);
         mPositionModifier = new PositionModifier(TIME_TO_LIVE);
         mPositionModifier.setAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER + 1);   // Fruit pieces need to be above flash effect
+        setLayer(GameLayer.EFFECT_LAYER + 1);   // Fruit pieces need to be above flash effect
     }
     //========================================================
 

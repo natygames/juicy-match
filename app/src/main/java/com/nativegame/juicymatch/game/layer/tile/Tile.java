@@ -3,7 +3,7 @@ package com.nativegame.juicymatch.game.layer.tile;
 import com.nativegame.juicymatch.algorithm.Match3Tile;
 import com.nativegame.juicymatch.algorithm.TileState;
 import com.nativegame.juicymatch.algorithm.TileType;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
@@ -39,7 +39,7 @@ public abstract class Tile extends LayerSprite implements Match3Tile {
         mFruitType = fruitType;
         mSpecialType = specialType;
         mTileState = tileState;
-        setLayer(Layer.TILE_LAYER);
+        setLayer(GameLayer.TILE_LAYER);
     }
     //========================================================
 

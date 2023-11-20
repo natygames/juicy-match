@@ -2,8 +2,8 @@ package com.nativegame.juicymatch.game.effect.lightning;
 
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.util.pool.ObjectPool;
 import com.nativegame.nattyengine.util.pool.Pool;
+import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -17,7 +17,7 @@ public class LightningEffectSystem {
     // Constructors
     //--------------------------------------------------------
     public LightningEffectSystem(Engine engine, int size) {
-        mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<LightningEffect>() {
+        mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<LightningEffect>() {
             @Override
             public LightningEffect createObject() {
                 return new LightningEffect(LightningEffectSystem.this, engine, Textures.LIGHTNING_ANIMATION);

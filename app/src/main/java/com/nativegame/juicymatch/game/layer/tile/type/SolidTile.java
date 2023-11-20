@@ -9,10 +9,10 @@ import com.nativegame.juicymatch.algorithm.TileState;
 import com.nativegame.juicymatch.asset.Colors;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.algorithm.special.handler.SpecialTileHandlerManager;
 import com.nativegame.juicymatch.game.effect.ScoreEffectSystem;
 import com.nativegame.juicymatch.game.effect.piece.FruitPieceEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
 import com.nativegame.juicymatch.game.layer.tile.FruitType;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
@@ -20,13 +20,14 @@ import com.nativegame.juicymatch.game.layer.tile.TileInitializer;
 import com.nativegame.juicymatch.game.layer.tile.TileResetter;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
-import com.nativegame.nattyengine.entity.particles.ParticleSystem;
-import com.nativegame.nattyengine.entity.shape.Circle;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeInModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleInModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
+import com.nativegame.nattyengine.entity.modifier.FadeInModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleInModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
+import com.nativegame.nattyengine.entity.particle.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
+import com.nativegame.nattyengine.entity.shape.geometry.Circle;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.texture.Texture;
 import com.nativegame.nattyengine.util.math.RandomUtils;
 
@@ -88,11 +89,11 @@ public class SolidTile extends Tile implements EventListener {
         mShuffleFadeModifier = new FadeInModifier(0, TIME_TO_SHUFFLE);
         mBounceInModifier = new ScaleModifier(1, 1, 1, 0.8f, TIME_TO_BOUNCE);
         mBounceOutModifier = new ScaleModifier(1, 1, 0.8f, 1, TIME_TO_BOUNCE, TIME_TO_BOUNCE);
-        mLightBgParticleSystem = new ParticleSystem(engine, Textures.LIGHT_BG, 1)
+        mLightBgParticleSystem = new SpriteParticleSystem(engine, Textures.LIGHT_BG, 1)
                 .setDuration(750)
                 .setAlpha(255, 0, 250)
-                .setLayer(Layer.EFFECT_LAYER);
-        mGlitterParticleSystem = new ParticleSystem(engine, Textures.GLITTER, GLITTER_NUM)
+                .setLayer(GameLayer.EFFECT_LAYER);
+        mGlitterParticleSystem = new SpriteParticleSystem(engine, Textures.GLITTER, GLITTER_NUM)
                 .setDuration(600)
                 .setSpeedX(-300, 300)
                 .setSpeedY(-300, 300)
@@ -100,7 +101,7 @@ public class SolidTile extends Tile implements EventListener {
                 .setRotationSpeed(-360, 360)
                 .setAlpha(255, 0, 400)
                 .setScale(1, 0, 400)
-                .setLayer(Layer.EFFECT_LAYER);
+                .setLayer(GameLayer.EFFECT_LAYER);
         mFruitPieceEffect = new FruitPieceEffectSystem(engine, 4);
         mScoreEffect = new ScoreEffectSystem(engine, 3);
         mLightCircle = new LightCircle(engine, 250);
@@ -115,7 +116,7 @@ public class SolidTile extends Tile implements EventListener {
     @Override
     public void onUpdate(long elapsedMillis) {
         // Show the tile when appear from top
-        if (mY >= mMarginY - mHeight / 2f && mY < mMarginY) {
+        if (mY >= mMarginY - getHeight() / 2f && mY < mMarginY) {
             setVisible(true);
         }
 
@@ -130,12 +131,12 @@ public class SolidTile extends Tile implements EventListener {
 
     @Override
     public void resetXByColumn(int column) {
-        mX = column * mWidth + mMarginX;
+        mX = column * getWidth() + mMarginX;
     }
 
     @Override
     public void resetYByRow(int row) {
-        mY = row * mHeight + mMarginY;
+        mY = row * getWidth() + mMarginY;
     }
 
     @Override
@@ -236,7 +237,7 @@ public class SolidTile extends Tile implements EventListener {
             }
             // Start the bounce modifier when stop falling
             if (mY == targetY) {
-                setScalePivotY(mHeight);
+                setScalePivotY(getHeight());
                 mBounceInModifier.init(this);
                 mBounceOutModifier.init(this);
             }
@@ -253,7 +254,7 @@ public class SolidTile extends Tile implements EventListener {
     public void swapTile(long elapsedMillis) {
         float speed = mSpeed * elapsedMillis;
         // Update x position
-        float targetX = mCol * mWidth + mMarginX;
+        float targetX = mCol * getWidth() + mMarginX;
         if (mX < targetX) {
             mX += speed;
             if (mX > targetX) {
@@ -268,7 +269,7 @@ public class SolidTile extends Tile implements EventListener {
         }
 
         // Update y position
-        float targetY = mRow * mHeight + mMarginY;
+        float targetY = mRow * getHeight() + mMarginY;
         if (mY < targetY) {
             mY += speed;
             if (mY > targetY) {
@@ -383,11 +384,11 @@ public class SolidTile extends Tile implements EventListener {
     // Methods
     //--------------------------------------------------------
     private float getTargetX() {
-        return mCol * mWidth + mMarginX;
+        return mCol * getWidth() + mMarginX;
     }
 
     private float getTargetY() {
-        return mRow * mHeight + mMarginY;
+        return mRow * getHeight() + mMarginY;
     }
 
     private void checkSpecialTile() {
@@ -439,7 +440,7 @@ public class SolidTile extends Tile implements EventListener {
         mShuffleFadeModifier.setDuration(duration);
         mShuffleScaleModifier.init(this);
         mShuffleFadeModifier.init(this);
-        setScalePivotY(mHeight / 2f);
+        setScalePivotY(getHeight() / 2f);
     }
 
     private void addLightEffect() {
@@ -454,7 +455,7 @@ public class SolidTile extends Tile implements EventListener {
         if (mLightCircle.isRunning()) {
             mLightCircle.removeFromGame();
         }
-        clearColorFilter();
+        setColorFilter(null);
     }
     //========================================================
 
@@ -469,8 +470,8 @@ public class SolidTile extends Tile implements EventListener {
         public LightCircle(Engine engine, int radius) {
             super(engine, radius);
             setColor(Colors.WHITE);
-            setMaskFilter(new BlurMaskFilter(150 * mPixelFactor, BlurMaskFilter.Blur.NORMAL));
-            setLayer(Layer.EFFECT_BG_LAYER);
+            setMaskFilter(new BlurMaskFilter(150, BlurMaskFilter.Blur.NORMAL));
+            setLayer(GameLayer.EFFECT_BG_LAYER);
         }
         //========================================================
 

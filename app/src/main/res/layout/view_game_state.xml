@@ -82,7 +82,7 @@
         app:layout_constraintStart_toStartOf="@+id/image_target_field"
         app:layout_constraintTop_toTopOf="@+id/image_target_field" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <ImageView
         android:id="@+id/image_target_01"
         android:layout_width="@dimen/image_state_target"
         android:layout_height="@dimen/image_state_target"
@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="@id/image_target_field"
         app:layout_constraintEnd_toStartOf="@id/image_target_02" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <ImageView
         android:id="@+id/image_target_02"
         android:layout_width="@dimen/image_state_target"
         android:layout_height="@dimen/image_state_target"
@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="@id/image_target_field"
         app:layout_constraintStart_toStartOf="@id/image_target_field" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <ImageView
         android:id="@+id/image_target_03"
         android:layout_width="@dimen/image_state_target"
         android:layout_height="@dimen/image_state_target"
@@ -112,7 +112,7 @@
         app:layout_constraintBottom_toBottomOf="@id/image_target_field"
         app:layout_constraintStart_toEndOf="@id/image_target_02" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <TextView
         android:id="@+id/txt_target_01"
         android:layout_width="0dp"
         android:layout_height="@dimen/image_state_target"
@@ -126,7 +126,7 @@
         app:layout_constraintEnd_toEndOf="@+id/image_target_01"
         app:layout_constraintTop_toTopOf="@+id/image_target_01" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <TextView
         android:id="@+id/txt_target_02"
         android:layout_width="0dp"
         android:layout_height="@dimen/image_state_target"
@@ -140,7 +140,7 @@
         app:layout_constraintEnd_toEndOf="@+id/image_target_02"
         app:layout_constraintTop_toTopOf="@+id/image_target_02" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <TextView
         android:id="@+id/txt_target_03"
         android:layout_width="0dp"
         android:layout_height="@dimen/image_state_target"

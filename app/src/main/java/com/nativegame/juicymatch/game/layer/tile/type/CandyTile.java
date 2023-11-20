@@ -3,10 +3,11 @@ package com.nativegame.juicymatch.game.layer.tile.type;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.effect.piece.ExplosionPieceEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.particles.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.ParticleSystem;
+import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
 import com.nativegame.nattyengine.texture.Texture;
 
 /**
@@ -27,11 +28,11 @@ public class CandyTile extends LayerObstacleTile {
     //--------------------------------------------------------
     public CandyTile(TileSystem tileSystem, Engine engine, Texture texture, int obstacleLayer) {
         super(tileSystem, engine, texture, obstacleLayer);
-        mRingLightParticleSystem = new ParticleSystem(engine, Textures.LIGHT_RING, 1)
+        mRingLightParticleSystem = new SpriteParticleSystem(engine, Textures.LIGHT_RING, 1)
                 .setDuration(500)
                 .setAlpha(255, 0, 350)
                 .setScale(0, 3)
-                .setLayer(Layer.EFFECT_LAYER);
+                .setLayer(GameLayer.EFFECT_LAYER);
         mCandyPieceEffect = new ExplosionPieceEffectSystem(engine, Textures.CANDY_PIECE, CANDY_PIECE);
         mWrapperPieceEffect = new ExplosionPieceEffectSystem(engine, Textures.CANDY_WRAPPER_PIECE, WRAPPER_PIECE);
     }

@@ -1,6 +1,6 @@
 package com.nativegame.juicymatch.game.layer;
 
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
@@ -23,8 +23,8 @@ public abstract class LayerSprite extends Sprite {
     //--------------------------------------------------------
     protected LayerSprite(Engine engine, Texture texture) {
         super(engine, texture);
-        mMarginX = (JuicyMatch.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * mWidth) / 2;
-        mMarginY = (JuicyMatch.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * mHeight) / 2;
+        mMarginX = (GameWorld.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * getWidth()) / 2;
+        mMarginY = (GameWorld.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * getHeight()) / 2;
     }
     //========================================================
 
@@ -50,8 +50,8 @@ public abstract class LayerSprite extends Sprite {
     public void setPosition(int row, int col) {
         mRow = row;
         mCol = col;
-        mX = col * mWidth + mMarginX;
-        mY = row * mHeight + mMarginY;
+        mX = col * getWidth() + mMarginX;
+        mY = row * getHeight() + mMarginY;
     }
     //========================================================
 

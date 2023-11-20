@@ -3,8 +3,8 @@ package com.nativegame.juicymatch.game.effect.piece;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.util.pool.ObjectPool;
 import com.nativegame.nattyengine.util.pool.Pool;
+import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -18,7 +18,7 @@ public class IceCreamPieceEffectSystem {
     // Constructors
     //--------------------------------------------------------
     public IceCreamPieceEffectSystem(Engine engine, int size) {
-        mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<IceCreamPieceEffect>() {
+        mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<IceCreamPieceEffect>() {
             @Override
             public IceCreamPieceEffect createObject() {
                 return new IceCreamPieceEffect(IceCreamPieceEffectSystem.this, engine, Textures.ICE_CREAM);

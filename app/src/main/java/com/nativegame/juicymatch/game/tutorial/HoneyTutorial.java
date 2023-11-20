@@ -2,6 +2,7 @@ package com.nativegame.juicymatch.game.tutorial;
 
 import com.nativegame.juicymatch.asset.Colors;
 import com.nativegame.juicymatch.asset.Textures;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialFingerEffect;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialHintEffectSystem;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialShadowEffect;
@@ -36,7 +37,9 @@ public class HoneyTutorial implements Tutorial {
     public void show(GameActivity activity) {
         mShadowBg.addToGame();
         mHintEffect.activate(Level.LEVEL_DATA.getTutorialHint().toCharArray());
-        mFingerEffect.activate(750, 1050, 850, 850);
+        int marginX = (GameWorld.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * 300) / 2;
+        int marginY = (GameWorld.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * 300) / 2;
+        mFingerEffect.activate(marginX + 600, marginX + 900, marginY + 700, marginY + 700);
     }
     //========================================================
 

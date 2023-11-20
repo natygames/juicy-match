@@ -8,8 +8,8 @@ import com.nativegame.juicymatch.R;
 import com.nativegame.nattyengine.texture.texture2d.Texture2D;
 import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
 import com.nativegame.nattyengine.texture.texture2d.Texture2DManager;
+import com.nativegame.nattyengine.util.bitmap.BitmapClipUtils;
 import com.nativegame.nattyengine.util.bitmap.BitmapUtils;
-import com.nativegame.nattyengine.util.bitmap.ClipUtils;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
 /**
@@ -410,11 +410,11 @@ public class Textures {
         CONFETTI_PINK = textureManager.loadTexture(R.drawable.confetti_pink);
         CONFETTI_YELLOW = textureManager.loadTexture(R.drawable.confetti_yellow);
 
-        FLASH_ROW_ANIMATION = textureManager.loadTextureGroup(ClipUtils.clipBitmapLeftRight(ResourceUtils.getBitmap(context, R.drawable.flash_row), 10));
-        FLASH_COLUMN_ANIMATION = textureManager.loadTextureGroup(ClipUtils.clipBitmapTopDown(ResourceUtils.getBitmap(context, R.drawable.flash_column), 10));
-        FLASH_EXPLOSION_ANIMATION = textureManager.loadTextureGroup(ClipUtils.clipBitmapInOut(ResourceUtils.getBitmap(context, R.drawable.flash_explosion), 10));
-        FLASH_TRANSFORM_ANIMATION = textureManager.loadTextureGroup(ClipUtils.clipBitmapInOut(ResourceUtils.getBitmap(context, R.drawable.flash_transform), 10));
-        Texture2DGroup clipLightnings = textureManager.loadTextureGroup(ClipUtils.clipBitmapTopDown(ResourceUtils.getBitmap(context, R.drawable.lightning_01), 5));
+        FLASH_ROW_ANIMATION = textureManager.loadTextureGroup(BitmapClipUtils.clipBitmapLeftRight(ResourceUtils.getBitmap(context, R.drawable.flash_row), 10));
+        FLASH_COLUMN_ANIMATION = textureManager.loadTextureGroup(BitmapClipUtils.clipBitmapTopDown(ResourceUtils.getBitmap(context, R.drawable.flash_column), 10));
+        FLASH_EXPLOSION_ANIMATION = textureManager.loadTextureGroup(BitmapClipUtils.clipBitmapInOut(ResourceUtils.getBitmap(context, R.drawable.flash_explosion), 10));
+        FLASH_TRANSFORM_ANIMATION = textureManager.loadTextureGroup(BitmapClipUtils.clipBitmapInOut(ResourceUtils.getBitmap(context, R.drawable.flash_transform), 10));
+        Texture2DGroup clipLightnings = textureManager.loadTextureGroup(BitmapClipUtils.clipBitmapTopDown(ResourceUtils.getBitmap(context, R.drawable.lightning_01), 5));
         Texture2DGroup lightnings = textureManager.loadTextureGroup(new int[]{
                 R.drawable.lightning_01,
                 R.drawable.lightning_02,

@@ -61,7 +61,7 @@ public class MainActivity extends GameActivity {
         setTheme(R.style.Theme_JuicyMatch);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_main);
-        setContainerView(R.id.layout_container);
+        setFragmentContainer(R.id.layout_container);
 
         mAdManager = new AdManager(this);
         mLivesTimer = new LivesTimer(this);

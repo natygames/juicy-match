@@ -18,7 +18,12 @@ import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.game.swap.SwapController;
 import com.nativegame.juicymatch.ui.dialog.PauseDialog;
 import com.nativegame.nattyengine.Game;
-import com.nativegame.nattyengine.engine.camera.Camera;
+import com.nativegame.nattyengine.camera.FixedCamera;
+import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.nattyengine.entity.counter.EntityCounter;
+import com.nativegame.nattyengine.entity.counter.FPSCounter;
+import com.nativegame.nattyengine.entity.counter.UPSCounter;
+import com.nativegame.nattyengine.input.touch.SingleTouchController;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameView;
 
@@ -29,45 +34,59 @@ import com.nativegame.nattyengine.ui.GameView;
 
 public class JuicyMatch extends Game {
 
-    public static final int WORLD_WIDTH = 2760;
-    public static final int WORLD_HEIGHT = 2760;
-
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public JuicyMatch(GameActivity activity, GameView gameView) {
-        super(activity, gameView);
+    public JuicyMatch(GameActivity activity, GameView gameView, Engine engine) {
+        super(activity, gameView, engine);
+        engine.setDebugMode(true);
+        engine.setTouchController(new SingleTouchController(gameView));
+        engine.setCamera(new FixedCamera(gameView.getWidth(), gameView.getHeight(), GameWorld.WORLD_WIDTH, GameWorld.WORLD_HEIGHT));
 
-        // Init camera
-        int cameraSize;
-        if (gameView.getHeight() / gameView.getWidth() < 2) {
-            cameraSize = gameView.getHeight() / 2;   // We use half screen height if screen too wide
-        } else {
-            cameraSize = gameView.getWidth();   // Otherwise, we just use screen width
+        // Align the Camera to world center
+        engine.getCamera().setCenterX(GameWorld.WORLD_WIDTH / 2f);
+        engine.getCamera().setCenterY(GameWorld.WORLD_HEIGHT / 2f);
+
+        // Init debug tools
+        if (engine.isDebugMode()) {
+            EntityCounter entityCounter = new EntityCounter(engine, 0, 200, 1000, 100);
+            UPSCounter upsCounter = new UPSCounter(engine, 0, 0, 1000, 100);
+            FPSCounter fpsCounter = new FPSCounter(engine, 0, 100, 1000, 100);
+
+            int textSize = 100;
+            int debugLayer = 12;
+            entityCounter.setTextSize(textSize);
+            upsCounter.setTextSize(textSize);
+            fpsCounter.setTextSize(textSize);
+            entityCounter.setLayer(debugLayer);
+            upsCounter.setLayer(debugLayer);
+            fpsCounter.setLayer(debugLayer);
+            entityCounter.addToGame();
+            upsCounter.addToGame();
+            fpsCounter.addToGame();
         }
-        mEngine.setCamera(new Camera(gameView, cameraSize, cameraSize, WORLD_WIDTH, WORLD_HEIGHT));
 
         // Init counter
-        new ComboCounter(mEngine).addToGame();
-        new ScoreCounter(mActivity, mEngine).addToGame();
-        new StarCounter(mActivity, mEngine).addToGame();
-        new MoveCounter(mActivity, mEngine).addToGame();
-        new TargetCounter(mActivity, mEngine).addToGame();
+        new ComboCounter(engine).addToGame();
+        new ScoreCounter(activity, engine).addToGame();
+        new StarCounter(activity, engine).addToGame();
+        new MoveCounter(activity, engine).addToGame();
+        new TargetCounter(activity, engine).addToGame();
 
         // Init layer
-        new GridSystem(mEngine);
-        TileSystem tileSystem = new TileSystem(mEngine);
+        new GridSystem(engine);
+        TileSystem tileSystem = new TileSystem(engine);
 
         // Init Algorithm
-        Algorithm regularTimeAlgorithm = new RegularTimeAlgorithm(mEngine, tileSystem,
-                new LayerHandlerManager(mEngine), new TargetHandlerManager());
-        Algorithm bonusTimeAlgorithm = new BonusTimeAlgorithm(mEngine, tileSystem);
+        Algorithm regularTimeAlgorithm = new RegularTimeAlgorithm(engine, tileSystem,
+                new LayerHandlerManager(engine), new TargetHandlerManager());
+        Algorithm bonusTimeAlgorithm = new BonusTimeAlgorithm(engine, tileSystem);
 
         // Init controller
-        new SwapController(mEngine, tileSystem).addToGame();
-        new HintController(mEngine, tileSystem).addToGame();
-        new BoosterCounter(mActivity, mEngine, tileSystem).addToGame();
-        new GameController(mActivity, mEngine, regularTimeAlgorithm, bonusTimeAlgorithm).addToGame();
+        new SwapController(engine, tileSystem).addToGame();
+        new HintController(engine, tileSystem).addToGame();
+        new BoosterCounter(activity, engine, tileSystem).addToGame();
+        new GameController(activity, engine, regularTimeAlgorithm, bonusTimeAlgorithm).addToGame();
     }
     //========================================================
 
@@ -77,12 +96,6 @@ public class JuicyMatch extends Game {
     @Override
     protected void onPause() {
         showPauseDialog();
-        mActivity.getSoundManager().pause();
-    }
-
-    @Override
-    protected void onResume() {
-        mActivity.getSoundManager().resume();
     }
     //========================================================
 
@@ -90,7 +103,7 @@ public class JuicyMatch extends Game {
     // Methods
     //--------------------------------------------------------
     private void showPauseDialog() {
-        PauseDialog dialog = new PauseDialog(mActivity) {
+        PauseDialog dialog = new PauseDialog(getActivity()) {
             @Override
             public void resumeGame() {
                 resume();
@@ -99,11 +112,11 @@ public class JuicyMatch extends Game {
             @Override
             public void quitGame() {
                 // Reduce one live
-                ((MainActivity) mActivity).getLivesTimer().reduceLive();
-                mActivity.navigateBack();
+                ((MainActivity) getActivity()).getLivesTimer().reduceLive();
+                getActivity().navigateBack();
             }
         };
-        mActivity.showDialog(dialog);
+        getActivity().showDialog(dialog);
     }
     //========================================================
 

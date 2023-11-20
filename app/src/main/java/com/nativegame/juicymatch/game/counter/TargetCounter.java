@@ -11,12 +11,10 @@ import com.nativegame.juicymatch.game.GameEvent;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.juicymatch.level.TargetType;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameImage;
-import com.nativegame.nattyengine.ui.GameText;
 import com.nativegame.nattyengine.util.resource.ResourceUtils;
 
 import java.util.ArrayList;
@@ -39,7 +37,7 @@ public class TargetCounter extends RunnableEntity implements EventListener {
     //--------------------------------------------------------
     public TargetCounter(GameActivity activity, Engine engine) {
         super(activity, engine);
-        mPulseAnimation = AnimationUtils.loadAnimation(activity, R.anim.image_pulse);
+        mPulseAnimation = AnimationUtils.loadAnimation(activity, R.anim.target_pulse);
         mTargetCounts.addAll(Level.LEVEL_DATA.getTargetCounts());
         initLevelText();
         initTargetImage();
@@ -107,9 +105,9 @@ public class TargetCounter extends RunnableEntity implements EventListener {
     private void initTargetImage() {
         List<TargetType> targetTypes = Level.LEVEL_DATA.getTargetTypes();
         // Init target image from TargetType
-        GameImage imageTargetA = (GameImage) mActivity.findViewById(R.id.image_target_01);
-        GameImage imageTargetB = (GameImage) mActivity.findViewById(R.id.image_target_02);
-        GameImage imageTargetC = (GameImage) mActivity.findViewById(R.id.image_target_03);
+        ImageView imageTargetA = (ImageView) mActivity.findViewById(R.id.image_target_01);
+        ImageView imageTargetB = (ImageView) mActivity.findViewById(R.id.image_target_02);
+        ImageView imageTargetC = (ImageView) mActivity.findViewById(R.id.image_target_03);
         switch (targetTypes.size()) {
             case 1:
                 imageTargetB.setImageResource(targetTypes.get(0).getDrawableId());
@@ -144,9 +142,9 @@ public class TargetCounter extends RunnableEntity implements EventListener {
     private void initTargetText() {
         List<Integer> targetCounts = Level.LEVEL_DATA.getTargetCounts();
         // Init target text from TargetType
-        GameText txtTargetA = (GameText) mActivity.findViewById(R.id.txt_target_01);
-        GameText txtTargetB = (GameText) mActivity.findViewById(R.id.txt_target_02);
-        GameText txtTargetC = (GameText) mActivity.findViewById(R.id.txt_target_03);
+        TextView txtTargetA = (TextView) mActivity.findViewById(R.id.txt_target_01);
+        TextView txtTargetB = (TextView) mActivity.findViewById(R.id.txt_target_02);
+        TextView txtTargetC = (TextView) mActivity.findViewById(R.id.txt_target_03);
         switch (targetCounts.size()) {
             case 1:
                 txtTargetB.setText(String.valueOf(targetCounts.get(0)));

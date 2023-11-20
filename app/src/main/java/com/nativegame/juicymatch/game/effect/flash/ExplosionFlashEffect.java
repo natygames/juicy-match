@@ -1,16 +1,16 @@
 package com.nativegame.juicymatch.game.effect.flash;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.sprite.AnimateSprite;
 import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
 
 /**
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class ExplosionFlashEffect extends AnimatedSprite {
+public class ExplosionFlashEffect extends AnimateSprite {
 
     private static final long TIME_TO_ANIMATE = 400;
     private static final long TIME_TO_FADE = 500;
@@ -28,7 +28,7 @@ public class ExplosionFlashEffect extends AnimatedSprite {
         mFadeOutModifier.setAutoRemove(true);
         setAnimation(40, false);
         setAnimationAutoStart(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

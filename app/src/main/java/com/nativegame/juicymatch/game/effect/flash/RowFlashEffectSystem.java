@@ -3,8 +3,8 @@ package com.nativegame.juicymatch.game.effect.flash;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.util.pool.ObjectPool;
 import com.nativegame.nattyengine.util.pool.Pool;
+import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -18,7 +18,7 @@ public class RowFlashEffectSystem {
     // Constructors
     //--------------------------------------------------------
     public RowFlashEffectSystem(Engine engine, int size) {
-        mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<RowFlashEffect>() {
+        mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<RowFlashEffect>() {
             @Override
             public RowFlashEffect createObject() {
                 return new RowFlashEffect(RowFlashEffectSystem.this, engine, Textures.FLASH_ROW_ANIMATION);

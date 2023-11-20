@@ -10,9 +10,9 @@ import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.game.GameEvent;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.ui.GameActivity;
 
 /**

@@ -3,7 +3,7 @@ package com.nativegame.juicymatch.game.layer.lock;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.effect.piece.ExplosionPieceEffectSystem;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.texture.Texture;
@@ -27,7 +27,7 @@ public class Lock extends LayerSprite {
         super(engine, texture);
         mLockType = lockType;
         mLockPieceEffect = new ExplosionPieceEffectSystem(engine, Textures.LOCK_PIECE, LOCK_PIECE);
-        setLayer(Layer.LOCK_LAYER);
+        setLayer(GameLayer.LOCK_LAYER);
     }
     //========================================================
 

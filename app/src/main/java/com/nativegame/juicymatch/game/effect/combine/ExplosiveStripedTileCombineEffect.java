@@ -1,11 +1,11 @@
 package com.nativegame.juicymatch.game.effect.combine;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.tween.AnticipateTweener;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.tween.AnticipateTweener;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -29,7 +29,7 @@ public class ExplosiveStripedTileCombineEffect extends Sprite {
                 AnticipateTweener.getInstance());
         mScaleOutModifier.setModifyBefore(false);
         mScaleOutModifier.setAutoRemove(true);
-        setLayer(Layer.EFFECT_LAYER + 1);
+        setLayer(GameLayer.EFFECT_LAYER + 1);
     }
     //========================================================
 

@@ -1,11 +1,13 @@
 package com.nativegame.juicymatch.game.effect.tutorial;
 
+import android.graphics.Color;
+
 import com.nativegame.juicymatch.asset.Colors;
-import com.nativegame.juicymatch.game.JuicyMatch;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.shape.Rectangle;
+import com.nativegame.nattyengine.entity.shape.geometry.Rectangle;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
 
 /**
@@ -22,10 +24,11 @@ public class TutorialHintEffect extends Rectangle implements TouchEventListener 
     //--------------------------------------------------------
     public TutorialHintEffect(Engine engine, int width, int height) {
         super(engine, width, height);
-        mMarginX = (JuicyMatch.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * mWidth) / 2;
-        mMarginY = (JuicyMatch.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * mHeight) / 2;
-        setColor(Colors.BLACK_60);
-        setLayer(Layer.EFFECT_LAYER);
+        mMarginX = (GameWorld.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * width) / 2;
+        mMarginY = (GameWorld.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * height) / 2;
+        setColor(Color.BLACK);
+        setAlpha(200);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

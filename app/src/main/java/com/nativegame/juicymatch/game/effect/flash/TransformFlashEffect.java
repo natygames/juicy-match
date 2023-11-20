@@ -1,18 +1,18 @@
 package com.nativegame.juicymatch.game.effect.flash;
 
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.sprite.animation.AnimatedSprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.RotationModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleOutModifier;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.RotationModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleOutModifier;
+import com.nativegame.nattyengine.entity.sprite.AnimateSprite;
 import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
 
 /**
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class TransformFlashEffect extends AnimatedSprite {
+public class TransformFlashEffect extends AnimateSprite {
 
     private static final long TIME_TO_LIVE = 500;
     private static final long TIME_TO_FADE = 200;
@@ -34,7 +34,7 @@ public class TransformFlashEffect extends AnimatedSprite {
         mFadeOutModifier.setAutoRemove(true);
         setAnimation(20, false);
         setAnimationAutoStart(true);
-        setLayer(Layer.EFFECT_LAYER);
+        setLayer(GameLayer.EFFECT_LAYER);
     }
     //========================================================
 

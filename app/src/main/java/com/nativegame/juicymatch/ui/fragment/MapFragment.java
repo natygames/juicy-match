@@ -268,7 +268,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
                 }
             }
         };
-        showDialog(levelDialog);
+        getGameActivity().showDialog(levelDialog);
     }
 
     private void showShopDialog() {
@@ -278,7 +278,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
                 loadCoin();
             }
         };
-        showDialog(shopDialog);
+        getGameActivity().showDialog(shopDialog);
     }
 
     private void showWheelDialog() {
@@ -288,7 +288,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
                 loadCoin();
             }
         };
-        showDialog(wheelDialog);
+        getGameActivity().showDialog(wheelDialog);
     }
 
     private void showMoreCoinDialog() {
@@ -298,17 +298,17 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
                 loadCoin();
             }
         };
-        showDialog(moreCoinDialog);
+        getGameActivity().showDialog(moreCoinDialog);
     }
 
     private void showMoreLivesDialog() {
         MoreLivesDialog moreLivesDialog = new MoreLivesDialog(getGameActivity());
-        showDialog(moreLivesDialog);
+        getGameActivity().showDialog(moreLivesDialog);
     }
 
     private void showSettingDialog() {
         SettingDialog settingDialog = new SettingDialog(getGameActivity());
-        showDialog(settingDialog);
+        getGameActivity().showDialog(settingDialog);
     }
     //========================================================
 

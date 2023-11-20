@@ -1,15 +1,15 @@
 package com.nativegame.juicymatch.game.layer.shell;
 
 import com.nativegame.juicymatch.asset.Sounds;
-import com.nativegame.juicymatch.game.layer.Layer;
+import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.tween.OvershootTweener;
+import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.nattyengine.entity.modifier.PositionYModifier;
+import com.nativegame.nattyengine.entity.modifier.ScaleModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.entity.sprite.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.PositionYModifier;
-import com.nativegame.nattyengine.entity.sprite.modifier.ScaleModifier;
 import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.nattyengine.util.modifier.tween.OvershootTweener;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -27,7 +27,7 @@ public class Shell extends LayerSprite {
         super(engine, texture);
         mShellType = sandType;
         mShellEffect = new ShellEffect(engine, sandType.getTexture());
-        setLayer(Layer.SAND_LAYER - 1);
+        setLayer(GameLayer.SAND_LAYER - 1);
     }
     //========================================================
 
@@ -80,7 +80,7 @@ public class Shell extends LayerSprite {
             mFadeOutModifier = new FadeOutModifier(500, 500);
             mPositionModifier = new PositionYModifier(500, 500);
             mPositionModifier.setAutoRemove(true);
-            setLayer(Layer.SAND_LAYER - 1);
+            setLayer(GameLayer.SAND_LAYER - 1);
         }
         //========================================================
 
@@ -111,7 +111,7 @@ public class Shell extends LayerSprite {
             mFadeOutModifier.init(this);
             mPositionModifier.setValue(mY, mY - 800);
             mPositionModifier.init(this);
-            setLayer(Layer.TEXT_LAYER + 1);
+            setLayer(GameLayer.TEXT_LAYER + 1);
         }
         //========================================================
 

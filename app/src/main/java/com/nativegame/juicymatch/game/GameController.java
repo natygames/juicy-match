@@ -20,9 +20,9 @@ import com.nativegame.juicymatch.ui.dialog.StartDialog;
 import com.nativegame.juicymatch.ui.dialog.TutorialDialog;
 import com.nativegame.juicymatch.ui.dialog.WinDialog;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.Entity;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.ui.GameActivity;
 
 /**
@@ -115,6 +115,7 @@ public class GameController extends Entity implements EventListener, AdManager.A
                 mTotalTime += elapsedMillis;
                 if (mTotalTime >= 1200) {
                     mEngine.stopGame();
+                    mEngine.releaseGame();
                     showScoreDialog();
                     mState = GameState.WAITING;
                     mTotalTime = 0;
@@ -124,6 +125,7 @@ public class GameController extends Entity implements EventListener, AdManager.A
                 mTotalTime += elapsedMillis;
                 if (mTotalTime >= 1200) {
                     mEngine.stopGame();
+                    mEngine.releaseGame();
                     mParent.navigateBack();
                     mState = GameState.WAITING;
                     mTotalTime = 0;

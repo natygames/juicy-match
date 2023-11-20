@@ -6,8 +6,8 @@ import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.Entity;
 import com.nativegame.nattyengine.entity.modifier.DurationModifier;
 import com.nativegame.nattyengine.util.math.RandomUtils;
-import com.nativegame.nattyengine.util.pool.ObjectPool;
 import com.nativegame.nattyengine.util.pool.Pool;
+import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -31,7 +31,7 @@ public class IceCreamCombineBeamEffectSystem extends Entity {
     //--------------------------------------------------------
     public IceCreamCombineBeamEffectSystem(Engine engine, int size) {
         super(engine);
-        mEffectPool = new ObjectPool<>(new Pool.PoolObjectFactory<IceCreamCombineBeamEffect>() {
+        mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<IceCreamCombineBeamEffect>() {
             @Override
             public IceCreamCombineBeamEffect createObject() {
                 return new IceCreamCombineBeamEffect(IceCreamCombineBeamEffectSystem.this, engine,

@@ -5,7 +5,7 @@ import com.nativegame.juicymatch.asset.Preferences;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
-import com.nativegame.juicymatch.game.JuicyMatch;
+import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.TextEffect;
 import com.nativegame.juicymatch.game.hint.finder.HintFinderManager;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
@@ -13,11 +13,11 @@ import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.juicymatch.level.TutorialType;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.Entity;
 import com.nativegame.nattyengine.entity.timer.Timer;
 import com.nativegame.nattyengine.entity.timer.TimerEvent;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 
 import java.util.List;
 
@@ -25,12 +25,12 @@ import java.util.List;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class HintController extends Entity implements EventListener,
-        Timer.TimerListener, TimerEvent.TimerEventListener {
+public class HintController extends Entity implements EventListener, TimerEvent.TimerEventListener {
 
     private static final long HINT_TIMEOUT = 4000;
     private static final long SHUFFLE_TIMEOUT = 2000;
-    private static final long SOUND_TIMEOUT = 1000;
+    private static final long SHUFFLE_SOUND_TIMEOUT = 1000;
+    private static final long SLIDE_SOUND_TIMEOUT = 300;
 
     private final Tile[][] mTiles;
     private final int mTotalRow;
@@ -56,10 +56,13 @@ public class HintController extends Entity implements EventListener,
         mHintFinder = new HintFinderManager();
         mHintModifier = new HintModifier(engine);
         mShuffleText = new TextEffect(engine, Textures.TEXT_SHUFFLE);
-        mHintTimer = new Timer(engine, this, HINT_TIMEOUT);
-        mShuffleTimer = new Timer(engine, this, SHUFFLE_TIMEOUT);
-        mSoundTimer = new Timer(engine, this, SOUND_TIMEOUT);
-        mSoundTimer.addTimerEvent(new TimerEvent(this, 300));
+        mHintTimer = new Timer(engine);
+        mHintTimer.addTimerEvent(new TimerEvent(this, HINT_TIMEOUT));
+        mShuffleTimer = new Timer(engine);
+        mShuffleTimer.addTimerEvent(new TimerEvent(this, SHUFFLE_TIMEOUT));
+        mSoundTimer = new Timer(engine);
+        mSoundTimer.addTimerEvent(new TimerEvent(this, SHUFFLE_SOUND_TIMEOUT));
+        mSoundTimer.addTimerEvent(new TimerEvent(this, SLIDE_SOUND_TIMEOUT));
         mHintEnable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_HINT, true);
     }
     //========================================================
@@ -98,19 +101,16 @@ public class HintController extends Entity implements EventListener,
     }
 
     @Override
-    public void onTimerComplete(Timer timer) {
-        if (mHintTimer == timer) {
-            showHintEffect();
-        } else if (mShuffleTimer == timer) {
-            startHint();
-        } else if (mSoundTimer == timer) {
-            Sounds.TILE_SHUFFLE.play();
-        }
-    }
-
-    @Override
     public void onTimerEvent(long eventTime) {
-        Sounds.TILE_SLIDE.play();
+        if (eventTime == HINT_TIMEOUT) {
+            showHintEffect();
+        } else if (eventTime == SHUFFLE_TIMEOUT) {
+            startHint();
+        } else if (eventTime == SHUFFLE_SOUND_TIMEOUT) {
+            Sounds.TILE_SHUFFLE.play();
+        } else if (eventTime == SLIDE_SOUND_TIMEOUT) {
+            Sounds.TILE_SLIDE.play();
+        }
     }
     //========================================================
 
@@ -131,7 +131,7 @@ public class HintController extends Entity implements EventListener,
     }
 
     private void stopHint() {
-        mHintTimer.cancelTimer();
+        mHintTimer.stopTimer();
         removeHintEffect();
     }
 
@@ -149,7 +149,7 @@ public class HintController extends Entity implements EventListener,
         Match3Algorithm.shuffleTile(mTiles, mTotalRow, mTotalCol);
         mSoundTimer.startTimer();
         mShuffleTimer.startTimer();
-        mShuffleText.activate(JuicyMatch.WORLD_WIDTH / 2f, JuicyMatch.WORLD_HEIGHT / 2f);
+        mShuffleText.activate(GameWorld.WORLD_WIDTH / 2f, GameWorld.WORLD_HEIGHT / 2f);
     }
     //========================================================
 

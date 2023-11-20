@@ -16,9 +16,9 @@ import com.nativegame.juicymatch.item.Item;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.juicymatch.level.TutorialType;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.engine.event.Event;
-import com.nativegame.nattyengine.engine.event.EventListener;
 import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
+import com.nativegame.nattyengine.event.Event;
+import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 
