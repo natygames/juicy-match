@@ -2,7 +2,6 @@ package com.nativegame.juicymatch.game.effect.tutorial;
 
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.Entity;
 import com.nativegame.nattyengine.util.pool.Pool;
 import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
 
@@ -10,7 +9,7 @@ import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
  * Created by Oscar Liang on 2022/02/23
  */
 
-public class TutorialHintEffectSystem extends Entity {
+public class TutorialHintEffectSystem {
 
     private final Pool<TutorialHintEffect> mEffectPool;
 
@@ -18,7 +17,6 @@ public class TutorialHintEffectSystem extends Entity {
     // Constructors
     //--------------------------------------------------------
     public TutorialHintEffectSystem(Engine engine) {
-        super(engine);
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<TutorialHintEffect>() {
             @Override
             public TutorialHintEffect createObject() {

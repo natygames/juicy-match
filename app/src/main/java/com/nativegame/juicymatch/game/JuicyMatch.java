@@ -34,12 +34,14 @@ import com.nativegame.nattyengine.ui.GameView;
 
 public class JuicyMatch extends Game {
 
+    private static final boolean DEBUG_MODE = false;
+
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
     public JuicyMatch(GameActivity activity, GameView gameView, Engine engine) {
         super(activity, gameView, engine);
-        engine.setDebugMode(true);
+        engine.setDebugMode(DEBUG_MODE);
         engine.setTouchController(new SingleTouchController(gameView));
         engine.setCamera(new FixedCamera(gameView.getWidth(), gameView.getHeight(), GameWorld.WORLD_WIDTH, GameWorld.WORLD_HEIGHT));
 
@@ -52,7 +54,6 @@ public class JuicyMatch extends Game {
             EntityCounter entityCounter = new EntityCounter(engine, 0, 200, 1000, 100);
             UPSCounter upsCounter = new UPSCounter(engine, 0, 0, 1000, 100);
             FPSCounter fpsCounter = new FPSCounter(engine, 0, 100, 1000, 100);
-
             int textSize = 100;
             int debugLayer = 12;
             entityCounter.setTextSize(textSize);
