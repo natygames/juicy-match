@@ -14,7 +14,7 @@ import com.nativegame.nattyengine.ui.GameActivity;
 /*
  *    MIT License
  *
- *    Copyright (c) 2022 Oscar Liang
+ *    Copyright (c) 2022 NativeGame
  *
  *    Permission is hereby granted, free of charge, to any person obtaining a copy
  *    of this software and associated documentation files (the "Software"), to deal
