@@ -7,7 +7,7 @@ import com.nativegame.juicymatch.game.algorithm.layer.LayerHandlerManager;
 import com.nativegame.juicymatch.game.algorithm.target.TargetHandlerManager;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.level.Level;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 /**
  * Created by Oscar Liang on 2022/02/23

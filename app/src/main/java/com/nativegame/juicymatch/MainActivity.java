@@ -5,7 +5,7 @@ import android.os.Bundle;
 import com.nativegame.juicymatch.ad.AdManager;
 import com.nativegame.juicymatch.timer.LivesTimer;
 import com.nativegame.juicymatch.ui.fragment.LoadingFragment;
-import com.nativegame.nattyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameActivity;
 
 /**
  * Created by Oscar Liang on 2022/02/23

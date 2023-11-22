@@ -7,14 +7,14 @@ import com.nativegame.juicymatch.game.algorithm.special.combine.SpecialCombineHa
 import com.nativegame.juicymatch.game.algorithm.special.combine.SpecialCombineHandlerManager;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.Entity;
-import com.nativegame.nattyengine.entity.timer.Timer;
-import com.nativegame.nattyengine.entity.timer.TimerEvent;
-import com.nativegame.nattyengine.event.Event;
-import com.nativegame.nattyengine.event.EventListener;
-import com.nativegame.nattyengine.input.touch.TouchEvent;
-import com.nativegame.nattyengine.input.touch.TouchEventListener;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.Entity;
+import com.nativegame.natyengine.entity.timer.Timer;
+import com.nativegame.natyengine.entity.timer.TimerEvent;
+import com.nativegame.natyengine.event.Event;
+import com.nativegame.natyengine.event.EventListener;
+import com.nativegame.natyengine.input.touch.TouchEvent;
+import com.nativegame.natyengine.input.touch.TouchEventListener;
 
 /**
  * Created by Oscar Liang on 2022/02/23

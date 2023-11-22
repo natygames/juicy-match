@@ -22,7 +22,7 @@ import com.nativegame.juicymatch.game.tutorial.PipeTutorial;
 import com.nativegame.juicymatch.game.tutorial.ShellTutorial;
 import com.nativegame.juicymatch.game.tutorial.StarfishTutorial;
 import com.nativegame.juicymatch.game.tutorial.Tutorial;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 /**
  * Created by Oscar Liang on 2022/02/23

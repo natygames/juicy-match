@@ -4,9 +4,9 @@ import com.nativegame.juicymatch.game.layer.generator.Generator;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileResetter;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.texture.Texture;
-import com.nativegame.nattyengine.util.RandomUtils;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.texture.Texture;
+import com.nativegame.natyengine.util.RandomUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

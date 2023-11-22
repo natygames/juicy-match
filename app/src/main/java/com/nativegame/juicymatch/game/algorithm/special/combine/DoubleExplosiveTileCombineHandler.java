@@ -8,9 +8,9 @@ import com.nativegame.juicymatch.game.effect.flash.ExplosionBeamEffectSystem;
 import com.nativegame.juicymatch.game.effect.flash.ExplosionFlashEffectSystem;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.particle.ParticleSystem;
-import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.particle.ParticleSystem;
+import com.nativegame.natyengine.entity.particle.SpriteParticleSystem;
 
 /**
  * Created by Oscar Liang on 2022/02/23

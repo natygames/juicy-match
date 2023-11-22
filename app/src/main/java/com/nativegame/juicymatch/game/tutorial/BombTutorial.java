@@ -6,9 +6,9 @@ import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialFingerEffect;
 import com.nativegame.juicymatch.game.effect.tutorial.TutorialHintEffectSystem;
 import com.nativegame.juicymatch.level.Level;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameButton;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameButton;
 
 /**
  * Created by Oscar Liang on 2022/02/23

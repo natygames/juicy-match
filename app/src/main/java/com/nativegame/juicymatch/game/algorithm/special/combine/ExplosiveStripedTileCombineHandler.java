@@ -10,11 +10,11 @@ import com.nativegame.juicymatch.game.effect.flash.ColumnFlashEffectSystem;
 import com.nativegame.juicymatch.game.effect.flash.RowFlashEffectSystem;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.particle.ParticleSystem;
-import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
-import com.nativegame.nattyengine.entity.timer.Timer;
-import com.nativegame.nattyengine.entity.timer.TimerEvent;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.particle.ParticleSystem;
+import com.nativegame.natyengine.entity.particle.SpriteParticleSystem;
+import com.nativegame.natyengine.entity.timer.Timer;
+import com.nativegame.natyengine.entity.timer.TimerEvent;
 
 import java.util.ArrayList;
 import java.util.List;

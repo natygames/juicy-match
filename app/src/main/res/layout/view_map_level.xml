@@ -46,7 +46,7 @@
         app:layout_constraintStart_toStartOf="@id/image_ribbon"
         app:layout_constraintTop_toTopOf="@id/image_ribbon" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_1"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -61,7 +61,7 @@
         app:layout_constraintStart_toStartOf="@id/image_dialog"
         app:layout_constraintTop_toBottomOf="@id/image_ribbon" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_1"
         app:layout_constraintTop_toTopOf="@id/btn_level_1" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_2"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -87,7 +87,7 @@
         app:layout_constraintStart_toEndOf="@id/btn_level_1"
         app:layout_constraintTop_toTopOf="@id/btn_level_1" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_2"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -98,7 +98,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_2"
         app:layout_constraintTop_toTopOf="@id/btn_level_2" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_3"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toEndOf="@id/btn_level_2"
         app:layout_constraintTop_toTopOf="@id/btn_level_1" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_3"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -124,7 +124,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_3"
         app:layout_constraintTop_toTopOf="@id/btn_level_3" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_4"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -140,7 +140,7 @@
         app:layout_constraintStart_toEndOf="@id/btn_level_3"
         app:layout_constraintTop_toTopOf="@id/btn_level_1" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_4"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -151,7 +151,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_4"
         app:layout_constraintTop_toTopOf="@id/btn_level_4" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_5"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -166,7 +166,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_1"
         app:layout_constraintTop_toBottomOf="@id/btn_level_1" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_5"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -177,7 +177,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_5"
         app:layout_constraintTop_toTopOf="@id/btn_level_5" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_6"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -192,7 +192,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_2"
         app:layout_constraintTop_toTopOf="@id/btn_level_5" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_6"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -203,7 +203,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_6"
         app:layout_constraintTop_toTopOf="@id/btn_level_6" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_7"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -218,7 +218,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_3"
         app:layout_constraintTop_toTopOf="@id/btn_level_5" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_7"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -229,7 +229,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_7"
         app:layout_constraintTop_toTopOf="@id/btn_level_7" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_8"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -244,7 +244,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_4"
         app:layout_constraintTop_toTopOf="@id/btn_level_5" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_8"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -255,7 +255,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_8"
         app:layout_constraintTop_toTopOf="@id/btn_level_8" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_9"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -270,7 +270,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_1"
         app:layout_constraintTop_toBottomOf="@id/btn_level_5" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_9"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -281,7 +281,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_9"
         app:layout_constraintTop_toTopOf="@id/btn_level_9" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_10"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -296,7 +296,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_2"
         app:layout_constraintTop_toTopOf="@id/btn_level_9" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_10"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -307,7 +307,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_10"
         app:layout_constraintTop_toTopOf="@id/btn_level_10" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_11"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -322,7 +322,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_3"
         app:layout_constraintTop_toTopOf="@id/btn_level_9" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_11"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -333,7 +333,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_11"
         app:layout_constraintTop_toTopOf="@id/btn_level_11" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_12"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -348,7 +348,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_4"
         app:layout_constraintTop_toTopOf="@id/btn_level_9" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_12"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -359,7 +359,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_12"
         app:layout_constraintTop_toTopOf="@id/btn_level_12" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_13"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -374,7 +374,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_1"
         app:layout_constraintTop_toBottomOf="@id/btn_level_9" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_13"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -385,7 +385,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_13"
         app:layout_constraintTop_toTopOf="@id/btn_level_13" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_14"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -400,7 +400,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_2"
         app:layout_constraintTop_toTopOf="@id/btn_level_13" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_14"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -411,7 +411,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_14"
         app:layout_constraintTop_toTopOf="@id/btn_level_14" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_15"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -426,7 +426,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_3"
         app:layout_constraintTop_toTopOf="@id/btn_level_13" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_15"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -437,7 +437,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_15"
         app:layout_constraintTop_toTopOf="@id/btn_level_15" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_16"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -452,7 +452,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_4"
         app:layout_constraintTop_toTopOf="@id/btn_level_13" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_16"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -463,7 +463,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_16"
         app:layout_constraintTop_toTopOf="@id/btn_level_16" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_17"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -478,7 +478,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_1"
         app:layout_constraintTop_toBottomOf="@id/btn_level_13" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_17"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -489,7 +489,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_17"
         app:layout_constraintTop_toTopOf="@id/btn_level_17" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_18"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -504,7 +504,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_2"
         app:layout_constraintTop_toTopOf="@id/btn_level_17" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_18"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -515,7 +515,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_18"
         app:layout_constraintTop_toTopOf="@id/btn_level_18" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_19"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -530,7 +530,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_3"
         app:layout_constraintTop_toTopOf="@id/btn_level_17" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_19"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -541,7 +541,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_19"
         app:layout_constraintTop_toTopOf="@id/btn_level_19" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/btn_level_20"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -556,7 +556,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_4"
         app:layout_constraintTop_toTopOf="@id/btn_level_17" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_level_star_20"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -567,7 +567,7 @@
         app:layout_constraintStart_toStartOf="@id/btn_level_20"
         app:layout_constraintTop_toTopOf="@id/btn_level_20" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_page_previous"
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="@dimen/btn_small_width"
@@ -589,7 +589,7 @@
         app:layout_constraintStart_toEndOf="@id/btn_page_previous"
         app:layout_constraintTop_toTopOf="@id/btn_page_previous" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_page_next"
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="@dimen/btn_small_width"

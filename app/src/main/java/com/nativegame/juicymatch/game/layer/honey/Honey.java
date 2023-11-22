@@ -6,10 +6,10 @@ import com.nativegame.juicymatch.game.effect.piece.HoneyPiece;
 import com.nativegame.juicymatch.game.effect.piece.HoneyPieceEffect;
 import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.ScaleInModifier;
-import com.nativegame.nattyengine.texture.Texture;
-import com.nativegame.nattyengine.util.modifier.tween.OvershootTweener;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.modifier.ScaleInModifier;
+import com.nativegame.natyengine.texture.Texture;
+import com.nativegame.natyengine.util.modifier.tween.OvershootTweener;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,10 +13,10 @@ import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.item.Item;
 import com.nativegame.juicymatch.item.product.Product;
 import com.nativegame.juicymatch.item.product.ProductManager;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.ui.GameImage;
-import com.nativegame.nattyengine.ui.GameText;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameButton;
+import com.nativegame.natyengine.ui.GameImage;
+import com.nativegame.natyengine.ui.GameText;
 
 import java.util.List;
 

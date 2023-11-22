@@ -21,7 +21,7 @@
 
     <include layout="@layout/view_map_level" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_wheel"
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="@dimen/btn_small_width"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.12" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_setting"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"

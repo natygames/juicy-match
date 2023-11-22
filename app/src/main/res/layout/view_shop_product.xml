@@ -8,7 +8,7 @@
     android:layout_margin="@dimen/margin_5"
     tools:ignore="ContentDescription">
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_field"
         android:layout_width="@dimen/dialog_small_width"
         android:layout_height="0dp"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_product"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/txt_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         app:layout_constraintStart_toEndOf="@id/image_product"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_product"
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="0dp"

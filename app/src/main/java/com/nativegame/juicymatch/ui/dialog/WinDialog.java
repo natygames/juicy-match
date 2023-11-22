@@ -1,7 +1,7 @@
 package com.nativegame.juicymatch.ui.dialog;
 
 import com.nativegame.juicymatch.R;
-import com.nativegame.nattyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameActivity;
 
 /**
  * Created by Oscar Liang on 2022/02/23

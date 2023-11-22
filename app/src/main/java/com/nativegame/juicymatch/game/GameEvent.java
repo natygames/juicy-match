@@ -1,6 +1,6 @@
 package com.nativegame.juicymatch.game;
 
-import com.nativegame.nattyengine.event.Event;
+import com.nativegame.natyengine.event.Event;
 
 /**
  * Created by Oscar Liang on 2022/02/23

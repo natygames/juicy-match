@@ -5,7 +5,7 @@ import com.nativegame.juicymatch.game.layer.generator.type.ColumnStripedGenerato
 import com.nativegame.juicymatch.game.layer.generator.type.ExplosiveGenerator;
 import com.nativegame.juicymatch.game.layer.generator.type.RowColumnStripedGenerator;
 import com.nativegame.juicymatch.game.layer.generator.type.RowStripedGenerator;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 /**
  * Created by Oscar Liang on 2022/02/23

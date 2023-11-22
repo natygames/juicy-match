@@ -44,7 +44,7 @@
         app:layout_constraintStart_toStartOf="@id/image_ribbon"
         app:layout_constraintTop_toTopOf="@id/image_ribbon" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_resume"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -53,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintTop_toTopOf="@id/image_dialog" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_music"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toStartOf="@id/image_dialog"
         app:layout_constraintTop_toBottomOf="@id/txt_level" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_sound"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -75,7 +75,7 @@
         app:layout_constraintStart_toStartOf="@id/image_dialog"
         app:layout_constraintTop_toTopOf="@id/btn_music" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_quit"
         android:layout_width="@dimen/btn_width"
         android:layout_height="0dp"

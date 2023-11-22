@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 
 import com.nativegame.juicymatch.R;
-import com.nativegame.nattyengine.util.ResourceUtils;
+import com.nativegame.natyengine.util.ResourceUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

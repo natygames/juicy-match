@@ -1,10 +1,10 @@
 package com.nativegame.juicymatch.game.effect.lightning;
 
 import com.nativegame.juicymatch.game.GameLayer;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.sprite.AnimateSprite;
-import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.natyengine.entity.sprite.AnimateSprite;
+import com.nativegame.natyengine.texture.texture2d.Texture2DGroup;
 
 /**
  * Created by Oscar Liang on 2022/02/23

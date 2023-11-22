@@ -4,13 +4,12 @@ import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameEvent;
 import com.nativegame.juicymatch.game.GameWorld;
-import com.nativegame.juicymatch.game.JuicyMatch;
 import com.nativegame.juicymatch.game.algorithm.special.handler.ExplosiveTileHandler;
 import com.nativegame.juicymatch.game.effect.booster.BombEffect;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.game.layer.tile.type.EmptyTile;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 /**
  * Created by Oscar Liang on 2022/02/23

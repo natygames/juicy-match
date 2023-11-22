@@ -9,7 +9,7 @@ import com.nativegame.juicymatch.game.effect.booster.GloveEffect;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.game.swap.SwapModifier;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 /**
  * Created by Oscar Liang on 2022/02/23

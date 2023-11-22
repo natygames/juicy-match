@@ -121,7 +121,7 @@
         app:layout_constraintStart_toStartOf="@id/image_star_bg_01"
         app:layout_constraintTop_toBottomOf="@id/txt_score" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_next"
         android:layout_width="@dimen/btn_large_width"
         android:layout_height="0dp"

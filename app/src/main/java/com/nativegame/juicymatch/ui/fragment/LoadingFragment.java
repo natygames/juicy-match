@@ -13,7 +13,7 @@ import com.nativegame.juicymatch.asset.Musics;
 import com.nativegame.juicymatch.asset.Preferences;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.asset.Textures;
-import com.nativegame.nattyengine.ui.GameFragment;
+import com.nativegame.natyengine.ui.GameFragment;
 
 /**
  * Created by Oscar Liang on 2022/02/23

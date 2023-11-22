@@ -16,11 +16,11 @@ import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.level.Level;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.text.Text;
-import com.nativegame.nattyengine.input.touch.TouchEvent;
-import com.nativegame.nattyengine.input.touch.TouchEventListener;
-import com.nativegame.nattyengine.util.RandomUtils;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.text.Text;
+import com.nativegame.natyengine.input.touch.TouchEvent;
+import com.nativegame.natyengine.input.touch.TouchEventListener;
+import com.nativegame.natyengine.util.RandomUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

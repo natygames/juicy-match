@@ -1,9 +1,9 @@
 package com.nativegame.juicymatch.game.effect.flash;
 
 import com.nativegame.juicymatch.asset.Textures;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.util.pool.Pool;
-import com.nativegame.nattyengine.util.pool.SafeFixedObjectPool;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.util.pool.Pool;
+import com.nativegame.natyengine.util.pool.SafeFixedObjectPool;
 
 /**
  * Created by Oscar Liang on 2022/02/23

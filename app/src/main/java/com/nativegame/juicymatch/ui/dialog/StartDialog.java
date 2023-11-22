@@ -6,10 +6,10 @@ import android.widget.TextView;
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.juicymatch.level.TargetType;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameImage;
-import com.nativegame.nattyengine.ui.GameText;
-import com.nativegame.nattyengine.util.ResourceUtils;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameImage;
+import com.nativegame.natyengine.ui.GameText;
+import com.nativegame.natyengine.util.ResourceUtils;
 
 import java.util.List;
 

@@ -4,9 +4,9 @@ import android.view.View;
 
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Sounds;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.ui.GameText;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameButton;
+import com.nativegame.natyengine.ui.GameText;
 
 /**
  * Created by Oscar Liang on 2022/02/23

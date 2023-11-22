@@ -1,8 +1,8 @@
 package com.nativegame.juicymatch.game.hint;
 
 import com.nativegame.juicymatch.game.layer.tile.Tile;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.Entity;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.Entity;
 
 import java.util.List;
 

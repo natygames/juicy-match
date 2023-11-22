@@ -1,7 +1,7 @@
 package com.nativegame.juicymatch.game.algorithm.special.finder;
 
 import com.nativegame.juicymatch.game.layer.tile.Tile;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 import java.util.ArrayList;
 import java.util.List;

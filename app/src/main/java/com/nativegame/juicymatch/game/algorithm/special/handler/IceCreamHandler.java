@@ -7,7 +7,7 @@ import com.nativegame.juicymatch.game.effect.piece.IceCreamPieceEffectSystem;
 import com.nativegame.juicymatch.game.layer.tile.FruitType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileInitializer;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 /**
  * Created by Oscar Liang on 2022/02/23

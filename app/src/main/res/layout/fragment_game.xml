@@ -21,7 +21,7 @@
         android:id="@+id/view_game_state"
         layout="@layout/view_game_state" />
 
-    <com.nativegame.nattyengine.ui.GameView
+    <com.nativegame.natyengine.ui.GameView
         android:id="@+id/game_view"
         android:layout_width="0dp"
         android:layout_height="0dp"

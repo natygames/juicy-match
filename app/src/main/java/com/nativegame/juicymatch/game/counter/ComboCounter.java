@@ -6,14 +6,14 @@ import com.nativegame.juicymatch.game.GameEvent;
 import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.game.effect.TextEffect;
-import com.nativegame.nattyengine.audio.sound.Sound;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.Entity;
-import com.nativegame.nattyengine.entity.particle.ParticleSystemGroup;
-import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
-import com.nativegame.nattyengine.event.Event;
-import com.nativegame.nattyengine.event.EventListener;
-import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.natyengine.audio.sound.Sound;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.Entity;
+import com.nativegame.natyengine.entity.particle.ParticleSystemGroup;
+import com.nativegame.natyengine.entity.particle.SpriteParticleSystem;
+import com.nativegame.natyengine.event.Event;
+import com.nativegame.natyengine.event.EventListener;
+import com.nativegame.natyengine.texture.Texture;
 
 /**
  * Created by Oscar Liang on 2022/02/23

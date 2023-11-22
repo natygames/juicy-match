@@ -1,8 +1,8 @@
 package com.nativegame.juicymatch.ui.dialog;
 
 import com.nativegame.juicymatch.asset.Sounds;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameDialog;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameDialog;
 
 /**
  * Created by Oscar Liang on 2022/02/23

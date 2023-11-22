@@ -3,8 +3,8 @@ package com.nativegame.juicymatch.game.algorithm;
 import com.nativegame.juicymatch.game.algorithm.special.finder.SpecialTileFinderManager;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.Entity;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.Entity;
 
 /**
  * Created by Oscar Liang on 2022/02/23

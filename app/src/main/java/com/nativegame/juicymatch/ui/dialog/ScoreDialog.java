@@ -11,9 +11,9 @@ import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.database.DatabaseHelper;
 import com.nativegame.juicymatch.level.Level;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.util.ResourceUtils;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameButton;
+import com.nativegame.natyengine.util.ResourceUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

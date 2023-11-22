@@ -10,12 +10,12 @@ import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.game.GameEvent;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.juicymatch.level.TargetType;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
-import com.nativegame.nattyengine.event.Event;
-import com.nativegame.nattyengine.event.EventListener;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.util.ResourceUtils;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.runnable.RunnableEntity;
+import com.nativegame.natyengine.event.Event;
+import com.nativegame.natyengine.event.EventListener;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.util.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.List;

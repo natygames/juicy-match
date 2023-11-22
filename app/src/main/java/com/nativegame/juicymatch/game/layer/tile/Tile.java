@@ -5,8 +5,8 @@ import com.nativegame.juicymatch.algorithm.TileState;
 import com.nativegame.juicymatch.algorithm.TileType;
 import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.texture.Texture;
 
 /**
  * Created by Oscar Liang on 2022/02/23

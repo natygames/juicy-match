@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:ignore="ContentDescription">
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_pause"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_hammer"
         android:layout_width="@dimen/btn_booster_width"
         android:layout_height="@dimen/btn_booster_width"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toStartOf="@id/btn_bomb"
         app:layout_constraintStart_toEndOf="@id/btn_pause" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_bomb"
         android:layout_width="@dimen/btn_booster_width"
         android:layout_height="@dimen/btn_booster_width"
@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toStartOf="@id/btn_glove"
         app:layout_constraintStart_toEndOf="@id/btn_hammer" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_glove"
         android:layout_width="@dimen/btn_booster_width"
         android:layout_height="@dimen/btn_booster_width"

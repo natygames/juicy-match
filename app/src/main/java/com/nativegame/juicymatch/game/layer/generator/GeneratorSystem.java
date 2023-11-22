@@ -3,7 +3,7 @@ package com.nativegame.juicymatch.game.layer.generator;
 import com.nativegame.juicymatch.game.layer.LayerSpriteSystem;
 import com.nativegame.juicymatch.game.layer.tile.TileResetter;
 import com.nativegame.juicymatch.level.Level;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 import java.util.ArrayList;
 import java.util.List;

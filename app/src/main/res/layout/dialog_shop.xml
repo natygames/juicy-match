@@ -65,7 +65,7 @@
         app:layout_constraintStart_toStartOf="@id/image_ribbon"
         app:layout_constraintTop_toTopOf="@id/image_ribbon" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_cancel"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"

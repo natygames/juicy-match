@@ -6,11 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.nativegame.juicymatch.R;
-import com.nativegame.nattyengine.texture.texture2d.Texture2D;
-import com.nativegame.nattyengine.texture.texture2d.Texture2DGroup;
-import com.nativegame.nattyengine.texture.texture2d.Texture2DManager;
-import com.nativegame.nattyengine.util.BitmapUtils;
-import com.nativegame.nattyengine.util.ResourceUtils;
+import com.nativegame.natyengine.texture.texture2d.Texture2D;
+import com.nativegame.natyengine.texture.texture2d.Texture2DGroup;
+import com.nativegame.natyengine.texture.texture2d.Texture2DManager;
+import com.nativegame.natyengine.util.BitmapUtils;
+import com.nativegame.natyengine.util.ResourceUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

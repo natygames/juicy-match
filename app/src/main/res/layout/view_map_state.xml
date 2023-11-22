@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toStartOf="@id/btn_shop"
         app:layout_constraintTop_toTopOf="@id/image_board" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_lives"
         android:layout_width="@dimen/image_state_item"
         android:layout_height="@dimen/image_state_item"
@@ -79,7 +79,7 @@
         app:layout_constraintStart_toEndOf="@id/btn_shop"
         app:layout_constraintTop_toTopOf="@id/image_board" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_coin"
         android:layout_width="@dimen/image_state_item"
         android:layout_height="@dimen/image_state_item"
@@ -105,7 +105,7 @@
         app:layout_constraintStart_toEndOf="@id/btn_coin"
         app:layout_constraintTop_toTopOf="@id/image_field_coin" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_shop"
         android:layout_width="@dimen/btn_shop_width"
         android:layout_height="0dp"

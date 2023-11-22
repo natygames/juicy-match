@@ -6,10 +6,10 @@ import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.effect.piece.CookiePiece;
 import com.nativegame.juicymatch.game.effect.piece.CookiePieceEffect;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.particle.ParticleSystem;
-import com.nativegame.nattyengine.entity.particle.SpriteParticleSystem;
-import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.particle.ParticleSystem;
+import com.nativegame.natyengine.entity.particle.SpriteParticleSystem;
+import com.nativegame.natyengine.texture.Texture;
 
 import java.util.ArrayList;
 import java.util.List;

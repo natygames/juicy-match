@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.nativegame.nattyengine.ui.GameText
+    <com.nativegame.natyengine.ui.GameText
         android:id="@+id/txt_exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@id/image_dialog"
         app:layout_constraintVertical_bias="0.2" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_cancel"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintTop_toTopOf="@id/image_dialog" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_exit"
         android:layout_width="@dimen/btn_width"
         android:layout_height="0dp"

@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Preferences;
-import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.util.ResourceUtils;
+import com.nativegame.natyengine.ui.GameButton;
+import com.nativegame.natyengine.util.ResourceUtils;
 
 import java.util.Locale;
 

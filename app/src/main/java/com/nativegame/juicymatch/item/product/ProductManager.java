@@ -1,9 +1,10 @@
 package com.nativegame.juicymatch.item.product;
 
+import android.app.Activity;
+
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.item.Item;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.util.ResourceUtils;
+import com.nativegame.natyengine.util.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class ProductManager {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public ProductManager(GameActivity activity) {
+    public ProductManager(Activity activity) {
         // Init all the product
         Product productWatchAd = new Product(Item.COIN, 0, R.drawable.ui_coin_50, R.drawable.ui_btn_watch_ad);
         Product productGlove = new Product(Item.GLOVE, 50, R.drawable.ui_booster_glove, R.drawable.ui_btn_price_50);

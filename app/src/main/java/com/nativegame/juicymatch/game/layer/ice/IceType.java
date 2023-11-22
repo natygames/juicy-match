@@ -1,7 +1,7 @@
 package com.nativegame.juicymatch.game.layer.ice;
 
 import com.nativegame.juicymatch.asset.Textures;
-import com.nativegame.nattyengine.texture.Texture;
+import com.nativegame.natyengine.texture.Texture;
 
 /**
  * Created by Oscar Liang on 2022/02/23

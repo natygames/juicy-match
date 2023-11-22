@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_logo_bg"
         android:layout_width="@dimen/image_logo_bg_width"
         android:layout_height="@dimen/image_logo_bg_width"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1" />
 
-    <com.nativegame.nattyengine.ui.GameImage
+    <com.nativegame.natyengine.ui.GameImage
         android:id="@+id/image_logo"
         android:layout_width="@dimen/image_logo_width"
         android:layout_height="@dimen/image_logo_width"
@@ -39,7 +39,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_start"
         android:layout_width="@dimen/btn_width"
         android:layout_height="@dimen/btn_width"
@@ -49,7 +49,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_logo" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_setting"
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"

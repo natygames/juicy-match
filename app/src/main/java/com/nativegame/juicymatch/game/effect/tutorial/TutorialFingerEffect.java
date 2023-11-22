@@ -1,14 +1,14 @@
 package com.nativegame.juicymatch.game.effect.tutorial;
 
 import com.nativegame.juicymatch.game.GameLayer;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.DurationModifier;
-import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
-import com.nativegame.nattyengine.entity.modifier.PositionModifier;
-import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.input.touch.TouchEventListener;
-import com.nativegame.nattyengine.texture.Texture;
-import com.nativegame.nattyengine.util.modifier.Modifier;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.modifier.DurationModifier;
+import com.nativegame.natyengine.entity.modifier.FadeOutModifier;
+import com.nativegame.natyengine.entity.modifier.PositionModifier;
+import com.nativegame.natyengine.entity.sprite.Sprite;
+import com.nativegame.natyengine.input.touch.TouchEventListener;
+import com.nativegame.natyengine.texture.Texture;
+import com.nativegame.natyengine.util.modifier.Modifier;
 
 /**
  * Created by Oscar Liang on 2022/02/23

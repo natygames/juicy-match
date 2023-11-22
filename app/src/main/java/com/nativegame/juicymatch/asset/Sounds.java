@@ -1,8 +1,8 @@
 package com.nativegame.juicymatch.asset;
 
 import com.nativegame.juicymatch.R;
-import com.nativegame.nattyengine.audio.sound.Sound;
-import com.nativegame.nattyengine.audio.sound.SoundManager;
+import com.nativegame.natyengine.audio.sound.Sound;
+import com.nativegame.natyengine.audio.sound.SoundManager;
 
 /**
  * Created by Oscar Liang on 2022/02/23

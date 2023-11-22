@@ -13,9 +13,9 @@ import com.nativegame.juicymatch.asset.Preferences;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.ui.dialog.ExitDialog;
 import com.nativegame.juicymatch.ui.dialog.SettingDialog;
-import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.ui.GameFragment;
-import com.nativegame.nattyengine.ui.GameImage;
+import com.nativegame.natyengine.ui.GameButton;
+import com.nativegame.natyengine.ui.GameFragment;
+import com.nativegame.natyengine.ui.GameImage;
 
 /**
  * Created by Oscar Liang on 2022/02/23

@@ -17,15 +17,15 @@ import com.nativegame.juicymatch.game.layer.grid.GridSystem;
 import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.game.swap.SwapController;
 import com.nativegame.juicymatch.ui.dialog.PauseDialog;
-import com.nativegame.nattyengine.Game;
-import com.nativegame.nattyengine.camera.FixedCamera;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.input.touch.SingleTouchController;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameView;
-import com.nativegame.nattyengine.util.debug.EntityCounter;
-import com.nativegame.nattyengine.util.debug.FPSCounter;
-import com.nativegame.nattyengine.util.debug.UPSCounter;
+import com.nativegame.natyengine.Game;
+import com.nativegame.natyengine.camera.FixedCamera;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.input.touch.SingleTouchController;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameView;
+import com.nativegame.natyengine.util.debug.EntityCounter;
+import com.nativegame.natyengine.util.debug.FPSCounter;
+import com.nativegame.natyengine.util.debug.UPSCounter;
 
 /**
  * Created by Oscar Liang on 2022/02/23

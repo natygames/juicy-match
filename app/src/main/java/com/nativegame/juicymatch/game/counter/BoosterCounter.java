@@ -15,12 +15,12 @@ import com.nativegame.juicymatch.game.layer.tile.TileSystem;
 import com.nativegame.juicymatch.item.Item;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.juicymatch.level.TutorialType;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
-import com.nativegame.nattyengine.event.Event;
-import com.nativegame.nattyengine.event.EventListener;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameButton;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.runnable.RunnableEntity;
+import com.nativegame.natyengine.event.Event;
+import com.nativegame.natyengine.event.EventListener;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameButton;
 
 /**
  * Created by Oscar Liang on 2022/02/23

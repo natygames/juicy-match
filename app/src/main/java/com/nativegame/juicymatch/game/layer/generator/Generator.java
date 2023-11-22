@@ -4,11 +4,11 @@ import com.nativegame.juicymatch.asset.Textures;
 import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.layer.LayerSprite;
 import com.nativegame.juicymatch.game.layer.tile.TileResetter;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.modifier.RotationModifier;
-import com.nativegame.nattyengine.entity.sprite.Sprite;
-import com.nativegame.nattyengine.texture.Texture;
-import com.nativegame.nattyengine.util.modifier.tween.OvershootTweener;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.modifier.RotationModifier;
+import com.nativegame.natyengine.entity.sprite.Sprite;
+import com.nativegame.natyengine.texture.Texture;
+import com.nativegame.natyengine.util.modifier.tween.OvershootTweener;
 
 /**
  * Created by Oscar Liang on 2022/02/23

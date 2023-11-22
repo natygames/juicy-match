@@ -19,11 +19,11 @@ import com.nativegame.juicymatch.ui.dialog.ScoreDialog;
 import com.nativegame.juicymatch.ui.dialog.StartDialog;
 import com.nativegame.juicymatch.ui.dialog.TutorialDialog;
 import com.nativegame.juicymatch.ui.dialog.WinDialog;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.Entity;
-import com.nativegame.nattyengine.event.Event;
-import com.nativegame.nattyengine.event.EventListener;
-import com.nativegame.nattyengine.ui.GameActivity;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.Entity;
+import com.nativegame.natyengine.event.Event;
+import com.nativegame.natyengine.event.EventListener;
+import com.nativegame.natyengine.ui.GameActivity;
 
 /**
  * Created by Oscar Liang on 2022/02/23

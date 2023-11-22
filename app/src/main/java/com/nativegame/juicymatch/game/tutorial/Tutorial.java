@@ -1,6 +1,6 @@
 package com.nativegame.juicymatch.game.tutorial;
 
-import com.nativegame.nattyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameActivity;
 
 /**
  * Created by Oscar Liang on 2022/02/23

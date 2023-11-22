@@ -9,10 +9,10 @@ import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Musics;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.game.JuicyMatch;
-import com.nativegame.nattyengine.Game;
-import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.ui.GameFragment;
-import com.nativegame.nattyengine.ui.GameView;
+import com.nativegame.natyengine.Game;
+import com.nativegame.natyengine.ui.GameButton;
+import com.nativegame.natyengine.ui.GameFragment;
+import com.nativegame.natyengine.ui.GameView;
 
 /**
  * Created by Oscar Liang on 2022/02/23

@@ -3,7 +3,7 @@ package com.nativegame.juicymatch.game.algorithm.special.finder;
 import com.nativegame.juicymatch.algorithm.TileType;
 import com.nativegame.juicymatch.game.layer.tile.SpecialType;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 /**
  * Created by Oscar Liang on 2022/02/23

@@ -8,8 +8,8 @@ import android.widget.ImageView;
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Sounds;
 import com.nativegame.juicymatch.item.product.Product;
-import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.ui.GameButton;
+import com.nativegame.natyengine.ui.GameActivity;
+import com.nativegame.natyengine.ui.GameButton;
 
 /**
  * Created by Oscar Liang on 2022/02/23

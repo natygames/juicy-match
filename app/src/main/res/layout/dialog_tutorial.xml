@@ -44,7 +44,7 @@
         app:layout_constraintStart_toStartOf="@id/image_dialog"
         app:layout_constraintTop_toBottomOf="@+id/image_tutorial" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_play"
         android:layout_width="@dimen/btn_width"
         android:layout_height="0dp"

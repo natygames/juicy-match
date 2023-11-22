@@ -52,7 +52,7 @@
         app:layout_constraintStart_toStartOf="@id/image_booster_bg"
         app:layout_constraintTop_toTopOf="@id/image_booster_bg" />
 
-    <com.nativegame.nattyengine.ui.GameButton
+    <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_next"
         android:layout_width="@dimen/btn_large_width"
         android:layout_height="0dp"

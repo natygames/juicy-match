@@ -2,8 +2,9 @@ package com.nativegame.juicymatch.level;
 
 import android.content.Context;
 
-import com.nativegame.nattyengine.util.storage.xml.XMLOpenHelper;
-import com.nativegame.nattyengine.util.storage.xml.XMLResultSet;
+
+import com.nativegame.natyengine.util.storage.xml.XMLOpenHelper;
+import com.nativegame.natyengine.util.storage.xml.XMLResultSet;
 
 import org.xmlpull.v1.XmlPullParserException;
 

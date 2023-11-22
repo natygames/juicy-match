@@ -21,10 +21,10 @@ import com.nativegame.juicymatch.ui.dialog.MoreLivesDialog;
 import com.nativegame.juicymatch.ui.dialog.SettingDialog;
 import com.nativegame.juicymatch.ui.dialog.ShopDialog;
 import com.nativegame.juicymatch.ui.dialog.WheelDialog;
-import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.ui.GameFragment;
-import com.nativegame.nattyengine.ui.GameImage;
-import com.nativegame.nattyengine.ui.GameText;
+import com.nativegame.natyengine.ui.GameButton;
+import com.nativegame.natyengine.ui.GameFragment;
+import com.nativegame.natyengine.ui.GameImage;
+import com.nativegame.natyengine.ui.GameText;
 
 import java.util.List;
 

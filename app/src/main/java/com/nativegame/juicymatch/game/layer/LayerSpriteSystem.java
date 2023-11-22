@@ -1,8 +1,8 @@
 package com.nativegame.juicymatch.game.layer;
 
 import com.nativegame.juicymatch.level.Level;
-import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.entity.Entity;
+import com.nativegame.natyengine.engine.Engine;
+import com.nativegame.natyengine.entity.Entity;
 
 /**
  * Created by Oscar Liang on 2022/02/23

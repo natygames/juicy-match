@@ -10,7 +10,7 @@ import com.nativegame.juicymatch.game.layer.sand.SandSystem;
 import com.nativegame.juicymatch.game.layer.shell.ShellSystem;
 import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.juicymatch.level.Level;
-import com.nativegame.nattyengine.engine.Engine;
+import com.nativegame.natyengine.engine.Engine;
 
 import java.util.ArrayList;
 import java.util.List;
