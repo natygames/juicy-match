@@ -8,7 +8,7 @@
 
 <img src="https://user-images.githubusercontent.com/93536412/227768392-703e62dd-f70c-428e-9c02-8d0f9388deda.png" width="70"><a href='https://play.google.com/store/apps/details?id=com.nativegame.juicymatch&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width="200"/></a>
 
-**Juicy Match is an open-source Android game made with [Natty Engine](https://github.com/nativegamestudio/natty-engine)**
+**Juicy Match is an open-source Android game made with [Naty Engine](https://github.com/nativegamestudio/naty-engine)**
 </div>
 
 ---
@@ -27,10 +27,11 @@ https://user-images.githubusercontent.com/93536412/191766820-ff952d4f-2320-4ac4-
 
 ## :handshake: Credit
 
-[princesseFranky](https://opengameart.org/content/flat-designed-fruits),
+Art from [princesseFranky](https://opengameart.org/content/flat-designed-fruits),
 [knik1985](https://opengameart.org/content/heart-7),
-[Pngtree](https://pngtree.com),
-[Free Music](https://soundcloud.com/fm_freemusic),
+[Pngtree](https://pngtree.com)
+
+Music from [Free Music](https://soundcloud.com/fm_freemusic),
 [mixkit]( https://mixkit.co/free-sound-effects)
 
 ## :balance_scale: License:
