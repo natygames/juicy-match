@@ -16,7 +16,7 @@ import com.nativegame.juicymatch.item.prize.PrizeManager;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.ui.GameText;
-import com.nativegame.nattyengine.util.math.RandomUtils;
+import com.nativegame.nattyengine.util.RandomUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -56,7 +56,7 @@ public class WheelDialog extends BaseDialog implements AdManager.AdRewardListene
 
         // Show watch ad button if wheel not ready
         if (!mIsWheelEnable) {
-            btnPlay.setBackgroundResource(R.drawable.btn_watch_ad);
+            btnPlay.setBackgroundResource(R.drawable.ui_btn_watch_ad);
         }
     }
     //========================================================

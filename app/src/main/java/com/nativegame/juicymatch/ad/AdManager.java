@@ -11,7 +11,7 @@ import com.google.android.gms.ads.rewarded.RewardItem;
 import com.google.android.gms.ads.rewarded.RewardedAd;
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.nativegame.juicymatch.R;
-import com.nativegame.nattyengine.util.resource.ResourceUtils;
+import com.nativegame.nattyengine.util.ResourceUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

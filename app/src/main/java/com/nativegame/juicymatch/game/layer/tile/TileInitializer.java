@@ -13,7 +13,7 @@ import com.nativegame.juicymatch.game.layer.tile.type.SolidTile;
 import com.nativegame.juicymatch.game.layer.tile.type.StarfishTile;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.nattyengine.engine.Engine;
-import com.nativegame.nattyengine.util.math.RandomUtils;
+import com.nativegame.nattyengine.util.RandomUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

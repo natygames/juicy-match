@@ -12,7 +12,7 @@
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
         android:layout_margin="@dimen/margin_20"
-        android:background="@drawable/btn_setting"
+        android:background="@drawable/ui_btn_setting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -22,7 +22,7 @@
         android:layout_height="@dimen/btn_booster_width"
         android:layout_marginStart="@dimen/margin_20"
         android:layout_marginBottom="@dimen/margin_20"
-        android:background="@drawable/btn_hammer"
+        android:background="@drawable/ui_btn_booster_hammer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_bomb"
         app:layout_constraintStart_toEndOf="@id/btn_pause" />
@@ -32,7 +32,7 @@
         android:layout_width="@dimen/btn_booster_width"
         android:layout_height="@dimen/btn_booster_width"
         android:layout_marginBottom="@dimen/margin_20"
-        android:background="@drawable/btn_bomb"
+        android:background="@drawable/ui_btn_booster_bomb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_glove"
         app:layout_constraintStart_toEndOf="@id/btn_hammer" />
@@ -42,7 +42,7 @@
         android:layout_width="@dimen/btn_booster_width"
         android:layout_height="@dimen/btn_booster_width"
         android:layout_marginBottom="@dimen/margin_20"
-        android:background="@drawable/btn_glove"
+        android:background="@drawable/ui_btn_booster_glove"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btn_bomb" />
@@ -51,7 +51,7 @@
         android:id="@+id/txt_hammer"
         android:layout_width="@dimen/image_state_booster"
         android:layout_height="@dimen/image_state_booster"
-        android:background="@drawable/item_field"
+        android:background="@drawable/ui_item_field"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:textColor="@color/white"
@@ -64,7 +64,7 @@
         android:id="@+id/txt_bomb"
         android:layout_width="@dimen/image_state_booster"
         android:layout_height="@dimen/image_state_booster"
-        android:background="@drawable/item_field"
+        android:background="@drawable/ui_item_field"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:textColor="@color/white"
@@ -77,7 +77,7 @@
         android:id="@+id/txt_gloves"
         android:layout_width="@dimen/image_state_booster"
         android:layout_height="@dimen/image_state_booster"
-        android:background="@drawable/item_field"
+        android:background="@drawable/ui_item_field"
         android:fontFamily="@font/baloo"
         android:gravity="center"
         android:textColor="@color/white"

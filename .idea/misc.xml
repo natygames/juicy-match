@@ -6,16 +6,28 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/activity_main.xml" value="0.1526268115942029" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_confirm.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_container.xml" value="0.1526268115942029" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_container_game.xml" value="0.15353260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_error.xml" value="0.15353260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_exit.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_level.xml" value="0.4" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_loss.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_more_coin.xml" value="0.5142857142857142" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_more_lives.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_more_move.xml" value="0.1539855072463768" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_new_booster.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_new_prize.xml" value="0.15942028985507245" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_pause.xml" value="0.15353260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_score.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_setting.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_shop.xml" value="0.16077898550724637" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_start.xml" value="0.14990942028985507" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_tutorial.xml" value="0.15353260869565216" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_wheel.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/dialog_win.xml" value="0.14990942028985507" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/fragment_game.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/fragment_loading.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/fragment_map.xml" value="0.15942028985507245" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/fragment_menu.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/view_game_booster.xml" value="0.15942028985507245" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/view_game_state.xml" value="0.264" />
         <entry key="..\:/Users/User/AndroidStudioProjects/JuicyMatch/app/src/main/res/layout/view_map_level.xml" value="0.1539855072463768" />

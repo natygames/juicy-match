@@ -108,19 +108,19 @@ public class StarCounter extends RunnableEntity implements EventListener {
     private void updateView() {
         if (mCurrentStar >= 1 && mObtainedStar == 0) {
             ImageView imageStar = (ImageView) mActivity.findViewById(R.id.image_progress_star_01);
-            imageStar.setImageResource(R.drawable.star);
+            imageStar.setImageResource(R.drawable.ui_star);
             imageStar.startAnimation(mStarAnimation);
             mObtainedStar = 1;
         }
         if (mCurrentStar >= 2 && mObtainedStar == 1) {
             ImageView imageStar = (ImageView) mActivity.findViewById(R.id.image_progress_star_02);
-            imageStar.setImageResource(R.drawable.star);
+            imageStar.setImageResource(R.drawable.ui_star);
             imageStar.startAnimation(mStarAnimation);
             mObtainedStar = 2;
         }
         if (mCurrentStar >= 3 && mObtainedStar == 2) {
             ImageView imageStar = (ImageView) mActivity.findViewById(R.id.image_progress_star_03);
-            imageStar.setImageResource(R.drawable.star);
+            imageStar.setImageResource(R.drawable.ui_star);
             imageStar.startAnimation(mStarAnimation);
             mObtainedStar = 3;
         }

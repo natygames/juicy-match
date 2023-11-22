@@ -13,7 +13,7 @@ import com.nativegame.juicymatch.database.DatabaseHelper;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.util.resource.ResourceUtils;
+import com.nativegame.nattyengine.util.ResourceUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

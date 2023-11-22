@@ -101,9 +101,9 @@ public class SettingDialog extends BaseDialog implements View.OnClickListener {
         boolean enable = mParent.getMusicManager().isAudioEnable();
         GameButton btnMusic = (GameButton) findViewById(R.id.btn_music);
         if (enable) {
-            btnMusic.setBackgroundResource(R.drawable.btn_music_on);
+            btnMusic.setBackgroundResource(R.drawable.ui_btn_music_on);
         } else {
-            btnMusic.setBackgroundResource(R.drawable.btn_music_off);
+            btnMusic.setBackgroundResource(R.drawable.ui_btn_music_off);
         }
     }
 
@@ -111,9 +111,9 @@ public class SettingDialog extends BaseDialog implements View.OnClickListener {
         boolean enable = mParent.getSoundManager().isAudioEnable();
         GameButton btnSound = (GameButton) findViewById(R.id.btn_sound);
         if (enable) {
-            btnSound.setBackgroundResource(R.drawable.btn_sound_on);
+            btnSound.setBackgroundResource(R.drawable.ui_btn_sound_on);
         } else {
-            btnSound.setBackgroundResource(R.drawable.btn_sound_off);
+            btnSound.setBackgroundResource(R.drawable.ui_btn_sound_off);
         }
     }
 
@@ -121,11 +121,11 @@ public class SettingDialog extends BaseDialog implements View.OnClickListener {
         boolean enable = Preferences.PREF_SETTING.getBoolean(Preferences.KEY_HINT, true);
         GameImage imageSwitch = (GameImage) findViewById(R.id.switch_hint);
         if (enable) {
-            imageSwitch.setImageResource(R.drawable.switch_thumb_on);
-            imageSwitch.setBackgroundResource(R.drawable.switch_track_on);
+            imageSwitch.setImageResource(R.drawable.ui_switch_thumb_on);
+            imageSwitch.setBackgroundResource(R.drawable.ui_switch_track_on);
         } else {
-            imageSwitch.setImageResource(R.drawable.switch_thumb_off);
-            imageSwitch.setBackgroundResource(R.drawable.switch_track_off);
+            imageSwitch.setImageResource(R.drawable.ui_switch_thumb_off);
+            imageSwitch.setBackgroundResource(R.drawable.ui_switch_track_off);
         }
     }
     //========================================================

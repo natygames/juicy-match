@@ -11,7 +11,7 @@ import com.nativegame.nattyengine.audio.music.MusicManager;
 import com.nativegame.nattyengine.audio.sound.SoundManager;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.util.resource.ResourceUtils;
+import com.nativegame.nattyengine.util.ResourceUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23
@@ -111,9 +111,9 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
         boolean enable = mParent.getMusicManager().isAudioEnable();
         GameButton btnMusic = (GameButton) findViewById(R.id.btn_music);
         if (enable) {
-            btnMusic.setBackgroundResource(R.drawable.btn_music_on);
+            btnMusic.setBackgroundResource(R.drawable.ui_btn_music_on);
         } else {
-            btnMusic.setBackgroundResource(R.drawable.btn_music_off);
+            btnMusic.setBackgroundResource(R.drawable.ui_btn_music_off);
         }
     }
 
@@ -121,9 +121,9 @@ public class PauseDialog extends BaseDialog implements View.OnClickListener {
         boolean enable = mParent.getSoundManager().isAudioEnable();
         GameButton btnSound = (GameButton) findViewById(R.id.btn_sound);
         if (enable) {
-            btnSound.setBackgroundResource(R.drawable.btn_sound_on);
+            btnSound.setBackgroundResource(R.drawable.ui_btn_sound_on);
         } else {
-            btnSound.setBackgroundResource(R.drawable.btn_sound_off);
+            btnSound.setBackgroundResource(R.drawable.ui_btn_sound_off);
         }
     }
 

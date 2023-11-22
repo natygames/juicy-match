@@ -57,45 +57,45 @@ public enum TutorialType {
     public int getDrawableId() {
         switch (this) {
             case MATCH_3:
-                return R.drawable.tutorial_match_3;
+                return R.drawable.ui_tutorial_match_3;
             case MATCH_4:
-                return R.drawable.tutorial_match_4;
+                return R.drawable.ui_tutorial_match_4;
             case MATCH_T:
-                return R.drawable.tutorial_match_t;
+                return R.drawable.ui_tutorial_match_t;
             case MATCH_L:
-                return R.drawable.tutorial_match_l;
+                return R.drawable.ui_tutorial_match_l;
             case MATCH_5:
-                return R.drawable.tutorial_match_5;
+                return R.drawable.ui_tutorial_match_5;
             case COMBINE:
-                return R.drawable.tutorial_combine;
+                return R.drawable.ui_tutorial_combine;
             case LOCK:
-                return R.drawable.tutorial_lock;
+                return R.drawable.ui_tutorial_lock;
             case COOKIE:
-                return R.drawable.tutorial_cookie;
+                return R.drawable.ui_tutorial_cookie;
             case CAKE:
-                return R.drawable.tutorial_cake;
+                return R.drawable.ui_tutorial_cake;
             case CANDY:
-                return R.drawable.tutorial_candy;
+                return R.drawable.ui_tutorial_candy;
             case PIE:
-                return R.drawable.tutorial_pie;
+                return R.drawable.ui_tutorial_pie;
             case ICE:
-                return R.drawable.tutorial_ice;
+                return R.drawable.ui_tutorial_ice;
             case HONEY:
-                return R.drawable.tutorial_honey;
+                return R.drawable.ui_tutorial_honey;
             case STARFISH:
-                return R.drawable.tutorial_starfish;
+                return R.drawable.ui_tutorial_starfish;
             case SHELL:
-                return R.drawable.tutorial_shell;
+                return R.drawable.ui_tutorial_shell;
             case PIPE:
-                return R.drawable.tutorial_pipe;
+                return R.drawable.ui_tutorial_pipe;
             case GENERATOR:
-                return R.drawable.tutorial_generator;
+                return R.drawable.ui_tutorial_generator;
             case HAMMER:
-                return R.drawable.tutorial_hammer;
+                return R.drawable.ui_tutorial_hammer;
             case BOMB:
-                return R.drawable.tutorial_bomb;
+                return R.drawable.ui_tutorial_bomb;
             case GLOVE:
-                return R.drawable.tutorial_glove;
+                return R.drawable.ui_tutorial_glove;
             default:
                 throw new IllegalArgumentException("TutorialType drawable not found!");
         }

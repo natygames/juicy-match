@@ -13,7 +13,7 @@ import com.nativegame.nattyengine.entity.modifier.FadeOutModifier;
 import com.nativegame.nattyengine.entity.modifier.ScaleOutModifier;
 import com.nativegame.nattyengine.entity.sprite.Sprite;
 import com.nativegame.nattyengine.texture.Texture;
-import com.nativegame.nattyengine.util.math.RandomUtils;
+import com.nativegame.nattyengine.util.RandomUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

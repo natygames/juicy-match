@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Preferences;
 import com.nativegame.nattyengine.ui.GameButton;
-import com.nativegame.nattyengine.util.resource.ResourceUtils;
+import com.nativegame.nattyengine.util.ResourceUtils;
 
 import java.util.Locale;
 
@@ -132,9 +132,9 @@ public class LivesTimer {
         // Update button
         GameButton btnLives = (GameButton) mActivity.findViewById(R.id.btn_lives);
         if (mLivesNum == 0) {
-            btnLives.setBackgroundResource(R.drawable.lives_lock);
+            btnLives.setBackgroundResource(R.drawable.ui_lives_lock);
         } else {
-            btnLives.setBackgroundResource(R.drawable.lives);
+            btnLives.setBackgroundResource(R.drawable.ui_lives);
             if (mLivesNum == MAX_LIVES) {
                 TextView txtTime = mActivity.findViewById(R.id.txt_lives_time);
                 txtTime.setText(ResourceUtils.getString(mActivity, R.string.txt_lives_full));

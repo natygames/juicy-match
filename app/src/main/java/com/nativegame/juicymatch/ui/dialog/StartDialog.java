@@ -9,7 +9,7 @@ import com.nativegame.juicymatch.level.TargetType;
 import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameImage;
 import com.nativegame.nattyengine.ui.GameText;
-import com.nativegame.nattyengine.util.resource.ResourceUtils;
+import com.nativegame.nattyengine.util.ResourceUtils;
 
 import java.util.List;
 

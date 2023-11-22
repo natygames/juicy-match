@@ -26,29 +26,29 @@ public enum TargetType {
     public int getDrawableId() {
         switch (this) {
             case STRAWBERRY:
-                return R.drawable.strawberry;
+                return R.drawable.ui_target_strawberry;
             case CHERRY:
-                return R.drawable.cherry;
+                return R.drawable.ui_target_cherry;
             case LEMON:
-                return R.drawable.lemon;
+                return R.drawable.ui_target_lemon;
             case LOCK:
-                return R.drawable.lock;
+                return R.drawable.ui_target_lock;
             case COOKIE:
-                return R.drawable.cookie;
+                return R.drawable.ui_target_cookie;
             case CAKE:
-                return R.drawable.cake_01;
+                return R.drawable.ui_target_cake;
             case CANDY:
-                return R.drawable.candy_02;
+                return R.drawable.ui_target_candy;
             case PIE:
-                return R.drawable.pie_04;
+                return R.drawable.ui_target_pie;
             case ICE:
-                return R.drawable.ice_center_01;
+                return R.drawable.ui_target_ice;
             case HONEY:
-                return R.drawable.honey_center;
+                return R.drawable.ui_target_honey;
             case STARFISH:
-                return R.drawable.starfish;
+                return R.drawable.ui_target_starfish;
             case SHELL:
-                return R.drawable.shell_02;
+                return R.drawable.ui_target_shell;
             default:
                 throw new IllegalArgumentException("TargetType drawable not found!");
         }

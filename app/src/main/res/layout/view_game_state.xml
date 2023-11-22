@@ -11,7 +11,7 @@
         android:id="@+id/image_board"
         android:layout_width="0dp"
         android:layout_height="@dimen/image_game_board_height"
-        android:background="@drawable/board_game"
+        android:background="@drawable/ui_board_game"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:layout_height="@dimen/image_game_board_field_height"
         android:layout_marginStart="@dimen/margin_10"
         android:layout_marginTop="@dimen/margin_5"
-        android:background="@drawable/board_field"
+        android:background="@drawable/ui_board_field"
         app:layout_constraintDimensionRatio="2:1"
         app:layout_constraintStart_toStartOf="@+id/image_board"
         app:layout_constraintTop_toTopOf="@+id/image_board" />
@@ -62,7 +62,7 @@
         android:layout_marginStart="@dimen/margin_5"
         android:layout_marginTop="@dimen/margin_5"
         android:layout_marginEnd="@dimen/margin_10"
-        android:background="@drawable/board_field"
+        android:background="@drawable/ui_board_field"
         app:layout_constraintEnd_toEndOf="@id/image_board"
         app:layout_constraintStart_toEndOf="@id/image_score_field"
         app:layout_constraintTop_toTopOf="@+id/image_board" />
@@ -88,7 +88,7 @@
         android:layout_height="@dimen/image_state_target"
         android:layout_marginEnd="@dimen/margin_5"
         android:layout_marginBottom="@dimen/margin_10"
-        android:src="@drawable/cherry"
+        android:src="@drawable/ui_target_cherry"
         app:layout_constraintBottom_toBottomOf="@id/image_target_field"
         app:layout_constraintEnd_toStartOf="@id/image_target_02" />
 
@@ -97,7 +97,7 @@
         android:layout_width="@dimen/image_state_target"
         android:layout_height="@dimen/image_state_target"
         android:layout_marginBottom="@dimen/margin_10"
-        android:src="@drawable/strawberry"
+        android:src="@drawable/ui_target_strawberry"
         app:layout_constraintBottom_toBottomOf="@id/image_target_field"
         app:layout_constraintEnd_toEndOf="@id/image_target_field"
         app:layout_constraintStart_toStartOf="@id/image_target_field" />
@@ -108,7 +108,7 @@
         android:layout_height="@dimen/image_state_target"
         android:layout_marginStart="@dimen/margin_5"
         android:layout_marginBottom="@dimen/margin_10"
-        android:src="@drawable/lemon"
+        android:src="@drawable/ui_target_lemon"
         app:layout_constraintBottom_toBottomOf="@id/image_target_field"
         app:layout_constraintStart_toEndOf="@id/image_target_02" />
 
@@ -172,8 +172,8 @@
         android:id="@+id/image_star_progress"
         android:layout_width="@dimen/image_star_progress_width"
         android:layout_height="0dp"
-        android:background="@drawable/star_progress_bg"
-        android:src="@drawable/star_progress_clip"
+        android:background="@drawable/ui_star_progress_bg"
+        android:src="@drawable/ui_star_progress_clip"
         app:layout_constraintBottom_toBottomOf="@id/image_board"
         app:layout_constraintDimensionRatio="18:1"
         app:layout_constraintEnd_toEndOf="@id/image_board"
@@ -184,7 +184,7 @@
         android:id="@+id/image_progress_star_01"
         android:layout_width="@dimen/image_star_small_width"
         android:layout_height="@dimen/image_star_small_width"
-        android:src="@drawable/star_bg"
+        android:src="@drawable/ui_star_bg"
         app:layout_constraintBottom_toBottomOf="@id/image_star_progress"
         app:layout_constraintEnd_toEndOf="@id/image_star_progress"
         app:layout_constraintHorizontal_bias="0.28"
@@ -195,7 +195,7 @@
         android:id="@+id/image_progress_star_02"
         android:layout_width="@dimen/image_star_small_width"
         android:layout_height="@dimen/image_star_small_width"
-        android:src="@drawable/star_bg"
+        android:src="@drawable/ui_star_bg"
         app:layout_constraintBottom_toBottomOf="@id/image_star_progress"
         app:layout_constraintEnd_toEndOf="@id/image_star_progress"
         app:layout_constraintHorizontal_bias="0.72"
@@ -206,7 +206,7 @@
         android:id="@+id/image_progress_star_03"
         android:layout_width="@dimen/image_star_small_width"
         android:layout_height="@dimen/image_star_small_width"
-        android:src="@drawable/star_bg"
+        android:src="@drawable/ui_star_bg"
         app:layout_constraintBottom_toBottomOf="@id/image_star_progress"
         app:layout_constraintEnd_toEndOf="@id/image_star_progress"
         app:layout_constraintTop_toTopOf="@id/image_star_progress" />

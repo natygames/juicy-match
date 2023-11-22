@@ -195,11 +195,11 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
                         showLevelDialog(level);
                     }
                 });
-                txtLevel.setBackgroundResource(R.drawable.btn_level);
+                txtLevel.setBackgroundResource(R.drawable.ui_btn_level);
                 txtLevel.setEnabled(true);
             } else {
                 txtLevel.setOnClickListener(null);
-                txtLevel.setBackgroundResource(R.drawable.btn_level_lock);
+                txtLevel.setBackgroundResource(R.drawable.ui_btn_level_lock);
                 txtLevel.setEnabled(false);
             }
             txtLevel.setText(String.valueOf(level));
@@ -224,13 +224,13 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
                 int star = stars.get(level - 1);
                 switch (star) {
                     case 1:
-                        imageStar.setBackgroundResource(R.drawable.star_set_01);
+                        imageStar.setBackgroundResource(R.drawable.ui_star_set_01);
                         break;
                     case 2:
-                        imageStar.setBackgroundResource(R.drawable.star_set_02);
+                        imageStar.setBackgroundResource(R.drawable.ui_star_set_02);
                         break;
                     case 3:
-                        imageStar.setBackgroundResource(R.drawable.star_set_03);
+                        imageStar.setBackgroundResource(R.drawable.ui_star_set_03);
                         break;
                 }
                 imageStar.setVisibility(View.VISIBLE);
@@ -262,7 +262,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
             public void startGame() {
                 // Check is player lives enough
                 if (mLivesTimer.getLivesCount() > 0) {
-                    getGameActivity().navigateToFragment(new MyGameFragment());
+                    getGameActivity().navigateToFragment(new JuicyMatchFragment());
                 } else {
                     showMoreLivesDialog();
                 }

@@ -15,7 +15,7 @@ import com.nativegame.nattyengine.entity.runnable.RunnableEntity;
 import com.nativegame.nattyengine.event.Event;
 import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.ui.GameActivity;
-import com.nativegame.nattyengine.util.resource.ResourceUtils;
+import com.nativegame.nattyengine.util.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public class TargetCounter extends RunnableEntity implements EventListener {
             TextView txtTarget = mTargetTexts.get(i);
             if (count == 0) {
                 txtTarget.setText("");
-                txtTarget.setBackgroundResource(R.drawable.sign_check);
+                txtTarget.setBackgroundResource(R.drawable.ui_sign_check);
             } else {
                 txtTarget.setText(String.valueOf(count));
             }

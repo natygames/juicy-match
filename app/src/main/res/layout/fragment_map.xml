@@ -11,7 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/bg"
+        android:src="@drawable/ui_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="@dimen/btn_small_width"
         android:layout_margin="@dimen/margin_10"
-        android:background="@drawable/btn_wheel"
+        android:background="@drawable/ui_btn_wheel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,7 +37,7 @@
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
         android:layout_margin="@dimen/margin_20"
-        android:background="@drawable/btn_setting"
+        android:background="@drawable/ui_btn_setting"
         app:layout_constraintBottom_toTopOf="@id/adView"
         app:layout_constraintStart_toStartOf="parent" />
 

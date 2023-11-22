@@ -29,7 +29,7 @@ import com.nativegame.nattyengine.entity.shape.geometry.Circle;
 import com.nativegame.nattyengine.event.Event;
 import com.nativegame.nattyengine.event.EventListener;
 import com.nativegame.nattyengine.texture.Texture;
-import com.nativegame.nattyengine.util.math.RandomUtils;
+import com.nativegame.nattyengine.util.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.List;

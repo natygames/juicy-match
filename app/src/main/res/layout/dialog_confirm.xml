@@ -11,7 +11,7 @@
         android:id="@+id/image_dialog"
         android:layout_width="@dimen/dialog_width"
         android:layout_height="0dp"
-        android:background="@drawable/dialog"
+        android:background="@drawable/ui_dialog"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         android:layout_width="@dimen/btn_large_width"
         android:layout_height="@dimen/btn_large_width"
         android:layout_marginTop="@dimen/margin_10"
-        android:src="@drawable/hammer"
+        android:src="@drawable/ui_booster_hammer"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintStart_toStartOf="@id/image_dialog"
         app:layout_constraintTop_toTopOf="@id/image_dialog" />
@@ -47,7 +47,7 @@
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
         android:layout_margin="@dimen/margin_10"
-        android:background="@drawable/btn_cancel"
+        android:background="@drawable/ui_btn_cancel"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintTop_toTopOf="@id/image_dialog" />
 
@@ -55,7 +55,7 @@
         android:id="@+id/btn_confirm"
         android:layout_width="@dimen/btn_width"
         android:layout_height="0dp"
-        android:background="@drawable/btn_yes"
+        android:background="@drawable/ui_btn_yes"
         app:layout_constraintDimensionRatio="5:2"
         app:layout_constraintEnd_toEndOf="@id/image_dialog"
         app:layout_constraintStart_toStartOf="@id/image_dialog"

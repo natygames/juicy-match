@@ -7,7 +7,7 @@ import com.nativegame.juicymatch.game.layer.tile.Tile;
 import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.timer.Timer;
 import com.nativegame.nattyengine.entity.timer.TimerEvent;
-import com.nativegame.nattyengine.util.math.RandomUtils;
+import com.nativegame.nattyengine.util.RandomUtils;
 
 import java.util.ArrayList;
 import java.util.List;

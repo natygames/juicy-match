@@ -12,7 +12,7 @@
         android:id="@+id/image_field"
         android:layout_width="@dimen/dialog_small_width"
         android:layout_height="0dp"
-        android:background="@drawable/board_field"
+        android:background="@drawable/ui_board_field"
         app:layout_constraintDimensionRatio="4:1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +22,7 @@
         android:layout_width="@dimen/btn_round_width"
         android:layout_height="@dimen/btn_round_width"
         android:layout_marginStart="@dimen/margin_10"
-        android:src="@drawable/hammer"
+        android:src="@drawable/ui_booster_hammer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -48,7 +48,7 @@
         android:layout_width="@dimen/btn_small_width"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/margin_10"
-        android:background="@drawable/btn_price_50"
+        android:background="@drawable/ui_btn_price_50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="5:2"
         app:layout_constraintEnd_toEndOf="parent"

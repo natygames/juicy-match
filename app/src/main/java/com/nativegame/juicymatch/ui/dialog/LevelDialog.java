@@ -12,7 +12,7 @@ import com.nativegame.nattyengine.ui.GameActivity;
 import com.nativegame.nattyengine.ui.GameButton;
 import com.nativegame.nattyengine.ui.GameImage;
 import com.nativegame.nattyengine.ui.GameText;
-import com.nativegame.nattyengine.util.resource.ResourceUtils;
+import com.nativegame.nattyengine.util.ResourceUtils;
 
 import java.util.List;
 
@@ -88,13 +88,13 @@ public class LevelDialog extends BaseDialog implements View.OnClickListener {
         if (star != -1) {
             switch (star) {
                 case 1:
-                    imageStar.setImageResource(R.drawable.star_set_01);
+                    imageStar.setImageResource(R.drawable.ui_star_set_01);
                     break;
                 case 2:
-                    imageStar.setImageResource(R.drawable.star_set_02);
+                    imageStar.setImageResource(R.drawable.ui_star_set_02);
                     break;
                 case 3:
-                    imageStar.setImageResource(R.drawable.star_set_03);
+                    imageStar.setImageResource(R.drawable.ui_star_set_03);
                     break;
 
             }

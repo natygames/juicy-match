@@ -20,7 +20,7 @@ import com.nativegame.nattyengine.engine.Engine;
 import com.nativegame.nattyengine.entity.text.Text;
 import com.nativegame.nattyengine.input.touch.TouchEvent;
 import com.nativegame.nattyengine.input.touch.TouchEventListener;
-import com.nativegame.nattyengine.util.math.RandomUtils;
+import com.nativegame.nattyengine.util.RandomUtils;
 
 /**
  * Created by Oscar Liang on 2022/02/23

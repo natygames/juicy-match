@@ -21,8 +21,6 @@ import com.nativegame.nattyengine.ui.GameFragment;
 
 public class LoadingFragment extends GameFragment {
 
-    private static final long TIME_TO_LOAD = 800;
-
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
@@ -44,24 +42,29 @@ public class LoadingFragment extends GameFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        // Load assets
-        Textures.load(getGameActivity().getTextureManager(), getContext());
-        Sounds.load(getGameActivity().getSoundManager());
-        Musics.load(getGameActivity().getMusicManager());
-        Fonts.load(getContext());
-        Colors.load(getContext());
-        Preferences.load(getContext());
-
-        // Init ad
-        MobileAds.initialize(getContext());
-
-        // Navigate to menu when loading complete
-        view.postDelayed(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-                getGameActivity().navigateToFragment(new MenuFragment());
+                // Load assets
+                Textures.load(getGameActivity().getTextureManager(), getContext());
+                Sounds.load(getGameActivity().getSoundManager());
+                Musics.load(getGameActivity().getMusicManager());
+                Fonts.load(getContext());
+                Colors.load(getContext());
+                Preferences.load(getContext());
+
+                // Load ad
+                MobileAds.initialize(getContext());
+
+                // Navigate to menu when loading complete
+                getGameActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        getGameActivity().navigateToFragment(new MenuFragment());
+                    }
+                });
             }
-        }, TIME_TO_LOAD);
+        }).start();
     }
     //========================================================
 
