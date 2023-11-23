@@ -17,13 +17,13 @@ public class RowFlashEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public RowFlashEffectSystem(Engine engine, int size) {
+    public RowFlashEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<RowFlashEffect>() {
             @Override
             public RowFlashEffect createObject() {
                 return new RowFlashEffect(RowFlashEffectSystem.this, engine, Textures.FLASH_ROW_ANIMATION);
             }
-        }, size * 2);
+        }, count * 2);
     }
     //========================================================
 

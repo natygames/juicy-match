@@ -26,7 +26,7 @@ public class ExplosiveStripedTileCombineRingEffectSystem extends Entity {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public ExplosiveStripedTileCombineRingEffectSystem(Engine engine, int size) {
+    public ExplosiveStripedTileCombineRingEffectSystem(Engine engine, int count) {
         super(engine);
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<ExplosiveStripedTileCombineRingEffect>() {
             @Override
@@ -34,7 +34,7 @@ public class ExplosiveStripedTileCombineRingEffectSystem extends Entity {
                 return new ExplosiveStripedTileCombineRingEffect(ExplosiveStripedTileCombineRingEffectSystem.this,
                         engine, Textures.LIGHT_CIRCLE);
             }
-        }, size);
+        }, count);
         mDurationModifier = new DurationModifier(TIME_TO_LIVE);
         mDurationModifier.setAutoRemove(true);
     }

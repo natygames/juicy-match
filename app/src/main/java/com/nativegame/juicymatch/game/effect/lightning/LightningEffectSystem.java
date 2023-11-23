@@ -16,13 +16,13 @@ public class LightningEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public LightningEffectSystem(Engine engine, int size) {
+    public LightningEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<LightningEffect>() {
             @Override
             public LightningEffect createObject() {
                 return new LightningEffect(LightningEffectSystem.this, engine, Textures.LIGHTNING_ANIMATION);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

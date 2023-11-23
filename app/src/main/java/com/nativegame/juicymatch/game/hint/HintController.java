@@ -72,7 +72,7 @@ public class HintController extends Entity implements EventListener, TimerEvent.
     //--------------------------------------------------------
     @Override
     public void onStart() {
-        mSoundTimer.startTimer();
+        mSoundTimer.start();
     }
 
     @Override
@@ -126,12 +126,12 @@ public class HintController extends Entity implements EventListener, TimerEvent.
         }
         if (mHintEnable) {
             // Start timer and show effect if hint found
-            mHintTimer.startTimer();
+            mHintTimer.start();
         }
     }
 
     private void stopHint() {
-        mHintTimer.stopTimer();
+        mHintTimer.stop();
         removeHintEffect();
     }
 
@@ -147,8 +147,8 @@ public class HintController extends Entity implements EventListener, TimerEvent.
 
     private void shuffleTile() {
         Match3Algorithm.shuffleTile(mTiles, mTotalRow, mTotalCol);
-        mSoundTimer.startTimer();
-        mShuffleTimer.startTimer();
+        mSoundTimer.start();
+        mShuffleTimer.start();
         mShuffleText.activate(GameWorld.WORLD_WIDTH / 2f, GameWorld.WORLD_HEIGHT / 2f);
     }
     //========================================================

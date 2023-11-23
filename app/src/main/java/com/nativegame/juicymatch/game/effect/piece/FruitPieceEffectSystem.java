@@ -18,13 +18,13 @@ public class FruitPieceEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public FruitPieceEffectSystem(Engine engine, int size) {
+    public FruitPieceEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<FruitPieceEffect>() {
             @Override
             public FruitPieceEffect createObject() {
                 return new FruitPieceEffect(FruitPieceEffectSystem.this, engine, Textures.CHERRY);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

@@ -18,13 +18,13 @@ public class UpgradeFruitEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public UpgradeFruitEffectSystem(Engine engine, int size) {
+    public UpgradeFruitEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<UpgradeFruitEffect>() {
             @Override
             public UpgradeFruitEffect createObject() {
                 return new UpgradeFruitEffect(UpgradeFruitEffectSystem.this, engine, Textures.CHERRY);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

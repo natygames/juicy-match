@@ -195,7 +195,7 @@ public class ExplosiveStripedTileCombineHandler extends BaseSpecialCombineHandle
         }
 
         playTileEffect(tileA, tileB);
-        mTimer.startTimer();
+        mTimer.start();
     }
     //========================================================
 

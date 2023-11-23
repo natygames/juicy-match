@@ -16,13 +16,13 @@ public class ExplosionPieceEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public ExplosionPieceEffectSystem(Engine engine, Texture texture, int size) {
+    public ExplosionPieceEffectSystem(Engine engine, Texture texture, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<ExplosionPieceEffect>() {
             @Override
             public ExplosionPieceEffect createObject() {
                 return new ExplosionPieceEffect(ExplosionPieceEffectSystem.this, engine, texture);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

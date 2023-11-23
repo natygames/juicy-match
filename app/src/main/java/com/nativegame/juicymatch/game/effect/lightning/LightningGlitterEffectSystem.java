@@ -16,13 +16,13 @@ public class LightningGlitterEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public LightningGlitterEffectSystem(Engine engine, int size) {
+    public LightningGlitterEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<LightningGlitterEffect>() {
             @Override
             public LightningGlitterEffect createObject() {
                 return new LightningGlitterEffect(LightningGlitterEffectSystem.this, engine, Textures.GLITTER_BLUE);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

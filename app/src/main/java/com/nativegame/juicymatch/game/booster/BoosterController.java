@@ -125,7 +125,7 @@ public abstract class BoosterController extends Entity implements TouchEventList
                     if (mListener != null) {
                         mListener.onConsumeBooster();
                     }
-                    mTimer.startTimer();
+                    mTimer.start();
                     removeFromGame();
                 }
                 break;

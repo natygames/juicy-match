@@ -17,13 +17,13 @@ public class ColumnFlashEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public ColumnFlashEffectSystem(Engine engine, int size) {
+    public ColumnFlashEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<ColumnFlashEffect>() {
             @Override
             public ColumnFlashEffect createObject() {
                 return new ColumnFlashEffect(ColumnFlashEffectSystem.this, engine, Textures.FLASH_COLUMN_ANIMATION);
             }
-        }, size * 2);
+        }, count * 2);
     }
     //========================================================
 

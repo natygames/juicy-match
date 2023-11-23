@@ -17,13 +17,13 @@ public class ExplosionFlashEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public ExplosionFlashEffectSystem(Engine engine, int size) {
+    public ExplosionFlashEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<ExplosionFlashEffect>() {
             @Override
             public ExplosionFlashEffect createObject() {
                 return new ExplosionFlashEffect(ExplosionFlashEffectSystem.this, engine, Textures.FLASH_EXPLOSION_ANIMATION);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

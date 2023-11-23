@@ -17,13 +17,13 @@ public class ScoreEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public ScoreEffectSystem(Engine engine, int size) {
+    public ScoreEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<ScoreEffect>() {
             @Override
             public ScoreEffect createObject() {
                 return new ScoreEffect(ScoreEffectSystem.this, engine, Textures.SCORE_PINK);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

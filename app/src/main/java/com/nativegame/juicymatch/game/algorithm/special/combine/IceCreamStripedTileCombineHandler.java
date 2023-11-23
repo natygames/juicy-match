@@ -105,7 +105,7 @@ public class IceCreamStripedTileCombineHandler extends IceCreamCombineHandler im
         }
 
         playTileEffect(colorTile, fruitTile);
-        mTimer.startTimer();
+        mTimer.start();
     }
     //========================================================
 

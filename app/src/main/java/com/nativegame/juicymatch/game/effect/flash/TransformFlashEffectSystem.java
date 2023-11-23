@@ -16,14 +16,14 @@ public class TransformFlashEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public TransformFlashEffectSystem(Engine engine, int size) {
+    public TransformFlashEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<TransformFlashEffect>() {
             @Override
             public TransformFlashEffect createObject() {
                 return new TransformFlashEffect(TransformFlashEffectSystem.this, engine,
                         Textures.FLASH_TRANSFORM_ANIMATION);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

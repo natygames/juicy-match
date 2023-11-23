@@ -6,7 +6,7 @@ import com.nativegame.juicymatch.game.GameLayer;
 import com.nativegame.juicymatch.game.GameWorld;
 import com.nativegame.juicymatch.level.Level;
 import com.nativegame.natyengine.engine.Engine;
-import com.nativegame.natyengine.entity.shape.geometry.Rectangle;
+import com.nativegame.natyengine.entity.shape.primitive.Rectangle;
 import com.nativegame.natyengine.input.touch.TouchEventListener;
 
 /**
@@ -25,7 +25,7 @@ public class TutorialHintEffect extends Rectangle implements TouchEventListener 
         super(engine, width, height);
         mMarginX = (GameWorld.WORLD_WIDTH - Level.LEVEL_DATA.getColumn() * width) / 2;
         mMarginY = (GameWorld.WORLD_HEIGHT - Level.LEVEL_DATA.getRow() * height) / 2;
-        setColor(Color.BLACK);
+        mPaint.setColor(Color.BLACK);
         setAlpha(200);
         setLayer(GameLayer.EFFECT_LAYER);
     }

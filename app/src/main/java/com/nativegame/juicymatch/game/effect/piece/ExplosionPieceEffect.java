@@ -108,7 +108,7 @@ public class ExplosionPieceEffect extends Sprite {
         //--------------------------------------------------------
         public EffectShadow(Engine engine, Texture texture) {
             super(engine, texture);
-            setColorFilter(SHADOW_FILTER);
+            mPaint.setColorFilter(SHADOW_FILTER);
             setLayer(GameLayer.EFFECT_LAYER - 1);
         }
         //========================================================

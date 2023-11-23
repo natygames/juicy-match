@@ -138,7 +138,7 @@ public class DoubleIceCreamCombineHandler extends BaseSpecialCombineHandler impl
         }
 
         playTileEffect(tileA, tileB);
-        mTimer.startTimer();
+        mTimer.start();
     }
     //========================================================
 

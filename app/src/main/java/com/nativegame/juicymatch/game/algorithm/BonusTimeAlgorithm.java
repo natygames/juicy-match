@@ -238,7 +238,7 @@ public class BonusTimeAlgorithm extends BaseAlgorithm implements TouchEventListe
         //--------------------------------------------------------
         public SkipText(Engine engine, int width, int height, String text) {
             super(engine, width, height, text);
-            setColor(Color.WHITE);
+            mPaint.setColor(Color.WHITE);
             setTextSize(300);
             setTextTypeface(Fonts.BALOO);
             setLayer(GameLayer.EFFECT_LAYER);

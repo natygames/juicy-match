@@ -114,8 +114,8 @@ public class GameController extends Entity implements EventListener, AdManager.A
             case SHOW_SCORE_DIALOG:
                 mTotalTime += elapsedMillis;
                 if (mTotalTime >= 1200) {
-                    mEngine.stopGame();
-                    mEngine.releaseGame();
+                    mEngine.stop();
+                    mEngine.release();
                     showScoreDialog();
                     mState = GameState.WAITING;
                     mTotalTime = 0;
@@ -124,8 +124,8 @@ public class GameController extends Entity implements EventListener, AdManager.A
             case NAVIGATE_BACK:
                 mTotalTime += elapsedMillis;
                 if (mTotalTime >= 1200) {
-                    mEngine.stopGame();
-                    mEngine.releaseGame();
+                    mEngine.stop();
+                    mEngine.release();
                     mParent.navigateBack();
                     mState = GameState.WAITING;
                     mTotalTime = 0;
@@ -177,14 +177,14 @@ public class GameController extends Entity implements EventListener, AdManager.A
     @Override
     public void onEarnReward() {
         // The ad will pause the game, so we resume it
-        mEngine.resumeGame();
+        mEngine.resume();
         dispatchEvent(GameEvent.ADD_EXTRA_MOVES);
     }
 
     @Override
     public void onLossReward() {
         // The ad will pause the game, so we resume it
-        mEngine.resumeGame();
+        mEngine.resume();
         dispatchEvent(GameEvent.GAME_OVER);
     }
     //========================================================
@@ -317,7 +317,7 @@ public class GameController extends Entity implements EventListener, AdManager.A
         // Check connection
         if (isConnect) {
             // Pause the game when loading ad, or the pause dialog will show
-            mEngine.pauseGame();
+            mEngine.pause();
         } else {
             // Show error dialog if no internet connect
             ErrorDialog dialog = new ErrorDialog(mParent) {

@@ -25,7 +25,7 @@ import com.nativegame.natyengine.entity.modifier.ScaleInModifier;
 import com.nativegame.natyengine.entity.modifier.ScaleModifier;
 import com.nativegame.natyengine.entity.particle.ParticleSystem;
 import com.nativegame.natyengine.entity.particle.SpriteParticleSystem;
-import com.nativegame.natyengine.entity.shape.geometry.Circle;
+import com.nativegame.natyengine.entity.shape.primitive.Circle;
 import com.nativegame.natyengine.event.Event;
 import com.nativegame.natyengine.event.EventListener;
 import com.nativegame.natyengine.texture.Texture;
@@ -448,14 +448,14 @@ public class SolidTile extends Tile implements EventListener {
         if (!mLightCircle.isRunning()) {
             mLightCircle.activate(getCenterX(), getCenterY());
         }
-        setColorFilter(mLightFilter);
+        mPaint.setColorFilter(mLightFilter);
     }
 
     private void removeLightEffect() {
         if (mLightCircle.isRunning()) {
             mLightCircle.removeFromGame();
         }
-        setColorFilter(null);
+        mPaint.setColorFilter(null);
     }
     //========================================================
 
@@ -469,8 +469,8 @@ public class SolidTile extends Tile implements EventListener {
         //--------------------------------------------------------
         public LightCircle(Engine engine, int radius) {
             super(engine, radius);
-            setColor(Colors.WHITE);
-            setMaskFilter(new BlurMaskFilter(150, BlurMaskFilter.Blur.NORMAL));
+            mPaint.setColor(Colors.WHITE);
+            mPaint.setMaskFilter(new BlurMaskFilter(150, BlurMaskFilter.Blur.NORMAL));
             setLayer(GameLayer.EFFECT_BG_LAYER);
         }
         //========================================================

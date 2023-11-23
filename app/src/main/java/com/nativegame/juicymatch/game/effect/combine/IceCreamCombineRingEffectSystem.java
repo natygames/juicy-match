@@ -28,7 +28,7 @@ public class IceCreamCombineRingEffectSystem extends Entity {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public IceCreamCombineRingEffectSystem(Engine engine, int size) {
+    public IceCreamCombineRingEffectSystem(Engine engine, int count) {
         super(engine);
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<IceCreamCombineRingEffect>() {
             @Override
@@ -36,7 +36,7 @@ public class IceCreamCombineRingEffectSystem extends Entity {
                 return new IceCreamCombineRingEffect(IceCreamCombineRingEffectSystem.this, engine,
                         Textures.LIGHT_RING);
             }
-        }, size);
+        }, count);
         mDurationModifier = new DurationModifier(TIME_TO_LIVE);
         mDurationModifier.setAutoRemove(true);
     }

@@ -123,7 +123,7 @@ public class SwapController extends Entity implements TouchEventListener,
     public void onSwap(Tile tileA, Tile tileB) {
         // Check is special combine detected
         if (checkSpecialCombine(tileA, tileB)) {
-            mTimer.startTimer();
+            mTimer.start();
         } else {
             // Otherwise, check is player match any tile
             Match3Algorithm.findMatchTile(mTiles, mTotalRow, mTotalCol);

@@ -17,13 +17,13 @@ public class IceCreamPieceEffectSystem {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public IceCreamPieceEffectSystem(Engine engine, int size) {
+    public IceCreamPieceEffectSystem(Engine engine, int count) {
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<IceCreamPieceEffect>() {
             @Override
             public IceCreamPieceEffect createObject() {
                 return new IceCreamPieceEffect(IceCreamPieceEffectSystem.this, engine, Textures.ICE_CREAM);
             }
-        }, size);
+        }, count);
     }
     //========================================================
 

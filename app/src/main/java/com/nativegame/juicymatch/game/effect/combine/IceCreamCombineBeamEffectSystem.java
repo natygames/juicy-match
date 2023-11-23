@@ -29,7 +29,7 @@ public class IceCreamCombineBeamEffectSystem extends Entity {
     //--------------------------------------------------------
     // Constructors
     //--------------------------------------------------------
-    public IceCreamCombineBeamEffectSystem(Engine engine, int size) {
+    public IceCreamCombineBeamEffectSystem(Engine engine, int count) {
         super(engine);
         mEffectPool = new SafeFixedObjectPool<>(new Pool.PoolObjectFactory<IceCreamCombineBeamEffect>() {
             @Override
@@ -37,7 +37,7 @@ public class IceCreamCombineBeamEffectSystem extends Entity {
                 return new IceCreamCombineBeamEffect(IceCreamCombineBeamEffectSystem.this, engine,
                         Textures.FLASH_BEAM);
             }
-        }, size);
+        }, count);
         mDurationModifier = new DurationModifier(TIME_TO_LIVE);
         mDurationModifier.setAutoRemove(true);
     }
