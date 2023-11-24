@@ -429,7 +429,7 @@ public class Textures {
         Bitmap booster = ResourceUtils.getBitmap(context, R.drawable.sprite_sheet_booster);
         HAMMER = textureManager.loadTexture(BitmapUtils.createBitmapRegion(booster, 0, 0, 900, 900));
         BOMB = textureManager.loadTexture(BitmapUtils.createBitmapRegion(booster, 900, 0, 900, 900));
-        GLOVE = textureManager.loadTexture(BitmapUtils.createBitmapRegion(booster, 180, 0, 900, 900));
+        GLOVE = textureManager.loadTexture(BitmapUtils.createBitmapRegion(booster, 1800, 0, 900, 900));
 
         Bitmap confetti = ResourceUtils.getBitmap(context, R.drawable.sprite_sheet_confetti);
         CONFETTI_BLUE = textureManager.loadTexture(BitmapUtils.createBitmapRegion(confetti, 0, 0, 200, 200));
