@@ -51,6 +51,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_state_move_size"
         android:textStyle="bold"
+        tools:text="10"
         app:layout_constraintBottom_toBottomOf="@+id/image_score_field"
         app:layout_constraintEnd_toEndOf="@+id/image_score_field"
         app:layout_constraintStart_toStartOf="@+id/image_score_field" />
@@ -114,7 +115,7 @@
 
     <TextView
         android:id="@+id/txt_target_01"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/image_state_target"
         android:layout_marginTop="@dimen/margin_10"
         android:fontFamily="@font/baloo"
@@ -122,13 +123,13 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_state_target_size"
         android:textStyle="bold"
-        app:layout_constraintDimensionRatio="1:2"
         app:layout_constraintEnd_toEndOf="@+id/image_target_01"
-        app:layout_constraintTop_toTopOf="@+id/image_target_01" />
+        app:layout_constraintTop_toTopOf="@+id/image_target_01"
+        tools:text="10" />
 
     <TextView
         android:id="@+id/txt_target_02"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/image_state_target"
         android:layout_marginTop="@dimen/margin_10"
         android:fontFamily="@font/baloo"
@@ -136,13 +137,13 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_state_target_size"
         android:textStyle="bold"
-        app:layout_constraintDimensionRatio="1:2"
         app:layout_constraintEnd_toEndOf="@+id/image_target_02"
-        app:layout_constraintTop_toTopOf="@+id/image_target_02" />
+        app:layout_constraintTop_toTopOf="@+id/image_target_02"
+        tools:text="10" />
 
     <TextView
         android:id="@+id/txt_target_03"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/image_state_target"
         android:layout_marginTop="@dimen/margin_10"
         android:fontFamily="@font/baloo"
@@ -150,9 +151,9 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_state_target_size"
         android:textStyle="bold"
-        app:layout_constraintDimensionRatio="1:2"
         app:layout_constraintEnd_toEndOf="@+id/image_target_03"
-        app:layout_constraintTop_toTopOf="@+id/image_target_03" />
+        app:layout_constraintTop_toTopOf="@+id/image_target_03"
+        tools:text="10" />
 
     <TextView
         android:id="@+id/txt_score"

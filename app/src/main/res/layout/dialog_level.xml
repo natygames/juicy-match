@@ -90,7 +90,7 @@
 
     <com.nativegame.natyengine.ui.GameText
         android:id="@+id/txt_target_01"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/image_state_item"
         android:layout_marginTop="@dimen/margin_5"
         android:fontFamily="@font/baloo"
@@ -98,13 +98,13 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_state_score_size"
         android:textStyle="bold"
-        app:layout_constraintDimensionRatio="1:2"
         app:layout_constraintEnd_toEndOf="@+id/image_target_01"
-        app:layout_constraintTop_toTopOf="@+id/image_target_01" />
+        app:layout_constraintTop_toTopOf="@+id/image_target_01"
+        tools:text="10" />
 
     <com.nativegame.natyengine.ui.GameText
         android:id="@+id/txt_target_02"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/image_state_item"
         android:layout_marginTop="@dimen/margin_5"
         android:fontFamily="@font/baloo"
@@ -112,13 +112,13 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_state_score_size"
         android:textStyle="bold"
-        app:layout_constraintDimensionRatio="1:2"
         app:layout_constraintEnd_toEndOf="@+id/image_target_02"
-        app:layout_constraintTop_toTopOf="@+id/image_target_02" />
+        app:layout_constraintTop_toTopOf="@+id/image_target_02"
+        tools:text="10" />
 
     <com.nativegame.natyengine.ui.GameText
         android:id="@+id/txt_target_03"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/image_state_item"
         android:layout_marginTop="@dimen/margin_5"
         android:fontFamily="@font/baloo"
@@ -126,9 +126,9 @@
         android:textColor="@color/white"
         android:textSize="@dimen/txt_state_score_size"
         android:textStyle="bold"
-        app:layout_constraintDimensionRatio="1:2"
         app:layout_constraintEnd_toEndOf="@+id/image_target_03"
-        app:layout_constraintTop_toTopOf="@+id/image_target_03" />
+        app:layout_constraintTop_toTopOf="@+id/image_target_03"
+        tools:text="10" />
 
     <com.nativegame.natyengine.ui.GameButton
         android:id="@+id/btn_cancel"

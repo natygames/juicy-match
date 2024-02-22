@@ -9,7 +9,7 @@
     <dimen name="txt_state_target_size">20sp</dimen>
     <dimen name="txt_state_score_size">24sp</dimen>
     <dimen name="txt_state_booster_size">28sp</dimen>
-    <dimen name="txt_state_move_size">48sp</dimen>
+    <dimen name="txt_state_move_size">44.8sp</dimen>
 
     <dimen name="txt_level_size">40sp</dimen>
 
