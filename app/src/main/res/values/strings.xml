@@ -47,6 +47,5 @@
     <string name="txt_tutorial_glove">Glove can swap two pieces\n without losing moves!</string>
 
     <!-- Text of Ad code -->
-    <string name="txt_admob_banner">ca-app-pub-3940256099942544/6300978111</string>
     <string name="txt_admob_reward">ca-app-pub-3940256099942544/5224354917</string>
 </resources>

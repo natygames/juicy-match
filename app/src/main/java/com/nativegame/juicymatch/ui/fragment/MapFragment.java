@@ -6,8 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.nativegame.juicymatch.MainActivity;
 import com.nativegame.juicymatch.R;
 import com.nativegame.juicymatch.asset.Sounds;
@@ -96,9 +94,7 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
         }
         mCurrentPage = (int) Math.ceil(mCurrentLevel * 1.0d / LEVEL_PRE_PAGE);
         updatePage(mCurrentPage);
-
         loadCoin();
-        loadAd();
 
         // Show current level dialog
         view.postDelayed(new Runnable() {
@@ -246,12 +242,6 @@ public class MapFragment extends GameFragment implements View.OnClickListener {
         DatabaseHelper databaseHelper = DatabaseHelper.getInstance(getContext());
         int coin = databaseHelper.getItemCount(Item.COIN);
         textCoin.setText(String.valueOf(coin));
-    }
-
-    private void loadAd() {
-        AdView adView = getView().findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
     }
 
     private void showLevelDialog(int level) {
